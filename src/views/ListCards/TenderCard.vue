@@ -137,11 +137,11 @@
         return getDataFromObject(this.entity, _ => _.currency);
       },
       wholeAmount() {
-        const amountStr = getDataFromObject(this.entity, _ => _.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        const amountStr = getDataFromObject(this.entity, _ => _.amount, 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
         return /\./.test(amountStr) ? amountStr.slice(0, amountStr.indexOf(".")) : amountStr;
       },
       fractionAmount() {
-        const amountStr = getDataFromObject(this.entity, _ => _.amount).toString();
+        const amountStr = getDataFromObject(this.entity, _ => _.amount, 0).toString();
         return /\./.test(amountStr) ? amountStr.slice(amountStr.indexOf(".") + 1).length === 1 ? amountStr.slice(amountStr.indexOf(".") + 1) + "0" : amountStr.slice(amountStr.indexOf(".") + 1) : "";
       },
       region() {

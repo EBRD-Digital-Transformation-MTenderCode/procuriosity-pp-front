@@ -1,30 +1,50 @@
 <template>
-  <div>
-    tender page
-  </div>
+  <el-container>
+    <tender-card
+      :entity="{}"
+    />
+  </el-container>
 </template>
 
 <script>
-  import axios from "axios";
+  import { mapState } from "vuex";
+  import { FETCH_TENDER } from "./../../store/types/actions-types";
+  
+  import { Container } from "element-ui";
+  
+  import TenderCard from "./../ListCards/TenderCard";
   
   export default {
     name: "TenderPage",
-    async created() {
-      if (/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/.test(this.$route.params.id)) {
-        const res = await axios({
-          method: "get",
-          url: `http://public.eprocurement.systems/tenders/${this.$route.params.id}`
-        });
-        
-        console.log(res);
-      } else {
-        const res = await axios({
-          method: "get",
-          url: `https://public.api.mepps.openprocurement.net/api/2.3/tenders/${this.$route.params.id}`
-        });
-        
-        console.log(res);
+    components: {
+      "el-container": Container,
+      "tender-card": TenderCard
+    },
+    data() {
+      return {
+        cdb: "",
+        entity: {}
       }
+    },
+    created() {
+      if (/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/.test(this.$route.params.id)) {
+        this.cdb = "mtender2";
+        this.$store.dispatch(FETCH_TENDER, {
+          cdb: "mtender2",
+          id: this.$route.params.id
+        })
+      } else {
+        this.cdb = "mtender1";
+        this.$store.dispatch(FETCH_TENDER, {
+          cdb: "mtender1",
+          id: this.$route.params.id
+        })
+      }
+    },
+    computed: {
+      ...mapState({
+        tender: state => state.entities.tenders.entity
+      })
     }
   };
 </script>
