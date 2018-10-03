@@ -1,0 +1,23 @@
+{
+  "message": {
+    "entity_budgets": "Budgets",
+    "entity_plans": "Annual procurement plans",
+    "entity_tenders": "Electronic Tenders",
+    "entity_contracts": "Contracts",
+    "search_strict": "Strict search",
+    "search_titles_or_descriptions": "search",
+    "search_amount_from": "Amount From",
+    "search_amount_to": "Amount To",
+    "search_region": "Buyer Regions",
+    "search_region_placeholder": "Buyers Regions",
+    "search_deliveries_regions_placeholder": "Deliveries Regions",
+    "search_auto_complete_not_found": "Nothing found",
+    "search_procedures_types_placeholder": "Procedures Types",
+    "search_procedures_statuses_placeholder": "Procedure Statuses",
+    "search_procedures_buyers_names_placeholder": "Buyers names",
+    "search_procedures_buyers_identifiers_placeholder": "Buyers identifiers",
+    "search_procedures_types_of_buyers_placeholder": "Types of Buyers",
+    "search_procedures_buyers_main_general_activity_placeholder": "Buyers main general activity",
+    "search_procedures_buyers_main_sectoral_activity_placeholder": "Buyers main sectoral activity"
+  }
+}

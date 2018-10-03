@@ -1,0 +1,9 @@
+{
+  "message": {
+    "mainTitle": "RO_Procuriosity Public Portal",
+    "entity_budgets": "RO_Budgets",
+    "entity_plans": "RO_Plans",
+    "entity_tenders": "RO_Tenders",
+    "entity_contracts": "RO_Contracts"
+  }
+}

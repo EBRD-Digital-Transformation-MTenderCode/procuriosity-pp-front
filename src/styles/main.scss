@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=cyrillic');
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+  /* @TODO delete important and do right connect styles */
+  background-color: #efefef !important;
+  color: #323232;
+}
+
+.el-container {
+  max-width: 1030px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  & > .el-row {
+    width: 100%;
+    flex-grow: 1;
+  }
+}
+
+.el-main {
+  overflow: inherit;
+  padding: 0;
+}
+
+.el-input__inner {
+  min-height: 52px !important;
+  padding: 20px 10px;
+  border-radius: 3px !important;
+  font-size: 18px;
+}
+
+.el-time-panel {
+  width: 140px !important;
+}
+
+.el-checkbox-button__inner {
+  height: 52px;
+  border-radius: 3px;
+  line-height: 26px;
+  font-size: 18px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.el-dropdown-menu {
+  .flag-wp {
+    margin: 10px 0;
+  }
+}
