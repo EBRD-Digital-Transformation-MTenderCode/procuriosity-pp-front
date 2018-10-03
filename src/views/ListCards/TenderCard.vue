@@ -14,9 +14,12 @@
       </div>
       <el-row type="flex" :gutter="18">
         <el-col :xs="24" :sm="14">
-          <router-link :to="`/tender/${id}`" class="entity-title">
+          <router-link v-if="needLink" :to="`/tender/${id}`" data-link class="entity-title">
             {{ title }}
           </router-link>
+          <div v-else class="entity-title">
+            {{ title }}
+          </div>
           <div class="entity-description">
             {{ description }}
           </div>
@@ -70,6 +73,10 @@
       entity: {
         type: Object,
         required: true
+      },
+      needLink: {
+        type: Boolean,
+        default: false
       }
     },
     computed: {

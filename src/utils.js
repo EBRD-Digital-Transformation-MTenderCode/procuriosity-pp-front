@@ -5,13 +5,9 @@ export function getDataFromObject(obj, getFunc, def) {
   return idx(obj, getFunc) || def;
 }
 
-export function formatDate(date, formatType = "DD.MM.YYYY / HH:mm", addDay) {
-  if (moment(date).isValid()) {
-    if (addDay) {
-      return moment(date).add(addDay, "days").format(formatType);
-    } else {
-      return moment(date).format(formatType);
-    }
+export function formatDate(date, formatType = "DD.MM.YYYY / HH:mm") {
+  if (date && moment(date).isValid()) {
+    return moment(date).format(formatType);
   } else {
     return "Waiting...";
   }

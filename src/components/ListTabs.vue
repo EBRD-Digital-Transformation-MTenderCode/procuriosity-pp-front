@@ -25,6 +25,7 @@
           :is="renderCard"
           v-for="entity of entities[key].list"
           :entity="entity"
+          needLink
           :key="entity.id"
         ></li>
       </ul>
@@ -50,7 +51,7 @@
 
   import BudgetsSearchForm from "./SearchForms/BudgetsSearchForm";
   import TendersSearchForm from "./SearchForms/TendersSearchForm";
-  
+
   import BudgetItem from "../views/ListCards/BudgetItem";
   import TenderCard from "../views/ListCards/TenderCard";
 
@@ -61,13 +62,13 @@
     components: {
       "el-tabs": Tabs,
       "el-tab-pane": TabPane,
-  
+
       "budgets-search-form": BudgetsSearchForm,
       "tenders-search-form": TendersSearchForm,
-    
+
       "budget-item": BudgetItem,
       "tender-card": TenderCard,
-    
+
       "list-pagination": ListPagination
     },
     data() {
@@ -111,7 +112,7 @@
         this.$router.push({path: "", query: {tab: "budgets"}});
       }
       this.activeTab = this.$route.query.tab;
-  
+
       this.$store.dispatch(FETCH_ENTITY_LIST, {
         entity: this.activeTab
       });
@@ -137,7 +138,7 @@
 
 <style lang="scss">
   @import "./../styles/variables";
-  
+
   .list {
     &__tabs {
       width: 100%;
