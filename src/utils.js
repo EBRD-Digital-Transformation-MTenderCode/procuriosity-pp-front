@@ -9,7 +9,7 @@ export function formatDate(date, formatType = "DD.MM.YYYY / HH:mm") {
   if (date && moment(date).isValid()) {
     return moment.utc(date).local().format(formatType);
   } else {
-    return "Waiting...";
+    return "udruchaet...!!!!";
   }
 }
 

@@ -1,13 +1,11 @@
 <template>
-  <el-main>
-    <el-container>
-      <el-row :gutter="30">
-        <el-col>
-          <list-tabs />
-        </el-col>
-      </el-row>
-    </el-container>
-  </el-main>
+  <el-container>
+    <el-row :gutter="30">
+      <el-col>
+        <list-tabs />
+      </el-col>
+    </el-row>
+  </el-container>
 </template>
 
 <script>
