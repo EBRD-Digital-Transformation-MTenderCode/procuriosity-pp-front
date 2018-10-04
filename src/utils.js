@@ -7,7 +7,7 @@ export function getDataFromObject(obj, getFunc, def) {
 
 export function formatDate(date, formatType = "DD.MM.YYYY / HH:mm") {
   if (date && moment(date).isValid()) {
-    return moment(date).format(formatType);
+    return moment.utc(date).local().format(formatType);
   } else {
     return "Waiting...";
   }
