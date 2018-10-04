@@ -1,12 +1,17 @@
 import axios from "axios";
-import { getListConfig } from "./../configs/requests-configs";
+import { getListConfig, getTenderConfig } from "./../configs/requests-configs";
 
 import {
   SET_ENTITY_LIST,
   SET_ENTITY_PAGINATION_INFO,
-  SET_ENTITY_SEARCH_PARAMS
+  SET_ENTITY_SEARCH_PARAMS,
+
+  SET_TENDER_ENTITY
 } from "./types/mutations-types";
-import { FETCH_ENTITY_LIST } from "./types/actions-types";
+import {
+  FETCH_ENTITY_LIST,
+  FETCH_TENDER
+} from "./types/actions-types";
 
 import { convertObjectToQueryParamsString } from "./../utils";
 
@@ -41,6 +46,7 @@ export default {
     tenders: {
       name: "message.entity_tenders",
       list: [],
+      entity: {},
       searchParams: {
         titlesOrDescriptions: "",
         titlesOrDescriptionsStrict: false,
@@ -50,7 +56,7 @@ export default {
 
         proceduresTypes: [],
         proceduresStatuses: [],
-  
+
         entityId: "",
 
         amountFrom: null,
@@ -111,7 +117,7 @@ export default {
       };
     },
 
-    [SET_ENTITY_SEARCH_PARAMS](state, {entity, params}) {
+    [SET_ENTITY_SEARCH_PARAMS](state, { entity, params }) {
       state[entity] = {
         ...state[entity],
         searchParams: {
@@ -124,10 +130,14 @@ export default {
         entity: entity,
         params: convertObjectToQueryParamsString(state[entity].searchParams)
       });
+    },
+
+    [SET_TENDER_ENTITY](state, { tender }) {
+      state.tenders.entity = tender
     }
   },
   actions: {
-    async [FETCH_ENTITY_LIST]({commit}, {entity, params}) {
+    async [FETCH_ENTITY_LIST]({ commit }, { entity, params }) {
       try {
         const res = await axios(getListConfig(entity, params));
 
@@ -144,6 +154,19 @@ export default {
       }
       catch (e) {
         console.log(e.message);
+      }
+    },
+
+    async [FETCH_TENDER]({ commit }, { cdb, id }) {
+      try {
+        const res = await axios(getTenderConfig(cdb, id));
+
+        commit(SET_TENDER_ENTITY, {
+          tender: res.data
+        });
+      }
+      catch (e) {
+
       }
     }
   }

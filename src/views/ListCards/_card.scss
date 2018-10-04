@@ -1,4 +1,5 @@
 .entity-card {
+  width: 100%;
   .el-card {
     margin: 20px 0;
     border: none;
@@ -134,15 +135,17 @@
         color: initial;
       }
     }
-    &-title {
+    &-title[data-link] {
       box-shadow: 0 2px 0 #235aa6;
-      line-height: 1.4;
-      font-size: 24px;
-      color: #235aa6;
       transition: 0.4s;
       &:hover {
         box-shadow: 0 2px 0 transparent;
       }
+    }
+    &-title {
+      line-height: 1.4;
+      font-size: 24px;
+      color: #235aa6;
     }
     &-description {
       margin-top: 26px;

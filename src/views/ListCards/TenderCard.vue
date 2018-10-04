@@ -14,9 +14,12 @@
       </div>
       <el-row type="flex" :gutter="18">
         <el-col :xs="24" :sm="14">
-          <router-link :to="`/tender/${id}`" class="entity-title">
+          <router-link v-if="needLink" :to="`/tender/${id}`" data-link class="entity-title">
             {{ title }}
           </router-link>
+          <div v-else class="entity-title">
+            {{ title }}
+          </div>
           <div class="entity-description">
             {{ description }}
           </div>
@@ -70,6 +73,10 @@
       entity: {
         type: Object,
         required: true
+      },
+      needLink: {
+        type: Boolean,
+        default: false
       }
     },
     computed: {
@@ -137,11 +144,11 @@
         return getDataFromObject(this.entity, _ => _.currency);
       },
       wholeAmount() {
-        const amountStr = getDataFromObject(this.entity, _ => _.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        const amountStr = getDataFromObject(this.entity, _ => _.amount, 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
         return /\./.test(amountStr) ? amountStr.slice(0, amountStr.indexOf(".")) : amountStr;
       },
       fractionAmount() {
-        const amountStr = getDataFromObject(this.entity, _ => _.amount).toString();
+        const amountStr = getDataFromObject(this.entity, _ => _.amount, 0).toString();
         return /\./.test(amountStr) ? amountStr.slice(amountStr.indexOf(".") + 1).length === 1 ? amountStr.slice(amountStr.indexOf(".") + 1) + "0" : amountStr.slice(amountStr.indexOf(".") + 1) : "";
       },
       region() {

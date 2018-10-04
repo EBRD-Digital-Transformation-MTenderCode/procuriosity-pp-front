@@ -1,3 +1,5 @@
 export const FETCH_ENTITY_LIST = "FETCH_ENTITY_LIST";
 
+export const FETCH_TENDER = "FETCH_TENDER";
+
 export const FETCH_DIRECTORY = "FETCH_DIRECTORY";
