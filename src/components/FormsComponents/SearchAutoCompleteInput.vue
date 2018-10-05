@@ -11,6 +11,7 @@
         :placeholder=placeholder
         :remote-method="getOptions"
         default-first-option
+        :popper-append-to-body="false"
         :value="values"
         @change="setValues(name, $event)"
     >
@@ -26,6 +27,7 @@
         multiple
         filterable
         :no-match-text="$t('message.search_auto_complete_not_found')"
+        :popper-append-to-body="false"
         :placeholder="placeholder"
         needFetch
         remote
