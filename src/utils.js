@@ -1,7 +1,7 @@
 import idx from "idx";
 import moment from "moment/moment";
 
-export function getDataFromObject(obj, getFunc, def) {
+export function getDataFromObject(obj, getFunc, def = "") {
   return idx(obj, getFunc) || def;
 }
 
@@ -9,12 +9,14 @@ export function formatDate(date, formatType = "DD.MM.YYYY / HH:mm") {
   if (date && moment(date).isValid()) {
     return moment.utc(date).local().format(formatType);
   } else {
-    return "Waiting...";
+    return "udruchaet...!!!!";
   }
 }
 
-// @TODO need refactoring
-export const convertObjectToQueryParamsString = obj => Object.entries(obj)
-  .filter(([key, value]) => Array.isArray(value) ? !!value.length : !!value)
-  .reduce((accVal, [key, value], i) => `${accVal}${i !== 0 ? "&" : ""}${key}=${encodeURIComponent(Array.isArray(value) ? JSON.stringify(value) : value)}`, "?");
-
+export const convertObjectToQueryParamsString = obj => {
+  return Object.entries(obj).filter(([key, val]) => {
+    return Array.isArray(val) ? !!val.length : !!val;
+  }).reduce((accVal, [key, val], i) => {
+    return `${accVal}${i !== 0 ? "&" : ""}${key}=${encodeURIComponent(Array.isArray(val) ? JSON.stringify(val) : val)}`;
+  }, "?");
+};

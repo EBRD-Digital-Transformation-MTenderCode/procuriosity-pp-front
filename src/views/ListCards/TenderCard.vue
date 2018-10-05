@@ -14,7 +14,7 @@
       </div>
       <el-row type="flex" :gutter="18">
         <el-col :xs="24" :sm="14">
-          <router-link v-if="needLink" :to="`/tender/${id}`" data-link class="entity-title">
+          <router-link v-if="needLink" :to="`/tenders/${id}`" data-link class="entity-title">
             {{ title }}
           </router-link>
           <div v-else class="entity-title">
@@ -80,9 +80,6 @@
       }
     },
     computed: {
-      cdb() {
-        return getDataFromObject(this.entity, _ => _.cdb);
-      },
       parseStatusIco() {
         const status = getDataFromObject(this.entity, _ => _.procedureStatus);
         switch (status) {

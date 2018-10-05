@@ -9,12 +9,12 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: "/",
+      path: "/(budgets|tenders|plans|contracts)",
       name: "list",
       component: List
     },
     {
-      path: "/tender/:id",
+      path: "/tenders/:id",
       name: "tender-page",
       component: () => import(/* webpackChunkName: "TenderPage" */ "./views/EntitiesPages/TenderPage.vue")
     }
