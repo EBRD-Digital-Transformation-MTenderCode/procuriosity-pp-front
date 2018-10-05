@@ -8,7 +8,7 @@
           :setValue="setFormParams"
           :label="$t('message.search_strict')"
       />
-      
+
       <!-- Titles or descriptions -->
       <search-input
           name="titlesOrDescriptions"
@@ -18,12 +18,12 @@
           placeholder="search"
       />
       <button class="search-form__btn search-form__btn_search" />
-      
+
       <!-- @TODO need write more readable classes -->
-       <button
-           @click="moreCriterions = !moreCriterions"
-           :class="moreCriterions ? 'search-form__btn search-form__btn_more search-form__btn_more_close': 'search-form__btn search-form__btn_more search-form__btn_more_open'"
-       />
+      <button
+          @click="moreCriterions = !moreCriterions"
+          :class="moreCriterions ? 'search-form__btn search-form__btn_more search-form__btn_more_close': 'search-form__btn search-form__btn_more search-form__btn_more_open'"
+      />
     </div>
     <el-collapse-transition name="el-zoom-in-top">
       <div v-show="moreCriterions">
@@ -34,30 +34,26 @@
               <div class="search-form-element">
                 <search-auto-complete-input
                     name="buyersRegions"
-                    :directory="regionsDirectory"
                     :items="regionsList"
                     :values="buyersRegions"
                     :setValues="setFormParams"
-                    remote
+                    needFetch
                     :placeholder="$t('message.search_region_placeholder')"
-                    :params="{country: 'MD'}"
                 />
               </div>
-              
+
               <!-- Delivery regions -->
               <div class="search-form-element">
                 <search-auto-complete-input
                     name="deliveriesRegions"
-                    :directory="regionsDirectory"
                     :items="regionsList"
                     :values="deliveriesRegions"
                     :setValues="setFormParams"
-                    remote
+                    needFetch
                     :placeholder="$t('message.search_deliveries_regions_placeholder')"
-                    :params="{country: 'MD'}"
                 />
               </div>
-              
+
               <!-- Procedure types -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -68,7 +64,7 @@
                     :placeholder="$t('message.search_procedures_types_placeholder')"
                 />
               </div>
-              
+
               <!-- Procedure statuses -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -103,7 +99,7 @@
                     :placeholder="$t('message.search_amount_to')"
                 />
               </div>
-              
+
               <!-- Buyers names -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -158,7 +154,7 @@
               </div>
             </el-col>
             <el-col :xs="24" :sm="12">
-               <!-- Period published -->
+              <!-- Period published -->
               <div class="search-form-element">
                 <search-period
                     name="periodPublished"
@@ -168,7 +164,7 @@
                   Published Period:
                 </search-period>
               </div>
-              
+
               <!-- Period delivery -->
               <div class="search-form-element">
                 <search-period
@@ -179,7 +175,7 @@
                   Delivery Period:
                 </search-period>
               </div>
-              
+
               <!-- Period enquiry -->
               <div class="search-form-element">
                 <search-period
@@ -190,7 +186,7 @@
                   Enquiry Period:
                 </search-period>
               </div>
-              
+
               <!-- Period offer -->
               <div class="search-form-element">
                 <search-period
@@ -201,7 +197,7 @@
                   Offer Period:
                 </search-period>
               </div>
-              
+
               <!-- Period auction -->
               <div class="search-form-element">
                 <search-period
@@ -212,7 +208,7 @@
                   Auction Period:
                 </search-period>
               </div>
-              
+
               <!-- Period Award -->
               <div class="search-form-element">
                 <search-period
@@ -223,7 +219,7 @@
                   Award Period:
                 </search-period>
               </div>
-              
+
               <!-- id -->
               <div class="search-form-element">
                 <search-input
@@ -234,20 +230,21 @@
                     prefixIcon=""
                 />
               </div>
+
+              <!-- Classifications -->
+              <div class="search-form-element">
+                <search-auto-complete-input
+                    name="classifications"
+                    :items="CPVCodesList"
+                    :values="classifications"
+                    :setValues="setFormParams"
+                    needFetch
+                    :placeholder="$t('message.search_classifications_placeholder')"
+                />
+              </div>
             </el-col>
           </el-row>
-
         </div>
-        <!--
-        <search-cpv
-            name="classification"
-            :directory="cpvCodesDirectory"
-            :values="classification"
-            :setValues="setFormParams"
-        >
-          CPV codes
-        </search-cpv>
-        -->
       </div>
     </el-collapse-transition>
   </div>
@@ -264,7 +261,6 @@
   import SearchInput from "./../FormsComponents/SearchInput";
   import SearchSwitch from "../FormsComponents/SearchCheckboxButton";
   import SearchAutoCompleteInput from "./../FormsComponents/SearchAutoCompleteInput";
-  import SearchCPV from "./../FormsComponents/SearchCPV";
   import SearchPeriods from "./../FormsComponents/SearchPeriods";
 
   import proceduresTypesList from "./../../store/types/procedures-types";
@@ -282,14 +278,11 @@
       "search-input": SearchInput,
       "search-switch": SearchSwitch,
       "search-auto-complete-input": SearchAutoCompleteInput,
-      "search-cpv": SearchCPV,
-      "search-period": SearchPeriods
-    },
+      "search-period": SearchPeriods,
+      },
     data() {
       return {
         moreCriterions: false,
-        regionsDirectory: REGIONS,
-        cpvCodesDirectory: CPV_CODES,
         proceduresTypesList: proceduresTypesList["tenders"],
         proceduresStatusesList: proceduresStatusesList["tenders"],
         buyersTypesList,
@@ -301,34 +294,35 @@
       ...mapState({
         /* + */titlesOrDescriptions: state => state.entities.tenders.searchParams.titlesOrDescriptions,
         /* + */titlesOrDescriptionsStrict: state => state.entities.tenders.searchParams.titlesOrDescriptionsStrict,
-  
+
         /* + */buyersRegions: state => state.entities.tenders.searchParams.buyersRegions,
         /* + */deliveriesRegions: state => state.entities.tenders.searchParams.deliveriesRegions,
-  
+
         /* + */proceduresTypes: state => state.entities.tenders.searchParams.proceduresTypes,
         /* + */proceduresStatuses: state => state.entities.tenders.searchParams.proceduresStatuses,
-  
+
         /* + */entityId: state => state.entities.tenders.searchParams.entityId,
-  
+
         /* + */amountFrom: state => state.entities.tenders.searchParams.amountFrom,
         /* + */amountTo: state => state.entities.tenders.searchParams.amountTo,
-      
-        classifications: state => state.entities.tenders.searchParams.classifications,
-      
+
+        /* + */ classifications: state => state.entities.tenders.searchParams.classifications,
+
         /* + */periodPublished: state => state.entities.tenders.searchParams.periodPublished,
         /* + */periodDelivery: state => state.entities.tenders.searchParams.periodDelivery,
         /* + */periodEnquiry: state => state.entities.tenders.searchParams.periodEnquiry,
         /* + */periodOffer: state => state.entities.tenders.searchParams.periodOffer,
         /* + */periodAuction: state => state.entities.tenders.searchParams.periodAuction,
         /* + */periodAward: state => state.entities.tenders.searchParams.periodAward,
-  
+
         /* + */buyersNames: state => state.entities.tenders.searchParams.buyersNames,
         /* + */buyersIdentifiers: state => state.entities.tenders.searchParams.buyersIdentifiers,
         /* + */buyersTypes: state => state.entities.tenders.searchParams.buyersTypes,
         /* + */buyersMainGeneralActivities: state => state.entities.tenders.searchParams.buyersMainGeneralActivities,
         /* + */buyersMainSectoralActivities: state => state.entities.tenders.searchParams.buyersMainSectoralActivities,
-      
-        regionsList: state => state.mdm[REGIONS]
+
+        regionsList: state => state.mdm[REGIONS],
+        CPVCodesList: state => state.mdm[CPV_CODES]
       })
     },
     methods: {
