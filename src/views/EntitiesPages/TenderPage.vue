@@ -2,9 +2,9 @@
   <div class="entity-wp">
     <el-container direction="vertical" v-if="Object.keys(tender).length">
       <tender-card
-          :entity="entity"
+        :entity="entity"
       />
-  
+
       <!-- Procuring entity -->
       <div class="info">
         <div class="info__title">Procuring Entity</div>
@@ -49,7 +49,7 @@
           </el-row>
         </div>
       </div>
-  
+
       <!-- Procurement info -->
       <div class="info">
         <div class="info__title">Information about the procurement procedure</div>
@@ -63,7 +63,7 @@
             </el-col>
           </el-row>
         </div>
-        <div class="info__text" v-if="hasAuction">
+        <div class="info__text" v-if="procurementInfo.minStep">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
               <div class="info__name">Minimum amount of price reduction ({{ procurementInfo.currency }})</div>
@@ -74,10 +74,9 @@
           </el-row>
         </div>
       </div>
-  
-      <!-- @TODO need add test on tender without dates and don`t render this block -->
+
       <!-- Dates -->
-      <div class="info">
+      <div class="info" v-if="dates">
         <div class="info__title">Dates and terms</div>
         <div class="info__text">
           <el-row :gutter="30">
@@ -99,7 +98,7 @@
             </el-col>
           </el-row>
         </div>
-        <div class="info__text" v-if="hasAuction">
+        <div class="info__text" v-if="dates.auction">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
               <div class="info__name">Auction period</div>
@@ -110,15 +109,17 @@
           </el-row>
         </div>
       </div>
-  
+
       <!-- Documents -->
-      <div class="info" v-if="hasDocuments">
+      <div class="info" v-if="documents.length">
         <div class="info__title">Purchase Documents</div>
         <div class="info__text" v-for="(document, key) of documents" :key="document.id + key">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
               <div class="info-document_name">
-                <a :href="document.url">{{ document.name }}</a>
+                <div>
+                  <a :href="document.url">{{ document.name }}</a>
+                </div>
               </div>
             </el-col>
             <el-col :xs="24" :sm="14">
@@ -128,7 +129,7 @@
           </el-row>
         </div>
       </div>
-  
+
       <!-- Items -->
       <div class="info">
         <div class="info__title">Purchase Specification</div>
@@ -154,9 +155,9 @@
           </div>
         </div>
       </div>
-      
+
       <!-- Bids -->
-      <div class="info" v-if="hasBids">
+      <div class="info" v-if="bids.length">
         <div class="info__title">Proposals Registry</div>
         <table class="info-table">
           <tr>
@@ -194,19 +195,19 @@
             </td>
             <td class="text-center">
               <a
-                  v-for="document of bid.documents"
-                  :key="document.id"
-                  :href="document.url"
-                  class="document-link"
-                  :title="document.title"
+                v-for="document of bid.documents"
+                :key="document.id"
+                :href="document.url"
+                class="document-link"
+                :title="document.title"
               />
             </td>
             </tr>
         </table>
       </div>
-  
+
       <!-- Awards -->
-      <div class="info" v-if="hasAwards">
+      <div class="info" v-if="awards.length">
         <div class="info__title">Protocol for the disclosure of proposals</div>
         <table class="info-table">
           <tr>
@@ -241,15 +242,138 @@
             </td>
             <td class="text-center">
               <a
-                  v-for="document of award.documents"
-                  :key="document.id"
-                  :href="document.url"
-                  class="document-link"
-                  :title="document.title"
+                v-for="document of award.documents"
+                :key="document.id"
+                :href="document.url"
+                class="document-link"
+                :title="document.title"
               />
             </td>
             </tr>
         </table>
+      </div>
+
+      <!-- Contracts -->
+      <div class="info" v-if="contracts.length">
+        <div class="info__title">Concluded Contracts</div>
+        <div v-for="contract of contracts" :key="contract.id">
+          <div class="info-contract">
+            <div class="info-contract__title">{{ contract.title }}</div>
+            <div class="info-contract__status">
+              <div class="info-contract__status_text">{{ contract.status }}</div>
+              <div :class="`info-contract__status_ico ${contract.status}`" />
+            </div>
+          </div>
+          <div class="info__text">
+            <el-row :gutter="30">
+              <el-col :xs="24" :sm="10">
+                <div class="info__name">Procuring Entity</div>
+              </el-col>
+              <el-col :xs="24" :sm="14">
+                <div class="info__value">{{ contract.procuringEntity }}</div>
+              </el-col>
+            </el-row>
+          </div>
+          <div class="info__text">
+            <el-row :gutter="30">
+              <el-col :xs="24" :sm="10">
+                <div class="info__name">Suppliers</div>
+              </el-col>
+              <el-col :xs="24" :sm="14">
+                <div
+                  v-for="supplier of contract.suppliers"
+                  :key="supplier"
+                  class="info__value"
+                >
+                  {{ supplier }}
+                </div>
+              </el-col>
+            </el-row>
+          </div>
+          <div class="info__text">
+            <el-row :gutter="30">
+              <el-col :xs="24" :sm="10">
+                <div class="info__name">Contract ID</div>
+              </el-col>
+              <el-col :xs="24" :sm="14">
+                <div class="info__value">{{ contract.contractId }}</div>
+              </el-col>
+            </el-row>
+          </div>
+          <div class="info__text">
+            <el-row :gutter="30">
+              <el-col :xs="24" :sm="10">
+                <div class="info__name">Contract amount</div>
+              </el-col>
+              <el-col :xs="24" :sm="14">
+                <div class="info__value info__value_accent">{{ contract.amount }} (withot VAT)</div>
+              </el-col>
+            </el-row>
+          </div>
+          <div class="info__text">
+            <el-row :gutter="30">
+              <el-col :xs="24" :sm="10">
+                <div class="info__name">Contract number</div>
+              </el-col>
+              <el-col :xs="24" :sm="14">
+                <div class="info__value">{{ contract.contractNumber }}</div>
+              </el-col>
+            </el-row>
+          </div>
+          <div class="info__text">
+            <el-row :gutter="30">
+              <el-col :xs="24" :sm="10">
+                <div class="info__name">Date signed</div>
+              </el-col>
+              <el-col :xs="24" :sm="14">
+                <div class="info__value info__value_accent">{{ contract.dateSigned }}</div>
+              </el-col>
+            </el-row>
+          </div>
+          <div class="info__text">
+            <el-row :gutter="30">
+              <el-col :xs="24" :sm="10">
+                <div class="info__name">Contract period start date</div>
+              </el-col>
+              <el-col :xs="24" :sm="14">
+                <div class="info__value info__value_accent">{{ contract.contractStartDate }}</div>
+              </el-col>
+            </el-row>
+          </div>
+          <div class="info__text">
+            <el-row :gutter="30">
+              <el-col :xs="24" :sm="10">
+                <div class="info__name">Contract period end date</div>
+              </el-col>
+              <el-col :xs="24" :sm="14">
+                <div class="info__value info__value_accent">{{ contract.contractEndDate }}</div>
+              </el-col>
+            </el-row>
+          </div>
+        </div>
+      </div>
+
+      <!-- Documentations -->
+      <div class="info" v-if="documentations.length">
+        <div class="info__title">Documentations</div>
+        <div v-for="(item, key) of documentations" :key="key">
+          <div class="info__text" v-for="(documentation, key) of item" :key="documentation.id + key">
+            <el-row :gutter="30">
+              <el-col :xs="24" :sm="14">
+                <div class="info-document_name">
+                  <div>
+                    <a :href="documentation.url">{{ documentation.name }}</a>
+                    <div class="info__value_muted">{{ documentation.type }}</div>
+                  </div>
+                </div>
+              </el-col>
+              <el-col :xs="24" :sm="10">
+                <div class="info-document_date-published">Published on {{ documentation.datePublished }}</div>
+                <div class="info-document_id">ID: {{ documentation.id }}</div>
+              </el-col>
+            </el-row>
+          </div>
+        </div>
       </div>
     </el-container>
     <el-container v-else>
@@ -291,11 +415,7 @@
     computed: {
       ...mapState({
         cdb: state => state.entities.tenders.currentTender.cdb,
-        tender: state => state.entities.tenders.currentTender.tenderData,
-        hasAuction: state => state.entities.tenders.currentTender.hasAuction,
-        hasDocuments: state => state.entities.tenders.currentTender.hasDocuments,
-        hasBids: state => state.entities.tenders.currentTender.hasBids,
-        hasAwards: state => state.entities.tenders.currentTender.hasAwards
+        tender: state => state.entities.tenders.currentTender.tenderData
       }),
       entity() {
         if (this.cdb === MTENDER1) {
@@ -349,10 +469,12 @@
             return Math.round(((minStep / amount) * 100) * 100) / 100;
           };
 
+          const hasAuction = tender.hasOwnProperty("auctionPeriod");
+
           return {
             currency: getDataFromObject(tender, _ => _.value.currency),
             amount: getDataFromObject(tender, _ => _.value.amount),
-            minStep: this.hasAuction ? `${getDataFromObject(tender, _ => _.minimalStep.amount)} (${calculateMinStepPercent()} %)` : ""
+            minStep: hasAuction ? `${getDataFromObject(tender, _ => _.minimalStep.amount)} (${calculateMinStepPercent()} %)` : ""
           };
         }
       },
@@ -360,10 +482,18 @@
         if (this.cdb === MTENDER1) {
           const tender = this.tender.data;
 
+          if (tender.procurementMethodType === "reporting") {
+            return false;
+          }
+
+          const hasAuction = tender.hasOwnProperty("auctionPeriod");
+
           return {
             enquiry: `${formatDate(getDataFromObject(tender, _ => _.enquiryPeriod.startDate))} - ${formatDate(getDataFromObject(tender, _ => _.enquiryPeriod.endDate))}`,
             tendering: `${formatDate(getDataFromObject(tender, _ => _.tenderPeriod.startDate))} - ${formatDate(getDataFromObject(tender, _ => _.tenderPeriod.endDate))}`,
-            auction: this.hasAuction ? `${formatDate(getDataFromObject(tender, _ => _.auctionPeriod.startDate))} - ${formatDate(getDataFromObject(tender, _ => _.auctionPeriod.endDate))}` : ""
+            auction: hasAuction ?
+              `${formatDate(getDataFromObject(tender, _ => _.auctionPeriod.startDate))} -
+              ${formatDate(getDataFromObject(tender, _ => _.auctionPeriod.endDate))}` : ""
           };
         }
       },
@@ -384,7 +514,7 @@
       items() {
         if (this.cdb === MTENDER1) {
           const tender = this.tender.data;
-          
+
           return getDataFromObject(tender, _ => _.items, []).map(item => {
             return {
               id: getDataFromObject(item, _ => _.id),
@@ -399,14 +529,14 @@
                                 ${getDataFromObject(item, _ => _.deliveryAddress.region)},
                                 ${getDataFromObject(item, _ => _.deliveryAddress.locality)},
                                 ${getDataFromObject(item, _ => _.deliveryAddress.streetAddress)}`
-            }
-          })
+            };
+          });
         }
       },
       bids() {
         if (this.cdb === MTENDER1) {
           const tender = this.tender.data;
-          
+
           return getDataFromObject(tender, _ => _.bids, []).map(bid => {
             return {
               id: getDataFromObject(bid, _ => _.id),
@@ -421,10 +551,10 @@
                   id: doc.id,
                   url: doc.url,
                   title: doc.title
-                }
+                };
               })
-            }
-          })
+            };
+          });
         }
       },
       awards() {
@@ -446,10 +576,49 @@
                   id: doc.id,
                   url: doc.url,
                   title: doc.title
-                }
+                };
               })
-            }
-          })
+            };
+          });
+        }
+      },
+      contracts() {
+        if (this.cdb === MTENDER1) {
+          const tender = this.tender.data;
+
+          return getDataFromObject(tender, _ => _.contracts, []).map(contract => {
+            return {
+              id: getDataFromObject(contract, _ => _.id),
+              title: getDataFromObject(contract, _ => _.title),
+              status: getDataFromObject(contract, _ => _.status),
+              procuringEntity: getDataFromObject(tender, _ => _.procuringEntity.name),
+              suppliers: getDataFromObject(contract, _ => _.suppliers, []).map(supplier => supplier.name),
+              contractId: getDataFromObject(contract, _ => _.contractID),
+              amount: getDataFromObject(contract, _ => _.value.amount),
+              currency: getDataFromObject(contract, _ => _.value.currency),
+              contractNumber: getDataFromObject(contract, _ => _.contractNumber),
+              dateSigned: formatDate(getDataFromObject(contract, _ => _.dateSigned), "DD.MM.YYYY"),
+              contractStartDate: formatDate(getDataFromObject(contract, _ => _.period.startDate), "DD.MM.YYYY"),
+              contractEndDate: formatDate(getDataFromObject(contract, _ => _.period.endDate), "DD.MM.YYYY")
+            };
+          });
+        }
+      },
+      documentations() {
+        if (this.cdb === MTENDER1) {
+          const tender = this.tender.data;
+
+          return getDataFromObject(tender, _ => _.contracts, []).map(contract => {
+            return getDataFromObject(contract, _ => _.documents, []).map(documentation => {
+              return {
+                name: getDataFromObject(documentation, _ => _.title),
+                url: getDataFromObject(documentation, _ => _.url),
+                type: getDataFromObject(documentation, _ => _.documentType),
+                datePublished: formatDate(getDataFromObject(documentation, _ => _.datePublished)),
+                id: getDataFromObject(documentation, _ => _.id)
+              };
+            });
+          });
         }
       }
     }

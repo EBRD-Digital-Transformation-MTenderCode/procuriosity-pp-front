@@ -41,7 +41,7 @@
           </div>
           <div class="entity-type">
             <div class="title">Procedure type:</div>
-            <div class="text">{{ type }}</div>
+            <div class="text text__status">{{ type }}</div>
           </div>
           <div class="entity-pe-name">
             <div class="title">Procuring Entity Name:</div>

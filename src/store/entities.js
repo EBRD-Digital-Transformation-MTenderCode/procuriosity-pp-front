@@ -50,12 +50,7 @@ export default {
       list: [],
       currentTender: {
         cdb: "",
-        tenderData: {},
-        hasAuction: false,
-        hasDocuments: false,
-        hasBids: false,
-        hasAwards: false,
-        hasContract: false
+        tenderData: {}
       },
       searchParams: {
         titlesOrDescriptions: "",
@@ -142,14 +137,10 @@ export default {
       });
     },
 
-    [SET_CURRENT_TENDER_INFO](state, {cdb, tenderData, hasAuction, hasDocuments, hasBids, hasAwards}) {
+    [SET_CURRENT_TENDER_INFO](state, {cdb, tenderData}) {
       state.tenders.currentTender = {
         cdb,
-        tenderData,
-        hasAuction,
-        hasDocuments,
-        hasBids,
-        hasAwards
+        tenderData
       };
     }
   },
@@ -179,30 +170,21 @@ export default {
         const res = await axios(getTenderConfig(cdb, id));
 
         let hasAuction;
-        let hasDocuments;
-        let hasBids;
-        let hasAwards;
 
         if (cdb === MTENDER1) {
           const tender = res.data.data;
 
           hasAuction = tender.hasOwnProperty("auctionPeriod"); // @TODO need clarify condition
-          hasDocuments = tender.hasOwnProperty("documents") && Array.isArray(tender.documents) && tender.documents.length;
-          hasBids = tender.hasOwnProperty("bids") && Array.isArray(tender.bids) && tender.bids.length;
-          hasAwards = tender.hasOwnProperty("awards") && Array.isArray(tender.awards) && tender.awards.length;
         }
 
         commit(SET_CURRENT_TENDER_INFO, {
           cdb,
-          tenderData: res.data,
-          hasAuction,
-          hasDocuments,
-          hasBids,
-          hasAwards
+          tenderData: res.data
         });
       }
       catch (e) {
-
+        // @TODO need add catching errors
+        console.log(e);
       }
     }
   }

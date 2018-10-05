@@ -64,12 +64,16 @@
         background-repeat: no-repeat;
       }
       a {
+        line-height: 1.4;
         font-weight: 700;
         box-shadow: 0 1px 0 $fontC1;
         transition: 0.4s;
         &:hover {
           box-shadow: 0 1px 0 transparent;
         }
+      }
+      .info__value_muted {
+        margin-top: 10px;
       }
     }
     &_date-published {
@@ -92,11 +96,46 @@
     th,
     td {
       padding: 16px;
+      font-size: 14px;
     }
     th {
       background-color: $fontC2;
       text-align: left;
       color: #fff;
+    }
+    td {
+      background-color: #fff;
+    }
+  }
+  &-contract {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background-color: $fontC2;
+    font-size: 14px;
+    color: #fff;
+    &__status {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      &_text {
+        &:first-letter {
+          text-transform:capitalize;
+        }
+      }
+      &_ico {
+        flex-shrink: 0;
+        display: inline-block;
+        position: relative;
+        width: 18px;
+        height: 18px;
+        margin-left: 12px;
+        border-radius: 50%;
+        &.active {
+          background-color: #97ca63;
+        }
+      }
     }
   }
   .document-link {
