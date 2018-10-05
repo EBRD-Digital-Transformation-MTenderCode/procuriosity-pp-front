@@ -2,9 +2,9 @@
   <div class="entity-wp">
     <el-container direction="vertical" v-if="Object.keys(tender).length">
       <tender-card
-        :entity="entity"
+          :entity="entity"
       />
-
+  
       <!-- Procuring entity -->
       <div class="info">
         <div class="info__title">Procuring Entity</div>
@@ -49,7 +49,7 @@
           </el-row>
         </div>
       </div>
-
+  
       <!-- Procurement info -->
       <div class="info">
         <div class="info__title">Information about the procurement procedure</div>
@@ -74,7 +74,7 @@
           </el-row>
         </div>
       </div>
-
+  
       <!-- @TODO need add test on tender without dates and don`t render this block -->
       <!-- Dates -->
       <div class="info">
@@ -106,6 +106,24 @@
             </el-col>
             <el-col :xs="24" :sm="14">
               <div class="info__value info__value_accent">{{ dates.auction }}</div>
+            </el-col>
+          </el-row>
+        </div>
+      </div>
+  
+      <!-- Documents -->
+      <div class="info" v-if="hasDocuments">
+        <div class="info__title">Purchase Documents</div>
+        <div class="info__text" v-for="document of documents" :key="document.id">
+          <el-row :gutter="30">
+            <el-col :xs="24" :sm="10">
+              <div class="info-document_name">
+                <a :href="document.url">{{ document.name }}</a>
+              </div>
+            </el-col>
+            <el-col :xs="24" :sm="14">
+              <div class="info-document_date-published">Published on {{ document.datePublished }}</div>
+              <div class="info-document_id">ID: {{ document.id }}</div>
             </el-col>
           </el-row>
         </div>
@@ -151,7 +169,8 @@
       ...mapState({
         cdb: state => state.entities.tenders.currentTender.cdb,
         tender: state => state.entities.tenders.currentTender.tenderData,
-        hasAuction: state => state.entities.tenders.currentTender.hasAuction
+        hasAuction: state => state.entities.tenders.currentTender.hasAuction,
+        hasDocuments: state => state.entities.tenders.currentTender.hasDocuments
       }),
       entity() {
         if (this.cdb === MTENDER1) {
@@ -221,6 +240,20 @@
             tendering: `${formatDate(getDataFromObject(tender, _ => _.tenderPeriod.startDate))} - ${formatDate(getDataFromObject(tender, _ => _.tenderPeriod.endDate))}`,
             auction: this.hasAuction ? `${formatDate(getDataFromObject(tender, _ => _.auctionPeriod.startDate))} - ${formatDate(getDataFromObject(tender, _ => _.auctionPeriod.endDate))}` : ""
           };
+        }
+      },
+      documents() {
+        if (this.cdb === MTENDER1) {
+          const tender = this.tender.data;
+
+          return getDataFromObject(tender, _ => _.documents, []).map(doc => {
+            return {
+              name: getDataFromObject(doc, _ => _.title),
+              url: getDataFromObject(doc, _ => _.url),
+              datePublished: formatDate(getDataFromObject(doc, _ => _.datePublished)),
+              id: getDataFromObject(doc, _ => _.id)
+            };
+          });
         }
       }
     }

@@ -4,7 +4,9 @@
       <el-row :gutter="30">
         <el-col>
           <div class="footer-logo">
-            <img src="@/assets/logo-footer.png" alt="" class="footer-logo__img">
+            <a href="/">
+              <img src="@/assets/logo-footer.png" alt="" class="footer-logo__img">
+            </a>
             <div class="footer-logo__cr">
               2018 ©,  All rights reserved
             </div>
