@@ -11,13 +11,14 @@
         end-placeholder="End date"
         clearable
         format="dd MM yyyy, HH:mm"
-        value-format="yyyy-MM-ddTHH:mm:ssZ"
         :editable="false"
     />
   </div>
 </template>
 
 <script>
+  import moment from "moment/moment";
+
   import { DatePicker } from "element-ui";
 
   export default {
@@ -42,10 +43,10 @@
     computed: {
       inputValue: {
         get() {
-          return this.value
+          return this.value;
         },
-        set(value) {
-          this.setValue(this.name, value)
+        set([startDate, endDate]) {
+          this.setValue(this.name, [moment.utc(startDate).format("YYYY-MM-DDTHH:mm:ss") + "Z", moment.utc(endDate).format("YYYY-MM-DDTHH:mm:ss") + "Z"]);
         }
       }
     }
