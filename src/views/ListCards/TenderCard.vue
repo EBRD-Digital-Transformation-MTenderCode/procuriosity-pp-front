@@ -80,9 +80,6 @@
       }
     },
     computed: {
-      cdb() {
-        return getDataFromObject(this.entity, _ => _.cdb);
-      },
       parseStatusIco() {
         const status = getDataFromObject(this.entity, _ => _.procedureStatus);
         switch (status) {

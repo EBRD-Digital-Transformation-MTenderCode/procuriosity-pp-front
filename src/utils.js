@@ -1,7 +1,7 @@
 import idx from "idx";
 import moment from "moment/moment";
 
-export function getDataFromObject(obj, getFunc, def) {
+export function getDataFromObject(obj, getFunc, def = "") {
   return idx(obj, getFunc) || def;
 }
 

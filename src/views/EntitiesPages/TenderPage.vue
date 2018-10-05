@@ -1,10 +1,10 @@
 <template>
   <div class="entity-wp">
-    <el-container direction="vertical">
+    <el-container direction="vertical" v-if="Object.keys(tender).length">
       <tender-card
         :entity="entity"
       />
-      
+
       <!-- Procuring entity -->
       <div class="info">
         <div class="info__title">Procuring Entity</div>
@@ -49,7 +49,7 @@
           </el-row>
         </div>
       </div>
-    
+
       <!-- Procurement info -->
       <div class="info">
         <div class="info__title">Information about the procurement procedure</div>
@@ -63,7 +63,7 @@
             </el-col>
           </el-row>
         </div>
-        <div class="info__text" v-if="procurementInfo.hasAuction">
+        <div class="info__text" v-if="hasAuction">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
               <div class="info__name">Minimum amount of price reduction ({{ procurementInfo.currency }})</div>
@@ -74,7 +74,8 @@
           </el-row>
         </div>
       </div>
-  
+
+      <!-- @TODO need add test on tender without dates and don`t render this block -->
       <!-- Dates -->
       <div class="info">
         <div class="info__title">Dates and terms</div>
@@ -98,7 +99,7 @@
             </el-col>
           </el-row>
         </div>
-        <div class="info__text" v-if="procurementInfo.hasAuction">
+        <div class="info__text" v-if="hasAuction">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
               <div class="info__name">Auction period</div>
@@ -110,16 +111,21 @@
         </div>
       </div>
     </el-container>
+    <el-container v-else>
+      LOADING...
+    </el-container>
   </div>
 </template>
 
 <script>
   import { mapState } from "vuex";
-  import { FETCH_TENDER } from "./../../store/types/actions-types";
+  import { FETCH_CURRENT_TENDER_INFO } from "./../../store/types/actions-types";
 
   import { Container, Row, Col } from "element-ui";
 
   import TenderCard from "./../ListCards/TenderCard";
+
+  import { MTENDER1, MTENDER2 } from "./../../store/types/cbd-types";
 
   import { getDataFromObject, formatDate } from "./../../utils";
 
@@ -131,37 +137,31 @@
       "el-col": Col,
       "tender-card": TenderCard
     },
-    data() {
-      return {
-        cdb: ""
-      }
-    },
-    created() {
-      if (!/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/.test(this.$route.params.id)) {
-        this.cdb = "mtender1";
-        this.$store.dispatch(FETCH_TENDER, {
-          cdb: "mtender1",
-          id: this.$route.params.id
-        });
-      } else {
-        this.cdb = "mtender2";
-        this.$store.dispatch(FETCH_TENDER, {
-          cdb: "mtender2",
-          id: this.$route.params.id
-        })
-      }
+    created: function() {
+      const regexMtener2Id = /^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/;
+      const id = this.$route.params.id;
+      const cdb = !regexMtener2Id.test(id) ? MTENDER1 : MTENDER2;
+
+      this.$store.dispatch(FETCH_CURRENT_TENDER_INFO, {
+        cdb,
+        id
+      });
     },
     computed: {
       ...mapState({
-        tender: state => state.entities.tenders.entity
+        cdb: state => state.entities.tenders.currentTender.cdb,
+        tender: state => state.entities.tenders.currentTender.tenderData,
+        hasAuction: state => state.entities.tenders.currentTender.hasAuction
       }),
       entity() {
-        if (this.cdb === "mtender1") {
+        if (this.cdb === MTENDER1) {
+          console.log(this.tender.data); // @TODO need delete after parsing JSON
+
           const tender = this.tender.data;
 
           return {
             procedureStatus: getDataFromObject(tender, _ => _.status),
-            modifiedDate: formatDate(getDataFromObject(tender, _ => _.dateModified)),
+            modifiedDate: getDataFromObject(tender, _ => _.dateModified),
             title: getDataFromObject(tender, _ => _.title),
             description: getDataFromObject(tender, _ => _.description),
             currency: getDataFromObject(tender, _ => _.value.currency),
@@ -170,22 +170,20 @@
             procedureType: getDataFromObject(tender, _ => _.procurementMethodType),
             buyerName: getDataFromObject(tender, _ => _.procuringEntity.name),
             entityId: getDataFromObject(tender, _ => _.tenderID)
-          }
+          };
         } else {
-          return {}
+          return {};
         }
       },
       procuringEntity() {
-        if (this.cdb === "mtender1") {
+        if (this.cdb === MTENDER1) {
           const tender = this.tender.data;
-          
-          console.log(tender);
-          
+
           return {
             fullName: getDataFromObject(tender, _ => _.procuringEntity.name),
             identifier: `${getDataFromObject(tender, _ => _.procuringEntity.identifier.scheme)}
-                        ${getDataFromObject(tender, _ => _.procuringEntity.identifier.id)} -
-                        ${getDataFromObject(tender, _ => _.procuringEntity.identifier.legalName)}`,
+                         ${getDataFromObject(tender, _ => _.procuringEntity.identifier.id)} -
+                         ${getDataFromObject(tender, _ => _.procuringEntity.identifier.legalName)}`,
             address: `${getDataFromObject(tender, _ => _.procuringEntity.address.postalCode)},
                       ${getDataFromObject(tender, _ => _.procuringEntity.address.countryName)},
                       ${getDataFromObject(tender, _ => _.procuringEntity.address.region)},
@@ -194,39 +192,35 @@
             responsiblePerson: `${getDataFromObject(tender, _ => _.procuringEntity.contactPoint.name)} /
                                 ${getDataFromObject(tender, _ => _.procuringEntity.contactPoint.email)} /
                                 ${getDataFromObject(tender, _ => _.procuringEntity.contactPoint.telephone)}`
-          }
+          };
         }
       },
       procurementInfo() {
-        if (this.cdb === "mtender1") {
+        if (this.cdb === MTENDER1) {
           const tender = this.tender.data;
-          
-          const hasAuction = getDataFromObject(tender, _ => _, {}).hasOwnProperty("auctionPeriod");
+
           const calculateMinStepPercent = () => {
             const amount = getDataFromObject(tender, _ => _.value.amount);
             const minStep = getDataFromObject(tender, _ => _.minimalStep.amount);
             return Math.round(((minStep / amount) * 100) * 100) / 100;
           };
-          
+
           return {
             currency: getDataFromObject(tender, _ => _.value.currency),
             amount: getDataFromObject(tender, _ => _.value.amount),
-            hasAuction,
-            minStep: hasAuction ? `${getDataFromObject(tender, _ => _.minimalStep.amount)} (${calculateMinStepPercent()} %)` : ""
-          }
+            minStep: this.hasAuction ? `${getDataFromObject(tender, _ => _.minimalStep.amount)} (${calculateMinStepPercent()} %)` : ""
+          };
         }
       },
       dates() {
-        if (this.cdb === "mtender1") {
+        if (this.cdb === MTENDER1) {
           const tender = this.tender.data;
 
-          const hasAuction = getDataFromObject(tender, _ => _, {}).hasOwnProperty("auctionPeriod");
-          
           return {
             enquiry: `${formatDate(getDataFromObject(tender, _ => _.enquiryPeriod.startDate))} - ${formatDate(getDataFromObject(tender, _ => _.enquiryPeriod.endDate))}`,
             tendering: `${formatDate(getDataFromObject(tender, _ => _.tenderPeriod.startDate))} - ${formatDate(getDataFromObject(tender, _ => _.tenderPeriod.endDate))}`,
-            auction: hasAuction ? `${formatDate(getDataFromObject(tender, _ => _.auctionPeriod.startDate))} - ${formatDate(getDataFromObject(tender, _ => _.auctionPeriod.endDate))}` : "",
-          }
+            auction: this.hasAuction ? `${formatDate(getDataFromObject(tender, _ => _.auctionPeriod.startDate))} - ${formatDate(getDataFromObject(tender, _ => _.auctionPeriod.endDate))}` : ""
+          };
         }
       }
     }

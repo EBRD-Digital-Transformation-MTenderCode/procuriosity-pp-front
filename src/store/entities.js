@@ -6,12 +6,14 @@ import {
   SET_ENTITY_PAGINATION_INFO,
   SET_ENTITY_SEARCH_PARAMS,
 
-  SET_TENDER_ENTITY
+  SET_CURRENT_TENDER_INFO
 } from "./types/mutations-types";
 import {
   FETCH_ENTITY_LIST,
-  FETCH_TENDER
+  FETCH_CURRENT_TENDER_INFO
 } from "./types/actions-types";
+
+import { MTENDER1, MTENDER2 } from "./types/cbd-types";
 
 import { convertObjectToQueryParamsString } from "./../utils";
 
@@ -46,7 +48,12 @@ export default {
     tenders: {
       name: "message.entity_tenders",
       list: [],
-      entity: {},
+      currentTender: {
+        cdb: "",
+        tenderData: {},
+        hasAuction: false,
+        hasContract: false
+      },
       searchParams: {
         titlesOrDescriptions: "",
         titlesOrDescriptionsStrict: false,
@@ -117,7 +124,7 @@ export default {
       };
     },
 
-    [SET_ENTITY_SEARCH_PARAMS](state, { entity, params }) {
+    [SET_ENTITY_SEARCH_PARAMS](state, {entity, params}) {
       state[entity] = {
         ...state[entity],
         searchParams: {
@@ -132,12 +139,16 @@ export default {
       });
     },
 
-    [SET_TENDER_ENTITY](state, { tender }) {
-      state.tenders.entity = tender
+    [SET_CURRENT_TENDER_INFO](state, {cdb, tenderData, hasAuction}) {
+      state.tenders.currentTender = {
+        cdb,
+        tenderData,
+        hasAuction
+      };
     }
   },
   actions: {
-    async [FETCH_ENTITY_LIST]({ commit }, { entity, params }) {
+    async [FETCH_ENTITY_LIST]({commit}, {entity, params}) {
       try {
         const res = await axios(getListConfig(entity, params));
 
@@ -157,12 +168,20 @@ export default {
       }
     },
 
-    async [FETCH_TENDER]({ commit }, { cdb, id }) {
+    async [FETCH_CURRENT_TENDER_INFO]({commit}, {cdb, id}) {
       try {
         const res = await axios(getTenderConfig(cdb, id));
 
-        commit(SET_TENDER_ENTITY, {
-          tender: res.data
+        let hasAuction;
+
+        if (cdb === MTENDER1) {
+          hasAuction = res.data.data.hasOwnProperty("auctionPeriod"); // @TODO need clarify condition
+        }
+
+        commit(SET_CURRENT_TENDER_INFO, {
+          cdb,
+          tenderData: res.data,
+          hasAuction
         });
       }
       catch (e) {
