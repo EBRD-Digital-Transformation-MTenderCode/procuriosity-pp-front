@@ -53,6 +53,8 @@ export default {
         tenderData: {},
         hasAuction: false,
         hasDocuments: false,
+        hasBids: false,
+        hasAwards: false,
         hasContract: false
       },
       searchParams: {
@@ -140,12 +142,14 @@ export default {
       });
     },
 
-    [SET_CURRENT_TENDER_INFO](state, {cdb, tenderData, hasAuction, hasDocuments}) {
+    [SET_CURRENT_TENDER_INFO](state, {cdb, tenderData, hasAuction, hasDocuments, hasBids, hasAwards}) {
       state.tenders.currentTender = {
         cdb,
         tenderData,
         hasAuction,
-        hasDocuments
+        hasDocuments,
+        hasBids,
+        hasAwards
       };
     }
   },
@@ -176,19 +180,25 @@ export default {
 
         let hasAuction;
         let hasDocuments;
+        let hasBids;
+        let hasAwards;
 
         if (cdb === MTENDER1) {
           const tender = res.data.data;
 
           hasAuction = tender.hasOwnProperty("auctionPeriod"); // @TODO need clarify condition
           hasDocuments = tender.hasOwnProperty("documents") && Array.isArray(tender.documents) && tender.documents.length;
+          hasBids = tender.hasOwnProperty("bids") && Array.isArray(tender.bids) && tender.bids.length;
+          hasAwards = tender.hasOwnProperty("awards") && Array.isArray(tender.awards) && tender.awards.length;
         }
 
         commit(SET_CURRENT_TENDER_INFO, {
           cdb,
           tenderData: res.data,
           hasAuction,
-          hasDocuments
+          hasDocuments,
+          hasBids,
+          hasAwards
         });
       }
       catch (e) {
