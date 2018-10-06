@@ -28,8 +28,12 @@
           <div class="entity-amount">
             <div class="entity-amount__text">Estimated Value without VAT ({{ currency }})</div>
             <div class="entity-amount__number">
-              <span class="whole" :style="wholeAmount.length > 10 ? 'font-size: 30px': ''">{{ wholeAmount }}<span
-                  v-if="fractionAmount">.</span></span>
+              <span
+                class="whole"
+                :style="wholeAmount.length > 10 ? 'font-size: 30px': ''"
+              >
+                {{ wholeAmount }} <span v-if="fractionAmount">.</span>
+              </span>
               <span v-if="fractionAmount" class="fraction">{{ fractionAmount }}</span>
             </div>
           </div>
@@ -125,7 +129,7 @@
           case "unsuccessful":
             return "Unsuccessful Tender";
           default:
-            return "";
+            return status;
         }
       },
       modifiedDate() {
@@ -161,7 +165,7 @@
         return getDataFromObject(this.entity, _ => _.id);
       },
       entityId() {
-        return getDataFromObject(this.entity, _ => _.entityId)
+        return getDataFromObject(this.entity, _ => _.entityId);
       }
     }
   };
