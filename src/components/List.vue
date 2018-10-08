@@ -38,7 +38,7 @@
   import BudgetsSearchForm from "./SearchForms/BudgetsSearchForm";
   import TendersSearchForm from "./SearchForms/TendersSearchForm";
 
-  import BudgetItem from "../views/ListCards/BudgetItem";
+  import BudgetItem from "../views/ListCards/BudgetCard";
   import TenderCard from "../views/ListCards/TenderCard";
 
   import ListPagination from "./ListPagination";

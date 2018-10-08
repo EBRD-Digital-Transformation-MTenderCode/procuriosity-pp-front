@@ -5,7 +5,6 @@
         :items="items"
         multiple
         filterable
-        needFetch
         remote
         reserve-keyword
         :placeholder=placeholder
@@ -23,14 +22,34 @@
       />
     </el-select>
     <el-select
-        v-else
+        v-else-if="needFetch"
         multiple
+        :items="items"
         filterable
         :no-match-text="$t('message.search_auto_complete_not_found')"
         :popper-append-to-body="false"
         :placeholder="placeholder"
-        needFetch
         remote
+        allow-create
+        :value="values"
+        @change="setValues(name, $event)"
+    >
+      <el-option
+          v-for="option of items"
+          :key="option.value"
+          :label="option.name"
+          :value="option.value"
+      />
+    </el-select>
+    <el-select
+        v-else
+        :items="items"
+        multiple
+        filterable
+        allow-create
+        :no-match-text="$t('message.search_auto_complete_not_found')"
+        :popper-append-to-body="false"
+        :placeholder="placeholder"
         :value="values"
         @focus="getOptions"
         @change="setValues(name, $event)"
@@ -62,7 +81,8 @@
         required: true
       },
       needFetch: {
-        type: Boolean
+        type: Boolean,
+        default: false
       },
       items: {
         type: Array

@@ -24,6 +24,26 @@ export default {
       list: [],
       searchParams: {
         titlesOrDescriptions: "",
+        titlesOrDescriptionsStrict: false,
+
+        buyersRegions: [],
+        budgetStatuses:[],
+
+        id: "",
+
+        amountFrom: null,
+        amountTo: null,
+
+        classifications: [],
+
+        periodPlanning: [],
+
+        buyersNames: [],
+        buyersIdentifiers: [],
+        buyersTypes: [],
+        buyersMainGeneralActivities: [],
+        buyersMainSectoralActivities: [],
+
         page: 1,
         pageSize: 25
       },

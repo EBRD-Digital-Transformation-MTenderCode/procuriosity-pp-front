@@ -1,4 +1,10 @@
 export default {
+  budgets: [
+    {
+      name: "Planning",
+      value: "planning"
+    }
+  ],
   tenders: [
     {
       name: "Auction Period",

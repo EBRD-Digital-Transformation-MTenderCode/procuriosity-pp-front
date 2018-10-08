@@ -9,6 +9,7 @@
     "search_amount_from": "Amount From",
     "search_amount_to": "Amount To",
     "search_region": "Buyer Regions",
+    "search_budget_statuses_placeholder": "Budget Statuses",
     "search_region_placeholder": "Buyers Regions",
     "search_deliveries_regions_placeholder": "Deliveries Regions",
     "search_auto_complete_not_found": "Nothing found",
