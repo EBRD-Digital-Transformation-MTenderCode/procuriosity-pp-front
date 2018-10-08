@@ -2,9 +2,9 @@
   <div class="entity-wp">
     <el-container direction="vertical" v-if="Object.keys(tender).length">
       <tender-card
-        :entity="entity"
+          :entity="entity"
       />
-
+  
       <!-- Procuring entity -->
       <div class="info">
         <div class="info__title">Procuring Entity</div>
@@ -49,7 +49,7 @@
           </el-row>
         </div>
       </div>
-
+  
       <!-- Procurement info -->
       <div class="info">
         <div class="info__title">Information about the procurement procedure</div>
@@ -74,7 +74,7 @@
           </el-row>
         </div>
       </div>
-
+  
       <!-- Dates -->
       <div class="info" v-if="dates">
         <div class="info__title">Dates and terms</div>
@@ -109,7 +109,7 @@
           </el-row>
         </div>
       </div>
-
+  
       <!-- Documents -->
       <div class="info" v-if="documents.length">
         <div class="info__title">Purchase Documents</div>
@@ -118,7 +118,7 @@
             <el-col :xs="24" :sm="10">
               <div class="info-document_name">
                 <div>
-                  <a :href="document.url">{{ document.name }}</a>
+                  <a :href="document.url" :title="document.name">{{ document.name }}</a>
                 </div>
               </div>
             </el-col>
@@ -129,12 +129,12 @@
           </el-row>
         </div>
       </div>
-
+  
       <!-- Items -->
       <div class="info">
         <div class="info__title">Purchase Specification</div>
-        <div v-for="item of items" :key="item.id">
-          <div class="info__text">
+        <template v-for="item in items">
+          <div class="info__text" :key="item.id">
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10">
                 <div class="info__name">{{ item.description }}</div>
@@ -144,7 +144,7 @@
               </el-col>
             </el-row>
           </div>
-          <div class="info__text">
+          <div class="info__text" :key="item.id + 1">
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10" />
               <el-col :xs="24" :sm="14">
@@ -153,9 +153,9 @@
               </el-col>
             </el-row>
           </div>
-        </div>
+        </template>
       </div>
-
+  
       <!-- Bids -->
       <div class="info" v-if="bids.length">
         <div class="info__title">Proposals Registry</div>
@@ -194,21 +194,31 @@
               </div>
             </td>
             <td class="text-center">
-              <a
-                v-for="document of bid.documents"
-                :key="document.id"
-                :href="document.url"
-                class="document-link"
-                :title="document.title"
+              <button
+                  v-if="bid.documents.length"
+                  type="button"
+                  @click="modalAction(bid.id)"
+                  class="document-link"
+              />
+              
+              <documents-modal
+                  :ref="bid.id"
+                  :open="false"
+                  :documents="bid.documents"
               />
             </td>
             </tr>
         </table>
       </div>
-
+  
       <!-- Awards -->
       <div class="info" v-if="awards.length">
-        <div class="info__title">Protocol for the disclosure of proposals</div>
+        <div class="info__title">
+          Protocol for the disclosure of proposals
+          <div class="info__title_sub">
+            Date and time of disclosure of offers: {{ awardsStartDate}}
+          </div>
+        </div>
         <table class="info-table">
           <tr>
             <th>№</th>
@@ -242,17 +252,52 @@
             </td>
             <td class="text-center">
               <a
-                v-for="document of award.documents"
-                :key="document.id"
-                :href="document.url"
-                class="document-link"
-                :title="document.title"
+                  v-for="document of award.documents"
+                  :key="document.id"
+                  :href="document.url"
+                  class="document-link"
+                  :title="document.title"
               />
             </td>
             </tr>
         </table>
       </div>
-
+  
+      <!-- Active awards -->
+      <div class="info" v-if="activeAwards.length">
+        <div class="info__title">Notification of intention to conclude a contract</div>
+        <table class="info-table">
+          <tr>
+            <th>Supplier Name</th>
+            <th>Final offer price	</th>
+            <th>Published on</th>
+          </tr>
+          <tr v-for="award of activeAwards" :key="award.id">
+            <td>
+              <div class="info__value">
+                {{ award.name }}
+              </div>
+              <div class="info__value info__value_muted">
+                IDNO Code : {{ award.identifier }}
+              </div>
+            </td>
+            <td>
+              <div class="info__value info__value_accent">
+                {{ award.amount }}
+              </div>
+              <div class="info__value info__value_muted">
+                {{ award.currency }} without VAT
+              </div>
+            </td>
+            <td>
+              <div class="info__value">
+                {{ award.publishedDate }}
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+  
       <!-- Contracts -->
       <div class="info" v-if="contracts.length">
         <div class="info__title">Concluded Contracts</div>
@@ -281,9 +326,9 @@
               </el-col>
               <el-col :xs="24" :sm="14">
                 <div
-                  v-for="supplier of contract.suppliers"
-                  :key="supplier"
-                  class="info__value"
+                    v-for="supplier of contract.suppliers"
+                    :key="supplier"
+                    class="info__value"
                 >
                   {{ supplier }}
                 </div>
@@ -306,7 +351,7 @@
                 <div class="info__name">Contract amount</div>
               </el-col>
               <el-col :xs="24" :sm="14">
-                <div class="info__value info__value_accent">{{ contract.amount }} (withot VAT)</div>
+                <div class="info__value info__value_accent">{{ contract.amount }} (without VAT)</div>
               </el-col>
             </el-row>
           </div>
@@ -352,27 +397,25 @@
           </div>
         </div>
       </div>
-
-      <!-- Documentations -->
-      <div class="info" v-if="documentations.length">
-        <div class="info__title">Documentations</div>
-        <div v-for="(item, key) of documentations" :key="key">
-          <div class="info__text" v-for="(documentation, key) of item" :key="documentation.id + key">
-            <el-row :gutter="30">
-              <el-col :xs="24" :sm="14">
-                <div class="info-document_name">
-                  <div>
-                    <a :href="documentation.url">{{ documentation.name }}</a>
-                    <div class="info__value_muted">{{ documentation.type }}</div>
-                  </div>
+  
+      <!-- Documentation -->
+      <div class="info" v-if="documentation.length">
+        <div class="info__title">Documentation</div>
+        <div class="info__text" v-for="document of documentation" :key="document.id">
+          <el-row :gutter="30">
+            <el-col :xs="24" :sm="14">
+              <div class="info-document_name">
+                <div>
+                  <a :href="document.url">{{ document.name }}</a>
+                  <div class="info__value_muted">{{ document.type }}</div>
                 </div>
-              </el-col>
-              <el-col :xs="24" :sm="10">
-                <div class="info-document_date-published">Published on {{ documentation.datePublished }}</div>
-                <div class="info-document_id">ID: {{ documentation.id }}</div>
-              </el-col>
-            </el-row>
-          </div>
+              </div>
+            </el-col>
+            <el-col :xs="24" :sm="10">
+              <div class="info-document_date-published">Published on {{ document.datePublished }}</div>
+              <div class="info-document_id">ID: {{ document.id }}</div>
+            </el-col>
+          </el-row>
         </div>
       </div>
     </el-container>
@@ -389,6 +432,7 @@
   import { Container, Row, Col } from "element-ui";
 
   import TenderCard from "./../ListCards/TenderCard";
+  import DocumentsModal from "./DocumentsModal";
 
   import { MTENDER1, MTENDER2 } from "./../../store/types/cbd-types";
 
@@ -400,7 +444,8 @@
       "el-container": Container,
       "el-row": Row,
       "el-col": Col,
-      "tender-card": TenderCard
+      "tender-card": TenderCard,
+      "documents-modal": DocumentsModal
     },
     created: function() {
       const regexMtener2Id = /^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/;
@@ -492,7 +537,7 @@
             enquiry: `${formatDate(getDataFromObject(tender, _ => _.enquiryPeriod.startDate))} - ${formatDate(getDataFromObject(tender, _ => _.enquiryPeriod.endDate))}`,
             tendering: `${formatDate(getDataFromObject(tender, _ => _.tenderPeriod.startDate))} - ${formatDate(getDataFromObject(tender, _ => _.tenderPeriod.endDate))}`,
             auction: hasAuction ?
-              `${formatDate(getDataFromObject(tender, _ => _.auctionPeriod.startDate))} -
+                `${formatDate(getDataFromObject(tender, _ => _.auctionPeriod.startDate))} -
               ${formatDate(getDataFromObject(tender, _ => _.auctionPeriod.endDate))}` : ""
           };
         }
@@ -548,13 +593,21 @@
               currency: getDataFromObject(bid, _ => _.value.currency),
               documents: getDataFromObject(bid, _ => _.documents, []).map(doc => {
                 return {
-                  id: doc.id,
-                  url: doc.url,
-                  title: doc.title
+                  name: getDataFromObject(doc, _ => _.title),
+                  url: getDataFromObject(doc, _ => _.url),
+                  datePublished: formatDate(getDataFromObject(doc, _ => _.datePublished)),
+                  id: getDataFromObject(doc, _ => _.id)
                 };
               })
             };
           });
+        }
+      },
+      awardsStartDate() {
+        if (this.cdb === MTENDER1) {
+          const tender = this.tender.data;
+
+          return formatDate(getDataFromObject(tender, _ => _.awardPeriod.startDate));
         }
       },
       awards() {
@@ -573,13 +626,40 @@
               status: getDataFromObject(award, _ => _.status),
               documents: getDataFromObject(award, _ => _.documents, []).map(doc => {
                 return {
-                  id: doc.id,
-                  url: doc.url,
-                  title: doc.title
+                  name: getDataFromObject(doc, _ => _.title),
+                  url: getDataFromObject(doc, _ => _.url),
+                  datePublished: formatDate(getDataFromObject(doc, _ => _.datePublished)),
+                  id: getDataFromObject(doc, _ => _.id)
                 };
               })
             };
           });
+        }
+      },
+      activeAwards() {
+        if (this.cdb === MTENDER1) {
+          const tender = this.tender.data;
+
+          return getDataFromObject(tender, _ => _.awards, [])
+              .filter(award => getDataFromObject(award, _ => _.status, "") === "active")
+              .sort((award1, award2) => {
+                if (getDataFromObject(award1, _ => _.value.amount) === getDataFromObject(award2, _ => _.value.amount)) {
+                  return getDataFromObject(award1, _ => _.date) > getDataFromObject(award2, _ => _.date);
+                }
+                return getDataFromObject(award1, _ => _.value.amount) > getDataFromObject(award2, _ => _.value.amount);
+              })
+              .map(award => {
+                return {
+                  id: getDataFromObject(award, _ => _.id),
+                  name: getDataFromObject(award, _ => _.suppliers[0].name),
+                  identifier: `${getDataFromObject(award, _ => _.suppliers[0].identifier.scheme)}
+                               ${getDataFromObject(award, _ => _.suppliers[0].identifier.id)} -
+                               ${getDataFromObject(award, _ => _.suppliers[0].identifier.legalName)}`,
+                  amount: getDataFromObject(award, _ => _.value.amount),
+                  currency: getDataFromObject(award, _ => _.value.currency),
+                  publishedDate: formatDate(getDataFromObject(award, _ => _.date))
+                };
+              });
         }
       },
       contracts() {
@@ -596,7 +676,7 @@
               contractId: getDataFromObject(contract, _ => _.contractID),
               amount: getDataFromObject(contract, _ => _.value.amount),
               currency: getDataFromObject(contract, _ => _.value.currency),
-              contractNumber: getDataFromObject(contract, _ => _.contractNumber),
+              contractNumber: getDataFromObject(contract, _ => _.contractNumber, "none"),
               dateSigned: formatDate(getDataFromObject(contract, _ => _.dateSigned), "DD.MM.YYYY"),
               contractStartDate: formatDate(getDataFromObject(contract, _ => _.period.startDate), "DD.MM.YYYY"),
               contractEndDate: formatDate(getDataFromObject(contract, _ => _.period.endDate), "DD.MM.YYYY")
@@ -604,22 +684,27 @@
           });
         }
       },
-      documentations() {
+      documentation() {
         if (this.cdb === MTENDER1) {
           const tender = this.tender.data;
 
           return getDataFromObject(tender, _ => _.contracts, []).map(contract => {
-            return getDataFromObject(contract, _ => _.documents, []).map(documentation => {
+            return getDataFromObject(contract, _ => _.documents, []).map(document => {
               return {
-                name: getDataFromObject(documentation, _ => _.title),
-                url: getDataFromObject(documentation, _ => _.url),
-                type: getDataFromObject(documentation, _ => _.documentType),
-                datePublished: formatDate(getDataFromObject(documentation, _ => _.datePublished)),
-                id: getDataFromObject(documentation, _ => _.id)
+                name: getDataFromObject(document, _ => _.title),
+                url: getDataFromObject(document, _ => _.url),
+                type: getDataFromObject(document, _ => _.documentType),
+                datePublished: formatDate(getDataFromObject(document, _ => _.datePublished)),
+                id: getDataFromObject(document, _ => _.id)
               };
             });
-          });
+          }).flat();
         }
+      }
+    },
+    methods: {
+      modalAction(id) {
+        this.$refs[id][0].open = true
       }
     }
   };
