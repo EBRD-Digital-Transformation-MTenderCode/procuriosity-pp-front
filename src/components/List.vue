@@ -38,7 +38,7 @@
   import BudgetsSearchForm from "./SearchForms/BudgetsSearchForm";
   import TendersSearchForm from "./SearchForms/TendersSearchForm";
 
-  import BudgetItem from "../views/ListCards/BudgetCard";
+  import BudgetCard from "../views/ListCards/BudgetCard";
   import TenderCard from "../views/ListCards/TenderCard";
 
   import ListPagination from "./ListPagination";
@@ -52,7 +52,7 @@
       "budgets-search-form": BudgetsSearchForm,
       "tenders-search-form": TendersSearchForm,
 
-      "budget-item": BudgetItem,
+      "budget-card": BudgetCard,
       "tender-card": TenderCard,
 
       "list-pagination": ListPagination
@@ -84,7 +84,7 @@
       renderCard() {
         switch (this.entityName) {
           case "budgets":
-            return "budget-item";
+            return "budget-card";
           case "plans":
             return "plan-item";
           case "tenders":
