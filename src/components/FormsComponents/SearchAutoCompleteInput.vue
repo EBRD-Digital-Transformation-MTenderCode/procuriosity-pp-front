@@ -46,6 +46,7 @@
         :items="items"
         multiple
         filterable
+        default-first-option
         allow-create
         :no-match-text="$t('message.search_auto_complete_not_found')"
         :popper-append-to-body="false"

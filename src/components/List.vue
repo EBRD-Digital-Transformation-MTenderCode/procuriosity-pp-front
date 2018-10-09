@@ -37,9 +37,13 @@
 
   import BudgetsSearchForm from "./SearchForms/BudgetsSearchForm";
   import TendersSearchForm from "./SearchForms/TendersSearchForm";
+  import PlansSearchForm from "./SearchForms/PlansSearchForm"
+  import ContractsSearchForm from "./SearchForms/ContractsSearchForm"
 
   import BudgetCard from "../views/ListCards/BudgetCard";
   import TenderCard from "../views/ListCards/TenderCard";
+  import PlanCard from "../views/ListCards/PlanCard"
+  import ContractCard from "../views/ListCards/ContractCard"
 
   import ListPagination from "./ListPagination";
 
@@ -51,9 +55,13 @@
 
       "budgets-search-form": BudgetsSearchForm,
       "tenders-search-form": TendersSearchForm,
+      "plans-search-form": PlansSearchForm,
+      "contracts-search-form": ContractsSearchForm,
 
       "budget-card": BudgetCard,
       "tender-card": TenderCard,
+      "plan-card": PlanCard,
+      "contract-card": ContractCard,
 
       "list-pagination": ListPagination
     },
@@ -86,11 +94,11 @@
           case "budgets":
             return "budget-card";
           case "plans":
-            return "plan-item";
+            return "plan-card";
           case "tenders":
             return "tender-card";
           case "contracts":
-            return "contract-item";
+            return "contract-card";
           default:
             return "li";
         }
