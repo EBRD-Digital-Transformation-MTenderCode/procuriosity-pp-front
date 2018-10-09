@@ -197,7 +197,7 @@
               <button
                   v-if="bid.documents.length"
                   type="button"
-                  @click="modalAction(bid.id)"
+                  @click="$refs[bid.id][0].open = true"
                   class="document-link"
               />
               
@@ -207,7 +207,7 @@
                   :documents="bid.documents"
               />
             </td>
-            </tr>
+          </tr>
         </table>
       </div>
   
@@ -251,15 +251,20 @@
               </div>
             </td>
             <td class="text-center">
-              <a
-                  v-for="document of award.documents"
-                  :key="document.id"
-                  :href="document.url"
+              <button
+                  v-if="award.documents.length"
+                  type="button"
+                  @click="$refs[award.id][0].open = true"
                   class="document-link"
-                  :title="document.title"
+              />
+              
+              <documents-modal
+                  :ref="award.id"
+                  :open="false"
+                  :documents="award.documents"
               />
             </td>
-            </tr>
+          </tr>
         </table>
       </div>
   
@@ -700,11 +705,6 @@
             });
           }).flat();
         }
-      }
-    },
-    methods: {
-      modalAction(id) {
-        this.$refs[id][0].open = true
       }
     }
   };

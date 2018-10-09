@@ -9,7 +9,6 @@
         range-separator="To"
         start-placeholder="Start date"
         end-placeholder="End date"
-        clearable
         format="dd MM yyyy, HH:mm"
         :editable="false"
     />
