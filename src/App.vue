@@ -11,13 +11,31 @@
 <script>
   import AppHeader from "./views/AppHeader";
   import AppFooter from "./views/AppFooter";
+  import entities from "./store/entities";
 
   export default {
     name: "App",
     components: {
       "app-header": AppHeader,
       "app-footer": AppFooter
+    },
+    created: () => {
+      const entities = {
+        "budgets":{
+        },
+        "plans":{
+        },
+        "tenders":{
+        },
+        "contracts":{
+        }};
+      const localStorageEntities = localStorage.getItem("entities");
+      if(!localStorageEntities){
+        localStorage.setItem("entities", JSON.stringify(entities));
+      }
     }
+
+
   };
 </script>
 

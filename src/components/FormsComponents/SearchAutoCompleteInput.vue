@@ -4,6 +4,7 @@
         v-if="name === 'classifications'"
         :items="items"
         multiple
+        data-classifications
         filterable
         remote
         reserve-keyword
@@ -26,10 +27,12 @@
         multiple
         :items="items"
         filterable
+        data-fetch
         :no-match-text="$t('message.search_auto_complete_not_found')"
         :popper-append-to-body="false"
         :placeholder="placeholder"
         remote
+        @focus="getOptions"
         allow-create
         :value="values"
         @change="setValues(name, $event)"
@@ -46,6 +49,7 @@
         :items="items"
         multiple
         filterable
+        data-local
         default-first-option
         allow-create
         :no-match-text="$t('message.search_auto_complete_not_found')"

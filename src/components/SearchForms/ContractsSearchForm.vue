@@ -21,7 +21,7 @@
 
       <!-- @TODO need write more readable classes -->
       <button
-          @click="moreCriterions = !moreCriterions"
+          @click="actionExpand"
           :class="moreCriterions ? 'search-form__btn search-form__btn_more search-form__btn_more_close': 'search-form__btn search-form__btn_more search-form__btn_more_open'"
       />
     </div>
@@ -334,6 +334,23 @@
             [name]: value
           }
         });
+      },
+      actionExpand(){
+        this.moreCriterions = !this.moreCriterions;
+
+        const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
+        localStorageEntities.contracts.isExpanded = this.moreCriterions;
+        localStorage.setItem("entities", JSON.stringify(localStorageEntities));
+      }
+    },
+    created(){
+      const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
+      if(localStorageEntities.contracts.hasOwnProperty("isExpanded")){
+        this.moreCriterions = localStorageEntities.contracts.isExpanded;
+      }
+      else{
+        localStorageEntities.contracts.isExpanded = this.moreCriterions;
+        localStorage.setItem("entities", JSON.stringify(localStorageEntities));
       }
     }
   };

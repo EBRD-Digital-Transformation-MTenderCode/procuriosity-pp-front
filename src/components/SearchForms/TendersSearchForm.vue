@@ -21,7 +21,7 @@
 
       <!-- @TODO need write more readable classes -->
       <button
-          @click="moreCriterions = !moreCriterions"
+          @click="actionExpand"
           :class="moreCriterions ? 'search-form__btn search-form__btn_more search-form__btn_more_close': 'search-form__btn search-form__btn_more search-form__btn_more_open'"
       />
     </div>
@@ -269,6 +269,7 @@
   import buyersTypesList from "./../../store/types/buyers-types";
   import mainGeneralActivityList from "./../../store/types/main-general-activity-types";
   import mainSectoralActivityList from "./../../store/types/main-sectoral-activity";
+  import entities from "../../store/entities";
 
   export default {
     name: "TendersSearchForm",
@@ -334,6 +335,23 @@
             [name]: value
           }
         });
+      },
+      actionExpand(){
+        this.moreCriterions = !this.moreCriterions;
+
+        const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
+        localStorageEntities.tenders.isExpanded = this.moreCriterions;
+        localStorage.setItem("entities", JSON.stringify(localStorageEntities));
+      }
+    },
+    created(){
+      const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
+      if(localStorageEntities.tenders.hasOwnProperty("isExpanded")){
+        this.moreCriterions = localStorageEntities.tenders.isExpanded;
+      }
+      else{
+        localStorageEntities.tenders.isExpanded = this.moreCriterions;
+        localStorage.setItem("entities", JSON.stringify(localStorageEntities));
       }
     }
   };

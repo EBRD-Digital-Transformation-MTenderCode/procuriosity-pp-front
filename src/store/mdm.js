@@ -20,20 +20,29 @@ export default {
   },
   actions: {
     async [FETCH_REGIONS]({ commit }, { lang, country }) {
-      const res = await axios(getRegionsConfig(lang, country));
-
-      commit(SET_REGIONS, {
-        regions: res.data.data.items.map(it => {
+      const localStorageRegions = localStorage.getItem("regions");
+      if (localStorageRegions) {
+        commit(SET_REGIONS, {
+          regions: JSON.parse(localStorageRegions)
+        });
+      }
+      else {
+        const res = await axios(getRegionsConfig(lang, country));
+        const regions = res.data.data.items.map(it => {
           return {
             name: it.name,
             value: it.name
           };
-        })
-      });
+        });
+        commit(SET_REGIONS, {
+          regions
+        });
+        localStorage.setItem("regions", JSON.stringify(regions));
+      }
+
     },
     async [FETCH_CPV_CODES]({ commit }, { lang, idOrName }) {
       const res = await axios(getCPVCodesConfig(lang, idOrName));
-
       commit(SET_CPV_CODES, {
         CPVCodes: res.data.data.map(item => {
           return {
