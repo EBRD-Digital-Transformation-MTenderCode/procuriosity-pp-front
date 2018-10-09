@@ -6,6 +6,7 @@
     />
     <ul
         v-if="entities[entityName].list.length"
+        id="entity-list"
         class="list"
     >
       <li
@@ -18,7 +19,7 @@
     </ul>
       <div class="list__no-data-title" v-else>No data (</div>
       <list-pagination
-          v-if="entities[entityName].list.length"
+          v-if="needPagination"
           :total="entities[entityName].paginationInfo.totalCount"
           :pageCount="entities[entityName].paginationInfo.pageCount"
           :currentPage="entities[entityName].searchParams.page"
@@ -102,6 +103,11 @@
           default:
             return "li";
         }
+      },
+      needPagination() {
+        const entityInfoObj = this.entities[this.entityName];
+
+        return entityInfoObj.paginationInfo.pageCount !== 1 && entityInfoObj.list.length;
       }
     },
     methods: {

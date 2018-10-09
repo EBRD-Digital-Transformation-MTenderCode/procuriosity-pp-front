@@ -9,7 +9,6 @@
         range-separator="To"
         start-placeholder="Start date"
         end-placeholder="End date"
-        clearable
         format="dd MM yyyy, HH:mm"
         :editable="false"
     />
@@ -45,8 +44,12 @@
         get() {
           return this.value;
         },
-        set([startDate, endDate]) {
-          this.setValue(this.name, [moment.utc(startDate).format("YYYY-MM-DDTHH:mm:ss") + "Z", moment.utc(endDate).format("YYYY-MM-DDTHH:mm:ss") + "Z"]);
+        set(period) {
+          if (Array.isArray(period)) {
+            this.setValue(this.name, [moment.utc(period[0]).format("YYYY-MM-DDTHH:mm:ss") + "Z", moment.utc(period[1]).format("YYYY-MM-DDTHH:mm:ss") + "Z"]);
+          } else {
+            this.setValue(this.name, []);
+          }
         }
       }
     }

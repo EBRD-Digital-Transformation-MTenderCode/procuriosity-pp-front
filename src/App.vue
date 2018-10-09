@@ -42,7 +42,7 @@
 <style lang="scss">
   @import "./styles/element-variables.scss";
   @import "./styles/main.scss";
-  
+
   #app {
     display: flex;
     flex-direction: column;
