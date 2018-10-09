@@ -26,7 +26,7 @@ export const getRegionsConfig = (lang, country) => {
 export const getCPVCodesConfig = (language, idOrName = "") => {
   return {
     method: "get",
-    url: `${baseURL}/rest-api/v1/cpv/search?language=${language}&idOrName=${idOrName}`
+    url: `${baseURL}/search/cpv?language=${language}&idOrName=${idOrName}`
   };
 };
 
