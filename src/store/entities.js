@@ -24,6 +24,26 @@ export default {
       list: [],
       searchParams: {
         titlesOrDescriptions: "",
+        titlesOrDescriptionsStrict: false,
+
+        buyersRegions: [],
+        budgetStatuses:[],
+
+        id: "",
+
+        amountFrom: null,
+        amountTo: null,
+
+        classifications: [],
+
+        periodPlanning: [],
+
+        buyersNames: [],
+        buyersIdentifiers: [],
+        buyersTypes: [],
+        buyersMainGeneralActivities: [],
+        buyersMainSectoralActivities: [],
+
         page: 1,
         pageSize: 25
       },
@@ -37,6 +57,35 @@ export default {
       list: [],
       searchParams: {
         titlesOrDescriptions: "",
+        titlesOrDescriptionsStrict: false,
+
+        entityId: "",
+
+        buyersRegions:[],
+        deliveriesRegions: [],
+        proceduresTypes: [],
+        proceduresStatuses:[],
+
+        amountFrom: null,
+        amountTo: null,
+
+        classifications: [],
+
+        periodPublished:[],
+        periodDelivery: [],
+        periodEnquiry: [],
+        periodOffer: [],
+        periodAuction: [],
+        periodAward: [],
+
+        buyersNames: [],
+        buyersIdentifiers: [],
+        buyersTypes: [],
+        buyersMainGeneralActivities: [],
+        buyersMainSectoralActivities: [],
+
+        tags: [],
+
         page: 1,
         pageSize: 25
       },
@@ -98,6 +147,34 @@ export default {
       list: [],
       searchParams: {
         titlesOrDescriptions: "",
+        titlesOrDescriptionsStrict: false,
+
+        entityId: "",
+
+        buyersRegions:[],
+        deliveriesRegions: [],
+        proceduresTypes: [],
+        proceduresStatuses:[],
+
+        amountFrom: null,
+        amountTo: null,
+
+        classifications: [],
+
+        periodPublished:[],
+        periodDelivery: [],
+        periodEnquiry: [],
+        periodOffer: [],
+        periodAuction: [],
+        periodAward: [],
+
+        buyersNames: [],
+        buyersIdentifiers: [],
+        buyersTypes: [],
+        buyersMainGeneralActivities: [],
+        buyersMainSectoralActivities: [],
+
+        tags: [],
         page: 1,
         pageSize: 25
       },

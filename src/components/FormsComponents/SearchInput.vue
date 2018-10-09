@@ -67,8 +67,7 @@
         default: ""
       },
       placeholder: {
-        type: String,
-        default: "Search"
+        type: String
       }
     },
     methods: {

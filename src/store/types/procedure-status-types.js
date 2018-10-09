@@ -1,4 +1,20 @@
 export default {
+  budgets: [
+    {
+      name: "Planning",
+      value: "planning"
+    }
+  ],
+  plans:[
+    {
+      name: "Empty",
+      value: "empty"
+    },
+    {
+      name: "Planning notice",
+      value: "planning notice"
+    }
+  ],
   tenders: [
     {
       name: "Auction Period",
@@ -35,6 +51,12 @@ export default {
     {
       name: "Unsuccessful Tender",
       value: "unsuccessful"
+    }
+  ],
+  contracts:[
+    {
+      name: "Execution",
+      value: "execution"
     }
   ]
 };

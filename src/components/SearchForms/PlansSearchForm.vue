@@ -269,10 +269,9 @@
   import buyersTypesList from "./../../store/types/buyers-types";
   import mainGeneralActivityList from "./../../store/types/main-general-activity-types";
   import mainSectoralActivityList from "./../../store/types/main-sectoral-activity";
-  import entities from "../../store/entities";
 
   export default {
-    name: "TendersSearchForm",
+    name: "PlansSearchForm",
     components: {
       "el-collapse-transition": CollapseTransition,
       "el-row": Row,
@@ -281,12 +280,12 @@
       "search-switch": SearchSwitch,
       "search-auto-complete-input": SearchAutoCompleteInput,
       "search-period": SearchPeriods,
-      },
+    },
     data() {
       return {
         moreCriterions: false,
-        proceduresTypesList: proceduresTypesList["tenders"],
-        proceduresStatusesList: proceduresStatusesList["tenders"],
+        proceduresTypesList: proceduresTypesList["plans"],
+        proceduresStatusesList: proceduresStatusesList["plans"],
         buyersTypesList,
         mainGeneralActivityList,
         mainSectoralActivityList
@@ -294,34 +293,34 @@
     },
     computed: {
       ...mapState({
-        /* + */titlesOrDescriptions: state => state.entities.tenders.searchParams.titlesOrDescriptions,
-        /* + */titlesOrDescriptionsStrict: state => state.entities.tenders.searchParams.titlesOrDescriptionsStrict,
+        /* + */titlesOrDescriptions: state => state.entities.plans.searchParams.titlesOrDescriptions,
+        /* + */titlesOrDescriptionsStrict: state => state.entities.plans.searchParams.titlesOrDescriptionsStrict,
 
-        /* + */buyersRegions: state => state.entities.tenders.searchParams.buyersRegions,
-        /* + */deliveriesRegions: state => state.entities.tenders.searchParams.deliveriesRegions,
+        /* + */buyersRegions: state => state.entities.plans.searchParams.buyersRegions,
+        /* + */deliveriesRegions: state => state.entities.plans.searchParams.deliveriesRegions,
 
-        /* + */proceduresTypes: state => state.entities.tenders.searchParams.proceduresTypes,
-        /* + */proceduresStatuses: state => state.entities.tenders.searchParams.proceduresStatuses,
+        /* + */proceduresTypes: state => state.entities.plans.searchParams.proceduresTypes,
+        /* + */proceduresStatuses: state => state.entities.plans.searchParams.proceduresStatuses,
 
-        /* + */entityId: state => state.entities.tenders.searchParams.entityId,
+        /* + */entityId: state => state.entities.plans.searchParams.entityId,
 
-        /* + */amountFrom: state => state.entities.tenders.searchParams.amountFrom,
-        /* + */amountTo: state => state.entities.tenders.searchParams.amountTo,
+        /* + */amountFrom: state => state.entities.plans.searchParams.amountFrom,
+        /* + */amountTo: state => state.entities.plans.searchParams.amountTo,
 
-        /* + */ classifications: state => state.entities.tenders.searchParams.classifications,
+        /* + */ classifications: state => state.entities.plans.searchParams.classifications,
 
-        /* + */periodPublished: state => state.entities.tenders.searchParams.periodPublished,
-        /* + */periodDelivery: state => state.entities.tenders.searchParams.periodDelivery,
-        /* + */periodEnquiry: state => state.entities.tenders.searchParams.periodEnquiry,
-        /* + */periodOffer: state => state.entities.tenders.searchParams.periodOffer,
-        /* + */periodAuction: state => state.entities.tenders.searchParams.periodAuction,
-        /* + */periodAward: state => state.entities.tenders.searchParams.periodAward,
+        /* + */periodPublished: state => state.entities.plans.searchParams.periodPublished,
+        /* + */periodDelivery: state => state.entities.plans.searchParams.periodDelivery,
+        /* + */periodEnquiry: state => state.entities.plans.searchParams.periodEnquiry,
+        /* + */periodOffer: state => state.entities.plans.searchParams.periodOffer,
+        /* + */periodAuction: state => state.entities.plans.searchParams.periodAuction,
+        /* + */periodAward: state => state.entities.plans.searchParams.periodAward,
 
-        /* + */buyersNames: state => state.entities.tenders.searchParams.buyersNames,
-        /* + */buyersIdentifiers: state => state.entities.tenders.searchParams.buyersIdentifiers,
-        /* + */buyersTypes: state => state.entities.tenders.searchParams.buyersTypes,
-        /* + */buyersMainGeneralActivities: state => state.entities.tenders.searchParams.buyersMainGeneralActivities,
-        /* + */buyersMainSectoralActivities: state => state.entities.tenders.searchParams.buyersMainSectoralActivities,
+        /* + */buyersNames: state => state.entities.plans.searchParams.buyersNames,
+        /* + */buyersIdentifiers: state => state.entities.plans.searchParams.buyersIdentifiers,
+        /* + */buyersTypes: state => state.entities.plans.searchParams.buyersTypes,
+        /* + */buyersMainGeneralActivities: state => state.entities.plans.searchParams.buyersMainGeneralActivities,
+        /* + */buyersMainSectoralActivities: state => state.entities.plans.searchParams.buyersMainSectoralActivities,
 
         regionsList: state => state.mdm[REGIONS],
         CPVCodesList: state => state.mdm[CPV_CODES]
@@ -330,7 +329,7 @@
     methods: {
       setFormParams(name, value) {
         this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
-          entity: "tenders",
+          entity: "plans",
           params: {
             [name]: value
           }
@@ -340,17 +339,17 @@
         this.moreCriterions = !this.moreCriterions;
 
         const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
-        localStorageEntities.tenders.isExpanded = this.moreCriterions;
+        localStorageEntities.plans.isExpanded = this.moreCriterions;
         localStorage.setItem("entities", JSON.stringify(localStorageEntities));
       }
     },
     created(){
       const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
-      if(localStorageEntities.tenders.hasOwnProperty("isExpanded")){
-        this.moreCriterions = localStorageEntities.tenders.isExpanded;
+      if(localStorageEntities.plans.hasOwnProperty("isExpanded")){
+        this.moreCriterions = localStorageEntities.plans.isExpanded;
       }
       else{
-        localStorageEntities.tenders.isExpanded = this.moreCriterions;
+        localStorageEntities.plans.isExpanded = this.moreCriterions;
         localStorage.setItem("entities", JSON.stringify(localStorageEntities));
       }
     }

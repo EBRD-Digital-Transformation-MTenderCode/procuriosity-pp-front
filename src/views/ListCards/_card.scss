@@ -19,6 +19,7 @@
     }
   }
   .entity {
+
     &-status {
       display: flex;
       align-items: center;
@@ -123,6 +124,7 @@
         font-weight: 700;
       }
     }
+
     &-update {
       display: flex;
       align-items: center;
@@ -181,10 +183,14 @@
         }
       }
     }
-    &-region,
+    &-id,
     &-type,
+    &-period-planning,
+    &-region,
+    &-buyer-id,
     &-pe-name,
-    &-id{
+    &-classifications,
+    &-budget-id{
       margin-bottom: 8px;
       .title {
         margin-bottom: 3px;
@@ -212,6 +218,10 @@
   .el-col-sm-6 {
     flex-shrink: 0;
     min-width: 270px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: right;
   }
   .el-col-sm-4 {
     flex-shrink: 0;

@@ -1,0 +1,158 @@
+<template>
+  <div class="entity-card">
+    <el-card>
+      <div slot="header">
+        <div class="entity-status">
+          <div class="entity-status__text">
+            {{ parseBudgetStatusText }}
+          </div>
+        </div>
+        <div class="entity-update">
+          Last Modified Date: <span class="entity-update__date">{{ modifiedDate }}</span>
+        </div>
+      </div>
+      <el-row type="flex" :gutter="18">
+        <el-col :xs="24" :sm="14">
+          <router-link v-if="needLink" :to="`/budges/${id}`" data-link class="entity-title">
+            {{ title }}
+          </router-link>
+          <div v-else class="entity-title">
+            {{ title }}
+          </div>
+          <div class="entity-description">
+            {{ description }}
+          </div>
+        </el-col>
+        <el-col :xs="24" :sm="6">
+          <div class="entity-amount"
+               v-if="amount">
+            <div class="entity-amount__text">Estimated Value without VAT ({{ currency }})</div>
+            <div class="entity-amount__number">
+              <span class="whole" :style="wholeAmount.length > 10 ? 'font-size: 30px': ''">{{ wholeAmount }}<span
+                  v-if="fractionAmount">.</span></span>
+              <span v-if="fractionAmount" class="fraction">{{ fractionAmount }}</span>
+            </div>
+          </div>
+          <div class="entity-amount__number" v-else>
+            Funding sources are not added
+          </div>
+          <div>
+            <div class="entity-period-planning">
+              <div class="title">Period planning from:</div>
+              <div class="text">{{ periodPlanningFrom}}</div>
+            </div>
+            <div class="entity-period-planning">
+              <div class="title">Period planning to:</div>
+              <div class="text">{{ periodPlanningTo}}</div>
+            </div>
+          </div>
+        </el-col>
+        <el-col :xs="24" :sm="4">
+          <div class="entity-pe-name">
+            <div class="title">Buyer Name:</div>
+            <div class="text">{{ peName }}</div>
+          </div>
+          <div class="entity-buyer-id">
+            <div class="title">Buyer id:</div>
+            <div class="text">{{ buyerIdentifier }}</div>
+          </div>
+          <div class="entity-region">
+            <div class="title">Buyer Region:</div>
+            <div class="text">{{ region }}</div>
+          </div>
+          <div class="entity-classifications">
+            <div class="title">Classifications:</div>
+            <div class="text">{{ classifications }}</div>
+          </div>
+          <div class="entity-budget-id">
+            <div class="title">Budget-ID:</div>
+            <div class="text">{{ id }}</div>
+          </div>
+        </el-col>
+      </el-row>
+    </el-card>
+  </div>
+</template>
+
+<script>
+  import { Card, Row, Col } from "element-ui";
+  import { getDataFromObject, formatDate } from "../../utils";
+
+  export default {
+    name: "BudgetCard",
+    props: {
+      entity: {
+        type: Object,
+        required: true
+      },
+      needLink: {
+        type: Boolean,
+        default: false
+      }
+    },
+    computed: {
+      parseBudgetStatusText() {
+        const status = getDataFromObject(this.entity, _ => _.budgetStatus);
+        switch (status) {
+          case "planning":
+            return "Planning";
+          default:
+            return "";
+        }
+      },
+      modifiedDate() {
+        return formatDate(getDataFromObject(this.entity, _ => _.modifiedDate));
+      },
+      title() {
+        return getDataFromObject(this.entity, _ => _.title);
+      },
+      description() {
+        return getDataFromObject(this.entity, _ => _.description);
+      },
+      currency() {
+        return getDataFromObject(this.entity, _ => _.currency);
+      },
+      amount() {
+        return getDataFromObject(this.entity, _ => _.amount);
+      },
+      wholeAmount() {
+        const amountStr = getDataFromObject(this.entity, _ => _.amount, 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        return /\./.test(amountStr) ? amountStr.slice(0, amountStr.indexOf(".")) : amountStr;
+      },
+      fractionAmount() {
+        const amountStr = getDataFromObject(this.entity, _ => _.amount, 0).toString();
+        return /\./.test(amountStr) ? amountStr.slice(amountStr.indexOf(".") + 1).length === 1 ? amountStr.slice(amountStr.indexOf(".") + 1) + "0" : amountStr.slice(amountStr.indexOf(".") + 1) : "";
+      },
+      region() {
+        return getDataFromObject(this.entity, _ => _.buyerRegion);
+      },
+      buyerIdentifier() {
+        return getDataFromObject(this.entity, _ => _.buyerIdentifier);
+      },
+      peName() {
+        return getDataFromObject(this.entity, _ => _.buyerName);
+      },
+      classifications() {
+        return getDataFromObject(this.entity, _ => _.classifications).join(",");
+      },
+      periodPlanningFrom() {
+        return formatDate(getDataFromObject(this.entity, _ => _.periodPlanningFrom));
+      },
+      periodPlanningTo() {
+        return formatDate(getDataFromObject(this.entity, _ => _.periodPlanningTo));
+      },
+      id() {
+        return getDataFromObject(this.entity, _ => _.id);
+      }
+    },
+    components: {
+      "el-card": Card,
+      "el-row": Row,
+      "el-col": Col
+    }
+  };
+</script>
+
+<style lang="scss">
+  @import "card";
+</style>
