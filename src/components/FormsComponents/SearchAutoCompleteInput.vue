@@ -62,7 +62,7 @@
       <el-option
           v-for="option of items"
           :key="option.value"
-          :label="option.name"
+          :label="option.name[$i18n.locale]"
           :value="option.value"
       />
     </el-select>
@@ -118,7 +118,7 @@
           } else {
               this.$store.dispatch(FETCH_REGIONS, {
                 country: "MD",
-                lang: this.$i18n.locale
+                lang: "ro"
               });
           }
         }

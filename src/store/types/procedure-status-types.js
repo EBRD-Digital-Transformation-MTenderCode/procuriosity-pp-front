@@ -1,61 +1,113 @@
 export default {
   budgets: [
     {
-      name: "Planning",
+      name:{
+        en: "Planning",
+        ro: "RO_Planning",
+        ru: "RU_Planning"
+      },
       value: "planning"
-    }
+    },
   ],
   plans:[
     {
-      name: "Empty",
+      name:{
+        en: "Empty",
+        ro: "RO_Empty",
+        ru: "RU_Empty"
+      },
       value: "empty"
     },
     {
-      name: "Planning notice",
+      name:{
+        en: "Planning notice",
+        ro: "RO_Planning notice",
+        ru: "RU_Planning notice"
+      },
       value: "planning notice"
     }
   ],
   tenders: [
     {
-      name: "Auction Period",
+      name:{
+        en: "Auction Period",
+        ro: "RO_Auction Period",
+        ru: "RU_Auction Period"
+      },
       value: "active.auction"
     },
     {
-      name: "Qualification Period",
+      name:{
+        en: "Qualification Period",
+        ro: "RO_Qualification Period",
+        ru: "RU_Qualification Period"
+      },
       value: "active.qualification"
     },
     {
-      name: "Enquiries Period",
+      name:{
+        en: "Enquiries Period",
+        ro: "RO_Enquiries Period",
+        ru: "RU_Enquiries Period"
+      },
       value: "active.enquiries"
     },
     {
-      name: "Tendering Period",
+      name:{
+        en: "Tendering Period",
+        ro: "RO_Tendering Period",
+        ru: "RU_Tendering Period"
+      },
       value: "active.tendering"
     },
     {
-      name: "Cancelled tender",
+      name:{
+        en: "Cancelled tender",
+        ro: "RO_Cancelled tender",
+        ru: "RU_Cancelled tender"
+      },
       value: "cancelled"
     },
     {
-      name: "Published",
+      name:{
+        en: "Published",
+        ro: "RO_Published",
+        ru: "RU_Published"
+      },
       value: "active"
     },
     {
-      name: "Awarded",
+      name:{
+        en: "Awarded",
+        ro: "RO_Awarded",
+        ru: "RU_Awarded"
+      },
       value: "active.awarded"
     },
     {
-      name: "Complete",
+      name:{
+        en: "Complete",
+        ro: "RO_Complete",
+        ru: "RU_Complete"
+      },
       value: "complete"
     },
     {
-      name: "Unsuccessful Tender",
+      name:{
+        en: "Unsuccessful Tender",
+        ro: "RO_Unsuccessful Tender",
+        ru: "RU_Unsuccessful Tender"
+      },
       value: "unsuccessful"
     }
   ],
   contracts:[
     {
-      name: "Execution",
+      name:{
+        en: "Execution",
+        ro: "RO_Execution",
+        ru: "RU_Execution"
+      },
       value: "execution"
     }
   ]

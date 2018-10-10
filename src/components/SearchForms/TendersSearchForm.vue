@@ -15,7 +15,7 @@
           :value="titlesOrDescriptions"
           :setValue="setFormParams"
           prefixIcon
-          placeholder="search"
+          :placeholder="$t('message.search_placeholder')"
       />
       <button class="search-form__btn search-form__btn_search" />
 
@@ -162,7 +162,7 @@
                     :value="periodPublished"
                     :setValue="setFormParams"
                 >
-                  Published Period:
+                  {{$t("message.search_published_period")}}
                 </search-period>
               </div>
 
@@ -173,7 +173,7 @@
                     :value="periodDelivery"
                     :setValue="setFormParams"
                 >
-                  Delivery Period:
+                  {{$t("message.search_delivery_period")}}
                 </search-period>
               </div>
 
@@ -184,7 +184,7 @@
                     :value="periodEnquiry"
                     :setValue="setFormParams"
                 >
-                  Enquiry Period:
+                  {{$t("message.search_enquiry_period")}}
                 </search-period>
               </div>
 
@@ -195,7 +195,7 @@
                     :value="periodOffer"
                     :setValue="setFormParams"
                 >
-                  Offer Period:
+                  {{$t("message.search_offer_period")}}
                 </search-period>
               </div>
 
@@ -206,7 +206,7 @@
                     :value="periodAuction"
                     :setValue="setFormParams"
                 >
-                  Auction Period:
+                  {{$t("message.search_auction_period")}}
                 </search-period>
               </div>
 
@@ -217,7 +217,7 @@
                     :value="periodAward"
                     :setValue="setFormParams"
                 >
-                  Award Period:
+                  {{$t("message.search_award_period")}}
                 </search-period>
               </div>
 
@@ -227,7 +227,7 @@
                     name="entityId"
                     :value="entityId"
                     :setValue="setFormParams"
-                    placeholder="ID"
+                    :placeholder="$t('message.search_id_placeholder')"
                     prefixIcon=""
                 />
               </div>

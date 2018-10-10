@@ -6,9 +6,9 @@
     <el-date-picker
         v-model="inputValue"
         type="datetimerange"
-        range-separator="To"
-        start-placeholder="Start date"
-        end-placeholder="End date"
+        :range-separator="$t('message.range_separator')"
+        :start-placeholder="$t('message.start_date_placeholder')"
+        :end-placeholder="$t('message.end_date_placeholder')"
         clearable
         format="dd MM yyyy, HH:mm"
         :editable="false"

@@ -1,16 +1,22 @@
 import axios from "axios";
-import { getListConfig, getTenderConfig } from "./../configs/requests-configs";
+import { getBudgetConfig, getListConfig, getTenderConfig } from "./../configs/requests-configs";
+
+import initialSearchProps from "./types/initial-search-props"
 
 import {
   SET_ENTITY_LIST,
   SET_ENTITY_PAGINATION_INFO,
   SET_ENTITY_SEARCH_PARAMS,
 
-  SET_CURRENT_TENDER_INFO
+  SET_CURRENT_TENDER_INFO,
+  SET_CURRENT_BUDGET_INFO,
+
+  SET_INITIAL_SEARCH_PARAMS
 } from "./types/mutations-types";
 import {
   FETCH_ENTITY_LIST,
-  FETCH_CURRENT_TENDER_INFO
+  FETCH_CURRENT_TENDER_INFO,
+  FETCH_CURRENT_BUDGET_INFO
 } from "./types/actions-types";
 
 import { MTENDER1, MTENDER2 } from "./types/cbd-types";
@@ -41,147 +47,26 @@ Object.entries(localStorageEntities).forEach(([key,val]) => {
   switch (key) {
     case "tenders":
       if(val.hasOwnProperty("searchParams") && !Object.keys(val.searchParams).length){
-        val.searchParams= {
-          titlesOrDescriptions: "",
-          titlesOrDescriptionsStrict: false,
-
-          buyersRegions: [],
-          deliveriesRegions: [],
-
-          proceduresTypes: [],
-          proceduresStatuses: [],
-
-          entityId: "",
-
-          amountFrom: null,
-          amountTo: null,
-
-          classifications: [],
-
-          periodPublished: [],
-          periodDelivery: [],
-          periodEnquiry: [],
-          periodOffer: [],
-          periodAuction: [],
-          periodAward: [],
-
-          buyersNames: [],
-          buyersIdentifiers: [],
-          buyersTypes: [],
-          buyersMainGeneralActivities: [],
-          buyersMainSectoralActivities: [],
-
-          page: 1,
-          pageSize: 25
-        }
+        val.searchParams= initialSearchProps.tenders;
       }
       break;
 
     case "budgets":
       if(val.hasOwnProperty("searchParams") && !Object.keys(val.searchParams).length) {
-        val.searchParams = {
-          titlesOrDescriptions: "",
-          titlesOrDescriptionsStrict: false,
-
-          buyersRegions: [],
-          budgetStatuses: [],
-
-          id: "",
-
-          amountFrom: null,
-          amountTo: null,
-
-          classifications: [],
-
-          periodPlanning: [],
-
-          buyersNames: [],
-          buyersIdentifiers: [],
-          buyersTypes: [],
-          buyersMainGeneralActivities: [],
-          buyersMainSectoralActivities: [],
-
-          page: 1,
-          pageSize: 25
-        }
+        val.searchParams = initialSearchProps.budgets;
       }
       break;
 
 
     case "plans":
       if(val.hasOwnProperty("searchParams") && !Object.keys(val.searchParams).length) {
-        val.searchParams = {
-          titlesOrDescriptions: "",
-          titlesOrDescriptionsStrict: false,
-
-          entityId: "",
-
-          buyersRegions:[],
-          deliveriesRegions: [],
-          proceduresTypes: [],
-          proceduresStatuses:[],
-
-          amountFrom: null,
-          amountTo: null,
-
-          classifications: [],
-
-          periodPublished:[],
-          periodDelivery: [],
-          periodEnquiry: [],
-          periodOffer: [],
-          periodAuction: [],
-          periodAward: [],
-
-          buyersNames: [],
-          buyersIdentifiers: [],
-          buyersTypes: [],
-          buyersMainGeneralActivities: [],
-          buyersMainSectoralActivities: [],
-
-          tags: [],
-
-          page: 1,
-          pageSize: 25
-        }
+        val.searchParams = initialSearchProps.plans;
       }
       break;
 
     case "contracts":
       if(val.hasOwnProperty("searchParams") && !Object.keys(val.searchParams).length) {
-        val.searchParams = {
-          titlesOrDescriptions: "",
-          titlesOrDescriptionsStrict: false,
-
-          entityId: "",
-
-          buyersRegions:[],
-          deliveriesRegions: [],
-          proceduresTypes: [],
-          proceduresStatuses:[],
-
-          amountFrom: null,
-          amountTo: null,
-
-          classifications: [],
-
-          periodPublished:[],
-          periodDelivery: [],
-          periodEnquiry: [],
-          periodOffer: [],
-          periodAuction: [],
-          periodAward: [],
-
-          buyersNames: [],
-          buyersIdentifiers: [],
-          buyersTypes: [],
-          buyersMainGeneralActivities: [],
-          buyersMainSectoralActivities: [],
-
-          tags: [],
-          page: 1,
-          pageSize: 25
-        }
+        val.searchParams = initialSearchProps.contracts;
       }
       break;
 
@@ -256,7 +141,7 @@ export default {
       };
     },
 
-    [SET_ENTITY_SEARCH_PARAMS](state, {entity, params}) {
+    [SET_ENTITY_SEARCH_PARAMS](state, { entity, params }) {
       state[entity] = {
         ...state[entity],
         searchParams: {
@@ -270,21 +155,35 @@ export default {
         params: convertObjectToQueryParamsString(state[entity].searchParams)
       });
       const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
-      localStorageEntities[entity].searchParams={
+      localStorageEntities[entity].searchParams = {
         ...localStorageEntities[entity].searchParams,
         ...params
       };
       localStorage.setItem("entities", JSON.stringify(localStorageEntities));
     },
 
-    [SET_CURRENT_TENDER_INFO](state, {cdb, tenderData, hasAuction, hasDocuments}) {
+    [SET_CURRENT_BUDGET_INFO](state, { budgetData }) {
+      state.tenders.currentTender = {
+        budgetData
+      };
+    },
+
+    [SET_CURRENT_TENDER_INFO](state, { cdb, tenderData, hasAuction, hasDocuments }) {
       state.tenders.currentTender = {
         cdb,
         tenderData,
         hasAuction,
         hasDocuments
       };
-    }
+    },
+    [SET_INITIAL_SEARCH_PARAMS](state, { entity }) {
+      state[entity].searchParams = initialSearchProps[entity];
+      const localStorageEntities =  JSON.parse(localStorage.getItem("entities"));
+      localStorageEntities[entity].searchParams = initialSearchProps[entity];
+      localStorage.setItem("entities", JSON.stringify(localStorageEntities));
+
+
+    },
   },
   actions: {
     async [FETCH_ENTITY_LIST]({commit}, {entity, params}) {
@@ -304,6 +203,19 @@ export default {
       }
       catch (e) {
         console.log(e.message);
+      }
+    },
+    async [FETCH_CURRENT_BUDGET_INFO]({commit}, {id}) {
+      try {
+        const res = await axios(getBudgetConfig(id));
+        console.log(res);
+
+        commit(SET_CURRENT_BUDGET_INFO, {
+          budgetData: res.data
+        });
+      }
+      catch (e) {
+    console.log(e);
       }
     },
 

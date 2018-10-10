@@ -39,7 +39,6 @@ export default {
         });
         localStorage.setItem("regions", JSON.stringify(regions));
       }
-
     },
     async [FETCH_CPV_CODES]({ commit }, { lang, idOrName }) {
       const res = await axios(getCPVCodesConfig(lang, idOrName));

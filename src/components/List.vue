@@ -16,7 +16,7 @@
           :key="entity.id"
       />
     </ul>
-      <div class="list__no-data-title" v-else>No data (</div>
+      <div class="list__no-data-title" v-else>  {{$t("message.list_no_data")}}</div>
       <list-pagination
           v-if="entities[entityName].list.length"
           :total="entities[entityName].paginationInfo.totalCount"
