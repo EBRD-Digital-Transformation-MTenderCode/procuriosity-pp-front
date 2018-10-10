@@ -67,9 +67,7 @@
       "list-pagination": ListPagination
     },
     created() {
-      this.$store.dispatch(FETCH_ENTITY_LIST, {
-        entity: this.entityName
-      });
+      this.getList();
     },
     computed: {
       ...mapState(["entities"]),
@@ -118,7 +116,15 @@
             page
           }
         });
+      },
+      getList() {
+        this.$store.dispatch(FETCH_ENTITY_LIST, {
+          entity: this.entityName
+        });
       }
+    },
+    watch: {
+      "entityName": "getList"
     }
   };
 </script>
