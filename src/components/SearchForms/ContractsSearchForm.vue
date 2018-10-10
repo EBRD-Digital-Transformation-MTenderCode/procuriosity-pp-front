@@ -103,7 +103,7 @@
 
               <!-- Buyers names -->
               <div class="search-form-element">
-                <search-auto-complete-input
+                <multiple-input
                     name="buyersNames"
                     :values="buyersNames"
                     :setValues="setFormParams"
@@ -113,7 +113,7 @@
 
               <!-- Buyers identifiers -->
               <div class="search-form-element">
-                <search-auto-complete-input
+                <multiple-input
                     name="buyersIdentifiers"
                     :values="buyersIdentifiers"
                     :setValues="setFormParams"
@@ -263,6 +263,7 @@
   import SearchSwitch from "../FormsComponents/SearchCheckboxButton";
   import SearchAutoCompleteInput from "./../FormsComponents/SearchAutoCompleteInput";
   import SearchPeriods from "./../FormsComponents/SearchPeriods";
+  import MultipleInput from "./../FormsComponents/MultipleInput"
 
   import proceduresTypesList from "./../../store/types/procedures-types";
   import proceduresStatusesList from "./../../store/types/procedure-status-types";
@@ -280,6 +281,7 @@
       "search-switch": SearchSwitch,
       "search-auto-complete-input": SearchAutoCompleteInput,
       "search-period": SearchPeriods,
+      "multiple-input": MultipleInput
     },
     data() {
       return {

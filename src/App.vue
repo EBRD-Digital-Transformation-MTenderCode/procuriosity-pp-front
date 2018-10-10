@@ -19,23 +19,6 @@
       "app-header": AppHeader,
       "app-footer": AppFooter
     },
-    created: () => {
-      const entities = {
-        "budgets":{
-        },
-        "plans":{
-        },
-        "tenders":{
-        },
-        "contracts":{
-        }};
-      const localStorageEntities = localStorage.getItem("entities");
-      if(!localStorageEntities){
-        localStorage.setItem("entities", JSON.stringify(entities));
-      }
-    }
-
-
   };
 </script>
 

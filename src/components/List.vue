@@ -47,6 +47,9 @@
 
   import ListPagination from "./ListPagination";
 
+  import { convertObjectToQueryParamsString } from "./../utils";
+
+
   export default {
     name: "List",
     components: {
@@ -67,6 +70,7 @@
     },
     created() {
       this.$store.dispatch(FETCH_ENTITY_LIST, {
+        params: convertObjectToQueryParamsString(this.$store.state.entities[this.entityName].searchParams),
         entity: this.entityName
       });
     },

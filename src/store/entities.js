@@ -17,36 +17,187 @@ import { MTENDER1, MTENDER2 } from "./types/cbd-types";
 
 import { convertObjectToQueryParamsString } from "./../utils";
 
+
+if(!localStorage.getItem("entities")){
+  const entities = {
+    "budgets":{
+      searchParams: {}
+    },
+    "plans":{
+      searchParams: {}
+    },
+    "tenders":{
+      searchParams: {}
+    },
+    "contracts":{
+      searchParams: {}
+    }};
+  localStorage.setItem("entities", JSON.stringify(entities));
+}
+
+const localStorageEntities =  JSON.parse(localStorage.getItem("entities"));
+
+Object.entries(localStorageEntities).forEach(([key,val]) => {
+  switch (key) {
+    case "tenders":
+      if(val.hasOwnProperty("searchParams") && !Object.keys(val.searchParams).length){
+        val.searchParams= {
+          titlesOrDescriptions: "",
+          titlesOrDescriptionsStrict: false,
+
+          buyersRegions: [],
+          deliveriesRegions: [],
+
+          proceduresTypes: [],
+          proceduresStatuses: [],
+
+          entityId: "",
+
+          amountFrom: null,
+          amountTo: null,
+
+          classifications: [],
+
+          periodPublished: [],
+          periodDelivery: [],
+          periodEnquiry: [],
+          periodOffer: [],
+          periodAuction: [],
+          periodAward: [],
+
+          buyersNames: [],
+          buyersIdentifiers: [],
+          buyersTypes: [],
+          buyersMainGeneralActivities: [],
+          buyersMainSectoralActivities: [],
+
+          page: 1,
+          pageSize: 25
+        }
+      }
+      break;
+
+    case "budgets":
+      if(val.hasOwnProperty("searchParams") && !Object.keys(val.searchParams).length) {
+        val.searchParams = {
+          titlesOrDescriptions: "",
+          titlesOrDescriptionsStrict: false,
+
+          buyersRegions: [],
+          budgetStatuses: [],
+
+          id: "",
+
+          amountFrom: null,
+          amountTo: null,
+
+          classifications: [],
+
+          periodPlanning: [],
+
+          buyersNames: [],
+          buyersIdentifiers: [],
+          buyersTypes: [],
+          buyersMainGeneralActivities: [],
+          buyersMainSectoralActivities: [],
+
+          page: 1,
+          pageSize: 25
+        }
+      }
+      break;
+
+
+    case "plans":
+      if(val.hasOwnProperty("searchParams") && !Object.keys(val.searchParams).length) {
+        val.searchParams = {
+          titlesOrDescriptions: "",
+          titlesOrDescriptionsStrict: false,
+
+          entityId: "",
+
+          buyersRegions:[],
+          deliveriesRegions: [],
+          proceduresTypes: [],
+          proceduresStatuses:[],
+
+          amountFrom: null,
+          amountTo: null,
+
+          classifications: [],
+
+          periodPublished:[],
+          periodDelivery: [],
+          periodEnquiry: [],
+          periodOffer: [],
+          periodAuction: [],
+          periodAward: [],
+
+          buyersNames: [],
+          buyersIdentifiers: [],
+          buyersTypes: [],
+          buyersMainGeneralActivities: [],
+          buyersMainSectoralActivities: [],
+
+          tags: [],
+
+          page: 1,
+          pageSize: 25
+        }
+      }
+      break;
+
+    case "contracts":
+      if(val.hasOwnProperty("searchParams") && !Object.keys(val.searchParams).length) {
+        val.searchParams = {
+          titlesOrDescriptions: "",
+          titlesOrDescriptionsStrict: false,
+
+          entityId: "",
+
+          buyersRegions:[],
+          deliveriesRegions: [],
+          proceduresTypes: [],
+          proceduresStatuses:[],
+
+          amountFrom: null,
+          amountTo: null,
+
+          classifications: [],
+
+          periodPublished:[],
+          periodDelivery: [],
+          periodEnquiry: [],
+          periodOffer: [],
+          periodAuction: [],
+          periodAward: [],
+
+          buyersNames: [],
+          buyersIdentifiers: [],
+          buyersTypes: [],
+          buyersMainGeneralActivities: [],
+          buyersMainSectoralActivities: [],
+
+          tags: [],
+          page: 1,
+          pageSize: 25
+        }
+      }
+      break;
+
+    default:
+      return;
+
+  }
+});
+localStorage.setItem("entities", JSON.stringify(localStorageEntities));
+
 export default {
   state: {
     budgets: {
       name: "message.entity_budgets",
       list: [],
-      searchParams: {
-        titlesOrDescriptions: "",
-        titlesOrDescriptionsStrict: false,
-
-        buyersRegions: [],
-        budgetStatuses:[],
-
-        id: "",
-
-        amountFrom: null,
-        amountTo: null,
-
-        classifications: [],
-
-        periodPlanning: [],
-
-        buyersNames: [],
-        buyersIdentifiers: [],
-        buyersTypes: [],
-        buyersMainGeneralActivities: [],
-        buyersMainSectoralActivities: [],
-
-        page: 1,
-        pageSize: 25
-      },
+      searchParams:{...localStorageEntities.budgets.searchParams},
       paginationInfo: {
         totalCount: 0,
         pageCount: 0
@@ -55,40 +206,7 @@ export default {
     plans: {
       name: "message.entity_plans",
       list: [],
-      searchParams: {
-        titlesOrDescriptions: "",
-        titlesOrDescriptionsStrict: false,
-
-        entityId: "",
-
-        buyersRegions:[],
-        deliveriesRegions: [],
-        proceduresTypes: [],
-        proceduresStatuses:[],
-
-        amountFrom: null,
-        amountTo: null,
-
-        classifications: [],
-
-        periodPublished:[],
-        periodDelivery: [],
-        periodEnquiry: [],
-        periodOffer: [],
-        periodAuction: [],
-        periodAward: [],
-
-        buyersNames: [],
-        buyersIdentifiers: [],
-        buyersTypes: [],
-        buyersMainGeneralActivities: [],
-        buyersMainSectoralActivities: [],
-
-        tags: [],
-
-        page: 1,
-        pageSize: 25
-      },
+      searchParams:{...localStorageEntities.plans.searchParams},
       paginationInfo: {
         totalCount: 0,
         pageCount: 0
@@ -97,45 +215,13 @@ export default {
     tenders: {
       name: "message.entity_tenders",
       list: [],
+      searchParams:{...localStorageEntities.tenders.searchParams},
       currentTender: {
         cdb: "",
         tenderData: {},
         hasAuction: false,
         hasDocuments: false,
         hasContract: false
-      },
-      searchParams: {
-        titlesOrDescriptions: "",
-        titlesOrDescriptionsStrict: false,
-
-        buyersRegions: [],
-        deliveriesRegions: [],
-
-        proceduresTypes: [],
-        proceduresStatuses: [],
-
-        entityId: "",
-
-        amountFrom: null,
-        amountTo: null,
-
-        classifications: [],
-
-        periodPublished: [],
-        periodDelivery: [],
-        periodEnquiry: [],
-        periodOffer: [],
-        periodAuction: [],
-        periodAward: [],
-
-        buyersNames: [],
-        buyersIdentifiers: [],
-        buyersTypes: [],
-        buyersMainGeneralActivities: [],
-        buyersMainSectoralActivities: [],
-
-        page: 1,
-        pageSize: 25
       },
       paginationInfo: {
         totalCount: 0,
@@ -145,39 +231,7 @@ export default {
     contracts: {
       name: "message.entity_contracts",
       list: [],
-      searchParams: {
-        titlesOrDescriptions: "",
-        titlesOrDescriptionsStrict: false,
-
-        entityId: "",
-
-        buyersRegions:[],
-        deliveriesRegions: [],
-        proceduresTypes: [],
-        proceduresStatuses:[],
-
-        amountFrom: null,
-        amountTo: null,
-
-        classifications: [],
-
-        periodPublished:[],
-        periodDelivery: [],
-        periodEnquiry: [],
-        periodOffer: [],
-        periodAuction: [],
-        periodAward: [],
-
-        buyersNames: [],
-        buyersIdentifiers: [],
-        buyersTypes: [],
-        buyersMainGeneralActivities: [],
-        buyersMainSectoralActivities: [],
-
-        tags: [],
-        page: 1,
-        pageSize: 25
-      },
+      searchParams:{...localStorageEntities.contracts.searchParams},
       paginationInfo: {
         totalCount: 0,
         pageCount: 0
@@ -215,6 +269,12 @@ export default {
         entity: entity,
         params: convertObjectToQueryParamsString(state[entity].searchParams)
       });
+      const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
+      localStorageEntities[entity].searchParams={
+        ...localStorageEntities[entity].searchParams,
+        ...params
+      };
+      localStorage.setItem("entities", JSON.stringify(localStorageEntities));
     },
 
     [SET_CURRENT_TENDER_INFO](state, {cdb, tenderData, hasAuction, hasDocuments}) {

@@ -103,7 +103,7 @@
 
               <!-- Buyers names -->
               <div class="search-form-element">
-                <search-auto-complete-input
+                <multiple-input
                     name="buyersNames"
                     :values="buyersNames"
                     :setValues="setFormParams"
@@ -113,7 +113,7 @@
 
               <!-- Buyers identifiers -->
               <div class="search-form-element">
-                <search-auto-complete-input
+                <multiple-input
                     name="buyersIdentifiers"
                     :values="buyersIdentifiers"
                     :setValues="setFormParams"
@@ -269,6 +269,7 @@
   import buyersTypesList from "./../../store/types/buyers-types";
   import mainGeneralActivityList from "./../../store/types/main-general-activity-types";
   import mainSectoralActivityList from "./../../store/types/main-sectoral-activity";
+  import MultipleInput from "../FormsComponents/MultipleInput";
 
   export default {
     name: "PlansSearchForm",
@@ -280,6 +281,7 @@
       "search-switch": SearchSwitch,
       "search-auto-complete-input": SearchAutoCompleteInput,
       "search-period": SearchPeriods,
+      "multiple-input": MultipleInput
     },
     data() {
       return {
