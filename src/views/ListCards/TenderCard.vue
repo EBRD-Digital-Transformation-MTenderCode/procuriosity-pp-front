@@ -39,6 +39,10 @@
           </div>
         </el-col>
         <el-col :xs="24" :sm="4">
+          <div class="entity-pe-name">
+            <div class="title">Procuring Entity Name:</div>
+            <div class="text">{{ peName }}</div>
+          </div>
           <div class="entity-region">
             <div class="title">Delivery Region:</div>
             <div class="text">{{ region }}</div>
@@ -46,10 +50,6 @@
           <div class="entity-type">
             <div class="title">Procedure type:</div>
             <div class="text text__status">{{ type }}</div>
-          </div>
-          <div class="entity-pe-name">
-            <div class="title">Procuring Entity Name:</div>
-            <div class="text">{{ peName }}</div>
           </div>
           <div class="entity-id">
             <div class="title">TenderID:</div>
