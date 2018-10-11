@@ -3,7 +3,7 @@
     :checked="value"
     @change="setValue(name, $event)"
   >
-    {{ value ? "Strict" : "No strict"}}
+    {{ value ?  $t('message.search_strict') : $t('message.search_no_strict')}}
   </el-checkbox-button>
 </template>
 

@@ -1,11 +1,19 @@
 const baseURL = "http://dev.tender.solutions:1111";
 const mTender1 = "https://public.api.mepps.openprocurement.net/api/2.3";
 const mTender2 = "http://public.mtender.gov.md";
+const mTender2Sendbox = "http://dev.tender.solutions:1111/public";
 
 export const getListConfig = (entity, params = "") => {
   return {
     method: "get",
     url: `${baseURL}/search/${entity}${params}`
+  };
+};
+
+export const getBudgetConfig = id => {
+  return {
+    method: "get",
+    url: `${mTender2Sendbox}/budgets/${id}`,
   };
 };
 

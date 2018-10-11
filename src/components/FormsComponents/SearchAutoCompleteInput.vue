@@ -13,6 +13,7 @@
         default-first-option
         :popper-append-to-body="false"
         :value="values"
+        @blur="clearItems"
         @change="setValues(name, $event)"
     >
       <el-option
@@ -28,12 +29,12 @@
         :items="items"
         filterable
         data-fetch
+        allow-create
+        default-first-option
         :no-match-text="$t('message.search_auto_complete_not_found')"
         :popper-append-to-body="false"
         :placeholder="placeholder"
-        remote
         @focus="getOptions"
-        allow-create
         :value="values"
         @change="setValues(name, $event)"
     >
@@ -51,7 +52,6 @@
         filterable
         data-local
         default-first-option
-        allow-create
         :no-match-text="$t('message.search_auto_complete_not_found')"
         :popper-append-to-body="false"
         :placeholder="placeholder"
@@ -62,7 +62,7 @@
       <el-option
           v-for="option of items"
           :key="option.value"
-          :label="option.name"
+          :label="option.name[$i18n.locale]"
           :value="option.value"
       />
     </el-select>
@@ -73,6 +73,7 @@
   import { FETCH_CPV_CODES, FETCH_REGIONS } from "./../../store/types/actions-types";
 
   import { Select, Option } from "element-ui";
+  import { SET_CPV_CODES } from "../../store/types/mutations-types";
 
   export default {
     name: "SearchAutoCompleteInput",
@@ -117,13 +118,19 @@
           } else {
               this.$store.dispatch(FETCH_REGIONS, {
                 country: "MD",
-                lang: this.$i18n.locale
+                lang: "ro"
               });
           }
         }
+      },
+      clearItems() {
+        this.$store.commit(SET_CPV_CODES, {
+          CPVCodes: []
+        });
       }
     }
-  };
+  }
+  ;
 </script>
 
 <style scoped>

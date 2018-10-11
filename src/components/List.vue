@@ -17,7 +17,7 @@
           :key="entity.id"
       />
     </ul>
-      <div class="list__no-data-title" v-else>No data (</div>
+      <div class="list__no-data-title" v-else>  {{$t("message.list_no_data")}}</div>
       <list-pagination
           v-if="needPagination"
           :total="entities[entityName].paginationInfo.totalCount"
@@ -48,6 +48,9 @@
 
   import ListPagination from "./ListPagination";
 
+  import { convertObjectToQueryParamsString } from "./../utils";
+
+
   export default {
     name: "List",
     components: {
@@ -68,6 +71,7 @@
     },
     created() {
       this.$store.dispatch(FETCH_ENTITY_LIST, {
+        params: convertObjectToQueryParamsString(this.$store.state.entities[this.entityName].searchParams),
         entity: this.entityName
       });
     },

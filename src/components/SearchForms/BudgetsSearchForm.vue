@@ -12,7 +12,7 @@
           :value="titlesOrDescriptions"
           :setValue="setFormParams"
           prefixIcon
-          placeholder="search"
+          :placeholder="$t('message.search_placeholder')"
       />
       <button class="search-form__btn search-form__btn_search" />
       <button
@@ -29,7 +29,7 @@
 
               <!-- Buyers names -->
               <div class="search-form-element">
-                <search-auto-complete-input
+                <multiple-input
                     name="buyersNames"
                     :values="buyersNames"
                     :setValues="setFormParams"
@@ -39,7 +39,7 @@
 
               <!-- Buyers identifiers -->
               <div class="search-form-element">
-                <search-auto-complete-input
+                <multiple-input
                     name="buyersIdentifiers"
                     :values="buyersIdentifiers"
                     :setValues="setFormParams"
@@ -102,7 +102,7 @@
                     :value="periodPlanning"
                     :setValue="setFormParams"
                 >
-                  Planning Period:
+                  {{$t("message.search_planning_period")}}
                 </search-period>
               </div>
 
@@ -113,7 +113,6 @@
                     :items="budgetStatusesList"
                     :values="budgetStatuses"
                     :setValues="setFormParams"
-                    needFetch
                     :placeholder="$t('message.search_budget_statuses_placeholder')"
                 />
               </div>
@@ -153,6 +152,13 @@
                     :placeholder="$t('message.search_classifications_placeholder')"
                 />
               </div>
+
+              <!-- Reset button -->
+              <div>
+                <reset-button
+                    entity="budgets"
+                ></reset-button>
+              </div>
             </el-col>
           </el-row>
         </div>
@@ -173,12 +179,13 @@
   import SearchSwitch from "../FormsComponents/SearchCheckboxButton";
   import SearchAutoCompleteInput from "./../FormsComponents/SearchAutoCompleteInput";
   import SearchPeriods from "./../FormsComponents/SearchPeriods";
+  import MultipleInput from "../FormsComponents/MultipleInput";
+  import ResetButton from "../FormsComponents/ResetButton"
 
   import buyersTypesList from "./../../store/types/buyers-types";
   import budgetStatusesList from "./../../store/types/procedure-status-types";
   import mainGeneralActivityList from "./../../store/types/main-general-activity-types";
   import mainSectoralActivityList from "./../../store/types/main-sectoral-activity";
-
 
   export default {
     name: "BudgetsSearchForm",
@@ -190,6 +197,9 @@
       "search-switch": SearchSwitch,
       "search-auto-complete-input": SearchAutoCompleteInput,
       "search-period": SearchPeriods,
+      "multiple-input": MultipleInput,
+      "reset-button": ResetButton
+
     },
     data() {
       return {
