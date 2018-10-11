@@ -20,7 +20,7 @@
             {{ description }}
           </div>
           <div class="entity-links">
-            <a :href="`https://achizitii.md/${$i18n.locale}/contract/${entityId}`" target="_blank">
+            <a :href="`https://achizitii.md/${$i18n.locale}/public/contract/${entityId}`" target="_blank">
               <img src="@/assets/achizitii.md .png" alt="Achizitii logo" >
             </a>
             <a :href="`https://yptender.md/contract/create/${entityId}/show`" target="_blank">

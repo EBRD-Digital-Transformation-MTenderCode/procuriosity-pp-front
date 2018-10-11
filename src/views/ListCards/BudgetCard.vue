@@ -20,13 +20,13 @@
             {{ description }}
           </div>
           <div class="entity-links">
-            <a :href="`https://achizitii.md/${$i18n.locale}/budgets/${entityId}`" target="_blank">
+            <a :href="`https://achizitii.md/${$i18n.locale}/budgets/${id}`" target="_blank">
               <img src="@/assets/achizitii.md .png" alt="Achizitii logo" >
             </a>
-            <a :href="`https://yptender.md/budget/${entityId}`" target="_blank">
+            <a :href="`https://yptender.md/budget/${id}`" target="_blank">
               <img src="@/assets/yptender.png" alt="Yptender logo" >
             </a>
-            <a :href="`https://e-licitatie.md/${$i18n.locale}/budget/${entityId}`" target="_blank">
+            <a :href="`https://e-licitatie.md/${$i18n.locale}/budget/${id}`" target="_blank">
               <img src="@/assets/e-lici.png" alt="E-lici logo" >
             </a>
           </div>
