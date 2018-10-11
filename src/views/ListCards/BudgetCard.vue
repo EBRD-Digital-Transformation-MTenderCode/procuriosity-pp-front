@@ -8,7 +8,7 @@
           </div>
         </div>
         <div class="entity-update">
-          Last Modified Date: <span class="entity-update__date">{{ modifiedDate }}</span>
+          {{$t("message.budget_card_last_modified_date")}} <span class="entity-update__date">{{ modifiedDate }}</span>
         </div>
       </div>
       <el-row type="flex" :gutter="18">
@@ -34,7 +34,7 @@
         <el-col :xs="24" :sm="6">
           <div class="entity-amount"
                v-if="amount">
-            <div class="entity-amount__text">Estimated Value without VAT ({{ currency }})</div>
+            <div class="entity-amount__text">{{$t("message.budget_card_value")}}({{ currency }})</div>
             <div class="entity-amount__number">
               <span class="whole" :style="wholeAmount.length > 10 ? 'font-size: 30px': ''">{{ wholeAmount }}<span
                   v-if="fractionAmount">.</span></span>
@@ -42,38 +42,38 @@
             </div>
           </div>
           <div class="entity-amount__number" v-else>
-            Funding sources are not added
+            {{$t("message.budget_card_no_sources")}}
           </div>
           <div>
             <div class="entity-period-planning">
-              <div class="title">Period planning from:</div>
+              <div class="title">{{$t("message.budget_period_planning_from")}}</div>
               <div class="text">{{ periodPlanningFrom}}</div>
             </div>
             <div class="entity-period-planning">
-              <div class="title">Period planning to:</div>
+              <div class="title">{{$t("message.budget_period_planning_to")}}</div>
               <div class="text">{{ periodPlanningTo}}</div>
             </div>
           </div>
         </el-col>
         <el-col :xs="24" :sm="4">
           <div class="entity-pe-name">
-            <div class="title">Buyer Name:</div>
+            <div class="title">{{$t("message.budget_card_buyer_name")}}</div>
             <div class="text">{{ peName }}</div>
           </div>
           <div class="entity-buyer-id">
-            <div class="title">Buyer id:</div>
+            <div class="title">{{$t("message.budget_card_buyer_id")}}</div>
             <div class="text">{{ buyerIdentifier }}</div>
           </div>
           <div class="entity-region">
-            <div class="title">Buyer Region:</div>
+            <div class="title">{{$t("message.budget_card_buyer_region")}}</div>
             <div class="text">{{ region }}</div>
           </div>
           <div class="entity-classifications">
-            <div class="title">Classifications:</div>
+            <div class="title">{{$t("message.budget_card_classifications")}}</div>
             <div class="text">{{ classifications }}</div>
           </div>
           <div class="entity-budget-id">
-            <div class="title">Budget-ID:</div>
+            <div class="title">{{$t("message.budget_card_budget_id")}}</div>
             <div class="text">{{ id }}</div>
           </div>
         </el-col>

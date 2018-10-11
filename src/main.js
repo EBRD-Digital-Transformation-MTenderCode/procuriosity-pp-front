@@ -2,6 +2,7 @@ import "@/styles/custom-reset.css";
 import "@/styles/element-variables.scss";
 import "@/styles/main.scss";
 
+import "./styles/flags.scss"
 import "@/components/SearchForms/_search-form.scss";
 import "@/views/ListCards/_card.scss";
 import "@/views/EntitiesPages/_entity-info.scss";

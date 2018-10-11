@@ -245,6 +245,12 @@
               </div>
             </el-col>
           </el-row>
+          <!-- Reset button -->
+          <div class=" search-form__reset-button-wp">
+            <reset-button
+                entity="plans"
+            ></reset-button>
+          </div>
         </div>
       </div>
     </el-collapse-transition>
@@ -270,6 +276,7 @@
   import mainGeneralActivityList from "./../../store/types/main-general-activity-types";
   import mainSectoralActivityList from "./../../store/types/main-sectoral-activity";
   import MultipleInput from "../FormsComponents/MultipleInput";
+  import ResetButton from "../FormsComponents/ResetButton"
 
   export default {
     name: "PlansSearchForm",
@@ -281,7 +288,8 @@
       "search-switch": SearchSwitch,
       "search-auto-complete-input": SearchAutoCompleteInput,
       "search-period": SearchPeriods,
-      "multiple-input": MultipleInput
+      "multiple-input": MultipleInput,
+      "reset-button": ResetButton
     },
     data() {
       return {

@@ -8,7 +8,7 @@
           </div>
         </div>
         <div class="entity-update">
-          Last Modified Date: <span class="entity-update__date">{{ modifiedDate }}</span>
+          {{$t("message.contract_card_last_modified_date")}} <span class="entity-update__date">{{ modifiedDate }}</span>
         </div>
       </div>
       <el-row type="flex" :gutter="18">
@@ -33,7 +33,7 @@
         </el-col>
         <el-col :xs="24" :sm="6">
           <div class="entity-amount">
-            <div class="entity-amount__text">Estimated Value without VAT ({{ currency }})</div>
+            <div class="entity-amount__text">{{$t("message.contract_card_value")}}({{ currency }})</div>
             <div class="entity-amount__number">
               <span class="whole" :style="wholeAmount.length > 10 ? 'font-size: 30px': ''">{{ wholeAmount }}<span
                   v-if="fractionAmount">.</span></span>
@@ -43,19 +43,19 @@
         </el-col>
         <el-col :xs="24" :sm="4">
           <div class="entity-region">
-            <div class="title">Delivery Region:</div>
+            <div class="title">{{$t("message.contract_card_delivery_regions")}}</div>
             <div class="text">{{ region }}</div>
           </div>
           <div class="entity-type">
-            <div class="title">Procedure type:</div>
+            <div class="title">{{$t("message.contract_card_procedure_type")}}</div>
             <div class="text">{{ type }}</div>
           </div>
           <div class="entity-pe-name">
-            <div class="title">Procuring Entity Name:</div>
+            <div class="title">{{$t("message.contract_card_procuring_entity_name")}}</div>
             <div class="text">{{ peName }}</div>
           </div>
           <div class="entity-id">
-            <div class="title">TenderID:</div>
+            <div class="title">{{$t("message.contract_card_tender_id")}}</div>
             <div class="text">{{ entityId }}</div>
           </div>
         </el-col>

@@ -9,8 +9,8 @@
                 <img src="@/assets/logo-ebrd.png" class="header-logo-ebrd__img" alt="EBRD">
               </a>
               <div class="header-logo-ebrd__text">
-                <div>eProcurement Pilot Project funded by the European Bank</div>
-                <div>for Reconstruction and Development</div>
+                <div>{{$t("message.header_ebrd_line1")}}</div>
+                <div>{{$t("message.header_ebrd_line2")}}</div>
               </div>
             </div>
             <locale-toggle />
@@ -26,14 +26,14 @@
               <img src="@/assets/logo.png" class="header-logo-mtender__img" alt="MTender">
             </router-link>
             <nav class="header-static-nav">
-              <a href="#">News</a>
-              <a href="#">For Contracting Authorities</a>
-              <a href="#">For State-Owned Enterprises</a>
-              <a href="#">For Commercial Buyers</a>
-              <a href="#">For Suppliers</a>
-              <a href="#">For Civil Society</a>
-              <a href="#">Vacancies</a>
-              <a href="#">FAQ</a>
+              <a href="#">{{$t("message.header_static_nav_news")}}</a>
+              <a href="#">{{$t("message.header_static_nav_for_contracting")}}</a>
+              <a href="#">{{$t("message.header_static_nav_for_state_owned")}}</a>
+              <a href="#">{{$t("message.header_static_nav_for_commercial")}}</a>
+              <a href="#">{{$t("message.header_static_nav_for_suppliers")}}</a>
+              <a href="#">{{$t("message.header_static_nav_for_civil")}}</a>
+              <a href="#">{{$t("message.header_static_nav_vacancies")}}</a>
+              <a href="#">{{$t("message.header_static_nav_FAQ")}}</a>
             </nav>
           </el-col>
         </el-row>
@@ -80,6 +80,7 @@
 
   .header {
     padding: 0;
+    width: 100%;
     .el-col {
       display: flex;
       justify-content: space-between;

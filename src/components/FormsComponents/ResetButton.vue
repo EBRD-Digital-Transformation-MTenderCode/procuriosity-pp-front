@@ -1,9 +1,10 @@
 <template>
   <el-button
+      class = "search-form__reset-button"
       type="warning"
       plain
       @click="reset">
-    Reset
+    {{$t("message.reset_button")}}
   </el-button>
 </template>
 
