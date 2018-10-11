@@ -31,7 +31,6 @@
 <script>
   import axios from "axios";
 
-  import { Dropdown, DropdownMenu, DropdownItem } from "element-ui";
   import EN from "./../views/flags/EN";
   import RU from "./../views/flags/RU";
   import RO from "./../views/flags/RO";
@@ -42,9 +41,6 @@
       return { locales: Object.keys(this.$i18n.messages) };
     },
     components: {
-      "el-dropdown": Dropdown,
-      "el-dropdown-menu": DropdownMenu,
-      "el-dropdown-item": DropdownItem,
       EN,
       RU,
       RO
@@ -52,6 +48,7 @@
     methods: {
       toggleLocale: function(locale) {
         this.$i18n.locale = locale;
+
         axios.defaults.headers.common["Accept-Language"] = locale;
         document.querySelector("html").setAttribute("lang", locale);
         localStorage.setItem("locale", locale);
@@ -66,6 +63,10 @@
     svg {
       display: inline-block;
       width: auto;
+    }
+    .flag{
+      width: 40px;
+      height: 27px;
     }
     .el-dropdown-link {
       display: flex;

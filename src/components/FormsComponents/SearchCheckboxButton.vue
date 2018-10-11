@@ -8,13 +8,8 @@
 </template>
 
 <script>
-  import { CheckboxButton } from "element-ui";
-
   export default {
     name: "SearchSwitch",
-    components: {
-      "el-checkbox-button": CheckboxButton
-    },
     props: {
       name: {
         type: String,

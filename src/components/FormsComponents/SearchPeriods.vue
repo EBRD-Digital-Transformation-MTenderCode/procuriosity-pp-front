@@ -20,18 +20,12 @@
 </template>
 
 <script>
-  // import moment from "moment/moment";
   import dayjs from "dayjs";
-
-  import { DatePicker } from "element-ui";
 
   import { convertStringDateToUTCDateObject } from "./../../utils";
 
   export default {
     name: "SearchPeriods",
-    components: {
-      "el-date-picker": DatePicker
-    },
     props: {
       name: {
         type: String,

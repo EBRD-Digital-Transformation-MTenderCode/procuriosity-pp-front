@@ -4,7 +4,7 @@
       <tender-card
           :entity="entity"
       />
-  
+
       <!-- Procuring entity -->
       <div class="info">
         <div class="info__title">Procuring Entity</div>
@@ -49,7 +49,7 @@
           </el-row>
         </div>
       </div>
-  
+
       <!-- Procurement info -->
       <div class="info">
         <div class="info__title">Information about the procurement procedure</div>
@@ -74,7 +74,7 @@
           </el-row>
         </div>
       </div>
-  
+
       <!-- Dates -->
       <div class="info" v-if="dates">
         <div class="info__title">Dates and terms</div>
@@ -109,7 +109,7 @@
           </el-row>
         </div>
       </div>
-  
+
       <!-- Documents -->
       <div class="info" v-if="documents.length">
         <div class="info__title">Purchase Documents</div>
@@ -129,7 +129,7 @@
           </el-row>
         </div>
       </div>
-  
+
       <!-- Items -->
       <div class="info">
         <div class="info__title">Purchase Specification</div>
@@ -155,7 +155,7 @@
           </div>
         </template>
       </div>
-  
+
       <!-- Bids -->
       <div class="info" v-if="bids.length">
         <div class="info__title">Proposals Registry</div>
@@ -200,7 +200,7 @@
                   @click="$refs[bid.id][0].open = true"
                   class="document-link"
               />
-              
+
               <documents-modal
                   :ref="bid.id"
                   :open="false"
@@ -210,7 +210,7 @@
           </tr>
         </table>
       </div>
-  
+
       <!-- Awards -->
       <div class="info" v-if="awards.length">
         <div class="info__title">
@@ -257,7 +257,7 @@
                   @click="$refs[award.id][0].open = true"
                   class="document-link"
               />
-              
+
               <documents-modal
                   :ref="award.id"
                   :open="false"
@@ -267,7 +267,7 @@
           </tr>
         </table>
       </div>
-  
+
       <!-- Active awards -->
       <div class="info" v-if="activeAwards.length">
         <div class="info__title">Notification of intention to conclude a contract</div>
@@ -302,7 +302,7 @@
           </tr>
         </table>
       </div>
-  
+
       <!-- Contracts -->
       <div class="info" v-if="contracts.length">
         <div class="info__title">Concluded Contracts</div>
@@ -402,7 +402,7 @@
           </div>
         </div>
       </div>
-  
+
       <!-- Documentation -->
       <div class="info" v-if="documentation.length">
         <div class="info__title">Documentation</div>
@@ -434,8 +434,6 @@
   import { mapState } from "vuex";
   import { FETCH_CURRENT_TENDER_INFO } from "./../../store/types/actions-types";
 
-  import { Container, Row, Col } from "element-ui";
-
   import TenderCard from "./../ListCards/TenderCard";
   import DocumentsModal from "./DocumentsModal";
 
@@ -446,9 +444,6 @@
   export default {
     name: "TenderPage",
     components: {
-      "el-container": Container,
-      "el-row": Row,
-      "el-col": Col,
       "tender-card": TenderCard,
       "documents-modal": DocumentsModal
     },

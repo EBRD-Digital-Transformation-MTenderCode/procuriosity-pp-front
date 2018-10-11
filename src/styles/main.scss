@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=cyrillic');
+@import "variables";
+
 
 body {
   font-family: 'Open Sans', sans-serif;
@@ -58,4 +60,19 @@ body {
   .flag-wp {
     margin: 10px 0;
   }
+}
+
+.el-button--text,
+.el-date-table td.available:hover,
+.el-date-table td.today span {
+  color: $mainC;
+}
+
+.el-date-table td.end-date span,
+.el-date-table td.start-date span {
+  background-color: $mainC;
+}
+
+.el-date-editor .el-range-separator {
+  width: 10%;
 }

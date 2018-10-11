@@ -26,14 +26,8 @@
 </template>
 
 <script>
-  import { Input, InputNumber } from "element-ui";
-
   export default {
     name: "SearchInput",
-    components: {
-      "el-input": Input,
-      "el-input-number": InputNumber
-    },
     props: {
       name: {
         type: String,

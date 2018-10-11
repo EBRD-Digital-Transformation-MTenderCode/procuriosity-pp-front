@@ -40,8 +40,6 @@
   import { FETCH_ENTITY_LIST } from "./../store/types/actions-types";
   import { SET_ENTITY_SEARCH_PARAMS } from "../store/types/mutations-types";
 
-  import { Main, Container } from "element-ui";
-
   import BudgetsSearchForm from "./SearchForms/BudgetsSearchForm";
   import TendersSearchForm from "./SearchForms/TendersSearchForm";
   import PlansSearchForm from "./SearchForms/PlansSearchForm";
@@ -60,9 +58,6 @@
   export default {
     name: "List",
     components: {
-      "el-main": Main,
-      "el-container": Container,
-
       "budgets-search-form": BudgetsSearchForm,
       "tenders-search-form": TendersSearchForm,
       "plans-search-form": PlansSearchForm,

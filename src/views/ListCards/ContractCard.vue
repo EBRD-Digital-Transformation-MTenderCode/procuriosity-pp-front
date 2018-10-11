@@ -65,17 +65,10 @@
 </template>
 
 <script>
-  import { Card, Row, Col } from "element-ui";
-
-  import { getDataFromObject, formatDate } from "../../utils";
+  import { getDataFromObject, formatDate } from "./../../utils";
 
   export default {
     name: "TenderCard",
-    components: {
-      "el-card": Card,
-      "el-row": Row,
-      "el-col": Col
-    },
     props: {
       entity: {
         type: Object,

@@ -54,8 +54,7 @@
 
 <script>
   import { mapState } from "vuex";
-  
-  import { Header, Container, Row, Col } from "element-ui";
+
   /*import LocaleToggle from "./../components/LocaleToggle";*/
 
   import "./../assets/logo.png";
@@ -63,10 +62,6 @@
   export default {
     name: "AppHeader",
     components: {
-      "el-header": Header,
-      "el-container": Container,
-      "el-row": Row,
-      "el-col": Col,
       /*"locale-toggle": LocaleToggle*/
     },
     computed: {

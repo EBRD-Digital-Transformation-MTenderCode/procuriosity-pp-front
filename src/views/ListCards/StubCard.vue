@@ -15,10 +15,10 @@
       <el-row type="flex" :gutter="18">
         <el-col :xs="24" :sm="14">
           <div class="entity-title_stub">
-          
+
           </div>
           <div class="entity-description_stub">
-          
+
           </div>
           <div class="entity-links entity-links_stub">
             <a :href="false">
@@ -68,17 +68,10 @@
 </template>
 
 <script>
-  import { Card, Row, Col } from "element-ui";
-
-  import { getDataFromObject, formatDate } from "../../utils";
+  import { getDataFromObject, formatDate } from "./../../utils";
 
   export default {
     name: "TenderCard",
-    components: {
-      "el-card": Card,
-      "el-row": Row,
-      "el-col": Col
-    },
     computed: {
       parseStatusIco() {
         const status = getDataFromObject(this.entity, _ => _.procedureStatus);

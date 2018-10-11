@@ -7,7 +7,8 @@
         :current-page="currentPage"
         :page-size="pageSize"
         :total="total"
-    
+        :pager-count="5"
+
         @prev-click="_changePage"
         @next-click="_changePage"
         @current-change="_changePage"
@@ -16,13 +17,8 @@
 </template>
 
 <script>
-  import { Pagination } from "element-ui";
-
   export default {
     name: "ListPagination",
-    components: {
-      "el-pagination": Pagination
-    },
     props: {
       total: {
         type: Number,
@@ -61,16 +57,22 @@
 
 <style lang="scss">
   @import "./../styles/variables";
-  
+
   .list-pagination {
     .el-pagination {
+      @media (max-width: 525px) {
+        display: flex;
+        white-space: normal;
+      }
       .btn-prev,
       .btn-next {
         display: inline-flex;
         justify-content: center;
         align-items: center;
+        flex-shrink: 0;
         width: 46px;
         height: 46px;
+        margin: 3px;
         border-radius: 50%;
         background-color: #9e9e9e;
         font-size: 40px;
@@ -88,6 +90,11 @@
         }
       }
       .el-pager {
+        @media (max-width: 525px) {
+          display: inline-flex;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
         .number,
         .more {
           display: inline-flex;
@@ -95,6 +102,7 @@
           align-items: center;
           width: 46px;
           height: 46px;
+          margin: 3px;
           border-radius: 50%;
           background-color: #fff;
           font-weight: 400;
@@ -102,10 +110,11 @@
           color: #333;
           transition: 0.4s;
           &.active {
-            background-color: $mainC;
+            background-color: $mainC !important;
           }
           &:hover:not(.active) {
             box-shadow: 0 0 5px #7b7b7b;
+            color: $mainC !important;
           }
         }
       }

@@ -6,8 +6,6 @@
   import { mapState } from "vuex";
   import { FETCH_CURRENT_BUDGET_INFO } from "./../../store/types/actions-types";
 
-  import { Container, Row, Col } from "element-ui";
-
   import BudgetCard from "./../ListCards/BudgetCard";
 
   import { getDataFromObject, formatDate } from "./../../utils";
@@ -16,9 +14,6 @@
   export default {
     name: "BudgetPage",
     components: {
-      "el-container": Container,
-      "el-row": Row,
-      "el-col": Col,
       "budget-card": BudgetCard
     },
     created: function() {
@@ -49,7 +44,7 @@
      },
      procuringEntity() {
      const budget = this.budget.data;
-   
+
      return {
      fullName: getDataFromObject(budget, _ => _.procuringEntity.name),
      identifier: `${getDataFromObject(budget, _ => _.procuringEntity.identifier.scheme)}
@@ -67,23 +62,23 @@
      },
      procurementInfo() {
      const budget = this.budget.data;
-   
+
      const calculateMinStepPercent = () => {
      const amount = getDataFromObject(budget, _ => _.value.amount);
      const minStep = getDataFromObject(budget, _ => _.minimalStep.amount);
      return Math.round(((minStep / amount) * 100) * 100) / 100;
      };
-   
+
      return {
      currency: getDataFromObject(budget, _ => _.value.currency),
      amount: getDataFromObject(budget, _ => _.value.amount),
      minStep: this.hasAuction ? `${getDataFromObject(tender, _ => _.minimalStep.amount)} (${calculateMinStepPercent()} %)` : ""
      };
-   
+
      },
      dates() {
      const budget = this.budget.data;
-   
+
      return {
      enquiry: `${formatDate(getDataFromObject(budget, _ => _.enquiryPeriod.startDate))} - ${formatDate(getDataFromObject(budget, _ => _.enquiryPeriod.endDate))}`,
      tendering: `${formatDate(getDataFromObject(budget, _ => _.tenderPeriod.startDate))} - ${formatDate(getDataFromObject(budget, _ => _.tenderPeriod.endDate))}`,
@@ -92,7 +87,7 @@
      },
      documents() {
      const budget = this.budget.data;
-   
+
      return getDataFromObject(budget, _ => _.documents, []).map(doc => {
      return {
      name: getDataFromObject(doc, _ => _.title),

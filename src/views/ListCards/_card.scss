@@ -273,10 +273,7 @@
       }
       @media (max-width: 768px) {
         margin-bottom: 20px;
-        text-align: center;
-        &__number {
-          justify-content: center;
-        }
+        align-items: center;
       }
     }
     &-id,
