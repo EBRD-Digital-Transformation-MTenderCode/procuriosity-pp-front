@@ -10,7 +10,10 @@
         :start-placeholder="$t('message.start_date_placeholder')"
         :end-placeholder="$t('message.end_date_placeholder')"
         clearable
-        format="dd MM yyyy, HH:mm"
+        unlink-panels
+        align="center"
+        time-arrow-control
+        format="dd MM yyyy HH:mm"
         :editable="false"
     />
   </div>
