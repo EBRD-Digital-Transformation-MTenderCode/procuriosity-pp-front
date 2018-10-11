@@ -31,7 +31,7 @@
     "search_auction_period": "Auction Period:",
     "search_id_placeholder": "ID",
     "search_placeholder": "search",
-    "list_no_data": "No data (",
+    "list_no_data": "Nothing found",
     "start_date_placeholder" : "Start date",
     "end_date_placeholder" : "End date",
     "range_separator" : "To",

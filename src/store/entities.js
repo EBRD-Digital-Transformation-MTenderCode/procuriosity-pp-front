@@ -4,6 +4,8 @@ import { getBudgetConfig, getListConfig, getTenderConfig } from "./../configs/re
 import initialSearchProps from "./types/initial-search-props";
 
 import {
+  SET_ENTITY_LOADED,
+
   SET_ENTITY_LIST,
   SET_ENTITY_PAGINATION_INFO,
   SET_ENTITY_SEARCH_PARAMS,
@@ -26,7 +28,7 @@ import { convertObjectToQueryParamsString } from "./../utils";
 if (!localStorage.getItem("entities")) {
   const entities = {
     "budgets": {
-      searchParams:  initialSearchProps.budgets
+      searchParams: initialSearchProps.budgets
     },
     "plans": {
       searchParams: initialSearchProps.plans
@@ -48,8 +50,9 @@ export default {
   state: {
     budgets: {
       name: "message.entity_budgets",
+      loaded: false,
       list: [],
-      searchParams:{...localStorageEntities.budgets.searchParams},
+      searchParams: { ...localStorageEntities.budgets.searchParams },
       paginationInfo: {
         totalCount: 0,
         pageCount: 0
@@ -57,8 +60,9 @@ export default {
     },
     plans: {
       name: "message.entity_plans",
+      loaded: false,
       list: [],
-      searchParams:{...localStorageEntities.plans.searchParams},
+      searchParams: { ...localStorageEntities.plans.searchParams },
       paginationInfo: {
         totalCount: 0,
         pageCount: 0
@@ -66,6 +70,7 @@ export default {
     },
     tenders: {
       name: "message.entity_tenders",
+      loaded: false,
       list: [],
       searchParams: { ...localStorageEntities.tenders.searchParams },
       currentTender: {
@@ -79,6 +84,7 @@ export default {
     },
     contracts: {
       name: "message.entity_contracts",
+      loaded: false,
       list: [],
       searchParams: { ...localStorageEntities.contracts.searchParams },
       paginationInfo: {
@@ -88,6 +94,10 @@ export default {
     }
   },
   mutations: {
+    [SET_ENTITY_LOADED](state, { entity, loaded }) {
+      state[entity].loaded = loaded;
+    },
+
     [SET_ENTITY_LIST](state, payload) {
       state[payload.entity] = {
         ...state[payload.entity],
@@ -154,6 +164,11 @@ export default {
   },
   actions: {
     async [FETCH_ENTITY_LIST]({ commit }, { entity, params }) {
+      commit(SET_ENTITY_LOADED, {
+        entity,
+        loaded: false
+      });
+
       try {
         const res = await axios(getListConfig(entity, params));
 
@@ -166,6 +181,11 @@ export default {
           entity,
           totalCount: res.data._meta.totalCount,
           pageCount: res.data._meta.pageCount
+        });
+
+        commit(SET_ENTITY_LOADED, {
+          entity,
+          loaded: true
         });
       }
       catch (e) {
