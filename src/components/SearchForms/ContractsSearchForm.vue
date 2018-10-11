@@ -245,6 +245,12 @@
               </div>
             </el-col>
           </el-row>
+          <!-- Reset button -->
+          <div class=" search-form__reset-button-wp">
+            <reset-button
+                entity="contracts"
+            ></reset-button>
+          </div>
         </div>
       </div>
     </el-collapse-transition>
@@ -263,7 +269,8 @@
   import SearchSwitch from "../FormsComponents/SearchCheckboxButton";
   import SearchAutoCompleteInput from "./../FormsComponents/SearchAutoCompleteInput";
   import SearchPeriods from "./../FormsComponents/SearchPeriods";
-  import MultipleInput from "./../FormsComponents/MultipleInput"
+  import MultipleInput from "./../FormsComponents/MultipleInput";
+  import ResetButton from "./../FormsComponents/ResetButton";
 
   import proceduresTypesList from "./../../store/types/procedures-types";
   import proceduresStatusesList from "./../../store/types/procedure-status-types";
@@ -281,7 +288,8 @@
       "search-switch": SearchSwitch,
       "search-auto-complete-input": SearchAutoCompleteInput,
       "search-period": SearchPeriods,
-      "multiple-input": MultipleInput
+      "multiple-input": MultipleInput,
+      "reset-button": ResetButton
     },
     data() {
       return {
