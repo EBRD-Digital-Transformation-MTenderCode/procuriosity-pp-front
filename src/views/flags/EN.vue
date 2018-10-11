@@ -18,7 +18,3 @@ export default {
   name: "EN"
 };
 </script>
-
-<style scoped>
-
-</style>

@@ -13,7 +13,3 @@ export default {
   name: "RU"
 };
 </script>
-
-<style scoped>
-
-</style>

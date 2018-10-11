@@ -1,17 +1,17 @@
 export default {
   budgets: [
     {
-      name:{
+      name: {
         en: "Planning",
         ro: "RO_Planning",
         ru: "RU_Planning"
       },
       value: "planning"
-    },
+    }
   ],
-  plans:[
+  plans: [
     {
-      name:{
+      name: {
         en: "Empty",
         ro: "RO_Empty",
         ru: "RU_Empty"
@@ -19,7 +19,7 @@ export default {
       value: "empty"
     },
     {
-      name:{
+      name: {
         en: "Planning notice",
         ro: "RO_Planning notice",
         ru: "RU_Planning notice"
@@ -29,7 +29,7 @@ export default {
   ],
   tenders: [
     {
-      name:{
+      name: {
         en: "Auction Period",
         ro: "RO_Auction Period",
         ru: "RU_Auction Period"
@@ -37,7 +37,7 @@ export default {
       value: "active.auction"
     },
     {
-      name:{
+      name: {
         en: "Qualification Period",
         ro: "RO_Qualification Period",
         ru: "RU_Qualification Period"
@@ -45,7 +45,7 @@ export default {
       value: "active.qualification"
     },
     {
-      name:{
+      name: {
         en: "Enquiries Period",
         ro: "RO_Enquiries Period",
         ru: "RU_Enquiries Period"
@@ -53,7 +53,7 @@ export default {
       value: "active.enquiries"
     },
     {
-      name:{
+      name: {
         en: "Tendering Period",
         ro: "RO_Tendering Period",
         ru: "RU_Tendering Period"
@@ -61,7 +61,7 @@ export default {
       value: "active.tendering"
     },
     {
-      name:{
+      name: {
         en: "Cancelled tender",
         ro: "RO_Cancelled tender",
         ru: "RU_Cancelled tender"
@@ -69,7 +69,7 @@ export default {
       value: "cancelled"
     },
     {
-      name:{
+      name: {
         en: "Published",
         ro: "RO_Published",
         ru: "RU_Published"
@@ -77,7 +77,7 @@ export default {
       value: "active"
     },
     {
-      name:{
+      name: {
         en: "Awarded",
         ro: "RO_Awarded",
         ru: "RU_Awarded"
@@ -85,7 +85,7 @@ export default {
       value: "active.awarded"
     },
     {
-      name:{
+      name: {
         en: "Complete",
         ro: "RO_Complete",
         ru: "RU_Complete"
@@ -93,7 +93,7 @@ export default {
       value: "complete"
     },
     {
-      name:{
+      name: {
         en: "Unsuccessful Tender",
         ro: "RO_Unsuccessful Tender",
         ru: "RU_Unsuccessful Tender"
@@ -101,9 +101,9 @@ export default {
       value: "unsuccessful"
     }
   ],
-  contracts:[
+  contracts: [
     {
-      name:{
+      name: {
         en: "Execution",
         ro: "RO_Execution",
         ru: "RU_Execution"

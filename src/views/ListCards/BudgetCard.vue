@@ -152,7 +152,3 @@
     }
   };
 </script>
-
-<style lang="scss">
-  @import "card";
-</style>

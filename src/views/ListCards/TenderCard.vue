@@ -29,8 +29,8 @@
             <div class="entity-amount__text">Estimated Value without VAT ({{ currency }})</div>
             <div class="entity-amount__number">
               <span
-                class="whole"
-                :style="wholeAmount.length > 10 ? 'font-size: 30px': ''"
+                  class="whole"
+                  :style="wholeAmount.length > 10 ? 'font-size: 30px': ''"
               >
                 {{ wholeAmount }} <span v-if="fractionAmount">.</span>
               </span>
@@ -170,7 +170,3 @@
     }
   };
 </script>
-
-<style lang="scss">
-  @import "card";
-</style>

@@ -4,7 +4,7 @@
   display: flex;
   position: relative;
   .el-input__inner {
-    border-radius: 0 3px 3px 0 !important;
+    border-radius: 0 3px 3px 0;
   }
 }
 
@@ -14,7 +14,7 @@
   .main-search &-field-wp {
     flex-grow: 1;
     .el-input__inner {
-      padding-right: 105px !important;
+      padding-right: 105px;
     }
   }
   &__btn {
@@ -56,61 +56,61 @@
   }
   .el-input {
     &-number {
-      width: 100% !important;
+      width: 100%;
       &__decrease,
       &__increase {
-        line-height: 25px !important;
+        line-height: 25px;
       }
     }
     &__inner {
-      width: 100% !important;
-      border-color: #dcdfe6 !important;
+      width: 100%;
+      border-color: #dcdfe6;
     }
     &__icon {
-      font-size: 25px !important;
+      font-size: 25px;
     }
   }
   .el-select {
     width: 100%;
-    &-dropdown{
+    &-dropdown {
       max-width: 100%;
     }
     .el-input {
       &.is-focus {
         .el-input {
           &__inner {
-            border-radius: 3px 3px 0 0 !important;
-            border-color: #fff !important;
+            border-radius: 3px 3px 0 0;
+            border-color: #fff;
           }
         }
       }
     }
-    &__tags > span{
+    &__tags > span {
       max-width: 100%;
     }
   }
   .el-checkbox-button {
     &__inner {
-      border-right: none !important;
+      border-right: none;
       border-color: #dcdfe6 !important;
-      border-radius: 3px 0 0 3px !important;
-      background-color: transparent !important;
-      color: #fff !important;
+      border-radius: 3px 0 0 3px;
+      background-color: transparent;
+      color: #fff;
     }
   }
   .is-checked .el-checkbox-button {
     &__inner {
-      background-color: #fff !important;
-      color: $mainC !important;
+      background-color: #fff;
+      color: $mainC;
     }
   }
   .el-range {
     &-input {
-      font-size: 18px !important;
+      font-size: 18px;
     }
     &-separator {
-      line-height: 42px !important;
-      font-size: 18px !important;
+      line-height: 42px;
+      font-size: 18px;
     }
     &__close-icon {
       font-size: 25px !important;
@@ -122,7 +122,7 @@
     align-items: center;
     height: auto;
     white-space: normal;
-    &__close{
+    &__close {
       flex-shrink: 0;
     }
   }
@@ -137,20 +137,20 @@
 .el-select-dropdown {
   margin-top: -1px !important;
   margin-bottom: -1px !important;
-  background-color: #efefef !important;
-  border-left: none !important;
-  border-right: none !important;
-  border-radius: 0 0 4px 4px !important;
+  background-color: #efefef;
+  border-left: none;
+  border-right: none;
+  border-radius: 0 0 4px 4px;
   &__item {
-    height: 52px !important;
-    line-height: 52px !important;
+    height: 52px;
+    line-height: 52px;
     border-bottom: 1px solid #d2d2d2;
     transition: 0.1s;
-    &.selected{
+    &.selected {
       padding-right: 35px;
     }
     &.hover {
-      background-color: #d9d9d9 !important;
+      background-color: #d9d9d9;
     }
   }
   .popper__arrow {

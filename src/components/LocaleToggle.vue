@@ -1,12 +1,12 @@
 <template>
   <el-dropdown
-    trigger="click"
-    @command="toggleLocale"
-    size="small"
-    class="locale-toggle"
+      trigger="click"
+      @command="toggleLocale"
+      size="small"
+      class="locale-toggle"
   >
     <span
-      class="el-dropdown-link"
+        class="el-dropdown-link"
     >
       <i class="el-icon-arrow-down el-icon--right"></i>
       <EN v-if="this.$i18n.locale === 'en'" />
@@ -15,10 +15,10 @@
     </span>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item
-        v-for="(locale, i) of locales"
-        :key="`locale${i}`"
-        :command="locale"
-        divided
+          v-for="(locale, i) of locales"
+          :key="`locale${i}`"
+          :command="locale"
+          divided
       >
         <EN v-if="locale === 'en'" />
         <RU v-if="locale === 'ru'" />
@@ -39,7 +39,7 @@
   export default {
     name: "LocaleToggle",
     data() {
-      return {locales: Object.keys(this.$i18n.messages)};
+      return { locales: Object.keys(this.$i18n.messages) };
     },
     components: {
       "el-dropdown": Dropdown,

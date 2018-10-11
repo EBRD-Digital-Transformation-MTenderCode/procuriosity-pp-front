@@ -18,18 +18,6 @@
     components: {
       "app-header": AppHeader,
       "app-footer": AppFooter
-    },
+    }
   };
 </script>
-
-<style lang="scss">
-  @import "./styles/element-variables.scss";
-  @import "./styles/main.scss";
-
-  #app {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    min-height: 100vh;
-  }
-</style>

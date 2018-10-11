@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getBudgetConfig, getListConfig, getTenderConfig } from "./../configs/requests-configs";
 
-import initialSearchProps from "./types/initial-search-props"
+import initialSearchProps from "./types/initial-search-props";
 
 import {
   SET_ENTITY_LIST,
@@ -24,48 +24,49 @@ import { MTENDER1, MTENDER2 } from "./types/cbd-types";
 import { convertObjectToQueryParamsString } from "./../utils";
 
 
-if(!localStorage.getItem("entities")){
+if (!localStorage.getItem("entities")) {
   const entities = {
-    "budgets":{
+    "budgets": {
       searchParams: {}
     },
-    "plans":{
+    "plans": {
       searchParams: {}
     },
-    "tenders":{
+    "tenders": {
       searchParams: {}
     },
-    "contracts":{
+    "contracts": {
       searchParams: {}
-    }};
+    }
+  };
   localStorage.setItem("entities", JSON.stringify(entities));
 }
 
-const localStorageEntities =  JSON.parse(localStorage.getItem("entities"));
+const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
 
-Object.entries(localStorageEntities).forEach(([key,val]) => {
+Object.entries(localStorageEntities).forEach(([key, val]) => {
   switch (key) {
     case "tenders":
-      if(val.hasOwnProperty("searchParams") && !Object.keys(val.searchParams).length){
-        val.searchParams= initialSearchProps.tenders;
+      if (val.hasOwnProperty("searchParams") && !Object.keys(val.searchParams).length) {
+        val.searchParams = initialSearchProps.tenders;
       }
       break;
 
     case "budgets":
-      if(val.hasOwnProperty("searchParams") && !Object.keys(val.searchParams).length) {
+      if (val.hasOwnProperty("searchParams") && !Object.keys(val.searchParams).length) {
         val.searchParams = initialSearchProps.budgets;
       }
       break;
 
 
     case "plans":
-      if(val.hasOwnProperty("searchParams") && !Object.keys(val.searchParams).length) {
+      if (val.hasOwnProperty("searchParams") && !Object.keys(val.searchParams).length) {
         val.searchParams = initialSearchProps.plans;
       }
       break;
 
     case "contracts":
-      if(val.hasOwnProperty("searchParams") && !Object.keys(val.searchParams).length) {
+      if (val.hasOwnProperty("searchParams") && !Object.keys(val.searchParams).length) {
         val.searchParams = initialSearchProps.contracts;
       }
       break;
@@ -87,7 +88,7 @@ export default {
         titlesOrDescriptionsStrict: false,
 
         buyersRegions: [],
-        budgetStatuses:[],
+        budgetStatuses: [],
 
         id: "",
 
@@ -121,17 +122,17 @@ export default {
 
         entityId: "",
 
-        buyersRegions:[],
+        buyersRegions: [],
         deliveriesRegions: [],
         proceduresTypes: [],
-        proceduresStatuses:[],
+        proceduresStatuses: [],
 
         amountFrom: null,
         amountTo: null,
 
         classifications: [],
 
-        periodPublished:[],
+        periodPublished: [],
         periodDelivery: [],
         periodEnquiry: [],
         periodOffer: [],
@@ -157,7 +158,7 @@ export default {
     tenders: {
       name: "message.entity_tenders",
       list: [],
-      searchParams:{...localStorageEntities.tenders.searchParams},
+      searchParams: { ...localStorageEntities.tenders.searchParams },
       currentTender: {
         cdb: "",
         tenderData: {}
@@ -170,7 +171,7 @@ export default {
     contracts: {
       name: "message.entity_contracts",
       list: [],
-      searchParams:{...localStorageEntities.contracts.searchParams},
+      searchParams: { ...localStorageEntities.contracts.searchParams },
       paginationInfo: {
         totalCount: 0,
         pageCount: 0
@@ -222,7 +223,7 @@ export default {
       };
     },
 
-    [SET_CURRENT_TENDER_INFO](state, {cdb, tenderData}) {
+    [SET_CURRENT_TENDER_INFO](state, { cdb, tenderData }) {
       state.tenders.currentTender = {
         cdb,
         tenderData
@@ -230,15 +231,15 @@ export default {
     },
     [SET_INITIAL_SEARCH_PARAMS](state, { entity }) {
       state[entity].searchParams = initialSearchProps[entity];
-      const localStorageEntities =  JSON.parse(localStorage.getItem("entities"));
+      const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
       localStorageEntities[entity].searchParams = initialSearchProps[entity];
       localStorage.setItem("entities", JSON.stringify(localStorageEntities));
 
 
-    },
+    }
   },
   actions: {
-    async [FETCH_ENTITY_LIST]({commit}, {entity, params}) {
+    async [FETCH_ENTITY_LIST]({ commit }, { entity, params }) {
       try {
         const res = await axios(getListConfig(entity, params));
 
@@ -257,7 +258,7 @@ export default {
         console.log(e.message);
       }
     },
-    async [FETCH_CURRENT_BUDGET_INFO]({commit}, {id}) {
+    async [FETCH_CURRENT_BUDGET_INFO]({ commit }, { id }) {
       try {
         const res = await axios(getBudgetConfig(id));
         console.log(res);
@@ -267,11 +268,11 @@ export default {
         });
       }
       catch (e) {
-    console.log(e);
+        console.log(e);
       }
     },
 
-    async [FETCH_CURRENT_TENDER_INFO]({commit}, {cdb, id}) {
+    async [FETCH_CURRENT_TENDER_INFO]({ commit }, { cdb, id }) {
       try {
         const res = await axios(getTenderConfig(cdb, id));
 
@@ -285,7 +286,7 @@ export default {
 
         }
 
-        if (cdb === MTENDER2){
+        if (cdb === MTENDER2) {
           const tenderRecords = res.data.records;
           tenderRecords.forEach(record => {
             if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/) !== -1) {
@@ -299,7 +300,7 @@ export default {
           Object.assign(tenderData, {
             MSRecord,
             EVRecord
-          })
+          });
         }
 
         commit(SET_CURRENT_TENDER_INFO, {

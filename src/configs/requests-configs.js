@@ -15,7 +15,7 @@ export const getListConfig = (entity, params = "") => {
 export const getBudgetConfig = id => {
   return {
     method: "get",
-    url: `${mTender2Sendbox}/budgets/${id}`,
+    url: `${mTender2Sendbox}/budgets/${id}`
   };
 };
 

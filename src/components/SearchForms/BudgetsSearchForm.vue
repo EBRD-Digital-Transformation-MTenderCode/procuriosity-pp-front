@@ -36,7 +36,7 @@
                     :placeholder="$t('message.search_procedures_buyers_names_placeholder')"
                 />
               </div>
-
+  
               <!-- Buyers identifiers -->
               <div class="search-form-element">
                 <multiple-input
@@ -46,7 +46,7 @@
                     :placeholder="$t('message.search_procedures_buyers_identifiers_placeholder')"
                 />
               </div>
-
+  
               <!-- Types of buyers -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -57,7 +57,7 @@
                     :placeholder="$t('message.search_procedures_types_of_buyers_placeholder')"
                 />
               </div>
-
+  
               <!-- Main general activity -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -68,7 +68,7 @@
                     :placeholder="$t('message.search_procedures_buyers_main_general_activity_placeholder')"
                 />
               </div>
-
+  
               <!-- Main sectoral activity -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -79,7 +79,7 @@
                     :placeholder="$t('message.search_procedures_buyers_main_sectoral_activity_placeholder')"
                 />
               </div>
-
+  
               <!-- Buyers regions -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -105,7 +105,7 @@
                   {{$t("message.search_planning_period")}}
                 </search-period>
               </div>
-
+  
               <!--Budget Statuses -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -116,7 +116,7 @@
                     :placeholder="$t('message.search_budget_statuses_placeholder')"
                 />
               </div>
-
+  
               <!-- Amount from -->
               <div class="search-form-element">
                 <search-input
@@ -128,7 +128,7 @@
                     :placeholder="$t('message.search_amount_from')"
                 />
               </div>
-
+  
               <!-- Amount to -->
               <div class="search-form-element">
                 <search-input
@@ -140,7 +140,7 @@
                     :placeholder="$t('message.search_amount_to')"
                 />
               </div>
-
+  
               <!-- Classifications -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -152,7 +152,7 @@
                     :placeholder="$t('message.search_classifications_placeholder')"
                 />
               </div>
-
+  
               <!-- Reset button -->
               <div>
                 <reset-button
@@ -180,7 +180,7 @@
   import SearchAutoCompleteInput from "./../FormsComponents/SearchAutoCompleteInput";
   import SearchPeriods from "./../FormsComponents/SearchPeriods";
   import MultipleInput from "../FormsComponents/MultipleInput";
-  import ResetButton from "../FormsComponents/ResetButton"
+  import ResetButton from "../FormsComponents/ResetButton";
 
   import buyersTypesList from "./../../store/types/buyers-types";
   import budgetStatusesList from "./../../store/types/procedure-status-types";
@@ -245,7 +245,7 @@
           }
         });
       },
-      actionExpand(){
+      actionExpand() {
         this.moreCriterions = !this.moreCriterions;
 
         const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
@@ -253,19 +253,15 @@
         localStorage.setItem("entities", JSON.stringify(localStorageEntities));
       }
     },
-    created(){
+    created() {
       const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
-      if(localStorageEntities.budgets.hasOwnProperty("isExpanded")){
+      if (localStorageEntities.budgets.hasOwnProperty("isExpanded")) {
         this.moreCriterions = localStorageEntities.budgets.isExpanded;
       }
-      else{
+      else {
         localStorageEntities.budgets.isExpanded = this.moreCriterions;
         localStorage.setItem("entities", JSON.stringify(localStorageEntities));
       }
     }
   };
 </script>
-
-<style lang="scss">
-  @import "search-form";
-</style>

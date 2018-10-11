@@ -121,12 +121,8 @@
         return getDataFromObject(this.entity, _ => _.id);
       },
       entityId() {
-        return getDataFromObject(this.entity, _ => _.entityId)
+        return getDataFromObject(this.entity, _ => _.entityId);
       }
     }
   };
 </script>
-
-<style lang="scss">
-  @import "card";
-</style>

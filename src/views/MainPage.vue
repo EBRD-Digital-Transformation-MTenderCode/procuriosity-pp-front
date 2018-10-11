@@ -11,7 +11,7 @@
 
 <script>
   import { Container } from "element-ui";
-  
+
   export default {
     name: "MainPage",
     components: {

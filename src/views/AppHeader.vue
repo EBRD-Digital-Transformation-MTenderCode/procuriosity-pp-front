@@ -22,9 +22,9 @@
       <el-container direction="vertical">
         <el-row :gutter="30">
           <el-col>
-            <a href="/" class="header-logo-mtender__link">
+            <router-link to="/" class="header-logo-mtender__link">
               <img src="@/assets/logo.png" class="header-logo-mtender__img" alt="MTender">
-            </a>
+            </router-link>
             <nav class="header-static-nav">
               <a href="#">News</a>
               <a href="#">For Contracting Authorities</a>

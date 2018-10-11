@@ -18,15 +18,15 @@ export default new Router({
       name: "list",
       component: () => import(/* webpackChunkName: "List" */ "./components/List.vue")
     },
-    {
+    /*{
       path: "/budgets/:id",
       name: "budget-page",
-      component: () => import(/* webpackChunkName: "BudgetPage" */ "./views/EntitiesPages/BudgetPage.vue")
+      component: () => import(/!* webpackChunkName: "BudgetPage" *!/ "./views/EntitiesPages/BudgetPage.vue")
     },
     {
       path: "/tenders/:id",
       name: "tender-page",
-      component: () => import(/* webpackChunkName: "TenderPage" */ "./views/EntitiesPages/TenderPage.vue")
-    }
+      component: () => import(/!* webpackChunkName: "TenderPage" *!/ "./views/EntitiesPages/TenderPage.vue")
+    }*/
   ]
 });

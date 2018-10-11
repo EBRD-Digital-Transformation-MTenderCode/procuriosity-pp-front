@@ -850,7 +850,7 @@
             };
           });
         } else {
-          return []
+          return [];
         }
       },
       documentation() {
@@ -875,7 +875,3 @@
     }
   };
 </script>
-
-<style lang="scss">
-  @import "entity-info";
-</style>

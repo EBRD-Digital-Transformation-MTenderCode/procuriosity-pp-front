@@ -4,9 +4,15 @@ body {
   font-family: 'Open Sans', sans-serif;
   line-height: 1.5;
   min-height: 100vh;
-  /* @TODO delete important and do right connect styles */
-  background-color: #efefef !important;
+  background-color: #efefef;
   color: #323232;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  min-height: 100vh;
 }
 
 .el-container {
@@ -25,16 +31,16 @@ body {
   overflow: inherit;
   padding: 0;
 }
-//не заметила изменений без импортант
+
 .el-input__inner {
-  min-height: 52px !important;
+  min-height: 52px;
   padding: 8px 10px;
-  border-radius: 3px !important;
+  border-radius: 3px;
   font-size: 18px;
 }
-//на что влияет?
+
 .el-time-panel {
-  width: 140px !important;
+  width: 140px;
 }
 
 .el-checkbox-button__inner {
