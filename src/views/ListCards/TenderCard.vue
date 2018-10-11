@@ -14,14 +14,22 @@
       </div>
       <el-row type="flex" :gutter="18">
         <el-col :xs="24" :sm="14">
-          <router-link v-if="needLink" :to="`/tenders/${id}`" data-link class="entity-title">
-            {{ title }}
-          </router-link>
-          <div v-else class="entity-title">
+          <div class="entity-title">
             {{ title }}
           </div>
           <div class="entity-description">
             {{ description }}
+          </div>
+          <div class="entity-links">
+            <a :href="`https://achizitii.md/${$i18n.locale}/tenders/${entityId}`" target="_blank">
+              <img src="@/assets/achizitii.md .png" alt="Achizitii logo" >
+            </a>
+            <a :href="`https://yptender.md/tender/${entityId}`" target="_blank">
+              <img src="@/assets/yptender.png" alt="Yptender logo" >
+            </a>
+            <a :href="`https://e-licitatie.md/${$i18n.locale}/mtender/${entityId}`" target="_blank">
+              <img src="@/assets/e-lici.png" alt="E-lici logo" >
+            </a>
           </div>
         </el-col>
         <el-col :xs="24" :sm="6">
