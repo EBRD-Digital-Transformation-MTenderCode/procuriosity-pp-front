@@ -1,9 +1,8 @@
 import Vue from "vue";
 import VueI18n from "vue-i18n";
+import messages from "./messages/index";
 
 import axios from "axios";
-
-import messages from "./messages/index";
 
 import Element from "element-ui";
 
@@ -17,7 +16,7 @@ if (!localStorage.getItem("locale")) {
 
 const savedLocale = localStorage.getItem("locale");
 
-export const i18n =  new VueI18n({
+export const i18n = new VueI18n({
   locale: savedLocale,
   messages
 });

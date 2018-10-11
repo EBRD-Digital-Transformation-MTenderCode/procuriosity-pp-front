@@ -116,10 +116,10 @@
               });
             }
           } else {
-              this.$store.dispatch(FETCH_REGIONS, {
-                country: "MD",
-                lang: "ro"
-              });
+            this.$store.dispatch(FETCH_REGIONS, {
+              country: "MD",
+              lang: "ro"
+            });
           }
         }
       },
@@ -132,7 +132,3 @@
   }
   ;
 </script>
-
-<style scoped>
-
-</style>

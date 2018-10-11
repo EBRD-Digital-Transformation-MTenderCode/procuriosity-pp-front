@@ -22,7 +22,7 @@
   export default {
     name: "MultipleInput",
     components: {
-      "el-select": Select,
+      "el-select": Select
     },
     props: {
       name: {
@@ -43,6 +43,3 @@
     }
   };
 </script>
-
-<style scoped>
-</style>

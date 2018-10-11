@@ -4,9 +4,9 @@
       <el-row :gutter="30">
         <el-col>
           <div class="footer-logo">
-            <a href="/">
+            <router-link to="/">
               <img src="@/assets/logo-footer.png" alt="" class="footer-logo__img">
-            </a>
+            </router-link>
             <div class="footer-logo__cr">
               {{$t("message.footer_logo_cr")}}
             </div>

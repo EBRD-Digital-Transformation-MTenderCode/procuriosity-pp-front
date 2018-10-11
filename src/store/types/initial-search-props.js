@@ -1,5 +1,5 @@
 export default {
-  budgets:{
+  budgets: {
     titlesOrDescriptions: "",
     titlesOrDescriptionsStrict: false,
 
@@ -24,23 +24,23 @@ export default {
     page: 1,
     pageSize: 25
   },
-  plans:{
+  plans: {
     titlesOrDescriptions: "",
     titlesOrDescriptionsStrict: false,
 
     entityId: "",
 
-    buyersRegions:[],
+    buyersRegions: [],
     deliveriesRegions: [],
     proceduresTypes: [],
-    proceduresStatuses:[],
+    proceduresStatuses: [],
 
     amountFrom: null,
     amountTo: null,
 
     classifications: [],
 
-    periodPublished:[],
+    periodPublished: [],
     periodDelivery: [],
     periodEnquiry: [],
     periodOffer: [],
@@ -58,7 +58,7 @@ export default {
     page: 1,
     pageSize: 25
   },
-  tenders:{
+  tenders: {
     titlesOrDescriptions: "",
     titlesOrDescriptionsStrict: false,
 
@@ -97,17 +97,17 @@ export default {
 
     entityId: "",
 
-    buyersRegions:[],
+    buyersRegions: [],
     deliveriesRegions: [],
     proceduresTypes: [],
-    proceduresStatuses:[],
+    proceduresStatuses: [],
 
     amountFrom: null,
     amountTo: null,
 
     classifications: [],
 
-    periodPublished:[],
+    periodPublished: [],
     periodDelivery: [],
     periodEnquiry: [],
     periodOffer: [],
@@ -124,4 +124,4 @@ export default {
     page: 1,
     pageSize: 25
   }
-}
+};

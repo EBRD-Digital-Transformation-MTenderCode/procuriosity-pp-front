@@ -289,7 +289,7 @@
       "search-switch": SearchSwitch,
       "search-auto-complete-input": SearchAutoCompleteInput,
       "search-period": SearchPeriods,
-      "multiple-input":MultipleInput,
+      "multiple-input": MultipleInput,
       "reset-button": ResetButton
       },
     data() {
@@ -347,7 +347,7 @@
           }
         });
       },
-      actionExpand(){
+      actionExpand() {
         this.moreCriterions = !this.moreCriterions;
 
         const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
@@ -355,12 +355,12 @@
         localStorage.setItem("entities", JSON.stringify(localStorageEntities));
       }
     },
-    created(){
+    created() {
       const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
-      if(localStorageEntities.tenders.hasOwnProperty("isExpanded")){
+      if (localStorageEntities.tenders.hasOwnProperty("isExpanded")) {
         this.moreCriterions = localStorageEntities.tenders.isExpanded;
       }
-      else{
+      else {
         localStorageEntities.tenders.isExpanded = this.moreCriterions;
         localStorage.setItem("entities", JSON.stringify(localStorageEntities));
       }

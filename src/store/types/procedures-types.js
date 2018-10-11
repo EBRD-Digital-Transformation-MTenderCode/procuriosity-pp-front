@@ -1,7 +1,7 @@
 export default {
   plans: [
     {
-      name:{
+      name: {
         en: "Licitație deschisă",
         ro: "RO_Licitație deschisă",
         ru: "RU_Licitație deschisă"
@@ -9,7 +9,7 @@ export default {
       value: "Licitație deschisă"
     },
     {
-      name:{
+      name: {
         en: "TEST Open Tender",
         ro: "RO_TEST Open Tender",
         ru: "RU_TEST Open Tender"
@@ -19,7 +19,7 @@ export default {
   ],
   tenders: [
     {
-      name:{
+      name: {
         en: "reporting",
         ro: "RO_reporting",
         ru: "RU_reporting"
@@ -27,7 +27,7 @@ export default {
       value: "reporting"
     },
     {
-      name:{
+      name: {
         en: "belowThreshold",
         ro: "RO_belowThreshold",
         ru: "RU_belowThreshold"
@@ -35,7 +35,7 @@ export default {
       value: "belowThreshold"
     },
     {
-      name:{
+      name: {
         en: "ot_test",
         ro: "RO_ot_test",
         ru: "RU_ot_test"
@@ -43,7 +43,7 @@ export default {
       value: "Open Tender TEST"
     },
     {
-      name:{
+      name: {
         en: "ot",
         ro: "RO_ot",
         ru: "RU_ot"
@@ -53,7 +53,7 @@ export default {
   ],
   contracts: [
     {
-      name:{
+      name: {
         en: "TEST Open Tender",
         ro: "RO_TEST Open Tender",
         ru: "RU_TEST Open Tender"
@@ -61,7 +61,7 @@ export default {
       value: "TEST Open Tender"
     },
     {
-      name:{
+      name: {
         en: "Open Tender TEST",
         ro: "RO_Open Tender TEST",
         ru: "RU_Open Tender TEST"
@@ -70,4 +70,4 @@ export default {
     }
   ]
 
-}
+};

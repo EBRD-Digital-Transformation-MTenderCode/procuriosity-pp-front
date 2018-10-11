@@ -14,14 +14,22 @@
       </div>
       <el-row type="flex" :gutter="18">
         <el-col :xs="24" :sm="14">
-          <router-link v-if="needLink" :to="`/plans/${id}`" data-link class="entity-title">
-            {{ title }}
-          </router-link>
-          <div v-else class="entity-title">
+          <div class="entity-title">
             {{ title }}
           </div>
           <div class="entity-description">
             {{ description }}
+          </div>
+          <div class="entity-links">
+            <a :href="`https://achizitii.md/${$i18n.locale}/public/plan/${entityId}`" target="_blank">
+              <img src="@/assets/achizitii.md .png" alt="Achizitii logo" >
+            </a>
+            <a :href="`https://yptender.md/${$i18n.locale}/plan/${entityId}`" target="_blank">
+              <img src="@/assets/yptender.png" alt="Yptender logo" >
+            </a>
+            <a :href="`https://e-licitatie.md/procurement/viewSpecificationPlan/id/${entityId}`" target="_blank">
+              <img src="@/assets/e-lici.png" alt="E-lici logo" >
+            </a>
           </div>
         </el-col>
         <el-col :xs="24" :sm="6">
@@ -161,12 +169,8 @@
         return getDataFromObject(this.entity, _ => _.id);
       },
       entityId() {
-        return getDataFromObject(this.entity, _ => _.entityId)
+        return getDataFromObject(this.entity, _ => _.entityId);
       }
     }
   };
 </script>
-
-<style lang="scss">
-  @import "card";
-</style>

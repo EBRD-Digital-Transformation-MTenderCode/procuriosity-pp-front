@@ -38,13 +38,13 @@
 
   import BudgetsSearchForm from "./SearchForms/BudgetsSearchForm";
   import TendersSearchForm from "./SearchForms/TendersSearchForm";
-  import PlansSearchForm from "./SearchForms/PlansSearchForm"
-  import ContractsSearchForm from "./SearchForms/ContractsSearchForm"
+  import PlansSearchForm from "./SearchForms/PlansSearchForm";
+  import ContractsSearchForm from "./SearchForms/ContractsSearchForm";
 
   import BudgetCard from "../views/ListCards/BudgetCard";
   import TenderCard from "../views/ListCards/TenderCard";
-  import PlanCard from "../views/ListCards/PlanCard"
-  import ContractCard from "../views/ListCards/ContractCard"
+  import PlanCard from "../views/ListCards/PlanCard";
+  import ContractCard from "../views/ListCards/ContractCard";
 
   import ListPagination from "./ListPagination";
 
@@ -132,7 +132,3 @@
     }
   };
 </script>
-
-<style lang="scss">
-
-</style>

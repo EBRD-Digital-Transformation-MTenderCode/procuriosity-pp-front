@@ -4,7 +4,7 @@ export default [
       en: "Airports related activities",
       ro: "RO_Airports related activities",
       ru: "RU_Airports related activities"
-  },
+    },
     value: "AIRPORT_RELATED_ACTIVITIES"
   },
   {

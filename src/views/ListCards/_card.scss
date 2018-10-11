@@ -4,7 +4,7 @@
     margin: 20px 0;
     border: none;
     border-radius: 3px;
-    box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.19) !important;
+    box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.19);
     &__header {
       padding: 14px 16px;
       border: none;
@@ -12,6 +12,10 @@
       & > div {
         display: flex;
         justify-content: space-between;
+        @media (max-width: 420px) {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
       }
     }
     &__body {
@@ -19,7 +23,6 @@
     }
   }
   .entity {
-
     &-status {
       display: flex;
       align-items: center;
@@ -124,10 +127,10 @@
         font-weight: 700;
       }
     }
-
     &-update {
       display: flex;
       align-items: center;
+      margin-left: 10px;
       text-align: right;
       font-size: 12px;
       color: #838383;
@@ -145,15 +148,55 @@
       }
     }
     &-title {
+      margin-bottom: 26px;
       line-height: 1.4;
       font-size: 24px;
       color: #235aa6;
     }
     &-description {
-      margin-top: 26px;
+      margin-bottom: 26px;
       line-height: 1.4;
       @media (max-width: 768px) {
         margin-bottom: 20px;
+      }
+    }
+    &-links {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      @media (max-width: 880px) {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      @media (max-width: 880px) {
+        flex-wrap: nowrap;
+      }
+      @media (max-width: 460px) {
+        flex-wrap: wrap;
+      }
+      a {
+        display: block;
+        width: 75%;
+        margin: 0 25px;
+        text-align: center;
+        &:first-child,
+        &:last-child {
+          margin: 0;
+        }
+        @media (max-width: 880px) {
+          margin: 25px 0;
+        }
+        @media (max-width: 880px) {
+          margin: 0 25px;
+        }
+        @media (max-width: 460px) {
+          margin: 25px 0;
+        }
+      }
+      img {
+        @media (max-width: 460px) {
+          height: 50px;
+        }
       }
     }
     &-amount {
@@ -190,7 +233,7 @@
     &-buyer-id,
     &-pe-name,
     &-classifications,
-    &-budget-id{
+    &-budget-id {
       margin-bottom: 8px;
       .title {
         margin-bottom: 3px;
@@ -203,7 +246,7 @@
         color: #000;
         &__status {
           &:first-letter {
-            text-transform:capitalize;
+            text-transform: capitalize;
           }
         }
       }
@@ -218,7 +261,10 @@
     }
   }
   .el-col-sm-14 {
-    border-right:  1px solid #d2d2d2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid #d2d2d2;
   }
   .el-col-sm-6 {
     flex-shrink: 0;
@@ -231,7 +277,7 @@
   .el-col-sm-4 {
     flex-shrink: 0;
     min-width: 180px;
-    border-left:  1px solid #d2d2d2;
+    border-left: 1px solid #d2d2d2;
   }
   .el-col-sm-14,
   .el-col-sm-4 {

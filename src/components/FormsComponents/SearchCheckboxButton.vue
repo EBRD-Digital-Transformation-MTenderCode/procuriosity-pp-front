@@ -1,9 +1,9 @@
 <template>
   <el-checkbox-button
-    :checked="value"
-    @change="setValue(name, $event)"
+      :checked="value"
+      @change="setValue(name, $event)"
   >
-    {{ value ?  $t('message.search_strict') : $t('message.search_no_strict')}}
+    {{ value ?  $t("message.search_strict") : $t("message.search_no_strict")}}
   </el-checkbox-button>
 </template>
 
@@ -35,7 +35,3 @@
     }
   };
 </script>
-
-<style scoped>
-
-</style>

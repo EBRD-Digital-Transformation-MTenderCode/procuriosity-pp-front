@@ -158,7 +158,7 @@
           <div class=" search-form__reset-button-wp">
             <reset-button
                 entity="budgets"
-            ></reset-button>
+            />
           </div>
         </div>
       </div>
@@ -179,7 +179,7 @@
   import SearchAutoCompleteInput from "./../FormsComponents/SearchAutoCompleteInput";
   import SearchPeriods from "./../FormsComponents/SearchPeriods";
   import MultipleInput from "../FormsComponents/MultipleInput";
-  import ResetButton from "../FormsComponents/ResetButton"
+  import ResetButton from "../FormsComponents/ResetButton";
 
   import buyersTypesList from "./../../store/types/buyers-types";
   import budgetStatusesList from "./../../store/types/procedure-status-types";
@@ -244,7 +244,7 @@
           }
         });
       },
-      actionExpand(){
+      actionExpand() {
         this.moreCriterions = !this.moreCriterions;
 
         const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
@@ -252,19 +252,15 @@
         localStorage.setItem("entities", JSON.stringify(localStorageEntities));
       }
     },
-    created(){
+    created() {
       const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
-      if(localStorageEntities.budgets.hasOwnProperty("isExpanded")){
+      if (localStorageEntities.budgets.hasOwnProperty("isExpanded")) {
         this.moreCriterions = localStorageEntities.budgets.isExpanded;
       }
-      else{
+      else {
         localStorageEntities.budgets.isExpanded = this.moreCriterions;
         localStorage.setItem("entities", JSON.stringify(localStorageEntities));
       }
     }
   };
 </script>
-
-<style lang="scss">
-  @import "search-form";
-</style>

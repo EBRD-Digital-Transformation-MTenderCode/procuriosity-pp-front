@@ -11,7 +11,7 @@
 <script>
   import { Button } from "element-ui";
 
-  import { SET_INITIAL_SEARCH_PARAMS} from "./../../store/types/mutations-types";
+  import { SET_INITIAL_SEARCH_PARAMS } from "./../../store/types/mutations-types";
 
   export default {
     name: "ResetButton",
@@ -24,8 +24,8 @@
         required: true
       }
     },
-    methods:{
-      reset(){
+    methods: {
+      reset() {
         this.$store.commit(SET_INITIAL_SEARCH_PARAMS, {
           entity: this.entity
         });
@@ -33,7 +33,3 @@
     }
   };
 </script>
-
-<style scoped>
-
-</style>
