@@ -1,42 +1,82 @@
 export default [
   {
-    name: "Airports related activities",
+    name: {
+      en: "Airports related activities",
+      ro: "RO_Airports related activities",
+      ru: "RU_Airports related activities"
+  },
     value: "AIRPORT_RELATED_ACTIVITIES"
   },
   {
-    name: "Electricity",
+    name: {
+      en: "Electricity",
+      ro: "RO_Electricity",
+      ru: "RU_Electricity"
+    },
     value: "ELECTRICITY"
   },
   {
-    name: "Exploration extraction coal and other solid fuel",
+    name: {
+      en: "Exploration extraction coal and other solid fuel",
+      ro: "RO_Exploration extraction coal and other solid fuel",
+      ru: "RU_Exploration extraction coal and other solid fuel"
+    },
     value: "EXPLORATION_EXTRACTION_COAL_OTHER_SOLID_FUEL"
   },
   {
-    name: "Exploration extraction gas and oil",
+    name: {
+      en: "Exploration extraction gas and oil",
+      ro: "RO_Exploration extraction gas and oil",
+      ru: "RU_Exploration extraction gas and oil"
+    },
     value: "EXPLORATION_EXTRACTION_GAS_OIL"
   },
   {
-    name: "Port related activities",
+    name: {
+      en: "Port related activities",
+      ro: "RO_Port related activities",
+      ru: "RU_Port related activities"
+    },
     value: "PORT_RELATED_ACTIVITIES"
   },
   {
-    name: "Postal services",
+    name: {
+      en: "Postal services",
+      ro: "RO_Postal services",
+      ru: "RU_Postal services"
+    },
     value: "POSTAL_SERVICES"
   },
   {
-    name: "Production transport distribution gas and heat",
+    name: {
+      en: "Production transport distribution gas and heat",
+      ro: "RO_Production transport distribution gas and heat",
+      ru: "RU_Production transport distribution gas and heat"
+    },
     value: "PRODUCTION_TRANSPORT_DISTRIBUTION_GAS_HEAT"
   },
   {
-    name: "Railway services",
+    name: {
+      en: "Railway services",
+      ro: "RO_Railway services",
+      ru: "RU_Railway services"
+    },
     value: "RAILWAY_SERVICES"
   },
   {
-    name: "Urban railway, tramway, trolleybus, bus services",
+    name: {
+      en: "Urban railway, tramway, trolleybus, bus services",
+      ro: "RO_Urban railway, tramway, trolleybus, bus services",
+      ru: "RU_Urban railway, tramway, trolleybus, bus services"
+    },
     value: "URBAN_RAILWAY_TRAMWAY_TROLLEYBUS_BUS_SERVICES"
   },
   {
-    name: "Water",
+    name: {
+      en: "Water",
+      ro: "RO_Water",
+      ru: "RU_Water"
+    },
     value: "WATER"
   }
 ];
