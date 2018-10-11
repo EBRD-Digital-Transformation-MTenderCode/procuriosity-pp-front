@@ -275,17 +275,36 @@ export default {
       try {
         const res = await axios(getTenderConfig(cdb, id));
 
-        let hasAuction;
+        const tenderData = {};
+
+        const MSRecord = {};
+        const EVRecord = {};
 
         if (cdb === MTENDER1) {
-          const tender = res.data.data;
+          Object.assign(tenderData, res.data.data);
 
-          hasAuction = tender.hasOwnProperty("auctionPeriod"); // @TODO need clarify condition
+        }
+
+        if (cdb === MTENDER2){
+          const tenderRecords = res.data.records;
+          tenderRecords.forEach(record => {
+            if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/) !== -1) {
+              Object.assign(MSRecord, record);
+            }
+            if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-EV-[0-9]{13}$/) !== -1) {
+              Object.assign(EVRecord, record);
+            }
+          });
+
+          Object.assign(tenderData, {
+            MSRecord,
+            EVRecord
+          })
         }
 
         commit(SET_CURRENT_TENDER_INFO, {
           cdb,
-          tenderData: res.data
+          tenderData
         });
       }
       catch (e) {

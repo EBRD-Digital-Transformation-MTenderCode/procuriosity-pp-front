@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import List from "./components/List.vue";
+import MainPage from "./views/MainPage";
 
 Vue.use(Router);
 
@@ -9,9 +9,14 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      path: "/",
+      name: "main-page",
+      component: MainPage
+    },
+    {
       path: "/(budgets|tenders|plans|contracts)",
       name: "list",
-      component: List
+      component: () => import(/* webpackChunkName: "List" */ "./components/List.vue")
     },
     {
       path: "/budgets/:id",

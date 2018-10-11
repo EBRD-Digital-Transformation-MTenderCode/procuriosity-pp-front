@@ -70,10 +70,7 @@
       "list-pagination": ListPagination
     },
     created() {
-      this.$store.dispatch(FETCH_ENTITY_LIST, {
-        params: convertObjectToQueryParamsString(this.$store.state.entities[this.entityName].searchParams),
-        entity: this.entityName
-      });
+      this.getList();
     },
     computed: {
       ...mapState(["entities"]),
@@ -122,7 +119,16 @@
             page
           }
         });
+      },
+      getList() {
+        this.$store.dispatch(FETCH_ENTITY_LIST, {
+          params: convertObjectToQueryParamsString(this.$store.state.entities[this.entityName].searchParams),
+          entity: this.entityName
+        });
       }
+    },
+    watch: {
+      "entityName": "getList"
     }
   };
 </script>
