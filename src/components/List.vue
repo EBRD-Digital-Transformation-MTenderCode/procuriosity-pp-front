@@ -21,7 +21,7 @@
     </div>
     <stub-card
         v-if="!entities[entityName].loaded"
-        v-for="item of 5"
+        v-for="item of 3"
         :key="item"
     />
     <list-pagination
