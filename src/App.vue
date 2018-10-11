@@ -28,7 +28,7 @@
 
   #app {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     flex-wrap: wrap;
     min-height: 100vh;
   }

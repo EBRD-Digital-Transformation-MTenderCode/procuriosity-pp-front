@@ -80,6 +80,7 @@
 
   .header {
     padding: 0;
+    width: 100%;
     .el-col {
       display: flex;
       justify-content: space-between;
