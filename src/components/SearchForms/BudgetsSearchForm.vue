@@ -152,15 +152,14 @@
                     :placeholder="$t('message.search_classifications_placeholder')"
                 />
               </div>
-
-              <!-- Reset button -->
-              <div>
-                <reset-button
-                    entity="budgets"
-                ></reset-button>
-              </div>
             </el-col>
           </el-row>
+          <!-- Reset button -->
+          <div class=" search-form__reset-button-wp">
+            <reset-button
+                entity="budgets"
+            ></reset-button>
+          </div>
         </div>
       </div>
     </el-collapse-transition>

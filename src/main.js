@@ -7,6 +7,7 @@ import store from "./store/index";
 import App from "./App.vue";
 
 import "./styles/custom-reset.css";
+import "./styles/flags.scss"
 
 Vue.config.productionTip = false;
 
