@@ -1,4 +1,4 @@
-const baseURL = "http://dev.tender.solutions:8888";
+const baseURL = "http://dev.tender.solutions:1111";
 const mTender1 = "https://public.api.mepps.openprocurement.net/api/2.3";
 const mTender2 = "http://public.mtender.gov.md";
 const mTender2Sendbox = "http://dev.tender.solutions:1111/public";
@@ -6,7 +6,7 @@ const mTender2Sendbox = "http://dev.tender.solutions:1111/public";
 export const getListConfig = (entity, params = "") => {
   return {
     method: "get",
-    url: `${baseURL}/rest-api/v1/${entity}/search${params}`
+    url: `${baseURL}/search/${entity}${params}`
   };
 };
 
@@ -24,17 +24,17 @@ export const getTenderConfig = (cdb, id) => {
   };
 };
 
-export  const getRegionsConfig = (lang, country) =>{
-  return{
+export const getRegionsConfig = (lang, country) => {
+  return {
     method: "get",
     url: `${mTender2}/mdm/region?lang=${lang}&country=${country}`
-  }
+  };
 };
 
 export const getCPVCodesConfig = (language, idOrName = "") => {
   return {
     method: "get",
-    url: `${baseURL}/rest-api/v1/cpv/search?language=${language}&idOrName=${idOrName}`
+    url: `${baseURL}/search/cpv?language=${language}&idOrName=${idOrName}`
   };
 };
 

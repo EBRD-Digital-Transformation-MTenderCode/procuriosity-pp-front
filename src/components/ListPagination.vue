@@ -7,7 +7,7 @@
       :current-page="currentPage"
       :page-size="pageSize"
       :total="total"
-      
+
       @prev-click="_changePage"
       @next-click="_changePage"
       @current-change="_changePage"
@@ -47,6 +47,12 @@
     },
     methods: {
       _changePage(page) {
+        window.scroll({
+          behavior: "smooth",
+          left: 0,
+          top: document.getElementById("entity-list").offsetTop
+        });
+
         this.changePage(page);
       }
     }
@@ -80,7 +86,7 @@
       }
     }
     .number,
-    .more{
+    .more {
       display: inline-flex;
       justify-content: center;
       align-items: center;
@@ -90,7 +96,7 @@
       background-color: #fff !important;
       font-weight: 400;
       font-size: 16px;
-      color: #333333;
+      color: #333;
       transition: 0.4s;
       &.active {
         background-color: #235aa6 !important;

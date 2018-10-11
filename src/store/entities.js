@@ -82,7 +82,31 @@ export default {
     budgets: {
       name: "message.entity_budgets",
       list: [],
-      searchParams:{...localStorageEntities.budgets.searchParams},
+      searchParams: {
+        titlesOrDescriptions: "",
+        titlesOrDescriptionsStrict: false,
+
+        buyersRegions: [],
+        budgetStatuses:[],
+
+        id: "",
+
+        amountFrom: null,
+        amountTo: null,
+
+        classifications: [],
+
+        periodPlanning: [],
+
+        buyersNames: [],
+        buyersIdentifiers: [],
+        buyersTypes: [],
+        buyersMainGeneralActivities: [],
+        buyersMainSectoralActivities: [],
+
+        page: 1,
+        pageSize: 25
+      },
       paginationInfo: {
         totalCount: 0,
         pageCount: 0
@@ -91,7 +115,40 @@ export default {
     plans: {
       name: "message.entity_plans",
       list: [],
-      searchParams:{...localStorageEntities.plans.searchParams},
+      searchParams: {
+        titlesOrDescriptions: "",
+        titlesOrDescriptionsStrict: false,
+
+        entityId: "",
+
+        buyersRegions:[],
+        deliveriesRegions: [],
+        proceduresTypes: [],
+        proceduresStatuses:[],
+
+        amountFrom: null,
+        amountTo: null,
+
+        classifications: [],
+
+        periodPublished:[],
+        periodDelivery: [],
+        periodEnquiry: [],
+        periodOffer: [],
+        periodAuction: [],
+        periodAward: [],
+
+        buyersNames: [],
+        buyersIdentifiers: [],
+        buyersTypes: [],
+        buyersMainGeneralActivities: [],
+        buyersMainSectoralActivities: [],
+
+        tags: [],
+
+        page: 1,
+        pageSize: 25
+      },
       paginationInfo: {
         totalCount: 0,
         pageCount: 0
@@ -103,10 +160,7 @@ export default {
       searchParams:{...localStorageEntities.tenders.searchParams},
       currentTender: {
         cdb: "",
-        tenderData: {},
-        hasAuction: false,
-        hasDocuments: false,
-        hasContract: false
+        tenderData: {}
       },
       paginationInfo: {
         totalCount: 0,
@@ -168,12 +222,10 @@ export default {
       };
     },
 
-    [SET_CURRENT_TENDER_INFO](state, { cdb, tenderData, hasAuction, hasDocuments }) {
+    [SET_CURRENT_TENDER_INFO](state, {cdb, tenderData}) {
       state.tenders.currentTender = {
         cdb,
-        tenderData,
-        hasAuction,
-        hasDocuments
+        tenderData
       };
     },
     [SET_INITIAL_SEARCH_PARAMS](state, { entity }) {
@@ -224,24 +276,21 @@ export default {
         const res = await axios(getTenderConfig(cdb, id));
 
         let hasAuction;
-        let hasDocuments;
 
         if (cdb === MTENDER1) {
           const tender = res.data.data;
 
           hasAuction = tender.hasOwnProperty("auctionPeriod"); // @TODO need clarify condition
-          hasDocuments = tender.hasOwnProperty("documents") && Array.isArray(tender.documents) && tender.documents.length;
         }
 
         commit(SET_CURRENT_TENDER_INFO, {
           cdb,
-          tenderData: res.data,
-          hasAuction,
-          hasDocuments
+          tenderData: res.data
         });
       }
       catch (e) {
-
+        // @TODO need add catching errors
+        console.log(e);
       }
     }
   }

@@ -5,11 +5,11 @@ export function getDataFromObject(obj, getFunc, def = "") {
   return idx(obj, getFunc) || def;
 }
 
-export function formatDate(date, formatType = "DD.MM.YYYY / HH:mm") {
+export function formatDate(date, formatType = "DD.MM.YYYY / HH:mm", def = "none") {
   if (date && moment(date).isValid()) {
     return moment.utc(date).local().format(formatType);
   } else {
-    return "udruchaet...!!!!";
+    return def;
   }
 }
 
