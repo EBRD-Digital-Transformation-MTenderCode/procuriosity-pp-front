@@ -1,5 +1,5 @@
 .entity-card {
-  
+
   width: 100%;
   &_stub {
     &:last-child {
@@ -226,11 +226,13 @@
         justify-content: center;
         align-items: center;
         width: 75%;
-        margin: 0 25px;
+        margin: 0;
         text-align: center;
-        &:first-child,
+        &:first-child {
+          margin-right: 10px;
+        }
         &:last-child {
-          margin: 0;
+          margin-left: 10px;
         }
         @media (max-width: 880px) {
           margin: 25px 0;
