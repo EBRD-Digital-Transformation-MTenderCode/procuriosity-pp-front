@@ -9,7 +9,7 @@
         clearable
         maxlength="255"
         :value="value"
-        @input="checkValue(type, name, $event)"
+        @change="checkValue(type, name, $event)"
     />
     <el-input
         v-if="type === 'number'"

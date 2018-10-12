@@ -2,6 +2,11 @@
   
   width: 100%;
   &_stub {
+    &:last-child {
+      .el-card {
+        margin-bottom: 0;
+      }
+    }
     .el-card {
       position: relative;
       &:before {
