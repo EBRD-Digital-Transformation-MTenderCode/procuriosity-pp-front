@@ -1,7 +1,12 @@
-const baseURL = "http://dev.tender.solutions:1111";
+let baseURL = "";
+
+if (process.env.NODE_ENV === "development") {
+  baseURL = "http://dev.tender.solutions:1111";
+}
+
 const mTender1 = "https://public.api.mepps.openprocurement.net/api/2.3";
 const mTender2 = "http://public.mtender.gov.md";
-const mTender2Sendbox = "http://dev.tender.solutions:1111/public";
+const mTender2Sandbox = "http://dev.tender.solutions:1111/public";
 
 const tempMtender2 = "http://10.0.10.116:9111";
 
@@ -15,7 +20,7 @@ export const getListConfig = (entity, params = "") => {
 export const getBudgetConfig = id => {
   return {
     method: "get",
-    url: `${mTender2Sendbox}/budgets/${id}`
+    url: `${mTender2Sandbox}/budgets/${id}`
   };
 };
 

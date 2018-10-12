@@ -4,5 +4,6 @@ module.exports = {
   css: {
     sourceMap: true
   },
-  productionSourceMap: false
+  productionSourceMap: false,
+  filenameHashing: false
 };
