@@ -42,6 +42,10 @@
           </div>
         </el-col>
         <el-col :xs="24" :sm="4">
+          <div class="entity-pe-name">
+            <div class="title">{{$t("message.contract_card_procuring_entity_name")}}</div>
+            <div class="text">{{ peName }}</div>
+          </div>
           <div class="entity-region">
             <div class="title">{{$t("message.contract_card_delivery_regions")}}</div>
             <div class="text">{{ region }}</div>
@@ -49,10 +53,6 @@
           <div class="entity-type">
             <div class="title">{{$t("message.contract_card_procedure_type")}}</div>
             <div class="text">{{ type }}</div>
-          </div>
-          <div class="entity-pe-name">
-            <div class="title">{{$t("message.contract_card_procuring_entity_name")}}</div>
-            <div class="text">{{ peName }}</div>
           </div>
           <div class="entity-id">
             <div class="title">{{$t("message.contract_card_tender_id")}}</div>

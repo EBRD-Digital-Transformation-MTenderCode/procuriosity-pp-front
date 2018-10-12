@@ -1,47 +1,54 @@
 <template>
-  <el-container direction="vertical">
-    <div
-        :is="renderSearchForm"
-        class="search-form"
-    />
-    <transition-group
-        @before-enter="beforeEnter"
-        @enter="enter"
-        @leave="leave"
-    >
-      <ul v-if="entities[entityName].loaded && entities[entityName].list.length"
-          :key="'list'"
-          id="entity-list"
-          class="list"
-      >
-        <li
-            :is="renderCard"
-            v-for="entity of entities[entityName].list"
-            :entity="entity"
-            needLink
-            :key="entity.id"
-        />
-      </ul>
-      <div class="list__no-data-title" v-if="entities[entityName].loaded && !entities[entityName].list.length"
-           :key="'no-data'">
-        {{$t("message.list_no_data")}}
-      </div>
-      <stub-card
-          v-if="!entities[entityName].loaded"
-          v-for="item of 3"
-          :key="item"
+  <div>
+    <el-container direction="vertical">
+      <div
+          :is="renderSearchForm"
+          class="search-form"
       />
-    </transition-group>
-    <list-pagination
-        v-if="needPagination"
-        :total="entities[entityName].paginationInfo.totalCount"
-        :pageCount="entities[entityName].paginationInfo.pageCount"
-        :currentPage="entities[entityName].searchParams.page"
-        :pageSize="entities[entityName].searchParams.pageSize"
-        :changePage="changePage"
-        :key="'pagination'"
-    />
-  </el-container>
+      <div class="list-status-bar">
+        <div class="list-status-bar__text">
+          Total found: <span class="list-status-bar__count">{{ entities[entityName].paginationInfo.totalCount }}</span>
+        </div>
+      </div>
+      <transition-group
+          @before-enter="beforeEnter"
+          @enter="enter"
+          @leave="leave"
+      >
+        <ul v-if="entities[entityName].loaded && entities[entityName].list.length"
+            :key="'list'"
+            id="entity-list"
+            class="list"
+        >
+          <li
+              :is="renderCard"
+              v-for="entity of entities[entityName].list"
+              :entity="entity"
+              needLink
+              :key="entity.id"
+          />
+        </ul>
+        <div class="list__no-data-title" v-if="entities[entityName].loaded && !entities[entityName].list.length"
+             :key="'no-data'">
+          {{$t("message.list_no_data")}}
+        </div>
+        <stub-card
+            v-if="!entities[entityName].loaded"
+            v-for="item of 3"
+            :key="item"
+        />
+      </transition-group>
+      <list-pagination
+          v-if="needPagination"
+          :total="entities[entityName].paginationInfo.totalCount"
+          :pageCount="entities[entityName].paginationInfo.pageCount"
+          :currentPage="entities[entityName].searchParams.page"
+          :pageSize="entities[entityName].searchParams.pageSize"
+          :changePage="changePage"
+          :key="'pagination'"
+      />
+    </el-container>
+  </div>
 </template>
 
 <script>
@@ -169,10 +176,30 @@
   };
 </script>
 
-<style lang="scss">
-  .list__no-data-title {
-    margin: 20px 0;
-    text-align: center;
-    font-size: 38px;
+<style lang="scss" scoped>
+  .list {
+    &-status-bar {
+      position: sticky;
+      left: 0;
+      bottom: 0;
+      z-index: 20;
+      width: 100%;
+      margin: 15px 0 0;
+      padding: 14px 16px;
+      background-color: #f7f7f7;
+      box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.19);
+      font-size: 16px;
+      &__text {
+      
+      }
+      &__count {
+        font-weight: 700;
+      }
+    }
+    &__no-data-title {
+      margin: 20px 0;
+      text-align: center;
+      font-size: 38px;
+    }
   }
 </style>

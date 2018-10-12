@@ -78,9 +78,7 @@
           }
         }
         if (type === "number") {
-          if (value > 0 && value < 100000000) {
-            this.setValue(name, value);
-          }
+          this.setValue(name, value);
         }
       }
     }

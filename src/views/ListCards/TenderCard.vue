@@ -52,7 +52,7 @@
             <div class="text">{{ peName }}</div>
           </div>
           <div class="entity-region">
-            <div class="title">{{$t("message.tender_card_delivery_regions")}}</div>
+            <div class="title">{{$t("message.tender_card_buyer_region")}}</div>
             <div class="text">{{ region }}</div>
           </div>
           <div class="entity-type">
@@ -106,6 +106,8 @@
             return "entity-status__ico_complete";
           case "unsuccessful":
             return "entity-status__ico_unsuccessful";
+          default:
+            return "entity-status__ico_active"
         }
       },
       parseStatusText() {
