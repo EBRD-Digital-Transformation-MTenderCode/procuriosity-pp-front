@@ -152,7 +152,7 @@
                     :placeholder="$t('message.search_classifications_placeholder')"
                 />
               </div>
-  
+
               <!-- id -->
               <div class="search-form-element">
                 <search-input

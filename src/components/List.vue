@@ -1,41 +1,52 @@
 <template>
   <el-container direction="vertical">
+
     <div
         :is="renderSearchForm"
         class="search-form"
     />
-    <ul
-        id="entity-list"
-        class="list"
+    <transition-group
+        @before-enter="beforeEnter"
+        @enter="enter"
+        @leave="leave"
     >
-      <li
-          :is="renderCard"
-          v-for="entity of entities[entityName].list"
-          :entity="entity"
-          needLink
-          :key="entity.id"
+      <ul v-if="entities[entityName].loaded && entities[entityName].list.length"
+          :key="'list'"
+          id="entity-list"
+          class="list"
+      >
+        <li
+            :is="renderCard"
+            v-for="entity of entities[entityName].list"
+            :entity="entity"
+            needLink
+            :key="entity.id"
+        />
+      </ul>
+      <div class="list__no-data-title" v-if="entities[entityName].loaded && !entities[entityName].list.length"
+           :key="'no-data'">
+        {{$t("message.list_no_data")}}
+      </div>
+      <stub-card
+          v-if="!entities[entityName].loaded"
+          v-for="item of 3"
+          :key="item"
       />
-    </ul>
-    <div class="list__no-data-title" v-if="entities[entityName].loaded && !entities[entityName].list.length">
-      {{$t("message.list_no_data")}}
-    </div>
-    <stub-card
-        v-if="!entities[entityName].loaded"
-        v-for="item of 3"
-        :key="item"
-    />
-    <list-pagination
-        v-if="needPagination"
-        :total="entities[entityName].paginationInfo.totalCount"
-        :pageCount="entities[entityName].paginationInfo.pageCount"
-        :currentPage="entities[entityName].searchParams.page"
-        :pageSize="entities[entityName].searchParams.pageSize"
-        :changePage="changePage"
-    />
+      <list-pagination
+          v-if="needPagination"
+          :total="entities[entityName].paginationInfo.totalCount"
+          :pageCount="entities[entityName].paginationInfo.pageCount"
+          :currentPage="entities[entityName].searchParams.page"
+          :pageSize="entities[entityName].searchParams.pageSize"
+          :changePage="changePage"
+          :key="'pagination'"
+      />
+    </transition-group>
   </el-container>
 </template>
 
 <script>
+  import Velocity from "velocity-animate";
   import { mapState } from "vuex";
   import { FETCH_ENTITY_LIST } from "./../store/types/actions-types";
   import { SET_ENTITY_SEARCH_PARAMS } from "../store/types/mutations-types";
@@ -127,6 +138,30 @@
           params: convertObjectToQueryParamsString(this.$store.state.entities[this.entityName].searchParams),
           entity: this.entityName
         });
+      },
+      beforeEnter: function(el) {
+        el.style.opacity = 0;
+        el.style.height = 0;
+      },
+      enter: function(el, done) {
+        const delay = el.dataset.index * 150;
+        setTimeout(() => {
+          Velocity(
+              el,
+              { opacity: 1, height: "100%" },
+              { complete: done }
+          );
+        }, delay);
+      },
+      leave: function(el, done) {
+        const delay = el.dataset.index * 150;
+        setTimeout(() => {
+          Velocity(
+              el,
+              { opacity: 0, height: 0 },
+              { complete: done }
+          );
+        }, delay);
       }
     },
     watch: {
@@ -141,4 +176,5 @@
     text-align: center;
     font-size: 38px;
   }
+
 </style>
