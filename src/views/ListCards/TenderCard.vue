@@ -106,6 +106,8 @@
             return "entity-status__ico_complete";
           case "unsuccessful":
             return "entity-status__ico_unsuccessful";
+          default:
+            return "entity-status__ico_active"
         }
       },
       parseStatusText() {

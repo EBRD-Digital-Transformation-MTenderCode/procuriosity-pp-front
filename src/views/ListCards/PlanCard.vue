@@ -4,9 +4,6 @@
       <div slot="header">
         <div class="entity-status">
           <div :class="`entity-status__ico ${parseStatusIco}`" />
-          <div class="entity-status__text">
-            {{ parseStatusText }}
-          </div>
         </div>
         <div class="entity-update">
           {{$t("message.plan_card_last_modified_date")}} <span class="entity-update__date">{{ modifiedDate }}</span>

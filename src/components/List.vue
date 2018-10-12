@@ -176,5 +176,4 @@
     text-align: center;
     font-size: 38px;
   }
-
 </style>
