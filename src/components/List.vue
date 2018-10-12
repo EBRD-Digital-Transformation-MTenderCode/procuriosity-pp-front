@@ -1,6 +1,5 @@
 <template>
   <el-container direction="vertical">
-
     <div
         :is="renderSearchForm"
         class="search-form"
@@ -32,16 +31,16 @@
           v-for="item of 3"
           :key="item"
       />
-      <list-pagination
-          v-if="needPagination"
-          :total="entities[entityName].paginationInfo.totalCount"
-          :pageCount="entities[entityName].paginationInfo.pageCount"
-          :currentPage="entities[entityName].searchParams.page"
-          :pageSize="entities[entityName].searchParams.pageSize"
-          :changePage="changePage"
-          :key="'pagination'"
-      />
     </transition-group>
+    <list-pagination
+        v-if="needPagination"
+        :total="entities[entityName].paginationInfo.totalCount"
+        :pageCount="entities[entityName].paginationInfo.pageCount"
+        :currentPage="entities[entityName].searchParams.page"
+        :pageSize="entities[entityName].searchParams.pageSize"
+        :changePage="changePage"
+        :key="'pagination'"
+    />
   </el-container>
 </template>
 
