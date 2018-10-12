@@ -1,5 +1,5 @@
 <template>
-  <div class="entity-card">
+  <div class="entity-card entity-card_stub">
     <el-card>
       <div slot="header">
         <div class="entity-status">
