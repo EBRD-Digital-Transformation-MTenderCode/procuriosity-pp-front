@@ -1,5 +1,21 @@
 .entity-card {
+  
   width: 100%;
+  &_stub {
+    .el-card {
+      position: relative;
+      &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, rgba(234,234,234,0.73) 0%,rgba(255,255,255,0.73) 50%,rgba(234,234,234,0.73) 100%);
+        animation: load-card 0.7s cubic-bezier(0.65, 0.05, 0.36, 1) 0.3s infinite alternate;
+      }
+    }
+  }
   .el-card {
     margin: 20px 0;
     border: none;
@@ -121,10 +137,18 @@
             transform: translate(-50%, -50%) rotate(-45deg);
           }
         }
+        &_stub {
+          background-color: #d1d1d1;
+        }
       }
       &__text {
         font-size: 12px;
         font-weight: 700;
+        &_stub {
+          width: 120px;
+          height: 20px;
+          background-color: #d1d1d1;
+        }
       }
     }
     &-update {
@@ -138,6 +162,12 @@
         margin-left: 5px;
         font-weight: 700;
         color: initial;
+        &_stub {
+          width: 80px;
+          height: 20px;
+          margin-left: 5px;
+          background-color: #d1d1d1;
+        }
       }
     }
     &-title[data-link] {
@@ -152,12 +182,24 @@
       line-height: 1.4;
       font-size: 24px;
       color: #235aa6;
+      &_stub {
+        width: 280px;
+        height: 28px;
+        margin-bottom: 20px;
+        background-color: #d1d1d1;
+      }
     }
     &-description {
       margin-bottom: 26px;
       line-height: 1.4;
       @media (max-width: 768px) {
         margin-bottom: 20px;
+      }
+      &_stub {
+        width: 100%;
+        height: 16px;
+        margin-bottom: 26px;
+        background-color: #d1d1d1;
       }
     }
     &-links {
@@ -175,7 +217,9 @@
         flex-wrap: wrap;
       }
       a {
-        display: block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 75%;
         margin: 0 25px;
         text-align: center;
@@ -198,13 +242,36 @@
           height: 50px;
         }
       }
+      &_stub {
+        a {
+          position: relative;
+          &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 100;
+            background-color: rgb(209, 209, 209);
+          }
+        }
+      }
     }
     &-amount {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
       text-align: right;
       &__text {
         margin-bottom: 6px;
         font-size: 11px;
         color: #787878;
+        &_stub {
+          width: 180px;
+          height: 14px;
+          margin-bottom: 20px;
+          background-color: #d1d1d1;
+        }
       }
       &__number {
         display: flex;
@@ -213,17 +280,16 @@
         font-weight: 600;
         .whole {
           font-size: 40px;
-        }
-        .fraction {
-          font-size: 20px;
+          &_stub {
+            width: 180px;
+            height: 40px;
+            background-color: #d1d1d1;
+          }
         }
       }
       @media (max-width: 768px) {
         margin-bottom: 20px;
-        text-align: center;
-        &__number {
-          justify-content: center;
-        }
+        align-items: center;
       }
     }
     &-id,
@@ -252,6 +318,22 @@
       }
       @media (max-width: 768px) {
         text-align: center;
+      }
+    }
+    &-info {
+      &_stub {
+        margin-bottom: 8px;
+        .title {
+          width: 80px;
+          height: 13px;
+          margin-bottom: 5px;
+          background-color: #d1d1d1;
+        }
+        .text {
+          width: 120px;
+          height: 13px;
+          background-color: #d1d1d1;
+        }
       }
     }
   }
@@ -284,5 +366,14 @@
     @media (max-width: 768px) {
       border: none;
     }
+  }
+}
+
+@keyframes load-card {
+  from {
+    background-position: -500px 0;
+  }
+  to {
+    background-position: 500px 0;
   }
 }

@@ -13,7 +13,7 @@
                 <div>{{$t("message.header_ebrd_line2")}}</div>
               </div>
             </div>
-            <locale-toggle />
+            <!--<locale-toggle />-->
           </el-col>
         </el-row>
       </el-container>
@@ -54,20 +54,15 @@
 
 <script>
   import { mapState } from "vuex";
-  
-  import { Header, Container, Row, Col } from "element-ui";
-  import LocaleToggle from "./../components/LocaleToggle";
+
+  /*import LocaleToggle from "./../components/LocaleToggle";*/
 
   import "./../assets/logo.png";
 
   export default {
     name: "AppHeader",
     components: {
-      "el-header": Header,
-      "el-container": Container,
-      "el-row": Row,
-      "el-col": Col,
-      "locale-toggle": LocaleToggle
+      /*"locale-toggle": LocaleToggle*/
     },
     computed: {
       ...mapState(["entities"])

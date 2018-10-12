@@ -1,8 +1,7 @@
 import "@/styles/custom-reset.css";
-import "@/styles/element-variables.scss";
+import 'element-ui/lib/theme-chalk/index.css';
 import "@/styles/main.scss";
 
-import "./styles/flags.scss"
 import "@/components/SearchForms/_search-form.scss";
 import "@/views/ListCards/_card.scss";
 import "@/views/EntitiesPages/_entity-info.scss";
@@ -15,7 +14,7 @@ import store from "./store/index";
 
 import App from "./App.vue";
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = true;
 
 new Vue({
   i18n,

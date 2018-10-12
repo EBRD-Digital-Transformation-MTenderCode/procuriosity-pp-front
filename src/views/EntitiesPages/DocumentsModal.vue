@@ -26,15 +26,8 @@
 </template>
 
 <script>
-  import { Dialog, Row, Col } from "element-ui";
-
   export default {
     name: "DocumentsModal",
-    components: {
-      "el-dialog": Dialog,
-      "el-row": Row,
-      "el-col": Col
-    },
     props: {
       open: {
         type: Boolean,

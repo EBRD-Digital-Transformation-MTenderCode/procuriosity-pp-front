@@ -262,9 +262,6 @@
   import { SET_ENTITY_SEARCH_PARAMS } from "../../store/types/mutations-types";
   import { REGIONS, CPV_CODES } from "./../../store/types/directories-types";
 
-  import { Row, Col } from "element-ui";
-  import CollapseTransition from "element-ui/lib/transitions/collapse-transition";
-
   import SearchInput from "./../FormsComponents/SearchInput";
   import SearchSwitch from "../FormsComponents/SearchCheckboxButton";
   import SearchAutoCompleteInput from "./../FormsComponents/SearchAutoCompleteInput";
@@ -281,9 +278,6 @@
   export default {
     name: "ContractsSearchForm",
     components: {
-      "el-collapse-transition": CollapseTransition,
-      "el-row": Row,
-      "el-col": Col,
       "search-input": SearchInput,
       "search-switch": SearchSwitch,
       "search-auto-complete-input": SearchAutoCompleteInput,

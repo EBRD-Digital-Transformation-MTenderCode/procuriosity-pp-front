@@ -37,16 +37,8 @@
 </template>
 
 <script>
-  import { Footer, Container, Row, Col } from "element-ui";
-
   export default {
-    name: "AppFooter",
-    components: {
-      "el-footer": Footer,
-      "el-container": Container,
-      "el-row": Row,
-      "el-col": Col
-    }
+    name: "AppFooter"
   };
 </script>
 

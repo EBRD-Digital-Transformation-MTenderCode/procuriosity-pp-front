@@ -1,13 +1,19 @@
 import idx from "idx";
-import moment from "moment/moment";
+import dayjs from "dayjs";
 
 export function getDataFromObject(obj, getFunc, def = "") {
   return idx(obj, getFunc) || def;
 }
 
+export function convertStringDateToUTCDateObject(date) {
+  const dateObject = new Date(date);
+
+  return new Date(dateObject.getTime() + (dateObject.getTimezoneOffset() * 60000));
+}
+
 export function formatDate(date, formatType = "DD.MM.YYYY / HH:mm", def = "none") {
-  if (date && moment(date).isValid()) {
-    return moment.utc(date).local().format(formatType);
+  if (date && dayjs(date).isValid()) {
+    return dayjs(date).format(formatType);
   } else {
     return def;
   }

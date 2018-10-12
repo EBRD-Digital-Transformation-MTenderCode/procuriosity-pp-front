@@ -11,6 +11,9 @@
 .search-form {
   padding: 25px 30px;
   background-color: $mainC;
+  @media (max-width: 480px) {
+    padding: 16px 18px;
+  }
   .main-search &-field-wp {
     flex-grow: 1;
     .el-input__inner {
@@ -69,6 +72,11 @@
   &-element {
     & + & {
       margin-top: 20px;
+    }
+    label {
+      @media (max-width: 768px) {
+        margin-top: 15px;
+      }
     }
   }
   .el-input {

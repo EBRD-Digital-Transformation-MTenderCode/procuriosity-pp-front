@@ -1,67 +1,65 @@
 <template>
-  <div class="entity-card">
+  <div class="entity-card entity-card_stub">
     <el-card>
       <div slot="header">
         <div class="entity-status">
-          <div :class="`entity-status__ico ${parseStatusIco}`" />
-          <div class="entity-status__text">
+          <div :class="`entity-status__ico entity-status__ico_stub`" />
+          <div class="entity-status__text_stub">
             {{ parseStatusText }}
           </div>
         </div>
         <div class="entity-update">
-          {{$t("message.tender_card_last_modified_date")}} <span class="entity-update__date">{{ modifiedDate }}</span>
+          <span class="entity-update__date_stub"></span> <span class="entity-update__date_stub"></span>
         </div>
       </div>
       <el-row type="flex" :gutter="18">
         <el-col :xs="24" :sm="14">
-          <div class="entity-title">
-            {{ title }}
+          <div class="entity-title_stub">
+
           </div>
-          <div class="entity-description">
-            {{ description }}
+          <div class="entity-description_stub">
+
           </div>
-          <div class="entity-links">
-            <a :href="`https://achizitii.md/${$i18n.locale}/tenders/${entityId}`" target="_blank">
+          <div class="entity-links entity-links_stub">
+            <a :href="false">
               <img src="@/assets/achizitii.md .png" alt="Achizitii logo" >
             </a>
-            <a :href="`https://yptender.md/tender/${entityId}`" target="_blank">
+            <a :href="false">
               <img src="@/assets/yptender.png" alt="Yptender logo" >
             </a>
-            <a :href="`https://e-licitatie.md/${$i18n.locale}/mtender/${entityId}`" target="_blank">
+            <a :href="false">
               <img src="@/assets/e-lici.png" alt="E-lici logo" >
             </a>
           </div>
         </el-col>
         <el-col :xs="24" :sm="6">
           <div class="entity-amount">
-            <div class="entity-amount__text">{{$t("message.tender_card_value")}} ({{ currency }})</div>
+            <div class="entity-amount__text entity-amount__text_stub">{{ currency }}</div>
             <div class="entity-amount__number">
-              <span
-                  class="whole"
-                  :style="wholeAmount.length > 10 ? 'font-size: 30px': ''"
-              >
-                {{ wholeAmount }} <span v-if="fractionAmount">.</span>
-              </span>
-              <span v-if="fractionAmount" class="fraction">{{ fractionAmount }}</span>
+              <span class="whole whole_stub" />
             </div>
           </div>
         </el-col>
         <el-col :xs="24" :sm="4">
-          <div class="entity-pe-name">
-            <div class="title">{{$t("message.tender_card_procuring_entity_name")}}</div>
-            <div class="text">{{ peName }}</div>
+          <div class="entity-info_stub">
+            <div class="title"></div>
+            <div class="text"></div>
           </div>
-          <div class="entity-region">
-            <div class="title">{{$t("message.tender_card_delivery_regions")}}</div>
-            <div class="text">{{ region }}</div>
+          <div class="entity-info_stub">
+            <div class="title"></div>
+            <div class="text"></div>
           </div>
-          <div class="entity-type">
-            <div class="title">{{$t("message.tender_card_procedure_type")}}</div>
-            <div class="text text__status">{{ type }}</div>
+          <div class="entity-info_stub">
+            <div class="title"></div>
+            <div class="text"></div>
           </div>
-          <div class="entity-id">
-            <div class="title">{{$t("message.tender_card_tender_id")}}</div>
-            <div class="text">{{ entityId }}</div>
+          <div class="entity-info_stub">
+            <div class="title"></div>
+            <div class="text"></div>
+          </div>
+          <div class="entity-info_stub">
+            <div class="title"></div>
+            <div class="text"></div>
           </div>
         </el-col>
       </el-row>
@@ -70,20 +68,10 @@
 </template>
 
 <script>
-  import { getDataFromObject, formatDate } from "../../utils";
+  import { getDataFromObject, formatDate } from "./../../utils";
 
   export default {
     name: "TenderCard",
-    props: {
-      entity: {
-        type: Object,
-        required: true
-      },
-      needLink: {
-        type: Boolean,
-        default: false
-      }
-    },
     computed: {
       parseStatusIco() {
         const status = getDataFromObject(this.entity, _ => _.procedureStatus);

@@ -11,7 +11,6 @@
 <script>
   import AppHeader from "./views/AppHeader";
   import AppFooter from "./views/AppFooter";
-  import entities from "./store/entities";
 
   export default {
     name: "App",

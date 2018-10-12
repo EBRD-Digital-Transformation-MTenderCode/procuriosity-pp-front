@@ -16,14 +16,8 @@
 </template>
 
 <script>
-
-  import { Select } from "element-ui";
-
   export default {
     name: "MultipleInput",
-    components: {
-      "el-select": Select
-    },
     props: {
       name: {
         type: String,

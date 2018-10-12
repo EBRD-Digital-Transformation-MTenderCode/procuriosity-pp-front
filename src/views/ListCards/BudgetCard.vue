@@ -83,8 +83,7 @@
 </template>
 
 <script>
-  import { Card, Row, Col } from "element-ui";
-  import { getDataFromObject, formatDate } from "../../utils";
+  import { getDataFromObject, formatDate } from "./../../utils";
 
   export default {
     name: "BudgetCard",
@@ -152,11 +151,6 @@
       id() {
         return getDataFromObject(this.entity, _ => _.id);
       }
-    },
-    components: {
-      "el-card": Card,
-      "el-row": Row,
-      "el-col": Col
     }
   };
 </script>

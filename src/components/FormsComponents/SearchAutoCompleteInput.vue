@@ -72,15 +72,10 @@
 <script>
   import { FETCH_CPV_CODES, FETCH_REGIONS } from "./../../store/types/actions-types";
 
-  import { Select, Option } from "element-ui";
   import { SET_CPV_CODES } from "../../store/types/mutations-types";
 
   export default {
     name: "SearchAutoCompleteInput",
-    components: {
-      "el-select": Select,
-      "el-option": Option
-    },
     props: {
       name: {
         type: String,

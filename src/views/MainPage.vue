@@ -4,19 +4,14 @@
       <img src="@/assets/main-banner.jpg" alt="Main Banner">
     </div>
     <el-container direction="vertical" fluid>
-    
+
     </el-container>
   </div>
 </template>
 
 <script>
-  import { Container } from "element-ui";
-
   export default {
-    name: "MainPage",
-    components: {
-      "el-container": Container
-    }
+    name: "MainPage"
   };
 </script>
 

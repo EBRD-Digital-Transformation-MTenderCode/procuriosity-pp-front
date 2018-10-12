@@ -4,6 +4,8 @@ import { getBudgetConfig, getListConfig, getTenderConfig } from "./../configs/re
 import initialSearchProps from "./types/initial-search-props";
 
 import {
+  SET_ENTITY_LOADED,
+
   SET_ENTITY_LIST,
   SET_ENTITY_PAGINATION_INFO,
   SET_ENTITY_SEARCH_PARAMS,
@@ -23,91 +25,34 @@ import { MTENDER1, MTENDER2 } from "./types/cbd-types";
 
 import { convertObjectToQueryParamsString } from "./../utils";
 
-
 if (!localStorage.getItem("entities")) {
   const entities = {
     "budgets": {
-      searchParams: {}
+      searchParams: initialSearchProps.budgets
     },
     "plans": {
-      searchParams: {}
+      searchParams: initialSearchProps.plans
     },
     "tenders": {
-      searchParams: {}
+      searchParams: initialSearchProps.tenders
     },
     "contracts": {
-      searchParams: {}
+      searchParams: initialSearchProps.contracts
     }
   };
+
   localStorage.setItem("entities", JSON.stringify(entities));
 }
 
 const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
 
-Object.entries(localStorageEntities).forEach(([key, val]) => {
-  switch (key) {
-    case "tenders":
-      if (val.hasOwnProperty("searchParams") && !Object.keys(val.searchParams).length) {
-        val.searchParams = initialSearchProps.tenders;
-      }
-      break;
-
-    case "budgets":
-      if (val.hasOwnProperty("searchParams") && !Object.keys(val.searchParams).length) {
-        val.searchParams = initialSearchProps.budgets;
-      }
-      break;
-
-
-    case "plans":
-      if (val.hasOwnProperty("searchParams") && !Object.keys(val.searchParams).length) {
-        val.searchParams = initialSearchProps.plans;
-      }
-      break;
-
-    case "contracts":
-      if (val.hasOwnProperty("searchParams") && !Object.keys(val.searchParams).length) {
-        val.searchParams = initialSearchProps.contracts;
-      }
-      break;
-
-    default:
-      return;
-
-  }
-});
-localStorage.setItem("entities", JSON.stringify(localStorageEntities));
-
 export default {
   state: {
     budgets: {
       name: "message.entity_budgets",
+      loaded: false,
       list: [],
-      searchParams: {
-        titlesOrDescriptions: "",
-        titlesOrDescriptionsStrict: false,
-
-        buyersRegions: [],
-        budgetStatuses: [],
-
-        id: "",
-
-        amountFrom: null,
-        amountTo: null,
-
-        classifications: [],
-
-        periodPlanning: [],
-
-        buyersNames: [],
-        buyersIdentifiers: [],
-        buyersTypes: [],
-        buyersMainGeneralActivities: [],
-        buyersMainSectoralActivities: [],
-
-        page: 1,
-        pageSize: 25
-      },
+      searchParams: { ...localStorageEntities.budgets.searchParams },
       paginationInfo: {
         totalCount: 0,
         pageCount: 0
@@ -115,41 +60,9 @@ export default {
     },
     plans: {
       name: "message.entity_plans",
+      loaded: false,
       list: [],
-      searchParams: {
-        titlesOrDescriptions: "",
-        titlesOrDescriptionsStrict: false,
-
-        entityId: "",
-
-        buyersRegions: [],
-        deliveriesRegions: [],
-        proceduresTypes: [],
-        proceduresStatuses: [],
-
-        amountFrom: null,
-        amountTo: null,
-
-        classifications: [],
-
-        periodPublished: [],
-        periodDelivery: [],
-        periodEnquiry: [],
-        periodOffer: [],
-        periodAuction: [],
-        periodAward: [],
-
-        buyersNames: [],
-        buyersIdentifiers: [],
-        buyersTypes: [],
-        buyersMainGeneralActivities: [],
-        buyersMainSectoralActivities: [],
-
-        tags: [],
-
-        page: 1,
-        pageSize: 25
-      },
+      searchParams: { ...localStorageEntities.plans.searchParams },
       paginationInfo: {
         totalCount: 0,
         pageCount: 0
@@ -157,6 +70,7 @@ export default {
     },
     tenders: {
       name: "message.entity_tenders",
+      loaded: false,
       list: [],
       searchParams: { ...localStorageEntities.tenders.searchParams },
       currentTender: {
@@ -170,6 +84,7 @@ export default {
     },
     contracts: {
       name: "message.entity_contracts",
+      loaded: false,
       list: [],
       searchParams: { ...localStorageEntities.contracts.searchParams },
       paginationInfo: {
@@ -179,6 +94,10 @@ export default {
     }
   },
   mutations: {
+    [SET_ENTITY_LOADED](state, { entity, loaded }) {
+      state[entity].loaded = loaded;
+    },
+
     [SET_ENTITY_LIST](state, payload) {
       state[payload.entity] = {
         ...state[payload.entity],
@@ -231,15 +150,25 @@ export default {
     },
     [SET_INITIAL_SEARCH_PARAMS](state, { entity }) {
       state[entity].searchParams = initialSearchProps[entity];
+
       const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
+
       localStorageEntities[entity].searchParams = initialSearchProps[entity];
       localStorage.setItem("entities", JSON.stringify(localStorageEntities));
 
-
+      this.dispatch(FETCH_ENTITY_LIST, {
+        entity: entity,
+        params: convertObjectToQueryParamsString(state[entity].searchParams)
+      });
     }
   },
   actions: {
     async [FETCH_ENTITY_LIST]({ commit }, { entity, params }) {
+      commit(SET_ENTITY_LOADED, {
+        entity,
+        loaded: false
+      });
+
       try {
         const res = await axios(getListConfig(entity, params));
 
@@ -252,6 +181,11 @@ export default {
           entity,
           totalCount: res.data._meta.totalCount,
           pageCount: res.data._meta.pageCount
+        });
+
+        commit(SET_ENTITY_LOADED, {
+          entity,
+          loaded: true
         });
       }
       catch (e) {
