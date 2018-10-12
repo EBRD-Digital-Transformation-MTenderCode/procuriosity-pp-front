@@ -7,6 +7,7 @@
         :suffix-icon="suffixIcon"
         :placeholder="placeholder"
         clearable
+        maxlength="255"
         :value="value"
         @input="checkValue(type, name, $event)"
     />
@@ -50,7 +51,8 @@
         default: 0
       },
       max: {
-        type: Number
+        type: Number,
+        default: 10000000
       },
       prefixIcon: {
         type: String,
@@ -76,7 +78,9 @@
           }
         }
         if (type === "number") {
-          this.setValue(name, value);
+          if (value > 0 && value < 100000000) {
+            this.setValue(name, value);
+          }
         }
       }
     }
