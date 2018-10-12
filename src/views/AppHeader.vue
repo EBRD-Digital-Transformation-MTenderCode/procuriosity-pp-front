@@ -5,53 +5,67 @@
         <el-row :gutter="30">
           <el-col>
             <div class="header-logo-ebrd">
-              <img src="@/assets/logo-ebrd.png" class="header-logo-ebrd__img" alt="EBRD">
+              <a href="/" class="header-logo-ebrd__link">
+                <img src="@/assets/logo-ebrd.png" class="header-logo-ebrd__img" alt="EBRD">
+              </a>
               <div class="header-logo-ebrd__text">
-                <div>eProcurement Pilot Project funded by the European Bank</div>
-                <div>for Reconstruction and Development</div>
+                <div>{{$t("message.header_ebrd_line1")}}</div>
+                <div>{{$t("message.header_ebrd_line2")}}</div>
               </div>
             </div>
-            <locale-toggle />
+            <!--<locale-toggle />-->
           </el-col>
         </el-row>
       </el-container>
     </div>
     <div class="header-second">
-      <el-container>
+      <el-container direction="vertical">
         <el-row :gutter="30">
           <el-col>
-            <img src="@/assets/logo.png" class="header-logo-mtender__img" alt="MTender">
-            <nav class="header-nav">
-              <a href="#">News</a>
-              <a href="#">For Contracting Authorities</a>
-              <a href="#">For State-Owned Enterprises</a>
-              <a href="#">For Commercial Buyers</a>
-              <a href="#">For Suppliers</a>
-              <a href="#">For Civil Society</a>
-              <a href="#">Vacancies</a>
-              <a href="#">FAQ</a>
+            <router-link to="/" class="header-logo-mtender__link">
+              <img src="@/assets/logo.png" class="header-logo-mtender__img" alt="MTender">
+            </router-link>
+            <nav class="header-static-nav">
+              <a href="#">{{$t("message.header_static_nav_news")}}</a>
+              <a href="#">{{$t("message.header_static_nav_for_contracting")}}</a>
+              <a href="#">{{$t("message.header_static_nav_for_state_owned")}}</a>
+              <a href="#">{{$t("message.header_static_nav_for_commercial")}}</a>
+              <a href="#">{{$t("message.header_static_nav_for_suppliers")}}</a>
+              <a href="#">{{$t("message.header_static_nav_for_civil")}}</a>
+              <a href="#">{{$t("message.header_static_nav_vacancies")}}</a>
+              <a href="#">{{$t("message.header_static_nav_FAQ")}}</a>
             </nav>
           </el-col>
         </el-row>
+        <nav class="header-entity-nav">
+          <router-link
+              v-for="(entity, key) in entities"
+              :key="entity.name"
+              :to="`/${key}`"
+              active-class="is-active"
+          >
+            {{ $t(entity.name) }}
+          </router-link>
+        </nav>
       </el-container>
     </div>
   </el-header>
 </template>
 
 <script>
-  import { Header, Container, Row, Col } from "element-ui";
-  import LocaleToggle from "./../components/LocaleToggle";
+  import { mapState } from "vuex";
+
+  /*import LocaleToggle from "./../components/LocaleToggle";*/
 
   import "./../assets/logo.png";
 
   export default {
     name: "AppHeader",
     components: {
-      "el-header": Header,
-      "el-container": Container,
-      "el-row": Row,
-      "el-col": Col,
-      "locale-toggle": LocaleToggle
+      /*"locale-toggle": LocaleToggle*/
+    },
+    computed: {
+      ...mapState(["entities"])
     }
   };
 </script>
@@ -61,6 +75,7 @@
 
   .header {
     padding: 0;
+    width: 100%;
     .el-col {
       display: flex;
       justify-content: space-between;
@@ -80,7 +95,6 @@
     }
     &-second {
       padding-top: 25px;
-      padding-bottom: 70px;
       background-color: #fff;
       .el-col {
         @media (max-width: 640px) {
@@ -97,6 +111,9 @@
         }
         @media (max-width: 400px) {
           flex-wrap: wrap;
+        }
+        &__link {
+          flex-shrink: 0;
         }
         &__img {
           height: 30px;
@@ -117,6 +134,13 @@
         }
       }
       &-mtender {
+        &__link {
+          flex-shrink: 0;
+          @media (max-width: 640px) {
+            width: 100%;
+            text-align: center;
+          }
+        }
         &__img {
           align-self: flex-start;
           margin-right: 20px;
@@ -126,7 +150,7 @@
         }
       }
     }
-    &-nav {
+    &-static-nav {
       display: flex;
       justify-content: flex-end;
       align-self: flex-start;
@@ -155,6 +179,55 @@
           margin-right: 10px;
           padding-right: 10px;
           border-right: 1px solid #838383;
+        }
+      }
+    }
+    &-entity-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      @media (max-width: 860px) {
+        flex-direction: column;
+      }
+      a {
+        flex-grow: 1;
+        margin: 0 10px;
+        padding: 14px;
+        border: none;
+        border-radius: 3px 3px 0 0;
+        background-color: #efefef;
+        white-space: nowrap;
+        text-align: center;
+        line-height: 1;
+        font-size: 20px;
+        color: #323232;
+        transition: 0.4s;
+        @media (max-width: 860px) {
+          margin: 5px 0;
+          border-radius: 0;
+        }
+        &:hover {
+          box-shadow: 0 -2px 4px #e2e2e2;
+          @media (max-width: 860px) {
+            box-shadow: none;
+          }
+        }
+        &.is-active {
+          background-color: $mainC;
+          color: #fff;
+        }
+        &:first-child {
+          margin-left: 0;
+          @media (max-width: 860px) {
+            margin-top: 0;
+            border-radius: 3px 3px 0 0;
+          }
+        }
+        &:last-child {
+          margin-right: 0;
+          @media (max-width: 860px) {
+            margin-bottom: 0;
+          }
         }
       }
     }

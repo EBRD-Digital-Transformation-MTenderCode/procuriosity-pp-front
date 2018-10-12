@@ -10,9 +10,10 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "dayjs": "^1.7.7",
     "element-ui": "^2.4.8",
     "idx": "^2.4.0",
-    "moment": "^2.22.2",
+    "velocity-animate": "^1.5.2",
     "vue": "^2.5.17",
     "vue-i18n": "^8.1.0",
     "vue-router": "^3.0.1",

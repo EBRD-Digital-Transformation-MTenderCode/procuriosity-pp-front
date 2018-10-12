@@ -1,43 +1,55 @@
 import axios from "axios";
-import { getMDMDirectoryConfig } from "./../configs/requests-configs";
+import { getCPVCodesConfig, getRegionsConfig } from "./../configs/requests-configs";
 
-import { SET_DIRECTORY } from "./types/mutations-types";
-import { FETCH_DIRECTORY } from "./types/actions-types";
-import { REGIONS } from "./types/directories-types";
-
-import { convertObjectToQueryParamsString } from "./../utils";
+import { SET_CPV_CODES, SET_REGIONS } from "./types/mutations-types";
+import { FETCH_CPV_CODES, FETCH_REGIONS } from "./types/actions-types";
+import { CPV_CODES, REGIONS } from "./types/directories-types";
 
 export default {
   state: {
-    [REGIONS]: []
+    [REGIONS]: [],
+    [CPV_CODES]: []
   },
   mutations: {
-    [SET_DIRECTORY](state, payload) {
-      Object.entries(payload).forEach(([key, value]) => {
-        state[key] = value;
-      });
+    [SET_CPV_CODES](state, { CPVCodes }) {
+      state[CPV_CODES] = CPVCodes;
+    },
+    [SET_REGIONS](state, { regions }) {
+      state[REGIONS] = regions;
     }
   },
   actions: {
-    async [FETCH_DIRECTORY]({commit}, {directory, params}) {
-      const res = await axios(getMDMDirectoryConfig(directory, convertObjectToQueryParamsString(params)));
-
-      const list = res.data.data.items;
-
-      if (directory === REGIONS) {
-        commit(SET_DIRECTORY, {
-          [directory]: list.map(it => {
-            return {
-              name: it.name,
-              value: it.name
-            };
-          })
+    async [FETCH_REGIONS]({ commit }, { lang, country }) {
+      const localStorageRegions = localStorage.getItem("regions");
+      if (localStorageRegions) {
+        commit(SET_REGIONS, {
+          regions: JSON.parse(localStorageRegions)
         });
-      } else {
-        commit(SET_DIRECTORY, {
-          [directory]: list
-        })
       }
+      else {
+        const res = await axios(getRegionsConfig(lang, country));
+        const regions = res.data.data.items.map(it => {
+          return {
+            name: it.name,
+            value: it.name
+          };
+        });
+        commit(SET_REGIONS, {
+          regions
+        });
+        localStorage.setItem("regions", JSON.stringify(regions));
+      }
+    },
+    async [FETCH_CPV_CODES]({ commit }, { lang, idOrName }) {
+      const res = await axios(getCPVCodesConfig(lang, idOrName));
+      commit(SET_CPV_CODES, {
+        CPVCodes: res.data.data.map(item => {
+          return {
+            value: `${item.id}`,
+            label: `${item.id} ${item.name}`
+          };
+        })
+      });
     }
   }
 };

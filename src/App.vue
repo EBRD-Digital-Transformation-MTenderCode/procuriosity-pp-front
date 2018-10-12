@@ -1,7 +1,9 @@
 <template>
   <div id="app">
       <app-header />
-      <router-view />
+      <el-main>
+        <router-view />
+      </el-main>
       <app-footer />
   </div>
 </template>
@@ -18,15 +20,3 @@
     }
   };
 </script>
-
-<style lang="scss">
-  @import "./styles/element-variables.scss";
-  @import "./styles/main.scss";
-  
-  #app {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    min-height: 100vh;
-  }
-</style>

@@ -4,28 +4,30 @@
       <el-row :gutter="30">
         <el-col>
           <div class="footer-logo">
-            <img src="@/assets/logo-footer.png" alt="" class="footer-logo__img">
+            <router-link to="/">
+              <img src="@/assets/logo-footer.png" alt="" class="footer-logo__img">
+            </router-link>
             <div class="footer-logo__cr">
-              2018 ©,  All rights reserved
+              {{$t("message.footer_logo_cr")}}
             </div>
           </div>
           <nav class="footer-nav">
-            <a href="#">Electronic tenders</a><br>
-            <a href="#">For Contracting Authorities</a><br>
-            <a href="#">For State-Owned Enterprises</a><br>
-            <a href="#">For Commercial Buyers</a><br>
-            <a href="#">For Suppliers</a><br>
-            <a href="#">For Civil Society</a><br>
-            <a href="#">News</a><br>
-            <a href="#">FAQ</a><br>
-            <a href="#">Vacancies</a><br>
+            <a href="#">{{$t("message.footer_nav_electronic_tenders")}}</a><br>
+            <a href="#">{{$t("message.footer_nav_for_contracting")}}</a><br>
+            <a href="#">{{$t("message.footer_nav_for_state_owned")}}</a><br>
+            <a href="#">{{$t("message.footer_nav_for_commercial")}}</a><br>
+            <a href="#">{{$t("message.footer_nav_for_suppliers")}}</a><br>
+            <a href="#">{{$t("message.footer_nav_for_civil")}}</a><br>
+            <a href="#">{{$t("message.footer_nav_news")}}</a><br>
+            <a href="#">{{$t("message.footer_nav_FAQ")}}</a><br>
+            <a href="#">{{$t("message.footer_nav_vacancies")}}</a><br>
           </nav>
           <div class="footer-info">
             <div class="footer-info__text">
-              Info Line:
+              {{$t("message.footer_info_text")}}
             </div>
             <div class="footer-info__tel">
-              <a href="tel:+37322022789789">022 789 789</a>
+              <a href="tel:+37322022789789">{{$t("message.footer_info_tel")}}</a>
             </div>
           </div>
         </el-col>
@@ -35,21 +37,14 @@
 </template>
 
 <script>
-  import { Footer, Container, Row, Col } from "element-ui";
-
   export default {
-    name: "AppFooter",
-    components: {
-      "el-footer": Footer,
-      "el-container": Container,
-      "el-row": Row,
-      "el-col": Col
-    }
+    name: "AppFooter"
   };
 </script>
 
 <style lang="scss" scoped>
   .footer {
+    width: 100%;
     margin-top: 20px;
     padding: 20px 0 35px;
     background-color: #d9d9d9;

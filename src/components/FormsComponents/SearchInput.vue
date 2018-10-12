@@ -7,8 +7,9 @@
         :suffix-icon="suffixIcon"
         :placeholder="placeholder"
         clearable
+        maxlength="255"
         :value="value"
-        @input="checkValue(type, name, $event)"
+        @change="checkValue(type, name, $event)"
     />
     <el-input
         v-if="type === 'number'"
@@ -26,14 +27,8 @@
 </template>
 
 <script>
-  import { Input, InputNumber } from "element-ui";
-
   export default {
     name: "SearchInput",
-    components: {
-      "el-input": Input,
-      "el-input-number": InputNumber
-    },
     props: {
       name: {
         type: String,
@@ -56,7 +51,8 @@
         default: 0
       },
       max: {
-        type: Number
+        type: Number,
+        default: 10000000
       },
       prefixIcon: {
         type: String,
@@ -67,8 +63,7 @@
         default: ""
       },
       placeholder: {
-        type: String,
-        default: "Search"
+        type: String
       }
     },
     methods: {
@@ -89,7 +84,3 @@
     }
   };
 </script>
-
-<style scoped>
-
-</style>

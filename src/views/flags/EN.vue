@@ -1,6 +1,6 @@
 <template>
   <span class="flag-wp">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="40" height="20">
+    <svg class = "flag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="20" height="20">
       <clipPath id="t">
         <path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z" />
       </clipPath>
@@ -18,7 +18,3 @@ export default {
   name: "EN"
 };
 </script>
-
-<style scoped>
-
-</style>

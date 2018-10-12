@@ -4,12 +4,9 @@
       <div slot="header">
         <div class="entity-status">
           <div :class="`entity-status__ico ${parseStatusIco}`" />
-          <div class="entity-status__text">
-            {{ parseStatusText }}
-          </div>
         </div>
         <div class="entity-update">
-          {{$t("message.tender_card_last_modified_date")}} <span class="entity-update__date">{{ modifiedDate }}</span>
+          {{$t("message.plan_card_last_modified_date")}} <span class="entity-update__date">{{ modifiedDate }}</span>
         </div>
       </div>
       <el-row type="flex" :gutter="18">
@@ -21,46 +18,42 @@
             {{ description }}
           </div>
           <div class="entity-links">
-            <a :href="`https://achizitii.md/${$i18n.locale}/tenders/${entityId}`" target="_blank">
+            <a :href="`https://achizitii.md/${$i18n.locale}/public/plan/${entityId}`" target="_blank">
               <img src="@/assets/achizitii.md .png" alt="Achizitii logo" >
             </a>
-            <a :href="`https://yptender.md/tender/${entityId}`" target="_blank">
+            <a :href="`https://yptender.md/plan/${entityId}`" target="_blank">
               <img src="@/assets/yptender.png" alt="Yptender logo" >
             </a>
-            <a :href="`https://e-licitatie.md/${$i18n.locale}/mtender/${entityId}`" target="_blank">
+            <a :href="`https://e-licitatie.md/procurement/viewSpecificationPlan/id/${entityId}`" target="_blank">
               <img src="@/assets/e-lici.png" alt="E-lici logo" >
             </a>
           </div>
         </el-col>
         <el-col :xs="24" :sm="6">
           <div class="entity-amount">
-            <div class="entity-amount__text">{{$t("message.tender_card_value")}} ({{ currency }})</div>
+            <div class="entity-amount__text">{{$t("message.plan_card_value")}}({{ currency }})</div>
             <div class="entity-amount__number">
-              <span
-                  class="whole"
-                  :style="wholeAmount.length > 10 ? 'font-size: 30px': ''"
-              >
-                {{ wholeAmount }} <span v-if="fractionAmount">.</span>
-              </span>
+              <span class="whole" :style="wholeAmount.length > 10 ? 'font-size: 30px': ''">{{ wholeAmount }}<span
+                  v-if="fractionAmount">.</span></span>
               <span v-if="fractionAmount" class="fraction">{{ fractionAmount }}</span>
             </div>
           </div>
         </el-col>
         <el-col :xs="24" :sm="4">
           <div class="entity-pe-name">
-            <div class="title">{{$t("message.tender_card_procuring_entity_name")}}</div>
+            <div class="title">{{$t("message.plan_card_procuring_entity_name")}}</div>
             <div class="text">{{ peName }}</div>
           </div>
           <div class="entity-region">
-            <div class="title">{{$t("message.tender_card_buyer_region")}}</div>
+            <div class="title">{{$t("message.plan_card_delivery_regions")}}</div>
             <div class="text">{{ region }}</div>
           </div>
           <div class="entity-type">
-            <div class="title">{{$t("message.tender_card_procedure_type")}}</div>
-            <div class="text text__status">{{ type }}</div>
+            <div class="title">{{$t("message.plan_card_procedure_type")}}</div>
+            <div class="text">{{ type }}</div>
           </div>
           <div class="entity-id">
-            <div class="title">{{$t("message.tender_card_tender_id")}}</div>
+            <div class="title">{{$t("message.plan_card_tender_id")}}</div>
             <div class="text">{{ entityId }}</div>
           </div>
         </el-col>
@@ -70,10 +63,10 @@
 </template>
 
 <script>
-  import { getDataFromObject, formatDate } from "../../utils";
+  import { getDataFromObject, formatDate } from "./../../utils";
 
   export default {
-    name: "TenderCard",
+    name: "PlanCard",
     props: {
       entity: {
         type: Object,
@@ -106,8 +99,6 @@
             return "entity-status__ico_complete";
           case "unsuccessful":
             return "entity-status__ico_unsuccessful";
-          default:
-            return "entity-status__ico_active"
         }
       },
       parseStatusText() {

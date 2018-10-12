@@ -1,12 +1,12 @@
 <template>
   <el-dropdown
-    trigger="click"
-    @command="toggleLocale"
-    size="small"
-    class="locale-toggle"
+      trigger="click"
+      @command="toggleLocale"
+      size="small"
+      class="locale-toggle"
   >
     <span
-      class="el-dropdown-link"
+        class="el-dropdown-link"
     >
       <i class="el-icon-arrow-down el-icon--right"></i>
       <EN v-if="this.$i18n.locale === 'en'" />
@@ -15,10 +15,10 @@
     </span>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item
-        v-for="(locale, i) of locales"
-        :key="`locale${i}`"
-        :command="locale"
-        divided
+          v-for="(locale, i) of locales"
+          :key="`locale${i}`"
+          :command="locale"
+          divided
       >
         <EN v-if="locale === 'en'" />
         <RU v-if="locale === 'ru'" />
@@ -31,7 +31,6 @@
 <script>
   import axios from "axios";
 
-  import { Dropdown, DropdownMenu, DropdownItem } from "element-ui";
   import EN from "./../views/flags/EN";
   import RU from "./../views/flags/RU";
   import RO from "./../views/flags/RO";
@@ -39,12 +38,9 @@
   export default {
     name: "LocaleToggle",
     data() {
-      return {locales: Object.keys(this.$i18n.messages)};
+      return { locales: Object.keys(this.$i18n.messages) };
     },
     components: {
-      "el-dropdown": Dropdown,
-      "el-dropdown-menu": DropdownMenu,
-      "el-dropdown-item": DropdownItem,
       EN,
       RU,
       RO
@@ -52,6 +48,7 @@
     methods: {
       toggleLocale: function(locale) {
         this.$i18n.locale = locale;
+
         axios.defaults.headers.common["Accept-Language"] = locale;
         document.querySelector("html").setAttribute("lang", locale);
         localStorage.setItem("locale", locale);
@@ -66,6 +63,10 @@
     svg {
       display: inline-block;
       width: auto;
+    }
+    .flag{
+      width: 40px;
+      height: 27px;
     }
     .el-dropdown-link {
       display: flex;

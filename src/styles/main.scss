@@ -1,22 +1,30 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=cyrillic');
+@import "variables";
+
 
 body {
   font-family: 'Open Sans', sans-serif;
   line-height: 1.5;
   min-height: 100vh;
-  /* @TODO delete important and do right connect styles */
-  background-color: #efefef !important;
+  background-color: #efefef;
   color: #323232;
 }
 
+#app {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  min-height: 100vh;
+}
+
 .el-container {
+  width: 100%;
   max-width: 1030px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 15px;
   padding-right: 15px;
   & > .el-row {
-    width: 100%;
     flex-grow: 1;
   }
 }
@@ -27,14 +35,14 @@ body {
 }
 
 .el-input__inner {
-  min-height: 52px !important;
-  padding: 20px 10px;
-  border-radius: 3px !important;
+  min-height: 52px;
+  padding: 8px 10px;
+  border-radius: 3px;
   font-size: 18px;
 }
 
 .el-time-panel {
-  width: 140px !important;
+  width: 140px;
 }
 
 .el-checkbox-button__inner {
@@ -52,4 +60,19 @@ body {
   .flag-wp {
     margin: 10px 0;
   }
+}
+
+.el-button--text,
+.el-date-table td.available:hover,
+.el-date-table td.today span {
+  color: $mainC;
+}
+
+.el-date-table td.end-date span,
+.el-date-table td.start-date span {
+  background-color: $mainC;
+}
+
+.el-date-editor .el-range-separator {
+  width: 10%;
 }
