@@ -24,7 +24,7 @@
             <a :href="`https://achizitii.md/${$i18n.locale}/public/plan/${entityId}`" target="_blank">
               <img src="@/assets/achizitii.md .png" alt="Achizitii logo" >
             </a>
-            <a :href="`https://yptender.md/${$i18n.locale}/plan/${entityId}`" target="_blank">
+            <a :href="`https://yptender.md/plan/${entityId}`" target="_blank">
               <img src="@/assets/yptender.png" alt="Yptender logo" >
             </a>
             <a :href="`https://e-licitatie.md/procurement/viewSpecificationPlan/id/${entityId}`" target="_blank">

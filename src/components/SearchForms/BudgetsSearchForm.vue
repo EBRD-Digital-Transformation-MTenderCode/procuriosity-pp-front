@@ -152,6 +152,17 @@
                     :placeholder="$t('message.search_classifications_placeholder')"
                 />
               </div>
+  
+              <!-- id -->
+              <div class="search-form-element">
+                <search-input
+                    name="id"
+                    :value="id"
+                    :setValue="setFormParams"
+                    :placeholder="$t('message.search_id_placeholder')"
+                    prefixIcon=""
+                />
+              </div>
             </el-col>
           </el-row>
           <!-- Reset button -->
@@ -224,6 +235,8 @@
         buyersMainGeneralActivities: state => state.entities.budgets.searchParams.buyersMainGeneralActivities,
         buyersMainSectoralActivities: state => state.entities.budgets.searchParams.buyersMainSectoralActivities,
 
+        id: state => state.entities.budgets.searchParams.id,
+
         regionsList: state => state.mdm[REGIONS],
         CPVCodesList: state => state.mdm[CPV_CODES]
       })
@@ -233,6 +246,7 @@
         this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
           entity: "budgets",
           params: {
+            page: 1,
             [name]: value
           }
         });

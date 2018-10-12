@@ -335,6 +335,7 @@
         this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
           entity: "contracts",
           params: {
+            page: 1,
             [name]: value
           }
         });
