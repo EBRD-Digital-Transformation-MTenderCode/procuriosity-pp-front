@@ -42,10 +42,6 @@ export default {
 
     periodPublished: [],
     periodDelivery: [],
-    periodEnquiry: [],
-    periodOffer: [],
-    periodAuction: [],
-    periodAward: [],
 
     buyersNames: [],
     buyersIdentifiers: [],
