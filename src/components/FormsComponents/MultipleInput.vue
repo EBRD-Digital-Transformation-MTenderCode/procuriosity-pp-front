@@ -1,9 +1,10 @@
 <template>
-  <div>
+  <div >
     <el-select
         multiple
         filterable
         allow-create
+        class="multiple_input"
         remote
         default-first-option
         :popper-append-to-body="false"

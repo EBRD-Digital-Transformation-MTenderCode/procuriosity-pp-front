@@ -184,4 +184,15 @@
       content: none !important;
     }
   }
+
+}
+.multiple_input{
+  .el-input__inner{
+    cursor: text !important;
+  }
+}
+[data-classifications]{
+  .el-input__inner{
+    cursor: text !important;
+  }
 }
