@@ -1,9 +1,9 @@
 {
   "message": {
     "entity_budgets": "Budgets",
-    "entity_plans": "Annual procurement plans",
     "entity_tenders": "Electronic Tenders",
-    "entity_contracts": "Contracts",
+    "entity_plans": "Annual procurement plans",
+    "entity_contracts": "Contracts and framework agreements",
     "search_strict": "Strict",
     "search_no_strict" : "No strict",
     "search_titles_or_descriptions": "search",

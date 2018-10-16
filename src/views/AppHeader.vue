@@ -80,10 +80,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-
     }
     &-first {
-      padding: 15px 0;
+      padding: 9px 0 5px;
       background-color: $mainC;
       color: #fff;
       .el-col {
@@ -117,7 +116,7 @@
         }
         &__img {
           height: 30px;
-          margin-right: 15px;
+          margin-right: 20px;
           @media (max-width: 400px) {
             height: 40px;
             margin-left: auto;
@@ -126,6 +125,7 @@
           }
         }
         &__text {
+          line-height: 1.1;
           font-size: 11px;
           @media (max-width: 400px) {
             width: 100%;
@@ -185,7 +185,7 @@
     &-entity-nav {
       display: flex;
       justify-content: space-between;
-      margin-top: 30px;
+      margin-top: 22px;
       @media (max-width: 860px) {
         flex-direction: column;
       }
@@ -197,7 +197,6 @@
         border-radius: 3px 3px 0 0;
         background-color: #efefef;
         white-space: nowrap;
-        font-family: "Open Sans";
         text-align: center;
         line-height: 1;
         font-size: 20px;
