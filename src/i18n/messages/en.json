@@ -66,14 +66,17 @@
     "tender_card_tender_id" : "TenderID",
     "header_ebrd_line1":"eProcurement Pilot Project funded by the European Bank",
     "header_ebrd_line2":"for Reconstruction and Development",
+
     "header_static_nav_news":"News",
-    "header_static_nav_for_contracting": "For Contracting Authorities",
-    "header_static_nav_for_state_owned": "For State-Owned Enterprises",
-    "header_static_nav_for_commercial": "For Commercial Buyers",
-    "header_static_nav_for_suppliers": "For Suppliers",
     "header_static_nav_for_civil": "For Civil Society",
-    "header_static_nav_vacancies": "Vacancies",
     "header_static_nav_FAQ": "FAQ",
+    "header_static_nav_about_MTender": "About MTender",
+    "header_static_nav_register": "Register",
+    "header_static_nav_legal_framework": "Legal framework",
+    "header_static_nav_security_and_confidentiality": "Security and confidentiality",
+    "header_static_nav_join_MTender": "Join the MTender",
+
+
     "footer_nav_electronic_tenders": "Electronic tenders",
     "footer_nav_news":"News",
     "footer_nav_for_contracting": "For Contracting Authorities",

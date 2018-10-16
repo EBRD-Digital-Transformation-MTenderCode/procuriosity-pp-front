@@ -27,12 +27,12 @@
             </router-link>
             <nav class="header-static-nav">
               <a href="#">{{$t("message.header_static_nav_news")}}</a>
-              <a href="#">{{$t("message.header_static_nav_for_contracting")}}</a>
-              <a href="#">{{$t("message.header_static_nav_for_state_owned")}}</a>
-              <a href="#">{{$t("message.header_static_nav_for_commercial")}}</a>
-              <a href="#">{{$t("message.header_static_nav_for_suppliers")}}</a>
+              <a href="#">{{$t("message.header_static_nav_about_MTender")}}</a>
+              <a href="#">{{$t("message.header_static_nav_register")}}</a>
+              <a href="#">{{$t("message.header_static_nav_legal_framework")}}</a>
               <a href="#">{{$t("message.header_static_nav_for_civil")}}</a>
-              <a href="#">{{$t("message.header_static_nav_vacancies")}}</a>
+              <a href="#">{{$t("message.header_static_nav_security_and_confidentiality")}}</a>
+              <a href="#">{{$t("message.header_static_nav_join_MTender")}}</a>
               <a href="#">{{$t("message.header_static_nav_FAQ")}}</a>
             </nav>
           </el-col>
@@ -155,7 +155,7 @@
       justify-content: flex-end;
       align-self: flex-start;
       flex-wrap: wrap;
-      max-width: 50%;
+      max-width: 43%;
       text-align: right;
       @media (max-width: 900px) {
         max-width: 100%;
@@ -197,6 +197,7 @@
         border-radius: 3px 3px 0 0;
         background-color: #efefef;
         white-space: nowrap;
+        font-family: "Open Sans";
         text-align: center;
         line-height: 1;
         font-size: 20px;

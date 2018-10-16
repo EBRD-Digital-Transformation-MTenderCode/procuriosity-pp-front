@@ -7,10 +7,11 @@
           Leading by example
         </div>
         <div class="main-count">
-          <div class="main-count__number">2 839 227</div>
+          <div class="main-count__number">12′25′413 <span class="main-count__number__index">MDL</span></div>
           <div class="main-count__text">Total savings</div>
         </div>
       </el-container>
+      <el-button class="main__button"> Join </el-button>
     </div>
     <el-container direction="vertical">
       <div class="main-organizations">
@@ -46,6 +47,7 @@
 <style lang="scss" scoped>
   .main {
     &-banner {
+      display: flex;
       width: 100%;
       height: 610px;
       padding: 95px 0;
@@ -61,9 +63,9 @@
     &-title {
       margin-bottom: 35px;
       line-height: 1;
-      font-family: serif;
+      font-family: "Open Sans";
       font-size: 47px;
-      font-weight: 700;
+      font-weight: 400;
       color: #fff;
       @media (max-width: 480px) {
         font-size: 9vw;
@@ -71,22 +73,41 @@
     }
     &-count {
       &__number {
-        line-height: 1.2;
-        font-size: 141px;
-        font-weight: 600;
+        line-height: 0.8;
+        font-family: "Open Sans";font-family: "Open Sans";
+        font-size: 92px;
+        font-weight: 700;
         color: #fff;
+        display: flex;
+        align-items: flex-start;
         @media (max-width: 768px) {
           font-size: 18vw;
         }
+        &__index{
+          font-size: 18px;
+          align-self: flex-end;
+        }
       }
       &__text {
-        font-family: serif;
-        font-size: 37px;
+        font-size: 36px;
+        font-weight: 700;
+        font-family: "Open Sans";
         color: #fff;
+        padding-top: 19px;
         @media (max-width: 768px) {
           font-size: 28px;
         }
       }
+    }
+    &__button{
+      align-self: flex-end;
+      padding: 16px 58px;
+      border-radius: 3px;
+      background-color: #97ca63;
+      color: #ffffff;
+      font-family: "Open Sans";
+      font-size: 25px;
+      font-weight: 400;
     }
   }
 </style>

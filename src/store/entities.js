@@ -48,16 +48,6 @@ const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
 
 export default {
   state: {
-    budgets: {
-      name: "message.entity_budgets",
-      loaded: false,
-      list: [],
-      searchParams: { ...localStorageEntities.budgets.searchParams },
-      paginationInfo: {
-        totalCount: 0,
-        pageCount: 0
-      }
-    },
     plans: {
       name: "message.entity_plans",
       loaded: false,
