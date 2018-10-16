@@ -22,11 +22,18 @@ export default new Router({
       path: "/budgets/:id",
       name: "budget-page",
       component: () => import(/!* webpackChunkName: "BudgetPage" *!/ "./views/EntitiesPages/BudgetPage.vue")
-    },
+    },*/
     {
       path: "/tenders/:id",
       name: "tender-page",
-      component: () => import(/!* webpackChunkName: "TenderPage" *!/ "./views/EntitiesPages/TenderPage.vue")
-    }*/
-  ]
+      component: () => import(/* webpackChunkName: "TenderPage" */ "./views/EntitiesPages/TenderPage.vue")
+    }
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  }
 });

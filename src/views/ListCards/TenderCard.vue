@@ -3,8 +3,8 @@
     <el-card>
       <div slot="header">
         <div class="entity-status">
-          <div :class="`entity-status__ico ${parseStatusIco}`" />
-          <div class="entity-status__text">
+          <div v-if="needLink" :class="`entity-status__ico ${parseStatusIco}`" />
+          <div v-if="needLink" class="entity-status__text">
             {{ parseStatusText }}
           </div>
         </div>
@@ -14,13 +14,16 @@
       </div>
       <el-row type="flex" :gutter="18">
         <el-col :xs="24" :sm="14">
-          <div class="entity-title">
+          <router-link v-if="needLink" :to="`/tenders/${id}`" data-link class="entity-title">
+            {{ title }}
+          </router-link>
+          <div v-else class="entity-title">
             {{ title }}
           </div>
           <div class="entity-description">
             {{ description }}
           </div>
-          <div class="entity-links">
+          <!--<div class="entity-links">
             <a :href="`https://achizitii.md/${$i18n.locale}/tenders/${entityId}`" target="_blank">
               <img src="@/assets/achizitii.md .png" alt="Achizitii logo" >
             </a>
@@ -30,7 +33,7 @@
             <a :href="`https://e-licitatie.md/${$i18n.locale}/mtender/${entityId}`" target="_blank">
               <img src="@/assets/e-lici.png" alt="E-lici logo" >
             </a>
-          </div>
+          </div>-->
         </el-col>
         <el-col :xs="24" :sm="6">
           <div class="entity-amount">

@@ -169,6 +169,10 @@
       background-color: $secondaryC2;
       font-size: 25px;
       color: #fff;
+      transition: 0.4s;
+      &:hover {
+        background-color: lighten($secondaryC2, 8%);
+      }
     }
     &-news {
       padding-bottom: 52px;

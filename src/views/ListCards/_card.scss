@@ -176,10 +176,10 @@
       }
     }
     &-title[data-link] {
-      box-shadow: 0 2px 0 #235aa6;
+      box-shadow: 0 2px 0 transparent;
       transition: 0.4s;
       &:hover {
-        box-shadow: 0 2px 0 transparent;
+        box-shadow: 0 2px 0 #235aa6;
       }
     }
     &-title {
