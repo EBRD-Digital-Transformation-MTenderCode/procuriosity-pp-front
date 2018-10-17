@@ -152,6 +152,7 @@ export default {
     "about_p12_after": " transparent but easy-to-use online bidding procedures, with lowest price and price and non-price selection criteria, will be available to interested state-owned enterprises and commercial clients.",
     "about_p13_before": "The EU Delegation to Moldova offered to support the Ministry of Finance and further development of the MTender - more modern purchasing tools, including dynamic purchasing system and innovative partnership will become available ",
     "about_p13_bold": "in 2019-2020.",
+    "about_p13_after": "",
 
     "legal_framework_title": "Legal framework",
     "legal_framework_h11": "Laws and regulations",

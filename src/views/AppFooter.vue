@@ -44,7 +44,7 @@
               {{$t("message.footer_info_text")}}:
             </div>
             <div class="footer-info__tel">
-              <a href="tel:+37322022789789">022 789 789</a>
+              <a href="tel:+373 022 78 97 89">022 789 789</a>
             </div>
           </div>
         </el-col>

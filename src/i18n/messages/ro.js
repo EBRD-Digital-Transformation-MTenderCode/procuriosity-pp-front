@@ -141,6 +141,7 @@ export default {
     "about_p12_after": " procedurile de licitare online transparente, dar ușor de utilizat, cu cele mai mici prețuri și criterii de selecție bazate pe preț sau pe alte criterii nelegate de preț, vor fi disponibile întreprinderilor de stat și clienților din sectorul privat interesați.",
     "about_p13_before": "Delegația UE în Moldova s-a oferit să sprijine Ministerul Finanțelor și să dezvolte pe viitor sistemul MTender - instrumente mai moderne de achiziție, inclusiv sistemul dinamic de achiziție și parteneriatul pentru inovare - vor fi disponibile ",
     "about_p13_bold": "în perioada 2019-2020.",
+    "about_p13_after": "",
 
     "legal_framework_title": "Legislația relevantă",
     "legal_framework_h11": "Legi și Regulamente",
