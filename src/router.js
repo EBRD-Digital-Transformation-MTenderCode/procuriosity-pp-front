@@ -32,6 +32,21 @@ export default new Router({
       path: "/news",
       name: "news",
       component: () => import(/* webpackChunkName: "News" */ "./views/NewsList.vue")
+    },
+    {
+      path: "/register",
+      name: "register",
+      component: () => import(/* webpackChunkName: "Register" */ "./views/StaticPages/Register.vue")
+    },
+    {
+      path: "/legal-framework",
+      name: "legal-framework",
+      component: () => import(/* webpackChunkName: "LegalFramework" */ "./views/StaticPages/LegalFramework.vue")
+    },
+    {
+      path: "/for-civil",
+      name: "for-civil",
+      component: () => import(/* webpackChunkName: "ForCivil" */ "./views/StaticPages/ForCivil.vue")
     }
   ],
   scrollBehavior (to, from, savedPosition) {

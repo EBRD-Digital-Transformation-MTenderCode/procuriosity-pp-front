@@ -26,14 +26,14 @@
               <img src="@/assets/logo.png" class="header-logo-mtender__img" alt="MTender">
             </router-link>
             <nav class="header-static-nav">
-              <router-link to="/news">{{$t("message.header_static_nav_news")}}</router-link>
+              <!--<router-link to="/news">{{$t("message.header_static_nav_news")}}</router-link>-->
               <a href="#">{{$t("message.header_static_nav_about_MTender")}}</a>
-              <a href="#">{{$t("message.header_static_nav_register")}}</a>
-              <a href="#">{{$t("message.header_static_nav_legal_framework")}}</a>
-              <a href="#">{{$t("message.header_static_nav_for_civil")}}</a>
+              <router-link to="/register">{{$t("message.header_static_nav_register")}}</router-link>
+              <router-link to="legal-framework">{{$t("message.header_static_nav_legal_framework")}}</router-link>
+              <router-link to="for-civil">{{$t("message.header_static_nav_for_civil")}}</router-link>
               <a href="#">{{$t("message.header_static_nav_security_and_confidentiality")}}</a>
               <a href="#">{{$t("message.header_static_nav_join_MTender")}}</a>
-              <a href="#">{{$t("message.header_static_nav_FAQ")}}</a>
+              <!--<a href="#">{{$t("message.header_static_nav_FAQ")}}</a>-->
             </nav>
           </el-col>
         </el-row>

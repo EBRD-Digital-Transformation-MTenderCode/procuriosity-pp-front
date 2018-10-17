@@ -5,6 +5,7 @@ import "@/styles/main.scss";
 import "@/components/SearchForms/_search-form.scss";
 import "@/views/ListCards/_card.scss";
 import "@/views/EntitiesPages/_entity-info.scss";
+import "@/views/StaticPages/_static-pages.scss";
 
 import Vue from "vue";
 

@@ -13,9 +13,9 @@
           </div>
           <nav class="footer-nav">
             <div>
-              <router-link to="/news">{{$t("message.footer_nav_news")}}</router-link><br>
+              <!--<router-link to="/news">{{$t("message.footer_nav_news")}}</router-link><br>-->
               <a href="#">{{$t("message.footer_nav_about_MTender")}}</a><br>
-              <a href="#">{{$t("message.footer_nav_register")}}</a><br>
+              <router-link to="/register">{{$t("message.footer_nav_register")}}</router-link><br>
             </div>
             <div>
               <a href="#">{{$t("message.footer_nav_legal_framework")}}</a><br>
@@ -24,7 +24,7 @@
             </div>
             <div>
               <a href="#">{{$t("message.footer_nav_join_MTender")}}</a><br>
-              <a href="#">{{$t("message.footer_nav_FAQ")}}</a><br>
+              <!--<a href="#">{{$t("message.footer_nav_FAQ")}}</a><br>-->
             </div>
           </nav>
           <div class="footer-info">
