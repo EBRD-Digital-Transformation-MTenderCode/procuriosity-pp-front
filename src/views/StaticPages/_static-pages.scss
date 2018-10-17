@@ -2,7 +2,8 @@
 
 .static {
   display: flex;
-  padding-top: 50px;
+  margin-top: 30px;
+  margin-bottom: 30px;
   &-aside {
     width: 300px;
     flex-shrink: 0;
@@ -24,6 +25,9 @@
     .underline {
       text-decoration: underline;
     }
+    .bold{
+      font-weight: bold;
+    }
     a {
       color: $mainC;
       &:hover {
@@ -31,6 +35,7 @@
       }
     }
     ul {
+      margin-bottom: 20px;
       list-style-position: inside;
     }
     li {

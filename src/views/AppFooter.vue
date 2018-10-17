@@ -14,7 +14,7 @@
           <nav class="footer-nav">
             <div>
               <!--<router-link to="/news">{{$t("message.footer_nav_news")}}</router-link><br>-->
-              <a href="#">{{$t("message.footer_nav_about_MTender")}}</a><br>
+              <router-link to="/about">{{$t("message.footer_nav_about_MTender")}}</router-link>
               <router-link to="/register">{{$t("message.footer_nav_register")}}</router-link><br>
             </div>
             <div>

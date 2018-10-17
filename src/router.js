@@ -47,6 +47,11 @@ export default new Router({
       path: "/for-civil",
       name: "for-civil",
       component: () => import(/* webpackChunkName: "ForCivil" */ "./views/StaticPages/ForCivil.vue")
+    },
+    {
+      path: "/about",
+      name: "about",
+      component: () => import(/* webpackChunkName: "About" */ "./views/StaticPages/About.vue")
     }
   ],
   scrollBehavior (to, from, savedPosition) {
