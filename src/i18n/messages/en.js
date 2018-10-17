@@ -38,7 +38,7 @@ export default {
     "main_ul1_li2":"On account of online and easy to participate tenders, the new fully digital procurement service will offer better access to opportunities in public procurement for business community, in particular local small and medium-sized enterprises.",
     "main_ul1_li3":"For public bodies, new digital service will also bring improved planning of spending, quicker purchases and better-quality as a result of ‘zero paper’ electronic bidding procedures.",
     "main_p2":"The MTender is a multi-platform networking digital procurement service, consisting of a government-operated web portal and Open Data central database unit and networking with several commercial electronic platforms certified to support electronic tendering procedures for public sector and commercial clients",
-    "main_p3":"he MTender networking electronic procurement platform is a commercial electronic procurement platform, authorised and certified for networking with the MTender and providing digital electronic tendering services to public sector clients as well as commercial buyers. Each MTender networking platform is providing a help desk service to buyers and economic operators registered on this platform to access digital services of the MTender.",
+    "main_p3":"The MTender networking electronic procurement platform is a commercial electronic procurement platform, authorised and certified for networking with the MTender and providing digital electronic tendering services to public sector clients as well as commercial buyers. Each MTender networking platform is providing a help desk service to buyers and economic operators registered on this platform to access digital services of the MTender.",
     "main_p4":"Presently the MTender is networking with the following platforms:",
 
     "entity_budgets": "Budgets",
@@ -145,7 +145,7 @@ export default {
     "about_p7_after2":" – a partnership between the Ministry of Finance and three commercial electronic platforms – achizitii, e-licitatie,  and YTender - has been launched.",
     "about_p8":"Supported by the European Bank for Reconstruction and Development, the MTender pilot attracted public and commercial buyers and successfully tested brand new concept of cooperative delivery of digital procurement service based on Open Government values of transparency, accountability and engagement with market stakeholders.",
     "about_p9_bold":"Since March 2018,",
-    "about_p9_after":" the economic operators registered in the Republic of Moldova are able to use the MTender for signing online any contract, public or commercial.Public bodies funded from the state budget may use the MTender for signing any public contract and registering it in the Treasury of the Republic of Moldova.<",
+    "about_p9_after":" the economic operators registered in the Republic of Moldova are able to use the MTender for signing online any contract, public or commercial.Public bodies funded from the state budget may use the MTender for signing any public contract and registering it in the Treasury of the Republic of Moldova.",
     "about_p10_bold":"In July 2018,",
     "about_p10_after":" public procurement law of the Republic of Moldova has been changed to introduce electronic tendering procedures as a standard for all public sector entities in Moldova.",
     "about_p11_bold":"Starting from 15 October 2018,",
@@ -154,6 +154,7 @@ export default {
     "about_p12_after":" transparent but easy-to-use online bidding procedures, with lowest price and price and non-price selection criteria, will be available to interested state-owned enterprises and commercial clients.",
     "about_p13_before":"The EU Delegation to Moldova offered to support the Ministry of Finance and further development of the MTender - more modern purchasing tools, including dynamic purchasing system and innovative partnership will become available ",
     "about_p13_bold":"in 2019-2020.",
+    "about_p13_after":"",
 
     "legal_framework_title":"Legal framework",
     "legal_framework_h11":"Laws and regulations",
