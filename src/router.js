@@ -27,6 +27,11 @@ export default new Router({
       path: "/tenders/:id",
       name: "tender-page",
       component: () => import(/* webpackChunkName: "TenderPage" */ "./views/EntitiesPages/TenderPage.vue")
+    },
+    {
+      path: "/news",
+      name: "news",
+      component: () => import(/* webpackChunkName: "News" */ "./views/NewsList.vue")
     }
   ],
   scrollBehavior (to, from, savedPosition) {

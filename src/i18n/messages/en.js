@@ -1,9 +1,35 @@
-{
+export default {
   "message": {
+    "header_ebrd_line1":"eProcurement Pilot Project funded by the European Bank",
+    "header_ebrd_line2":"for Reconstruction and Development",
+
+    "header_static_nav_news":"News",
+    "header_static_nav_about_MTender": "About MTender",
+    "header_static_nav_register": "Register",
+    "header_static_nav_legal_framework": "Legal framework",
+    "header_static_nav_for_civil": "For Civil Society",
+    "header_static_nav_security_and_confidentiality": "Security and confidentiality",
+    "header_static_nav_join_MTender": "Join the MTender",
+    "header_static_nav_FAQ": "FAQ",
+
+    "footer_logo_cr": "All rights reserved",
+
+    "footer_nav_news":"News",
+    "footer_nav_about_MTender": "About MTender",
+    "footer_nav_register": "Register",
+    "footer_nav_legal_framework": "Legal framework",
+    "footer_nav_for_civil": "For Civil Society",
+    "footer_nav_security_and_confidentiality": "Security and confidentiality",
+    "footer_nav_join_MTender": "Join the MTender",
+    "footer_nav_FAQ": "FAQ",
+
+    "footer_info_text": "Info Line",
+
     "entity_budgets": "Budgets",
     "entity_tenders": "Electronic Tenders",
     "entity_plans": "Annual procurement plans",
     "entity_contracts": "Contracts and framework agreements",
+
     "search_strict": "Strict",
     "search_no_strict" : "No strict",
     "search_titles_or_descriptions": "search",
@@ -31,11 +57,13 @@
     "search_auction_period": "Auction Period:",
     "search_id_placeholder": "ID",
     "search_placeholder": "search",
+
     "list_no_data": "Nothing found",
     "start_date_placeholder" : "Start date",
     "end_date_placeholder" : "End date",
     "range_separator" : "To",
     "reset_button": "Reset",
+
     "budget_card_last_modified_date": "Last Modified Date:",
     "budget_card_value" : "Estimated Value without VAT ",
     "budget_card_no_sources" : "Funding sources are not added",
@@ -46,12 +74,14 @@
     "budget_card_buyer_region" : "Buyer Region:",
     "budget_card_classifications" : "Classifications:",
     "budget_card_budget_id" : "Budget-ID:",
+
     "plan_card_last_modified_date": "Last Modified Date:",
     "plan_card_value" : "Estimated Value without VAT ",
     "plan_card_delivery_regions" : "Delivery Region:",
     "plan_card_procedure_type" : "Procedure type:",
     "plan_card_procuring_entity_name" : "Procuring Entity Name:",
     "plan_card_tender_id" : "Plan ID",
+
     "contract_card_last_modified_date": "Last Modified Date:",
     "contract_card_value" : "Estimated Value without VAT ",
     "contract_card_delivery_regions" : "Delivery Region:",
@@ -63,31 +93,6 @@
     "tender_card_procedure_type" : "Procedure type:",
     "tender_card_buyer_region" : "Procuring Entity region:",
     "tender_card_procuring_entity_name" : "Procuring Entity Name:",
-    "tender_card_tender_id" : "TenderID",
-    "header_ebrd_line1":"eProcurement Pilot Project funded by the European Bank",
-    "header_ebrd_line2":"for Reconstruction and Development",
-
-    "header_static_nav_news":"News",
-    "header_static_nav_for_civil": "For Civil Society",
-    "header_static_nav_FAQ": "FAQ",
-    "header_static_nav_about_MTender": "About MTender",
-    "header_static_nav_register": "Register",
-    "header_static_nav_legal_framework": "Legal framework",
-    "header_static_nav_security_and_confidentiality": "Security and confidentiality",
-    "header_static_nav_join_MTender": "Join the MTender",
-
-
-    "footer_nav_electronic_tenders": "Electronic tenders",
-    "footer_nav_news":"News",
-    "footer_nav_for_contracting": "For Contracting Authorities",
-    "footer_nav_for_state_owned": "For State-Owned Enterprises",
-    "footer_nav_for_commercial": "For Commercial Buyers",
-    "footer_nav_for_suppliers": "For Suppliers",
-    "footer_nav_for_civil": "For Civil Society",
-    "footer_nav_vacancies": "Vacancies",
-    "footer_nav_FAQ": "FAQ",
-    "footer_logo_cr": "2018 ©,  All rights reserved",
-    "footer_info_text": "Info Line",
-    "footer_info_tel": "022 789 789"
+    "tender_card_tender_id" : "TenderID"
   }
 }

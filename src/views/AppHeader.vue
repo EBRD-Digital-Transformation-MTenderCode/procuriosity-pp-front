@@ -5,15 +5,15 @@
         <el-row :gutter="30">
           <el-col>
             <div class="header-logo-ebrd">
-              <a href="/" class="header-logo-ebrd__link">
+              <router-link to="/" class="header-logo-ebrd__link">
                 <img src="@/assets/logo-ebrd.png" class="header-logo-ebrd__img" alt="EBRD">
-              </a>
+              </router-link>
               <div class="header-logo-ebrd__text">
                 <div>{{$t("message.header_ebrd_line1")}}</div>
                 <div>{{$t("message.header_ebrd_line2")}}</div>
               </div>
             </div>
-            <!--<locale-toggle />-->
+            <locale-toggle />
           </el-col>
         </el-row>
       </el-container>
@@ -26,7 +26,7 @@
               <img src="@/assets/logo.png" class="header-logo-mtender__img" alt="MTender">
             </router-link>
             <nav class="header-static-nav">
-              <a href="#">{{$t("message.header_static_nav_news")}}</a>
+              <router-link to="/news">{{$t("message.header_static_nav_news")}}</router-link>
               <a href="#">{{$t("message.header_static_nav_about_MTender")}}</a>
               <a href="#">{{$t("message.header_static_nav_register")}}</a>
               <a href="#">{{$t("message.header_static_nav_legal_framework")}}</a>
@@ -55,14 +55,14 @@
 <script>
   import { mapState } from "vuex";
 
-  /*import LocaleToggle from "./../components/LocaleToggle";*/
+  import LocaleToggle from "./../components/LocaleToggle";
 
   import "./../assets/logo.png";
 
   export default {
     name: "AppHeader",
     components: {
-      /*"locale-toggle": LocaleToggle*/
+      "locale-toggle": LocaleToggle
     },
     computed: {
       ...mapState(["entities"])
@@ -155,7 +155,7 @@
       justify-content: flex-end;
       align-self: flex-start;
       flex-wrap: wrap;
-      max-width: 43%;
+      max-width: 50%;
       text-align: right;
       @media (max-width: 900px) {
         max-width: 100%;
