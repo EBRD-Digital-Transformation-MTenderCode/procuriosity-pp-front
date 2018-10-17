@@ -7,10 +7,10 @@
           Leading by example
         </div>
         <div class="main-count">
-          <div class="main-count__number">12′25′413 <span class="main-count_currency">MDL</span></div>
+          <div class="main-count__number">12′256′413 <span class="main-count_currency">MDL</span></div>
           <div class="main-count__text">Total savings</div>
         </div>
-        <a href="/" class="main__join-button">Join</a>
+        <router-link to="/join-mtender" class="main__join-button">Join</router-link>
       </el-container>
     </div>
     <el-container direction="vertical">
@@ -143,8 +143,14 @@
         font-size: 125px;
         font-weight: 700;
         color: #fff;
+        @media (max-width: 800px) {
+          font-size: 12vw;
+        }
         @media (max-width: 768px) {
-          font-size: 18vw;
+          justify-content: center;
+        }
+        @media (max-width: 380px) {
+          font-size: 8vw;
         }
       }
       &_currency {
@@ -173,6 +179,9 @@
       &:hover {
         background-color: lighten($secondaryC2, 8%);
       }
+      @media (max-width: 768px) {
+        align-self: center;
+      }
     }
     &-news {
       padding-bottom: 52px;
@@ -185,9 +194,23 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
+        @media (max-width: 940px) {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
       }
       &__card {
         max-width: 289px;
+        margin: 0 20px;
+        &:first-child {
+          margin-left: 0;
+        }
+        &:last-child {
+          margin-right: 0;
+        }
+        @media (max-width: 940px) {
+          margin: 20px;
+        }
       }
       &__img {
         margin-bottom: 22px;
@@ -221,10 +244,20 @@
         justify-content: space-between;
         align-items: flex-start;
         margin-bottom: 105px;
+        @media (max-width: 940px) {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
       }
       &__card {
         max-width: 30%;
         text-align: center;
+        @media (max-width: 768px) {
+          max-width: 100%;
+          &:not(:last-child) {
+            margin-bottom: 20px;
+          }
+        }
       }
       &__img {
         margin-bottom: 30px;
@@ -248,6 +281,9 @@
         text-align: center;
         font-size: 20px;
         font-weight: 700;
+        @media (max-width: 768px) {
+          width: 100%;
+        }
       }
       &__sub-text {
         width: 70%;
@@ -255,6 +291,9 @@
         margin-right: auto;
         margin-bottom: 35px;
         text-align: justify;
+        @media (max-width: 768px) {
+          width: 100%;
+        }
       }
       &__partners {
         padding-bottom: 90px;
@@ -269,8 +308,19 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
+          @media (max-width: 768px) {
+            flex-wrap: wrap;
+            justify-content: center;
+          }
           a {
             max-width: 20%;
+            @media (max-width: 768px) {
+              max-width: 50%;
+              margin: 20px;
+            }
+            @media (max-width: 768px) {
+              min-width: 200px;
+            }
           }
         }
       }

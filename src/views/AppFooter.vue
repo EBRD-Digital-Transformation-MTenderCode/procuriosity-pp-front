@@ -88,8 +88,8 @@
       justify-content: flex-start;
       align-items: flex-start;
       line-height: 1.5;
-      @media (max-width: 768px) {
-        margin-bottom: 15px;
+      @media (max-width: 845px) {
+        justify-content: center;
       }
       @media (max-width: 480px) {
         columns: 2;
@@ -99,6 +99,10 @@
       }
       div:not(:last-child) {
         margin-right: 20px;
+        @media (max-width: 845px) {
+          margin-right: 0;
+          text-align: center;
+        }
       }
       a {
         font-size: 12px;

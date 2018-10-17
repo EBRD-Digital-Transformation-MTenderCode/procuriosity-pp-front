@@ -8,7 +8,7 @@ import Element from "element-ui";
 
 Vue.use(VueI18n);
 
-const defaultLocale = "en";
+const defaultLocale = "ro";
 
 if (!localStorage.getItem("locale")) {
   localStorage.setItem("locale", defaultLocale);

@@ -164,7 +164,7 @@
                     :value="periodPublished"
                     :setValue="setFormParams"
                 >
-                  {{$t("message.search_published_period")}}
+                  {{$t("message.search_published_period")}}:
                 </search-period>
               </div>
 
@@ -175,7 +175,7 @@
                     :value="periodDelivery"
                     :setValue="setFormParams"
                 >
-                  {{$t("message.search_delivery_period")}}
+                  {{$t("message.search_delivery_period")}}:
                 </search-period>
               </div>
 
@@ -186,7 +186,7 @@
                     :value="periodEnquiry"
                     :setValue="setFormParams"
                 >
-                  {{$t("message.search_enquiry_period")}}
+                  {{$t("message.search_enquiry_period")}}:
                 </search-period>
               </div>
 
@@ -197,7 +197,7 @@
                     :value="periodOffer"
                     :setValue="setFormParams"
                 >
-                  {{$t("message.search_offer_period")}}
+                  {{$t("message.search_offer_period")}}:
                 </search-period>
               </div>
 
@@ -208,7 +208,7 @@
                     :value="periodAuction"
                     :setValue="setFormParams"
                 >
-                  {{$t("message.search_auction_period")}}
+                  {{$t("message.search_auction_period")}}:
                 </search-period>
               </div>
 
@@ -219,7 +219,7 @@
                     :value="periodAward"
                     :setValue="setFormParams"
                 >
-                  {{$t("message.search_award_period")}}
+                  {{$t("message.search_award_period")}}:
                 </search-period>
               </div>
 

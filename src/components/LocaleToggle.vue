@@ -10,8 +10,8 @@
     >
       
       <EN v-if="this.$i18n.locale === 'en'" />
-      <!--<RU v-if="this.$i18n.locale === 'ru'" />-->
       <RO v-if="this.$i18n.locale === 'ro'" />
+      <RU v-if="this.$i18n.locale === 'ru'" />
       <i class="el-icon-caret-bottom el-icon--right" />
     </span>
     <el-dropdown-menu class="locale-dropdown-menu" slot="dropdown">
@@ -22,8 +22,8 @@
           divided
       >
         <EN v-if="locale === 'en'" />
-        <!--<RU v-if="locale === 'ru'" />-->
         <RO v-if="locale === 'ro'" />
+        <RU v-if="locale === 'ru'" />
       </el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
@@ -65,6 +65,9 @@
     }
     &-toggle {
       line-height: 1;
+      @media (max-width: 570px) {
+        margin-bottom: 10px;
+      }
       .el-dropdown-link {
         display: flex;
         justify-content: center;
@@ -78,10 +81,8 @@
     }
     &-dropdown-menu {
       padding: 0;
-      
       .el-dropdown-menu__item {
         margin: 5px 0;
-        padding: 0 10px;
         line-height: 2;
         .locale-lang {
           color: #000;

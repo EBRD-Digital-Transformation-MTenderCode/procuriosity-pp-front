@@ -11,12 +11,12 @@ export default {
     ...enLocale,
     ...en
   },
+  ro: {
+    ...roLocale,
+    ...ro
+  },
   ru: {
     ...ruLocale,
     ...ru
   },
-  ro: {
-    ...roLocale,
-    ...ro
-  }
 };
