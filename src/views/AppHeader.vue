@@ -27,12 +27,12 @@
             </router-link>
             <nav class="header-static-nav">
               <!--<router-link to="/news">{{$t("message.header_static_nav_news")}}</router-link>-->
-              <router-link to="/about">{{$t("message.header_static_nav_about_MTender")}}</router-link>
-              <router-link to="/register">{{$t("message.header_static_nav_register")}}</router-link>
-              <router-link to="/legal-framework">{{$t("message.header_static_nav_legal_framework")}}</router-link>
-              <router-link to="/for-civil">{{$t("message.header_static_nav_for_civil")}}</router-link>
-              <router-link to="/security-and-confidentiality">{{$t("message.header_static_nav_security_and_confidentiality")}}</router-link>
-              <router-link to="/join-mtender">{{$t("message.header_static_nav_join_MTender")}}</router-link>
+              <router-link active-class="header-static-nav_active" to="/about">{{$t("message.header_static_nav_about_MTender")}}</router-link>
+              <router-link active-class="header-static-nav_active" to="/register">{{$t("message.header_static_nav_register")}}</router-link>
+              <router-link active-class="header-static-nav_active" to="/legal-framework">{{$t("message.header_static_nav_legal_framework")}}</router-link>
+              <router-link active-class="header-static-nav_active" to="/for-civil">{{$t("message.header_static_nav_for_civil")}}</router-link>
+              <router-link active-class="header-static-nav_active" to="/security-and-confidentiality">{{$t("message.header_static_nav_security_and_confidentiality")}}</router-link>
+              <router-link active-class="header-static-nav_active" to="/join-mtender">{{$t("message.header_static_nav_join_MTender")}}</router-link>
               <!--<a href="#">{{$t("message.header_static_nav_FAQ")}}</a>-->
             </nav>
           </el-col>
@@ -164,6 +164,9 @@
         width: 100%;
         flex-grow: 1;
         justify-content: center;
+      }
+      &_active {
+        color: #000 !important;
       }
       a {
         display: inline-block;

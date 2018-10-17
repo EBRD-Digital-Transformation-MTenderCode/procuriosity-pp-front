@@ -49,14 +49,24 @@ const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
 export default {
   state: {
     /*budgets: {
-      name: "message.entity_budgets",
+     name: "message.entity_budgets",
+     loaded: false,
+     list: [],
+     searchParams: {...localStorageEntities.budgets.searchParams},
+     paginationInfo: {
+     totalCount: 0, pageCount: 0
+     }
+     },*/
+    plans: {
+      name: "message.entity_plans",
       loaded: false,
       list: [],
-      searchParams: {...localStorageEntities.budgets.searchParams},
+      searchParams: {...localStorageEntities.plans.searchParams},
       paginationInfo: {
-        totalCount: 0, pageCount: 0
+        totalCount: 0,
+        pageCount: 0
       }
-    },*/
+    },
     tenders: {
       name: "message.entity_tenders",
       loaded: false,
@@ -66,16 +76,6 @@ export default {
         cdb: "",
         tenderData: {}
       },
-      paginationInfo: {
-        totalCount: 0,
-        pageCount: 0
-      }
-    },
-    plans: {
-      name: "message.entity_plans",
-      loaded: false,
-      list: [],
-      searchParams: {...localStorageEntities.plans.searchParams},
       paginationInfo: {
         totalCount: 0,
         pageCount: 0

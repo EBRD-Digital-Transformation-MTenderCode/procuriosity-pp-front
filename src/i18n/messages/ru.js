@@ -26,8 +26,8 @@ export default {
     "footer_info_text": "Информационная линия",
 
     "entity_budgets": "Budgets",
-    "entity_tenders": "Тендеры",
-    "entity_plans": "Годовые планы",
-    "entity_contracts": "Контракты и соглашения",
+    "entity_plans": "Планирование закупок",
+    "entity_tenders": "Активные онлайн-торги",
+    "entity_contracts": "Реестр договоров",
   }
 }

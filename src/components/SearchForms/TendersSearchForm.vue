@@ -15,7 +15,7 @@
           :value="titlesOrDescriptions"
           :setValue="setFormParams"
           prefixIcon
-          :placeholder="$t('message.search_placeholder')"
+          :placeholder="$t('message.search_titles_or_descriptions')"
       />
       <button class="search-form__btn search-form__btn_search" />
 
@@ -31,6 +31,16 @@
           <el-row :gutter="40">
             <el-col :xs="24" :sm="12">
 
+              <!-- Buyers names -->
+              <div class="search-form-element">
+                <multiple-input
+                    name="buyersNames"
+                    :values="buyersNames"
+                    :setValues="setFormParams"
+                    :placeholder="$t('message.search_buyers_names_placeholder')"
+                />
+              </div>
+              
               <!-- Buyers regions -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -39,7 +49,50 @@
                     :values="buyersRegions"
                     :setValues="setFormParams"
                     needFetch
-                    :placeholder="$t('message.search_region_placeholder')"
+                    :placeholder="$t('message.search_buyers_region_placeholder')"
+                />
+              </div>
+  
+              <!-- Buyers identifiers -->
+              <div class="search-form-element">
+                <multiple-input
+                    name="buyersIdentifiers"
+                    :values="buyersIdentifiers"
+                    :setValues="setFormParams"
+                    :placeholder="$t('message.search_buyers_identifiers_placeholder')"
+                />
+              </div>
+  
+              <!-- Types of buyers -->
+              <div class="search-form-element">
+                <search-auto-complete-input
+                    name="buyersTypes"
+                    :items="buyersTypesList"
+                    :values="buyersTypes"
+                    :setValues="setFormParams"
+                    :placeholder="$t('message.search_buyers_types_placeholder')"
+                />
+              </div>
+  
+              <!-- Main general activity -->
+              <div class="search-form-element">
+                <search-auto-complete-input
+                    name="buyersMainGeneralActivities"
+                    :items="mainGeneralActivityList"
+                    :values="buyersMainGeneralActivities"
+                    :setValues="setFormParams"
+                    :placeholder="$t('message.search_buyers_main_general_activity_placeholder')"
+                />
+              </div>
+  
+              <!-- Main sectoral activity -->
+              <div class="search-form-element">
+                <search-auto-complete-input
+                    name="buyersMainSectoralActivities"
+                    :items="mainSectoralActivityList"
+                    :values="buyersMainSectoralActivities"
+                    :setValues="setFormParams"
+                    :placeholder="$t('message.search_buyers_main_sectoral_activity_placeholder')"
                 />
               </div>
 
@@ -54,29 +107,7 @@
                     :placeholder="$t('message.search_deliveries_regions_placeholder')"
                 />
               </div>
-
-              <!-- Procedure types -->
-              <div class="search-form-element">
-                <search-auto-complete-input
-                    name="proceduresTypes"
-                    :items="proceduresTypesList"
-                    :values="proceduresTypes"
-                    :setValues="setFormParams"
-                    :placeholder="$t('message.search_procedures_types_placeholder')"
-                />
-              </div>
-
-              <!-- Procedure statuses -->
-              <div class="search-form-element">
-                <search-auto-complete-input
-                    name="proceduresStatuses"
-                    :items="proceduresStatusesList"
-                    :values="proceduresStatuses"
-                    :setValues="setFormParams"
-                    :placeholder="$t('message.search_procedures_statuses_placeholder')"
-                />
-              </div>
-
+  
               <!-- Amount from -->
               <div class="search-form-element">
                 <search-input
@@ -88,7 +119,7 @@
                     :placeholder="$t('message.search_amount_from')"
                 />
               </div>
-
+  
               <!-- Amount to -->
               <div class="search-form-element">
                 <search-input
@@ -101,60 +132,30 @@
                 />
               </div>
 
-              <!-- Buyers names -->
-              <div class="search-form-element">
-                <multiple-input
-                    name="buyersNames"
-                    :values="buyersNames"
-                    :setValues="setFormParams"
-                    :placeholder="$t('message.search_procedures_buyers_names_placeholder')"
-                />
-              </div>
-
-              <!-- Buyers identifiers -->
-              <div class="search-form-element">
-                <multiple-input
-                    name="buyersIdentifiers"
-                    :values="buyersIdentifiers"
-                    :setValues="setFormParams"
-                    :placeholder="$t('message.search_procedures_buyers_identifiers_placeholder')"
-                />
-              </div>
-
-              <!-- Types of buyers -->
+              <!-- Procedure types -->
               <div class="search-form-element">
                 <search-auto-complete-input
-                    name="buyersTypes"
-                    :items="buyersTypesList"
-                    :values="buyersTypes"
+                    name="proceduresTypes"
+                    :items="proceduresTypesList"
+                    :values="proceduresTypes"
                     :setValues="setFormParams"
-                    :placeholder="$t('message.search_procedures_types_of_buyers_placeholder')"
+                    :placeholder="$t('message.search_types_procedures_placeholder')"
                 />
               </div>
 
-              <!-- Main general activity -->
+              <!-- Procedure statuses -->
               <div class="search-form-element">
                 <search-auto-complete-input
-                    name="buyersMainGeneralActivities"
-                    :items="mainGeneralActivityList"
-                    :values="buyersMainGeneralActivities"
+                    name="proceduresStatuses"
+                    :items="proceduresStatusesList"
+                    :values="proceduresStatuses"
                     :setValues="setFormParams"
-                    :placeholder="$t('message.search_procedures_buyers_main_general_activity_placeholder')"
-                />
-              </div>
-
-              <!-- Main sectoral activity -->
-              <div class="search-form-element">
-                <search-auto-complete-input
-                    name="buyersMainSectoralActivities"
-                    :items="mainSectoralActivityList"
-                    :values="buyersMainSectoralActivities"
-                    :setValues="setFormParams"
-                    :placeholder="$t('message.search_procedures_buyers_main_sectoral_activity_placeholder')"
+                    :placeholder="$t('message.search_statuses_procedures_placeholder')"
                 />
               </div>
             </el-col>
             <el-col :xs="24" :sm="12">
+
               <!-- Period published -->
               <div class="search-form-element">
                 <search-period
@@ -162,7 +163,7 @@
                     :value="periodPublished"
                     :setValue="setFormParams"
                 >
-                  {{$t("message.search_published_period")}}
+                  {{$t("message.search_published_period")}}:
                 </search-period>
               </div>
 
@@ -173,7 +174,7 @@
                     :value="periodDelivery"
                     :setValue="setFormParams"
                 >
-                  {{$t("message.search_delivery_period")}}
+                  {{$t("message.search_delivery_period")}}:
                 </search-period>
               </div>
 
@@ -184,7 +185,7 @@
                     :value="periodEnquiry"
                     :setValue="setFormParams"
                 >
-                  {{$t("message.search_enquiry_period")}}
+                  {{$t("message.search_enquiry_period")}}:
                 </search-period>
               </div>
 
@@ -195,7 +196,7 @@
                     :value="periodOffer"
                     :setValue="setFormParams"
                 >
-                  {{$t("message.search_offer_period")}}
+                  {{$t("message.search_offer_period")}}:
                 </search-period>
               </div>
 
@@ -206,7 +207,7 @@
                     :value="periodAuction"
                     :setValue="setFormParams"
                 >
-                  {{$t("message.search_auction_period")}}
+                  {{$t("message.search_auction_period")}}:
                 </search-period>
               </div>
 
@@ -217,7 +218,7 @@
                     :value="periodAward"
                     :setValue="setFormParams"
                 >
-                  {{$t("message.search_award_period")}}
+                  {{$t("message.search_award_period")}}:
                 </search-period>
               </div>
 
@@ -247,9 +248,7 @@
           </el-row>
           <!-- Reset button -->
           <div class=" search-form__reset-button-wp">
-            <reset-button
-                entity="tenders"
-            ></reset-button>
+            <reset-button entity="tenders" />
           </div>
         </div>
       </div>

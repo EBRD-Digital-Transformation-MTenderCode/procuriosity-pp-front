@@ -15,15 +15,15 @@
           <li>On account of online and easy to participate tenders, the new fully digital procurement service will offer better access to opportunities in public procurement for business community, in particular local small and medium-sized enterprises.</li>
           <li>For public bodies, new digital service will also bring improved planning of spending, quicker purchases and better-quality as a result of ‘zero paper’ electronic bidding procedures.</li>
         </ul>
-        <p>The <span class="bold"> MTender </span>is a multi-platform networking digital procurement service, consisting of  a government-operated web portal and Open Data central database unit and networking with several commercial electronic platforms certified to support electronic tendering procedures for public sector and commercial clients.</p>
+        <p>The <span class="bold">MTender</span> is a multi-platform networking digital procurement service, consisting of  a government-operated web portal and Open Data central database unit and networking with several commercial electronic platforms certified to support electronic tendering procedures for public sector and commercial clients.</p>
         <p>The <span class="bold">MTender networking electronic procurement platform</span> is a commercial electronic procurement platform, authorised and certified for networking with the MTender and providing digital electronic tendering services to public sector clients as well as commercial buyers. Each MTender networking platform is providing a <span class="bold">help desk</span> service to buyers and economic operators registered on this platform to access digital services of the MTender.</p>
-        <p>Presently the MTender is networking with the following platforms:        </p>
+        <p>Presently the MTender is networking with the following platforms:</p>
         <ul>
           <li><a href="https://achizitii.md/" target="_blank">Achizitii</a></li>
           <li><a href="https://e-licitatie.md/" target="_blank">E-licitatie</a></li>
           <li><a href="https://yptender.md/" target="_blank">YTender</a></li>
         </ul>
-        <h1>Digital Public Procurement</h1>
+        <h3>Digital Public Procurement</h3>
         <p><span class="bold">On 30 November 2016,</span> the Ministry of Finance, eGovernment Centre, Public Procurement Agency, business associations, NGOs, and IT companies signed a Memorandum to work collaboratively to develop a new digital procurement system for Moldova.</p>
         <p><span class="bold">In April 2017,</span> a pilot of the <span class="bold">MTender</span> – a partnership between the Ministry of Finance and three commercial electronic platforms – achizitii, e-licitatie,  and YTender - has been launched.</p>
         <p>Supported by the European Bank for Reconstruction and Development, the MTender pilot attracted public and commercial buyers and successfully tested brand new concept of cooperative delivery of digital procurement service based on Open Government values of transparency, accountability and engagement with market stakeholders.</p>
