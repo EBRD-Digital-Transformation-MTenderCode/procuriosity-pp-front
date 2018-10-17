@@ -13,7 +13,8 @@
         <p>{{$t("message.register_p3")}}</p>
         <p>{{$t("message.register_p4_before")}}
           <a href="https://achizitii.md/" target="_blank">achizitii</a>,
-          <a href="https://e-licitatie.md/" target="_blank">e-licitatie</a>, {{$t("message.register_p4_bold")}} <a href="https://yptender.md/" target="_blank">YTender</a> {{$t("message.register_p4_after")}}</p>
+          <a href="https://e-licitatie.md/" target="_blank">e-licitatie</a>, {{$t("message.register_p4_bold")}} <a
+              href="https://yptender.md/" target="_blank">YTender</a> {{$t("message.register_p4_after")}}</p>
         <p>{{$t("message.register_p5")}}</p>
       </section>
     </div>

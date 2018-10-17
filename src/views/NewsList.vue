@@ -10,13 +10,13 @@
         <ul class="news-list">
           <li class="news-list__item">
             <div class="news-list__item_date">15 October 2018</div>
-            <router-link to=""  class="news-list__item_title">
+            <router-link to="" class="news-list__item_title">
               New types of electronic tendering procedures are becoming available on the MTender, to suit different types of contracts and serve different public and commercial buyers, including state-owned enterprises.
             </router-link>
           </li>
           <li class="news-list__item">
             <div class="news-list__item_date">15 October 2018</div>
-            <router-link to=""  class="news-list__item_title">
+            <router-link to="" class="news-list__item_title">
               New types of electronic tendering procedures are becoming available on the MTender, to suit different types of contracts and serve different public and commercial buyers, including state-owned enterprises.
             </router-link>
           </li>
@@ -34,7 +34,7 @@
 
 <style lang="scss" scoped>
   @import "./../styles/variables";
-  
+
   .news {
     display: flex;
     padding-top: 50px;

@@ -8,7 +8,7 @@
           :setValue="setFormParams"
           :label="$t('message.search_strict')"
       />
-
+  
       <!-- Titles or descriptions -->
       <search-input
           name="titlesOrDescriptions"
@@ -18,7 +18,7 @@
           :placeholder="$t('message.search_titles_or_descriptions')"
       />
       <button class="search-form__btn search-form__btn_search" />
-
+  
       <!-- @TODO need write more readable classes -->
       <button
           @click="actionExpand"
@@ -40,7 +40,7 @@
                     :placeholder="$t('message.search_buyers_names_placeholder')"
                 />
               </div>
-              
+  
               <!-- Buyers regions -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -95,7 +95,7 @@
                     :placeholder="$t('message.search_buyers_main_sectoral_activity_placeholder')"
                 />
               </div>
-
+  
               <!-- Amount from -->
               <div class="search-form-element">
                 <search-input
@@ -107,7 +107,7 @@
                     :placeholder="$t('message.search_amount_from')"
                 />
               </div>
-
+  
               <!-- Amount to -->
               <div class="search-form-element">
                 <search-input
@@ -155,7 +155,7 @@
                     :placeholder="$t('message.search_deliveries_regions_placeholder')"
                 />
               </div>
-              
+  
               <!-- Period published -->
               <div class="search-form-element">
                 <search-period
@@ -166,7 +166,7 @@
                   {{$t("message.search_published_period")}}:
                 </search-period>
               </div>
-
+  
               <!-- Period delivery -->
               <div class="search-form-element">
                 <search-period
@@ -177,7 +177,7 @@
                   {{$t("message.search_delivery_period")}}:
                 </search-period>
               </div>
-
+  
               <!-- id -->
               <div class="search-form-element">
                 <search-input
@@ -188,7 +188,7 @@
                     prefixIcon=""
                 />
               </div>
-
+  
               <!-- Classifications -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -227,8 +227,8 @@
   import buyersTypesList from "./../../store/types/buyers-types";
   import mainGeneralActivityList from "./../../store/types/main-general-activity-types";
   import mainSectoralActivityList from "./../../store/types/main-sectoral-activity";
-  import MultipleInput from "../FormsComponents/MultipleInput";
-  import ResetButton from "../FormsComponents/ResetButton"
+  import MultipleInput from "./../FormsComponents/MultipleInput";
+  import ResetButton from "./../FormsComponents/ResetButton";
 
   export default {
     name: "PlansSearchForm",
@@ -254,23 +254,23 @@
       ...mapState({
         /* + */titlesOrDescriptions: state => state.entities.plans.searchParams.titlesOrDescriptions,
         /* + */titlesOrDescriptionsStrict: state => state.entities.plans.searchParams.titlesOrDescriptionsStrict,
-
+      
         /* + */buyersRegions: state => state.entities.plans.searchParams.buyersRegions,
         /* + */deliveriesRegions: state => state.entities.plans.searchParams.deliveriesRegions,
-
+      
         /* + */proceduresTypes: state => state.entities.plans.searchParams.proceduresTypes,
         /* + */proceduresStatuses: state => state.entities.plans.searchParams.proceduresStatuses,
-
+      
         /* + */entityId: state => state.entities.plans.searchParams.entityId,
-
+      
         /* + */amountFrom: state => state.entities.plans.searchParams.amountFrom,
         /* + */amountTo: state => state.entities.plans.searchParams.amountTo,
-
+      
         /* + */ classifications: state => state.entities.plans.searchParams.classifications,
-
+      
         /* + */periodPublished: state => state.entities.plans.searchParams.periodPublished,
         /* + */periodDelivery: state => state.entities.plans.searchParams.periodDelivery,
-
+      
         /* + */buyersNames: state => state.entities.plans.searchParams.buyersNames,
         /* + */buyersIdentifiers: state => state.entities.plans.searchParams.buyersIdentifiers,
         /* + */buyersTypes: state => state.entities.plans.searchParams.buyersTypes,

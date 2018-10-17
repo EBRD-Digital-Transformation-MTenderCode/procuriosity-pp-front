@@ -16,7 +16,8 @@
           <li>{{$t("message.about_ul1_li3")}}</li>
         </ul>
         <p>{{$t("message.about_p3_before")}}<span class="bold">{{$t("message.about_p3_bold")}}</span>{{$t("message.about_p3_after")}}</p>
-        <p>{{$t("message.about_p4_before")}}<span class="bold">{{$t("message.about_p4_bold")}}</span>{{$t("message.about_p4_after")}}<span class="bold">{{$t("message.about_p4_bold2")}}</span>{{$t("message.about_p4_after2")}}</p>
+        <p>{{$t("message.about_p4_before")}}<span class="bold">{{$t("message.about_p4_bold")}}</span>{{$t("message.about_p4_after")}}<span
+            class="bold">{{$t("message.about_p4_bold2")}}</span>{{$t("message.about_p4_after2")}}</p>
         <p>{{$t("message.about_p5")}}</p>
         <ul>
           <li><a href="https://achizitii.md/" target="_blank">Achizitii</a></li>

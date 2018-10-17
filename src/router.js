@@ -19,10 +19,10 @@ export default new Router({
       component: () => import(/* webpackChunkName: "List" */ "./components/List.vue")
     },
     /*{
-      path: "/budgets/:id",
-      name: "budget-page",
-      component: () => import(/!* webpackChunkName: "BudgetPage" *!/ "./views/EntitiesPages/BudgetPage.vue")
-    },*/
+     path: "/budgets/:id",
+     name: "budget-page",
+     component: () => import(/!* webpackChunkName: "BudgetPage" *!/ "./views/EntitiesPages/BudgetPage.vue")
+     },*/
     {
       path: "/tenders/:id",
       name: "tender-page",
@@ -64,11 +64,11 @@ export default new Router({
       component: () => import(/* webpackChunkName: "JoinMTender" */ "./views/StaticPages/JoinMTender.vue")
     }
   ],
-  scrollBehavior (to, from, savedPosition) {
+  scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
-      return savedPosition
+      return savedPosition;
     } else {
-      return { x: 0, y: 0 }
+      return { x: 0, y: 0 };
     }
   }
 });

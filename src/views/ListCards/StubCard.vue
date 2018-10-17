@@ -15,7 +15,7 @@
       <el-row type="flex" :gutter="18">
         <el-col :xs="24" :sm="14">
           <div class="entity-title_stub" />
-          <div class="entity-description_stub"/>
+          <div class="entity-description_stub" />
           <!--<div class="entity-links entity-links_stub">
             <a :href="false">
               <img src="@/assets/achizitii.md .png" alt="Achizitii logo" >

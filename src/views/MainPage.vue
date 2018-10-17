@@ -166,7 +166,7 @@
         }
       }
     }
-    &__join-button{
+    &__join-button {
       align-self: flex-start;
       padding: 14px 58px;
       border: none;

@@ -110,7 +110,7 @@
           case "unsuccessful":
             return "entity-status__ico_unsuccessful";
           default:
-            return "entity-status__ico_active"
+            return "entity-status__ico_active";
         }
       },
       parseStatusText() {
