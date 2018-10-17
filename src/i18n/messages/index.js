@@ -1,6 +1,6 @@
-import en from "./en.json";
-import ru from "./ru.json";
-import ro from "./ro.json";
+import en from "./en";
+import ru from "./ru";
+import ro from "./ro";
 
 import enLocale from "element-ui/lib/locale/lang/en";
 import ruLocale from "element-ui/lib/locale/lang/ru-RU";

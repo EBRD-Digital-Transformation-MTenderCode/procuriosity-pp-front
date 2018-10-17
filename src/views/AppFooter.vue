@@ -8,26 +8,31 @@
               <img src="@/assets/logo-footer.png" alt="" class="footer-logo__img">
             </router-link>
             <div class="footer-logo__cr">
-              {{$t("message.footer_logo_cr")}}
+              2018 ©, {{$t("message.footer_logo_cr")}}
             </div>
           </div>
           <nav class="footer-nav">
-            <a href="#">{{$t("message.footer_nav_electronic_tenders")}}</a><br>
-            <a href="#">{{$t("message.footer_nav_for_contracting")}}</a><br>
-            <a href="#">{{$t("message.footer_nav_for_state_owned")}}</a><br>
-            <a href="#">{{$t("message.footer_nav_for_commercial")}}</a><br>
-            <a href="#">{{$t("message.footer_nav_for_suppliers")}}</a><br>
-            <a href="#">{{$t("message.footer_nav_for_civil")}}</a><br>
-            <a href="#">{{$t("message.footer_nav_news")}}</a><br>
-            <a href="#">{{$t("message.footer_nav_FAQ")}}</a><br>
-            <a href="#">{{$t("message.footer_nav_vacancies")}}</a><br>
+            <div>
+              <!--<router-link to="/news">{{$t("message.footer_nav_news")}}</router-link><br>-->
+              <router-link to="/about">{{$t("message.footer_nav_about_MTender")}}</router-link>
+              <router-link to="/register">{{$t("message.footer_nav_register")}}</router-link><br>
+            </div>
+            <div>
+              <a href="#">{{$t("message.footer_nav_legal_framework")}}</a><br>
+              <a href="#">{{$t("message.footer_nav_for_civil")}}</a><br>
+              <a href="#">{{$t("message.footer_nav_security_and_confidentiality")}}</a><br>
+            </div>
+            <div>
+              <a href="#">{{$t("message.footer_nav_join_MTender")}}</a><br>
+              <!--<a href="#">{{$t("message.footer_nav_FAQ")}}</a><br>-->
+            </div>
           </nav>
           <div class="footer-info">
             <div class="footer-info__text">
-              {{$t("message.footer_info_text")}}
+              {{$t("message.footer_info_text")}}:
             </div>
             <div class="footer-info__tel">
-              <a href="tel:+37322022789789">{{$t("message.footer_info_tel")}}</a>
+              <a href="tel:+37322022789789">022 789 789</a>
             </div>
           </div>
         </el-col>
@@ -78,14 +83,19 @@
       }
     }
     &-nav {
-      columns: 3;
-      column-gap: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: flex-start;
       line-height: 1.5;
       @media (max-width: 768px) {
         margin-bottom: 15px;
       }
       @media (max-width: 480px) {
         columns: 2;
+      }
+      div:not(:last-child) {
+        margin-right: 20px;
       }
       a {
         font-size: 12px;

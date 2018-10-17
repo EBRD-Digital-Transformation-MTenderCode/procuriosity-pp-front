@@ -48,21 +48,20 @@ const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
 
 export default {
   state: {
-    plans: {
-      name: "message.entity_plans",
+    /*budgets: {
+      name: "message.entity_budgets",
       loaded: false,
       list: [],
-      searchParams: { ...localStorageEntities.plans.searchParams },
+      searchParams: {...localStorageEntities.budgets.searchParams},
       paginationInfo: {
-        totalCount: 0,
-        pageCount: 0
+        totalCount: 0, pageCount: 0
       }
-    },
+    },*/
     tenders: {
       name: "message.entity_tenders",
       loaded: false,
       list: [],
-      searchParams: { ...localStorageEntities.tenders.searchParams },
+      searchParams: {...localStorageEntities.tenders.searchParams},
       currentTender: {
         cdb: "",
         tenderData: {}
@@ -72,11 +71,21 @@ export default {
         pageCount: 0
       }
     },
+    plans: {
+      name: "message.entity_plans",
+      loaded: false,
+      list: [],
+      searchParams: {...localStorageEntities.plans.searchParams},
+      paginationInfo: {
+        totalCount: 0,
+        pageCount: 0
+      }
+    },
     contracts: {
       name: "message.entity_contracts",
       loaded: false,
       list: [],
-      searchParams: { ...localStorageEntities.contracts.searchParams },
+      searchParams: {...localStorageEntities.contracts.searchParams},
       paginationInfo: {
         totalCount: 0,
         pageCount: 0
@@ -84,7 +93,7 @@ export default {
     }
   },
   mutations: {
-    [SET_ENTITY_LOADED](state, { entity, loaded }) {
+    [SET_ENTITY_LOADED](state, {entity, loaded}) {
       state[entity].loaded = loaded;
     },
 
@@ -105,7 +114,7 @@ export default {
       };
     },
 
-    [SET_ENTITY_SEARCH_PARAMS](state, { entity, params }) {
+    [SET_ENTITY_SEARCH_PARAMS](state, {entity, params}) {
       state[entity] = {
         ...state[entity],
         searchParams: {
@@ -129,19 +138,19 @@ export default {
       localStorage.setItem("entities", JSON.stringify(localStorageEntities));
     },
 
-    [SET_CURRENT_BUDGET_INFO](state, { budgetData }) {
+    [SET_CURRENT_BUDGET_INFO](state, {budgetData}) {
       state.tenders.currentTender = {
         budgetData
       };
     },
 
-    [SET_CURRENT_TENDER_INFO](state, { cdb, tenderData }) {
+    [SET_CURRENT_TENDER_INFO](state, {cdb, tenderData}) {
       state.tenders.currentTender = {
         cdb,
         tenderData
       };
     },
-    [SET_INITIAL_SEARCH_PARAMS](state, { entity }) {
+    [SET_INITIAL_SEARCH_PARAMS](state, {entity}) {
       state[entity].searchParams = initialSearchProps[entity];
 
       const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
@@ -156,7 +165,7 @@ export default {
     }
   },
   actions: {
-    async [FETCH_ENTITY_LIST]({ commit }, { entity, params }) {
+    async [FETCH_ENTITY_LIST]({commit}, {entity, params}) {
       commit(SET_ENTITY_LOADED, {
         entity,
         loaded: false
@@ -185,7 +194,7 @@ export default {
         console.log(e.message);
       }
     },
-    async [FETCH_CURRENT_BUDGET_INFO]({ commit }, { id }) {
+    async [FETCH_CURRENT_BUDGET_INFO]({commit}, {id}) {
       try {
         const res = await axios(getBudgetConfig(id));
         console.log(res);
@@ -199,7 +208,7 @@ export default {
       }
     },
 
-    async [FETCH_CURRENT_TENDER_INFO]({ commit }, { cdb, id }) {
+    async [FETCH_CURRENT_TENDER_INFO]({commit}, {cdb, id}) {
       try {
         const res = await axios(getTenderConfig(cdb, id));
 

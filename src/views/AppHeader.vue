@@ -5,15 +5,15 @@
         <el-row :gutter="30">
           <el-col>
             <div class="header-logo-ebrd">
-              <a href="/" class="header-logo-ebrd__link">
+              <router-link to="/" class="header-logo-ebrd__link">
                 <img src="@/assets/logo-ebrd.png" class="header-logo-ebrd__img" alt="EBRD">
-              </a>
+              </router-link>
               <div class="header-logo-ebrd__text">
                 <div>{{$t("message.header_ebrd_line1")}}</div>
                 <div>{{$t("message.header_ebrd_line2")}}</div>
               </div>
             </div>
-            <!--<locale-toggle />-->
+            <locale-toggle />
           </el-col>
         </el-row>
       </el-container>
@@ -26,14 +26,14 @@
               <img src="@/assets/logo.png" class="header-logo-mtender__img" alt="MTender">
             </router-link>
             <nav class="header-static-nav">
-              <a href="#">{{$t("message.header_static_nav_news")}}</a>
-              <a href="#">{{$t("message.header_static_nav_about_MTender")}}</a>
-              <a href="#">{{$t("message.header_static_nav_register")}}</a>
-              <a href="#">{{$t("message.header_static_nav_legal_framework")}}</a>
-              <a href="#">{{$t("message.header_static_nav_for_civil")}}</a>
-              <a href="#">{{$t("message.header_static_nav_security_and_confidentiality")}}</a>
-              <a href="#">{{$t("message.header_static_nav_join_MTender")}}</a>
-              <a href="#">{{$t("message.header_static_nav_FAQ")}}</a>
+              <!--<router-link to="/news">{{$t("message.header_static_nav_news")}}</router-link>-->
+              <router-link to="/about">{{$t("message.header_static_nav_about_MTender")}}</router-link>
+              <router-link to="/register">{{$t("message.header_static_nav_register")}}</router-link>
+              <router-link to="/legal-framework">{{$t("message.header_static_nav_legal_framework")}}</router-link>
+              <router-link to="/for-civil">{{$t("message.header_static_nav_for_civil")}}</router-link>
+              <router-link to="/security-and-confidentiality">{{$t("message.header_static_nav_security_and_confidentiality")}}</router-link>
+              <router-link to="/join-mtender">{{$t("message.header_static_nav_join_MTender")}}</router-link>
+              <!--<a href="#">{{$t("message.header_static_nav_FAQ")}}</a>-->
             </nav>
           </el-col>
         </el-row>
@@ -55,14 +55,14 @@
 <script>
   import { mapState } from "vuex";
 
-  /*import LocaleToggle from "./../components/LocaleToggle";*/
+  import LocaleToggle from "./../components/LocaleToggle";
 
   import "./../assets/logo.png";
 
   export default {
     name: "AppHeader",
     components: {
-      /*"locale-toggle": LocaleToggle*/
+      "locale-toggle": LocaleToggle
     },
     computed: {
       ...mapState(["entities"])
@@ -80,10 +80,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-
     }
     &-first {
-      padding: 15px 0;
+      padding: 9px 0 5px;
       background-color: $mainC;
       color: #fff;
       .el-col {
@@ -117,7 +116,7 @@
         }
         &__img {
           height: 30px;
-          margin-right: 15px;
+          margin-right: 20px;
           @media (max-width: 400px) {
             height: 40px;
             margin-left: auto;
@@ -126,6 +125,7 @@
           }
         }
         &__text {
+          line-height: 1.1;
           font-size: 11px;
           @media (max-width: 400px) {
             width: 100%;
@@ -155,7 +155,7 @@
       justify-content: flex-end;
       align-self: flex-start;
       flex-wrap: wrap;
-      max-width: 43%;
+      max-width: 50%;
       text-align: right;
       @media (max-width: 900px) {
         max-width: 100%;
@@ -185,7 +185,7 @@
     &-entity-nav {
       display: flex;
       justify-content: space-between;
-      margin-top: 30px;
+      margin-top: 22px;
       @media (max-width: 860px) {
         flex-direction: column;
       }
@@ -197,7 +197,6 @@
         border-radius: 3px 3px 0 0;
         background-color: #efefef;
         white-space: nowrap;
-        font-family: "Open Sans";
         text-align: center;
         line-height: 1;
         font-size: 20px;
