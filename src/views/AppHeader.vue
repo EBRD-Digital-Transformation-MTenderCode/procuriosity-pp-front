@@ -27,7 +27,7 @@
             </router-link>
             <nav class="header-static-nav">
               <!--<router-link to="/news">{{$t("message.header_static_nav_news")}}</router-link>-->
-              <a href="#">{{$t("message.header_static_nav_about_MTender")}}</a>
+              <router-link to="/about">{{$t("message.header_static_nav_about_MTender")}}</router-link>
               <router-link to="/register">{{$t("message.header_static_nav_register")}}</router-link>
               <router-link to="/legal-framework">{{$t("message.header_static_nav_legal_framework")}}</router-link>
               <router-link to="/for-civil">{{$t("message.header_static_nav_for_civil")}}</router-link>

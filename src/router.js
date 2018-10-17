@@ -49,6 +49,11 @@ export default new Router({
       component: () => import(/* webpackChunkName: "ForCivil" */ "./views/StaticPages/ForCivil.vue")
     },
     {
+      path: "/about",
+      name: "about",
+      component: () => import(/* webpackChunkName: "About" */ "./views/StaticPages/About.vue")
+    },
+    {
       path: "/security-and-confidentiality",
       name: "security-and-confidentiality",
       component: () => import(/* webpackChunkName: "SecurityAndConfidentiality" */ "./views/StaticPages/SecurityAndConfidentiality.vue")
