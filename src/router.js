@@ -47,6 +47,16 @@ export default new Router({
       path: "/for-civil",
       name: "for-civil",
       component: () => import(/* webpackChunkName: "ForCivil" */ "./views/StaticPages/ForCivil.vue")
+    },
+    {
+      path: "/security-and-confidentiality",
+      name: "security-and-confidentiality",
+      component: () => import(/* webpackChunkName: "SecurityAndConfidentiality" */ "./views/StaticPages/SecurityAndConfidentiality.vue")
+    },
+    {
+      path: "/join-mtender",
+      name: "join-mtender",
+      component: () => import(/* webpackChunkName: "JoinMTender" */ "./views/StaticPages/JoinMTender.vue")
     }
   ],
   scrollBehavior (to, from, savedPosition) {

@@ -29,10 +29,10 @@
               <!--<router-link to="/news">{{$t("message.header_static_nav_news")}}</router-link>-->
               <a href="#">{{$t("message.header_static_nav_about_MTender")}}</a>
               <router-link to="/register">{{$t("message.header_static_nav_register")}}</router-link>
-              <router-link to="legal-framework">{{$t("message.header_static_nav_legal_framework")}}</router-link>
-              <router-link to="for-civil">{{$t("message.header_static_nav_for_civil")}}</router-link>
-              <a href="#">{{$t("message.header_static_nav_security_and_confidentiality")}}</a>
-              <a href="#">{{$t("message.header_static_nav_join_MTender")}}</a>
+              <router-link to="/legal-framework">{{$t("message.header_static_nav_legal_framework")}}</router-link>
+              <router-link to="/for-civil">{{$t("message.header_static_nav_for_civil")}}</router-link>
+              <router-link to="/security-and-confidentiality">{{$t("message.header_static_nav_security_and_confidentiality")}}</router-link>
+              <router-link to="/join-mtender">{{$t("message.header_static_nav_join_MTender")}}</router-link>
               <!--<a href="#">{{$t("message.header_static_nav_FAQ")}}</a>-->
             </nav>
           </el-col>
