@@ -10,7 +10,7 @@
     >
       
       <EN v-if="this.$i18n.locale === 'en'" />
-      <!--<RU v-if="this.$i18n.locale === 'ru'" />-->
+      <RU v-if="this.$i18n.locale === 'ru'" />
       <RO v-if="this.$i18n.locale === 'ro'" />
       <i class="el-icon-caret-bottom el-icon--right" />
     </span>
@@ -22,7 +22,7 @@
           divided
       >
         <EN v-if="locale === 'en'" />
-        <!--<RU v-if="locale === 'ru'" />-->
+        <RU v-if="locale === 'ru'" />
         <RO v-if="locale === 'ro'" />
       </el-dropdown-item>
     </el-dropdown-menu>

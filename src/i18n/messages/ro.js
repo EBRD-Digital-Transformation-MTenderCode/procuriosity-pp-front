@@ -25,6 +25,22 @@ export default {
 
     "footer_info_text": "Linia info",
 
+    "main_title":"Conducerea prin exemplu",
+    "main_total_saving":"Economii totale",
+    "main_news":" Noutăți",
+    "main_join":"Alătura",
+    "main_news1":"Noi tipuri de proceduri de licitație desfășurate electronic devin disponibile pe MTender, pentru a corespunde diferitelor tipuri de contracte și a servi diferitor cumpărători publici și din sectorul privat, inclusiv întreprinderilor de stat. Ministerul Finanțelor din Moldova introduce primele proceduri electronice de achiziții publice de licitație deschisă, cererea ofertelor de prețuri, negocierea fără publicarea prealabilă a unui anunț de participare. Ghidurile privind procedurile electronice de achiziții publice vor fi disponibile în scurt timp de la Agenția Achiziții Publice.",
+    "main_news2":"În perioada 22-26 octombrie 2018, Ministerul Finanțelor din Moldova și Președintele Parlamentului Republicii Moldova găzduiesc Seminarul Regional al OMC pentru Părțile AAP (Acordul privind achizițiile publice) și Guvernele cu Statut de Observator AAP din Europa Centrală, Balcanii de Vest, Caucaz și Asia Centrală, inclusiv o sesiune pe tema achizițiile publice digitale în Moldova.Înregistrați-vă pentru a participa la ședința PNUD privind Guvernarea Deschisă și Cheltuielile Publice din 22 octombrie.",
+    "main_news3":"Începând cu 26 octombrie 2018, proceduri de licitare competitive și transparente, dar ușor de utilizat online, cu cele mai mici prețuri și criterii de selecție bazate pe preț sau pe alte criterii nelegate de preț, vor fi oferite întreprinderilor de stat și clienților din sectorul privat interesați. Întreprinderile de stat și clienții din sectorul privat pot utiliza, de asemenea, serviciul online MTender de semnare a contractului.",
+    "main_h11":"Ce este Mteder",
+    "main_p1":"Ministerul Finanțelor al Republicii Moldova conduce o tranziție la achizițiile publice electronice pentru a asigura o utilizare mai transparentă și mai eficientă a bugetului de stat al Republicii Moldova. Noul serviciu guvernamental digital - MTender - va sprijini achizițiile publice de la planificarea achiziției până la plata pentru contractele de achiziții publice. Acesta va scurta timpul pentru licitații pentru instituțiile publice și timpul de așteptare pentru plăți pentru furnizori și contractori.",
+    "main_ul1_li1":"Cu serviciul digital MTender, toate licitațiile publice sunt accesibile online și fiecare decizie de achiziție publică este publicată în mod transparent online în timp real. Cetățenii pot urmări deciziile privind achizițiile publice și modul în care sunt cheltuiți banii plătitorilor de impozite pentru serviciile publice.",
+    "main_ul1_li2":"Din cauza licitațiilor online și ușor de participat, noul serviciu de achiziții publice complet electronic va oferi un acces mai bun la oportunitățile din achizițiile publice pentru comunitatea de afaceri, în special întreprinderile mici și mijlocii locale.",
+    "main_ul1_li3":"Pentru instituțiile publice, noul serviciu digital va aduce, de asemenea, o planificare îmbunătățită a cheltuielilor, achiziții mai rapide și mai de calitate, ca urmare a procedurilor electronice de licitare care implică ”zero hârtie”.",
+    "main_p2":"Sistemul MTender este un sistem electronic online de achiziții electronice cu multiple platforme, alcătuit dintr-un portal web și o Unitate Centrală de Date de date de tip deschis (Open Data) și o rețea cu mai multe platforme din sectorul privat acreditate pentru a sprijini licitațiile desfășurate electronic pentru clienții din sectorul public și sectorul privat.",
+    "main_p3":"Platforma electronica de achiziții MTender este o platformă comercială electronică de achiziții publice, acreditată pentru conectarea cu sistemul MTender și oferă servicii de licitație electronică digitală atât clienților din sectorul public, cât și cumpărătorilor din sectorul privat. Fiecare platformă de achiziții MTender oferă un serviciu de asistență (Help Desk) pentru cumpărători și operatori economici înregistrați pe această platformă pentru a accesa serviciile electronice ale MTender.",
+    "main_p4":"În prezent, MTender este conectată la următoarele platforme:",
+
     "entity_budgets": "Budgets",
     "entity_plans": "Planificarea Achizițiilor",
     "entity_tenders": "Buletinul Achizițiilor Buplice",
@@ -127,6 +143,7 @@ export default {
     "about_p12_after":" procedurile de licitare online transparente, dar ușor de utilizat, cu cele mai mici prețuri și criterii de selecție bazate pe preț sau pe alte criterii nelegate de preț, vor fi disponibile întreprinderilor de stat și clienților din sectorul privat interesați.",
     "about_p13_before":"Delegația UE în Moldova s-a oferit să sprijine Ministerul Finanțelor și să dezvolte pe viitor sistemul MTender - instrumente mai moderne de achiziție, inclusiv sistemul dinamic de achiziție și parteneriatul pentru inovare - vor fi disponibile ",
     "about_p13_bold":"în perioada 2019-2020.",
+    "about_p13_after":"",
 
     "legal_framework_title":"Legislația relevantă",
     "legal_framework_h11":"Legi și Regulamente",
