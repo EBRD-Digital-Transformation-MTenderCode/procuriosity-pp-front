@@ -3,17 +3,17 @@
     <div class="static">
       <aside class="static-aside">
         <div class="static-aside__title">
-          Legal framework
+          {{$t("message.legal_framework_title")}}
         </div>
       </aside>
       <section class="static-content">
-        <h1>Laws and regulations</h1>
-        <p>List below includes every new legislation on digital public procurement as soon as published by the Government of Moldova.</p>
+        <h1> {{$t("message.legal_framework_h11")}}</h1>
+        <p>L{{$t("message.legal_framework_p1")}}</p>
         <ul>
-          <li>Law on public procurement  - link to the published law</li>
-          <li>Terms of use of the MTender – link to provided doc</li>
-          <li>Mandatory minimum requirements for economic operators – link to provided doc (to be replaced by lint to ESPD when ready)</li>
-          <li>MTender standard online contracts – link to published contract templates in ENG and in RUS</li>
+          <li>{{$t("message.legal_framework_ul1_li1")}}</li>
+          <li>{{$t("message.legal_framework_ul1_li2")}}</li>
+          <li>{{$t("message.legal_framework_ul1_li3")}}</li>
+          <li>{{$t("message.legal_framework_ul1_li4")}}</li>
         </ul>
       </section>
     </div>
