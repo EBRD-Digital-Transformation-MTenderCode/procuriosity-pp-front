@@ -31,7 +31,7 @@
         <p><span class="bold">{{$t("message.about_p10_bold")}}</span>{{$t("message.about_p10_after")}}</p>
         <p><span class="bold">{{$t("message.about_p11_bold")}}</span>{{$t("message.about_p11_after")}}</p>
         <p><span class="bold">{{$t("message.about_p12_bold")}}</span>{{$t("message.about_p12_after")}}</p>
-        <p>{{$t("message.about_p13_before")}}<span class="bold">{{$t("message.about_p13_bold")}}</span></p>
+        <p>{{$t("message.about_p13_before")}}<span class="bold">{{$t("message.about_p13_bold")}}</span> {{$t("message.about_p13_after")}}</p>
       </section>
     </div>
   </el-container>
