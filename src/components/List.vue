@@ -7,7 +7,7 @@
       />
       <div class="list-status-bar">
         <div class="list-status-bar__text">
-          Total found: <span class="list-status-bar__count">{{ entities[entityName].paginationInfo.totalCount }}</span>
+          {{$t("message.list_total_found")}}: <span class="list-status-bar__count">{{ entities[entityName].paginationInfo.totalCount }}</span>
         </div>
       </div>
       <transition-group

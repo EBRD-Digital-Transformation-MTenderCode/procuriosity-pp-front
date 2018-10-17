@@ -19,11 +19,11 @@
         <p>{{$t("message.about_p4_before")}}<span class="bold">{{$t("message.about_p4_bold")}}</span>{{$t("message.about_p4_after")}}<span class="bold">{{$t("message.about_p4_bold2")}}</span>{{$t("message.about_p4_after2")}}</p>
         <p>{{$t("message.about_p5")}}</p>
         <ul>
-          <li><a href="https://achizitii.md/" target="_blank">{{$t("message.about_ul2_li1")}}</a></li>
-          <li><a href="https://e-licitatie.md/" target="_blank">{{$t("message.about_ul2_li2")}}</a></li>
-          <li><a href="https://yptender.md/" target="_blank">{{$t("message.about_ul2_li3")}}</a></li>
+          <li><a href="https://achizitii.md/" target="_blank">Achizitii</a></li>
+          <li><a href="https://e-licitatie.md/" target="_blank">E-licitatie</a></li>
+          <li><a href="https://yptender.md/" target="_blank">YTender</a></li>
         </ul>
-        <h1>{{$t("message.about_h12")}}</h1>
+        <h3>{{$t("message.about_h12")}}</h3>
         <p><span class="bold">{{$t("message.about_p6_bold")}}</span>{{$t("message.about_p6_after")}}</p>
         <p><span class="bold">{{$t("message.about_p7_bold")}}</span>{{$t("message.about_p7_after")}}<span class="bold">{{$t("message.about_p7_bold2")}}</span>{{$t("message.about_p7_after2")}}</p>
         <p>{{$t("message.about_p8")}}</p>

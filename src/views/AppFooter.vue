@@ -14,16 +14,16 @@
           <nav class="footer-nav">
             <div>
               <!--<router-link to="/news">{{$t("message.footer_nav_news")}}</router-link><br>-->
-              <router-link to="/about">{{$t("message.footer_nav_about_MTender")}}</router-link>
-              <router-link to="/register">{{$t("message.footer_nav_register")}}</router-link><br>
+              <router-link active-class="footer-nav_active" to="/about">{{$t("message.footer_nav_about_MTender")}}</router-link><br>
+              <router-link active-class="footer-nav_active" to="/register">{{$t("message.footer_nav_register")}}</router-link><br>
             </div>
             <div>
-              <a href="#">{{$t("message.footer_nav_legal_framework")}}</a><br>
-              <a href="#">{{$t("message.footer_nav_for_civil")}}</a><br>
-              <a href="#">{{$t("message.footer_nav_security_and_confidentiality")}}</a><br>
+              <router-link active-class="footer-nav_active" to="/legal-framework">{{$t("message.footer_nav_legal_framework")}}</router-link><br>
+              <router-link active-class="footer-nav_active" to="/for-civil">{{$t("message.footer_nav_for_civil")}}</router-link><br>
+              <router-link active-class="footer-nav_active" to="/security-and-confidentiality">{{$t("message.footer_nav_security_and_confidentiality")}}</router-link><br>
             </div>
             <div>
-              <a href="#">{{$t("message.footer_nav_join_MTender")}}</a><br>
+              <router-link active-class="footer-nav_active" to="/join-mtender">{{$t("message.footer_nav_join_MTender")}}</router-link><br>
               <!--<a href="#">{{$t("message.footer_nav_FAQ")}}</a><br>-->
             </div>
           </nav>
@@ -93,6 +93,9 @@
       }
       @media (max-width: 480px) {
         columns: 2;
+      }
+      &_active {
+        color: #000 !important;
       }
       div:not(:last-child) {
         margin-right: 20px;

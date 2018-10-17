@@ -34,6 +34,11 @@ export default new Router({
       component: () => import(/* webpackChunkName: "News" */ "./views/NewsList.vue")
     },
     {
+      path: "/about",
+      name: "about",
+      component: () => import(/* webpackChunkName: "About" */ "./views/StaticPages/About.vue")
+    },
+    {
       path: "/register",
       name: "register",
       component: () => import(/* webpackChunkName: "Register" */ "./views/StaticPages/Register.vue")
@@ -47,11 +52,6 @@ export default new Router({
       path: "/for-civil",
       name: "for-civil",
       component: () => import(/* webpackChunkName: "ForCivil" */ "./views/StaticPages/ForCivil.vue")
-    },
-    {
-      path: "/about",
-      name: "about",
-      component: () => import(/* webpackChunkName: "About" */ "./views/StaticPages/About.vue")
     },
     {
       path: "/security-and-confidentiality",

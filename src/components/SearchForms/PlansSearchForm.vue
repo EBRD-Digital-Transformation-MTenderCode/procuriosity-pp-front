@@ -15,7 +15,7 @@
           :value="titlesOrDescriptions"
           :setValue="setFormParams"
           prefixIcon
-          :placeholder="$t('message.search_placeholder')"
+          :placeholder="$t('message.search_titles_or_descriptions')"
       />
       <button class="search-form__btn search-form__btn_search" />
 
@@ -37,7 +37,7 @@
                     name="buyersNames"
                     :values="buyersNames"
                     :setValues="setFormParams"
-                    :placeholder="$t('message.search_procedures_buyers_names_placeholder')"
+                    :placeholder="$t('message.search_buyers_names_placeholder')"
                 />
               </div>
               
@@ -49,7 +49,7 @@
                     :values="buyersRegions"
                     :setValues="setFormParams"
                     needFetch
-                    :placeholder="$t('message.search_region_placeholder')"
+                    :placeholder="$t('message.search_buyers_region_placeholder')"
                 />
               </div>
   
@@ -59,7 +59,7 @@
                     name="buyersIdentifiers"
                     :values="buyersIdentifiers"
                     :setValues="setFormParams"
-                    :placeholder="$t('message.search_procedures_buyers_identifiers_placeholder')"
+                    :placeholder="$t('message.search_buyers_identifiers_placeholder')"
                 />
               </div>
   
@@ -70,7 +70,7 @@
                     :items="buyersTypesList"
                     :values="buyersTypes"
                     :setValues="setFormParams"
-                    :placeholder="$t('message.search_procedures_types_of_buyers_placeholder')"
+                    :placeholder="$t('message.search_buyers_types_placeholder')"
                 />
               </div>
   
@@ -81,7 +81,7 @@
                     :items="mainGeneralActivityList"
                     :values="buyersMainGeneralActivities"
                     :setValues="setFormParams"
-                    :placeholder="$t('message.search_procedures_buyers_main_general_activity_placeholder')"
+                    :placeholder="$t('message.search_buyers_main_general_activity_placeholder')"
                 />
               </div>
   
@@ -92,7 +92,7 @@
                     :items="mainSectoralActivityList"
                     :values="buyersMainSectoralActivities"
                     :setValues="setFormParams"
-                    :placeholder="$t('message.search_procedures_buyers_main_sectoral_activity_placeholder')"
+                    :placeholder="$t('message.search_buyers_main_sectoral_activity_placeholder')"
                 />
               </div>
 
@@ -129,7 +129,7 @@
                     :items="proceduresTypesList"
                     :values="proceduresTypes"
                     :setValues="setFormParams"
-                    :placeholder="$t('message.search_procedures_types_placeholder')"
+                    :placeholder="$t('message.search_types_procedures_placeholder')"
                 />
               </div>
   
@@ -140,7 +140,7 @@
                     :items="proceduresStatusesList"
                     :values="proceduresStatuses"
                     :setValues="setFormParams"
-                    :placeholder="$t('message.search_procedures_statuses_placeholder')"
+                    :placeholder="$t('message.search_statuses_procedures_placeholder')"
                 />
               </div>
   
@@ -163,7 +163,7 @@
                     :value="periodPublished"
                     :setValue="setFormParams"
                 >
-                  {{$t("message.search_published_period")}}
+                  {{$t("message.search_published_period")}}:
                 </search-period>
               </div>
 
@@ -174,7 +174,7 @@
                     :value="periodDelivery"
                     :setValue="setFormParams"
                 >
-                  {{$t("message.search_delivery_period")}}
+                  {{$t("message.search_delivery_period")}}:
                 </search-period>
               </div>
 
@@ -204,9 +204,7 @@
           </el-row>
           <!-- Reset button -->
           <div class=" search-form__reset-button-wp">
-            <reset-button
-                entity="plans"
-            ></reset-button>
+            <reset-button entity="plans" />
           </div>
         </div>
       </div>

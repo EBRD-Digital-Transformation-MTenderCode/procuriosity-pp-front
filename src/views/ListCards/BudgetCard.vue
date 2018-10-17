@@ -19,14 +19,14 @@
           <div class="entity-description">
             {{ description }}
           </div>
-          <div class="entity-links">
+          <!--<div class="entity-links">
             <a :href="`https://achizitii.md/${$i18n.locale}/budgets/${id}`" target="_blank">
               <img src="@/assets/achizitii.md .png" alt="Achizitii logo" >
             </a>
             <a :href="`https://e-licitatie.md/${$i18n.locale}/budget/${id}`" target="_blank">
               <img src="@/assets/e-lici.png" alt="E-lici logo" >
             </a>
-          </div>
+          </div>-->
         </el-col>
         <el-col :xs="24" :sm="6">
           <div class="entity-amount"

@@ -51,19 +51,19 @@
         </el-col>
         <el-col :xs="24" :sm="4">
           <div class="entity-pe-name">
-            <div class="title">{{$t("message.tender_card_procuring_entity_name")}}</div>
+            <div class="title">{{$t("message.tender_card_procuring_entity_name")}}:</div>
             <div class="text">{{ peName }}</div>
           </div>
           <div class="entity-region">
-            <div class="title">{{$t("message.tender_card_buyer_region")}}</div>
+            <div class="title">{{$t("message.tender_card_buyer_region")}}:</div>
             <div class="text">{{ region }}</div>
           </div>
           <div class="entity-type">
-            <div class="title">{{$t("message.tender_card_procedure_type")}}</div>
+            <div class="title">{{$t("message.tender_card_procedure_type")}}:</div>
             <div class="text text__status">{{ type }}</div>
           </div>
           <div class="entity-id">
-            <div class="title">{{$t("message.tender_card_tender_id")}}</div>
+            <div class="title">{{$t("message.tender_card_tender_id")}}:</div>
             <div class="text">{{ entityId }}</div>
           </div>
         </el-col>
