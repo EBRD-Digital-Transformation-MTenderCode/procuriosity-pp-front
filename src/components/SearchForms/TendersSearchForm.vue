@@ -8,7 +8,7 @@
           :setValue="setFormParams"
           :label="$t('message.search_strict')"
       />
-
+  
       <!-- Titles or descriptions -->
       <search-input
           name="titlesOrDescriptions"
@@ -18,7 +18,7 @@
           :placeholder="$t('message.search_titles_or_descriptions')"
       />
       <button class="search-form__btn search-form__btn_search" />
-
+  
       <!-- @TODO need write more readable classes -->
       <button
           @click="actionExpand"
@@ -40,7 +40,7 @@
                     :placeholder="$t('message.search_buyers_names_placeholder')"
                 />
               </div>
-              
+  
               <!-- Buyers regions -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -95,7 +95,7 @@
                     :placeholder="$t('message.search_buyers_main_sectoral_activity_placeholder')"
                 />
               </div>
-
+  
               <!-- Delivery regions -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -131,7 +131,7 @@
                     :placeholder="$t('message.search_amount_to')"
                 />
               </div>
-
+  
               <!-- Procedure types -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -142,7 +142,7 @@
                     :placeholder="$t('message.search_types_procedures_placeholder')"
                 />
               </div>
-
+  
               <!-- Procedure statuses -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -166,7 +166,7 @@
                   {{$t("message.search_published_period")}}:
                 </search-period>
               </div>
-
+  
               <!-- Period delivery -->
               <div class="search-form-element">
                 <search-period
@@ -177,7 +177,7 @@
                   {{$t("message.search_delivery_period")}}:
                 </search-period>
               </div>
-
+  
               <!-- Period enquiry -->
               <div class="search-form-element">
                 <search-period
@@ -188,7 +188,7 @@
                   {{$t("message.search_enquiry_period")}}:
                 </search-period>
               </div>
-
+  
               <!-- Period offer -->
               <div class="search-form-element">
                 <search-period
@@ -199,7 +199,7 @@
                   {{$t("message.search_offer_period")}}:
                 </search-period>
               </div>
-
+  
               <!-- Period auction -->
               <div class="search-form-element">
                 <search-period
@@ -210,7 +210,7 @@
                   {{$t("message.search_auction_period")}}:
                 </search-period>
               </div>
-
+  
               <!-- Period Award -->
               <div class="search-form-element">
                 <search-period
@@ -221,7 +221,7 @@
                   {{$t("message.search_award_period")}}:
                 </search-period>
               </div>
-
+  
               <!-- id -->
               <div class="search-form-element">
                 <search-input
@@ -232,7 +232,7 @@
                     prefixIcon=""
                 />
               </div>
-
+  
               <!-- Classifications -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -272,8 +272,8 @@
   import mainGeneralActivityList from "./../../store/types/main-general-activity-types";
   import mainSectoralActivityList from "./../../store/types/main-sectoral-activity";
   import entities from "../../store/entities";
-  import MultipleInput from "../FormsComponents/MultipleInput";
-  import ResetButton from "../FormsComponents/ResetButton";
+  import MultipleInput from "./../FormsComponents/MultipleInput";
+  import ResetButton from "./../FormsComponents/ResetButton";
 
   export default {
     name: "TendersSearchForm",
@@ -299,27 +299,27 @@
       ...mapState({
         /* + */titlesOrDescriptions: state => state.entities.tenders.searchParams.titlesOrDescriptions,
         /* + */titlesOrDescriptionsStrict: state => state.entities.tenders.searchParams.titlesOrDescriptionsStrict,
-
+      
         /* + */buyersRegions: state => state.entities.tenders.searchParams.buyersRegions,
         /* + */deliveriesRegions: state => state.entities.tenders.searchParams.deliveriesRegions,
-
+      
         /* + */proceduresTypes: state => state.entities.tenders.searchParams.proceduresTypes,
         /* + */proceduresStatuses: state => state.entities.tenders.searchParams.proceduresStatuses,
-
+      
         /* + */entityId: state => state.entities.tenders.searchParams.entityId,
-
+      
         /* + */amountFrom: state => state.entities.tenders.searchParams.amountFrom,
         /* + */amountTo: state => state.entities.tenders.searchParams.amountTo,
-
+      
         /* + */ classifications: state => state.entities.tenders.searchParams.classifications,
-
+      
         /* + */periodPublished: state => state.entities.tenders.searchParams.periodPublished,
         /* + */periodDelivery: state => state.entities.tenders.searchParams.periodDelivery,
         /* + */periodEnquiry: state => state.entities.tenders.searchParams.periodEnquiry,
         /* + */periodOffer: state => state.entities.tenders.searchParams.periodOffer,
         /* + */periodAuction: state => state.entities.tenders.searchParams.periodAuction,
         /* + */periodAward: state => state.entities.tenders.searchParams.periodAward,
-
+      
         /* + */buyersNames: state => state.entities.tenders.searchParams.buyersNames,
         /* + */buyersIdentifiers: state => state.entities.tenders.searchParams.buyersIdentifiers,
         /* + */buyersTypes: state => state.entities.tenders.searchParams.buyersTypes,

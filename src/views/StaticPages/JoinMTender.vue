@@ -14,9 +14,12 @@
         <p>{{$t("message.join_p3")}}</p>
         <ul>
           <li>{{$t("message.join_ul1li1")}}</li>
-          <li>{{$t("message.join_ul1li2_before")}}<span class="bold">{{$t("message.join_ul1li2_bold")}}</span>{{$t("message.join_ul1li2_after")}}</li>
+          <i18n path="message.join_ul1li2" tag="li">
+            <span class="bold" place="join_ul1li2_place">{{$t("message.join_ul1li2_bold")}}</span>
+          </i18n>
         </ul>
         <h3>{{$t("message.join_h32")}}</h3>
+        <p>{{$t("message.join_p4")}}</p>
         <p>{{$t("message.join_p4")}}</p>
         <p>{{$t("message.join_p5")}}</p>
         <p>{{$t("message.join_p6")}}</p>

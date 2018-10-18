@@ -4,17 +4,17 @@
       <slot></slot>
     </label>
     <el-date-picker
-      v-model="inputValue"
-      type="datetimerange"
-      :range-separator="$t('message.range_separator')"
-      :start-placeholder="$t('message.start_date_placeholder')"
-      :end-placeholder="$t('message.end_date_placeholder')"
-      clearable
-      unlink-panels
-      align="center"
-      time-arrow-control
-      format="dd MM yyyy HH:mm"
-      :editable="false"
+        v-model="inputValue"
+        type="datetimerange"
+        :range-separator="$t('message.range_separator')"
+        :start-placeholder="$t('message.start_date_placeholder')"
+        :end-placeholder="$t('message.end_date_placeholder')"
+        clearable
+        unlink-panels
+        align="center"
+        time-arrow-control
+        format="dd MM yyyy HH:mm"
+        :editable="false"
     />
   </div>
 </template>

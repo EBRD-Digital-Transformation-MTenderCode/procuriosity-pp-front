@@ -8,7 +8,7 @@
         :page-size="pageSize"
         :total="total"
         :pager-count="5"
-
+    
         @prev-click="_changePage"
         @next-click="_changePage"
         @current-change="_changePage"

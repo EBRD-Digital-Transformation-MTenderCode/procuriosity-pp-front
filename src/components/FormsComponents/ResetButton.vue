@@ -1,6 +1,6 @@
 <template>
   <el-button
-      class = "search-form__reset-button"
+      class="search-form__reset-button"
       type="warning"
       plain
       @click="reset">

@@ -18,5 +18,5 @@ export default {
   ru: {
     ...ruLocale,
     ...ru
-  },
+  }
 };

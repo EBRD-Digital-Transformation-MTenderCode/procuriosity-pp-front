@@ -8,7 +8,7 @@
           :setValue="setFormParams"
           :label="$t('message.search_strict')"
       />
-
+  
       <!-- Titles or descriptions -->
       <search-input
           name="titlesOrDescriptions"
@@ -18,7 +18,7 @@
           :placeholder="$t('message.search_titles_or_descriptions')"
       />
       <button class="search-form__btn search-form__btn_search" />
-
+  
       <!-- @TODO need write more readable classes -->
       <button
           @click="actionExpand"
@@ -40,7 +40,7 @@
                     :placeholder="$t('message.search_buyers_names_placeholder')"
                 />
               </div>
-              
+  
               <!-- Buyers regions -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -52,7 +52,7 @@
                     :placeholder="$t('message.search_buyers_region_placeholder')"
                 />
               </div>
-
+  
               <!-- Delivery regions -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -131,7 +131,7 @@
                     :placeholder="$t('message.search_amount_to')"
                 />
               </div>
-              
+  
               <!-- Procedure types -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -142,7 +142,7 @@
                     :placeholder="$t('message.search_types_procedures_placeholder')"
                 />
               </div>
-
+  
               <!-- Procedure statuses -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -167,7 +167,7 @@
                   {{$t("message.search_published_period")}}:
                 </search-period>
               </div>
-
+  
               <!-- Period delivery -->
               <div class="search-form-element">
                 <search-period
@@ -178,7 +178,7 @@
                   {{$t("message.search_delivery_period")}}:
                 </search-period>
               </div>
-
+  
               <!-- Period enquiry -->
               <div class="search-form-element">
                 <search-period
@@ -189,7 +189,7 @@
                   {{$t("message.search_enquiry_period")}}:
                 </search-period>
               </div>
-
+  
               <!-- Period offer -->
               <div class="search-form-element">
                 <search-period
@@ -200,7 +200,7 @@
                   {{$t("message.search_offer_period")}}:
                 </search-period>
               </div>
-
+  
               <!-- Period auction -->
               <div class="search-form-element">
                 <search-period
@@ -211,7 +211,7 @@
                   {{$t("message.search_auction_period")}}:
                 </search-period>
               </div>
-
+  
               <!-- Period Award -->
               <div class="search-form-element">
                 <search-period
@@ -222,7 +222,7 @@
                   {{$t("message.search_award_period")}}:
                 </search-period>
               </div>
-
+  
               <!-- id -->
               <div class="search-form-element">
                 <search-input
@@ -233,7 +233,7 @@
                     prefixIcon=""
                 />
               </div>
-
+  
               <!-- Classifications -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -297,34 +297,55 @@
     },
     computed: {
       ...mapState({
-        /* + */titlesOrDescriptions: state => state.entities.contracts.searchParams.titlesOrDescriptions,
-        /* + */titlesOrDescriptionsStrict: state => state.entities.contracts.searchParams.titlesOrDescriptionsStrict,
-
-        /* + */buyersRegions: state => state.entities.contracts.searchParams.buyersRegions,
-        /* + */deliveriesRegions: state => state.entities.contracts.searchParams.deliveriesRegions,
-
-        /* + */proceduresTypes: state => state.entities.contracts.searchParams.proceduresTypes,
-        /* + */proceduresStatuses: state => state.entities.contracts.searchParams.proceduresStatuses,
-
-        /* + */entityId: state => state.entities.contracts.searchParams.entityId,
-
-        /* + */amountFrom: state => state.entities.contracts.searchParams.amountFrom,
-        /* + */amountTo: state => state.entities.contracts.searchParams.amountTo,
-
-        /* + */ classifications: state => state.entities.contracts.searchParams.classifications,
-
-        /* + */periodPublished: state => state.entities.contracts.searchParams.periodPublished,
-        /* + */periodDelivery: state => state.entities.contracts.searchParams.periodDelivery,
-        /* + */periodEnquiry: state => state.entities.contracts.searchParams.periodEnquiry,
-        /* + */periodOffer: state => state.entities.contracts.searchParams.periodOffer,
-        /* + */periodAuction: state => state.entities.contracts.searchParams.periodAuction,
-        /* + */periodAward: state => state.entities.contracts.searchParams.periodAward,
-
-        /* + */buyersNames: state => state.entities.contracts.searchParams.buyersNames,
-        /* + */buyersIdentifiers: state => state.entities.contracts.searchParams.buyersIdentifiers,
-        /* + */buyersTypes: state => state.entities.contracts.searchParams.buyersTypes,
-        /* + */buyersMainGeneralActivities: state => state.entities.contracts.searchParams.buyersMainGeneralActivities,
-        /* + */buyersMainSectoralActivities: state => state.entities.contracts.searchParams.buyersMainSectoralActivities,
+        /* + */
+        titlesOrDescriptions: state => state.entities.contracts.searchParams.titlesOrDescriptions,
+        /* + */
+        titlesOrDescriptionsStrict: state => state.entities.contracts.searchParams.titlesOrDescriptionsStrict,
+      
+        /* + */
+        buyersRegions: state => state.entities.contracts.searchParams.buyersRegions,
+        /* + */
+        deliveriesRegions: state => state.entities.contracts.searchParams.deliveriesRegions,
+      
+        /* + */
+        proceduresTypes: state => state.entities.contracts.searchParams.proceduresTypes,
+        /* + */
+        proceduresStatuses: state => state.entities.contracts.searchParams.proceduresStatuses,
+      
+        /* + */
+        entityId: state => state.entities.contracts.searchParams.entityId,
+      
+        /* + */
+        amountFrom: state => state.entities.contracts.searchParams.amountFrom,
+        /* + */
+        amountTo: state => state.entities.contracts.searchParams.amountTo,
+      
+        /* + */
+        classifications: state => state.entities.contracts.searchParams.classifications,
+      
+        /* + */
+        periodPublished: state => state.entities.contracts.searchParams.periodPublished,
+        /* + */
+        periodDelivery: state => state.entities.contracts.searchParams.periodDelivery,
+        /* + */
+        periodEnquiry: state => state.entities.contracts.searchParams.periodEnquiry,
+        /* + */
+        periodOffer: state => state.entities.contracts.searchParams.periodOffer,
+        /* + */
+        periodAuction: state => state.entities.contracts.searchParams.periodAuction,
+        /* + */
+        periodAward: state => state.entities.contracts.searchParams.periodAward,
+      
+        /* + */
+        buyersNames: state => state.entities.contracts.searchParams.buyersNames,
+        /* + */
+        buyersIdentifiers: state => state.entities.contracts.searchParams.buyersIdentifiers,
+        /* + */
+        buyersTypes: state => state.entities.contracts.searchParams.buyersTypes,
+        /* + */
+        buyersMainGeneralActivities: state => state.entities.contracts.searchParams.buyersMainGeneralActivities,
+        /* + */
+        buyersMainSectoralActivities: state => state.entities.contracts.searchParams.buyersMainSectoralActivities,
 
         regionsList: state => state.mdm[REGIONS],
         CPVCodesList: state => state.mdm[CPV_CODES]
@@ -340,7 +361,7 @@
           }
         });
       },
-      actionExpand(){
+      actionExpand() {
         this.moreCriterions = !this.moreCriterions;
 
         const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
@@ -348,12 +369,12 @@
         localStorage.setItem("entities", JSON.stringify(localStorageEntities));
       }
     },
-    created(){
+    created() {
       const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
-      if(localStorageEntities.contracts.hasOwnProperty("isExpanded")){
+      if (localStorageEntities.contracts.hasOwnProperty("isExpanded")) {
         this.moreCriterions = localStorageEntities.contracts.isExpanded;
       }
-      else{
+      else {
         localStorageEntities.contracts.isExpanded = this.moreCriterions;
         localStorage.setItem("entities", JSON.stringify(localStorageEntities));
       }

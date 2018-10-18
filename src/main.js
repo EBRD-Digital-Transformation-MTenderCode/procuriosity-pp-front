@@ -1,5 +1,5 @@
 import "@/styles/custom-reset.css";
-import 'element-ui/lib/theme-chalk/index.css';
+import "element-ui/lib/theme-chalk/index.css";
 import "@/styles/main.scss";
 
 import "@/components/SearchForms/_search-form.scss";

@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <el-select
         multiple
         filterable

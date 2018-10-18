@@ -80,14 +80,13 @@
             {{$t("message.main_p4")}}
           </div>
           <div class="main-about__partners_links">
-            <a href="https://yptender.md/" target="_blank">
-              <img src="@/assets/yptender.png" alt="yptender">
-            </a>
-            <a href="https://e-licitatie.md/" target="_blank">
-              <img src="@/assets/e-lici.png" alt="e-lici">
-            </a>
-            <a href="https://achizitii.md/" target="_blank">
-              <img src="@/assets/achizitii.md .png" alt="achizitii">
+            <a
+                v-for="platform of randomSortPlatforms"
+                :key="platform.link"
+                :href="platform.link"
+                target="_blank"
+            >
+              <img :src="platform.img" :alt="platform.alt">
             </a>
           </div>
         </div>
@@ -98,7 +97,33 @@
 
 <script>
   export default {
-    name: "MainPage"
+    name: "MainPage",
+    data() {
+      return {
+        platforms: [
+          {
+            link: "https://yptender.md/",
+            img: "../img/yptender.png",
+            alt: "yptender"
+          },
+          {
+            link: "https://e-licitatie.md/",
+            img: "../img/e-lici.png",
+            alt: "e-lici"
+          },
+          {
+            link: "https://achizitii.md/",
+            img: "../img/achizitii.md .png",
+            alt: "achizitii"
+          }
+        ]
+      };
+    },
+    computed: {
+      randomSortPlatforms() {
+        return [...this.platforms].sort(() => 0.5 - Math.random());
+      }
+    }
   };
 </script>
 
@@ -166,7 +191,7 @@
         }
       }
     }
-    &__join-button{
+    &__join-button {
       align-self: flex-start;
       padding: 14px 58px;
       border: none;
