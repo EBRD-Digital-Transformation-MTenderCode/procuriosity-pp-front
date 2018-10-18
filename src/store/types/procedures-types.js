@@ -2,27 +2,27 @@ export default {
   plans: [
     {
       name: {
-        en: "Open auction",
+        en: "Open Tender",
         ro: "Licitație deschisă",
-        ru: "Открытый аукцион"
+        ru: "Открытые торги"
       },
-      value: "Licitație deschisă"
+      value: "Open Tender"
     }
   ],
   tenders: [
     {
       name: {
-        en: "Report on the conclusion of the contract",
-        ro: "Raport privind încheierea contractului",
-        ru: "Отчет о заключении договора"
+        en: "Negotiated procedure without publication in PPB",
+        ro: "Proceduri negociată fără publicare în BAP",
+        ru: "Переговорная процедура без публикации объявления в БГЗ"
       },
       value: "reporting"
     },
     {
       name: {
-        en: "Preliminary purchase",
-        ro: "Cumpărare preliminară",
-        ru: "Допороговая закупка"
+        en: "Low value procedure",
+        ro: "Procedură de valoare mică",
+        ru: "Закупка малой стоимости"
       },
       value: "belowThreshold"
     },
@@ -30,7 +30,7 @@ export default {
       name: {
         en: "Open Tender",
         ro: "Licitație deschisă",
-        ru: "Открытый тендер"
+        ru: "Открытые торги"
       },
       value: "Open Tender"
     }
@@ -40,7 +40,7 @@ export default {
       name: {
         en: "Open Tender",
         ro: "Licitație deschisă",
-        ru: "Открытый тендер"
+        ru: "Открытые торги"
       },
       value: "Open Tender"
     }
