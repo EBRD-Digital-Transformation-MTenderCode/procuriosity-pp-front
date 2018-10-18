@@ -36,16 +36,21 @@
               <router-link active-class="header-static-nav_active" to="/legal-framework">
                 {{$t("message.header_static_nav_legal_framework")}}
               </router-link>
-              <router-link active-class="header-static-nav_active" to="/for-civil">
-                {{$t("message.header_static_nav_for_civil")}}
-              </router-link>
               <router-link active-class="header-static-nav_active" to="/security-and-confidentiality">
                 {{$t("message.header_static_nav_security_and_confidentiality")}}
               </router-link>
               <router-link active-class="header-static-nav_active" to="/join-mtender">
                 {{$t("message.header_static_nav_join_MTender")}}
               </router-link>
-              <!--<a href="#">{{$t("message.header_static_nav_FAQ")}}</a>-->
+              <router-link active-class="header-static-nav_active" to="/accreditation">
+                {{$t("message.header_static_nav_accreditation")}}
+              </router-link>
+              <router-link active-class="header-static-nav_active" to="/for-civil">
+                {{$t("message.header_static_nav_for_civil")}}
+              </router-link>
+              <router-link active-class="header-static-nav_active" to="/faq">
+                {{$t("message.header_static_nav_FAQ")}}
+              </router-link>
             </nav>
           </el-col>
         </el-row>
@@ -167,7 +172,7 @@
       justify-content: flex-end;
       align-self: flex-start;
       flex-wrap: wrap;
-      max-width: 50%;
+      max-width: 60%;
       text-align: right;
       @media (max-width: 900px) {
         max-width: 100%;

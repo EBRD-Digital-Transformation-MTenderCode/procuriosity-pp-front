@@ -49,11 +49,6 @@ export default new Router({
       component: () => import(/* webpackChunkName: "LegalFramework" */ "./views/StaticPages/LegalFramework.vue")
     },
     {
-      path: "/for-civil",
-      name: "for-civil",
-      component: () => import(/* webpackChunkName: "ForCivil" */ "./views/StaticPages/ForCivil.vue")
-    },
-    {
       path: "/security-and-confidentiality",
       name: "security-and-confidentiality",
       component: () => import(/* webpackChunkName: "SecurityAndConfidentiality" */ "./views/StaticPages/SecurityAndConfidentiality.vue")
@@ -62,7 +57,22 @@ export default new Router({
       path: "/join-mtender",
       name: "join-mtender",
       component: () => import(/* webpackChunkName: "JoinMTender" */ "./views/StaticPages/JoinMTender.vue")
-    }
+    },
+    {
+      path: "/accreditation",
+      name: "accreditation",
+      component: () => import(/* webpackChunkName: "Accreditation" */ "./views/StaticPages/Accreditation.vue")
+    },
+    {
+      path: "/for-civil",
+      name: "for-civil",
+      component: () => import(/* webpackChunkName: "ForCivil" */ "./views/StaticPages/ForCivil.vue")
+    },
+    {
+      path: "/faq",
+      name: "faq",
+      component: () => import(/* webpackChunkName: "FAQ" */ "./views/StaticPages/FAQ.vue")
+    },
   ],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
