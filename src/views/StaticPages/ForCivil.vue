@@ -1,5 +1,5 @@
 <template>
- <el-container>
+  <el-container>
     <div class="static">
       <aside class="static-aside">
         <div class="static-aside__title">
@@ -11,7 +11,9 @@
         <p>{{$t("message.for_civil_p1")}}</p>
         <p>{{$t("message.for_civil_p2")}}</p>
         <p>{{$t("message.for_civil_p3")}}</p>
-        <p>{{$t("message.for_civil_p4_before")}}<a href="https://www.open-contracting.org/" target="_blank">{{$t("message.for_civil_p4_bold")}}</a>{{$t("message.for_civil_p4_after")}}</p>
+        <i18n path="message.for_civil_p4" tag="p">
+          <a place="for_civil_p4_place" href="https://www.open-contracting.org/" target="_blank">{{$t("message.for_civil_p4_bold")}}</a>
+        </i18n>
         <p>{{$t("message.for_civil_p5")}}</p>
         <p>{{$t("message.for_civil_p6")}}</p>
         <p><span class="bold">{{$t("message.for_civil_p7")}}</span></p>

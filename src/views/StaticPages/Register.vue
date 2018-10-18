@@ -9,12 +9,18 @@
       <section class="static-content">
         <h1>{{$t("message.register_h11")}}</h1>
         <p>{{$t("message.register_p1")}}</p>
-        <p><span class="underline">{{$t("message.register_p2_bold")}}</span>{{$t("message.register_p2_after")}}</p>
+        <i18n path="message.register_p2" tag="p">
+          <span class="underline" place="register_p2_place">{{ $t("message.register_p2_bold") }}</span>
+        </i18n>
         <p>{{$t("message.register_p3")}}</p>
-        <p>{{$t("message.register_p4_before")}}
+        <i18n path="message.register_p4" tag="p">
+           <span place="register_p4_place">
           <a href="https://achizitii.md/" target="_blank">achizitii</a>,
-          <a href="https://e-licitatie.md/" target="_blank">e-licitatie</a>, {{$t("message.register_p4_bold")}} <a
-              href="https://yptender.md/" target="_blank">YTender</a> {{$t("message.register_p4_after")}}</p>
+             <a href="https://e-licitatie.md/" target="_blank">e-licitatie</a>
+             {{$t("message.register_p4_bold")}}
+          <a href="https://yptender.md/" target="_blank">YTender</a>
+         </span>
+        </i18n>
         <p>{{$t("message.register_p5")}}</p>
       </section>
     </div>

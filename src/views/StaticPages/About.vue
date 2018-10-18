@@ -16,11 +16,11 @@
           <li>{{$t("message.about_ul1_li3")}}</li>
         </ul>
         <i18n path="message.about_p3" tag="p">
-          <span class="bold" place="about_p3_place" >{{ $t('message.about_p3_bold') }}</span>
+          <span class="bold" place="about_p3_place">{{ $t("message.about_p3_bold") }}</span>
         </i18n>
         <i18n path="message.about_p4" tag="p">
-          <span class="bold" place="about_p4_place1" >{{ $t('message.about_p4_bold1') }}</span>
-          <span class="bold" place="about_p4_place2" >{{ $t('message.about_p4_bold2') }}</span>
+          <span class="bold" place="about_p4_place1">{{ $t("message.about_p4_bold1") }}</span>
+          <span class="bold" place="about_p4_place2">{{ $t("message.about_p4_bold2") }}</span>
         </i18n>
         <p>{{$t("message.about_p5")}}</p>
         <ul>
@@ -30,27 +30,27 @@
         </ul>
         <h3>{{$t("message.about_h12")}}</h3>
         <i18n path="message.about_p6" tag="p">
-          <span class="bold" place="about_p6_place" >{{ $t('message.about_p6_bold') }}</span>
+          <span class="bold" place="about_p6_place">{{ $t("message.about_p6_bold") }}</span>
         </i18n>
         <i18n path="message.about_p7" tag="p">
-          <span class="bold" place="about_p7_place1" >{{ $t('message.about_p7_bold1') }}</span>
-          <span class="bold" place="about_p7_place2" >{{ $t('message.about_p7_bold2') }}</span>
+          <span class="bold" place="about_p7_place1">{{ $t("message.about_p7_bold1") }}</span>
+          <span class="bold" place="about_p7_place2">{{ $t("message.about_p7_bold2") }}</span>
         </i18n>
         <p>{{$t("message.about_p8")}}</p>
         <i18n path="message.about_p9" tag="p">
-          <span class="bold" place="about_p9_place" >{{ $t('message.about_p9_bold') }}</span>
+          <span class="bold" place="about_p9_place">{{ $t("message.about_p9_bold") }}</span>
         </i18n>
         <i18n path="message.about_p10" tag="p">
-          <span class="bold" place="about_p10_place" >{{ $t('message.about_p10_bold') }}</span>
+          <span class="bold" place="about_p10_place">{{ $t("message.about_p10_bold") }}</span>
         </i18n>
         <i18n path="message.about_p11" tag="p">
-          <span class="bold" place="about_p11_place" >{{ $t('message.about_p11_bold') }}</span>
+          <span class="bold" place="about_p11_place">{{ $t("message.about_p11_bold") }}</span>
         </i18n>
         <i18n path="message.about_p12" tag="p">
-          <span class="bold" place="about_p12_place" >{{ $t('message.about_p12_bold') }}</span>
+          <span class="bold" place="about_p12_place">{{ $t("message.about_p12_bold") }}</span>
         </i18n>
         <i18n path="message.about_p13" tag="p">
-          <span class="bold" place="about_p13_place" >{{ $t('message.about_p13_bold') }}</span>
+          <span class="bold" place="about_p13_place">{{ $t("message.about_p13_bold") }}</span>
         </i18n>
       </section>
     </div>
