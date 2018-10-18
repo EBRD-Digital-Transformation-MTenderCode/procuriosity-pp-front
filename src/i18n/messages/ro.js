@@ -53,7 +53,7 @@ export default {
 
     "entity_budgets": "Budgets",
     "entity_plans": "Planificarea Achizițiilor",
-    "entity_tenders": "Buletinul Achizițiilor Puplice",
+    "entity_tenders": "Buletinul Achizițiilor Publice",
     "entity_contracts": "Registru Contractelor",
 
     "search_strict": "Strictă",

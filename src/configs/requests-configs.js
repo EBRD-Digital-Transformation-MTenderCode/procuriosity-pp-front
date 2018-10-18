@@ -5,7 +5,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 const mTender1 = "https://public.api.mepps.openprocurement.net/api/2.3";
-const mTender2 = "http://public.mtender.gov.md";
+const mTender2 = "https://public.mtender.gov.md";
 
 export const getListConfig = (entity, params = "") => {
   return {
