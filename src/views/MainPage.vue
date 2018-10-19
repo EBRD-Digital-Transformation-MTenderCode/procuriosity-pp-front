@@ -10,7 +10,7 @@
           <div class="main-count__number">12′256′413 <span class="main-count_currency">MDL</span></div>
           <div class="main-count__text">{{$t("message.main_total_saving")}}</div>
         </div>
-        <a href="/" class="main__join-button">{{$t("message.main_join")}}</a>
+        <router-link to="/join-mtender" class="main__join-button">{{$t("message.main_join")}}</router-link>
       </el-container>
     </div>
     <el-container direction="vertical">
