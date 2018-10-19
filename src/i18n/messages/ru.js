@@ -31,7 +31,7 @@ export default {
     "main_total_saving": "Общая экономия",
     "main_news": "Новости",
     "main_join": "Присоединиться",
-    "main_news1": "Министерство Финансов Республики Молдова первым ввоодит процедуру электронных государственных закупок для следующих процедур: открытые торги, запрос ценовых оферт, переговоры без предварительного опубликования объявления на участие. Руководство по электронным процедурам государственных закупок будут доступны в ближайшее время от Агентства Государственных Закупок.",
+    "main_news1": "Министерство Финансов Республики Молдова первым вводит процедуру электронных государственных закупок для следующих процедур: открытые торги, запрос ценовых оферт, переговоры без предварительного опубликования объявления на участие. Руководство по электронным процедурам государственных закупок будут доступны в ближайшее время от Агентства Государственных Закупок.",
 
     "main_news2": "22-26 октября 2018 года Министерство Финансов Республики Молдова и Председатель Парламента Республики Молдовы проводят Региональный семинар Всемирной торговой организации для Сторон Соглашения о государственных закупках ВТО и правительств стран-наблюдателей из Центральной Европы, Западных Балкан, Кавказа и Центральной Азии, включая сессию по электронным государственным закупкам в Молдове. Зарегистрируйтесь для участия в сессии ПРООН об открытом правлений и общественных расходах 22 октября.",
 
@@ -158,10 +158,45 @@ export default {
     "legal_framework_title": "Соответствующее законодательство",
     "legal_framework_h11": "Законы и регламенты",
     "legal_framework_p1": "В приведенном ниже списке содержится каждое новое правовые положение о государственных закупках, как только оно опубликовано Правительством Республики Молдова.",
+    "legal_framework_h3_1": "Законы",
+
     "legal_framework_ul1_li1": "Закон о государственных закупках",
-    "legal_framework_ul1_li2": "Условия использования MTender",
-    "legal_framework_ul1_li3": "Европейский единый документ по закупкам (DUAE)",
-    "legal_framework_ul1_li4": "Стандартные онлайн-договора MTender",
+    "legal_framework_ul1_li1_link": "http://lex.justice.md/viewdoc.php?action=view&view=doc&id=360122&lang=2",
+
+    "legal_framework_ul1_li2": "Положения об аккредитации электронных платформ закупок в рамках Автоматизированной информационной системы «Государственный регистр государственных закупок» (MTender)",
+    "legal_framework_ul1_li2_link": "http://lex.justice.md/viewdoc.php?action=view&view=doc&id=377584&lang=2",
+
+    "legal_framework_ul1_li3": "Положения о порядке ведения Государственного регистра государственных закупок, созданного Автоматизированной информационной системой «Государственный регистр государственных закупок» (MTender)",
+    "legal_framework_ul1_li3_link": "http://lex.justice.md/viewdoc.php?action=view&view=doc&id=377585&lang=2",
+
+    "legal_framework_ul1_li4": "Положения о закупке товаров и услуг путем запроса ценовых оферт",
+    "legal_framework_ul1_li4_link": "http://lex.justice.md/viewdoc.php?action=view&view=doc&id=377586&lang=2",
+
+    "legal_framework_ul1_li5": "Стандартная документация для проведения государственных закупок товаров",
+    "legal_framework_ul1_li5_link": "http://lex.justice.md/viewdoc.php?action=view&view=doc&id=377587&lang=2",
+
+    "legal_framework_ul1_li6": "Стандартная документация для проведения государственных закупок услуг",
+    "legal_framework_ul1_li6_link": "http://lex.justice.md/viewdoc.php?action=view&view=doc&id=377588&lang=2",
+
+    "legal_framework_ul1_li7": "Стандартной документация для проведения государственных закупок работ",
+    "legal_framework_ul1_li7_link": "http://lex.justice.md/viewdoc.php?action=view&view=doc&id=377590&lang=2",
+
+    "legal_framework_ul1_li8": "Стандартная документация для проведения государственных закупок товаров и услуг путем запроса ценовых оферт",
+    "legal_framework_ul1_li8_link": "http://lex.justice.md/viewdoc.php?action=view&view=doc&id=377589&lang=2",
+
+    "legal_framework_ul1_li9": "Стандартный формуляр Единого европейского документа закупок",
+    "legal_framework_ul1_li9_link": "http://lex.justice.md/viewdoc.php?action=view&view=doc&id=377591&lang=2",
+
+    "legal_framework_h3_2": "Условия использования MTender",
+
+    "legal_framework_ul2_li1": "Terms of use of the MTender",
+    "legal_framework_ul2_li1_link": "#",
+
+    "legal_framework_ul2_li2": "Template declaration on compliance with mandatory minimum requirements for economic operators",
+    "legal_framework_ul2_li2_link": "#",
+
+    "legal_framework_ul2_li3": "Template MTender ESPD Declaration - to be submitted by the winner of the tender",
+    "legal_framework_ul2_li3_link": "#",
 
     "register_title": "Регистрация",
     "register_h11": "Регистрация на АИС ГРГЗ MTender",

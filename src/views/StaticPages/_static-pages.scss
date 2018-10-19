@@ -51,6 +51,9 @@
     }
     li {
       list-style-type: disc;
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
     }
     .organizations {
       display: flex;

@@ -6,7 +6,7 @@ export default {
         ro: "Licitație deschisă",
         ru: "Открытые торги"
       },
-      value: "Open Tender"
+      value: "Licitație deschisă"
     }
   ],
   tenders: [
@@ -32,7 +32,7 @@ export default {
         ro: "Licitație deschisă",
         ru: "Открытые торги"
       },
-      value: "Open Tender"
+      value: "Licitație deschisă"
     }
   ],
   contracts: [
@@ -42,8 +42,7 @@ export default {
         ro: "Licitație deschisă",
         ru: "Открытые торги"
       },
-      value: "Open Tender"
+      value: "Licitație deschisă"
     }
   ]
-
 };
