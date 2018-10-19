@@ -700,7 +700,7 @@
         } else {
           const EVRecord = this.tender.EVRecord.compiledRelease;
 
-          return getDataFromObject(EVRecord, _ => _.bids.details).map(bid => {
+          return getDataFromObject(EVRecord, _ => _.bids.details, []).map(bid => {
             return {
               id: getDataFromObject(bid, _ => _.id),
               name: getDataFromObject(bid, _ => _.tenderers[0].name),
