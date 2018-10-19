@@ -68,10 +68,10 @@ export default {
     "search_types_procedures_placeholder": "Procedures Types",
     "search_statuses_procedures_placeholder": "Procedures Statuses",
     "search_deliveries_regions_placeholder": "Deliveries Regions",
-    "search_published_period": "Published Period:",
-    "search_delivery_period": "Delivery Period:",
-    "search_enquiry_period": "Enquiry Period:",
-    "search_offer_period": "Offer Period:",
+    "search_published_period": "Published Period",
+    "search_delivery_period": "Delivery Period",
+    "search_enquiry_period": "Enquiry Period",
+    "search_offer_period": "Offer Period",
     "search_auction_period": "Auction Period",
     "search_award_period": "Award Period",
     "search_planning_period": "Planning Period",
@@ -157,15 +157,45 @@ export default {
     "legal_framework_title": "Legal framework",
     "legal_framework_h11": "Laws and regulations",
     "legal_framework_p1": "List below includes every new legislation on digital public procurement as soon as published by the Government of Moldova.",
-    "legal_framework_ul1_li1": "Document 1",
-    "legal_framework_ul1_li2": "Document 2",
-    "legal_framework_ul1_li3": "Document 3",
-    "legal_framework_ul1_li4": "Document 4",
-    "legal_framework_ul1_li5": "Document 5",
-    "legal_framework_ul1_li6": "Document 6",
-    "legal_framework_ul1_li7": "Document 7",
-    "legal_framework_ul1_li8": "Document 8",
-    "legal_framework_ul1_li9": "Document 9",
+    "legal_framework_h3_1": "Laws",
+
+    "legal_framework_ul1_li1": "Law on public procurement",
+    "legal_framework_ul1_li1_link": "http://lex.justice.md/viewdoc.php?action=view&view=doc&id=365891&lang=1",
+
+    "legal_framework_ul1_li2": "The Regulation on NEPP accreditation within the SIA RSAP (MTender system)",
+    "legal_framework_ul1_li2_link": "http://lex.justice.md/index.php?action=view&view=doc&lang=1&id=377584",
+
+    "legal_framework_ul1_li3": "The Regulation on the use of the SIA RSAP MTender system",
+    "legal_framework_ul1_li3_link": "http://lex.justice.md/index.php?action=view&view=doc&lang=1&id=377585",
+
+    "legal_framework_ul1_li4": "The Regulation on procurement of goods and services through request for price quotation",
+    "legal_framework_ul1_li4_link": "http://lex.justice.md/index.php?action=view&view=doc&lang=1&id=377586",
+
+    "legal_framework_ul1_li5": "Standard Bidding Documents for public procurement of Goods",
+    "legal_framework_ul1_li5_link": "http://lex.justice.md/index.php?action=view&view=doc&lang=1&id=377587",
+
+    "legal_framework_ul1_li6": "Standard Bidding Documents for public procurement of services",
+    "legal_framework_ul1_li6_link": "http://lex.justice.md/index.php?action=view&view=doc&lang=1&id=377588",
+
+    "legal_framework_ul1_li7": "Standard Bidding Documents for public procurement of works",
+    "legal_framework_ul1_li7_link": "http://lex.justice.md/index.php?action=view&view=doc&lang=1&id=377590",
+
+    "legal_framework_ul1_li8": "Standard Bidding Documents for public procurement through request for price quotation",
+    "legal_framework_ul1_li8_link": "http://lex.justice.md/index.php?action=view&view=doc&lang=1&id=377589",
+
+    "legal_framework_ul1_li9": "The standard template of the European Single Procurement Document (ESPD)",
+    "legal_framework_ul1_li9_link": "http://lex.justice.md/index.php?action=view&view=doc&lang=1&id=377591",
+
+    "legal_framework_h3_2": "Terms of use of the MTender",
+
+    "legal_framework_ul2_li1": "Terms of use of the MTender",
+    "legal_framework_ul2_li1_link": "/docs/en_terms-of-use.pdf",
+
+    "legal_framework_ul2_li2": "Template declaration on compliance with mandatory minimum requirements for economic operators",
+    "legal_framework_ul2_li2_link": "/docs/en_minimum-declaration.pdf",
+
+    "legal_framework_ul2_li3": "Template MTender ESPD Declaration - to be submitted by the winner of the tender",
+    "legal_framework_ul2_li3_link": "/docs/en_ESPD.pdf",
 
     "register_title": "Register",
     "register_h11": "Register on the MTender",

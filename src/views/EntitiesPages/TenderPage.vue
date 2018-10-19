@@ -137,7 +137,7 @@
           <div class="info__text" :key="item.id">
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10">
-                <div class="info__name">{{ item.description }}</div>
+                <div class="info__name" :title="item.description">{{ item.description }}</div>
               </el-col>
               <el-col :xs="24" :sm="14">
                 <div class="info__value_accent">{{ item.quantityAndUnit }}</div>

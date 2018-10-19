@@ -148,17 +148,47 @@ export default {
     "about_p13_bold": "în perioada 2019-2020.",
 
     "legal_framework_title": "Legislația relevantă",
-    "legal_framework_h11": "Legislație",
+    "legal_framework_h11": "Legi și Regulamente",
     "legal_framework_p1": "Lista de mai jos include fiecare prevedere legală nouă privind achizițiile publice de îndată ce este publicată de Guvernul Republicii Moldova.",
-    "legal_framework_ul1_li1": "Legea privind achizițiileile publice",
-    "legal_framework_ul1_li2": "Hotărârea Guvernului nr.985 din 10 octombrie 2018 pentru aprobarea Regulamentului privind acreditarea platformelor electronice de achiziții în cadrul Sistemului informațional automatizat „Registrul de stat al achizițiilor publice” (MTender)",
-    "legal_framework_ul1_li3": "Hotărârea Guvernului nr.986 din 10 octombrie 2018 pentru aprobarea Regulamentului privind modul de ținere a Registrului de stat al achizițiilor publice format de Sistemul informațional automatizat „Registrul de stat al achizițiilor publice” (MTender)",
-    "legal_framework_ul1_li4": "Hotărârea Guvernului nr.987 din 10 octombrie 2018 pentru aprobarea Regulamentului privind achiziția bunurilor și serviciilor prin cererea ofertelor de prețuri",
-    "legal_framework_ul1_li5": "Ordin Ministerului Finanțelor nr.173 din 5 octombrie 2018 cu privire la aprobarea Documentației standard pentru realizarea achizițiilor publice de bunuri",
-    "legal_framework_ul1_li6": "Ordin Ministerului Finanțelor nr.174 din 5 octombrie 2018 cu privire la aprobarea Documentației standard pentru realizarea achizițiilor publice de servicii",
-    "legal_framework_ul1_li7": "Ordin Ministerului Finanțelor nr.175 din 5 octombrie 2018 cu privire la aprobarea Documentației standard pentru realizarea achizițiilor publice de bunuri și servicii prin cererea ofertelor de prețuri",
-    "legal_framework_ul1_li8": "Ordin Ministerului Finanțelor nr.176 din 5 octombrie 2018 cu privire la aprobarea Documentației standard pentru realizarea achizițiilor publice de lucrări",
-    "legal_framework_ul1_li9": "Ordin Ministerului Finanțelor nr.177 din 9 octombrie 2018 cu privire la aprobarea formularului standard al Documentului Unic de Achiziții European",
+    "legal_framework_h3_1": "Legi",
+
+    "legal_framework_ul1_li1": "Legea privind achizițiilor publice",
+    "legal_framework_ul1_li1_link": "http://lex.justice.md/index.php?action=view&view=doc&lang=1&id=360122",
+
+    "legal_framework_ul1_li2": "Regulamentului privind acreditarea platformelor electronice de achiziții în cadrul Sistemului informațional automatizat „Registrul de stat al achizițiilor publice” (MTender)",
+    "legal_framework_ul1_li2_link": "http://lex.justice.md/index.php?action=view&view=doc&lang=1&id=377584",
+
+    "legal_framework_ul1_li3": "Regulamentul privind modul de ținere a Registrului de stat al achizițiilor publice format de Sistemul informațional automatizat",
+    "legal_framework_ul1_li3_link": "http://lex.justice.md/index.php?action=view&view=doc&lang=1&id=377585",
+
+    "legal_framework_ul1_li4": "Regulamentul privind achiziția bunurilor și serviciilor prin cererea ofertelor de prețuri",
+    "legal_framework_ul1_li4_link": "http://lex.justice.md/index.php?action=view&view=doc&lang=1&id=377586",
+
+    "legal_framework_ul1_li5": "Documentației standard pentru realizarea achizițiilor publice de bunuri",
+    "legal_framework_ul1_li5_link": "http://lex.justice.md/index.php?action=view&view=doc&lang=1&id=377587",
+
+    "legal_framework_ul1_li6": "Documentației standard pentru realizarea achizițiilor publice de servicii",
+    "legal_framework_ul1_li6_link": "http://lex.justice.md/index.php?action=view&view=doc&lang=1&id=377588",
+
+    "legal_framework_ul1_li7": "Documentației standard pentru realizarea achizițiilor publice de lucrări",
+    "legal_framework_ul1_li7_link": "http://lex.justice.md/index.php?action=view&view=doc&lang=1&id=377590",
+
+    "legal_framework_ul1_li8": "Documentației standard pentru realizarea achizițiilor publice de bunuri și servicii prin cererea ofertelor de prețuri",
+    "legal_framework_ul1_li8_link": "http://lex.justice.md/index.php?action=view&view=doc&lang=1&id=377589",
+
+    "legal_framework_ul1_li9": "Formularul Standard al Documentului Unic de Achizitii European (DUAE)",
+    "legal_framework_ul1_li9_link": "http://lex.justice.md/index.php?action=view&view=doc&lang=1&id=377591",
+
+    "legal_framework_h3_2": "Termenii de utilizare a MTender",
+
+    "legal_framework_ul2_li1": "Termenii de utilizare a MTender",
+    "legal_framework_ul2_li1_link": "/docs/ro_terms-of-use.pdf",
+
+    "legal_framework_ul2_li2": "Declarația cu privire la conformarea cu cerințelor obligatorii minime",
+    "legal_framework_ul2_li2_link": "/docs/ro_minimum-declaration.pdf",
+
+    "legal_framework_ul2_li3": "MTender Declarația DUAE - depusă numai de câștigător",
+    "legal_framework_ul2_li3_link": "/docs/ro_ESPD.pdf",
 
     "register_title": "Înregistrare",
     "register_h11": "Înregistrarea în sistemul SIA RSAP MTender",
