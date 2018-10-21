@@ -96,10 +96,12 @@
           case "active.qualification":
             return "entity-status__ico_qualification";
           case "active.enquiries":
+          case "evaluation":
             return "entity-status__ico_enquiries";
           case "active.tendering":
             return "entity-status__ico_tendering";
           case "cancelled":
+          case "empty":
             return "entity-status__ico_cancelled";
           case "active":
             return "entity-status__ico_active";
@@ -121,10 +123,12 @@
           case "active.qualification":
             return "Qualification Period";
           case "active.enquiries":
+          case "evaluation":
             return "Enquiries Period";
           case "active.tendering":
             return "Tendering Period";
           case "cancelled":
+          case "empty":
             return "Cancelled tender";
           case "active":
             return "Published";

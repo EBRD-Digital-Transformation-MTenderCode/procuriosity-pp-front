@@ -197,9 +197,9 @@ export default {
     "register_p2_bold": "Începând cu data de 1 octombrie 2018",
     "register_p2": "{register_p2_place} instituțiile din sectorul public din Moldova sunt obligate să planifice achiziții, să selecteze furnizori, să semneze și să execute contracte electronice folosind procedurile online de pe MTender.",
     "register_p3": "Înregistrarea și utilizarea sistemului MTender este gratuită pentru autorități contractante.",
-    "register_p4": "Vă rugăm să vă înregistrați pe orice platforme electronice de achiziții conectată la Unitatea de dtae centrală a SIA RSAP MTender: {register_p4_place} . Toate platformele electronice de achiziții MTender furnizează un serviciu de asistență (help desk) pentru a asista cumpărătorii și furnizorii interesați de oportunitățile de achiziții.",
+    "register_p4": "Vă rugăm să vă înregistrați pe orice platforme electronice de achiziții conectată la Unitatea de dtae centrală a SIA RSAP MTender: {register_p4_place}.",
     "register_p4_bold": "și ",
-    "register_p4_1": "",
+    "register_p4_1": "Toate platformele electronice de achiziții MTender furnizează un serviciu de asistență (help desk) pentru a asista cumpărătorii și furnizorii interesați de oportunitățile de achiziții.",
     "register_p5": "Puteți utiliza diferite platforme electronice MTender pentru fiecare licitație pe care o publicați sau la care participați. Pentru a utiliza serviciul electronic al MTender este suficient să vă înregistrați și să acceptați termenii de utilizare a serviciului.",
 
     "for_civil_title": "Pentru Societatea Civilă",
