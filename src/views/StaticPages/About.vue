@@ -26,7 +26,7 @@
         <ul>
           <li><a href="https://achizitii.md/" target="_blank">Achizitii</a></li>
           <li><a href="https://e-licitatie.md/" target="_blank">E-licitatie</a></li>
-          <li><a href="https://yptender.md/" target="_blank">YTender</a></li>
+          <li><a href="https://yptender.md/" target="_blank">YPTender</a></li>
         </ul>
         <h3>{{$t("message.about_h12")}}</h3>
         <i18n path="message.about_p6" tag="p">

@@ -172,7 +172,7 @@
       justify-content: flex-end;
       align-self: flex-start;
       flex-wrap: wrap;
-      max-width: 60%;
+      max-width: 70%;
       text-align: right;
       @media (max-width: 900px) {
         max-width: 100%;
