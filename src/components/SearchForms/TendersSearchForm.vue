@@ -285,6 +285,16 @@
       "multiple-input": MultipleInput,
       "reset-button": ResetButton
     },
+    created() {
+      const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
+      if (localStorageEntities.tenders.hasOwnProperty("isExpanded")) {
+        this.moreCriterions = localStorageEntities.tenders.isExpanded;
+      }
+      else {
+        localStorageEntities.tenders.isExpanded = this.moreCriterions;
+        localStorage.setItem("entities", JSON.stringify(localStorageEntities));
+      }
+    },
     data() {
       return {
         moreCriterions: false,
@@ -344,16 +354,6 @@
         this.moreCriterions = !this.moreCriterions;
 
         const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
-        localStorageEntities.tenders.isExpanded = this.moreCriterions;
-        localStorage.setItem("entities", JSON.stringify(localStorageEntities));
-      }
-    },
-    created() {
-      const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
-      if (localStorageEntities.tenders.hasOwnProperty("isExpanded")) {
-        this.moreCriterions = localStorageEntities.tenders.isExpanded;
-      }
-      else {
         localStorageEntities.tenders.isExpanded = this.moreCriterions;
         localStorage.setItem("entities", JSON.stringify(localStorageEntities));
       }

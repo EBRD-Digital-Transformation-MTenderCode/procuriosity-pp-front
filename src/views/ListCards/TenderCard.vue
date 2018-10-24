@@ -73,6 +73,8 @@
 </template>
 
 <script>
+  import procedureTypes from "./../../store/types/procedures-types"
+  
   import { getDataFromObject, formatDate } from "../../utils";
 
   export default {
@@ -166,7 +168,23 @@
         return getDataFromObject(this.entity, _ => _.buyerRegion);
       },
       type() {
-        return getDataFromObject(this.entity, _ => _.procedureType);
+        if (getDataFromObject(this.entity, _ => _.procedureType) === "reporting") {
+          return procedureTypes.tenders.find(it => it.value === "reporting").name[this.$i18n.locale];
+        } else if (getDataFromObject(this.entity, _ => _.procedureType) === "belowThreshold") {
+          return procedureTypes.tenders.find(it => it.value === "belowThreshold").name[this.$i18n.locale];
+        } else if (getDataFromObject(this.entity, _ => _.procedureType) === "Licitație deschisă" && getDataFromObject(this.entity, _ => _.amount) < 1500000) {
+          if (this.$i18n.locale === "en") {
+            return "Request for price quotations";
+          } else if (this.$i18n.locale === "ro") {
+            return "Cererea ofertelor de preț";
+          } else {
+            return "Запрос ценовых оферт"
+          }
+        } else if (getDataFromObject(this.entity, _ => _.procedureType) === "Licitație deschisă") {
+          return procedureTypes.tenders.find(it => it.value === "Licitație deschisă").name[this.$i18n.locale];
+        } else {
+          return getDataFromObject(this.entity, _ => _.procedureType);
+        }
       },
       peName() {
         return getDataFromObject(this.entity, _ => _.buyerName);

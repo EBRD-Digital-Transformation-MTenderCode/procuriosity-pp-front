@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getBudgetConfig, getListConfig, getTenderConfig } from "./../configs/requests-configs";
+import { getBudgetConfig, getListConfig, getTenderConfig, getContractConfig } from "./../configs/requests-configs";
 
 import initialSearchProps from "./types/initial-search-props";
 
@@ -12,13 +12,14 @@ import {
 
   SET_CURRENT_TENDER_INFO,
   SET_CURRENT_BUDGET_INFO,
+  SET_CURRENT_CONTRACT_INFO,
 
   SET_INITIAL_SEARCH_PARAMS
 } from "./types/mutations-types";
 import {
   FETCH_ENTITY_LIST,
   FETCH_CURRENT_TENDER_INFO,
-  FETCH_CURRENT_BUDGET_INFO
+  FETCH_CURRENT_BUDGET_INFO, FETCH_CURRENT_CONTRACT_INFO
 } from "./types/actions-types";
 
 import { MTENDER1, MTENDER2 } from "./types/cbd-types";
@@ -86,6 +87,10 @@ export default {
       loaded: false,
       list: [],
       searchParams: { ...localStorageEntities.contracts.searchParams },
+      currentContract: {
+        cdb: "",
+        contractData: {}
+      },
       paginationInfo: {
         totalCount: 0,
         pageCount: 0
@@ -150,6 +155,14 @@ export default {
         tenderData
       };
     },
+
+    [SET_CURRENT_CONTRACT_INFO](state, { cdb, contractData }) {
+      state.contracts.currentContract = {
+        cdb,
+        contractData
+      };
+    },
+
     [SET_INITIAL_SEARCH_PARAMS](state, { entity }) {
       state[entity].searchParams = initialSearchProps[entity];
 
@@ -194,6 +207,7 @@ export default {
         console.log(e.message);
       }
     },
+
     async [FETCH_CURRENT_BUDGET_INFO]({ commit }, { id }) {
       try {
         const res = await axios(getBudgetConfig(id));
@@ -219,7 +233,6 @@ export default {
 
         if (cdb === MTENDER1) {
           Object.assign(tenderData, res.data.data);
-
         }
 
         if (cdb === MTENDER2) {
@@ -242,6 +255,34 @@ export default {
         commit(SET_CURRENT_TENDER_INFO, {
           cdb,
           tenderData
+        });
+      }
+      catch (e) {
+        // @TODO need add catching errors
+        console.log(e);
+      }
+    },
+
+    async [FETCH_CURRENT_CONTRACT_INFO]({ commit }, { cdb, id }) {
+      try {
+        const res = await axios(getContractConfig(cdb, id));
+
+        const contractData = {};
+
+        const MSRecord = {};
+        const ACRecords = [];
+
+        if (cdb === MTENDER1) {
+          Object.assign(contractData, res.data.data);
+        }
+
+        if (cdb === MTENDER2) {
+
+        }
+
+        commit(SET_CURRENT_CONTRACT_INFO, {
+          cdb,
+          contractData
         });
       }
       catch (e) {

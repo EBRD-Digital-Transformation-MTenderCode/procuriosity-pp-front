@@ -28,7 +28,22 @@ export default {
     "footer_info_text": "Linia info",
 
     "main_title": "Conducerea prin exemplu",
-    "main_total_saving": "Economii totale",
+
+    "main_slide1_1": "{main_slide1_1_place} Active",
+    "main_slide1_1_place": "Proceduri",
+
+    "main_slide1_2": "{main_slide1_2_place} Contracte",
+    "main_slide1_2_place": "Încheiate ",
+
+    "main_slide2_1": "{main_slide2_1_place} Contractante",
+    "main_slide2_1_place": "Autorități",
+
+    "main_slide2_2": "{main_slide2_2_place} Economici",
+    "main_slide2_2_place": "Agenți",
+
+    "main_slide3_1": "{main_slide3_1_place} Totale",
+    "main_slide3_1_place": "Economiile",
+
     "main_news": " Noutăți",
     "main_join": "Alătura",
     "main_news1": "Ministerul Finanțelor al Republicii Moldova introduce primele proceduri electronice de achiziții publice de licitație deschisă, cererea ofertelor de prețuri, negocierea fără publicarea prealabilă a unui anunț de participare. Ghidurile privind procedurile electronice de achiziții publice vor fi disponibile în scurt timp de la Agenția Achizițiilor Publice.",
@@ -110,7 +125,7 @@ export default {
     "contract_card_last_modified_date": "Data ultimei modificări",
     "contract_card_value": "Valoarea estimată fără TVA",
     "contract_card_procedure_type": "Tip de procedură",
-    "contract_card_delivery_regions": "Regiunea de livrare",
+    "contract_card_delivery_regions": "Obținerea regiunii entităților",
     "contract_card_procuring_entity_name": "Obtinerea numelui entitatii",
     "contract_card_tender_id": "ID de contract",
 

@@ -127,6 +127,20 @@
               <div class="info-document_id">ID: {{ document.id }}</div>
             </el-col>
           </el-row>
+          
+          <el-row v-for="(oldDoc, index) of document.oldVersions" :key="oldDoc.id + index" class="info-old-document" :gutter="30">
+            <el-col :xs="24" :sm="10">
+              <div class="info-document_name">
+                <div>
+                  <a :href="oldDoc.url" :title="oldDoc.name">{{ oldDoc.name }}</a>
+                </div>
+              </div>
+            </el-col>
+            <el-col :xs="24" :sm="14">
+              <div class="info-document_date-published">Published on {{ oldDoc.datePublished }}</div>
+              <div class="info-document_id">ID: {{ oldDoc.id }}</div>
+            </el-col>
+          </el-row>
         </div>
       </div>
   
@@ -421,6 +435,20 @@
               <div class="info-document_id">ID: {{ document.id }}</div>
             </el-col>
           </el-row>
+          
+          <el-row v-for="(oldDoc, index) of document.oldVersions" :key="oldDoc.id + index" class="info-old-document" :gutter="30">
+            <el-col :xs="24" :sm="14">
+              <div class="info-document_name">
+                <div>
+                  <a :href="oldDoc.url" :title="oldDoc.name">{{ oldDoc.name }}</a>
+                </div>
+              </div>
+            </el-col>
+            <el-col :xs="24" :sm="10">
+              <div class="info-document_date-published">Published on {{ oldDoc.datePublished }}</div>
+              <div class="info-document_id">ID: {{ oldDoc.id }}</div>
+            </el-col>
+          </el-row>
         </div>
       </div>
     </el-container>
@@ -464,8 +492,6 @@
       }),
       entity() {
         if (this.cdb === MTENDER1) {
-          console.log(this.tender); // @TODO need delete after parsing JSON
-
           const tender = this.tender;
 
           return {
@@ -488,9 +514,9 @@
             return item.roles.some(role => role === "procuringEntity");
           });
 
-          console.log(this.tender); // @TODO need delete after parsing JSON
+          /*console.log(this.tender); // @TODO need delete after parsing JSON
           console.log("MSRecord ", MSRecord);
-          console.log("EVRecord ", EVRecord);
+          console.log("EVRecord ", EVRecord);*/
 
           return {
             procedureStatus: `${getDataFromObject(EVRecord, _ => _.tender.status)} ${getDataFromObject(EVRecord, _ => _.tender.statusDetails)}`,
@@ -606,14 +632,37 @@
         if (this.cdb === MTENDER1) {
           const tender = this.tender;
 
-          return getDataFromObject(tender, _ => _.documents, []).map(doc => {
-            return {
-              name: getDataFromObject(doc, _ => _.title),
-              url: getDataFromObject(doc, _ => _.url),
-              datePublished: formatDate(getDataFromObject(doc, _ => _.datePublished)),
-              id: getDataFromObject(doc, _ => _.id)
-            };
-          });
+          const obj = {};
+
+          for(const item of [...getDataFromObject(tender, _ => _.documents, [])].sort((doc1, doc2) => new Date(doc2.dateModified) - new Date(doc1.dateModified))) {
+            if (!obj.hasOwnProperty(item.id)) {
+              obj[item.id] = {
+                name: item.title,
+                url: item.url,
+                datePublished: formatDate(item.datePublished),
+                id: item.id
+              };
+              obj[item.id].oldVersions = []
+            } else {
+              obj[item.id].oldVersions.push({
+                name: item.title,
+                url: item.url,
+                datePublished: formatDate(item.datePublished),
+                id: item.id
+              })
+            }
+          }
+
+          return Object.values(obj);
+  
+          /*return getDataFromObject(contract, _ => _.documents, []).map(doc => {
+           return {
+           name: getDataFromObject(doc, _ => _.title),
+           url: getDataFromObject(doc, _ => _.url),
+           datePublished: formatDate(getDataFromObject(doc, _ => _.datePublished)),
+           id: getDataFromObject(doc, _ => _.id)
+           };
+           });*/
         } else {
           const EVRecord = this.tender.EVRecord.compiledRelease;
 
@@ -853,15 +902,28 @@
           const tender = this.tender;
 
           return getDataFromObject(tender, _ => _.contracts, []).map(contract => {
-            return getDataFromObject(contract, _ => _.documents, []).map(document => {
-              return {
-                name: getDataFromObject(document, _ => _.title),
-                url: getDataFromObject(document, _ => _.url),
-                type: getDataFromObject(document, _ => _.documentType),
-                datePublished: formatDate(getDataFromObject(document, _ => _.datePublished)),
-                id: getDataFromObject(document, _ => _.id)
-              };
-            });
+            const obj = {};
+
+            for(const item of [...getDataFromObject(contract, _ => _.documents, [])].sort((doc1, doc2) => new Date(doc2.dateModified) - new Date(doc1.dateModified))) {
+              if (!obj.hasOwnProperty(item.id)) {
+                obj[item.id] = {
+                  name: item.title,
+                  url: item.url,
+                  datePublished: formatDate(item.datePublished),
+                  id: item.id
+                };
+                obj[item.id].oldVersions = []
+              } else {
+                obj[item.id].oldVersions.push({
+                  name: item.title,
+                  url: item.url,
+                  datePublished: formatDate(item.datePublished),
+                  id: item.id
+                })
+              }
+            }
+
+            return Object.values(obj);
           }).reduce((acc, val) => acc.concat(val), []);
         } else {
           return [];

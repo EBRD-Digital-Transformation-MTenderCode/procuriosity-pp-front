@@ -28,7 +28,22 @@ export default {
     "footer_info_text": "Info Line",
 
     "main_title": "Leading by example",
-    "main_total_saving": "Total savings",
+
+    "main_slide1_1": "{main_slide1_1_place} Procedures",
+    "main_slide1_1_place": "Active",
+
+    "main_slide1_2": "{main_slide1_2_place} Contracts",
+    "main_slide1_2_place": "Concluded",
+
+    "main_slide2_1": "{main_slide2_1_place} Entities",
+    "main_slide2_1_place": "Contracting",
+
+    "main_slide2_2": "{main_slide2_2_place} Operators",
+    "main_slide2_2_place": "Economic",
+
+    "main_slide3_1": "{main_slide3_1_place} savings",
+    "main_slide3_1_place": "Total",
+
     "main_news": " News",
     "main_join": "Join",
     "main_news1": "New types of electronic tendering procedures are becoming available on the MTender, to suit different types of contracts and serve different public and commercial buyers, including state-owned enterprises. The Ministry of Finance of Moldova is first introducing electronic public procurement procedures of open tender, request for quotation, and negotiated procedure without publication of contract notice.",
@@ -115,7 +130,7 @@ export default {
 
     "contract_card_last_modified_date": "Last Modified Date:",
     "contract_card_value": "Estimated Value without VAT ",
-    "contract_card_delivery_regions": "Delivery Region:",
+    "contract_card_delivery_regions": "Procuring Entity Region:",
     "contract_card_procedure_type": "Procedure type:",
     "contract_card_procuring_entity_name": "Procuring Entity Name:",
     "contract_card_tender_id": "Contract ID",

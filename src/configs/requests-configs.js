@@ -28,6 +28,13 @@ export const getTenderConfig = (cdb, id) => {
   };
 };
 
+export const getContractConfig = (cdb, id) => {
+  return {
+    method: "get",
+    url: `${cdb === "mtender1" ? mTender1 : mTender2}/contracts/${id}`
+  };
+};
+
 export const getRegionsConfig = (lang, country) => {
   return {
     method: "get",

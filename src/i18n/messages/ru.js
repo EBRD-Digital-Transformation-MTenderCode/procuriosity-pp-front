@@ -28,7 +28,22 @@ export default {
     "footer_info_text": "Информационная линия",
 
     "main_title": "Cледуя примеру",
-    "main_total_saving": "Общая экономия",
+
+    "main_slide1_1": "{main_slide1_1_place} Процедур",
+    "main_slide1_1_place": "Активных",
+
+    "main_slide1_2": "{main_slide1_2_place} Контрактов",
+    "main_slide1_2_place": "Заключенных",
+
+    "main_slide2_1": "{main_slide2_1_place} Организаций",
+    "main_slide2_1_place": "Закупающих",
+
+    "main_slide2_2": "{main_slide2_2_place} Агентов",
+    "main_slide2_2_place": "Экономических",
+
+    "main_slide3_1": "{main_slide3_1_place} Экономия",
+    "main_slide3_1_place": "Общая",
+
     "main_news": "Новости",
     "main_join": "Присоединиться",
     "main_news1": "Министерство Финансов Республики Молдова первым вводит процедуру электронных государственных закупок для следующих процедур: открытые торги, запрос ценовых оферт, переговоры без предварительного опубликования объявления на участие. Руководство по электронным процедурам государственных закупок будут доступны в ближайшее время от Агентства Государственных Закупок.",
@@ -116,7 +131,7 @@ export default {
 
     "contract_card_last_modified_date": "Дата последней модификации",
     "contract_card_value": "Расчетная стоимость без НДС",
-    "contract_card_delivery_regions": "Регион поставки",
+    "contract_card_delivery_regions": "Регион закупающей организации",
     "contract_card_procedure_type": "Тип процедуры",
     "contract_card_procuring_entity_name": "Название закупающей организации",
     "contract_card_tender_id": "ID Контракта",

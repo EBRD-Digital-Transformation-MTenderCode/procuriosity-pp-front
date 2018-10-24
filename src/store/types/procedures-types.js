@@ -12,9 +12,9 @@ export default {
   tenders: [
     {
       name: {
-        en: "Negotiated procedure without publication in PPB",
-        ro: "Proceduri negociată fără publicare în BAP",
-        ru: "Переговорная процедура без публикации объявления в БГЗ"
+        en: "Direct award",
+        ro: "Premiul direct",
+        ru: "Прямой договор"
       },
       value: "reporting"
     },
