@@ -14,13 +14,14 @@
         </i18n>
         <p>{{$t("message.register_p3")}}</p>
         <i18n path="message.register_p4" tag="p">
-           <span place="register_p4_place">
-          <a href="https://achizitii.md/" target="_blank">achizitii</a>,
-             <a href="https://e-licitatie.md/" target="_blank">e-licitatie</a>
-             {{$t("message.register_p4_bold")}}
-          <a href="https://yptender.md/" target="_blank">YTender</a>
+          <span place="register_p4_place">
+          <a href="https://achizitii.md/" target="_blank">Achizitii</a>,
+          <a href="https://e-licitatie.md/" target="_blank">E-licitatie</a>
+          {{$t("message.register_p4_bold")}}
+          <a href="https://yptender.md/" target="_blank">YPTender</a>
          </span>
         </i18n>
+        <p>{{ $t("message.register_p4_1") }}</p>
         <p>{{$t("message.register_p5")}}</p>
       </section>
     </div>

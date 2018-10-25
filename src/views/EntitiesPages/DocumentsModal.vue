@@ -16,7 +16,7 @@
             </div>
           </el-col>
           <el-col :xs="24" :sm="14">
-            <div class="info-document_date-published">Published on {{ document.datePublished }}</div>
+            <div class="info-document_date-published">{{ $t("tender.documents_published") }}{{ document.datePublished }}</div>
             <div class="info-document_id">ID: {{ document.id }}</div>
           </el-col>
         </el-row>

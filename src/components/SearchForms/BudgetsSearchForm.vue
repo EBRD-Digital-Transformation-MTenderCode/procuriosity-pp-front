@@ -5,14 +5,14 @@
           name="titlesOrDescriptionsStrict"
           :value="titlesOrDescriptionsStrict"
           :setValue="setFormParams"
-          :label="$t('message.search_strict')"
+          :label="$t('search.strict')"
       />
       <search-input
           name="titlesOrDescriptions"
           :value="titlesOrDescriptions"
           :setValue="setFormParams"
           prefixIcon
-          :placeholder="$t('message.search_placeholder')"
+          :placeholder="$t('search.placeholder')"
       />
       <button class="search-form__btn search-form__btn_search" />
       <button
@@ -33,7 +33,7 @@
                     name="buyersNames"
                     :values="buyersNames"
                     :setValues="setFormParams"
-                    :placeholder="$t('message.search_procedures_buyers_names_placeholder')"
+                    :placeholder="$t('search.procedures_buyers_names_placeholder')"
                 />
               </div>
   
@@ -43,7 +43,7 @@
                     name="buyersIdentifiers"
                     :values="buyersIdentifiers"
                     :setValues="setFormParams"
-                    :placeholder="$t('message.search_procedures_buyers_identifiers_placeholder')"
+                    :placeholder="$t('search.procedures_buyers_identifiers_placeholder')"
                 />
               </div>
   
@@ -54,7 +54,7 @@
                     :items="buyersTypesList"
                     :values="buyersTypes"
                     :setValues="setFormParams"
-                    :placeholder="$t('message.search_procedures_types_of_buyers_placeholder')"
+                    :placeholder="$t('search.procedures_types_of_buyers_placeholder')"
                 />
               </div>
   
@@ -65,7 +65,7 @@
                     :items="mainGeneralActivityList"
                     :values="buyersMainGeneralActivities"
                     :setValues="setFormParams"
-                    :placeholder="$t('message.search_procedures_buyers_main_general_activity_placeholder')"
+                    :placeholder="$t('search.procedures_buyers_main_general_activity_placeholder')"
                 />
               </div>
   
@@ -76,7 +76,7 @@
                     :items="mainSectoralActivityList"
                     :values="buyersMainSectoralActivities"
                     :setValues="setFormParams"
-                    :placeholder="$t('message.search_procedures_buyers_main_sectoral_activity_placeholder')"
+                    :placeholder="$t('search.procedures_buyers_main_sectoral_activity_placeholder')"
                 />
               </div>
   
@@ -88,7 +88,7 @@
                     :values="buyersRegions"
                     :setValues="setFormParams"
                     needFetch
-                    :placeholder="$t('message.search_region_placeholder')"
+                    :placeholder="$t('search.region_placeholder')"
                 />
               </div>
             </el-col>
@@ -102,7 +102,7 @@
                     :value="periodPlanning"
                     :setValue="setFormParams"
                 >
-                  {{$t("message.search_planning_period")}}
+                  {{$t("search.planning_period")}}
                 </search-period>
               </div>
   
@@ -113,7 +113,7 @@
                     :items="budgetStatusesList"
                     :values="budgetStatuses"
                     :setValues="setFormParams"
-                    :placeholder="$t('message.search_budget_statuses_placeholder')"
+                    :placeholder="$t('search.budget_statuses_placeholder')"
                 />
               </div>
   
@@ -125,7 +125,7 @@
                     prefixIcon
                     :value="amountFrom"
                     :setValue="setFormParams"
-                    :placeholder="$t('message.search_amount_from')"
+                    :placeholder="$t('search.amount_from')"
                 />
               </div>
   
@@ -137,7 +137,7 @@
                     prefixIcon
                     :value="amountTo"
                     :setValue="setFormParams"
-                    :placeholder="$t('message.search_amount_to')"
+                    :placeholder="$t('search.amount_to')"
                 />
               </div>
   
@@ -149,7 +149,7 @@
                     :values="classifications"
                     :setValues="setFormParams"
                     needFetch
-                    :placeholder="$t('message.search_classifications_placeholder')"
+                    :placeholder="$t('search.classifications_placeholder')"
                 />
               </div>
   
@@ -159,7 +159,7 @@
                     name="id"
                     :value="id"
                     :setValue="setFormParams"
-                    :placeholder="$t('message.search_id_placeholder')"
+                    :placeholder="$t('search.id_placeholder')"
                     prefixIcon=""
                 />
               </div>

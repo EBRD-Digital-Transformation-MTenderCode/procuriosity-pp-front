@@ -8,45 +8,45 @@
               <img src="@/assets/logo-footer.png" alt="" class="footer-logo__img">
             </router-link>
             <div class="footer-logo__cr">
-              2018 ©, {{$t("message.footer_logo_cr")}}
+              2018 ©, {{ $t("footer.logo_cr") }}
             </div>
           </div>
           <nav class="footer-nav">
             <div>
-              <!--<router-link to="/news">{{$t("message.footer_nav_news")}}</router-link><br>-->
+              <!--<router-link to="/news">{{$t("footer.nav_news")}}</router-link><br>-->
               <router-link active-class="footer-nav_active" to="/about">
-                {{$t("message.footer_nav_about_MTender")}}
+                {{$t("footer.nav_about_MTender")}}
               </router-link><br>
               <router-link active-class="footer-nav_active" to="/register">
-                {{$t("message.footer_nav_register")}}
+                {{$t("footer.nav_register")}}
               </router-link><br>
             </div>
             <div>
               <router-link active-class="footer-nav_active" to="/legal-framework">
-                {{$t("message.footer_nav_legal_framework")}}
+                {{$t("footer.nav_legal_framework")}}
               </router-link><br>
               <router-link active-class="footer-nav_active" to="/security-and-confidentiality">
-                {{$t("message.footer_nav_security_and_confidentiality")}}
+                {{$t("footer.nav_security_and_confidentiality")}}
               </router-link><br>
               <router-link active-class="footer-nav_active" to="/join-mtender">
-                {{$t("message.footer_nav_join_MTender")}}
+                {{$t("footer.nav_join_MTender")}}
               </router-link><br>
             </div>
             <div>
               <router-link active-class="footer-nav_active" to="/accreditation">
-                {{$t("message.footer_nav_accreditation")}}
+                {{$t("footer.nav_accreditation")}}
               </router-link><br>
               <router-link active-class="footer-nav_active" to="/for-civil">
-                {{$t("message.footer_nav_for_civil")}}
+                {{$t("footer.nav_for_civil")}}
               </router-link><br>
               <router-link active-class="footer-nav_active" to="/faq">
-                {{$t("message.footer_nav_FAQ")}}
+                {{$t("footer.nav_FAQ")}}
               </router-link><br>
             </div>
           </nav>
           <div class="footer-info">
             <div class="footer-info__text">
-              {{$t("message.footer_info_text")}}:
+              {{$t("footer.info_text")}}:
             </div>
             <div class="footer-info__tel">
               <a href="tel:+373 022 78 97 89">022 789 789</a>
