@@ -31,7 +31,7 @@
         data-fetch
         allow-create
         default-first-option
-        :no-match-text="$t('message.search_auto_complete_not_found')"
+        :no-match-text="$t('search.auto_complete_not_found')"
         :popper-append-to-body="false"
         :placeholder="placeholder"
         @focus="getOptions"
@@ -52,7 +52,7 @@
         filterable
         data-local
         default-first-option
-        :no-match-text="$t('message.search_auto_complete_not_found')"
+        :no-match-text="$t('search.auto_complete_not_found')"
         :popper-append-to-body="false"
         :placeholder="placeholder"
         :value="values"

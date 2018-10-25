@@ -8,18 +8,21 @@
           </div>
         </div>
         <div class="entity-update">
-          {{$t("message.contract_card_last_modified_date")}} <span class="entity-update__date">{{ modifiedDate }}</span>
+          {{$t("contract.last_modified_date")}}: <span class="entity-update__date">{{ modifiedDate }}</span>
         </div>
       </div>
       <el-row type="flex" :gutter="18">
         <el-col :xs="24" :sm="14">
-          <div class="entity-title">
+          <router-link v-if="needLink" :to="`/contracts/${entityId}`" data-link class="entity-title">
+            {{ title }}
+          </router-link>
+          <div v-else class="entity-title">
             {{ title }}
           </div>
           <div class="entity-description">
             {{ description }}
           </div>
-          <div class="entity-links">
+          <!--<div class="entity-links">
             <a :href="`https://achizitii.md/${$i18n.locale}/public/contract/${entityId}`" target="_blank">
               <img src="@/assets/achizitii.md .png" alt="Achizitii logo" >
             </a>
@@ -29,11 +32,13 @@
             <a :href="`https://e-licitatie.md/${$i18n.locale}/contract/${entityId}`" target="_blank">
               <img src="@/assets/e-lici.png" alt="E-lici logo" >
             </a>
-          </div>
+          </div>-->
         </el-col>
         <el-col :xs="24" :sm="6">
           <div class="entity-amount">
-            <div class="entity-amount__text">{{$t("message.contract_card_value")}}({{ currency }})</div>
+            <div class="entity-amount__text">
+              {{$t("contract.value")}} ({{ currency ? currency: "MDL" }})
+            </div>
             <div class="entity-amount__number">
               <span class="whole" :style="wholeAmount.length > 10 ? 'font-size: 30px': ''">{{ wholeAmount }}<span
                   v-if="fractionAmount">.</span></span>
@@ -43,19 +48,19 @@
         </el-col>
         <el-col :xs="24" :sm="4">
           <div class="entity-pe-name">
-            <div class="title">{{$t("message.contract_card_procuring_entity_name")}}</div>
+            <div class="title">{{$t("contract.procuring_entity_name")}}:</div>
             <div class="text">{{ peName }}</div>
           </div>
-          <div class="entity-region">
-            <div class="title">{{$t("message.contract_card_delivery_regions")}}</div>
+          <div class="entity-region" v-if="region">
+            <div class="title">{{$t("contract.delivery_regions")}}:</div>
             <div class="text">{{ region }}</div>
           </div>
-          <div class="entity-type">
-            <div class="title">{{$t("message.contract_card_procedure_type")}}</div>
+          <div class="entity-type" v-if="type">
+            <div class="title">{{$t("contract.procedure_type")}}:</div>
             <div class="text">{{ type }}</div>
           </div>
           <div class="entity-id">
-            <div class="title">{{$t("message.contract_card_tender_id")}}</div>
+            <div class="title">{{$t("contract.tender_id")}}</div>
             <div class="text">{{ entityId }}</div>
           </div>
         </el-col>

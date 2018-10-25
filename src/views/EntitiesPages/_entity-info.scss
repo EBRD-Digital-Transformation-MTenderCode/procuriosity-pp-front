@@ -32,6 +32,8 @@
     }
   }
   &__name {
+    text-overflow: ellipsis;
+    overflow: hidden;
     line-height: 1.4;
     color: #787878;
   }
@@ -91,6 +93,20 @@
     }
     &_id {
       color: $fontC2;
+    }
+  }
+  &-old-document {
+    margin: 15px 0;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    .info-document_name {
+      padding-left: 20px;
+    }
+    a {
+      box-shadow: 0 1px 0 #838383;
+      text-decoration: line-through;
+      color: #838383;
     }
   }
   &-table {

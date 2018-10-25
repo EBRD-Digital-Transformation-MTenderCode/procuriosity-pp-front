@@ -5,15 +5,15 @@
         <el-row :gutter="30">
           <el-col>
             <div class="header-logo-ebrd">
-              <a href="/" class="header-logo-ebrd__link">
+              <router-link to="/" class="header-logo-ebrd__link">
                 <img src="@/assets/logo-ebrd.png" class="header-logo-ebrd__img" alt="EBRD">
-              </a>
+              </router-link>
               <div class="header-logo-ebrd__text">
-                <div>{{$t("message.header_ebrd_line1")}}</div>
-                <div>{{$t("message.header_ebrd_line2")}}</div>
+                <div>{{$t("header.ebrd_line1")}}</div>
+                <div>{{$t("header.ebrd_line2")}}</div>
               </div>
             </div>
-            <!--<locale-toggle />-->
+            <locale-toggle />
           </el-col>
         </el-row>
       </el-container>
@@ -26,14 +26,31 @@
               <img src="@/assets/logo.png" class="header-logo-mtender__img" alt="MTender">
             </router-link>
             <nav class="header-static-nav">
-              <a href="#">{{$t("message.header_static_nav_news")}}</a>
-              <a href="#">{{$t("message.header_static_nav_for_contracting")}}</a>
-              <a href="#">{{$t("message.header_static_nav_for_state_owned")}}</a>
-              <a href="#">{{$t("message.header_static_nav_for_commercial")}}</a>
-              <a href="#">{{$t("message.header_static_nav_for_suppliers")}}</a>
-              <a href="#">{{$t("message.header_static_nav_for_civil")}}</a>
-              <a href="#">{{$t("message.header_static_nav_vacancies")}}</a>
-              <a href="#">{{$t("message.header_static_nav_FAQ")}}</a>
+              <!--<router-link to="/news">{{$t("header.static_nav_news")}}</router-link>-->
+              <router-link active-class="header-static-nav_active" to="/about">
+                {{$t("header.static_nav_about_MTender")}}
+              </router-link>
+              <router-link active-class="header-static-nav_active" to="/register">
+                {{$t("header.static_nav_register")}}
+              </router-link>
+              <router-link active-class="header-static-nav_active" to="/legal-framework">
+                {{$t("header.static_nav_legal_framework")}}
+              </router-link>
+              <router-link active-class="header-static-nav_active" to="/security-and-confidentiality">
+                {{$t("header.static_nav_security_and_confidentiality")}}
+              </router-link>
+              <router-link active-class="header-static-nav_active" to="/join-mtender">
+                {{$t("header.static_nav_join_MTender")}}
+              </router-link>
+              <router-link active-class="header-static-nav_active" to="/accreditation">
+                {{$t("header.static_nav_accreditation")}}
+              </router-link>
+              <router-link active-class="header-static-nav_active" to="/for-civil">
+                {{$t("header.static_nav_for_civil")}}
+              </router-link>
+              <router-link active-class="header-static-nav_active" to="/faq">
+                {{$t("header.static_nav_FAQ")}}
+              </router-link>
             </nav>
           </el-col>
         </el-row>
@@ -55,14 +72,14 @@
 <script>
   import { mapState } from "vuex";
 
-  /*import LocaleToggle from "./../components/LocaleToggle";*/
+  import LocaleToggle from "./../components/LocaleToggle";
 
   import "./../assets/logo.png";
 
   export default {
     name: "AppHeader",
     components: {
-      /*"locale-toggle": LocaleToggle*/
+      "locale-toggle": LocaleToggle
     },
     computed: {
       ...mapState(["entities"])
@@ -80,10 +97,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-
     }
     &-first {
-      padding: 15px 0;
+      padding: 9px 0 5px;
       background-color: $mainC;
       color: #fff;
       .el-col {
@@ -117,7 +133,7 @@
         }
         &__img {
           height: 30px;
-          margin-right: 15px;
+          margin-right: 20px;
           @media (max-width: 400px) {
             height: 40px;
             margin-left: auto;
@@ -126,6 +142,7 @@
           }
         }
         &__text {
+          line-height: 1.1;
           font-size: 11px;
           @media (max-width: 400px) {
             width: 100%;
@@ -155,7 +172,7 @@
       justify-content: flex-end;
       align-self: flex-start;
       flex-wrap: wrap;
-      max-width: 50%;
+      max-width: 70%;
       text-align: right;
       @media (max-width: 900px) {
         max-width: 100%;
@@ -164,6 +181,9 @@
         width: 100%;
         flex-grow: 1;
         justify-content: center;
+      }
+      &_active {
+        color: #000 !important;
       }
       a {
         display: inline-block;
@@ -185,7 +205,7 @@
     &-entity-nav {
       display: flex;
       justify-content: space-between;
-      margin-top: 30px;
+      margin-top: 22px;
       @media (max-width: 860px) {
         flex-direction: column;
       }

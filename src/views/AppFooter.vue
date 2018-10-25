@@ -8,26 +8,48 @@
               <img src="@/assets/logo-footer.png" alt="" class="footer-logo__img">
             </router-link>
             <div class="footer-logo__cr">
-              {{$t("message.footer_logo_cr")}}
+              2018 ©, {{ $t("footer.logo_cr") }}
             </div>
           </div>
           <nav class="footer-nav">
-            <a href="#">{{$t("message.footer_nav_electronic_tenders")}}</a><br>
-            <a href="#">{{$t("message.footer_nav_for_contracting")}}</a><br>
-            <a href="#">{{$t("message.footer_nav_for_state_owned")}}</a><br>
-            <a href="#">{{$t("message.footer_nav_for_commercial")}}</a><br>
-            <a href="#">{{$t("message.footer_nav_for_suppliers")}}</a><br>
-            <a href="#">{{$t("message.footer_nav_for_civil")}}</a><br>
-            <a href="#">{{$t("message.footer_nav_news")}}</a><br>
-            <a href="#">{{$t("message.footer_nav_FAQ")}}</a><br>
-            <a href="#">{{$t("message.footer_nav_vacancies")}}</a><br>
+            <div>
+              <!--<router-link to="/news">{{$t("footer.nav_news")}}</router-link><br>-->
+              <router-link active-class="footer-nav_active" to="/about">
+                {{$t("footer.nav_about_MTender")}}
+              </router-link><br>
+              <router-link active-class="footer-nav_active" to="/register">
+                {{$t("footer.nav_register")}}
+              </router-link><br>
+            </div>
+            <div>
+              <router-link active-class="footer-nav_active" to="/legal-framework">
+                {{$t("footer.nav_legal_framework")}}
+              </router-link><br>
+              <router-link active-class="footer-nav_active" to="/security-and-confidentiality">
+                {{$t("footer.nav_security_and_confidentiality")}}
+              </router-link><br>
+              <router-link active-class="footer-nav_active" to="/join-mtender">
+                {{$t("footer.nav_join_MTender")}}
+              </router-link><br>
+            </div>
+            <div>
+              <router-link active-class="footer-nav_active" to="/accreditation">
+                {{$t("footer.nav_accreditation")}}
+              </router-link><br>
+              <router-link active-class="footer-nav_active" to="/for-civil">
+                {{$t("footer.nav_for_civil")}}
+              </router-link><br>
+              <router-link active-class="footer-nav_active" to="/faq">
+                {{$t("footer.nav_FAQ")}}
+              </router-link><br>
+            </div>
           </nav>
           <div class="footer-info">
             <div class="footer-info__text">
-              {{$t("message.footer_info_text")}}
+              {{$t("footer.info_text")}}:
             </div>
             <div class="footer-info__tel">
-              <a href="tel:+37322022789789">{{$t("message.footer_info_tel")}}</a>
+              <a href="tel:+373 022 78 97 89">022 789 789</a>
             </div>
           </div>
         </el-col>
@@ -78,14 +100,26 @@
       }
     }
     &-nav {
-      columns: 3;
-      column-gap: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: flex-start;
       line-height: 1.5;
-      @media (max-width: 768px) {
-        margin-bottom: 15px;
+      @media (max-width: 845px) {
+        justify-content: center;
       }
       @media (max-width: 480px) {
         columns: 2;
+      }
+      &_active {
+        color: #000 !important;
+      }
+      div:not(:last-child) {
+        margin-right: 20px;
+        @media (max-width: 845px) {
+          margin-right: 0;
+          text-align: center;
+        }
       }
       a {
         font-size: 12px;

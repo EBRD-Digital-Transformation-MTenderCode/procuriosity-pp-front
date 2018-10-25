@@ -7,7 +7,7 @@
       />
       <div class="list-status-bar">
         <div class="list-status-bar__text">
-          Total found: <span class="list-status-bar__count">{{ entities[entityName].paginationInfo.totalCount }}</span>
+          {{$t("search.list_total_found")}}: <span class="list-status-bar__count">{{ entities[entityName].paginationInfo.totalCount }}</span>
         </div>
       </div>
       <transition-group
@@ -30,7 +30,7 @@
         </ul>
         <div class="list__no-data-title" v-if="entities[entityName].loaded && !entities[entityName].list.length"
              :key="'no-data'">
-          {{$t("message.list_no_data")}}
+          {{$t("search.list_no_data")}}
         </div>
         <stub-card
             v-if="!entities[entityName].loaded"

@@ -52,7 +52,7 @@
   &-more {
     padding-top: 40px;
   }
-  &__reset-button{
+  &__reset-button {
     padding: 13px 44px;
     border: 0;
     border-radius: 3px;
@@ -60,10 +60,10 @@
     color: #f7f7f7 !important;
     font-size: 25px;
     transition: 0.4s;
-    &:hover{
+    &:hover {
       background-color: #fb9d47 !important;
     }
-    &-wp{
+    &-wp {
       display: flex;
       justify-content: flex-end;
       margin-top: 10px;
@@ -186,13 +186,15 @@
   }
 
 }
-.multiple_input{
-  .el-input__inner{
+
+.multiple_input {
+  .el-input__inner {
     cursor: text !important;
   }
 }
-[data-classifications]{
-  .el-input__inner{
+
+[data-classifications] {
+  .el-input__inner {
     cursor: text !important;
   }
 }

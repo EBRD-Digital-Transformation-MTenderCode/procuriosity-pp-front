@@ -5,14 +5,14 @@
           name="titlesOrDescriptionsStrict"
           :value="titlesOrDescriptionsStrict"
           :setValue="setFormParams"
-          :label="$t('message.search_strict')"
+          :label="$t('search.strict')"
       />
       <search-input
           name="titlesOrDescriptions"
           :value="titlesOrDescriptions"
           :setValue="setFormParams"
           prefixIcon
-          :placeholder="$t('message.search_placeholder')"
+          :placeholder="$t('search.placeholder')"
       />
       <button class="search-form__btn search-form__btn_search" />
       <button
@@ -33,20 +33,20 @@
                     name="buyersNames"
                     :values="buyersNames"
                     :setValues="setFormParams"
-                    :placeholder="$t('message.search_procedures_buyers_names_placeholder')"
+                    :placeholder="$t('search.procedures_buyers_names_placeholder')"
                 />
               </div>
-
+  
               <!-- Buyers identifiers -->
               <div class="search-form-element">
                 <multiple-input
                     name="buyersIdentifiers"
                     :values="buyersIdentifiers"
                     :setValues="setFormParams"
-                    :placeholder="$t('message.search_procedures_buyers_identifiers_placeholder')"
+                    :placeholder="$t('search.procedures_buyers_identifiers_placeholder')"
                 />
               </div>
-
+  
               <!-- Types of buyers -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -54,10 +54,10 @@
                     :items="buyersTypesList"
                     :values="buyersTypes"
                     :setValues="setFormParams"
-                    :placeholder="$t('message.search_procedures_types_of_buyers_placeholder')"
+                    :placeholder="$t('search.procedures_types_of_buyers_placeholder')"
                 />
               </div>
-
+  
               <!-- Main general activity -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -65,10 +65,10 @@
                     :items="mainGeneralActivityList"
                     :values="buyersMainGeneralActivities"
                     :setValues="setFormParams"
-                    :placeholder="$t('message.search_procedures_buyers_main_general_activity_placeholder')"
+                    :placeholder="$t('search.procedures_buyers_main_general_activity_placeholder')"
                 />
               </div>
-
+  
               <!-- Main sectoral activity -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -76,10 +76,10 @@
                     :items="mainSectoralActivityList"
                     :values="buyersMainSectoralActivities"
                     :setValues="setFormParams"
-                    :placeholder="$t('message.search_procedures_buyers_main_sectoral_activity_placeholder')"
+                    :placeholder="$t('search.procedures_buyers_main_sectoral_activity_placeholder')"
                 />
               </div>
-
+  
               <!-- Buyers regions -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -88,7 +88,7 @@
                     :values="buyersRegions"
                     :setValues="setFormParams"
                     needFetch
-                    :placeholder="$t('message.search_region_placeholder')"
+                    :placeholder="$t('search.region_placeholder')"
                 />
               </div>
             </el-col>
@@ -102,10 +102,10 @@
                     :value="periodPlanning"
                     :setValue="setFormParams"
                 >
-                  {{$t("message.search_planning_period")}}
+                  {{$t("search.planning_period")}}
                 </search-period>
               </div>
-
+  
               <!--Budget Statuses -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -113,10 +113,10 @@
                     :items="budgetStatusesList"
                     :values="budgetStatuses"
                     :setValues="setFormParams"
-                    :placeholder="$t('message.search_budget_statuses_placeholder')"
+                    :placeholder="$t('search.budget_statuses_placeholder')"
                 />
               </div>
-
+  
               <!-- Amount from -->
               <div class="search-form-element">
                 <search-input
@@ -125,10 +125,10 @@
                     prefixIcon
                     :value="amountFrom"
                     :setValue="setFormParams"
-                    :placeholder="$t('message.search_amount_from')"
+                    :placeholder="$t('search.amount_from')"
                 />
               </div>
-
+  
               <!-- Amount to -->
               <div class="search-form-element">
                 <search-input
@@ -137,10 +137,10 @@
                     prefixIcon
                     :value="amountTo"
                     :setValue="setFormParams"
-                    :placeholder="$t('message.search_amount_to')"
+                    :placeholder="$t('search.amount_to')"
                 />
               </div>
-
+  
               <!-- Classifications -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -149,17 +149,17 @@
                     :values="classifications"
                     :setValues="setFormParams"
                     needFetch
-                    :placeholder="$t('message.search_classifications_placeholder')"
+                    :placeholder="$t('search.classifications_placeholder')"
                 />
               </div>
-
+  
               <!-- id -->
               <div class="search-form-element">
                 <search-input
                     name="id"
                     :value="id"
                     :setValue="setFormParams"
-                    :placeholder="$t('message.search_id_placeholder')"
+                    :placeholder="$t('search.id_placeholder')"
                     prefixIcon=""
                 />
               </div>

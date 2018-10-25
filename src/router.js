@@ -19,14 +19,71 @@ export default new Router({
       component: () => import(/* webpackChunkName: "List" */ "./components/List.vue")
     },
     /*{
-      path: "/budgets/:id",
-      name: "budget-page",
-      component: () => import(/!* webpackChunkName: "BudgetPage" *!/ "./views/EntitiesPages/BudgetPage.vue")
-    },
+     path: "/budgets/:id",
+     name: "budget-page",
+     component: () => import(/!* webpackChunkName: "BudgetPage" *!/ "./views/EntitiesPages/BudgetPage.vue")
+     },*/
     {
       path: "/tenders/:id",
       name: "tender-page",
-      component: () => import(/!* webpackChunkName: "TenderPage" *!/ "./views/EntitiesPages/TenderPage.vue")
-    }*/
-  ]
+      component: () => import(/* webpackChunkName: "TenderPage" */ "./views/EntitiesPages/TenderPage.vue")
+    },
+    {
+      path: "/contracts/:id",
+      name: "contract-page",
+      component: () => import(/* webpackChunkName: "ContractPage" */ "./views/EntitiesPages/ContractPage.vue")
+    },
+    {
+      path: "/news",
+      name: "news",
+      component: () => import(/* webpackChunkName: "News" */ "./views/NewsList.vue")
+    },
+    {
+      path: "/about",
+      name: "about",
+      component: () => import(/* webpackChunkName: "About" */ "./views/StaticPages/About.vue")
+    },
+    {
+      path: "/register",
+      name: "register",
+      component: () => import(/* webpackChunkName: "Register" */ "./views/StaticPages/Register.vue")
+    },
+    {
+      path: "/legal-framework",
+      name: "legal-framework",
+      component: () => import(/* webpackChunkName: "LegalFramework" */ "./views/StaticPages/LegalFramework.vue")
+    },
+    {
+      path: "/security-and-confidentiality",
+      name: "security-and-confidentiality",
+      component: () => import(/* webpackChunkName: "SecurityAndConfidentiality" */ "./views/StaticPages/SecurityAndConfidentiality.vue")
+    },
+    {
+      path: "/join-mtender",
+      name: "join-mtender",
+      component: () => import(/* webpackChunkName: "JoinMTender" */ "./views/StaticPages/JoinMTender.vue")
+    },
+    {
+      path: "/accreditation",
+      name: "accreditation",
+      component: () => import(/* webpackChunkName: "Accreditation" */ "./views/StaticPages/Accreditation.vue")
+    },
+    {
+      path: "/for-civil",
+      name: "for-civil",
+      component: () => import(/* webpackChunkName: "ForCivil" */ "./views/StaticPages/ForCivil.vue")
+    },
+    {
+      path: "/faq",
+      name: "faq",
+      component: () => import(/* webpackChunkName: "FAQ" */ "./views/StaticPages/FAQ.vue")
+    },
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { x: 0, y: 0 };
+    }
+  }
 });

@@ -8,12 +8,13 @@
     <span
         class="el-dropdown-link"
     >
-      <i class="el-icon-arrow-down el-icon--right"></i>
+      
       <EN v-if="this.$i18n.locale === 'en'" />
-      <RU v-if="this.$i18n.locale === 'ru'" />
       <RO v-if="this.$i18n.locale === 'ro'" />
+      <RU v-if="this.$i18n.locale === 'ru'" />
+      <i class="el-icon-caret-bottom el-icon--right" />
     </span>
-    <el-dropdown-menu slot="dropdown">
+    <el-dropdown-menu class="locale-dropdown-menu" slot="dropdown">
       <el-dropdown-item
           v-for="(locale, i) of locales"
           :key="`locale${i}`"
@@ -21,8 +22,8 @@
           divided
       >
         <EN v-if="locale === 'en'" />
-        <RU v-if="locale === 'ru'" />
         <RO v-if="locale === 'ro'" />
+        <RU v-if="locale === 'ru'" />
       </el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
@@ -57,33 +58,36 @@
   };
 </script>
 
-<style lang="scss" scoped>
-  .locale-toggle {
-    line-height: 1;
-    svg {
-      display: inline-block;
-      width: auto;
+<style lang="scss">
+  .locale {
+    &-lang {
+      color: #fff;
     }
-    .flag{
-      width: 40px;
-      height: 27px;
-    }
-    .el-dropdown-link {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      .el-icon-arrow-down {
-        font-size: 20px;
+    &-toggle {
+      line-height: 1;
+      @media (max-width: 570px) {
+        margin-bottom: 10px;
+      }
+      .el-dropdown-link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+      .el-icon-caret-bottom {
         font-weight: 700;
         color: #fff;
       }
     }
-    .el-icon-arrow-down {
-      margin-right: 10px;
-    }
-    .el-dropdown-menu__item {
-      padding: 0 10px;
-      margin: 10px 0;
+    &-dropdown-menu {
+      padding: 0;
+      .el-dropdown-menu__item {
+        margin: 5px 0;
+        line-height: 2;
+        .locale-lang {
+          color: #000;
+        }
+      }
     }
   }
 </style>

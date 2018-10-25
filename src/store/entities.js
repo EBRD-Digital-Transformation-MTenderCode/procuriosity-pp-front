@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getBudgetConfig, getListConfig, getTenderConfig } from "./../configs/requests-configs";
+import { getBudgetConfig, getListConfig, getTenderConfig, getContractConfig } from "./../configs/requests-configs";
 
 import initialSearchProps from "./types/initial-search-props";
 
@@ -12,13 +12,14 @@ import {
 
   SET_CURRENT_TENDER_INFO,
   SET_CURRENT_BUDGET_INFO,
+  SET_CURRENT_CONTRACT_INFO,
 
   SET_INITIAL_SEARCH_PARAMS
 } from "./types/mutations-types";
 import {
   FETCH_ENTITY_LIST,
   FETCH_CURRENT_TENDER_INFO,
-  FETCH_CURRENT_BUDGET_INFO
+  FETCH_CURRENT_BUDGET_INFO, FETCH_CURRENT_CONTRACT_INFO
 } from "./types/actions-types";
 
 import { MTENDER1, MTENDER2 } from "./types/cbd-types";
@@ -48,18 +49,17 @@ const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
 
 export default {
   state: {
-    budgets: {
-      name: "message.entity_budgets",
-      loaded: false,
-      list: [],
-      searchParams: { ...localStorageEntities.budgets.searchParams },
-      paginationInfo: {
-        totalCount: 0,
-        pageCount: 0
-      }
-    },
+    /*budgets: {
+     name: "entities.budgets",
+     loaded: false,
+     list: [],
+     searchParams: {...localStorageEntities.budgets.searchParams},
+     paginationInfo: {
+     totalCount: 0, pageCount: 0
+     }
+     },*/
     plans: {
-      name: "message.entity_plans",
+      name: "entities.plans",
       loaded: false,
       list: [],
       searchParams: { ...localStorageEntities.plans.searchParams },
@@ -69,7 +69,7 @@ export default {
       }
     },
     tenders: {
-      name: "message.entity_tenders",
+      name: "entities.tenders",
       loaded: false,
       list: [],
       searchParams: { ...localStorageEntities.tenders.searchParams },
@@ -83,10 +83,14 @@ export default {
       }
     },
     contracts: {
-      name: "message.entity_contracts",
+      name: "entities.contracts",
       loaded: false,
       list: [],
       searchParams: { ...localStorageEntities.contracts.searchParams },
+      currentContract: {
+        cdb: "",
+        contractData: {}
+      },
       paginationInfo: {
         totalCount: 0,
         pageCount: 0
@@ -151,6 +155,14 @@ export default {
         tenderData
       };
     },
+
+    [SET_CURRENT_CONTRACT_INFO](state, { cdb, contractData }) {
+      state.contracts.currentContract = {
+        cdb,
+        contractData
+      };
+    },
+
     [SET_INITIAL_SEARCH_PARAMS](state, { entity }) {
       state[entity].searchParams = initialSearchProps[entity];
 
@@ -195,6 +207,7 @@ export default {
         console.log(e.message);
       }
     },
+
     async [FETCH_CURRENT_BUDGET_INFO]({ commit }, { id }) {
       try {
         const res = await axios(getBudgetConfig(id));
@@ -210,44 +223,80 @@ export default {
     },
 
     async [FETCH_CURRENT_TENDER_INFO]({ commit }, { cdb, id }) {
-      try {
-        const res = await axios(getTenderConfig(cdb, id));
+      if (cdb === MTENDER1) {
+        try {
+          const elasticRes = await axios(getListConfig("tenders", `?entityId=${id}`));
 
-        const tenderData = {};
+          const requestId = elasticRes.data.data[0].id;
 
-        const MSRecord = {};
-        const EVRecord = {};
+          const res = await axios(getTenderConfig(cdb, requestId));
 
-        if (cdb === MTENDER1) {
-          Object.assign(tenderData, res.data.data);
+          const tenderData = res.data.data;
 
-        }
-
-        if (cdb === MTENDER2) {
-          const tenderRecords = res.data.records;
-          tenderRecords.forEach(record => {
-            if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/) !== -1) {
-              Object.assign(MSRecord, record);
-            }
-            if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-EV-[0-9]{13}$/) !== -1) {
-              Object.assign(EVRecord, record);
-            }
-          });
-
-          Object.assign(tenderData, {
-            MSRecord,
-            EVRecord
+          commit(SET_CURRENT_TENDER_INFO, {
+            cdb,
+            tenderData
           });
         }
+        catch (e) {
+          console.log(e);
+        }
+      } else {
+        try {
+          const res = await axios(getTenderConfig(cdb, id));
 
-        commit(SET_CURRENT_TENDER_INFO, {
-          cdb,
-          tenderData
-        });
+          const tenderData = {};
+
+          const MSRecord = {};
+          const EVRecord = {};
+
+          if (cdb === MTENDER2) {
+            const tenderRecords = res.data.records;
+            tenderRecords.forEach(record => {
+              if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/) !== -1) {
+                Object.assign(MSRecord, record);
+              }
+              if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-EV-[0-9]{13}$/) !== -1) {
+                Object.assign(EVRecord, record);
+              }
+            });
+
+            Object.assign(tenderData, {
+              MSRecord,
+              EVRecord
+            });
+
+            commit(SET_CURRENT_TENDER_INFO, {
+              cdb,
+              tenderData
+            });
+          }
+        }
+        catch (e) {
+          console.log(e);
+        }
       }
-      catch (e) {
-        // @TODO need add catching errors
-        console.log(e);
+    },
+
+    async [FETCH_CURRENT_CONTRACT_INFO]({ commit }, { cdb, id }) {
+      if (cdb === MTENDER1) {
+        try {
+          const elasticRes = await axios(getListConfig("contracts", `?entityId=${id}`));
+
+          const requestId = elasticRes.data.data[0].id;
+
+          const res = await axios(getContractConfig(cdb, requestId));
+
+          const contractData = res.data.data;
+
+          commit(SET_CURRENT_CONTRACT_INFO, {
+            cdb,
+            contractData
+          });
+        }
+        catch (e) {
+          console.log(e);
+        }
       }
     }
   }
