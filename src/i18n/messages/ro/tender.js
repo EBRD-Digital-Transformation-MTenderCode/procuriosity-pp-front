@@ -1,10 +1,10 @@
 export default {
-  "tender_card_last_modified_date": "Data ultimilor modificări",
-  "tender_card_value": "Valoarea estimată a achiziției",
-  "tender_card_procedure_type": "Tipul procedurii",
-  "tender_card_procuring_entity_name": "Autoritate contractantă",
-  "tender_card_buyer_region": "Raionul",
-  "tender_card_tender_id": "Numărul de notificări",
+  "last_modified_date": "Data ultimilor modificări",
+  "value": "Valoarea estimată a achiziției",
+  "procedure_type": "Tipul procedurii",
+  "procuring_entity_name": "Autoritate contractantă",
+  "buyer_region": "Raionul",
+  "tender_id": "Numărul de notificări",
 
   "procuring_entity": "Autoritate contractantă",
   "procuring_entity_full_name": "Denumirea persoanei juridice",
