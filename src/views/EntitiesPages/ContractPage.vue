@@ -7,11 +7,11 @@
   
       <!-- Procuring entity -->
       <div class="info">
-        <div class="info__title">Procuring Entity</div>
+        <div class="info__title">{{ $t("contract.procuring_entity") }}</div>
         <div class="info__text">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
-              <div class="info__name">Procuring Entity full name</div>
+              <div class="info__name">{{ $t("contract.procuring_entity_full_name") }}</div>
             </el-col>
             <el-col :xs="24" :sm="14">
               <div class="info__value">{{ procuringEntity.fullName }}</div>
@@ -21,7 +21,7 @@
         <div class="info__text">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
-              <div class="info__name">IDNO of Procuring Entity</div>
+              <div class="info__name">{{ $t("contract.procuring_entity_identifier") }}</div>
             </el-col>
             <el-col :xs="24" :sm="14">
               <div class="info__value">{{ procuringEntity.identifier }}</div>
@@ -31,7 +31,7 @@
         <div class="info__text">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
-              <div class="info__name">Legal address</div>
+              <div class="info__name">{{ $t("contract.procuring_entity_address") }}</div>
             </el-col>
             <el-col :xs="24" :sm="14">
               <div class="info__value">{{ procuringEntity.address }}</div>
@@ -41,7 +41,7 @@
         <div class="info__text">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
-              <div class="info__name">Person responsible for the procurement procedure</div>
+              <div class="info__name">{{ $t("contract.procuring_entity_responsible_person") }}</div>
             </el-col>
             <el-col :xs="24" :sm="14">
               <div class="info__value">{{ procuringEntity.responsiblePerson }}</div>
@@ -52,12 +52,12 @@
   
       <!-- Suppliers -->
       <div class="info">
-        <div class="info__title">Suppliers</div>
+        <div class="info__title">{{ $t("contract.suppliers") }}</div>
         <div v-for="(supplier, index) of suppliers" :key="supplier.identifier">
           <div class="info__text">
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10">
-                <div class="info__name">Supplier full name</div>
+                <div class="info__name">{{ $t("contract.suppliers_full_name") }}</div>
               </el-col>
               <el-col :xs="24" :sm="14">
                 <div class="info__value">{{ supplier.fullName }}</div>
@@ -67,7 +67,7 @@
           <div class="info__text">
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10">
-                <div class="info__name">IDNO of Supplier</div>
+                <div class="info__name">{{ $t("contract.suppliers_identifier") }}</div>
               </el-col>
               <el-col :xs="24" :sm="14">
                 <div class="info__value">{{ supplier.identifier }}</div>
@@ -77,7 +77,7 @@
           <div class="info__text">
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10">
-                <div class="info__name">Legal address</div>
+                <div class="info__name">{{ $t("contract.suppliers_address") }}</div>
               </el-col>
               <el-col :xs="24" :sm="14">
                 <div class="info__value">{{ supplier.address }}</div>
@@ -87,7 +87,7 @@
           <div class="info__text">
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10">
-                <div class="info__name">Person responsible</div>
+                <div class="info__name">{{ $t("contract.suppliers_responsible_person") }}</div>
               </el-col>
               <el-col :xs="24" :sm="14">
                 <div class="info__value">{{ supplier.responsiblePerson }}</div>
@@ -97,10 +97,10 @@
           <div class="info__text" v-if="index !== 0">
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10">
-                <div class="info__name"></div>
+                <div class="info__name" />
               </el-col>
               <el-col :xs="24" :sm="14">
-                <div class="info__value"></div>
+                <div class="info__value" />
               </el-col>
             </el-row>
           </div>
@@ -109,11 +109,11 @@
   
       <!-- Procurement info -->
       <div class="info">
-        <div class="info__title">Information about the procurement procedure</div>
+        <div class="info__title">{{ $t("contract.procuring_info") }}</div>
         <div class="info__text">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
-              <div class="info__name">Estimated Value without VAT ({{ procurementInfo.currency }})</div>
+              <div class="info__name">{{ $t("contract.procuring_info_value") }} ({{ procurementInfo.currency }})</div>
             </el-col>
             <el-col :xs="24" :sm="14">
               <div class="info__value info__value_accent">{{ procurementInfo.amount }}</div>
@@ -122,9 +122,44 @@
         </div>
       </div>
   
+      <!-- Documents -->
+      <div class="info" v-if="documents.length">
+        <div class="info__title">{{ $t("contract.documents") }}</div>
+        <div class="info__text" v-for="(document, key) of documents" :key="document.id + key">
+          <el-row :gutter="30">
+            <el-col :xs="24" :sm="10">
+              <div class="info-document_name">
+                <div>
+                  <a :href="document.url" :title="document.name">{{ document.name }}</a>
+                </div>
+              </div>
+            </el-col>
+            <el-col :xs="24" :sm="14">
+              <div class="info-document_date-published">{{ $t("contract.documents_published") }} {{ document.datePublished }}</div>
+              <div class="info-document_id">{{ $t("contract.documents_id") }}: {{ document.id }}</div>
+            </el-col>
+          </el-row>
+          
+          <el-row v-for="(oldDoc, index) of document.oldVersions" :key="oldDoc.id + index" class="info-old-document"
+                  :gutter="30">
+            <el-col :xs="24" :sm="10">
+              <div class="info-document_name">
+                <div>
+                  <a :href="oldDoc.url" :title="oldDoc.name">{{ oldDoc.name }}</a>
+                </div>
+              </div>
+            </el-col>
+            <el-col :xs="24" :sm="14">
+              <div class="info-document_date-published">{{ $t("contract.documents_published") }} {{ oldDoc.datePublished }}</div>
+              <div class="info-document_id">{{ $t("contract.documents_id") }}: {{ oldDoc.id }}</div>
+            </el-col>
+          </el-row>
+        </div>
+      </div>
+      
       <!-- Items -->
       <div class="info">
-        <div class="info__title">Purchase Specification</div>
+        <div class="info__title">{{ $t("contract.items") }}</div>
         <template v-for="item in items">
           <div class="info__text" :key="item.id">
             <el-row :gutter="30">
@@ -140,46 +175,16 @@
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10" />
               <el-col :xs="24" :sm="14">
-                <div class="info__value info__value_muted">CPV Code: {{ item.cpv }}</div>
-                <div class="info__value info__value_muted">Delivery address:  {{ item.deliveryAddress}}</div>
+                <div class="info__value info__value_muted">
+                  {{ $t("contract.items_cpv") }}: {{ item.cpv }}
+                </div>
+                <div class="info__value info__value_muted">
+                  {{ $t("contract.items_delivery_address") }}:  {{ item.deliveryAddress}}
+                </div>
               </el-col>
             </el-row>
           </div>
         </template>
-      </div>
-  
-      <!-- Documents -->
-      <div class="info" v-if="documents.length">
-        <div class="info__title">Purchase Documents</div>
-        <div class="info__text" v-for="(document, key) of documents" :key="document.id + key">
-          <el-row :gutter="30">
-            <el-col :xs="24" :sm="10">
-              <div class="info-document_name">
-                <div>
-                  <a :href="document.url" :title="document.name">{{ document.name }}</a>
-                </div>
-              </div>
-            </el-col>
-            <el-col :xs="24" :sm="14">
-              <div class="info-document_date-published">Published on {{ document.datePublished }}</div>
-              <div class="info-document_id">ID: {{ document.id }}</div>
-            </el-col>
-          </el-row>
-          
-          <el-row v-for="(oldDoc, index) of document.oldVersions" :key="oldDoc.id + index" class="info-old-document" :gutter="30">
-            <el-col :xs="24" :sm="10">
-              <div class="info-document_name">
-                <div>
-                  <a :href="oldDoc.url" :title="oldDoc.name">{{ oldDoc.name }}</a>
-                </div>
-              </div>
-            </el-col>
-            <el-col :xs="24" :sm="14">
-              <div class="info-document_date-published">Published on {{ oldDoc.datePublished }}</div>
-              <div class="info-document_id">ID: {{ oldDoc.id }}</div>
-            </el-col>
-          </el-row>
-        </div>
       </div>
     </el-container>
     <el-container v-else>

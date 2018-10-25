@@ -3,7 +3,7 @@
     <div class="main-banner">
       <el-container direction="vertical">
         <div class="main-title">
-          {{$t("message.main_title")}}
+          {{$t("main.title")}}
           <span class="carousel-indicators">
             <span
                 :class="activeSlide === 0 ? 'carousel-indicator is-active' : 'carousel-indicator'"
@@ -33,8 +33,8 @@
                 <div class="slide-item__ico slide-item__ico_active-procedures" />
                 <div class="slide-item__number">933</div>
               </div>
-              <i18n path="message.main_slide1_1" tag="div" class="slide-item__text">
-                <div place="main_slide1_1_place">{{ $t("message.main_slide1_1_place") }}</div>
+              <i18n path="main.slide1_1" tag="div" class="slide-item__text">
+                <div place="slide1_1_place">{{ $t("main.slide1_1_place") }}</div>
               </i18n>
             </div>
             <div class="slide-item">
@@ -42,8 +42,8 @@
                 <div class="slide-item__ico slide-item__ico_concluded-contracts" />
                 <div class="slide-item__number">2’470</div>
               </div>
-              <i18n path="message.main_slide1_2" tag="div" class="slide-item__text">
-                <div place="main_slide1_2_place">{{ $t("message.main_slide1_2_place") }}</div>
+              <i18n path="main.slide1_2" tag="div" class="slide-item__text">
+                <div place="slide1_2_place">{{ $t("main.slide1_2_place") }}</div>
               </i18n>
             </div>
           </el-carousel-item>
@@ -53,8 +53,8 @@
                 <div class="slide-item__ico slide-item__ico_contracting-entities" />
                 <div class="slide-item__number">817</div>
               </div>
-              <i18n path="message.main_slide2_1" tag="div" class="slide-item__text">
-                <div place="main_slide2_1_place">{{ $t("message.main_slide2_1_place") }}</div>
+              <i18n path="main.slide2_1" tag="div" class="slide-item__text">
+                <div place="slide2_1_place">{{ $t("main.slide2_1_place") }}</div>
               </i18n>
             </div>
             <div class="slide-item">
@@ -62,8 +62,8 @@
                 <div class="slide-item__ico slide-item__ico_economic-operators" />
                 <div class="slide-item__number">1’860</div>
               </div>
-              <i18n path="message.main_slide2_2" tag="div" class="slide-item__text">
-                <div place="main_slide2_2_place">{{ $t("message.main_slide2_2_place") }}</div>
+              <i18n path="main.slide2_2" tag="div" class="slide-item__text">
+                <div place="slide2_2_place">{{ $t("main.slide2_2_place") }}</div>
               </i18n>
             </div>
           </el-carousel-item>
@@ -73,37 +73,37 @@
                 <div class="slide-item__ico slide-item__ico_total-savings" />
                 <div class="slide-item__number">12’150’000</div>
               </div>
-              <i18n path="message.main_slide3_1" tag="div" class="slide-item__text">
-                <div place="main_slide3_1_place">{{ $t("message.main_slide3_1_place") }}</div>
+              <i18n path="main.slide3_1" tag="div" class="slide-item__text">
+                <div place="slide3_1_place">{{ $t("main.slide3_1_place") }}</div>
               </i18n>
             </div>
           </el-carousel-item>
         </el-carousel>
-        <router-link to="/join-mtender" class="main__join-button">{{$t("message.main_join")}}</router-link>
+        <router-link to="/join-mtender" class="main__join-button">{{$t("main.join")}}</router-link>
       </el-container>
     </div>
     <el-container direction="vertical">
       <div class="main-news">
         <div class="main-news__title">
-          {{$t("message.main_news")}}
+          {{$t("main.news")}}
         </div>
         <div class="main-news__cards-wp">
           <div class="main-news__card">
             <img src="@/assets/news1.jpg" alt="news1" class="main-news__img">
             <div class="main-news__text">
-              {{$t("message.main_news1")}}
+              {{$t("main.news1")}}
             </div>
           </div>
           <div class="main-news__card">
             <img src="@/assets/news2.jpg" alt="news2" class="main-news__img">
             <div class="main-news__text">
-              {{$t("message.main_news2")}}
+              {{$t("main.news2")}}
             </div>
           </div>
           <div class="main-news__card">
             <img src="@/assets/news3.jpg" alt="news3" class="main-news__img">
             <div class="main-news__text">
-              {{$t("message.main_news2")}}
+              {{$t("main.news2")}}
             </div>
           </div>
         </div>
@@ -112,41 +112,41 @@
     <div class="main-about">
       <el-container direction="vertical">
         <div class="main-about__title">
-          {{$t("message.main_h11")}}
+          {{$t("main.h11")}}
         </div>
         <div class="main-about__text">
-          {{$t("message.main_p1")}}
+          {{$t("main.p1")}}
         </div>
         <div class="main-about__cards-wp">
           <div class="main-about__card">
             <img src="@/assets/main-ico1.png" alt="main ico 1" class="main-about__img">
             <div class="main-about__card-text">
-              {{$t("message.main_ul1_li1")}}
+              {{$t("main.ul1_li1")}}
             </div>
           </div>
           <div class="main-about__card">
             <img src="@/assets/main-ico2.png" alt="main ico 2" class="main-about__img">
             <div class="main-about__card-text">
-              {{$t("message.main_ul1_li2")}}
+              {{$t("main.ul1_li2")}}
             </div>
           </div>
           <div class="main-about__card">
             <img src="@/assets/main-ico3.png" alt="main ico 3" class="main-about__img">
             <div class="main-about__card-text">
-              {{$t("message.main_ul1_li3")}}
+              {{$t("main.ul1_li3")}}
             </div>
           </div>
         </div>
         <hr class="main-about__line">
         <div class="main-about__sub-title">
-          {{$t("message.main_p2")}}
+          {{$t("main.p2")}}
         </div>
         <div class="main-about__sub-text">
-          {{$t("message.main_p3")}}
+          {{$t("main.p3")}}
         </div>
         <div class="main-about__partners">
           <div class="main-about__partners_title">
-            {{$t("message.main_p4")}}
+            {{$t("main.p4")}}
           </div>
           <div class="main-about__partners_links">
             <a

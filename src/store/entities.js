@@ -50,7 +50,7 @@ const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
 export default {
   state: {
     /*budgets: {
-     name: "message.entity_budgets",
+     name: "entities.budgets",
      loaded: false,
      list: [],
      searchParams: {...localStorageEntities.budgets.searchParams},
@@ -59,7 +59,7 @@ export default {
      }
      },*/
     plans: {
-      name: "message.entity_plans",
+      name: "entities.plans",
       loaded: false,
       list: [],
       searchParams: { ...localStorageEntities.plans.searchParams },
@@ -69,7 +69,7 @@ export default {
       }
     },
     tenders: {
-      name: "message.entity_tenders",
+      name: "entities.tenders",
       loaded: false,
       list: [],
       searchParams: { ...localStorageEntities.tenders.searchParams },
@@ -83,7 +83,7 @@ export default {
       }
     },
     contracts: {
-      name: "message.entity_contracts",
+      name: "entities.contracts",
       loaded: false,
       list: [],
       searchParams: { ...localStorageEntities.contracts.searchParams },

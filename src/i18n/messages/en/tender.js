@@ -1,0 +1,68 @@
+export default {
+  "last_modified_date": "Last Modified Date",
+  "value": "Estimated Value without VAT ",
+  "procedure_type": "Procedure type",
+  "procuring_entity_name": "Procuring Entity Name",
+  "buyer_region": "Procuring Entity region",
+  "tender_id": "TenderID",
+
+  "procuring_entity": "Procuring Entity",
+  "procuring_entity_full_name": "Procuring Entity full name",
+  "procuring_entity_identifier": "IDNO of Procuring Entity",
+  "procuring_entity_address": "Legal address",
+  "procuring_entity_responsible_person": "Person responsible for the procurement procedure",
+
+  "procuring_info": "Information about the procurement procedure",
+  "procuring_info_value": "Estimated Value without VAT",
+  "procuring_info_min_step": "Minimum amount of price reduction",
+
+  "dates": "Dates and terms",
+  "dates_enquiry": "Enquiries period",
+  "dates_tendering": "Tendering period",
+  "dates_auction": "Auction period",
+
+  "documents": "Purchase Documents",
+  "documents_published": "Published on",
+  "documents_id": "ID",
+
+  "items": "Purchase Specification",
+  "items_cpv": "CPV Code",
+  "items_delivery_address": "Delivery address",
+
+  "bids": "Proposals Registry",
+  "bids_tenderer_name": "Tenderer Name",
+  "bids_initial_amount": "The initial amount of the offer",
+  "bids_final_amount": "Final offer price",
+  "bids_documents": "Documentation",
+  "bids_tenderer_identifier": "IDNO Code",
+  "bids_currency": "",
+
+  "awards": "Protocol for the disclosure of proposals",
+  "awards_date": "Date and time of disclosure of offers",
+  "awards_supplier_name": "Supplier Name",
+  "awards_final_offer": "Final offer price",
+  "awards_status": "Status",
+  "awards_documents": "Documentation",
+  "awards_supplier_identifier": "IDNO Code",
+  "awards_currency": "without VAT",
+
+  "active_awards": "Notification of intention to conclude a contract",
+  "active_awards_supplier_name": "Supplier Name",
+  "active_awards_final_offer": "Final offer price",
+  "active_awards_date_published": "Published on",
+  "active_awards_supplier_identifier": "IDNO Code",
+  "active_awards_supplier_currency": "without VAT",
+
+  "contracts": "Concluded Contracts",
+  "contracts_procuring_entity": "Procuring Entity",
+  "contracts_suppliers": "Suppliers",
+  "contracts_id": "Contract ID",
+  "contracts_amount": "Contract amount",
+  "contracts_currency": "without VAT",
+  "contracts_number": "Contract number",
+  "contracts_date_signed": "Date signed",
+  "contracts_start_date": "Contract period start date",
+  "contracts_end_date": "Contract period end date",
+
+  "documentation": "Documentation",
+}

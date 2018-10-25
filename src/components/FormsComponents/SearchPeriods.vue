@@ -6,9 +6,9 @@
     <el-date-picker
         v-model="inputValue"
         type="datetimerange"
-        :range-separator="$t('message.range_separator')"
-        :start-placeholder="$t('message.start_date_placeholder')"
-        :end-placeholder="$t('message.end_date_placeholder')"
+        :range-separator="$t('search.range_separator')"
+        :start-placeholder="$t('search.start_date_placeholder')"
+        :end-placeholder="$t('search.end_date_placeholder')"
         clearable
         unlink-panels
         align="center"

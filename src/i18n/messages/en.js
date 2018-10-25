@@ -1,108 +1,22 @@
+import header from "./en/header";
+import footer from "./en/footer";
+import main from "./en/main";
+import entities from "./en/entities";
+import search from "./en/search";
+import plan from "./en/plan";
+import tender from "./en/tender";
+import contract from "./en/contract";
+
 export default {
+  header,
+  footer,
+  main,
+  entities,
+  search,
+  plan,
+  tender,
+  contract,
   "message": {
-    "header_ebrd_line1": "Pilot Project Funded by the European Bank",
-    "header_ebrd_line2": "for Reconstruction and Development",
-
-    "header_static_nav_news": "News",
-    "header_static_nav_about_MTender": "About MTender",
-    "header_static_nav_register": "Register",
-    "header_static_nav_legal_framework": "Legal framework",
-    "header_static_nav_security_and_confidentiality": "Security",
-    "header_static_nav_join_MTender": "Join the MTender",
-    "header_static_nav_accreditation": "Accreditation Committee",
-    "header_static_nav_for_civil": "For Civil Society",
-    "header_static_nav_FAQ": "FAQ",
-
-    "footer_logo_cr": "All rights reserved",
-
-    "footer_nav_news": "News",
-    "footer_nav_about_MTender": "About MTender",
-    "footer_nav_register": "Register",
-    "footer_nav_legal_framework": "Legal framework",
-    "footer_nav_security_and_confidentiality": "Security",
-    "footer_nav_join_MTender": "Join the MTender",
-    "footer_nav_accreditation": "Accreditation Committee",
-    "footer_nav_for_civil": "For Civil Society",
-    "footer_nav_FAQ": "FAQ",
-
-    "footer_info_text": "Info Line",
-
-    "main_title": "Leading by example",
-
-    "main_slide1_1": "{main_slide1_1_place} Procedures",
-    "main_slide1_1_place": "Active",
-
-    "main_slide1_2": "{main_slide1_2_place} Contracts",
-    "main_slide1_2_place": "Concluded",
-
-    "main_slide2_1": "{main_slide2_1_place} Entities",
-    "main_slide2_1_place": "Contracting",
-
-    "main_slide2_2": "{main_slide2_2_place} Operators",
-    "main_slide2_2_place": "Economic",
-
-    "main_slide3_1": "{main_slide3_1_place} savings",
-    "main_slide3_1_place": "Total",
-
-    "main_news": " News",
-    "main_join": "Join",
-    "main_news1": "New types of electronic tendering procedures are becoming available on the MTender, to suit different types of contracts and serve different public and commercial buyers, including state-owned enterprises. The Ministry of Finance of Moldova is first introducing electronic public procurement procedures of open tender, request for quotation, and negotiated procedure without publication of contract notice.",
-
-    "main_news2": "On 22-26 October 2018, the Ministry of Finance of Moldova and the Speaker of the Parliament of Moldova are hosting the WTO Regional Seminar for GPA Parties and Observer Governments from Central Europe, Western Balkans, Caucasus and Central Asia, including a session on digital public procurement in Moldova. Register to attend the UNDP Open Government and Public Spending session on 22 October.",
-
-    "main_news3": "From 26 October 2018, interested state-owned enterprises and commercial clients of the MTender will be able to use competitive and transparent but easy-to-use online bidding procedures, with lowest price and price and non-price selection criteria. Commercial clients may also use the MTender online contract service to preapre and sign online contracts.",
-
-    "main_h11": "What is MTender",
-    "main_p1": "The  Ministry of Finance of the Republic of Moldova is leading a transition to digital public procurement to ensure more transparent and efficient spending of the state budget of the Republic of Moldova. New digital government service – MTender - will support public procurement from planning the purchase to payment for public contracts. It will shorten time for tendering for public bodies and waiting time for payment for suppliers and contractors.",
-    "main_ul1_li1": "With MTender digital service, all public tenders are accessible online and every procurement decision transparently published online in real time. Citizens can watch government procurement decisions and how taxpayers money are spent on public services.",
-    "main_ul1_li2": "On account of online and easy to participate tenders, the new fully digital procurement service will offer better access to opportunities in public procurement for business community, in particular local small and medium-sized enterprises.",
-    "main_ul1_li3": "For public bodies, new digital service will also bring improved planning of spending, quicker purchases and better-quality as a result of ‘zero paper’ electronic bidding procedures.",
-    "main_p2": "The MTender is a multi-platform networking digital procurement service it, comprise a government-operated web portal and the Open Data central database unit and is networking with several commercial electronic platforms certified to support electronic tendering procedures for public sector and commercial clients.",
-    "main_p3": "The MTender networking electronic procurement platform is a commercial electronic platform, authorised and certified for networking with the MTender and providing digital electronic tendering services to public sector clients as well as commercial buyers. Each MTender networking platform is providing a help desk service to buyers and economic operators registered on this platform to access digital services of the MTender.",
-    "main_p4": "Presently the MTender is networking with the following platforms:",
-
-    "entity_budgets": "Budgets",
-    "entity_plans": "Procurement Planning",
-    "entity_tenders": "Public Procurement Bulletin",
-    "entity_contracts": "Contract Register",
-
-    "search_strict": "Strict",
-    "search_no_strict": "No strict",
-    "search_titles_or_descriptions": "search",
-
-    "search_buyers_names_placeholder": "Buyers names",
-    "search_buyers_region_placeholder": "Buyers Regions",
-    "search_buyers_identifiers_placeholder": "Buyers identifiers",
-    "search_buyers_types_placeholder": "Types of Buyers",
-    "search_buyers_main_general_activity_placeholder": "Buyers main general activity",
-    "search_buyers_main_sectoral_activity_placeholder": "Buyers main sectoral activity",
-
-    "search_amount_from": "Amount From",
-    "search_amount_to": "Amount To",
-
-    "search_types_procedures_placeholder": "Procedures Types",
-    "search_statuses_procedures_placeholder": "Procedures Statuses",
-    "search_deliveries_regions_placeholder": "Deliveries Regions",
-    "search_published_period": "Published Period",
-    "search_delivery_period": "Delivery Period",
-    "search_enquiry_period": "Enquiry Period",
-    "search_offer_period": "Offer Period",
-    "search_auction_period": "Auction Period",
-    "search_award_period": "Award Period",
-    "search_planning_period": "Planning Period",
-    "search_id_placeholder": "ID",
-    "search_classifications_placeholder": "Classifications",
-
-    "search_auto_complete_not_found": "Nothing found",
-
-    "list_no_data": "Nothing found",
-    "start_date_placeholder": "Start date",
-    "end_date_placeholder": "End date",
-    "range_separator": "To",
-    "reset_button": "Reset",
-
-    "list_total_found": "Total found",
-
     "budget_card_last_modified_date": "Last Modified Date",
     "budget_card_value": "Estimated Value without VAT ",
     "budget_card_no_sources": "Funding sources are not added",
@@ -113,27 +27,6 @@ export default {
     "budget_card_buyer_region": "Buyer Region",
     "budget_card_classifications": "Classifications",
     "budget_card_budget_id": "Budget ID",
-
-    "plan_card_last_modified_date": "Last Modified Date",
-    "plan_card_value": "Estimated value without VAT",
-    "plan_card_delivery_regions": "Delivery Region",
-    "plan_card_procedure_type": "Procedure type",
-    "plan_card_procuring_entity_name": "Procuring Entity Name",
-    "plan_card_tender_id": "Plan ID",
-
-    "tender_card_last_modified_date": "Last Modified Date",
-    "tender_card_value": "Estimated Value without VAT ",
-    "tender_card_procedure_type": "Procedure type",
-    "tender_card_procuring_entity_name": "Procuring Entity Name",
-    "tender_card_buyer_region": "Procuring Entity region",
-    "tender_card_tender_id": "TenderID",
-
-    "contract_card_last_modified_date": "Last Modified Date:",
-    "contract_card_value": "Estimated Value without VAT ",
-    "contract_card_delivery_regions": "Procuring Entity Region:",
-    "contract_card_procedure_type": "Procedure type:",
-    "contract_card_procuring_entity_name": "Procuring Entity Name:",
-    "contract_card_tender_id": "Contract ID",
 
     "about_title": "About MTender",
     "about_h11": "What is MTender",
@@ -270,5 +163,6 @@ export default {
     "accreditation_title": "Accreditation Committee",
 
     "faq_title": "FAQ"
+
   }
 };

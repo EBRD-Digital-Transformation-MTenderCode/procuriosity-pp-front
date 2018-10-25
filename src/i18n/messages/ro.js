@@ -1,134 +1,22 @@
+import header from "./ro/header";
+import footer from "./ro/footer";
+import main from "./ro/main";
+import entities from "./ro/entities";
+import search from "./ro/search";
+import plan from "./ro/plan";
+import tender from "./ro/tender";
+import contract from "./ro/contract";
+
 export default {
+  header,
+  footer,
+  main,
+  entities,
+  search,
+  plan,
+  tender,
+  contract,
   "message": {
-    "header_ebrd_line1": "Pilot Project Funded by the European Bank",
-    "header_ebrd_line2": "for Reconstruction and Development",
-
-    "header_static_nav_news": "Noutăți",
-    "header_static_nav_about_MTender": "Despre SIA RSAP MTender",
-    "header_static_nav_register": "Înregistrare",
-    "header_static_nav_legal_framework": "Legislația",
-    "header_static_nav_security_and_confidentiality": "Securitatea",
-    "header_static_nav_join_MTender": "Aderă la MTender",
-    "header_static_nav_accreditation": "Comisia de acreditare",
-    "header_static_nav_for_civil": "Pentru Societatea Civilă",
-    "header_static_nav_FAQ": "Întrebări frecvente",
-
-    "footer_logo_cr": "Toate drepturile rezervate",
-
-    "footer_nav_news": "Noutăți",
-    "footer_nav_about_MTender": "Despre SIA RSAP MTender",
-    "footer_nav_register": "Înregistrare",
-    "footer_nav_legal_framework": "Legislația",
-    "footer_nav_security_and_confidentiality": "Securitatea",
-    "footer_nav_join_MTender": "Aderă la MTender",
-    "footer_nav_accreditation": "Comisia de acreditare",
-    "footer_nav_for_civil": "Pentru Societatea Civilă",
-    "footer_nav_FAQ": "Întrebări frecvente",
-
-    "footer_info_text": "Linia info",
-
-    "main_title": "Conducerea prin exemplu",
-
-    "main_slide1_1": "{main_slide1_1_place} Active",
-    "main_slide1_1_place": "Proceduri",
-
-    "main_slide1_2": "{main_slide1_2_place} Contracte",
-    "main_slide1_2_place": "Încheiate ",
-
-    "main_slide2_1": "{main_slide2_1_place} Contractante",
-    "main_slide2_1_place": "Autorități",
-
-    "main_slide2_2": "{main_slide2_2_place} Economici",
-    "main_slide2_2_place": "Agenți",
-
-    "main_slide3_1": "{main_slide3_1_place} Totale",
-    "main_slide3_1_place": "Economiile",
-
-    "main_news": " Noutăți",
-    "main_join": "Alătura",
-    "main_news1": "Ministerul Finanțelor al Republicii Moldova introduce primele proceduri electronice de achiziții publice de licitație deschisă, cererea ofertelor de prețuri, negocierea fără publicarea prealabilă a unui anunț de participare. Ghidurile privind procedurile electronice de achiziții publice vor fi disponibile în scurt timp de la Agenția Achizițiilor Publice.",
-
-    "main_news2": "În perioada 22-26 octombrie 2018, Ministerul Finanțelor al Republicii Moldova și Președintele Parlamentulu al Republicii Moldova găzduiesc Seminarul Regional al Organizației Mondiale a Comerțului pentru Părțile Acordul privind achizițiile publice (AAP) și Guvernele cu Statut de Observator AAP din Europa Centrală, Balcanii de Vest, Caucaz și Asia Centrală, inclusiv o sesiune pe tema achizițiile publice digitale în Republica Moldova. Înregistrați-vă pentru a participa la ședința PNUD privind Guvernarea Deschisă și Cheltuielile Publice din 22 octombrie.",
-
-    "main_news3": "Începând cu 26 octombrie 2018, proceduri de licitare competitive și transparente, dar ușor de utilizat online, cu cele mai mici prețuri și criterii de selecție bazate pe preț sau pe alte criterii nelegate de preț, vor fi oferite întreprinderilor de stat și clienților din sectorul privat interesați. Întreprinderile de stat și clienții din sectorul privat pot utiliza, de asemenea, serviciul online MTender de semnare a contractului.",
-
-    "main_h11": "Ce este MTender",
-    "main_p1": "Ministerul Finanțelor al Republicii Moldova conduce o tranziție la achizițiile publice electronice pentru a asigura o utilizare mai transparentă și mai eficientă a bugetului de stat al Republicii Moldova. Noul serviciu guvernamental digital - MTender - va sprijini achizițiile publice de la planificarea achiziției până la plata pentru contractele de achiziții publice. Acesta va scurta timpul pentru licitații pentru instituțiile publice și timpul de așteptare pentru plăți pentru furnizori și contractori.",
-
-    "main_ul1_li1": "Cu serviciul digital MTender, toate licitațiile publice sunt accesibile online și fiecare decizie de achiziție publică este publicată în mod transparent online în timp real. Cetățenii pot urmări deciziile privind achizițiile publice și modul în care sunt cheltuiți banii plătitorilor de impozite.",
-
-    "main_ul1_li2": "Noul serviciu de achiziții publice complet electronic va oferi un acces mai bun la oportunitățile pentru comunitatea de afaceri, în special întreprinderile mici și mijlocii locale.",
-
-    "main_ul1_li3": "Pentru instituțiile publice, noul serviciu digital va aduce, de asemenea, o planificare îmbunătățită a cheltuielilor, achiziții mai rapide și mai  calitative, ca urmare a procedurilor electronice de licitare care implică ”zero hârtie”.",
-
-    "main_p2": "Sistemul informaţional automatizat “Registrul de stat al achiziţiilor publice” MTender este un sistem de achiziții electronice, alcătuit dintr-un portal web și o Unitate Centrală de Date de date de tip deschis (Open Data) și platformele acreditate din sectorul privat pentru a sprijini licitațiile desfășurate electronic pentru utilizatori și din sectorul public și din sectorul privat.",
-
-    "main_p3": "Platforma electronica de achiziții este o platformă comercială electronică de achiziții publice, acreditată pentru conectarea cu MTender și oferă servicii de licitație electronică digitală atât clienților din sectorul public, cât și cumpărătorilor din sectorul privat. Fiecare platformă de achiziții MTender oferă un serviciu de asistență (Help Desk) pentru autorități contractante și operatori economici înregistrați pe această platformă pentru a accesa serviciile electronice ale MTender.",
-    "main_p4": "În prezent, la MTender sunt conectate următoarele platforme:",
-
-    "entity_budgets": "Budgets",
-    "entity_plans": "Planificarea Achizițiilor",
-    "entity_tenders": "Buletinul Achizițiilor Publice",
-    "entity_contracts": "Registru Contractelor",
-
-    "search_strict": "Strictă",
-    "search_no_strict": "Nu este strictă",
-    "search_titles_or_descriptions": "căutare",
-
-    "search_buyers_names_placeholder": "Numele cumpărătorilor",
-    "search_buyers_region_placeholder": "Regiunile cumpărătorilor",
-    "search_buyers_identifiers_placeholder": "Identificatori de cumpărători",
-    "search_buyers_types_placeholder": "Tipuri de cumpărători",
-    "search_buyers_main_general_activity_placeholder": "Activitatea generală a cumpărătorilor",
-    "search_buyers_main_sectoral_activity_placeholder": "Activitatea sectorială principală a cumpărătorilor",
-
-    "search_amount_from": "Sumă de la",
-    "search_amount_to": "Sumă de",
-
-    "search_types_procedures_placeholder": "Tipuri de proceduri",
-    "search_statuses_procedures_placeholder": "Stadiile procedurilor",
-    "search_deliveries_regions_placeholder": "Livrează regiuni",
-    "search_published_period": "Perioada publicată",
-    "search_delivery_period": "Perioada de livrare",
-    "search_enquiry_period": "Perioada de anchetă",
-    "search_offer_period": "Perioada de ofertă",
-    "search_auction_period": "Perioada Licitației",
-    "search_award_period": "Perioada de premiere",
-    "search_planning_period": "Perioada de planificare",
-    "search_id_placeholder": "ID",
-    "search_classifications_placeholder": "Clasificări",
-
-    "search_auto_complete_not_found": "Nimic gasit",
-
-    "list_no_data": "Nimic gasit",
-    "start_date_placeholder": "Data de început",
-    "end_date_placeholder": "Data de încheiere",
-    "range_separator": "La",
-    "reset_button": "Restabili",
-
-    "list_total_found": "Total găsit",
-
-    "plan_card_last_modified_date": "Data ultimei modificări",
-    "plan_card_value": "Valoarea estimată fără TVA",
-    "plan_card_delivery_regions": "Regiunea de livrare",
-    "plan_card_procedure_type": "Tip de procedură",
-    "plan_card_procuring_entity_name": "Obtinerea numelui entitatii",
-    "plan_card_tender_id": "Identificarea planului",
-
-    "tender_card_last_modified_date": "Data ultimei modificări",
-    "tender_card_value": "Valoarea estimată fără TVA",
-    "tender_card_procedure_type": "Tip de procedură",
-    "tender_card_procuring_entity_name": "Obtinerea numelui entitatii",
-    "tender_card_buyer_region": "Obținerea regiunii entităților",
-    "tender_card_tender_id": "Cod de licitație",
-
-    "contract_card_last_modified_date": "Data ultimei modificări",
-    "contract_card_value": "Valoarea estimată fără TVA",
-    "contract_card_procedure_type": "Tip de procedură",
-    "contract_card_delivery_regions": "Obținerea regiunii entităților",
-    "contract_card_procuring_entity_name": "Obtinerea numelui entitatii",
-    "contract_card_tender_id": "ID de contract",
-
     "about_title": "Despre MTender",
     "about_h11": "Ce este MTender",
     "about_p1": "Ministerul Finanțelor al Republicii Moldova conduce o tranziție la achizițiile publice electronice pentru a asigura o utilizare mai transparentă și mai eficientă a bugetului de stat al Republicii Moldova.",
