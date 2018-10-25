@@ -200,16 +200,10 @@
               <div class="info__value info__value_accent">
                 {{ bid.amount }}
               </div>
-              <div class="info__value info__value_muted">
-                {{ bid.currency }} {{ $t("tender.bids_currency") }}
-              </div>
             </td>
             <td>
               <div class="info__value info__value_accent">
                 {{ bid.amount }}
-              </div>
-              <div class="info__value info__value_muted">
-                {{ bid.currency }} {{ $t("tender.bids_currency") }}
               </div>
             </td>
             <td class="text-center">
@@ -260,9 +254,6 @@
               <div class="info__value info__value_accent">
                 {{ award.amount }}
               </div>
-              <div class="info__value info__value_muted">
-                {{ award.currency }} {{ $t("tender.awards_currency") }}
-              </div>
             </td>
             <td>
               <div class="info__value info__value_accent info__value_status">
@@ -308,9 +299,6 @@
             <td>
               <div class="info__value info__value_accent">
                 {{ award.amount }}
-              </div>
-              <div class="info__value info__value_muted">
-                {{ award.currency }} {{ $t("tender.active_awards_supplier_currency") }}
               </div>
             </td>
             <td>
@@ -376,7 +364,7 @@
               </el-col>
               <el-col :xs="24" :sm="14">
                 <div class="info__value info__value_accent">
-                  {{ contract.amount }} ({{ $t("tender.contracts_currency") }})
+                  {{ contract.amount }}
                 </div>
               </el-col>
             </el-row>
