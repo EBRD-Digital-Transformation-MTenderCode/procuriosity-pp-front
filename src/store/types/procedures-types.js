@@ -7,6 +7,14 @@ export default {
         ru: "Открытые торги"
       },
       value: "Licitație deschisă"
+    },
+    {
+      name: {
+        en: "COP",
+        ro: "Request for Proposals",
+        ru: "Запрос ценовых предложений"
+      },
+      value: "Procedură de valoare mică"
     }
   ],
   tenders: [

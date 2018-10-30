@@ -17,17 +17,6 @@
           <div class="entity-description">
             {{ description }}
           </div>
-          <!--<div class="entity-links">
-            <a :href="`https://achizitii.md/${$i18n.locale}/public/plan/${entityId}`" target="_blank">
-              <img src="@/assets/achizitii.md .png" alt="Achizitii logo" >
-            </a>
-            <a :href="`https://yptender.md/plan/${entityId}`" target="_blank">
-              <img src="@/assets/yptender.png" alt="Yptender logo" >
-            </a>
-            <a :href="`https://e-licitatie.md/procurement/viewSpecificationPlan/id/${entityId}`" target="_blank">
-              <img src="@/assets/e-lici.png" alt="E-lici logo" >
-            </a>
-          </div>-->
         </el-col>
         <el-col :xs="24" :sm="6">
           <div class="entity-amount">
@@ -63,6 +52,8 @@
 </template>
 
 <script>
+  import procedureTypes from "./../../store/types/procedures-types"
+  
   import { getDataFromObject, formatDate } from "./../../utils";
 
   export default {
@@ -150,7 +141,25 @@
         return getDataFromObject(this.entity, _ => _.buyerRegion);
       },
       type() {
-        return getDataFromObject(this.entity, _ => _.procedureType);
+        if (getDataFromObject(this.entity, _ => _.procedureType) === "reporting") {
+          return procedureTypes.tenders.find(it => it.value === "reporting").name[this.$i18n.locale];
+        } else if (getDataFromObject(this.entity, _ => _.procedureType) === "belowThreshold") {
+          return procedureTypes.tenders.find(it => it.value === "belowThreshold").name[this.$i18n.locale];
+        } else if (getDataFromObject(this.entity, _ => _.procedureType) === "Licitație deschisă" && getDataFromObject(this.entity, _ => _.amount) < 1500000) {
+          if (this.$i18n.locale === "en") {
+            return "Request for price quotations";
+          } else if (this.$i18n.locale === "ro") {
+            return "Cererea ofertelor de preț";
+          } else {
+            return "Запрос ценовых оферт"
+          }
+        } else if (getDataFromObject(this.entity, _ => _.procedureType) === "Licitație deschisă") {
+          return procedureTypes.tenders.find(it => it.value === "Licitație deschisă").name[this.$i18n.locale];
+        } else if (getDataFromObject(this.entity, _ => _.procedureType) === "Procedură de valoare mică") {
+          return procedureTypes.tenders.find(it => it.value === "Procedură de valoare mică").name[this.$i18n.locale];
+        } else {
+          return getDataFromObject(this.entity, _ => _.procedureType);
+        }
       },
       peName() {
         return getDataFromObject(this.entity, _ => _.buyerName);
