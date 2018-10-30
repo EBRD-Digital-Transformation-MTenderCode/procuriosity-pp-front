@@ -1,19 +1,19 @@
 export default {
   "title": "Leading by example",
 
-  "slide1_1": "{main_slide1_1_place} Procedures",
+  "slide1_1": "{slide1_1_place} Procedures",
   "slide1_1_place": "Active",
 
-  "slide1_2": "{main_slide1_2_place} Contracts",
+  "slide1_2": "{slide1_2_place} Contracts",
   "slide1_2_place": "Concluded",
 
-  "slide2_1": "{main_slide2_1_place} Entities",
+  "slide2_1": "{slide2_1_place} Entities",
   "slide2_1_place": "Contracting",
 
-  "slide2_2": "{main_slide2_2_place} Operators",
+  "slide2_2": "{slide2_2_place} Operators",
   "slide2_2_place": "Economic",
 
-  "slide3_1": "{main_slide3_1_place} savings",
+  "slide3_1": "{slide3_1_place} savings",
   "slide3_1_place": "Total",
 
   "news": " News",

@@ -1,19 +1,19 @@
 export default {
   "title": "Cледуя примеру",
 
-  "slide1_1": "{main_slide1_1_place} Процедур",
+  "slide1_1": "{slide1_1_place} Процедур",
   "slide1_1_place": "Активных",
 
-  "slide1_2": "{main_slide1_2_place} Контрактов",
+  "slide1_2": "{slide1_2_place} Контрактов",
   "slide1_2_place": "Заключенных",
 
-  "slide2_1": "{main_slide2_1_place} Организаций",
+  "slide2_1": "{slide2_1_place} Организаций",
   "slide2_1_place": "Закупающих",
 
-  "slide2_2": "{main_slide2_2_place} Агентов",
+  "slide2_2": "{slide2_2_place} Агентов",
   "slide2_2_place": "Экономических",
 
-  "slide3_1": "{main_slide3_1_place} Экономия",
+  "slide3_1": "{slide3_1_place} Экономия",
   "slide3_1_place": "Общая",
 
   "news": "Новости",

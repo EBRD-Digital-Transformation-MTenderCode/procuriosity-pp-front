@@ -1,19 +1,19 @@
 export default {
   "title": "Conducerea prin exemplu",
 
-  "slide1_1": "{main_slide1_1_place} Active",
+  "slide1_1": "{slide1_1_place} Active",
   "slide1_1_place": "Proceduri",
 
-  "slide1_2": "{main_slide1_2_place} Contracte",
+  "slide1_2": "{slide1_2_place} Contracte",
   "slide1_2_place": "Încheiate ",
 
-  "slide2_1": "{main_slide2_1_place} Contractante",
+  "slide2_1": "{slide2_1_place} Contractante",
   "slide2_1_place": "Autorități",
 
-  "slide2_2": "{main_slide2_2_place} Economici",
+  "slide2_2": "{slide2_2_place} Economici",
   "slide2_2_place": "Agenți",
 
-  "slide3_1": "{main_slide3_1_place} Totale",
+  "slide3_1": "{slide3_1_place} Totale",
   "slide3_1_place": "Economiile",
 
   "news": " Noutăți",

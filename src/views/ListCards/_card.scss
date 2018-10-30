@@ -183,6 +183,7 @@
     }
     &-title {
       margin-bottom: 26px;
+      overflow-wrap: break-word;
       line-height: 1.4;
       font-size: 24px;
       color: #235aa6;
@@ -350,6 +351,7 @@
     }
   }
   .el-col-sm-14 {
+    max-width: 536px;
     border-right: 1px solid #d2d2d2;
   }
   .el-col-sm-6 {

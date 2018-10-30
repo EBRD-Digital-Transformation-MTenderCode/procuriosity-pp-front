@@ -89,7 +89,7 @@
         </div>
         <div class="main-news__cards-wp">
           <div class="main-news__card">
-            <img src="@/assets/news1.jpg" alt="news1" class="main-news__img">
+            <img src="@/assets/news_1.jpg" alt="news1" class="main-news__img">
             <div class="main-news__text">
               {{$t("main.news1")}}
             </div>

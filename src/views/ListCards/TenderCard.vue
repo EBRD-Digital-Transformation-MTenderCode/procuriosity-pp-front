@@ -171,6 +171,8 @@
           }
         } else if (getDataFromObject(this.entity, _ => _.procedureType) === "Licitație deschisă") {
           return procedureTypes.tenders.find(it => it.value === "Licitație deschisă").name[this.$i18n.locale];
+        } else if (getDataFromObject(this.entity, _ => _.procedureType) === "Procedură de valoare mică") {
+          return procedureTypes.tenders.find(it => it.value === "Procedură de valoare mică").name[this.$i18n.locale];
         } else {
           return getDataFromObject(this.entity, _ => _.procedureType);
         }
