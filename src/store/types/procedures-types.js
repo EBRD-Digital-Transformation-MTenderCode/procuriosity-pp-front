@@ -10,8 +10,8 @@ export default {
     },
     {
       name: {
-        en: "COP",
-        ro: "Request for Proposals",
+        en: "Request for Proposals",
+        ro: "COP",
         ru: "Запрос ценовых предложений"
       },
       value: "Procedură de valoare mică"
