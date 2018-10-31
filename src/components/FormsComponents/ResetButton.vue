@@ -4,7 +4,7 @@
       type="warning"
       plain
       @click="reset">
-    {{$t("message.reset_button")}}
+    {{$t("search.reset_button")}}
   </el-button>
 </template>
 

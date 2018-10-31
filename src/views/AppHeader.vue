@@ -9,8 +9,8 @@
                 <img src="@/assets/logo-ebrd.png" class="header-logo-ebrd__img" alt="EBRD">
               </router-link>
               <div class="header-logo-ebrd__text">
-                <div>{{$t("message.header_ebrd_line1")}}</div>
-                <div>{{$t("message.header_ebrd_line2")}}</div>
+                <div>{{$t("header.ebrd_line1")}}</div>
+                <div>{{$t("header.ebrd_line2")}}</div>
               </div>
             </div>
             <locale-toggle />
@@ -26,30 +26,30 @@
               <img src="@/assets/logo.png" class="header-logo-mtender__img" alt="MTender">
             </router-link>
             <nav class="header-static-nav">
-              <!--<router-link to="/news">{{$t("message.header_static_nav_news")}}</router-link>-->
+              <!--<router-link to="/news">{{$t("header.static_nav_news")}}</router-link>-->
               <router-link active-class="header-static-nav_active" to="/about">
-                {{$t("message.header_static_nav_about_MTender")}}
+                {{$t("header.static_nav_about_MTender")}}
               </router-link>
               <router-link active-class="header-static-nav_active" to="/register">
-                {{$t("message.header_static_nav_register")}}
+                {{$t("header.static_nav_register")}}
               </router-link>
               <router-link active-class="header-static-nav_active" to="/legal-framework">
-                {{$t("message.header_static_nav_legal_framework")}}
+                {{$t("header.static_nav_legal_framework")}}
               </router-link>
               <router-link active-class="header-static-nav_active" to="/security-and-confidentiality">
-                {{$t("message.header_static_nav_security_and_confidentiality")}}
+                {{$t("header.static_nav_security_and_confidentiality")}}
               </router-link>
               <router-link active-class="header-static-nav_active" to="/join-mtender">
-                {{$t("message.header_static_nav_join_MTender")}}
+                {{$t("header.static_nav_join_MTender")}}
               </router-link>
               <router-link active-class="header-static-nav_active" to="/accreditation">
-                {{$t("message.header_static_nav_accreditation")}}
+                {{$t("header.static_nav_accreditation")}}
               </router-link>
               <router-link active-class="header-static-nav_active" to="/for-civil">
-                {{$t("message.header_static_nav_for_civil")}}
+                {{$t("header.static_nav_for_civil")}}
               </router-link>
               <router-link active-class="header-static-nav_active" to="/faq">
-                {{$t("message.header_static_nav_FAQ")}}
+                {{$t("header.static_nav_FAQ")}}
               </router-link>
             </nav>
           </el-col>

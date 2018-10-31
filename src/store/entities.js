@@ -50,7 +50,7 @@ const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
 export default {
   state: {
     /*budgets: {
-     name: "message.entity_budgets",
+     name: "entities.budgets",
      loaded: false,
      list: [],
      searchParams: {...localStorageEntities.budgets.searchParams},
@@ -59,7 +59,7 @@ export default {
      }
      },*/
     plans: {
-      name: "message.entity_plans",
+      name: "entities.plans",
       loaded: false,
       list: [],
       searchParams: { ...localStorageEntities.plans.searchParams },
@@ -69,7 +69,7 @@ export default {
       }
     },
     tenders: {
-      name: "message.entity_tenders",
+      name: "entities.tenders",
       loaded: false,
       list: [],
       searchParams: { ...localStorageEntities.tenders.searchParams },
@@ -83,7 +83,7 @@ export default {
       }
     },
     contracts: {
-      name: "message.entity_contracts",
+      name: "entities.contracts",
       loaded: false,
       list: [],
       searchParams: { ...localStorageEntities.contracts.searchParams },
@@ -223,71 +223,80 @@ export default {
     },
 
     async [FETCH_CURRENT_TENDER_INFO]({ commit }, { cdb, id }) {
-      try {
-        const res = await axios(getTenderConfig(cdb, id));
+      if (cdb === MTENDER1) {
+        try {
+          const elasticRes = await axios(getListConfig("tenders", `?entityId=${id}`));
 
-        const tenderData = {};
+          const requestId = elasticRes.data.data[0].id;
 
-        const MSRecord = {};
-        const EVRecord = {};
+          const res = await axios(getTenderConfig(cdb, requestId));
 
-        if (cdb === MTENDER1) {
-          Object.assign(tenderData, res.data.data);
-        }
+          const tenderData = res.data.data;
 
-        if (cdb === MTENDER2) {
-          const tenderRecords = res.data.records;
-          tenderRecords.forEach(record => {
-            if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/) !== -1) {
-              Object.assign(MSRecord, record);
-            }
-            if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-EV-[0-9]{13}$/) !== -1) {
-              Object.assign(EVRecord, record);
-            }
-          });
-
-          Object.assign(tenderData, {
-            MSRecord,
-            EVRecord
+          commit(SET_CURRENT_TENDER_INFO, {
+            cdb,
+            tenderData
           });
         }
+        catch (e) {
+          console.log(e);
+        }
+      } else {
+        try {
+          const res = await axios(getTenderConfig(cdb, id));
 
-        commit(SET_CURRENT_TENDER_INFO, {
-          cdb,
-          tenderData
-        });
-      }
-      catch (e) {
-        // @TODO need add catching errors
-        console.log(e);
+          const tenderData = {};
+
+          const MSRecord = {};
+          const EVRecord = {};
+
+          if (cdb === MTENDER2) {
+            const tenderRecords = res.data.records;
+            tenderRecords.forEach(record => {
+              if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/) !== -1) {
+                Object.assign(MSRecord, record);
+              }
+              if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-EV-[0-9]{13}$/) !== -1) {
+                Object.assign(EVRecord, record);
+              }
+            });
+
+            Object.assign(tenderData, {
+              MSRecord,
+              EVRecord
+            });
+
+            commit(SET_CURRENT_TENDER_INFO, {
+              cdb,
+              tenderData
+            });
+          }
+        }
+        catch (e) {
+          console.log(e);
+        }
       }
     },
 
     async [FETCH_CURRENT_CONTRACT_INFO]({ commit }, { cdb, id }) {
-      try {
-        const res = await axios(getContractConfig(cdb, id));
+      if (cdb === MTENDER1) {
+        try {
+          const elasticRes = await axios(getListConfig("contracts", `?entityId=${id}`));
 
-        const contractData = {};
+          const requestId = elasticRes.data.data[0].id;
 
-        const MSRecord = {};
-        const ACRecords = [];
+          const res = await axios(getContractConfig(cdb, requestId));
 
-        if (cdb === MTENDER1) {
-          Object.assign(contractData, res.data.data);
+          const contractData = res.data.data;
+
+          commit(SET_CURRENT_CONTRACT_INFO, {
+            cdb,
+            contractData
+          });
         }
-
-        if (cdb === MTENDER2) {
-
+        catch (e) {
+          console.log(e);
         }
-
-        commit(SET_CURRENT_CONTRACT_INFO, {
-          cdb,
-          contractData
-        });
-      }
-      catch (e) {
-        // @TODO need add catching errors
-        console.log(e);
       }
     }
   }

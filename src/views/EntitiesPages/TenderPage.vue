@@ -7,11 +7,11 @@
   
       <!-- Procuring entity -->
       <div class="info">
-        <div class="info__title">Procuring Entity</div>
+        <div class="info__title">{{ $t("tender.procuring_entity") }}</div>
         <div class="info__text">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
-              <div class="info__name">Procuring Entity full name</div>
+              <div class="info__name">{{ $t("tender.procuring_entity_full_name") }}</div>
             </el-col>
             <el-col :xs="24" :sm="14">
               <div class="info__value">{{ procuringEntity.fullName }}</div>
@@ -21,7 +21,7 @@
         <div class="info__text">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
-              <div class="info__name">IDNO of Procuring Entity</div>
+              <div class="info__name">{{ $t("tender.procuring_entity_identifier") }}</div>
             </el-col>
             <el-col :xs="24" :sm="14">
               <div class="info__value">{{ procuringEntity.identifier }}</div>
@@ -31,7 +31,7 @@
         <div class="info__text">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
-              <div class="info__name">Legal address</div>
+              <div class="info__name">{{ $t("tender.procuring_entity_address") }}</div>
             </el-col>
             <el-col :xs="24" :sm="14">
               <div class="info__value">{{ procuringEntity.address }}</div>
@@ -41,7 +41,7 @@
         <div class="info__text">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
-              <div class="info__name">Person responsible for the procurement procedure</div>
+              <div class="info__name">{{ $t("tender.procuring_entity_responsible_person") }}</div>
             </el-col>
             <el-col :xs="24" :sm="14">
               <div class="info__value">{{ procuringEntity.responsiblePerson }}</div>
@@ -52,11 +52,11 @@
   
       <!-- Procurement info -->
       <div class="info">
-        <div class="info__title">Information about the procurement procedure</div>
+        <div class="info__title">{{ $t("tender.procuring_info") }}</div>
         <div class="info__text">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
-              <div class="info__name">Estimated Value without VAT ({{ procurementInfo.currency }})</div>
+              <div class="info__name">{{ $t("tender.procuring_info_value") }} ({{ procurementInfo.currency }})</div>
             </el-col>
             <el-col :xs="24" :sm="14">
               <div class="info__value info__value_accent">{{ procurementInfo.amount }}</div>
@@ -66,7 +66,7 @@
         <div class="info__text" v-if="procurementInfo.minStep">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
-              <div class="info__name">Minimum amount of price reduction ({{ procurementInfo.currency }})</div>
+              <div class="info__name">{{ $t("tender.procuring_info_min_step") }} ({{ procurementInfo.currency }})</div>
             </el-col>
             <el-col :xs="24" :sm="14">
               <div class="info__value info__value_accent">{{ procurementInfo.minStep }}</div>
@@ -77,11 +77,11 @@
   
       <!-- Dates -->
       <div class="info" v-if="dates">
-        <div class="info__title">Dates and terms</div>
+        <div class="info__title">{{ $t("tender.dates") }}</div>
         <div class="info__text">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
-              <div class="info__name">Enquiries period</div>
+              <div class="info__name">{{ $t("tender.dates_enquiry") }}</div>
             </el-col>
             <el-col :xs="24" :sm="14">
               <div class="info__value info__value_accent">{{ dates.enquiry }}</div>
@@ -91,7 +91,7 @@
         <div class="info__text">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
-              <div class="info__name">Tendering period</div>
+              <div class="info__name">{{ $t("tender.dates_tendering") }}</div>
             </el-col>
             <el-col :xs="24" :sm="14">
               <div class="info__value info__value_accent">{{ dates.tendering }}</div>
@@ -101,7 +101,7 @@
         <div class="info__text" v-if="dates.auction">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
-              <div class="info__name">Auction period</div>
+              <div class="info__name">{{ $t("tender.dates_auction") }}</div>
             </el-col>
             <el-col :xs="24" :sm="14">
               <div class="info__value info__value_accent">{{ dates.auction }}</div>
@@ -112,7 +112,7 @@
   
       <!-- Documents -->
       <div class="info" v-if="documents.length">
-        <div class="info__title">Purchase Documents</div>
+        <div class="info__title">{{ $t("tender.documents") }}</div>
         <div class="info__text" v-for="(document, key) of documents" :key="document.id + key">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
@@ -123,12 +123,13 @@
               </div>
             </el-col>
             <el-col :xs="24" :sm="14">
-              <div class="info-document_date-published">Published on {{ document.datePublished }}</div>
-              <div class="info-document_id">ID: {{ document.id }}</div>
+              <div class="info-document_date-published">{{ $t("tender.documents_published") }} {{ document.datePublished }}</div>
+              <div class="info-document_id">{{ $t("tender.documents_id") }}: {{ document.id }}</div>
             </el-col>
           </el-row>
           
-          <el-row v-for="(oldDoc, index) of document.oldVersions" :key="oldDoc.id + index" class="info-old-document" :gutter="30">
+          <el-row v-for="(oldDoc, index) of document.oldVersions" :key="oldDoc.id + index" class="info-old-document"
+                  :gutter="30">
             <el-col :xs="24" :sm="10">
               <div class="info-document_name">
                 <div>
@@ -137,8 +138,8 @@
               </div>
             </el-col>
             <el-col :xs="24" :sm="14">
-              <div class="info-document_date-published">Published on {{ oldDoc.datePublished }}</div>
-              <div class="info-document_id">ID: {{ oldDoc.id }}</div>
+              <div class="info-document_date-published">{{ $t("tender.documents_published") }} {{ oldDoc.datePublished }}</div>
+              <div class="info-document_id">{{ $t("tender.documents_id") }}: {{ oldDoc.id }}</div>
             </el-col>
           </el-row>
         </div>
@@ -146,7 +147,7 @@
   
       <!-- Items -->
       <div class="info">
-        <div class="info__title">Purchase Specification</div>
+        <div class="info__title">{{ $t("tender.items") }}</div>
         <template v-for="item in items">
           <div class="info__text" :key="item.id">
             <el-row :gutter="30">
@@ -162,8 +163,12 @@
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10" />
               <el-col :xs="24" :sm="14">
-                <div class="info__value info__value_muted">CPV Code: {{ item.cpv }}</div>
-                <div class="info__value info__value_muted">Delivery address:  {{ item.deliveryAddress}}</div>
+                <div class="info__value info__value_muted">
+                  {{ $t("tender.items_cpv") }}: {{ item.cpv }}
+                </div>
+                <div class="info__value info__value_muted">
+                  {{ $t("tender.items_delivery_address") }}:  {{ item.deliveryAddress}}
+                </div>
               </el-col>
             </el-row>
           </div>
@@ -172,14 +177,14 @@
   
       <!-- Bids -->
       <div class="info" v-if="bids.length">
-        <div class="info__title">Proposals Registry</div>
+        <div class="info__title">{{ $t("tender.bids") }}</div>
         <table class="info-table">
           <tr>
             <th>№</th>
-            <th>Tenderer Name</th>
-            <th>The initial amount of the offer</th>
-            <th>Final offer price</th>
-            <th>Documentation</th>
+            <th>{{ $t("tender.bids_tenderer_name") }}</th>
+            <th>{{ $t("tender.bids_initial_amount") }}</th>
+            <th>{{ $t("tender.bids_final_amount") }}</th>
+            <th>{{ $t("tender.bids_documents") }}</th>
           </tr>
           <tr v-for="(bid, key) of bids" :key="bid.id">
             <td>{{ ++key }}</td>
@@ -188,23 +193,17 @@
                 {{ bid.name }}
               </div>
               <div class="info__value info__value_muted">
-                IDNO Code : {{ bid.identifier }}
+                {{ $t("tender.bids_tenderer_identifier") }}: {{ bid.identifier }}
               </div>
             </td>
             <td>
               <div class="info__value info__value_accent">
                 {{ bid.amount }}
               </div>
-              <div class="info__value info__value_muted">
-                {{ bid.currency }} without VAT
-              </div>
             </td>
             <td>
               <div class="info__value info__value_accent">
                 {{ bid.amount }}
-              </div>
-              <div class="info__value info__value_muted">
-                {{ bid.currency }} without VAT
               </div>
             </td>
             <td class="text-center">
@@ -228,18 +227,18 @@
       <!-- Awards -->
       <div class="info" v-if="awards.length">
         <div class="info__title">
-          Protocol for the disclosure of proposals
+          {{ $t("tender.awards") }}
           <div class="info__title_sub">
-            Date and time of disclosure of offers: {{ awardsStartDate}}
+            {{ $t("tender.awards_date") }}: {{ awardsStartDate}}
           </div>
         </div>
         <table class="info-table">
           <tr>
             <th>№</th>
-            <th>Supplier Name</th>
-            <th>Final offer price	</th>
-            <th>Status</th>
-            <th>Documentation</th>
+            <th>{{ $t("tender.awards_supplier_name") }}</th>
+            <th>{{ $t("tender.awards_final_offer") }}</th>
+            <th>{{ $t("tender.awards_status") }}</th>
+            <th>{{ $t("tender.awards_documents") }}</th>
           </tr>
           <tr v-for="(award, key) of awards" :key="award.id">
             <td>{{ ++key }}</td>
@@ -248,15 +247,12 @@
                 {{ award.name }}
               </div>
               <div class="info__value info__value_muted">
-                IDNO Code : {{ award.identifier }}
+                {{ $t("tender.awards_supplier_identifier") }}: {{ award.identifier }}
               </div>
             </td>
             <td>
               <div class="info__value info__value_accent">
                 {{ award.amount }}
-              </div>
-              <div class="info__value info__value_muted">
-                {{ award.currency }} without VAT
               </div>
             </td>
             <td>
@@ -284,12 +280,12 @@
   
       <!-- Active awards -->
       <div class="info" v-if="activeAwards.length">
-        <div class="info__title">Notification of intention to conclude a contract</div>
+        <div class="info__title">{{ $t("tender.active_awards") }}</div>
         <table class="info-table">
           <tr>
-            <th>Supplier Name</th>
-            <th>Final offer price	</th>
-            <th>Published on</th>
+            <th>{{ $t("tender.active_awards_supplier_name") }}</th>
+            <th>{{ $t("tender.active_awards_final_offer") }}</th>
+            <th>{{ $t("tender.active_awards_date_published") }}</th>
           </tr>
           <tr v-for="award of activeAwards" :key="award.id">
             <td>
@@ -297,15 +293,12 @@
                 {{ award.name }}
               </div>
               <div class="info__value info__value_muted">
-                IDNO Code : {{ award.identifier }}
+                {{ $t("tender.active_awards_supplier_identifier") }}: {{ award.identifier }}
               </div>
             </td>
             <td>
               <div class="info__value info__value_accent">
                 {{ award.amount }}
-              </div>
-              <div class="info__value info__value_muted">
-                {{ award.currency }} without VAT
               </div>
             </td>
             <td>
@@ -319,7 +312,7 @@
   
       <!-- Contracts -->
       <div class="info" v-if="contracts.length">
-        <div class="info__title">Concluded Contracts</div>
+        <div class="info__title">{{ $t("tender.contracts") }}</div>
         <div v-for="contract of contracts" :key="contract.id">
           <div class="info-contract">
             <div class="info-contract__title">{{ contract.title }}</div>
@@ -331,7 +324,7 @@
           <div class="info__text">
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10">
-                <div class="info__name">Procuring Entity</div>
+                <div class="info__name">{{ $t("tender.contracts_procuring_entity") }}</div>
               </el-col>
               <el-col :xs="24" :sm="14">
                 <div class="info__value">{{ contract.procuringEntity }}</div>
@@ -341,7 +334,7 @@
           <div class="info__text">
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10">
-                <div class="info__name">Suppliers</div>
+                <div class="info__name">{{ $t("tender.contracts_suppliers") }}</div>
               </el-col>
               <el-col :xs="24" :sm="14">
                 <div
@@ -357,7 +350,7 @@
           <div class="info__text">
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10">
-                <div class="info__name">Contract ID</div>
+                <div class="info__name">{{ $t("tender.contracts_id") }}</div>
               </el-col>
               <el-col :xs="24" :sm="14">
                 <div class="info__value">{{ contract.contractId }}</div>
@@ -367,17 +360,19 @@
           <div class="info__text">
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10">
-                <div class="info__name">Contract amount</div>
+                <div class="info__name">{{ $t("tender.contracts_amount") }}</div>
               </el-col>
               <el-col :xs="24" :sm="14">
-                <div class="info__value info__value_accent">{{ contract.amount }} (without VAT)</div>
+                <div class="info__value info__value_accent">
+                  {{ contract.amount }}
+                </div>
               </el-col>
             </el-row>
           </div>
           <div class="info__text">
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10">
-                <div class="info__name">Contract number</div>
+                <div class="info__name">{{ $t("tender.contracts_number") }}</div>
               </el-col>
               <el-col :xs="24" :sm="14">
                 <div class="info__value">{{ contract.contractNumber }}</div>
@@ -387,7 +382,7 @@
           <div class="info__text">
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10">
-                <div class="info__name">Date signed</div>
+                <div class="info__name">{{ $t("tender.contracts_date_signed") }}</div>
               </el-col>
               <el-col :xs="24" :sm="14">
                 <div class="info__value info__value_accent">{{ contract.dateSigned }}</div>
@@ -397,7 +392,7 @@
           <div class="info__text">
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10">
-                <div class="info__name">Contract period start date</div>
+                <div class="info__name">{{ $t("tender.contracts_start_date") }}</div>
               </el-col>
               <el-col :xs="24" :sm="14">
                 <div class="info__value info__value_accent">{{ contract.contractStartDate }}</div>
@@ -407,7 +402,7 @@
           <div class="info__text">
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10">
-                <div class="info__name">Contract period end date</div>
+                <div class="info__name">{{ $t("tender.contracts_end_date") }}</div>
               </el-col>
               <el-col :xs="24" :sm="14">
                 <div class="info__value info__value_accent">{{ contract.contractEndDate }}</div>
@@ -419,7 +414,7 @@
   
       <!-- Documentation -->
       <div class="info" v-if="documentation.length">
-        <div class="info__title">Documentation</div>
+        <div class="info__title">{{ $t("tender.documentation") }}</div>
         <div class="info__text" v-for="(document, index) of documentation" :key="document.id + index">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="14">
@@ -431,12 +426,17 @@
               </div>
             </el-col>
             <el-col :xs="24" :sm="10">
-              <div class="info-document_date-published">Published on {{ document.datePublished }}</div>
+              <div class="info-document_date-published">{{ $t("tender.documents_published") }} {{ document.datePublished }}</div>
               <div class="info-document_id">ID: {{ document.id }}</div>
             </el-col>
           </el-row>
           
-          <el-row v-for="(oldDoc, index) of document.oldVersions" :key="oldDoc.id + index" class="info-old-document" :gutter="30">
+          <el-row
+              v-for="(oldDoc, index) of document.oldVersions"
+              :key="oldDoc.id + index"
+              class="info-old-document"
+              :gutter="30"
+          >
             <el-col :xs="24" :sm="14">
               <div class="info-document_name">
                 <div>
@@ -445,8 +445,8 @@
               </div>
             </el-col>
             <el-col :xs="24" :sm="10">
-              <div class="info-document_date-published">Published on {{ oldDoc.datePublished }}</div>
-              <div class="info-document_id">ID: {{ oldDoc.id }}</div>
+              <div class="info-document_date-published">{{ $t("tender.documents_published") }} {{ oldDoc.datePublished }}</div>
+              <div class="info-document_id">{{ $t("tender.documents_id") }}: {{ oldDoc.id }}</div>
             </el-col>
           </el-row>
         </div>
@@ -513,10 +513,10 @@
           const procuringEntity = getDataFromObject(MSRecord, _ => _.parties, []).find(item => {
             return item.roles.some(role => role === "procuringEntity");
           });
-
+        
           /*console.log(this.tender); // @TODO need delete after parsing JSON
-          console.log("MSRecord ", MSRecord);
-          console.log("EVRecord ", EVRecord);*/
+           console.log("MSRecord ", MSRecord);
+           console.log("EVRecord ", EVRecord);*/
 
           return {
             procedureStatus: `${getDataFromObject(EVRecord, _ => _.tender.status)} ${getDataFromObject(EVRecord, _ => _.tender.statusDetails)}`,
@@ -634,7 +634,7 @@
 
           const obj = {};
 
-          for(const item of [...getDataFromObject(tender, _ => _.documents, [])].sort((doc1, doc2) => new Date(doc2.dateModified) - new Date(doc1.dateModified))) {
+          for (const item of [...getDataFromObject(tender, _ => _.documents, [])].sort((doc1, doc2) => new Date(doc2.dateModified) - new Date(doc1.dateModified))) {
             if (!obj.hasOwnProperty(item.id)) {
               obj[item.id] = {
                 name: item.title,
@@ -642,19 +642,19 @@
                 datePublished: formatDate(item.datePublished),
                 id: item.id
               };
-              obj[item.id].oldVersions = []
+              obj[item.id].oldVersions = [];
             } else {
               obj[item.id].oldVersions.push({
                 name: item.title,
                 url: item.url,
                 datePublished: formatDate(item.datePublished),
                 id: item.id
-              })
+              });
             }
           }
 
           return Object.values(obj);
-  
+        
           /*return getDataFromObject(contract, _ => _.documents, []).map(doc => {
            return {
            name: getDataFromObject(doc, _ => _.title),
@@ -702,11 +702,11 @@
             const address = getDataFromObject(EVRecord, _ => _.tender.lots, []).find(lot => lot.id === relatedLot).placeOfPerformance.address;
 
             return `
-              ${address.postalCode},
-              ${address.addressDetails.country.description},
-              ${address.addressDetails.region.description},
-              ${address.addressDetails.locality.description},
-              ${address.postalCode}
+              ${getDataFromObject(address, _ => _.postalCode)},
+              ${getDataFromObject(address, _ => _.addressDetails.country.description)},
+              ${getDataFromObject(address, _ => _.addressDetails.region.description)},
+              ${getDataFromObject(address, _ => _.addressDetails.locality.description)},
+              ${getDataFromObject(address, _ => _.postalCode)}
             `;
           }
 
@@ -904,7 +904,7 @@
           return getDataFromObject(tender, _ => _.contracts, []).map(contract => {
             const obj = {};
 
-            for(const item of [...getDataFromObject(contract, _ => _.documents, [])].sort((doc1, doc2) => new Date(doc2.dateModified) - new Date(doc1.dateModified))) {
+            for (const item of [...getDataFromObject(contract, _ => _.documents, [])].sort((doc1, doc2) => new Date(doc2.dateModified) - new Date(doc1.dateModified))) {
               if (!obj.hasOwnProperty(item.id)) {
                 obj[item.id] = {
                   name: item.title,
@@ -912,14 +912,14 @@
                   datePublished: formatDate(item.datePublished),
                   id: item.id
                 };
-                obj[item.id].oldVersions = []
+                obj[item.id].oldVersions = [];
               } else {
                 obj[item.id].oldVersions.push({
                   name: item.title,
                   url: item.url,
                   datePublished: formatDate(item.datePublished),
                   id: item.id
-                })
+                });
               }
             }
 

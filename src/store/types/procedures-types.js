@@ -7,22 +7,30 @@ export default {
         ru: "Открытые торги"
       },
       value: "Licitație deschisă"
+    },
+    {
+      name: {
+        en: "COP",
+        ro: "Request for Proposals",
+        ru: "Запрос ценовых предложений"
+      },
+      value: "Procedură de valoare mică"
     }
   ],
   tenders: [
     {
       name: {
-        en: "Direct award",
-        ro: "Premiul direct",
-        ru: "Прямой договор"
+        en: "Negotiatian with one or Negotiation with several",
+        ro: "Procedura negocieri fără publicare",
+        ru: "Переговоры без публикации"
       },
       value: "reporting"
     },
     {
       name: {
-        en: "Low value procedure",
-        ro: "Procedură de valoare mică",
-        ru: "Закупка малой стоимости"
+        en: "Micro value",
+        ro: "Achiziții de valoare mica",
+        ru: "Закупки малой стоимости"
       },
       value: "belowThreshold"
     },
@@ -33,6 +41,14 @@ export default {
         ru: "Открытые торги"
       },
       value: "Licitație deschisă"
+    },
+    {
+      name: {
+        en: "COP",
+        ro: "Request for Proposals",
+        ru: "Запрос ценовых предложений"
+      },
+      value: "Procedură de valoare mică"
     }
   ],
   contracts: [
