@@ -22,73 +22,73 @@ export default {
   tenders: [
     {
       name: {
-        en: "Auction Period",
-        ro: "Perioada Licitației",
+        en: "Auction in progress",
+        ro: "Perioada de licitare",
         ru: "Период аукциона"
       },
       value: "active.auction"
     },
     {
       name: {
-        en: "Qualification Period",
-        ro: "Perioada de calificare",
-        ru: "Квалификационный период"
+        en: "Qualification of bidders",
+        ro: "Calificarea ofertanților",
+        ru: "Квалификация офертантов"
       },
       value: "active.qualification"
     },
     {
       name: {
-        en: "Enquiries Period",
-        ro: "Perioada anchetelor",
-        ru: "Период запросов"
+        en: "Enquiries in progress ",
+        ro: "Solicitare сlarificări",
+        ru: "Период уточнений"
       },
       value: "active.enquiries"
     },
     {
       name: {
-        en: "Tendering Period",
-        ro: "Perioada de licitare",
-        ru: "Тендерный период"
+        en: "Bidding in progress",
+        ro: "Depunerea ofertelor",
+        ru: "Подача предложений"
       },
       value: "active.tendering"
     },
     {
       name: {
         en: "Cancelled tender",
-        ro: "Anunțarea licitației anulate",
-        ru: "Отмененный тендер"
+        ro: "Procedură anulată",
+        ru: "Закупка отменена"
       },
       value: "cancelled"
     },
     {
       name: {
         en: "Published",
-        ro: "Publicat",
-        ru: "Опубликованный"
+        ro: "Postat",
+        ru: "Опубликовано"
       },
       value: "active"
     },
     {
       name: {
         en: "Awarded",
-        ro: "Premiat",
-        ru: "Решение о квалификации"
+        ro: "Ofertele a fost revizuite",
+        ru: "Победитель определен"
       },
       value: "active.awarded"
     },
     {
       name: {
-        en: "Complete",
-        ro: "Complet",
-        ru: "Завершен"
+        en: "Tender completed",
+        ro: "Procedură finalizată",
+        ru: "Закупка завершена"
       },
       value: "complete"
     },
     {
       name: {
         en: "Unsuccessful Tender",
-        ro: "Ofertă nereușită",
-        ru: "Неуспешный тендер"
+        ro: "Procedura nu a avut loc",
+        ru: "Закупка не состоялась"
       },
       value: "unsuccessful"
     }
