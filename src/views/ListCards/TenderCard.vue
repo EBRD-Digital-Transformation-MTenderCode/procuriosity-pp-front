@@ -62,6 +62,7 @@
 </template>
 
 <script>
+  import procedureStatuses from "./../../store/types/procedure-status-types";
   import procedureTypes from "./../../store/types/procedures-types"
   
   import { getDataFromObject, formatDate } from "../../utils";
@@ -108,29 +109,10 @@
       },
       parseStatusText() {
         const status = getDataFromObject(this.entity, _ => _.procedureStatus);
-        switch (status) {
-          case "active.auction":
-            return "Auction Period";
-          case "active.qualification":
-            return "Qualification Period";
-          case "active.enquiries":
-          case "evaluation":
-            return "Enquiries Period";
-          case "active.tendering":
-            return "Tendering Period";
-          case "cancelled":
-          case "empty":
-            return "Cancelled tender";
-          case "active":
-            return "Published";
-          case "active.awarded":
-            return "Awarded";
-          case "complete":
-            return "Complete";
-          case "unsuccessful":
-            return "Unsuccessful Tender";
-          default:
-            return status;
+        if (procedureStatuses.tenders.some(it => it.value === status)) {
+          return procedureStatuses.tenders.find(it => it.value === status).name[this.$i18n.locale];
+        } else {
+          return status;
         }
       },
       modifiedDate() {
