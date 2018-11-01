@@ -22,6 +22,30 @@ export default {
   tenders: [
     {
       name: {
+        en: "Enquiries in progress ",
+        ro: "Solicitare сlarificări",
+        ru: "Период уточнений"
+      },
+      value: "active.clarification"
+    },
+    {
+      name: {
+        en: "Cancelled tender",
+        ro: "Procedură anulată",
+        ru: "Закупка отменена"
+      },
+      value: "cancelled.empty"
+    },
+    {
+      name: {
+        en: "Unsuccessful Tender",
+        ro: "Procedura nu a avut loc",
+        ru: "Закупка не состоялась"
+      },
+      value: "active.unsuccessful"
+    },
+    {
+      name: {
         en: "Auction in progress",
         ro: "Perioada de licitare",
         ru: "Период аукциона"
@@ -91,22 +115,6 @@ export default {
         ru: "Закупка не состоялась"
       },
       value: "unsuccessful"
-    },
-    {
-      name: {
-        en: "Enquiries in progress ",
-        ro: "Solicitare сlarificări",
-        ru: "Период уточнений"
-      },
-      value: "evaluation"
-    },
-    {
-      name: {
-        en: "Cancelled tender",
-        ro: "Procedură anulată",
-        ru: "Закупка отменена"
-      },
-      value: "empty"
     }
   ],
   contracts: [

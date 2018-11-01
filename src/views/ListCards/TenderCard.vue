@@ -29,8 +29,8 @@
             <div class="entity-amount__text">{{$t("tender.value")}} ({{ currency }})</div>
             <div class="entity-amount__number">
               <span
-                  class="whole"
-                  :style="wholeAmount.length > 10 ? 'font-size: 30px': ''"
+                class="whole"
+                :style="wholeAmount.length > 10 ? 'font-size: 30px': ''"
               >
                 {{ wholeAmount }} <span v-if="fractionAmount">.</span>
               </span>
@@ -63,8 +63,8 @@
 
 <script>
   import procedureStatuses from "./../../store/types/procedure-status-types";
-  import procedureTypes from "./../../store/types/procedures-types"
-  
+  import procedureTypes from "./../../store/types/procedures-types";
+
   import { getDataFromObject, formatDate } from "../../utils";
 
   export default {
@@ -149,7 +149,7 @@
           } else if (this.$i18n.locale === "ro") {
             return "Cererea ofertelor de preț";
           } else {
-            return "Запрос ценовых оферт"
+            return "Запрос ценовых оферт";
           }
         } else if (getDataFromObject(this.entity, _ => _.procedureType) === "Licitație deschisă") {
           return procedureTypes.tenders.find(it => it.value === "Licitație deschisă").name[this.$i18n.locale];
