@@ -26,3 +26,7 @@ export const convertObjectToQueryParamsString = obj => {
     return `${accVal}${i !== 0 ? "&" : ""}${key}=${encodeURIComponent(Array.isArray(val) ? JSON.stringify(val) : val)}`;
   }, "?");
 };
+
+export const isMobileDevice = () => {
+  return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf("IEMobile") !== -1);
+};

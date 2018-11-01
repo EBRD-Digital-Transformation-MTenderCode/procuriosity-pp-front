@@ -49,7 +49,8 @@
               {{$t("footer.info_text")}}:
             </div>
             <div class="footer-info__tel">
-              <a href="tel:+373022822038 ">022 822 038</a>
+              <a v-if="isMobileDevice" href="tel:+373022822038">022 822 038</a>
+              <div v-else>022 822 038</div>
             </div>
           </div>
         </el-col>
@@ -59,8 +60,13 @@
 </template>
 
 <script>
+  import { isMobileDevice } from "./../utils";
+
   export default {
-    name: "AppFooter"
+    name: "AppFooter",
+    computed: {
+      isMobileDevice
+    }
   };
 </script>
 

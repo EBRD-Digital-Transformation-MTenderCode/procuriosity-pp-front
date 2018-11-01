@@ -53,13 +53,24 @@
               </router-link>
             </nav>
           </el-col>
+          <el-col>
+            <div class="header-info">
+              <div class="header-info__text">
+                {{$t("footer.info_text")}}:
+              </div>
+              <div class="header-info__tel">
+                <a v-if="isMobileDevice" href="tel:+373022822038">022 822 038</a>
+                <div v-else>022 822 038</div>
+              </div>
+            </div>
+          </el-col>
         </el-row>
         <nav class="header-entity-nav">
           <router-link
-              v-for="(entity, key) in entities"
-              :key="entity.name"
-              :to="`/${key}`"
-              active-class="is-active"
+            v-for="(entity, key) in entities"
+            :key="entity.name"
+            :to="`/${key}`"
+            active-class="is-active"
           >
             {{ $t(entity.name) }}
           </router-link>
@@ -74,6 +85,8 @@
 
   import LocaleToggle from "./../components/LocaleToggle";
 
+  import { isMobileDevice } from "./../utils";
+
   import "./../assets/logo.png";
 
   export default {
@@ -82,7 +95,8 @@
       "locale-toggle": LocaleToggle
     },
     computed: {
-      ...mapState(["entities"])
+      ...mapState(["entities"]),
+      isMobileDevice
     }
   };
 </script>
@@ -249,6 +263,25 @@
             margin-bottom: 0;
           }
         }
+      }
+    }
+    &-info {
+      display: flex;
+      align-items: flex-end;
+      flex-shrink: 0;
+      margin-left: auto;
+      @media (max-width: 768px) {
+        width: 100%;
+      }
+      &__text {
+        margin-right: 15px;
+        font-size: 12px;
+      }
+      &__tel {
+        line-height: 1;
+        font-weight: 600;
+        font-size: 35px;
+        color: #5f5f5f;
       }
     }
   }
