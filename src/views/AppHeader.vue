@@ -5,9 +5,7 @@
         <el-row :gutter="30">
           <el-col>
             <div class="header-logo-ebrd">
-              <router-link to="/" class="header-logo-ebrd__link">
-                <img src="@/assets/logo-ebrd.png" class="header-logo-ebrd__img" alt="EBRD">
-              </router-link>
+              <img src="@/assets/logo-ebrd.png" class="header-logo-ebrd__img" alt="EBRD">
               <div class="header-logo-ebrd__text">
                 <div>{{$t("header.ebrd_line1")}}</div>
                 <div>{{$t("header.ebrd_line2")}}</div>
@@ -22,35 +20,34 @@
       <el-container direction="vertical">
         <el-row :gutter="30">
           <el-col>
-            <router-link to="/" class="header-logo-mtender__link">
+            <a href="/" class="header-logo-mtender__link">
               <img src="@/assets/logo.png" class="header-logo-mtender__img" alt="MTender">
-            </router-link>
+            </a>
             <nav class="header-static-nav">
-              <!--<router-link to="/news">{{$t("header.static_nav_news")}}</router-link>-->
-              <router-link active-class="header-static-nav_active" to="/about">
+              <a href="/about">
                 {{$t("header.static_nav_about_MTender")}}
-              </router-link>
-              <router-link active-class="header-static-nav_active" to="/register">
+              </a>
+              <a href="/register">
                 {{$t("header.static_nav_register")}}
-              </router-link>
-              <router-link active-class="header-static-nav_active" to="/legal-framework">
+              </a>
+              <a href="/legal-framework">
                 {{$t("header.static_nav_legal_framework")}}
-              </router-link>
-              <router-link active-class="header-static-nav_active" to="/security-and-confidentiality">
+              </a>
+              <a href="/security-and-confidentiality">
                 {{$t("header.static_nav_security_and_confidentiality")}}
-              </router-link>
-              <router-link active-class="header-static-nav_active" to="/join-mtender">
+              </a>
+              <a href="/join-mtender">
                 {{$t("header.static_nav_join_MTender")}}
-              </router-link>
-              <router-link active-class="header-static-nav_active" to="/accreditation">
+              </a>
+              <a href="/accreditation">
                 {{$t("header.static_nav_accreditation")}}
-              </router-link>
-              <router-link active-class="header-static-nav_active" to="/for-civil">
+              </a>
+              <a href="/for-civil">
                 {{$t("header.static_nav_for_civil")}}
-              </router-link>
-              <router-link active-class="header-static-nav_active" to="/faq">
+              </a>
+              <a href="/faq">
                 {{$t("header.static_nav_FAQ")}}
-              </router-link>
+              </a>
             </nav>
           </el-col>
           <el-col>
@@ -69,7 +66,7 @@
           <router-link
             v-for="(entity, key) in entities"
             :key="entity.name"
-            :to="`/${key}`"
+            :to="`/${$i18n.locale !== defaultLocale ? `${$i18n.locale}/` : ''}${key}`"
             active-class="is-active"
           >
             {{ $t(entity.name) }}
@@ -83,6 +80,7 @@
 <script>
   import { mapState } from "vuex";
 
+  import { defaultLocale } from "./../i18n";
   import LocaleToggle from "./../components/LocaleToggle";
 
   import { isMobileDevice } from "./../utils";
@@ -96,7 +94,12 @@
     },
     computed: {
       ...mapState(["entities"]),
-      isMobileDevice
+      isMobileDevice,
+      defaultLocale: {
+        get() {
+          return defaultLocale
+        }
+      }
     }
   };
 </script>
@@ -142,10 +145,8 @@
         @media (max-width: 400px) {
           flex-wrap: wrap;
         }
-        &__link {
-          flex-shrink: 0;
-        }
         &__img {
+          flex-shrink: 0;
           height: 30px;
           margin-right: 20px;
           @media (max-width: 400px) {

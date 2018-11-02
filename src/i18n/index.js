@@ -2,22 +2,20 @@ import Vue from "vue";
 import VueI18n from "vue-i18n";
 import messages from "./messages/index";
 
+import Router from "./../router";
+
 import axios from "axios";
 
 Vue.use(VueI18n);
 
-const defaultLocale = "ro";
+export const defaultLocale = "ro";
 
-if (!localStorage.getItem("locale")) {
-  localStorage.setItem("locale", defaultLocale);
-}
-
-const savedLocale = localStorage.getItem("locale");
+console.log();
 
 export default new VueI18n({
-  locale: savedLocale,
+  locale: defaultLocale,
   messages
 });
 
-axios.defaults.headers.common["Accept-Language"] = savedLocale;
-document.querySelector("html").setAttribute("lang", savedLocale);
+axios.defaults.headers.common["Accept-Language"] = defaultLocale;
+document.querySelector("html").setAttribute("lang", defaultLocale);

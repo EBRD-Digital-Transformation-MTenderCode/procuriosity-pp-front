@@ -31,6 +31,8 @@
 
 <script>
   import axios from "axios";
+  
+  import { defaultLocale } from "./../i18n";
 
   import EN from "./../views/flags/EN";
   import RU from "./../views/flags/RU";
@@ -50,9 +52,14 @@
       toggleLocale: function(locale) {
         this.$i18n.locale = locale;
 
+        this.$router.replace({
+          params: {
+            lang: locale !== defaultLocale ? locale : null
+          }
+        });
+
         axios.defaults.headers.common["Accept-Language"] = locale;
         document.querySelector("html").setAttribute("lang", locale);
-        localStorage.setItem("locale", locale);
       }
     }
   };

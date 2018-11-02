@@ -4,44 +4,43 @@
       <el-row :gutter="30">
         <el-col>
           <div class="footer-logo">
-            <router-link to="/">
+            <a href="/">
               <img src="@/assets/logo-footer.png" alt="" class="footer-logo__img">
-            </router-link>
+            </a>
             <div class="footer-logo__cr">
               2018 ©, {{ $t("footer.logo_cr") }}
             </div>
           </div>
           <nav class="footer-nav">
             <div>
-              <!--<router-link to="/news">{{$t("footer.nav_news")}}</router-link><br>-->
-              <router-link active-class="footer-nav_active" to="/about">
+              <a href="/about">
                 {{$t("footer.nav_about_MTender")}}
-              </router-link><br>
-              <router-link active-class="footer-nav_active" to="/register">
+              </a><br>
+              <a href="/register">
                 {{$t("footer.nav_register")}}
-              </router-link><br>
+              </a><br>
             </div>
             <div>
-              <router-link active-class="footer-nav_active" to="/legal-framework">
+              <a href="/legal-framework">
                 {{$t("footer.nav_legal_framework")}}
-              </router-link><br>
-              <router-link active-class="footer-nav_active" to="/security-and-confidentiality">
+              </a><br>
+              <a href="/security-and-confidentiality">
                 {{$t("footer.nav_security_and_confidentiality")}}
-              </router-link><br>
-              <router-link active-class="footer-nav_active" to="/join-mtender">
+              </a><br>
+              <a href="/join-mtender">
                 {{$t("footer.nav_join_MTender")}}
-              </router-link><br>
+              </a><br>
             </div>
             <div>
-              <router-link active-class="footer-nav_active" to="/accreditation">
+              <a href="/accreditation">
                 {{$t("footer.nav_accreditation")}}
-              </router-link><br>
-              <router-link active-class="footer-nav_active" to="/for-civil">
+              </a><br>
+              <a href="/for-civil">
                 {{$t("footer.nav_for_civil")}}
-              </router-link><br>
-              <router-link active-class="footer-nav_active" to="/faq">
+              </a><br>
+              <a href="/faq">
                 {{$t("footer.nav_FAQ")}}
-              </router-link><br>
+              </a><br>
             </div>
           </nav>
           <div class="footer-info">
