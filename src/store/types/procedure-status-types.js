@@ -22,43 +22,11 @@ export default {
   tenders: [
     {
       name: {
-        en: "Enquiries in progress ",
-        ro: "Solicitare сlarificări",
-        ru: "Период уточнений"
+        en: "Published",
+        ro: "Postat",
+        ru: "Опубликовано"
       },
-      value: "active.clarification"
-    },
-    {
-      name: {
-        en: "Cancelled tender",
-        ro: "Procedură anulată",
-        ru: "Закупка отменена"
-      },
-      value: "cancelled.empty"
-    },
-    {
-      name: {
-        en: "Unsuccessful Tender",
-        ro: "Procedura nu a avut loc",
-        ru: "Закупка не состоялась"
-      },
-      value: "active.unsuccessful"
-    },
-    {
-      name: {
-        en: "Auction in progress",
-        ro: "Perioada de licitare",
-        ru: "Период аукциона"
-      },
-      value: "active.auction"
-    },
-    {
-      name: {
-        en: "Qualification of bidders",
-        ro: "Calificarea ofertanților",
-        ru: "Квалификация офертантов"
-      },
-      value: "active.qualification"
+      value: "published"
     },
     {
       name: {
@@ -66,7 +34,7 @@ export default {
         ro: "Solicitare сlarificări",
         ru: "Период уточнений"
       },
-      value: "active.enquiries"
+      value: "clarification"
     },
     {
       name: {
@@ -74,23 +42,31 @@ export default {
         ro: "Depunerea ofertelor",
         ru: "Подача предложений"
       },
-      value: "active.tendering"
+      value: "tendering"
     },
     {
       name: {
-        en: "Cancelled tender",
-        ro: "Procedură anulată",
-        ru: "Закупка отменена"
+        en: "Auction in progress",
+        ro: "Perioada de licitare",
+        ru: "Период аукциона"
       },
-      value: "cancelled"
+      value: "auction"
     },
     {
       name: {
-        en: "Published",
-        ro: "Postat",
-        ru: "Опубликовано"
+        en: "Qualification of bidders",
+        ro: "Calificarea ofertanților",
+        ru: "Квалификация офертантов"
       },
-      value: "active"
+      value: "awarding"
+    },
+    {
+      name: {
+        en: "Standstill period",
+        ro: "Perioada de așteptare",
+        ru: "Период ожидания"
+      },
+      value: "suspended"
     },
     {
       name: {
@@ -98,7 +74,7 @@ export default {
         ro: "Ofertele a fost revizuite",
         ru: "Победитель определен"
       },
-      value: "active.awarded"
+      value: "awarded"
     },
     {
       name: {
@@ -107,6 +83,14 @@ export default {
         ru: "Закупка завершена"
       },
       value: "complete"
+    },
+    {
+      name: {
+        en: "Cancelled tender",
+        ro: "Procedură anulată",
+        ru: "Закупка отменена"
+      },
+      value: "cancelled"
     },
     {
       name: {

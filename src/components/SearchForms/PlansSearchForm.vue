@@ -43,7 +43,7 @@
   
               <!-- Buyers regions -->
               <div class="search-form-element">
-                <search-auto-complete-input
+                <search-regions
                     name="buyersRegions"
                     :items="regionsList"
                     :values="buyersRegions"
@@ -146,7 +146,7 @@
   
               <!-- Delivery regions -->
               <div class="search-form-element">
-                <search-auto-complete-input
+                <search-regions
                     name="deliveriesRegions"
                     :items="regionsList"
                     :values="deliveriesRegions"
@@ -191,12 +191,11 @@
   
               <!-- Classifications -->
               <div class="search-form-element">
-                <search-auto-complete-input
+                <search-classifications
                     name="classifications"
                     :items="CPVCodesList"
                     :values="classifications"
                     :setValues="setFormParams"
-                    needFetch
                     :placeholder="$t('search.classifications_placeholder')"
                 />
               </div>
@@ -220,6 +219,8 @@
   import SearchInput from "./../FormsComponents/SearchInput";
   import SearchSwitch from "../FormsComponents/SearchCheckboxButton";
   import SearchAutoCompleteInput from "./../FormsComponents/SearchAutoCompleteInput";
+  import SearchRegions from "./../FormsComponents/SearchRegions";
+  import SearchClassifications from "./../FormsComponents/SearchClassifications";
   import SearchPeriods from "./../FormsComponents/SearchPeriods";
 
   import proceduresTypesList from "./../../store/types/procedures-types";
@@ -236,9 +237,21 @@
       "search-input": SearchInput,
       "search-switch": SearchSwitch,
       "search-auto-complete-input": SearchAutoCompleteInput,
+      "search-regions": SearchRegions,
+      "search-classifications": SearchClassifications,
       "search-period": SearchPeriods,
       "multiple-input": MultipleInput,
       "reset-button": ResetButton
+    },
+    created() {
+      const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
+      if (localStorageEntities.plans.hasOwnProperty("isExpanded")) {
+        this.moreCriterions = localStorageEntities.plans.isExpanded;
+      }
+      else {
+        localStorageEntities.plans.isExpanded = this.moreCriterions;
+        localStorage.setItem("entities", JSON.stringify(localStorageEntities));
+      }
     },
     data() {
       return {
@@ -295,16 +308,6 @@
         this.moreCriterions = !this.moreCriterions;
 
         const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
-        localStorageEntities.plans.isExpanded = this.moreCriterions;
-        localStorage.setItem("entities", JSON.stringify(localStorageEntities));
-      }
-    },
-    created() {
-      const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
-      if (localStorageEntities.plans.hasOwnProperty("isExpanded")) {
-        this.moreCriterions = localStorageEntities.plans.isExpanded;
-      }
-      else {
         localStorageEntities.plans.isExpanded = this.moreCriterions;
         localStorage.setItem("entities", JSON.stringify(localStorageEntities));
       }

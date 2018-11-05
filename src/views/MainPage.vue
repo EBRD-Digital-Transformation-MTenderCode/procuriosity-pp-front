@@ -31,7 +31,7 @@
             <div class="slide-item">
               <div class="slide-item__part">
                 <div class="slide-item__ico slide-item__ico_active-procedures" />
-                <div class="slide-item__number">933</div>
+                <div class="slide-item__number">939</div>
               </div>
               <i18n path="main.slide1_1" tag="div" class="slide-item__text">
                 <div place="slide1_1_place">{{ $t("main.slide1_1_place") }}</div>
@@ -40,7 +40,7 @@
             <div class="slide-item">
               <div class="slide-item__part">
                 <div class="slide-item__ico slide-item__ico_concluded-contracts" />
-                <div class="slide-item__number">2’470</div>
+                <div class="slide-item__number">3'040</div>
               </div>
               <i18n path="main.slide1_2" tag="div" class="slide-item__text">
                 <div place="slide1_2_place">{{ $t("main.slide1_2_place") }}</div>
@@ -51,7 +51,7 @@
             <div class="slide-item">
               <div class="slide-item__part">
                 <div class="slide-item__ico slide-item__ico_contracting-entities" />
-                <div class="slide-item__number">817</div>
+                <div class="slide-item__number">982</div>
               </div>
               <i18n path="main.slide2_1" tag="div" class="slide-item__text">
                 <div place="slide2_1_place">{{ $t("main.slide2_1_place") }}</div>
@@ -60,7 +60,7 @@
             <div class="slide-item">
               <div class="slide-item__part">
                 <div class="slide-item__ico slide-item__ico_economic-operators" />
-                <div class="slide-item__number">1’860</div>
+                <div class="slide-item__number">2'110</div>
               </div>
               <i18n path="main.slide2_2" tag="div" class="slide-item__text">
                 <div place="slide2_2_place">{{ $t("main.slide2_2_place") }}</div>
@@ -71,7 +71,7 @@
             <div class="slide-item">
               <div class="slide-item__part">
                 <div class="slide-item__ico slide-item__ico_total-savings" />
-                <div class="slide-item__number">12’150’000</div>
+                <div class="slide-item__number">14'420'000</div>
               </div>
               <i18n path="main.slide3_1" tag="div" class="slide-item__text">
                 <div place="slide3_1_place">{{ $t("main.slide3_1_place") }}</div>
