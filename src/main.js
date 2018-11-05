@@ -20,7 +20,7 @@ Vue.use(Element, {
   i18n: (key, value) => i18n.t(key, value)
 });
 
-Vue.config.productionTip = true;
+Vue.config.productionTip = false;
 
 new Vue({
   i18n,

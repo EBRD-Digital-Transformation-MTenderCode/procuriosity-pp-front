@@ -13,7 +13,7 @@
       </div>
       <el-row type="flex" :gutter="18">
         <el-col :xs="24" :sm="14">
-          <router-link v-if="needLink" :to="`/contracts/${entityId}`" data-link class="entity-title">
+          <router-link v-if="needLink" :to="`${$i18n.locale !== 'ro' ? `/${$i18n.locale}` : ''}/contracts/${entityId}`" data-link class="entity-title">
             {{ title }}
           </router-link>
           <div v-else class="entity-title">

@@ -25,7 +25,7 @@ export default new Router({
       component: () => import(/* webpackChunkName: "TenderPage" */ "./views/EntitiesPages/TenderPage.vue")
     },
     {
-      path: `:lang?/contracts/:id`,
+      path: `/:lang?/contracts/:id`,
       name: "contract-page",
       component: () => import(/* webpackChunkName: "ContractPage" */ "./views/EntitiesPages/ContractPage.vue")
     }
