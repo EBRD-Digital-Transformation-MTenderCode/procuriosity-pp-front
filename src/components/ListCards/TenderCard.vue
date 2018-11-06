@@ -62,8 +62,8 @@
 </template>
 
 <script>
-  import procedureStatuses from "./../../store/types/procedure-status-types";
-  import procedureTypes from "./../../store/types/procedures-types";
+  import procedureStatuses from "../../store/types/procedure-status-types";
+  import procedureTypes from "../../store/types/procedures-types";
 
   import { getDataFromObject, formatDate } from "../../utils";
 

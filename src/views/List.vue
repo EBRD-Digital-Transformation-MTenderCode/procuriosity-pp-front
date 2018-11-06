@@ -1,76 +1,74 @@
 <template>
-  <div>
-    <el-container direction="vertical">
-      <div
-          :is="renderSearchForm"
-          class="search-form"
-      />
-      <div class="list-status-bar">
-        <div class="list-status-bar__text">
-          {{$t("search.list_total_found")}}: <span class="list-status-bar__count">{{ entities[entityName].paginationInfo.totalCount }}</span>
-        </div>
-      </div>
-      <transition-group
-          @before-enter="beforeEnter"
-          @enter="enter"
-          @leave="leave"
+  <el-container direction="vertical">
+    <component
+        :is="renderSearchForm"
+        class="search-form"
+    />
+    <search-status-bar
+      :entity="entityName"
+    />
+    <transition-group
+        @before-enter="beforeEnter"
+        @enter="enter"
+        @leave="leave"
+    >
+      <div v-if="entities[entityName].loaded && entities[entityName].list.length"
+          :key="'list'"
+          id="entity-list"
+          class="list"
       >
-        <ul v-if="entities[entityName].loaded && entities[entityName].list.length"
-            :key="'list'"
-            id="entity-list"
-            class="list"
-        >
-          <li
-              :is="renderCard"
-              v-for="entity of entities[entityName].list"
-              :entity="entity"
-              needLink
-              :key="entity.id"
-          />
-        </ul>
-        <div class="list__no-data-title" v-if="entities[entityName].loaded && !entities[entityName].list.length"
-             :key="'no-data'">
-          {{$t("search.list_no_data")}}
-        </div>
-        <stub-card
-            v-if="!entities[entityName].loaded"
-            v-for="item of 3"
-            :key="item"
+        <component
+            :is="renderCard"
+            v-for="entity of entities[entityName].list"
+            :entity="entity"
+            needLink
+            :key="entity.id"
         />
-      </transition-group>
-      <list-pagination
-          v-if="needPagination"
-          :total="entities[entityName].paginationInfo.totalCount"
-          :pageCount="entities[entityName].paginationInfo.pageCount"
-          :currentPage="entities[entityName].searchParams.page"
-          :pageSize="entities[entityName].searchParams.pageSize"
-          :changePage="changePage"
-          :key="'pagination'"
+      </div>
+      <div class="list__no-data-title" v-if="entities[entityName].loaded && !entities[entityName].list.length"
+           :key="'no-data'">
+        {{$t("search.list_no_data")}}
+      </div>
+      <stub-card
+          v-if="!entities[entityName].loaded"
+          v-for="item of 3"
+          :key="item"
       />
+    </transition-group>
+    <list-pagination
+        v-if="needPagination"
+        :total="entities[entityName].paginationInfo.totalCount"
+        :pageCount="entities[entityName].paginationInfo.pageCount"
+        :currentPage="entities[entityName].searchParams.page"
+        :pageSize="entities[entityName].searchParams.pageSize"
+        :changePage="changePage"
+        :key="'pagination'"
+    />
     </el-container>
-  </div>
 </template>
 
 <script>
   import Velocity from "velocity-animate";
   import { mapState } from "vuex";
-  import { FETCH_ENTITY_LIST } from "./../store/types/actions-types";
+  import { FETCH_ENTITY_LIST } from "../store/types/actions-types";
   import { SET_ENTITY_SEARCH_PARAMS } from "../store/types/mutations-types";
 
-  import BudgetsSearchForm from "./SearchForms/BudgetsSearchForm";
-  import TendersSearchForm from "./SearchForms/TendersSearchForm";
-  import PlansSearchForm from "./SearchForms/PlansSearchForm";
-  import ContractsSearchForm from "./SearchForms/ContractsSearchForm";
+  import BudgetsSearchForm from "../components/SearchForms/BudgetsSearchForm";
+  import TendersSearchForm from "../components/SearchForms/TendersSearchForm";
+  import PlansSearchForm from "../components/SearchForms/PlansSearchForm";
+  import ContractsSearchForm from "../components/SearchForms/ContractsSearchForm";
+  
+  import SearchStatusBar from "./../components/SearchStatusBar";
 
-  import StubCard from "./../views/ListCards/StubCard";
-  import BudgetCard from "./../views/ListCards/BudgetCard";
-  import TenderCard from "./../views/ListCards/TenderCard";
-  import PlanCard from "./../views/ListCards/PlanCard";
-  import ContractCard from "./../views/ListCards/ContractCard";
+  import StubCard from "../components/ListCards/StubCard";
+  import BudgetCard from "../components/ListCards/BudgetCard";
+  import TenderCard from "../components/ListCards/TenderCard";
+  import PlanCard from "../components/ListCards/PlanCard";
+  import ContractCard from "../components/ListCards/ContractCard";
 
-  import ListPagination from "./ListPagination";
+  import ListPagination from "../components/ListPagination";
 
-  import { convertObjectToQueryParamsString } from "./../utils";
+  import { convertObjectToQueryParamsString } from "../utils";
 
   export default {
     name: "List",
@@ -79,6 +77,8 @@
       "tenders-search-form": TendersSearchForm,
       "plans-search-form": PlansSearchForm,
       "contracts-search-form": ContractsSearchForm,
+      
+      "search-status-bar": SearchStatusBar,
 
       "stub-card": StubCard,
       "budget-card": BudgetCard,
@@ -178,24 +178,6 @@
 
 <style lang="scss" scoped>
   .list {
-    &-status-bar {
-      position: sticky;
-      left: 0;
-      bottom: 0;
-      z-index: 20;
-      width: 100%;
-      margin: 15px 0 0;
-      padding: 14px 16px;
-      background-color: #f7f7f7;
-      box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.19);
-      font-size: 16px;
-      &__text {
-      
-      }
-      &__count {
-        font-weight: 700;
-      }
-    }
     &__no-data-title {
       margin: 20px 0;
       text-align: center;

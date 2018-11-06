@@ -462,7 +462,7 @@
   import { mapState } from "vuex";
   import { FETCH_CURRENT_TENDER_INFO } from "./../../store/types/actions-types";
 
-  import TenderCard from "./../ListCards/TenderCard";
+  import TenderCard from "../../components/ListCards/TenderCard";
   import DocumentsModal from "./DocumentsModal";
 
   import { MTENDER1, MTENDER2 } from "./../../store/types/cbd-types";

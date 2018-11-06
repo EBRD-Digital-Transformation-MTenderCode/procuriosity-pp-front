@@ -70,7 +70,7 @@
 </template>
 
 <script>
-  import { getDataFromObject, formatDate } from "./../../utils";
+  import { getDataFromObject, formatDate } from "../../utils";
 
   export default {
     name: "TenderCard",
