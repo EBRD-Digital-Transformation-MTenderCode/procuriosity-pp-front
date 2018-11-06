@@ -183,7 +183,7 @@
   import { REGIONS, CPV_CODES } from "./../../store/types/directories-types";
 
   import SearchInput from "./../FormsComponents/SearchInput";
-  import SearchSwitch from "../FormsComponents/SearchCheckboxButton";
+  import SearchSwitch from "../FormsComponents/SearchStrictButton";
   import SearchAutoCompleteInput from "./../FormsComponents/SearchAutoCompleteInput";
   import SearchPeriods from "./../FormsComponents/SearchPeriods";
   import MultipleInput from "../FormsComponents/MultipleInput";

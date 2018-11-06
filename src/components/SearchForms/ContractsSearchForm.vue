@@ -4,6 +4,7 @@
       <!-- Strict search -->
       <search-switch
         name="titlesOrDescriptionsStrict"
+        entity="contracts"
         :value="titlesOrDescriptionsStrict"
         :setValue="setFormParams"
         :label="$t('search.strict')"
@@ -263,7 +264,7 @@
   import { REGIONS, CPV_CODES } from "./../../store/types/directories-types";
 
   import SearchInput from "./../FormsComponents/SearchInput";
-  import SearchSwitch from "../FormsComponents/SearchCheckboxButton";
+  import SearchSwitch from "../FormsComponents/SearchStrictButton";
   import SearchAutoCompleteInput from "./../FormsComponents/SearchAutoCompleteInput";
   import SearchRegions from "./../FormsComponents/SearchRegions";
   import SearchClassifications from "./../FormsComponents/SearchClassifications";

@@ -128,12 +128,10 @@ export default {
         }
       };
 
-      if (!(Object.keys(params).length === 2 && params.hasOwnProperty("titlesOrDescriptionsStrict"))) {
-        this.dispatch(FETCH_ENTITY_LIST, {
-          entity: entity,
-          params: convertObjectToQueryParamsString(state[entity].searchParams)
-        });
-      }
+      this.dispatch(FETCH_ENTITY_LIST, {
+        entity: entity,
+        params: convertObjectToQueryParamsString(state[entity].searchParams)
+      });
 
       const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
       localStorageEntities[entity].searchParams = {

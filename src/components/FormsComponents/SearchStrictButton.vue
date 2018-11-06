@@ -1,7 +1,7 @@
 <template>
   <el-checkbox-button
       :checked="value"
-      @change="setValue(name, $event)"
+      @change="buttonAction"
   >
     {{ value ?  $t("search.strict") : $t("search.no_strict")}}
   </el-checkbox-button>
@@ -12,6 +12,10 @@
     name: "SearchSwitch",
     props: {
       name: {
+        type: String,
+        required: true
+      },
+      entity: {
         type: String,
         required: true
       },
@@ -26,6 +30,13 @@
       label: {
         type: String,
         required: true
+      }
+    },
+    methods: {
+      buttonAction(val) {
+        if (this.$store.state.entities[this.entity].searchParams.titlesOrDescriptions) {
+          this.setValue(this.name, val)
+        }
       }
     }
   };
