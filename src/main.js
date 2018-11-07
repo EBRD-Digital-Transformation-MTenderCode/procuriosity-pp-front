@@ -1,6 +1,8 @@
 if (process.env.NODE_ENV === "development") {
-  import ("@/styles/custom-reset.css");
-  import ("@/styles/for-dev.scss");
+  import ("@/styles/custom-reset.css")
+    .then(() => {
+      import ("@/styles/for-dev.scss");
+    });
 }
 
 import "element-ui/lib/theme-chalk/index.css";
