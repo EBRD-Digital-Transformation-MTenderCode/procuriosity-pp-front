@@ -147,18 +147,18 @@
       }
     },
     methods: {
+      getList() {
+        this.$store.dispatch(FETCH_ENTITY_LIST, {
+          params: convertObjectToQueryParamsString(this.$store.state.entities[this.entityName].searchParams),
+          entity: this.entityName
+        });
+      },
       changePage(page) {
         this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
           entity: this.entityName,
           params: {
             page
           }
-        });
-      },
-      getList() {
-        this.$store.dispatch(FETCH_ENTITY_LIST, {
-          params: convertObjectToQueryParamsString(this.$store.state.entities[this.entityName].searchParams),
-          entity: this.entityName
         });
       },
       beforeEnter: function(el) {

@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-      <el-main>
+    <el-main>
+      <transition name="fade" mode="out-in" appear>
         <router-view />
-      </el-main>
+      </transition>
+    </el-main>
   </div>
 </template>
 
@@ -16,3 +18,13 @@
     }
   };
 </script>
+
+<style lang="scss">
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 0.2s ease;
+  }
+
+  .fade-enter, .fade-leave-active {
+    opacity: 0;
+  }
+</style>
