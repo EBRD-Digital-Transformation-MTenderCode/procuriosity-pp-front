@@ -5,6 +5,7 @@ import initialSearchProps from "./types/initial-search-props";
 
 import {
   SET_ENTITY_LOADED,
+  SET_ENTITY_LOADED_ERROR,
 
   SET_ENTITY_LIST,
   SET_ENTITY_PAGINATION_INFO,
@@ -61,6 +62,10 @@ export default {
     plans: {
       name: "entities.plans",
       loaded: false,
+      error:{
+        status: false,
+        message: ""
+      },
       list: [],
       searchParams: { ...localStorageEntities.plans.searchParams },
       paginationInfo: {
@@ -71,6 +76,10 @@ export default {
     tenders: {
       name: "entities.tenders",
       loaded: false,
+      error:{
+        status: false,
+        message: ""
+      },
       list: [],
       searchParams: { ...localStorageEntities.tenders.searchParams },
       currentTender: {
@@ -85,6 +94,10 @@ export default {
     contracts: {
       name: "entities.contracts",
       loaded: false,
+      error:{
+        status: false,
+        message: ""
+      },
       list: [],
       searchParams: { ...localStorageEntities.contracts.searchParams },
       currentContract: {
@@ -100,6 +113,13 @@ export default {
   mutations: {
     [SET_ENTITY_LOADED](state, { entity, loaded }) {
       state[entity].loaded = loaded;
+    },
+
+    [SET_ENTITY_LOADED_ERROR](state, { entity, error }) {
+      state[entity].error= {
+        status: error.status,
+        message: error.message
+      };
     },
 
     [SET_ENTITY_LIST](state, payload) {
@@ -182,6 +202,14 @@ export default {
         loaded: false
       });
 
+      commit(SET_ENTITY_LOADED_ERROR, {
+        entity,
+        error: {
+          status: false,
+          message: ""
+        }
+      });
+
       try {
         const res = await axios(getListConfig(entity, params));
 
@@ -202,7 +230,18 @@ export default {
         });
       }
       catch (e) {
-        console.log(e.message);
+        commit(SET_ENTITY_LOADED, {
+          entity,
+          loaded: true
+        });
+
+        commit(SET_ENTITY_LOADED_ERROR, {
+          entity,
+          error: {
+            status: true,
+            message: e.message
+          }
+        });
       }
     },
 
