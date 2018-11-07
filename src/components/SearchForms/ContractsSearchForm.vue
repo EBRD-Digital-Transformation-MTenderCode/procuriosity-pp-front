@@ -18,10 +18,11 @@
         prefixIcon
         :placeholder="$t('search.titles_or_descriptions')"
       />
-      <button class="search-form__btn search-form__btn_search" />
+      <button class="search-form__btn search-form__btn_search" tabindex="-1" />
 
       <!-- @TODO need write more readable classes -->
       <button
+        tabindex="-1"
         @click="actionExpand"
         :class="moreCriterions ? 'search-form__btn search-form__btn_more search-form__btn_more_close': 'search-form__btn search-form__btn_more search-form__btn_more_open'"
       />
@@ -51,18 +52,6 @@
                   :setValues="setFormParams"
                   needFetch
                   :placeholder="$t('search.buyers_region_placeholder')"
-                />
-              </div>
-
-              <!-- Delivery regions -->
-              <div class="search-form-element">
-                <search-regions
-                  name="deliveriesRegions"
-                  :items="regionsList"
-                  :values="deliveriesRegions"
-                  :setValues="setFormParams"
-                  needFetch
-                  :placeholder="$t('search.deliveries_regions_placeholder')"
                 />
               </div>
 
@@ -136,6 +125,18 @@
             </el-col>
             <el-col :xs="24" :sm="12">
 
+               <!-- Delivery regions -->
+              <div class="search-form-element">
+                <search-regions
+                    name="deliveriesRegions"
+                    :items="regionsList"
+                    :values="deliveriesRegions"
+                    :setValues="setFormParams"
+                    needFetch
+                    :placeholder="$t('search.deliveries_regions_placeholder')"
+                />
+              </div>
+              
               <!-- Procedure types -->
               <div class="search-form-element">
                 <search-auto-complete-input

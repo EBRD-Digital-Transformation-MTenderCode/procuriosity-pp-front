@@ -1,9 +1,13 @@
-import "@/styles/custom-reset.css";
+if (process.env.NODE_ENV === "development") {
+  import ("@/styles/custom-reset.css");
+  import ("@/styles/for-dev.scss");
+}
+
 import "element-ui/lib/theme-chalk/index.css";
 import "@/styles/main.scss";
 
 import "@/components/SearchForms/_search-form.scss";
-import "@/views/ListCards/_card.scss";
+import "@/components/ListCards/_card.scss";
 import "@/views/EntitiesPages/_entity-info.scss";
 
 import Vue from "vue";

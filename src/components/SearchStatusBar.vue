@@ -1,7 +1,7 @@
 <template>
-  <div class="list-status-bar">
-    <div class="list-status-bar__text">
-      {{$t("search.list_total_found")}}: <span class="list-status-bar__count">{{ entities[entity].paginationInfo.totalCount }}</span>
+  <div class="list__status-bar">
+    <div class="list__status-bar__text">
+      {{$t("search.list_total_found")}}: <span class="list__status-bar_count">{{ entities[entity].paginationInfo.totalCount }}</span>
     </div>
   </div>
 </template>
@@ -25,7 +25,7 @@
 
 <style lang="scss" scoped>
   .list {
-    &-status-bar {
+    &__status-bar {
       position: sticky;
       left: 0;
       right: 0;
@@ -37,10 +37,9 @@
       background-color: #f7f7f7;
       box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.19);
       font-size: 16px;
-      &__text {
-      
+      &_text {
       }
-      &__count {
+      &_count {
         font-weight: 700;
       }
     }

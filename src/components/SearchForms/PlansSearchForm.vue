@@ -18,10 +18,11 @@
           prefixIcon
           :placeholder="$t('search.titles_or_descriptions')"
       />
-      <button class="search-form__btn search-form__btn_search" />
+      <button class="search-form__btn search-form__btn_search" tabindex="-1" />
   
       <!-- @TODO need write more readable classes -->
       <button
+          tabindex="-1"
           @click="actionExpand"
           :class="moreCriterions ? 'search-form__btn search-form__btn_more search-form__btn_more_close': 'search-form__btn search-form__btn_more search-form__btn_more_open'"
       />
