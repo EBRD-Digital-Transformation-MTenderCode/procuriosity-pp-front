@@ -179,7 +179,8 @@
         <!-- Bids -->
         <div class="info" v-if="bids.length">
           <div class="info__title">{{ $t("tender.bids") }}</div>
-          <table class="info-table">
+          <div class="info-table-wp">
+            <table class="info-table">
             <tr>
               <th>№</th>
               <th>{{ $t("tender.bids_tenderer_name") }}</th>
@@ -223,6 +224,7 @@
               </td>
             </tr>
           </table>
+          </div>
         </div>
     
         <!-- Awards -->
@@ -233,7 +235,8 @@
               {{ $t("tender.awards_date") }}: {{ awardsStartDate}}
             </div>
           </div>
-          <table class="info-table">
+          <div class="info-table-wp">
+            <table class="info-table">
             <tr>
               <th>№</th>
               <th>{{ $t("tender.awards_supplier_name") }}</th>
@@ -277,12 +280,14 @@
               </td>
             </tr>
           </table>
+          </div>
         </div>
     
         <!-- Active awards -->
         <div class="info" v-if="activeAwards.length">
           <div class="info__title">{{ $t("tender.active_awards") }}</div>
-          <table class="info-table">
+          <div class="info-table-wp">
+            <table class="info-table">
             <tr>
               <th>{{ $t("tender.active_awards_supplier_name") }}</th>
               <th>{{ $t("tender.active_awards_final_offer") }}</th>
@@ -309,6 +314,7 @@
               </td>
             </tr>
           </table>
+          </div>
         </div>
     
         <!-- Contracts -->

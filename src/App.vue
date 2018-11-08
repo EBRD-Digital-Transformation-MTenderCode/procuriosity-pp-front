@@ -9,12 +9,13 @@
 </template>
 
 <script>
-  import { defaultLocale } from "./i18n";
-
   export default {
     name: "App",
     beforeCreate() {
-      this.$route.params.lang ? this.$i18n.locale = this.$route.params.lang : this.$i18n.locale = defaultLocale;
+      if ((/\/en\/|\/ru\//).test(window.location)) {
+        const lang = window.location.pathname.match(/\/en\/|\/ru\//)[0].replace(/\//g, "");
+        this.$i18n.locale = lang;
+      }
     }
   };
 </script>

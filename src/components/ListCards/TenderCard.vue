@@ -9,7 +9,7 @@
           </div>
         </div>
         <div class="entity-update">
-          {{$t("tender.last_modified_date")}} <span class="entity-update__date">{{ modifiedDate }}</span>
+          {{$t("tender.last_modified_date")}}: <span class="entity-update__date">{{ modifiedDate }}</span>
         </div>
       </div>
       <el-row type="flex" :gutter="18">
@@ -20,7 +20,11 @@
           <div v-else class="entity-title">
             {{ title }}
           </div>
-          <div class="entity-description">
+          <div class="entity-description" v-if="needLink">
+            <!-- &lt; - https://github.com/vuejs/eslint-plugin-vue/issues/370 -->
+            {{ description.length &lt; 256 ? description : `${description.substring(0, 256)}...` }}
+          </div>
+          <div class="entity-description" v-else>
             {{ description }}
           </div>
         </el-col>
