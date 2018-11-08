@@ -12,7 +12,7 @@
   export default {
     name: "App",
     beforeCreate() {
-      if ((/\/en\/|\/ru\//).test(window.location)) {
+      if ((/\/en\/|\/ru\//).test(window.location.pathname)) {
         const lang = window.location.pathname.match(/\/en\/|\/ru\//)[0].replace(/\//g, "");
         this.$i18n.locale = lang;
       }

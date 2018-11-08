@@ -36,7 +36,7 @@
                 class="whole"
                 :style="wholeAmount.length > 10 ? 'font-size: 30px': ''"
               >
-                {{ wholeAmount }} <span v-if="fractionAmount">.</span>
+                {{ wholeAmount }}<span v-if="fractionAmount">.</span>
               </span>
               <span v-if="fractionAmount" class="fraction">{{ fractionAmount }}</span>
             </div>
