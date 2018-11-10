@@ -66,8 +66,8 @@
 </template>
 
 <script>
-  import procedureStatuses from "../../store/types/procedure-status-types";
-  import procedureTypes from "../../store/types/procedures-types";
+  import procedureStatuses from "./../../store/types/procedure-status-types";
+  import procedureTypes from "./../../store/types/procedures-types";
 
   import { getDataFromObject, formatDate } from "../../utils";
 
@@ -86,29 +86,10 @@
     computed: {
       parseStatusIco() {
         const status = getDataFromObject(this.entity, _ => _.procedureStatus);
-        switch (status) {
-          case "active.auction":
-            return "entity-status__ico_auction";
-          case "active.qualification":
-            return "entity-status__ico_qualification";
-          case "active.enquiries":
-          case "evaluation":
-            return "entity-status__ico_enquiries";
-          case "active.tendering":
-            return "entity-status__ico_tendering";
-          case "cancelled":
-          case "empty":
-            return "entity-status__ico_cancelled";
-          case "active":
-            return "entity-status__ico_active";
-          case "active.awarded":
-            return "entity-status__ico_awarded";
-          case "complete":
-            return "entity-status__ico_complete";
-          case "unsuccessful":
-            return "entity-status__ico_unsuccessful";
-          default:
-            return "entity-status__ico_active";
+        if (procedureStatuses.tenders.some(it => it.value === status)) {
+          return `entity-status__ico_${procedureStatuses.tenders.find(it => it.value === status).value}`;
+        } else {
+          return `entity-status__ico_${status}`;
         }
       },
       parseStatusText() {
