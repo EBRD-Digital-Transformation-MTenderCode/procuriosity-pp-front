@@ -834,7 +834,6 @@
           });
         } else {
           const EVRecord = this.tender.EVRecord.compiledRelease;
-
           return getDataFromObject(EVRecord, _ => _.awards, []).map(award => {
             return {
               id: getDataFromObject(award, _ => _.id),
@@ -842,7 +841,7 @@
               identifier: `${getDataFromObject(award, _ => _.suppliers[0].id)}`,
               amount: getDataFromObject(award, _ => _.value.amount),
               currency: getDataFromObject(award, _ => _.value.currency),
-              status: getDataFromObject(award, _ => _.status),
+              status: getDataFromObject(award, _ => _.statusDetails),
               documents: getDataFromObject(award, _ => _.documents, []).map(doc => {
                 return {
                   name: getDataFromObject(doc, _ => _.title),
