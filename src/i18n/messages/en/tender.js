@@ -61,4 +61,5 @@ export default {
   "contracts_end_date": "Contract period end date",
 
   "documentation": "Documentation",
+  "refresh": "Refresh"
 }

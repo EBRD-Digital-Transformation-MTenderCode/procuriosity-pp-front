@@ -28,4 +28,6 @@ export default {
   "documents": "Тендерная документация",
   "documents_published": "Дата публикации",
   "documents_id": "ID",
+
+  "refresh": "Обновить"
 }

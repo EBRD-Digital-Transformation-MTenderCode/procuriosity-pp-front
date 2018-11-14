@@ -28,4 +28,5 @@ export default {
   "documents": "Documentația de atribuire",
   "documents_published": "Data publicării",
   "documents_id": "ID",
+  "refresh": "Reîmprospăta",
 }

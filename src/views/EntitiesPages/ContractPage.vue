@@ -1,6 +1,6 @@
 <template>
   <div class="entity-wp">
-    <el-container direction="vertical" v-if="Object.keys(contract).length">
+    <el-container direction="vertical" v-if="loaded && Object.keys(contract).length">
       <contract-card
           :entity="entity"
       />
@@ -187,8 +187,16 @@
         </template>
       </div>
     </el-container>
-    <el-container v-else>
-      LOADING...
+    <el-container class="error" key="error" v-if="loaded && error.status" >
+      <div class="error-message"> {{error.message}} </div>
+      <button
+          class="refresh-btn"
+          @click="getContract"
+      >
+        {{$t("contract.refresh")}}
+      </button>
+    </el-container>
+    <el-container class="loading" key="loading" v-if="!loaded" >
     </el-container>
   </div>
 </template>
@@ -220,10 +228,24 @@
         id
       });
     },
+    methods:{
+      getContract() {
+        const regexMtener2Id = /^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/;
+        const id = this.$route.params.id;
+        const cdb = !regexMtener2Id.test(id) ? MTENDER1 : MTENDER2;
+
+        this.$store.dispatch(FETCH_CURRENT_CONTRACT_INFO, {
+          cdb,
+          id
+        });
+      },
+    },
     computed: {
       ...mapState({
         cdb: state => state.entities.contracts.currentContract.cdb,
-        contract: state => state.entities.contracts.currentContract.contractData
+        contract: state => state.entities.contracts.currentContract.contractData,
+        loaded: state => state.entities.contracts.currentContract.loaded,
+        error: state => state.entities.contracts.currentContract.error
       }),
       entity() {
         if (this.cdb === MTENDER1) {

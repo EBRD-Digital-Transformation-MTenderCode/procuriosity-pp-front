@@ -1,7 +1,7 @@
 <template>
   <div class="entity-wp">
     <transition name="fade" mode="out-in" appear>
-      <el-container direction="vertical" v-if="Object.keys(tender).length" key="info">
+      <el-container direction="vertical" v-if="loaded && Object.keys(tender).length" key="info">
         <tender-card
             :entity="entity"
         />
@@ -459,8 +459,16 @@
           </div>
         </div>
       </el-container>
-      <el-container v-else key="loading">
-        LOADING...
+      <el-container class="error" key="error" v-if="loaded && error.status" >
+        <div class="error-message"> {{error.message}} </div>
+        <button
+            class="refresh-btn"
+            @click="getTender"
+        >
+          {{$t("tender.refresh")}}
+        </button>
+      </el-container>
+      <el-container class="loading" key="loading" v-if="!loaded" >
       </el-container>
     </transition>
   </div>
@@ -493,10 +501,25 @@
         id
       });
     },
+    methods:{
+      getTender() {
+        const regexMtener2Id = /^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/;
+        const id = this.$route.params.id;
+        const cdb = !regexMtener2Id.test(id) ? MTENDER1 : MTENDER2;
+
+        this.$store.dispatch(FETCH_CURRENT_TENDER_INFO, {
+          cdb,
+          id
+        });
+      },
+    },
     computed: {
       ...mapState({
         cdb: state => state.entities.tenders.currentTender.cdb,
-        tender: state => state.entities.tenders.currentTender.tenderData
+        tender: state => state.entities.tenders.currentTender.tenderData,
+        loaded: state => state.entities.tenders.currentTender.loaded,
+        error: state => state.entities.tenders.currentTender.error
+
       }),
       entity() {
         if (this.cdb === MTENDER1) {
@@ -543,7 +566,6 @@
       procuringEntity() {
         if (this.cdb === MTENDER1) {
           const tender = this.tender;
-
           return {
             fullName: getDataFromObject(tender, _ => _.procuringEntity.name),
             identifier: `${getDataFromObject(tender, _ => _.procuringEntity.identifier.scheme)}
@@ -790,7 +812,6 @@
       awards() {
         if (this.cdb === MTENDER1) {
           const tender = this.tender;
-
           return getDataFromObject(tender, _ => _.awards, []).map(award => {
             return {
               id: getDataFromObject(award, _ => _.id),
@@ -837,7 +858,6 @@
       activeAwards() {
         if (this.cdb === MTENDER1) {
           const tender = this.tender;
-
           return getDataFromObject(tender, _ => _.awards, [])
               .filter(award => getDataFromObject(award, _ => _.status, "") === "active")
               .sort((award1, award2) => {

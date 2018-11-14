@@ -15,6 +15,11 @@ import {
   SET_CURRENT_BUDGET_INFO,
   SET_CURRENT_CONTRACT_INFO,
 
+  SET_CURRENT_TENDER_LOADED,
+  SET_CURRENT_TENDER_ERROR,
+  SET_CURRENT_CONTRACT_LOADED,
+  SET_CURRENT_CONTRACT_ERROR,
+
   SET_INITIAL_SEARCH_PARAMS
 } from "./types/mutations-types";
 import {
@@ -84,7 +89,12 @@ export default {
       searchParams: { ...localStorageEntities.tenders.searchParams },
       currentTender: {
         cdb: "",
-        tenderData: {}
+        tenderData: {},
+        loaded: false,
+        error: {
+          status: false,
+          message: ""
+        }
       },
       paginationInfo: {
         totalCount: 0,
@@ -102,7 +112,12 @@ export default {
       searchParams: { ...localStorageEntities.contracts.searchParams },
       currentContract: {
         cdb: "",
-        contractData: {}
+        contractData: {},
+        loaded: false,
+        error: {
+          status: false,
+          message: ""
+        }
       },
       paginationInfo: {
         totalCount: 0,
@@ -174,10 +189,29 @@ export default {
       };
     },
 
+    [SET_CURRENT_TENDER_LOADED](state, {loaded}){
+      state.tenders.currentTender.loaded = loaded;
+    },
+    [SET_CURRENT_TENDER_ERROR](state, {error}){
+      state.tenders.currentTender.error= {
+        status: error.status,
+        message: error.message
+      };
+    },
+
     [SET_CURRENT_CONTRACT_INFO](state, { cdb, contractData }) {
       state.contracts.currentContract = {
         cdb,
         contractData
+      };
+    },
+    [SET_CURRENT_CONTRACT_LOADED](state, {loaded}){
+      state.contracts.currentContract.loaded = loaded;
+    },
+    [SET_CURRENT_CONTRACT_ERROR](state, {error}){
+      state.contracts.currentContract.error= {
+        status: error.status,
+        message: error.message
       };
     },
 
@@ -260,6 +294,15 @@ export default {
     },
 
     async [FETCH_CURRENT_TENDER_INFO]({ commit }, { cdb, id }) {
+      commit(SET_CURRENT_TENDER_LOADED, {
+        loaded: false
+      });
+      commit(SET_CURRENT_TENDER_ERROR, {
+        error: {
+          status: false,
+          message: ""
+        }
+      });
       if (cdb === MTENDER1) {
         try {
           const elasticRes = await axios(getListConfig("tenders", `?entityId=${id}`));
@@ -274,9 +317,26 @@ export default {
             cdb,
             tenderData
           });
+          commit(SET_CURRENT_TENDER_LOADED, {
+            loaded: true
+          });
+          commit(SET_CURRENT_TENDER_ERROR, {
+            error: {
+              status: false,
+              message: ""
+            }
+          });
         }
         catch (e) {
-          console.log(e);
+          commit(SET_CURRENT_TENDER_LOADED, {
+            loaded: true
+          });
+          commit(SET_CURRENT_TENDER_ERROR, {
+            error: {
+              status: true,
+              message: e.message
+            }
+          });
         }
       } else {
         try {
@@ -307,15 +367,41 @@ export default {
               cdb,
               tenderData
             });
+            commit(SET_CURRENT_TENDER_LOADED, {
+              loaded: true
+            });
+            commit(SET_CURRENT_TENDER_ERROR, {
+              error: {
+                status: false,
+                message: ""
+              }
+            });
           }
         }
         catch (e) {
-          console.log(e);
+          commit(SET_CURRENT_TENDER_LOADED, {
+            loaded: true
+          });
+          commit(SET_CURRENT_TENDER_ERROR, {
+            error: {
+              status: true,
+              message: e.message
+            }
+          });
         }
       }
     },
 
     async [FETCH_CURRENT_CONTRACT_INFO]({ commit }, { cdb, id }) {
+      commit(SET_CURRENT_CONTRACT_LOADED, {
+        loaded: false
+      });
+      commit(SET_CURRENT_CONTRACT_ERROR, {
+        error: {
+          status: false,
+          message: ""
+        }
+      });
       if (cdb === MTENDER1) {
         try {
           const elasticRes = await axios(getListConfig("contracts", `?entityId=${id}`));
@@ -330,9 +416,26 @@ export default {
             cdb,
             contractData
           });
+          commit(SET_CURRENT_CONTRACT_LOADED, {
+            loaded: true
+          });
+          commit(SET_CURRENT_CONTRACT_ERROR, {
+            error: {
+              status: false,
+              message: ""
+            }
+          });
         }
         catch (e) {
-          console.log(e);
+          commit(SET_CURRENT_CONTRACT_LOADED, {
+            loaded: true
+          });
+          commit(SET_CURRENT_CONTRACT_ERROR, {
+            error: {
+              status: true,
+              message: e.message
+            }
+          });
         }
       }
     }
