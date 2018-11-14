@@ -646,7 +646,6 @@
         } else {
           const EVRecord = this.tender.EVRecord.compiledRelease;
           const hasAuction = EVRecord.tender.hasOwnProperty("auctionPeriod");
-console.log(this.tender);
           return {
             enquiry: `${formatDate(getDataFromObject(EVRecord, _ => _.tender.enquiryPeriod.startDate))} - ${formatDate(getDataFromObject(EVRecord, _ => _.tender.enquiryPeriod.endDate))}`,
             tendering: `${formatDate(getDataFromObject(EVRecord, _ => _.tender.tenderPeriod.startDate))} - ${formatDate(getDataFromObject(EVRecord, _ => _.tender.tenderPeriod.endDate))}`,
