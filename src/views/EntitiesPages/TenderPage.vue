@@ -495,7 +495,6 @@
       const regexMtener2Id = /^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/;
       const id = this.$route.params.id;
       const cdb = !regexMtener2Id.test(id) ? MTENDER1 : MTENDER2;
-
       this.$store.dispatch(FETCH_CURRENT_TENDER_INFO, {
         cdb,
         id
@@ -606,7 +605,6 @@
       procurementInfo() {
         if (this.cdb === MTENDER1) {
           const tender = this.tender;
-
           const calculateMinStepPercent = () => {
             const amount = getDataFromObject(tender, _ => _.value.amount);
             const minStep = getDataFromObject(tender, _ => _.minimalStep.amount);
@@ -647,14 +645,12 @@
           };
         } else {
           const EVRecord = this.tender.EVRecord.compiledRelease;
-
           const hasAuction = EVRecord.tender.hasOwnProperty("auctionPeriod");
-
+console.log(this.tender);
           return {
             enquiry: `${formatDate(getDataFromObject(EVRecord, _ => _.tender.enquiryPeriod.startDate))} - ${formatDate(getDataFromObject(EVRecord, _ => _.tender.enquiryPeriod.endDate))}`,
             tendering: `${formatDate(getDataFromObject(EVRecord, _ => _.tender.tenderPeriod.startDate))} - ${formatDate(getDataFromObject(EVRecord, _ => _.tender.tenderPeriod.endDate))}`,
-            auction: hasAuction ? `${formatDate(getDataFromObject(tender, _ => _.tender.auctionPeriod.startDate))} -
-              ${formatDate(getDataFromObject(tender, _ => _.tender.auctionPeriod.endDate))}` : ""
+            auction: hasAuction ? `${formatDate(getDataFromObject(EVRecord, _ => _.tender.auctionPeriod.startDate))} - ${formatDate(getDataFromObject(EVRecord, _ => _.tender.auctionPeriod.endDate))}` : ""
           };
         }
       },
