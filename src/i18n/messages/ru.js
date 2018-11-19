@@ -10,6 +10,7 @@ export default {
   plan,
   tender,
   contract,
-  "message": {
-  }
+  "refresh": "Обновить",
+  "back": "Назад",
+  "invalid-id" : "Неправильный идентификатор"
 };

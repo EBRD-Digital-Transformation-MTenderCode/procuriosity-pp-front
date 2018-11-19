@@ -10,6 +10,7 @@ export default {
   plan,
   tender,
   contract,
-  "message": {
-  }
+  "refresh": "Refresh",
+  "back": "Back",
+  "invalid-id" : "Invalid ID"
 };

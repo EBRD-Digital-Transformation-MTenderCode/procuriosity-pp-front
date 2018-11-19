@@ -1,11 +1,14 @@
 <template>
   <div class="entity-wp">
     <transition name="fade" mode="out-in" appear>
-      <el-container direction="vertical" v-if="loaded && Object.keys(tender).length" key="info">
+      <el-container key="loading" v-if="!loaded">
+        <div class="loading"></div>
+      </el-container>
+      <el-container direction="vertical" v-else-if="loaded && Object.keys(tender).length" key="info">
         <tender-card
             :entity="entity"
         />
-    
+
         <!-- Procuring entity -->
         <div class="info">
           <div class="info__title">{{ $t("tender.procuring_entity") }}</div>
@@ -50,7 +53,7 @@
             </el-row>
           </div>
         </div>
-    
+
         <!-- Procurement info -->
         <div class="info">
           <div class="info__title">{{ $t("tender.procuring_info") }}</div>
@@ -67,7 +70,8 @@
           <div class="info__text" v-if="procurementInfo.minStep">
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10">
-                <div class="info__name">{{ $t("tender.procuring_info_min_step") }} ({{ procurementInfo.currency }})</div>
+                <div class="info__name">{{ $t("tender.procuring_info_min_step") }} ({{ procurementInfo.currency }})
+                </div>
               </el-col>
               <el-col :xs="24" :sm="14">
                 <div class="info__value info__value_accent">{{ procurementInfo.minStep }}</div>
@@ -75,7 +79,7 @@
             </el-row>
           </div>
         </div>
-    
+
         <!-- Dates -->
         <div class="info" v-if="dates">
           <div class="info__title">{{ $t("tender.dates") }}</div>
@@ -110,7 +114,7 @@
             </el-row>
           </div>
         </div>
-    
+
         <!-- Documents -->
         <div class="info" v-if="documents.length">
           <div class="info__title">{{ $t("tender.documents") }}</div>
@@ -124,11 +128,13 @@
                 </div>
               </el-col>
               <el-col :xs="24" :sm="14">
-                <div class="info-document_date-published">{{ $t("tender.documents_published") }} {{ document.datePublished }}</div>
+                <div class="info-document_date-published">{{ $t("tender.documents_published") }} {{
+                  document.datePublished }}
+                </div>
                 <div class="info-document_id">{{ $t("tender.documents_id") }}: {{ document.id }}</div>
               </el-col>
             </el-row>
-            
+
             <el-row v-for="(oldDoc, index) of document.oldVersions" :key="oldDoc.id + index" class="info-old-document"
                     :gutter="30">
               <el-col :xs="24" :sm="10">
@@ -139,13 +145,15 @@
                 </div>
               </el-col>
               <el-col :xs="24" :sm="14">
-                <div class="info-document_date-published">{{ $t("tender.documents_published") }} {{ oldDoc.datePublished }}</div>
+                <div class="info-document_date-published">{{ $t("tender.documents_published") }} {{ oldDoc.datePublished
+                  }}
+                </div>
                 <div class="info-document_id">{{ $t("tender.documents_id") }}: {{ oldDoc.id }}</div>
               </el-col>
             </el-row>
           </div>
         </div>
-    
+
         <!-- Items -->
         <div class="info">
           <div class="info__title">{{ $t("tender.items") }}</div>
@@ -168,65 +176,65 @@
                     {{ $t("tender.items_cpv") }}: {{ item.cpv }}
                   </div>
                   <div class="info__value info__value_muted">
-                    {{ $t("tender.items_delivery_address") }}:  {{ item.deliveryAddress}}
+                    {{ $t("tender.items_delivery_address") }}: {{ item.deliveryAddress}}
                   </div>
                 </el-col>
               </el-row>
             </div>
           </template>
         </div>
-    
+
         <!-- Bids -->
         <div class="info" v-if="bids.length">
           <div class="info__title">{{ $t("tender.bids") }}</div>
           <div class="info-table-wp">
             <table class="info-table">
-            <tr>
-              <th>№</th>
-              <th>{{ $t("tender.bids_tenderer_name") }}</th>
-              <th>{{ $t("tender.bids_initial_amount") }}</th>
-              <th>{{ $t("tender.bids_final_amount") }}</th>
-              <th>{{ $t("tender.bids_documents") }}</th>
-            </tr>
-            <tr v-for="(bid, key) of bids" :key="bid.id">
-              <td>{{ ++key }}</td>
-              <td>
-                <div class="info__value">
-                  {{ bid.name }}
-                </div>
-                <div class="info__value info__value_muted">
-                  {{ $t("tender.bids_tenderer_identifier") }}: {{ bid.identifier }}
-                </div>
-              </td>
-              <td>
-                <div class="info__value info__value_accent">
-                  {{ bid.amount }}
-                </div>
-              </td>
-              <td>
-                <div class="info__value info__value_accent">
-                  {{ bid.amount }}
-                </div>
-              </td>
-              <td class="text-center">
-                <button
-                    v-if="bid.documents.length"
-                    type="button"
-                    @click="$refs[bid.id][0].open = true"
-                    class="document-link"
-                />
-  
-                <documents-modal
-                    :ref="bid.id"
-                    :open="false"
-                    :documents="bid.documents"
-                />
-              </td>
-            </tr>
-          </table>
+              <tr>
+                <th>№</th>
+                <th>{{ $t("tender.bids_tenderer_name") }}</th>
+                <th>{{ $t("tender.bids_initial_amount") }}</th>
+                <th>{{ $t("tender.bids_final_amount") }}</th>
+                <th>{{ $t("tender.bids_documents") }}</th>
+              </tr>
+              <tr v-for="(bid, key) of bids" :key="bid.id">
+                <td>{{ ++key }}</td>
+                <td>
+                  <div class="info__value">
+                    {{ bid.name }}
+                  </div>
+                  <div class="info__value info__value_muted">
+                    {{ $t("tender.bids_tenderer_identifier") }}: {{ bid.identifier }}
+                  </div>
+                </td>
+                <td>
+                  <div class="info__value info__value_accent">
+                    {{ bid.amount }}
+                  </div>
+                </td>
+                <td>
+                  <div class="info__value info__value_accent">
+                    {{ bid.amount }}
+                  </div>
+                </td>
+                <td class="text-center">
+                  <button
+                      v-if="bid.documents.length"
+                      type="button"
+                      @click="$refs[bid.id][0].open = true"
+                      class="document-link"
+                  />
+
+                  <documents-modal
+                      :ref="bid.id"
+                      :open="false"
+                      :documents="bid.documents"
+                  />
+                </td>
+              </tr>
+            </table>
           </div>
         </div>
-    
+
         <!-- Awards -->
         <div class="info" v-if="awards.length">
           <div class="info__title">
@@ -237,86 +245,86 @@
           </div>
           <div class="info-table-wp">
             <table class="info-table">
-            <tr>
-              <th>№</th>
-              <th>{{ $t("tender.awards_supplier_name") }}</th>
-              <th>{{ $t("tender.awards_final_offer") }}</th>
-              <th>{{ $t("tender.awards_status") }}</th>
-              <th>{{ $t("tender.awards_documents") }}</th>
-            </tr>
-            <tr v-for="(award, key) of awards" :key="award.id">
-              <td>{{ ++key }}</td>
-              <td>
-                <div class="info__value">
-                  {{ award.name }}
-                </div>
-                <div class="info__value info__value_muted">
-                  {{ $t("tender.awards_supplier_identifier") }}: {{ award.identifier }}
-                </div>
-              </td>
-              <td>
-                <div class="info__value info__value_accent">
-                  {{ award.amount }}
-                </div>
-              </td>
-              <td>
-                <div class="info__value info__value_accent info__value_status">
-                  {{ award.status }}
-                </div>
-              </td>
-              <td class="text-center">
-                <button
-                    v-if="award.documents.length"
-                    type="button"
-                    @click="$refs[award.id][0].open = true"
-                    class="document-link"
-                />
-  
-                <documents-modal
-                    :ref="award.id"
-                    :open="false"
-                    :documents="award.documents"
-                />
-              </td>
-            </tr>
-          </table>
+              <tr>
+                <th>№</th>
+                <th>{{ $t("tender.awards_supplier_name") }}</th>
+                <th>{{ $t("tender.awards_final_offer") }}</th>
+                <th>{{ $t("tender.awards_status") }}</th>
+                <th>{{ $t("tender.awards_documents") }}</th>
+              </tr>
+              <tr v-for="(award, key) of awards" :key="award.id">
+                <td>{{ ++key }}</td>
+                <td>
+                  <div class="info__value">
+                    {{ award.name }}
+                  </div>
+                  <div class="info__value info__value_muted">
+                    {{ $t("tender.awards_supplier_identifier") }}: {{ award.identifier }}
+                  </div>
+                </td>
+                <td>
+                  <div class="info__value info__value_accent">
+                    {{ award.amount }}
+                  </div>
+                </td>
+                <td>
+                  <div class="info__value info__value_accent info__value_status">
+                    {{ award.status }}
+                  </div>
+                </td>
+                <td class="text-center">
+                  <button
+                      v-if="award.documents.length"
+                      type="button"
+                      @click="$refs[award.id][0].open = true"
+                      class="document-link"
+                  />
+
+                  <documents-modal
+                      :ref="award.id"
+                      :open="false"
+                      :documents="award.documents"
+                  />
+                </td>
+              </tr>
+            </table>
           </div>
         </div>
-    
+
         <!-- Active awards -->
         <div class="info" v-if="activeAwards.length">
           <div class="info__title">{{ $t("tender.active_awards") }}</div>
           <div class="info-table-wp">
             <table class="info-table">
-            <tr>
-              <th>{{ $t("tender.active_awards_supplier_name") }}</th>
-              <th>{{ $t("tender.active_awards_final_offer") }}</th>
-              <th>{{ $t("tender.active_awards_date_published") }}</th>
-            </tr>
-            <tr v-for="award of activeAwards" :key="award.id">
-              <td>
-                <div class="info__value">
-                  {{ award.name }}
-                </div>
-                <div class="info__value info__value_muted">
-                  {{ $t("tender.active_awards_supplier_identifier") }}: {{ award.identifier }}
-                </div>
-              </td>
-              <td>
-                <div class="info__value info__value_accent">
-                  {{ award.amount }}
-                </div>
-              </td>
-              <td>
-                <div class="info__value">
-                  {{ award.publishedDate }}
-                </div>
-              </td>
-            </tr>
-          </table>
+              <tr>
+                <th>{{ $t("tender.active_awards_supplier_name") }}</th>
+                <th>{{ $t("tender.active_awards_final_offer") }}</th>
+                <th>{{ $t("tender.active_awards_date_published") }}</th>
+              </tr>
+              <tr v-for="award of activeAwards" :key="award.id">
+                <td>
+                  <div class="info__value">
+                    {{ award.name }}
+                  </div>
+                  <div class="info__value info__value_muted">
+                    {{ $t("tender.active_awards_supplier_identifier") }}: {{ award.identifier }}
+                  </div>
+                </td>
+                <td>
+                  <div class="info__value info__value_accent">
+                    {{ award.amount }}
+                  </div>
+                </td>
+                <td>
+                  <div class="info__value">
+                    {{ award.publishedDate }}
+                  </div>
+                </td>
+              </tr>
+            </table>
           </div>
         </div>
-    
+
         <!-- Contracts -->
         <div class="info" v-if="contracts.length">
           <div class="info__title">{{ $t("tender.contracts") }}</div>
@@ -418,7 +426,7 @@
             </div>
           </div>
         </div>
-    
+
         <!-- Documentation -->
         <div class="info" v-if="documentation.length">
           <div class="info__title">{{ $t("tender.documentation") }}</div>
@@ -433,11 +441,13 @@
                 </div>
               </el-col>
               <el-col :xs="24" :sm="10">
-                <div class="info-document_date-published">{{ $t("tender.documents_published") }} {{ document.datePublished }}</div>
+                <div class="info-document_date-published">{{ $t("tender.documents_published") }} {{
+                  document.datePublished }}
+                </div>
                 <div class="info-document_id">ID: {{ document.id }}</div>
               </el-col>
             </el-row>
-            
+
             <el-row
                 v-for="(oldDoc, index) of document.oldVersions"
                 :key="oldDoc.id + index"
@@ -452,23 +462,24 @@
                 </div>
               </el-col>
               <el-col :xs="24" :sm="10">
-                <div class="info-document_date-published">{{ $t("tender.documents_published") }} {{ oldDoc.datePublished }}</div>
+                <div class="info-document_date-published">{{ $t("tender.documents_published") }} {{ oldDoc.datePublished
+                  }}
+                </div>
                 <div class="info-document_id">{{ $t("tender.documents_id") }}: {{ oldDoc.id }}</div>
               </el-col>
             </el-row>
           </div>
         </div>
       </el-container>
-      <el-container class="error" key="error" v-if="loaded && error.status" >
-        <div class="error-message"> {{error.message}} </div>
+      <el-container class="error" key="error" v-else="loaded && error.status">
+        <div class="error-message"> {{error.message}}</div>
         <button
             class="refresh-btn"
             @click="getTender"
         >
-          {{$t("tender.refresh")}}
+          {{$t("refresh")}}
         </button>
-      </el-container>
-      <el-container class="loading" key="loading" v-if="!loaded" >
+        <button class="back-btn" @click="$router.go(-1)">{{$t("back")}}</button>
       </el-container>
     </transition>
   </div>
@@ -491,16 +502,10 @@
       "tender-card": TenderCard,
       "documents-modal": DocumentsModal
     },
-    created: function() {
-      const regexMtener2Id = /^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/;
-      const id = this.$route.params.id;
-      const cdb = !regexMtener2Id.test(id) ? MTENDER1 : MTENDER2;
-      this.$store.dispatch(FETCH_CURRENT_TENDER_INFO, {
-        cdb,
-        id
-      });
+    created() {
+      this.getTender();
     },
-    methods:{
+    methods: {
       getTender() {
         const regexMtener2Id = /^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/;
         const id = this.$route.params.id;
@@ -516,8 +521,8 @@
       ...mapState({
         cdb: state => state.entities.tenders.currentTender.cdb,
         tender: state => state.entities.tenders.currentTender.tenderData,
-        loaded: state => state.entities.tenders.currentTender.loaded,
-        error: state => state.entities.tenders.currentTender.error
+        loaded: state => state.entities.tenders.loaded,
+        error: state => state.entities.tenders.error
 
       }),
       entity() {
@@ -543,7 +548,7 @@
           const procuringEntity = getDataFromObject(MSRecord, _ => _.parties, []).find(item => {
             return item.roles.some(role => role === "procuringEntity");
           });
-        
+
           /*console.log(this.tender); // @TODO need delete after parsing JSON
            console.log("MSRecord ", MSRecord);
            console.log("EVRecord ", EVRecord);*/
@@ -679,7 +684,7 @@
           }
 
           return Object.values(obj);
-        
+
           /*return getDataFromObject(contract, _ => _.documents, []).map(doc => {
            return {
            name: getDataFromObject(doc, _ => _.title),

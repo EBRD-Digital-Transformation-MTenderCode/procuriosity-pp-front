@@ -1,4 +1,6 @@
 import axios from "axios";
+import VueI18n  from "./../i18n/index";
+
 import { getBudgetConfig, getListConfig, getTenderConfig, getContractConfig } from "./../configs/requests-configs";
 
 import initialSearchProps from "./types/initial-search-props";
@@ -14,11 +16,6 @@ import {
   SET_CURRENT_TENDER_INFO,
   SET_CURRENT_BUDGET_INFO,
   SET_CURRENT_CONTRACT_INFO,
-
-  SET_CURRENT_TENDER_LOADED,
-  SET_CURRENT_TENDER_ERROR,
-  SET_CURRENT_CONTRACT_LOADED,
-  SET_CURRENT_CONTRACT_ERROR,
 
   SET_INITIAL_SEARCH_PARAMS
 } from "./types/mutations-types";
@@ -67,7 +64,7 @@ export default {
     plans: {
       name: "entities.plans",
       loaded: false,
-      error:{
+      error: {
         status: false,
         message: ""
       },
@@ -81,7 +78,7 @@ export default {
     tenders: {
       name: "entities.tenders",
       loaded: false,
-      error:{
+      error: {
         status: false,
         message: ""
       },
@@ -104,7 +101,7 @@ export default {
     contracts: {
       name: "entities.contracts",
       loaded: false,
-      error:{
+      error: {
         status: false,
         message: ""
       },
@@ -131,7 +128,7 @@ export default {
     },
 
     [SET_ENTITY_LOADED_ERROR](state, { entity, error }) {
-      state[entity].error= {
+      state[entity].error = {
         status: error.status,
         message: error.message
       };
@@ -182,20 +179,10 @@ export default {
       };
     },
 
-    [SET_CURRENT_TENDER_INFO](state, { cdb, tenderData }) {
+    [SET_CURRENT_TENDER_INFO](state, { entity, cdb, tenderData }) {
       state.tenders.currentTender = {
         cdb,
         tenderData
-      };
-    },
-
-    [SET_CURRENT_TENDER_LOADED](state, {loaded}){
-      state.tenders.currentTender.loaded = loaded;
-    },
-    [SET_CURRENT_TENDER_ERROR](state, {error}){
-      state.tenders.currentTender.error= {
-        status: error.status,
-        message: error.message
       };
     },
 
@@ -203,15 +190,6 @@ export default {
       state.contracts.currentContract = {
         cdb,
         contractData
-      };
-    },
-    [SET_CURRENT_CONTRACT_LOADED](state, {loaded}){
-      state.contracts.currentContract.loaded = loaded;
-    },
-    [SET_CURRENT_CONTRACT_ERROR](state, {error}){
-      state.contracts.currentContract.error= {
-        status: error.status,
-        message: error.message
       };
     },
 
@@ -294,10 +272,16 @@ export default {
     },
 
     async [FETCH_CURRENT_TENDER_INFO]({ commit }, { cdb, id }) {
-      commit(SET_CURRENT_TENDER_LOADED, {
+
+      const entity = "tenders";
+
+      commit(SET_ENTITY_LOADED, {
+        entity,
         loaded: false
       });
-      commit(SET_CURRENT_TENDER_ERROR, {
+
+      commit(SET_ENTITY_LOADED_ERROR, {
+        entity,
         error: {
           status: false,
           message: ""
@@ -307,31 +291,52 @@ export default {
         try {
           const elasticRes = await axios(getListConfig("tenders", `?entityId=${id}`));
 
-          const requestId = elasticRes.data.data[0].id;
+          if (elasticRes.data.data.length) {
+            const requestId = elasticRes.data.data[0].id;
 
-          const res = await axios(getTenderConfig(cdb, requestId));
+            const res = await axios(getTenderConfig(cdb, requestId));
 
-          const tenderData = res.data.data;
+            const tenderData = res.data.data;
 
-          commit(SET_CURRENT_TENDER_INFO, {
-            cdb,
-            tenderData
-          });
-          commit(SET_CURRENT_TENDER_LOADED, {
-            loaded: true
-          });
-          commit(SET_CURRENT_TENDER_ERROR, {
-            error: {
-              status: false,
-              message: ""
-            }
-          });
+            commit(SET_CURRENT_TENDER_INFO, {
+              cdb,
+              tenderData
+            });
+            commit(SET_ENTITY_LOADED, {
+              entity,
+              loaded: true
+            });
+
+            commit(SET_ENTITY_LOADED_ERROR, {
+              entity,
+              error: {
+                status: false,
+                message: ""
+              }
+            });
+          } else {
+            commit(SET_ENTITY_LOADED, {
+              entity,
+              loaded: true
+            });
+
+            commit(SET_ENTITY_LOADED_ERROR, {
+              entity,
+              error: {
+                status: true,
+                message:  VueI18n.t("invalid-id")
+              }
+            });
+          }
         }
         catch (e) {
-          commit(SET_CURRENT_TENDER_LOADED, {
+          commit(SET_ENTITY_LOADED, {
+            entity,
             loaded: true
           });
-          commit(SET_CURRENT_TENDER_ERROR, {
+
+          commit(SET_ENTITY_LOADED_ERROR, {
+            entity,
             error: {
               status: true,
               message: e.message
@@ -341,48 +346,70 @@ export default {
       } else {
         try {
           const res = await axios(getTenderConfig(cdb, id));
-
           const tenderData = {};
 
           const MSRecord = {};
           const EVRecord = {};
 
           if (cdb === MTENDER2) {
-            const tenderRecords = res.data.records;
-            tenderRecords.forEach(record => {
-              if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/) !== -1) {
-                Object.assign(MSRecord, record);
-              }
-              if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-EV-[0-9]{13}$/) !== -1) {
-                Object.assign(EVRecord, record);
-              }
-            });
+            if (Object.keys(res.data).length) {
+              const tenderRecords = res.data.records;
+              tenderRecords.forEach(record => {
+                if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/) !== -1) {
+                  Object.assign(MSRecord, record);
+                }
+                if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-EV-[0-9]{13}$/) !== -1) {
+                  Object.assign(EVRecord, record);
+                }
+              });
 
-            Object.assign(tenderData, {
-              MSRecord,
-              EVRecord
-            });
+              Object.assign(tenderData, {
+                MSRecord,
+                EVRecord
+              });
 
-            commit(SET_CURRENT_TENDER_INFO, {
-              cdb,
-              tenderData
-            });
-            commit(SET_CURRENT_TENDER_LOADED, {
-              loaded: true
-            });
-            commit(SET_CURRENT_TENDER_ERROR, {
-              error: {
-                status: false,
-                message: ""
-              }
-            });
+              commit(SET_CURRENT_TENDER_INFO, {
+                cdb,
+                tenderData
+              });
+              commit(SET_ENTITY_LOADED, {
+                entity,
+                loaded: true
+              });
+
+              commit(SET_ENTITY_LOADED_ERROR, {
+                entity,
+                error: {
+                  status: false,
+                  message: ""
+                }
+              });
+            }
+            else {
+              commit(SET_ENTITY_LOADED, {
+                entity,
+                loaded: true
+              });
+
+              commit(SET_ENTITY_LOADED_ERROR, {
+                entity,
+                error: {
+                  status: true,
+                  message:  VueI18n.t("invalid-id")
+                }
+              });
+            }
           }
+
         }
         catch (e) {
-          commit(SET_CURRENT_TENDER_LOADED, {
+          commit(SET_ENTITY_LOADED, {
+            entity,
             loaded: true
           });
-          commit(SET_CURRENT_TENDER_ERROR, {
+
+          commit(SET_ENTITY_LOADED_ERROR, {
+            entity,
             error: {
               status: true,
               message: e.message
@@ -393,10 +420,15 @@ export default {
     },
 
     async [FETCH_CURRENT_CONTRACT_INFO]({ commit }, { cdb, id }) {
-      commit(SET_CURRENT_CONTRACT_LOADED, {
+      const entity = "contracts";
+
+      commit(SET_ENTITY_LOADED, {
+        entity,
         loaded: false
       });
-      commit(SET_CURRENT_CONTRACT_ERROR, {
+
+      commit(SET_ENTITY_LOADED_ERROR, {
+        entity,
         error: {
           status: false,
           message: ""
@@ -405,32 +437,53 @@ export default {
       if (cdb === MTENDER1) {
         try {
           const elasticRes = await axios(getListConfig("contracts", `?entityId=${id}`));
+          if (elasticRes.data.data.length) {
+            const requestId = elasticRes.data.data[0].id;
 
-          const requestId = elasticRes.data.data[0].id;
+            const res = await axios(getContractConfig(cdb, requestId));
 
-          const res = await axios(getContractConfig(cdb, requestId));
+            const contractData = res.data.data;
 
-          const contractData = res.data.data;
+            commit(SET_CURRENT_CONTRACT_INFO, {
+              cdb,
+              contractData
+            });
+            commit(SET_ENTITY_LOADED, {
+              entity,
+              loaded: true
+            });
 
-          commit(SET_CURRENT_CONTRACT_INFO, {
-            cdb,
-            contractData
-          });
-          commit(SET_CURRENT_CONTRACT_LOADED, {
-            loaded: true
-          });
-          commit(SET_CURRENT_CONTRACT_ERROR, {
-            error: {
-              status: false,
-              message: ""
-            }
-          });
+            commit(SET_ENTITY_LOADED_ERROR, {
+              entity,
+              error: {
+                status: false,
+                message: ""
+              }
+            });
+          } else {
+            commit(SET_ENTITY_LOADED, {
+              entity,
+              loaded: true
+            });
+
+            commit(SET_ENTITY_LOADED_ERROR, {
+              entity,
+              error: {
+                status: true,
+                message: VueI18n.t("invalid-id")
+              }
+            });
+          }
+
         }
         catch (e) {
-          commit(SET_CURRENT_CONTRACT_LOADED, {
+          commit(SET_ENTITY_LOADED, {
+            entity,
             loaded: true
           });
-          commit(SET_CURRENT_CONTRACT_ERROR, {
+
+          commit(SET_ENTITY_LOADED_ERROR, {
+            entity,
             error: {
               status: true,
               message: e.message

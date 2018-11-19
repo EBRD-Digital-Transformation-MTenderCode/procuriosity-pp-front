@@ -61,5 +61,4 @@ export default {
   "contracts_end_date": "Data de încheiere a perioadei contractului",
 
   "documentation": "Documentație",
-  "refresh": "Reîmprospăta"
 }

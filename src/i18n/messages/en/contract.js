@@ -28,5 +28,4 @@ export default {
   "documents": "Documents of Tender",
   "documents_published": "Published on",
   "documents_id": "ID",
-  "refresh": "Refresh",
 }

@@ -1,10 +1,13 @@
 <template>
   <div class="entity-wp">
-    <el-container direction="vertical" v-if="loaded && Object.keys(contract).length">
+    <el-container key="loading" v-if="!loaded">
+      <div class="loading"></div>
+    </el-container>
+    <el-container direction="vertical" v-else-if="loaded && Object.keys(contract).length">
       <contract-card
           :entity="entity"
       />
-  
+
       <!-- Procuring entity -->
       <div class="info">
         <div class="info__title">{{ $t("contract.procuring_entity") }}</div>
@@ -49,7 +52,7 @@
           </el-row>
         </div>
       </div>
-  
+
       <!-- Suppliers -->
       <div class="info">
         <div class="info__title">{{ $t("contract.suppliers") }}</div>
@@ -106,7 +109,7 @@
           </div>
         </div>
       </div>
-  
+
       <!-- Procurement info -->
       <div class="info">
         <div class="info__title">{{ $t("contract.procuring_info") }}</div>
@@ -121,7 +124,7 @@
           </el-row>
         </div>
       </div>
-  
+
       <!-- Documents -->
       <div class="info" v-if="documents.length">
         <div class="info__title">{{ $t("contract.documents") }}</div>
@@ -135,11 +138,13 @@
               </div>
             </el-col>
             <el-col :xs="24" :sm="14">
-              <div class="info-document_date-published">{{ $t("contract.documents_published") }} {{ document.datePublished }}</div>
+              <div class="info-document_date-published">{{ $t("contract.documents_published") }} {{
+                document.datePublished }}
+              </div>
               <div class="info-document_id">{{ $t("contract.documents_id") }}: {{ document.id }}</div>
             </el-col>
           </el-row>
-          
+
           <el-row v-for="(oldDoc, index) of document.oldVersions" :key="oldDoc.id + index" class="info-old-document"
                   :gutter="30">
             <el-col :xs="24" :sm="10">
@@ -150,13 +155,15 @@
               </div>
             </el-col>
             <el-col :xs="24" :sm="14">
-              <div class="info-document_date-published">{{ $t("contract.documents_published") }} {{ oldDoc.datePublished }}</div>
+              <div class="info-document_date-published">{{ $t("contract.documents_published") }} {{ oldDoc.datePublished
+                }}
+              </div>
               <div class="info-document_id">{{ $t("contract.documents_id") }}: {{ oldDoc.id }}</div>
             </el-col>
           </el-row>
         </div>
       </div>
-      
+
       <!-- Items -->
       <div class="info">
         <div class="info__title">{{ $t("contract.items") }}</div>
@@ -179,7 +186,7 @@
                   {{ $t("contract.items_cpv") }}: {{ item.cpv }}
                 </div>
                 <div class="info__value info__value_muted">
-                  {{ $t("contract.items_delivery_address") }}:  {{ item.deliveryAddress}}
+                  {{ $t("contract.items_delivery_address") }}: {{ item.deliveryAddress}}
                 </div>
               </el-col>
             </el-row>
@@ -187,16 +194,15 @@
         </template>
       </div>
     </el-container>
-    <el-container class="error" key="error" v-if="loaded && error.status" >
-      <div class="error-message"> {{error.message}} </div>
+    <el-container class="error" key="error" v-else>
+      <div class="error-message"> {{error.message}}</div>
       <button
           class="refresh-btn"
           @click="getContract"
       >
-        {{$t("contract.refresh")}}
+        {{$t("refresh")}}
       </button>
-    </el-container>
-    <el-container class="loading" key="loading" v-if="!loaded" >
+      <button class="back-btn" @click="$router.go(-1)">{{$t("back")}}</button>
     </el-container>
   </div>
 </template>
@@ -211,24 +217,17 @@
   import { MTENDER1, MTENDER2 } from "./../../store/types/cbd-types";
 
   import { getDataFromObject, formatDate } from "./../../utils";
-  
+
   export default {
     name: "ContractPage",
     components: {
       "contract-card": ContractCard,
       "documents-modal": DocumentsModal
     },
-    created: function() {
-      const regexMtener2Id = /^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/;
-      const id = this.$route.params.id;
-      const cdb = !regexMtener2Id.test(id) ? MTENDER1 : MTENDER2;
-
-      this.$store.dispatch(FETCH_CURRENT_CONTRACT_INFO, {
-        cdb,
-        id
-      });
+    created() {
+      this.getContract();
     },
-    methods:{
+    methods: {
       getContract() {
         const regexMtener2Id = /^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/;
         const id = this.$route.params.id;
@@ -244,13 +243,13 @@
       ...mapState({
         cdb: state => state.entities.contracts.currentContract.cdb,
         contract: state => state.entities.contracts.currentContract.contractData,
-        loaded: state => state.entities.contracts.currentContract.loaded,
-        error: state => state.entities.contracts.currentContract.error
+        loaded: state => state.entities.contracts.loaded,
+        error: state => state.entities.contracts.error
       }),
       entity() {
         if (this.cdb === MTENDER1) {
           const contract = this.contract;
-          
+
           return {
             procedureStatus: getDataFromObject(contract, _ => _.status),
             modifiedDate: getDataFromObject(contract, _ => _.dateModified),
@@ -263,12 +262,12 @@
             entityId: getDataFromObject(contract, _ => _.contractID)
           };
         }
-        return {}
+        return {};
       },
       procuringEntity() {
         if (this.cdb === MTENDER1) {
           const contract = this.contract;
-          
+
           return {
             fullName: getDataFromObject(contract, _ => _.procuringEntity.name),
             identifier: `${getDataFromObject(contract, _ => _.procuringEntity.identifier.scheme)}
@@ -284,7 +283,7 @@
                                 ${getDataFromObject(contract, _ => _.procuringEntity.contactPoint.telephone)}`
           };
         }
-        return {}
+        return {};
       },
       suppliers() {
         if (this.cdb === MTENDER1) {
@@ -305,21 +304,21 @@
                                 ${getDataFromObject(supplier, _ => _.contactPoint.email)} /
                                 ${getDataFromObject(supplier, _ => _.contactPoint.telephone)}`
             };
-          })
+          });
         }
-        return {}
+        return {};
       },
       procurementInfo() {
         if (this.cdb === MTENDER1) {
           const contract = this.contract;
-          
+
 
           return {
             currency: getDataFromObject(contract, _ => _.value.currency),
             amount: getDataFromObject(contract, _ => _.value.amount)
           };
         }
-        return {}
+        return {};
       },
       items() {
         if (this.cdb === MTENDER1) {
@@ -348,8 +347,8 @@
           const contract = this.contract;
 
           const obj = {};
-          
-          for(const item of [...getDataFromObject(contract, _ => _.documents, [])].sort((doc1, doc2) => new Date(doc2.dateModified) - new Date(doc1.dateModified))) {
+
+          for (const item of [...getDataFromObject(contract, _ => _.documents, [])].sort((doc1, doc2) => new Date(doc2.dateModified) - new Date(doc1.dateModified))) {
             if (!obj.hasOwnProperty(item.id)) {
               obj[item.id] = {
                 name: item.title,
@@ -357,19 +356,19 @@
                 datePublished: formatDate(item.datePublished),
                 id: item.id
               };
-              obj[item.id].oldVersions = []
+              obj[item.id].oldVersions = [];
             } else {
               obj[item.id].oldVersions.push({
                 name: item.title,
                 url: item.url,
                 datePublished: formatDate(item.datePublished),
                 id: item.id
-              })
+              });
             }
           }
-          
+
           return Object.values(obj);
-          
+
           /*return getDataFromObject(contract, _ => _.documents, []).map(doc => {
             return {
               name: getDataFromObject(doc, _ => _.title),

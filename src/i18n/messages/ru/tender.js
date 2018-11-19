@@ -61,5 +61,4 @@ export default {
   "contracts_end_date": "Дата окончания срока действия договора",
 
   "documentation": "Документация",
-  "refresh": "Обновить"
 }
