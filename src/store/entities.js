@@ -1,5 +1,5 @@
 import axios from "axios";
-import VueI18n  from "./../i18n/index";
+import VueI18n from "./../i18n/index";
 
 import { getBudgetConfig, getListConfig, getTenderConfig, getContractConfig } from "./../configs/requests-configs";
 
@@ -22,7 +22,8 @@ import {
 import {
   FETCH_ENTITY_LIST,
   FETCH_CURRENT_TENDER_INFO,
-  FETCH_CURRENT_BUDGET_INFO, FETCH_CURRENT_CONTRACT_INFO
+  FETCH_CURRENT_CONTRACT_INFO,
+  FETCH_CURRENT_BUDGET_INFO
 } from "./types/actions-types";
 
 import { MTENDER1, MTENDER2 } from "./types/cbd-types";
@@ -271,9 +272,12 @@ export default {
       }
     },
 
-    async [FETCH_CURRENT_TENDER_INFO]({ commit }, { cdb, id }) {
-
+    async [FETCH_CURRENT_TENDER_INFO]({ commit }, { id }) {
       const entity = "tenders";
+      const regexMtender1Id = /^MD-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{6}-[0-9]$/;
+      const regexMtender2Id = /^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/;
+
+      let cdb = "";
 
       commit(SET_ENTITY_LOADED, {
         entity,
@@ -287,16 +291,75 @@ export default {
           message: ""
         }
       });
-      if (cdb === MTENDER1) {
+
+      if (regexMtender1Id.test(id)) {
+        cdb = MTENDER1;
+
         try {
           const elasticRes = await axios(getListConfig("tenders", `?entityId=${id}`));
+          const requestId = elasticRes.data.data[0].id;
 
-          if (elasticRes.data.data.length) {
-            const requestId = elasticRes.data.data[0].id;
+          const res = await axios(getTenderConfig(cdb, requestId));
+          const tenderData = res.data.data;
 
-            const res = await axios(getTenderConfig(cdb, requestId));
+          commit(SET_CURRENT_TENDER_INFO, {
+            cdb,
+            tenderData
+          });
 
-            const tenderData = res.data.data;
+          commit(SET_ENTITY_LOADED, {
+            entity,
+            loaded: true
+          });
+
+          commit(SET_ENTITY_LOADED_ERROR, {
+            entity,
+            error: {
+              status: false,
+              message: ""
+            }
+          });
+
+        }
+        catch (e) {
+          commit(SET_ENTITY_LOADED, {
+            entity,
+            loaded: true
+          });
+
+          commit(SET_ENTITY_LOADED_ERROR, {
+            entity,
+            error: {
+              status: true,
+              message: e.message
+            }
+          });
+        }
+      } else if (regexMtender2Id.test(id)) {
+        cdb = MTENDER2;
+
+        try {
+          const res = await axios(getTenderConfig(cdb, id));
+          const tenderData = {};
+
+          const MSRecord = {};
+          const EVRecord = {};
+
+          if (Object.keys(res.data).length) {
+            const tenderRecords = res.data.records;
+            tenderRecords.forEach(record => {
+              if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/) !== -1) {
+                Object.assign(MSRecord, record);
+              }
+              if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-EV-[0-9]{13}$/) !== -1) {
+                Object.assign(EVRecord, record);
+              }
+            });
+
+            Object.assign(tenderData, {
+              MSRecord,
+              EVRecord
+            });
 
             commit(SET_CURRENT_TENDER_INFO, {
               cdb,
@@ -312,19 +375,6 @@ export default {
               error: {
                 status: false,
                 message: ""
-              }
-            });
-          } else {
-            commit(SET_ENTITY_LOADED, {
-              entity,
-              loaded: true
-            });
-
-            commit(SET_ENTITY_LOADED_ERROR, {
-              entity,
-              error: {
-                status: true,
-                message:  VueI18n.t("invalid-id")
               }
             });
           }
@@ -344,78 +394,18 @@ export default {
           });
         }
       } else {
-        try {
-          const res = await axios(getTenderConfig(cdb, id));
-          const tenderData = {};
+        commit(SET_ENTITY_LOADED, {
+          entity,
+          loaded: true
+        });
 
-          const MSRecord = {};
-          const EVRecord = {};
-
-          if (cdb === MTENDER2) {
-            if (Object.keys(res.data).length) {
-              const tenderRecords = res.data.records;
-              tenderRecords.forEach(record => {
-                if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/) !== -1) {
-                  Object.assign(MSRecord, record);
-                }
-                if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-EV-[0-9]{13}$/) !== -1) {
-                  Object.assign(EVRecord, record);
-                }
-              });
-
-              Object.assign(tenderData, {
-                MSRecord,
-                EVRecord
-              });
-
-              commit(SET_CURRENT_TENDER_INFO, {
-                cdb,
-                tenderData
-              });
-              commit(SET_ENTITY_LOADED, {
-                entity,
-                loaded: true
-              });
-
-              commit(SET_ENTITY_LOADED_ERROR, {
-                entity,
-                error: {
-                  status: false,
-                  message: ""
-                }
-              });
-            }
-            else {
-              commit(SET_ENTITY_LOADED, {
-                entity,
-                loaded: true
-              });
-
-              commit(SET_ENTITY_LOADED_ERROR, {
-                entity,
-                error: {
-                  status: true,
-                  message:  VueI18n.t("invalid-id")
-                }
-              });
-            }
+        commit(SET_ENTITY_LOADED_ERROR, {
+          entity,
+          error: {
+            status: true,
+            message: VueI18n.t("invalid-id")
           }
-
-        }
-        catch (e) {
-          commit(SET_ENTITY_LOADED, {
-            entity,
-            loaded: true
-          });
-
-          commit(SET_ENTITY_LOADED_ERROR, {
-            entity,
-            error: {
-              status: true,
-              message: e.message
-            }
-          });
-        }
+        });
       }
     },
 
