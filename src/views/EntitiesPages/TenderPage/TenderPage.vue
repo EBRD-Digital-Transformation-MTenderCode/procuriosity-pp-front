@@ -22,13 +22,14 @@
               <el-col :xs="24" :sm="2"></el-col>
               <el-col :xs=24 :sm="8">
                 <div class="entity-main-info__value">
-                  Estimated value excluding VAT
-                  <div class="entity-main-info__amount">
-                    {{ gd(tender, _ => _.MSRecord.compiledRelease.tender.value.amount) }}
-                    <div class="entity-main-info__currency">
+                  <div> Estimated value excluding VAT</div>
+                  <span class="entity-main-info__amount">
+                    <span class="whole">{{ wholeAmount }} </span>
+                    <span v-if="fractionAmount" class="fraction"> <span v-if="fractionAmount" class="dot">.</span>{{ fractionAmount }}</span>
+                    <span class="entity-main-info__currency">
                       {{ gd(tender, _ => _.MSRecord.compiledRelease.tender.value.currency) }}
-                    </div>
-                  </div>
+                    </span>
+                  </span>
                 </div>
                 <div class="entity-main-info__additional">
                   <div class="entity-main-info__additional-block">
@@ -46,7 +47,8 @@
                   <div class="entity-main-info__additional-block">
                     <div class="entity-main-info__additional-title">Регион</div>
                     <div class="entity-main-info__additional-value">
-                      {{ gd(tender, _ => _.MSRecord.compiledRelease.parties, []).find(part => part.roles.some(role => role === "procuringEntity")).address.addressDetails.region.description }}
+                      {{ gd(tender, _ => _.MSRecord.compiledRelease.parties, []).find(part => part.roles.some(role =>
+                      role === "procuringEntity")).address.addressDetails.region.description }}
                     </div>
                   </div>
                   <div class="entity-main-info__additional-block">
@@ -84,7 +86,7 @@
                     <evaluation />
                   </el-tab-pane>
                   <el-tab-pane label="Contracts" lazy key="7">
-                    <contracts/>
+                    <contracts />
                   </el-tab-pane>
                 </el-tabs>
               </el-col>
@@ -107,65 +109,141 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import { FETCH_CURRENT_TENDER_INFO } from "../../../store/types/actions-types";
+  import { mapState } from "vuex";
+  import { FETCH_CURRENT_TENDER_INFO } from "../../../store/types/actions-types";
 
-import PlanningNotice from "./Tabs/PlanningNotice";
-import ContractNotice from "./Tabs/ContractNotice";
-import Clarification from "./Tabs/Clarification";
-import Auction from "./Tabs/Auction";
-import ReceivedOffers from "./Tabs/ReceivedOffers";
-import Evaluation from "./Tabs/Evaluation";
-import Contracts from "./Tabs/Contracts";
+  import PlanningNotice from "./Tabs/PlanningNotice";
+  import ContractNotice from "./Tabs/ContractNotice";
+  import Clarification from "./Tabs/Clarification";
+  import Auction from "./Tabs/Auction";
+  import ReceivedOffers from "./Tabs/ReceivedOffers";
+  import Evaluation from "./Tabs/Evaluation";
+  import Contracts from "./Tabs/Contracts";
 
-import { getDataFromObject, formatDate } from "../../../utils";
+  import { getDataFromObject, formatDate } from "../../../utils";
 
-export default {
-  name: "TenderPage",
-  components: {
-    "planning-notice": PlanningNotice,
-    "contract-notice": ContractNotice,
-    clarification: Clarification,
-    auction: Auction,
-    "received-offers": ReceivedOffers,
-    evaluation: Evaluation,
-    contracts: Contracts
-  },
-  data() {
-    return {
-      activeTab: 0
-    };
-  },
-  created() {
-    this.getTender();
-  },
-  methods: {
-    async getTender() {
-      await this.$store.dispatch(FETCH_CURRENT_TENDER_INFO, {
-        id: this.$route.params.id
-      });
-
-      console.log(this.tender);
+  export default {
+    name: "TenderPage",
+    components: {
+      "planning-notice": PlanningNotice,
+      "contract-notice": ContractNotice,
+      clarification: Clarification,
+      auction: Auction,
+      "received-offers": ReceivedOffers,
+      evaluation: Evaluation,
+      contracts: Contracts
     },
-    gd(...args) {
-      return getDataFromObject(...args);
+    data() {
+      return {
+        activeTab: 0
+      };
+    },
+    created() {
+      this.getTender();
+    },
+    methods: {
+      async getTender() {
+        await this.$store.dispatch(FETCH_CURRENT_TENDER_INFO, {
+          id: this.$route.params.id
+        });
+
+        console.log(this.tender);
+      },
+      gd(...args) {
+        return getDataFromObject(...args);
+      }
+    },
+    computed: {
+      ...mapState({
+        tender: state => state.entities.tenders.currentTender.tenderData,
+        loaded: state => state.entities.tenders.loaded,
+        error: state => state.entities.tenders.error
+      }),
+      wholeAmount() {
+        const amountStr = this.gd(this.tender, _ => _.MSRecord.compiledRelease.tender.value.amount, 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        return /\./.test(amountStr) ? amountStr.slice(0, amountStr.indexOf(".")) : amountStr;
+      },
+      fractionAmount() {
+        const amountStr = this.gd(this.tender, _ => _.MSRecord.compiledRelease.tender.value.amount, 0).toString();
+        return /\./.test(amountStr) ? amountStr.slice(amountStr.indexOf(".") + 1).length === 1 ? amountStr.slice(amountStr.indexOf(".") + 1) + "0" : amountStr.slice(amountStr.indexOf(".") + 1) : "";
+      },
     }
-  },
-  computed: {
-    ...mapState({
-      tender: state => state.entities.tenders.currentTender.tenderData,
-      loaded: state => state.entities.tenders.loaded,
-      error: state => state.entities.tenders.error
-    })
-  }
-};
+  };
 </script>
 
 <style lang="scss" scoped>
-@import "../../../styles/variables";
+  @import "../../../styles/variables";
 
-.entity-main-info {
-  padding-top: 45px;
-  background-color: $mainC;
-}
+  .entity {
+    &-main-info {
+      padding-top: 45px;
+      padding-bottom: 70px;
+      background-color: $mainC;
+      &__title {
+        margin-bottom: 33px;
+        color: #ffffff;
+        font-size: 30px;
+      }
+      &__description {
+        margin-bottom: 40px;
+        font-size: 12px;
+        font-weight: 300;
+        color: #ffffff;
+      }
+      &__value {
+        margin-bottom: 70px;
+        font-size: 13px;
+        font-weight: 400;
+        color: #ffffff;
+      }
+      &__amount {
+        position: relative;
+        display: inline-block;
+        margin-top: 6px;
+        padding-right: 35px;
+        color: #ffffff;
+        .whole{
+          display: inline-block;
+          margin-right: 2px;
+          line-height: 0.8;
+          font-size: 44px;
+        }
+        .fraction{
+          position: absolute;
+          top: 0;
+          right: 0;
+          display: inline-block;
+          font-size: 22px;
+          line-height: 1;
+        }
+        .dot{
+          margin-right: 2px;
+        }
+      }
+      &__currency {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        font-size: 13px;
+        font-weight: 400;
+        text-transform: uppercase;
+        color: #2da9e2;
+      }
+      &__additional {
+        &-block {
+          margin-bottom: 10px;
+        }
+        &-title {
+          margin-bottom: 2px;
+          font-size: 13px;
+          color: #2da9e2;
+        }
+        &-value {
+          font-size: 15px;
+          font-weight: 400;
+          color: #ffffff;
+        }
+      }
+    }
+  }
 </style>
