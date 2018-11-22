@@ -11,7 +11,8 @@
     <div class="info">
       <div class="info__title">Contracting authority</div>
       <div class="info__sub-title">Name and address</div>
-      <div class="info-block">
+      <div class="info-blocks">
+        <div class="info-block">
         <el-row>
           <el-col :sm="16">
             <div class="info-block__text">
@@ -33,138 +34,178 @@
         </el-row>
       </div>
       
-      <div class="info-block">
-        <el-row>
-          <el-col :sm="24">
-            <div class="info-block__text">
-              Postal address
-            </div>
-            <div class="info-block__value">
-              {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.address.addressDetails.region.description) }},
-              {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.address.streetAddress) }}
-            </div>
-          </el-col>
-        </el-row>
+        <div class="info-block">
+          <el-row>
+            <el-col :sm="24">
+              <div class="info-block__text">
+                Postal address
+              </div>
+              <div class="info-block__value">
+                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.address.addressDetails.region.description) }},
+                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.address.streetAddress) }}
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+        
+        <div class="info-block">
+          <el-row>
+            <el-col :sm="6">
+              <div class="info-block__text">
+                Town
+              </div>
+              <div class="info-block__value">
+                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.address.addressDetails.locality.description) }}
+              </div>
+            </el-col>
+            <el-col :sm="4">
+              <div class="info-block__text">
+                Nuts code
+              </div>
+              <div class="info-block__value">
+                n/a
+              </div>
+            </el-col>
+            <el-col :sm="6">
+              <div class="info-block__text">
+                Postal Code
+              </div>
+              <div class="info-block__value">
+                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.address.postalCode, "n/a") }}
+              </div>
+            </el-col>
+            <el-col :sm="8">
+              <div class="info-block__text">
+                Country
+              </div>
+              <div class="info-block__value">
+                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.address.addressDetails.country.description) }}
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+        
+        <div class="info-block">
+          <el-row>
+            <el-col :sm="10">
+              <div class="info-block__text">
+                Contact Persone
+              </div>
+              <div class="info-block__value">
+                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.contactPoint.name) }}
+              </div>
+            </el-col>
+            <el-col :sm="6">
+              <div class="info-block__text">
+                Telephone
+              </div>
+              <div class="info-block__value">
+                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.contactPoint.telephone) }}
+              </div>
+            </el-col>
+            <el-col :sm="8">
+              <div class="info-block__text">
+                E-mail
+              </div>
+              <div class="info-block__value">
+                <a
+                    :href="`mailto:${gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === 'buyer')), _ => _.contactPoint.email) }`"
+                >
+                  {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.contactPoint.email) }}
+                </a>
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+        
+        <div class="info-block">
+          <el-row>
+            <el-col :sm="10">
+              <div class="info-block__text">
+                Main Internet address (URL)
+              </div>
+              <div class="info-block__value">
+                <a href="https://www.fisc.md" target="_blank">www.fisc.md</a>
+              </div>
+            </el-col>
+            <el-col :sm="14">
+              <div class="info-block__text">
+                Address of the buyer profile (URL)
+              </div>
+              <div class="info-block__value">
+                <a :href="`/plans/${gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === 'planning')), _ => _.identifier)}`" target="_blank">
+                  www.mtender.gov.md/plans/{{ gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === "planning")), _ => _.identifier) }}
+                </a>
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+        
+        <div class="info-block">
+          <el-row>
+            <el-col :sm="10">
+              <div class="info-block__text">
+                Type of buyer
+              </div>
+              <div class="info-block__value">
+                {{ getTypeOfBuyer }}
+              </div>
+            </el-col>
+            <el-col :sm="14">
+              <div class="info-block__text">
+                Main activity
+              </div>
+              <div class="info-block__value">
+                {{ getMainGeneralActivity }}
+              </div>
+            </el-col>
+          </el-row>
+        </div>
       </div>
       
-      <div class="info-block">
-        <el-row>
-          <el-col :sm="6">
-            <div class="info-block__text">
-              Town
-            </div>
-            <div class="info-block__value">
-              {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.address.addressDetails.locality.description) }}
-            </div>
-          </el-col>
-          <el-col :sm="4">
-            <div class="info-block__text">
-              Nuts code
-            </div>
-            <div class="info-block__value">
-              n/a
-            </div>
-          </el-col>
-          <el-col :sm="6">
-            <div class="info-block__text">
-              Postal Code
-            </div>
-            <div class="info-block__value">
-              {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.address.postalCode, "n/a") }}
-            </div>
-          </el-col>
-          <el-col :sm="8">
-            <div class="info-block__text">
-              Country
-            </div>
-            <div class="info-block__value">
-              {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.address.addressDetails.country.description) }}
-            </div>
-          </el-col>
-        </el-row>
-      </div>
-      
-      <div class="info-block">
-        <el-row>
-          <el-col :sm="10">
-            <div class="info-block__text">
-              Contact Persone
-            </div>
-            <div class="info-block__value">
-              {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.contactPoint.name) }}
-            </div>
-          </el-col>
-          <el-col :sm="6">
-            <div class="info-block__text">
-              Telephone
-            </div>
-            <div class="info-block__value">
-              {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.contactPoint.telephone) }}
-            </div>
-          </el-col>
-          <el-col :sm="8">
-            <div class="info-block__text">
-              E-mail
-            </div>
-            <div class="info-block__value">
-              <a
-                  :href="`mailto:${gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === 'buyer')), _ => _.contactPoint.email) }`"
-              >
-                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.contactPoint.email) }}
-              </a>
-            </div>
-          </el-col>
-        </el-row>
-      </div>
-      
-      <div class="info-block">
-        <el-row>
-          <el-col :sm="10">
-            <div class="info-block__text">
-              Main Internet address (URL)
-            </div>
-            <div class="info-block__value">
-              <a href="https://www.fisc.md" target="_blank">www.fisc.md</a>
-            </div>
-          </el-col>
-          <el-col :sm="14">
-            <div class="info-block__text">
-              Address of the buyer profile (URL)
-            </div>
-            <div class="info-block__value">
-              <a :href="`/plans/${gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === 'planning')), _ => _.identifier)}`" target="_blank">
-                www.mtender.gov.md/plans/{{ gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === "planning")), _ => _.identifier) }}
-              </a>
-            </div>
-          </el-col>
-        </el-row>
-      </div>
-      
-      <div class="info-block">
-        <el-row>
-          <el-col :sm="10">
-            <div class="info-block__text">
-              Type of buyer
-            </div>
-            <div class="info-block__value">
-              {{ getTypeOfBuyer }}
-            </div>
-          </el-col>
-          <el-col :sm="14">
-            <div class="info-block__text">
-              Main activity
-            </div>
-            <div class="info-block__value">
-              {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.mainGeneralActivity, "n/a") }}
-            </div>
-          </el-col>
-        </el-row>
+      <div class="info__sub-title">Communication</div>
+      <div class="info-blocks">
+        <div class="info-block">
+          <el-row>
+            <el-col>
+              <div class="info-block__text">
+                The procurement documents are available for unrestricted and full direct access, free of charge, at:
+              </div>
+              <div class="info-block__value">
+                www.mtender.gov.md/{{ i18n.locale }}/tenders/{{ gd(msRecord, _ => _.ocid) }}
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+        <div class="info-block">
+          <el-row>
+            <el-col>
+              <div class="info-block__text">
+              
+              </div>
+              <div class="info-block__value"></div>
+            </el-col>
+          </el-row>
+        </div>
+        <div class="info-block">
+          <el-row>
+            <el-col>
+              <div class="info-block__text">
+              
+              </div>
+              <div class="info-block__value"></div>
+            </el-col>
+          </el-row>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import typesOfBuyers from "./../../../../store/types/buyers-types";
+import mainGeneralActivites from "./../../../../store/types/main-general-activity-types";
+
 import { getDataFromObject, formatDate } from "../../../../utils";
 
 export default {
@@ -183,7 +224,15 @@ export default {
       if (!this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.typeOfBuyer)) {
         return "n/a";
       }
-      return "abc";
+      
+      return typesOfBuyers.find(type => type.value === this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.typeOfBuyer)).name[this.$i18n.locale];
+    },
+    getMainGeneralActivity() {
+      if (!this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.mainGeneralActivity)) {
+        return "n/a";
+      }
+
+      return mainGeneralActivites.find(activity => activity.value === this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.mainGeneralActivity)).name[this.$i18n.locale];
     }
   },
   methods: {
