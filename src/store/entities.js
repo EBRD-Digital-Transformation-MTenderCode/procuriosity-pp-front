@@ -343,6 +343,7 @@ export default {
           const tenderData = {};
 
           const MSRecord = {};
+          const PNRecord = {};
           const EVRecord = {};
 
           if (Object.keys(res.data).length) {
@@ -351,6 +352,9 @@ export default {
               if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/) !== -1) {
                 Object.assign(MSRecord, record);
               }
+              if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-PN-[0-9]{13}$/) !== -1) {
+                Object.assign(PNRecord, record);
+              }
               if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-EV-[0-9]{13}$/) !== -1) {
                 Object.assign(EVRecord, record);
               }
@@ -358,6 +362,7 @@ export default {
 
             Object.assign(tenderData, {
               MSRecord,
+              PNRecord,
               EVRecord
             });
 

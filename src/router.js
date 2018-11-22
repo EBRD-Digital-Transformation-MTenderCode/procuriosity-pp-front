@@ -22,7 +22,7 @@ export default new Router({
     {
       path: `/:lang?/tenders/:id`,
       name: "tender-page",
-      component: () => import(/* webpackChunkName: "TenderPage" */ "./views/EntitiesPages/TenderPage.vue")
+      component: () => import(/* webpackChunkName: "TenderPage" */ "./views/EntitiesPages/TenderPage/ContainerTenderPage.vue")
     },
     {
       path: `/:lang?/contracts/:id`,

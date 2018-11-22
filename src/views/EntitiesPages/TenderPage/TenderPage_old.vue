@@ -487,14 +487,14 @@
 
 <script>
   import { mapState } from "vuex";
-  import { FETCH_CURRENT_TENDER_INFO } from "./../../store/types/actions-types";
+  import { FETCH_CURRENT_TENDER_INFO } from "../../../store/types/actions-types";
 
-  import TenderCard from "../../components/ListCards/TenderCard";
-  import DocumentsModal from "./DocumentsModal";
+  import TenderCard from "../../../components/ListCards/TenderCard";
+  import DocumentsModal from "../DocumentsModal";
 
-  import { MTENDER1, MTENDER2 } from "./../../store/types/cbd-types";
+  import { MTENDER1, MTENDER2 } from "../../../store/types/cbd-types";
 
-  import { getDataFromObject, formatDate } from "./../../utils";
+  import { getDataFromObject, formatDate } from "../../../utils";
 
   export default {
     name: "TenderPage",
@@ -507,13 +507,8 @@
     },
     methods: {
       getTender() {
-        const regexMtener2Id = /^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/;
-        const id = this.$route.params.id;
-        const cdb = !regexMtener2Id.test(id) ? MTENDER1 : MTENDER2;
-
         this.$store.dispatch(FETCH_CURRENT_TENDER_INFO, {
-          cdb,
-          id
+          id: this.$route.params.id
         });
       },
     },
@@ -525,145 +520,216 @@
         error: state => state.entities.tenders.error
       }),
       entity() {
-        if (this.cdb === MTENDER1) {
-          const tender = this.tender;
+        const tender = this.tender;
 
-          return {
-            procedureStatus: getDataFromObject(tender, _ => _.status),
-            modifiedDate: getDataFromObject(tender, _ => _.dateModified),
-            title: getDataFromObject(tender, _ => _.title),
-            description: getDataFromObject(tender, _ => _.description),
-            currency: getDataFromObject(tender, _ => _.value.currency),
-            amount: getDataFromObject(tender, _ => _.value.amount),
-            buyerName: getDataFromObject(tender, _ => _.procuringEntity.name),
-            buyerRegion: getDataFromObject(tender, _ => _.procuringEntity.address.region),
-            procedureType: getDataFromObject(tender, _ => _.procurementMethodType),
-            entityId: getDataFromObject(tender, _ => _.tenderID)
-          };
-        } else {
-          const MSRecord = this.tender.MSRecord.compiledRelease;
-          const EVRecord = this.tender.EVRecord.compiledRelease;
-
-          const procuringEntity = getDataFromObject(MSRecord, _ => _.parties, []).find(item => {
-            return item.roles.some(role => role === "procuringEntity");
-          });
-
-          /*console.log(this.tender); // @TODO need delete after parsing JSON
-           console.log("MSRecord ", MSRecord);
-           console.log("EVRecord ", EVRecord);*/
-
-          return {
-            procedureStatus: `${getDataFromObject(EVRecord, _ => _.tender.status)} ${getDataFromObject(EVRecord, _ => _.tender.statusDetails)}`,
-            modifiedDate: getDataFromObject(MSRecord, _ => _.date),
-            title: getDataFromObject(MSRecord, _ => _.tender.title),
-            description: getDataFromObject(MSRecord, _ => _.tender.description),
-            currency: getDataFromObject(MSRecord, _ => _.tender.value.currency),
-            amount: getDataFromObject(MSRecord, _ => _.tender.value.amount),
-            buyerName: getDataFromObject(procuringEntity, _ => _.name),
-            buyerRegion: getDataFromObject(procuringEntity, _ => _.address.addressDetails.region.description),
-            procedureType: getDataFromObject(MSRecord, _ => _.tender.procurementMethodDetails),
-            entityId: getDataFromObject(MSRecord, _ => _.ocid)
-          };
-        }
+        return {
+          procedureStatus: getDataFromObject(tender, _ => _.status),
+          modifiedDate: getDataFromObject(tender, _ => _.dateModified),
+          title: getDataFromObject(tender, _ => _.title),
+          description: getDataFromObject(tender, _ => _.description),
+          currency: getDataFromObject(tender, _ => _.value.currency),
+          amount: getDataFromObject(tender, _ => _.value.amount),
+          buyerName: getDataFromObject(tender, _ => _.procuringEntity.name),
+          buyerRegion: getDataFromObject(tender, _ => _.procuringEntity.address.region),
+          procedureType: getDataFromObject(tender, _ => _.procurementMethodType),
+          entityId: getDataFromObject(tender, _ => _.tenderID)
+        };
       },
       procuringEntity() {
-        if (this.cdb === MTENDER1) {
-          const tender = this.tender;
-          return {
-            fullName: getDataFromObject(tender, _ => _.procuringEntity.name),
-            identifier: `${getDataFromObject(tender, _ => _.procuringEntity.identifier.scheme)}
+        const tender = this.tender;
+        return {
+          fullName: getDataFromObject(tender, _ => _.procuringEntity.name),
+          identifier: `${getDataFromObject(tender, _ => _.procuringEntity.identifier.scheme)}
                          ${getDataFromObject(tender, _ => _.procuringEntity.identifier.id)} -
                          ${getDataFromObject(tender, _ => _.procuringEntity.identifier.legalName)}`,
-            address: `${getDataFromObject(tender, _ => _.procuringEntity.address.postalCode)},
+          address: `${getDataFromObject(tender, _ => _.procuringEntity.address.postalCode)},
                       ${getDataFromObject(tender, _ => _.procuringEntity.address.countryName)},
                       ${getDataFromObject(tender, _ => _.procuringEntity.address.region)},
                       ${getDataFromObject(tender, _ => _.procuringEntity.address.locality)},
                       ${getDataFromObject(tender, _ => _.procuringEntity.address.streetAddress)}`,
-            responsiblePerson: `${getDataFromObject(tender, _ => _.procuringEntity.contactPoint.name)} /
+          responsiblePerson: `${getDataFromObject(tender, _ => _.procuringEntity.contactPoint.name)} /
                                 ${getDataFromObject(tender, _ => _.procuringEntity.contactPoint.email)} /
                                 ${getDataFromObject(tender, _ => _.procuringEntity.contactPoint.telephone)}`
-          };
-        } else {
-          const MSRecord = this.tender.MSRecord.compiledRelease;
-
-          const procuringEntity = getDataFromObject(MSRecord, _ => _.parties, []).find(item => {
-            return item.roles.some(role => role === "procuringEntity");
-          });
-
-          return {
-            fullName: getDataFromObject(procuringEntity, _ => _.name),
-            identifier: `${getDataFromObject(procuringEntity, _ => _.identifier.scheme)}
-                         ${getDataFromObject(procuringEntity, _ => _.identifier.id)} -
-                         ${getDataFromObject(procuringEntity, _ => _.identifier.legalName)}`,
-            address: `${getDataFromObject(procuringEntity, _ => _.address.postalCode)},
-                      ${getDataFromObject(procuringEntity, _ => _.address.addressDetails.country.description)},
-                      ${getDataFromObject(procuringEntity, _ => _.address.addressDetails.region.description)},
-                      ${getDataFromObject(procuringEntity, _ => _.address.addressDetails.locality.description)},
-                      ${getDataFromObject(procuringEntity, _ => _.address.streetAddress)}`,
-            responsiblePerson: `${getDataFromObject(procuringEntity, _ => _.contactPoint.name)} /
-                                ${getDataFromObject(procuringEntity, _ => _.contactPoint.email)} /
-                                ${getDataFromObject(procuringEntity, _ => _.contactPoint.telephone)}`
-          };
-        }
+        };
       },
       procurementInfo() {
-        if (this.cdb === MTENDER1) {
-          const tender = this.tender;
-          const calculateMinStepPercent = () => {
-            const amount = getDataFromObject(tender, _ => _.value.amount);
-            const minStep = getDataFromObject(tender, _ => _.minimalStep.amount);
-            return Math.round(((minStep / amount) * 100) * 100) / 100;
-          };
+        const tender = this.tender;
+        const calculateMinStepPercent = () => {
+          const amount = getDataFromObject(tender, _ => _.value.amount);
+          const minStep = getDataFromObject(tender, _ => _.minimalStep.amount);
+          return Math.round(((minStep / amount) * 100) * 100) / 100;
+        };
 
-          const hasAuction = tender.hasOwnProperty("auctionPeriod");
+        const hasAuction = tender.hasOwnProperty("auctionPeriod");
 
-          return {
-            currency: getDataFromObject(tender, _ => _.value.currency),
-            amount: getDataFromObject(tender, _ => _.value.amount),
-            minStep: hasAuction ? `${getDataFromObject(tender, _ => _.minimalStep.amount)} (${calculateMinStepPercent()} %)` : ""
-          };
-        } else {
-          const MSRecord = this.tender.MSRecord.compiledRelease;
-
-          return {
-            currency: getDataFromObject(MSRecord, _ => _.tender.value.currency),
-            amount: getDataFromObject(MSRecord, _ => _.tender.value.amount)
-          };
-        }
+        return {
+          currency: getDataFromObject(tender, _ => _.value.currency),
+          amount: getDataFromObject(tender, _ => _.value.amount),
+          minStep: hasAuction ? `${getDataFromObject(tender, _ => _.minimalStep.amount)} (${calculateMinStepPercent()} %)` : ""
+        };
       },
       dates() {
-        if (this.cdb === MTENDER1) {
-          const tender = this.tender;
+        const tender = this.tender;
 
-          if (tender.procurementMethodType === "reporting") {
-            return false;
-          }
-
-          const hasAuction = tender.hasOwnProperty("auctionPeriod");
-
-          return {
-            enquiry: `${formatDate(getDataFromObject(tender, _ => _.enquiryPeriod.startDate))} - ${formatDate(getDataFromObject(tender, _ => _.enquiryPeriod.endDate))}`,
-            tendering: `${formatDate(getDataFromObject(tender, _ => _.tenderPeriod.startDate))} - ${formatDate(getDataFromObject(tender, _ => _.tenderPeriod.endDate))}`,
-            auction: hasAuction ? `${formatDate(getDataFromObject(tender, _ => _.auctionPeriod.startDate))} -
-              ${formatDate(getDataFromObject(tender, _ => _.auctionPeriod.endDate))}` : ""
-          };
-        } else {
-          const EVRecord = this.tender.EVRecord.compiledRelease;
-          const hasAuction = EVRecord.tender.hasOwnProperty("auctionPeriod");
-          return {
-            enquiry: `${formatDate(getDataFromObject(EVRecord, _ => _.tender.enquiryPeriod.startDate))} - ${formatDate(getDataFromObject(EVRecord, _ => _.tender.enquiryPeriod.endDate))}`,
-            tendering: `${formatDate(getDataFromObject(EVRecord, _ => _.tender.tenderPeriod.startDate))} - ${formatDate(getDataFromObject(EVRecord, _ => _.tender.tenderPeriod.endDate))}`,
-            auction: hasAuction ? `${formatDate(getDataFromObject(EVRecord, _ => _.tender.auctionPeriod.startDate))} - ${formatDate(getDataFromObject(EVRecord, _ => _.tender.auctionPeriod.endDate))}` : ""
-          };
+        if (tender.procurementMethodType === "reporting") {
+          return false;
         }
+
+        const hasAuction = tender.hasOwnProperty("auctionPeriod");
+
+        return {
+          enquiry: `${formatDate(getDataFromObject(tender, _ => _.enquiryPeriod.startDate))} - ${formatDate(getDataFromObject(tender, _ => _.enquiryPeriod.endDate))}`,
+          tendering: `${formatDate(getDataFromObject(tender, _ => _.tenderPeriod.startDate))} - ${formatDate(getDataFromObject(tender, _ => _.tenderPeriod.endDate))}`,
+          auction: hasAuction ? `${formatDate(getDataFromObject(tender, _ => _.auctionPeriod.startDate))} -
+              ${formatDate(getDataFromObject(tender, _ => _.auctionPeriod.endDate))}` : ""
+        };
       },
       documents() {
-        if (this.cdb === MTENDER1) {
-          const tender = this.tender;
+        const tender = this.tender;
 
+        const obj = {};
+
+        for (const item of [...getDataFromObject(tender, _ => _.documents, [])].sort((doc1, doc2) => new Date(doc2.dateModified) - new Date(doc1.dateModified))) {
+          if (!obj.hasOwnProperty(item.id)) {
+            obj[item.id] = {
+              name: item.title,
+              url: item.url,
+              datePublished: formatDate(item.datePublished),
+              id: item.id
+            };
+            obj[item.id].oldVersions = [];
+          } else {
+            obj[item.id].oldVersions.push({
+              name: item.title,
+              url: item.url,
+              datePublished: formatDate(item.datePublished),
+              id: item.id
+            });
+          }
+        }
+
+        return Object.values(obj);
+      },
+      items() {
+        const tender = this.tender;
+
+        return getDataFromObject(tender, _ => _.items, []).map(item => {
+          return {
+            id: getDataFromObject(item, _ => _.id),
+            description: getDataFromObject(item, _ => _.description),
+            quantityAndUnit: `${getDataFromObject(item, _ => _.quantity)}
+                                ${getDataFromObject(item, _ => _.unit.name)}`,
+            cpv: `${getDataFromObject(item, _ => _.classification.id)}
+                    ${getDataFromObject(item, _ => _.classification.description)}`,
+            deliveryAddress: `${getDataFromObject(item, _ => _.deliveryAddress.postalCode)},
+                                ${getDataFromObject(item, _ => _.deliveryAddress.countryName)},
+                                ${getDataFromObject(item, _ => _.deliveryAddress.region)},
+                                ${getDataFromObject(item, _ => _.deliveryAddress.locality)},
+                                ${getDataFromObject(item, _ => _.deliveryAddress.streetAddress)}`
+          };
+        });
+      },
+      bids() {
+        const tender = this.tender;
+
+        return getDataFromObject(tender, _ => _.bids, []).map(bid => {
+          return {
+            id: getDataFromObject(bid, _ => _.id),
+            name: getDataFromObject(bid, _ => _.tenderers[0].name),
+            identifier: `${getDataFromObject(bid, _ => _.tenderers[0].identifier.scheme)}
+                           ${getDataFromObject(bid, _ => _.tenderers[0].identifier.id)} -
+                           ${getDataFromObject(bid, _ => _.tenderers[0].identifier.legalName)}`,
+            amount: getDataFromObject(bid, _ => _.value.amount),
+            currency: getDataFromObject(bid, _ => _.value.currency),
+            documents: getDataFromObject(bid, _ => _.documents, []).map(doc => {
+              return {
+                name: getDataFromObject(doc, _ => _.title),
+                url: getDataFromObject(doc, _ => _.url),
+                datePublished: formatDate(getDataFromObject(doc, _ => _.datePublished)),
+                id: getDataFromObject(doc, _ => _.id)
+              };
+            })
+          };
+        });
+      },
+      awardsStartDate() {
+        const tender = this.tender;
+
+        return formatDate(getDataFromObject(tender, _ => _.awardPeriod.startDate));
+      },
+      awards() {
+        const tender = this.tender;
+        return getDataFromObject(tender, _ => _.awards, []).map(award => {
+          return {
+            id: getDataFromObject(award, _ => _.id),
+            name: getDataFromObject(award, _ => _.suppliers[0].name),
+            identifier: `${getDataFromObject(award, _ => _.suppliers[0].identifier.scheme)}
+                           ${getDataFromObject(award, _ => _.suppliers[0].identifier.id)} -
+                           ${getDataFromObject(award, _ => _.suppliers[0].identifier.legalName)}`,
+            amount: getDataFromObject(award, _ => _.value.amount),
+            currency: getDataFromObject(award, _ => _.value.currency),
+            status: getDataFromObject(award, _ => _.status),
+            documents: getDataFromObject(award, _ => _.documents, []).map(doc => {
+              return {
+                name: getDataFromObject(doc, _ => _.title),
+                url: getDataFromObject(doc, _ => _.url),
+                datePublished: formatDate(getDataFromObject(doc, _ => _.datePublished)),
+                id: getDataFromObject(doc, _ => _.id)
+              };
+            })
+          };
+        });
+      },
+      activeAwards() {
+        const tender = this.tender;
+        return getDataFromObject(tender, _ => _.awards, [])
+            .filter(award => getDataFromObject(award, _ => _.status, "") === "active")
+            .sort((award1, award2) => {
+              if (getDataFromObject(award1, _ => _.value.amount) === getDataFromObject(award2, _ => _.value.amount)) {
+                return getDataFromObject(award1, _ => _.date) > getDataFromObject(award2, _ => _.date);
+              }
+              return getDataFromObject(award1, _ => _.value.amount) > getDataFromObject(award2, _ => _.value.amount);
+            })
+            .map(award => {
+              return {
+                id: getDataFromObject(award, _ => _.id),
+                name: getDataFromObject(award, _ => _.suppliers[0].name),
+                identifier: `${getDataFromObject(award, _ => _.suppliers[0].identifier.scheme)}
+                               ${getDataFromObject(award, _ => _.suppliers[0].identifier.id)} -
+                               ${getDataFromObject(award, _ => _.suppliers[0].identifier.legalName)}`,
+                amount: getDataFromObject(award, _ => _.value.amount),
+                currency: getDataFromObject(award, _ => _.value.currency),
+                publishedDate: formatDate(getDataFromObject(award, _ => _.date))
+              };
+            });
+      },
+      contracts() {
+        const tender = this.tender;
+
+        return getDataFromObject(tender, _ => _.contracts, []).map(contract => {
+          return {
+            id: getDataFromObject(contract, _ => _.id),
+            title: getDataFromObject(contract, _ => _.title),
+            status: getDataFromObject(contract, _ => _.status),
+            procuringEntity: getDataFromObject(tender, _ => _.procuringEntity.name),
+            suppliers: getDataFromObject(contract, _ => _.suppliers, []).map(supplier => supplier.name),
+            contractId: getDataFromObject(contract, _ => _.contractID),
+            amount: getDataFromObject(contract, _ => _.value.amount),
+            currency: getDataFromObject(contract, _ => _.value.currency),
+            contractNumber: getDataFromObject(contract, _ => _.contractNumber, "none"),
+            dateSigned: formatDate(getDataFromObject(contract, _ => _.dateSigned), "DD.MM.YYYY"),
+            contractStartDate: formatDate(getDataFromObject(contract, _ => _.period.startDate), "DD.MM.YYYY"),
+            contractEndDate: formatDate(getDataFromObject(contract, _ => _.period.endDate), "DD.MM.YYYY")
+          };
+        });
+      },
+      documentation() {
+        const tender = this.tender;
+
+        return getDataFromObject(tender, _ => _.contracts, []).map(contract => {
           const obj = {};
 
-          for (const item of [...getDataFromObject(tender, _ => _.documents, [])].sort((doc1, doc2) => new Date(doc2.dateModified) - new Date(doc1.dateModified))) {
+          for (const item of [...getDataFromObject(contract, _ => _.documents, [])].sort((doc1, doc2) => new Date(doc2.dateModified) - new Date(doc1.dateModified))) {
             if (!obj.hasOwnProperty(item.id)) {
               obj[item.id] = {
                 name: item.title,
@@ -683,277 +749,7 @@
           }
 
           return Object.values(obj);
-
-          /*return getDataFromObject(contract, _ => _.documents, []).map(doc => {
-           return {
-           name: getDataFromObject(doc, _ => _.title),
-           url: getDataFromObject(doc, _ => _.url),
-           datePublished: formatDate(getDataFromObject(doc, _ => _.datePublished)),
-           id: getDataFromObject(doc, _ => _.id)
-           };
-           });*/
-        } else {
-          const EVRecord = this.tender.EVRecord.compiledRelease;
-
-          return getDataFromObject(EVRecord, _ => _.tender.documents, []).map(doc => {
-            return {
-              name: getDataFromObject(doc, _ => _.title),
-              url: getDataFromObject(doc, _ => _.url),
-              datePublished: getDataFromObject(doc, _ => _.datePublished),
-              id: getDataFromObject(doc, _ => _.id)
-            };
-          });
-        }
-      },
-      items() {
-        if (this.cdb === MTENDER1) {
-          const tender = this.tender;
-
-          return getDataFromObject(tender, _ => _.items, []).map(item => {
-            return {
-              id: getDataFromObject(item, _ => _.id),
-              description: getDataFromObject(item, _ => _.description),
-              quantityAndUnit: `${getDataFromObject(item, _ => _.quantity)}
-                                ${getDataFromObject(item, _ => _.unit.name)}`,
-              cpv: `${getDataFromObject(item, _ => _.classification.id)}
-                    ${getDataFromObject(item, _ => _.classification.description)}`,
-              deliveryAddress: `${getDataFromObject(item, _ => _.deliveryAddress.postalCode)},
-                                ${getDataFromObject(item, _ => _.deliveryAddress.countryName)},
-                                ${getDataFromObject(item, _ => _.deliveryAddress.region)},
-                                ${getDataFromObject(item, _ => _.deliveryAddress.locality)},
-                                ${getDataFromObject(item, _ => _.deliveryAddress.streetAddress)}`
-            };
-          });
-        } else {
-          const EVRecord = this.tender.EVRecord.compiledRelease;
-
-          function getDeliveryAddress(relatedLot) {
-            const address = getDataFromObject(EVRecord, _ => _.tender.lots, []).find(lot => lot.id === relatedLot).placeOfPerformance.address;
-
-            return `
-              ${getDataFromObject(address, _ => _.postalCode)},
-              ${getDataFromObject(address, _ => _.addressDetails.country.description)},
-              ${getDataFromObject(address, _ => _.addressDetails.region.description)},
-              ${getDataFromObject(address, _ => _.addressDetails.locality.description)},
-              ${getDataFromObject(address, _ => _.postalCode)}
-            `;
-          }
-
-          return getDataFromObject(EVRecord, _ => _.tender.items, []).map(item => {
-            return {
-              id: getDataFromObject(item, _ => _.id),
-              description: getDataFromObject(item, _ => _.description),
-              quantityAndUnit: `${getDataFromObject(item, _ => _.quantity)}
-                                ${getDataFromObject(item, _ => _.unit.name)}`,
-              cpv: `${getDataFromObject(item, _ => _.classification.id)}
-                    ${getDataFromObject(item, _ => _.classification.description)}`,
-              deliveryAddress: getDeliveryAddress(getDataFromObject(item, _ => _.relatedLot))
-            };
-          });
-        }
-      },
-      bids() {
-        if (this.cdb === MTENDER1) {
-          const tender = this.tender;
-
-          return getDataFromObject(tender, _ => _.bids, []).map(bid => {
-            return {
-              id: getDataFromObject(bid, _ => _.id),
-              name: getDataFromObject(bid, _ => _.tenderers[0].name),
-              identifier: `${getDataFromObject(bid, _ => _.tenderers[0].identifier.scheme)}
-                           ${getDataFromObject(bid, _ => _.tenderers[0].identifier.id)} -
-                           ${getDataFromObject(bid, _ => _.tenderers[0].identifier.legalName)}`,
-              amount: getDataFromObject(bid, _ => _.value.amount),
-              currency: getDataFromObject(bid, _ => _.value.currency),
-              documents: getDataFromObject(bid, _ => _.documents, []).map(doc => {
-                return {
-                  name: getDataFromObject(doc, _ => _.title),
-                  url: getDataFromObject(doc, _ => _.url),
-                  datePublished: formatDate(getDataFromObject(doc, _ => _.datePublished)),
-                  id: getDataFromObject(doc, _ => _.id)
-                };
-              })
-            };
-          });
-        } else {
-          const EVRecord = this.tender.EVRecord.compiledRelease;
-
-          return getDataFromObject(EVRecord, _ => _.bids.details, []).map(bid => {
-            return {
-              id: getDataFromObject(bid, _ => _.id),
-              name: getDataFromObject(bid, _ => _.tenderers[0].name),
-              identifier: `${getDataFromObject(bid, _ => _.tenderers[0].id)}`,
-              amount: getDataFromObject(bid, _ => _.value.amount),
-              currency: getDataFromObject(bid, _ => _.value.currency),
-              documents: getDataFromObject(bid, _ => _.documents, []).map(doc => {
-                return {
-                  name: getDataFromObject(doc, _ => _.title),
-                  url: getDataFromObject(doc, _ => _.url),
-                  datePublished: formatDate(getDataFromObject(doc, _ => _.datePublished)),
-                  id: getDataFromObject(doc, _ => _.id)
-                };
-              })
-            };
-          });
-        }
-      },
-      awardsStartDate() {
-        if (this.cdb === MTENDER1) {
-          const tender = this.tender;
-
-          return formatDate(getDataFromObject(tender, _ => _.awardPeriod.startDate));
-        } else {
-          const EVRecord = this.tender.EVRecord.compiledRelease;
-
-          return formatDate(getDataFromObject(EVRecord, _ => _.tender.awardPeriod.startDate));
-        }
-      },
-      awards() {
-        if (this.cdb === MTENDER1) {
-          const tender = this.tender;
-          return getDataFromObject(tender, _ => _.awards, []).map(award => {
-            return {
-              id: getDataFromObject(award, _ => _.id),
-              name: getDataFromObject(award, _ => _.suppliers[0].name),
-              identifier: `${getDataFromObject(award, _ => _.suppliers[0].identifier.scheme)}
-                           ${getDataFromObject(award, _ => _.suppliers[0].identifier.id)} -
-                           ${getDataFromObject(award, _ => _.suppliers[0].identifier.legalName)}`,
-              amount: getDataFromObject(award, _ => _.value.amount),
-              currency: getDataFromObject(award, _ => _.value.currency),
-              status: getDataFromObject(award, _ => _.status),
-              documents: getDataFromObject(award, _ => _.documents, []).map(doc => {
-                return {
-                  name: getDataFromObject(doc, _ => _.title),
-                  url: getDataFromObject(doc, _ => _.url),
-                  datePublished: formatDate(getDataFromObject(doc, _ => _.datePublished)),
-                  id: getDataFromObject(doc, _ => _.id)
-                };
-              })
-            };
-          });
-        } else {
-          const EVRecord = this.tender.EVRecord.compiledRelease;
-          return getDataFromObject(EVRecord, _ => _.awards, []).map(award => {
-            return {
-              id: getDataFromObject(award, _ => _.id),
-              name: getDataFromObject(award, _ => _.suppliers[0].name),
-              identifier: `${getDataFromObject(award, _ => _.suppliers[0].id)}`,
-              amount: getDataFromObject(award, _ => _.value.amount),
-              currency: getDataFromObject(award, _ => _.value.currency),
-              status: getDataFromObject(award, _ => _.statusDetails),
-              documents: getDataFromObject(award, _ => _.documents, []).map(doc => {
-                return {
-                  name: getDataFromObject(doc, _ => _.title),
-                  url: getDataFromObject(doc, _ => _.url),
-                  datePublished: formatDate(getDataFromObject(doc, _ => _.datePublished)),
-                  id: getDataFromObject(doc, _ => _.id)
-                };
-              })
-            };
-          });
-        }
-      },
-      activeAwards() {
-        if (this.cdb === MTENDER1) {
-          const tender = this.tender;
-          return getDataFromObject(tender, _ => _.awards, [])
-              .filter(award => getDataFromObject(award, _ => _.status, "") === "active")
-              .sort((award1, award2) => {
-                if (getDataFromObject(award1, _ => _.value.amount) === getDataFromObject(award2, _ => _.value.amount)) {
-                  return getDataFromObject(award1, _ => _.date) > getDataFromObject(award2, _ => _.date);
-                }
-                return getDataFromObject(award1, _ => _.value.amount) > getDataFromObject(award2, _ => _.value.amount);
-              })
-              .map(award => {
-                return {
-                  id: getDataFromObject(award, _ => _.id),
-                  name: getDataFromObject(award, _ => _.suppliers[0].name),
-                  identifier: `${getDataFromObject(award, _ => _.suppliers[0].identifier.scheme)}
-                               ${getDataFromObject(award, _ => _.suppliers[0].identifier.id)} -
-                               ${getDataFromObject(award, _ => _.suppliers[0].identifier.legalName)}`,
-                  amount: getDataFromObject(award, _ => _.value.amount),
-                  currency: getDataFromObject(award, _ => _.value.currency),
-                  publishedDate: formatDate(getDataFromObject(award, _ => _.date))
-                };
-              });
-        } else {
-          const EVRecord = this.tender.EVRecord.compiledRelease;
-
-          return getDataFromObject(EVRecord, _ => _.awards, [])
-              .filter(award => getDataFromObject(award, _ => _.status, "") === "active")
-              .sort((award1, award2) => {
-                if (getDataFromObject(award1, _ => _.value.amount) === getDataFromObject(award2, _ => _.value.amount)) {
-                  return getDataFromObject(award1, _ => _.date) > getDataFromObject(award2, _ => _.date);
-                }
-                return getDataFromObject(award1, _ => _.value.amount) > getDataFromObject(award2, _ => _.value.amount);
-              })
-              .map(award => {
-                return {
-                  id: getDataFromObject(award, _ => _.id),
-                  name: getDataFromObject(award, _ => _.suppliers[0].name),
-                  identifier: `${getDataFromObject(award, _ => _.suppliers[0].id)}`,
-                  amount: getDataFromObject(award, _ => _.value.amount),
-                  currency: getDataFromObject(award, _ => _.value.currency),
-                  publishedDate: formatDate(getDataFromObject(award, _ => _.date))
-                };
-              });
-        }
-      },
-      contracts() {
-        if (this.cdb === MTENDER1) {
-          const tender = this.tender;
-
-          return getDataFromObject(tender, _ => _.contracts, []).map(contract => {
-            return {
-              id: getDataFromObject(contract, _ => _.id),
-              title: getDataFromObject(contract, _ => _.title),
-              status: getDataFromObject(contract, _ => _.status),
-              procuringEntity: getDataFromObject(tender, _ => _.procuringEntity.name),
-              suppliers: getDataFromObject(contract, _ => _.suppliers, []).map(supplier => supplier.name),
-              contractId: getDataFromObject(contract, _ => _.contractID),
-              amount: getDataFromObject(contract, _ => _.value.amount),
-              currency: getDataFromObject(contract, _ => _.value.currency),
-              contractNumber: getDataFromObject(contract, _ => _.contractNumber, "none"),
-              dateSigned: formatDate(getDataFromObject(contract, _ => _.dateSigned), "DD.MM.YYYY"),
-              contractStartDate: formatDate(getDataFromObject(contract, _ => _.period.startDate), "DD.MM.YYYY"),
-              contractEndDate: formatDate(getDataFromObject(contract, _ => _.period.endDate), "DD.MM.YYYY")
-            };
-          });
-        } else {
-          return [];
-        }
-      },
-      documentation() {
-        if (this.cdb === MTENDER1) {
-          const tender = this.tender;
-
-          return getDataFromObject(tender, _ => _.contracts, []).map(contract => {
-            const obj = {};
-
-            for (const item of [...getDataFromObject(contract, _ => _.documents, [])].sort((doc1, doc2) => new Date(doc2.dateModified) - new Date(doc1.dateModified))) {
-              if (!obj.hasOwnProperty(item.id)) {
-                obj[item.id] = {
-                  name: item.title,
-                  url: item.url,
-                  datePublished: formatDate(item.datePublished),
-                  id: item.id
-                };
-                obj[item.id].oldVersions = [];
-              } else {
-                obj[item.id].oldVersions.push({
-                  name: item.title,
-                  url: item.url,
-                  datePublished: formatDate(item.datePublished),
-                  id: item.id
-                });
-              }
-            }
-
-            return Object.values(obj);
-          }).reduce((acc, val) => acc.concat(val), []);
-        } else {
-          return [];
-        }
+        }).reduce((acc, val) => acc.concat(val), []);
       }
     }
   };

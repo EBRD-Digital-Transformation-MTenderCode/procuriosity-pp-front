@@ -1,0 +1,171 @@
+<template>
+  <div class="entity-wp">
+    <transition name="fade" mode="out-in" appear>
+      <el-container key="loading" v-if="!loaded && !error.status">
+        <div class="loading"></div>
+      </el-container>
+      <div v-else-if="loaded && Object.keys(tender).length" key="info">
+        <div class="entity-main-info">
+          <el-container direction="vertical">
+            <el-row>
+              <el-col :xs="24" :sm="14">
+                <div class="entity-main-info__title">
+                  {{ gd(tender, _ => _.MSRecord.compiledRelease.tender.title) }}
+                </div>
+                <div class="entity-main-info__description">
+                  {{ gd(tender, _ => _.MSRecord.compiledRelease.tender.description) }}
+                </div>
+                <div class="entity-main-info__timeline">
+                  TIMELINE
+                </div>
+              </el-col>
+              <el-col :xs="24" :sm="2"></el-col>
+              <el-col :xs=24 :sm="8">
+                <div class="entity-main-info__value">
+                  Estimated value excluding VAT
+                  <div class="entity-main-info__amount">
+                    {{ gd(tender, _ => _.MSRecord.compiledRelease.tender.value.amount) }}
+                    <div class="entity-main-info__currency">
+                      {{ gd(tender, _ => _.MSRecord.compiledRelease.tender.value.currency) }}
+                    </div>
+                  </div>
+                </div>
+                <div class="entity-main-info__additional">
+                  <div class="entity-main-info__additional-block">
+                    <div class="entity-main-info__additional-title">Процедура закупки</div>
+                    <div class="entity-main-info__additional-value">
+                      {{ gd(tender, _ => _.MSRecord.compiledRelease.tender.procurementMethodDetails) }}
+                    </div>
+                  </div>
+                  <div class="entity-main-info__additional-block">
+                    <div class="entity-main-info__additional-title">Закупающая организация</div>
+                    <div class="entity-main-info__additional-value">
+                      {{ gd(tender, _ => _.MSRecord.compiledRelease.tender.procuringEntity.name) }}
+                    </div>
+                  </div>
+                  <div class="entity-main-info__additional-block">
+                    <div class="entity-main-info__additional-title">Регион</div>
+                    <div class="entity-main-info__additional-value">
+                      {{ gd(tender, _ => _.MSRecord.compiledRelease.parties, []).find(part => part.roles.some(role => role === "procuringEntity")).address.addressDetails.region.description }}
+                    </div>
+                  </div>
+                  <div class="entity-main-info__additional-block">
+                    <div class="entity-main-info__additional-title">Number of notice</div>
+                    <div class="entity-main-info__additional-value">
+                      {{ gd(tender, _ => _.MSRecord.compiledRelease.ocid) }}
+                    </div>
+                  </div>
+                </div>
+              </el-col>
+            </el-row>
+          </el-container>
+        </div>
+        <div class="entity-tabs">
+          <el-container>
+            <el-row>
+              <el-col :xs="24">
+                <el-tabs v-model="activeTab" stretch>
+                  <el-tab-pane label="PN" lazy key="1">
+                    <planning-notice />
+                  </el-tab-pane>
+                  <el-tab-pane label="Contract Notice" lazy key="2">
+                    <contract-notice />
+                  </el-tab-pane>
+                  <el-tab-pane label="Clarification and review" lazy key="3">
+                    <clarification />
+                  </el-tab-pane>
+                  <el-tab-pane label="e-Auction" lazy key="4">
+                    <auction />
+                  </el-tab-pane>
+                  <el-tab-pane label="Received offers" lazy key="5">
+                    <received-offers />
+                  </el-tab-pane>
+                  <el-tab-pane label="Evaluation" lazy key="6">
+                    <evaluation />
+                  </el-tab-pane>
+                  <el-tab-pane label="Contracts" lazy key="7">
+                    <contracts/>
+                  </el-tab-pane>
+                </el-tabs>
+              </el-col>
+            </el-row>
+          </el-container>
+        </div>
+      </div>
+      <el-container class="error" key="error" v-else>
+        <div class="error-message"> {{error.message}}</div>
+        <button
+            class="refresh-btn"
+            @click="getTender"
+        >
+          {{$t("refresh")}}
+        </button>
+        <button class="back-btn" @click="$router.go(-1)">{{$t("back")}}</button>
+      </el-container>
+    </transition>
+  </div>
+</template>
+
+<script>
+import { mapState } from "vuex";
+import { FETCH_CURRENT_TENDER_INFO } from "../../../store/types/actions-types";
+
+import PlanningNotice from "./Tabs/PlanningNotice";
+import ContractNotice from "./Tabs/ContractNotice";
+import Clarification from "./Tabs/Clarification";
+import Auction from "./Tabs/Auction";
+import ReceivedOffers from "./Tabs/ReceivedOffers";
+import Evaluation from "./Tabs/Evaluation";
+import Contracts from "./Tabs/Contracts";
+
+import { getDataFromObject, formatDate } from "../../../utils";
+
+export default {
+  name: "TenderPage",
+  components: {
+    "planning-notice": PlanningNotice,
+    "contract-notice": ContractNotice,
+    clarification: Clarification,
+    auction: Auction,
+    "received-offers": ReceivedOffers,
+    evaluation: Evaluation,
+    contracts: Contracts
+  },
+  data() {
+    return {
+      activeTab: 0
+    };
+  },
+  created() {
+    this.getTender();
+  },
+  methods: {
+    async getTender() {
+      await this.$store.dispatch(FETCH_CURRENT_TENDER_INFO, {
+        id: this.$route.params.id
+      });
+
+      console.log(this.tender);
+    },
+    gd(...args) {
+      return getDataFromObject(...args);
+    }
+  },
+  computed: {
+    ...mapState({
+      tender: state => state.entities.tenders.currentTender.tenderData,
+      loaded: state => state.entities.tenders.loaded,
+      error: state => state.entities.tenders.error
+    })
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+@import "../../../styles/variables";
+
+.entity-main-info {
+  padding-top: 45px;
+  background-color: $mainC;
+}
+</style>
