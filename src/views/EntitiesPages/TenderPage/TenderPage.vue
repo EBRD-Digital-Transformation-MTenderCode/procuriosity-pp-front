@@ -67,26 +67,28 @@
             <el-row>
               <el-col :xs="24">
                 <el-tabs v-model="activeTab" stretch>
-                  <el-tab-pane label="PN" lazy key="1">
+                  <el-tab-pane label="PN" name="pn" lazy>
                     <planning-notice />
                   </el-tab-pane>
-                  <el-tab-pane label="Contract Notice" lazy key="2">
-                    <contract-notice />
+                  <el-tab-pane label="Contract Notice" name="cn" lazy>
+                    <contract-notice
+                        :msRecord="gd(tender, _ => _.MSRecord.compiledRelease)"
+                    />
                   </el-tab-pane>
-                  <el-tab-pane label="Clarification and review" lazy key="3">
+                  <el-tab-pane label="Clarification and review" name="clarification" lazy>
                     <clarification />
                   </el-tab-pane>
-                  <el-tab-pane label="e-Auction" lazy key="4">
+                  <el-tab-pane label="e-Auction" name="auction" lazy>
                     <auction />
                   </el-tab-pane>
-                  <el-tab-pane label="Received offers" lazy key="5">
+                  <el-tab-pane label="Received offers" name="offer" lazy>
                     <received-offers />
                   </el-tab-pane>
-                  <el-tab-pane label="Evaluation" lazy key="6">
+                  <el-tab-pane label="Evaluation" name="ev" lazy>
                     <evaluation />
                   </el-tab-pane>
-                  <el-tab-pane label="Contracts" lazy key="7">
-                    <contracts />
+                  <el-tab-pane label="Contracts" name="can" lazy>
+                    <contracts/>
                   </el-tab-pane>
                 </el-tabs>
               </el-col>
@@ -135,7 +137,7 @@
     },
     data() {
       return {
-        activeTab: 0
+        activeTab: "cn"
       };
     },
     created() {
