@@ -25,7 +25,7 @@
                   <div> Estimated value excluding VAT</div>
                   <span class="entity-main-info__amount">
                     <span class="whole">{{ wholeAmount }} </span>
-                    <span v-if="fractionAmount" class="fraction"> <span v-if="fractionAmount" class="dot">.</span>{{ fractionAmount }}</span>
+                    <span class="fraction"> <span class="dot">.</span>{{ fractionAmount }}</span>
                     <span class="entity-main-info__currency">
                       {{ gd(tender, _ => _.MSRecord.compiledRelease.tender.value.currency) }}
                     </span>
@@ -167,7 +167,7 @@
       },
       fractionAmount() {
         const amountStr = this.gd(this.tender, _ => _.MSRecord.compiledRelease.tender.value.amount, 0).toString();
-        return /\./.test(amountStr) ? amountStr.slice(amountStr.indexOf(".") + 1).length === 1 ? amountStr.slice(amountStr.indexOf(".") + 1) + "0" : amountStr.slice(amountStr.indexOf(".") + 1) : "";
+        return /\./.test(amountStr) ? amountStr.slice(amountStr.indexOf(".") + 1).length === 1 ? amountStr.slice(amountStr.indexOf(".") + 1) + "0" : amountStr.slice(amountStr.indexOf(".") + 1) : "00";
       },
     }
   };
