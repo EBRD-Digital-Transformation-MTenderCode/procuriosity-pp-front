@@ -534,11 +534,26 @@
             </div>
             
             <div class="info-block">
-              <el-row>
-                <el-col :sm="24">
-                  <div class="info-block__text">Additional information</div>
+              <el-row
+                  v-for="(doc, index) of gd(evRecord, _ => _.tender.documents).filter(doc => gd(doc, _ => _.relatedLots[0], '') === gd(lot, _ => _.id), [])"
+                  :key="doc.id + index"
+              >
+                <el-col :sm="16">
                   <div class="info-block__value">
+                    <!-- @TODO human-readeble document type -->
+                    {{ gd(doc, _ => _.documentType) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a>
+                  </div>
+                  <div class="info-block__text">
+                    ID: {{ gd(doc, _ => _.id) }}
+                  </div>
                   
+                </el-col>
+                <el-col :sm="8">
+                  <div class="info-block__text">
+                    Published: {{ fd(gd(doc, _ => _.datePublished)) }}
+                  </div>
+                  <div class="info-block__text">
+                    Last modified: {{ fd(gd(doc, _ => _.datePublished)) }}
                   </div>
                 </el-col>
               </el-row>
@@ -546,6 +561,346 @@
           </div>
         </el-collapse-item>
       </el-collapse>
+      
+      <div class="info__title">Legal, economic, financial and technical information</div>
+      <div class="info__sub-title">Conditions for participation</div>
+      <div class="info-blocks">
+        <div class="info-block">
+          <el-row>
+            <el-col :sm="24">
+              <div class="info-block__text">Suitability to pursue the professional activity, including requirements relating to enrolment on professional or trade registers</div>
+            </el-col>
+          </el-row>
+          
+          <el-row>
+            <el-col :sm="24">
+              <div class="info-block__value">Enrolment in a relevant professional register</div>
+              <div class="info-block__text">
+                It is enrolled in relevant professional registers kept in the Member State of its establishment as described in Annex XI economic operators from certain Member States may have to comply with other requirements set out in that Annex.
+              </div>
+            </el-col>
+          </el-row>
+          
+          <el-row>
+            <el-col :sm="24">
+              <div class="info-block__value">Enrolment in a trade register</div>
+              <div class="info-block__text">
+                It is enrolled in trade registers kept in the Member State of its establishment as described in Annex XI of Directive  2014/24/EU; EOs from certain Member States may have to comply with other requirements set out in that Annex.
+              </div>
+            </el-col>
+          </el-row>
+          
+          <el-row>
+            <el-col :sm="24">
+              <div class="info-block__value">Authorisation of particular organisation needed</div>
+              <div class="info-block__text">
+                ???Is a particular authorisation of a particular organisation needed in order to be able to perform the service in question in the country of establishment of the economic operator?
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+        
+        <div class="info-block">
+          <el-row>
+            <el-col :sm="24">
+              <div class="info-block__text">
+                Economic and financial standing
+              </div>
+            </el-col>
+          </el-row>
+          
+          <el-row>
+            <el-col :sm="16">
+              <div class="info-block__value">
+                Economic and financial standing
+              </div>
+              <div class="info-block__text">
+                Its general yearly turnover for the number of financial years required in the relevant notice, the procurement documents or the ESPD is as follows more information
+              </div>
+            </el-col>
+            <el-col :sm="8">
+              <div class="info-block__value">
+                ???5’000’000,00 MDL
+              </div>
+              <div class="info-block__text">
+                ???is required as minimum
+              </div>
+            </el-col>
+          </el-row>
+          
+          <el-row>
+            <el-col :sm="16">
+              <div class="info-block__value">
+                Average yearly turnover
+              </div>
+              <div class="info-block__text">
+                It is enrolled in trade registers kept in the Member State of its establishment as described in Annex XI of Directive 2014/24/EU; EOs from certain Member States may have to comply with other requirements set out in that Annex.
+              </div>
+            </el-col>
+            <el-col :sm="8">
+              <div class="info-block__value">
+                ???15’000’000,00 MDL
+              </div>
+              <div class="info-block__text">
+                ???is required as minimum
+              </div>
+            </el-col>
+          </el-row>
+          
+          <el-row>
+            <el-col :sm="16">
+              <div class="info-block__value">
+                Set up of economic operator
+              </div>
+              <div class="info-block__text">
+                ???Is a particular authorisation of a particular organisation needed in order to be able to perform the service in question in the country of establishment of the economic operator?
+              </div>
+            </el-col>
+            <el-col :sm="8">
+              <div class="info-block__value">
+                ???1’000’000,00 MLD
+              </div>
+              <div class="info-block__text">
+                ???is required as minimum
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+        
+        <div class="info-block">
+          <el-row>
+            <el-col :sm="24">
+              <div class="info-block__text">
+                Technical and professional ability
+              </div>
+            </el-col>
+          </el-row>
+          
+          <el-row>
+            <el-col :sm="16">
+              <div class="info-block__value">
+                Number of managerial staff
+              </div>
+              <div class="info-block__text">
+                The economic operator's number of managerial staff for the last three years were as follows
+              </div>
+            </el-col>
+            <el-col :sm="8">
+              <div class="info-block__value">
+                ???15 human
+              </div>
+              <div class="info-block__text">
+                ???is required as minimum
+              </div>
+            </el-col>
+          </el-row>
+          
+          <el-row>
+            <el-col :sm="16">
+              <div class="info-block__value">
+                Average annual manpower
+              </div>
+              <div class="info-block__text">
+                The economic operator's average annual manpower for the last three years were as follows
+              </div>
+            </el-col>
+            <el-col :sm="8">
+              <div class="info-block__value">
+                ???15’000 human/hours
+              </div>
+              <div class="info-block__text">
+                ???is required as minimum
+              </div>
+            </el-col>
+          </el-row>
+          
+          <el-row>
+            <el-col :sm="16">
+              <div class="info-block__value">
+                Subcontracting proportion
+              </div>
+              <div class="info-block__text">
+                Is a particular authorisation of a particular organisation needed in order to be able to perform the service in question in the country of establishment of the economic operator?
+              </div>
+            </el-col>
+            <el-col :sm="8">
+              <div class="info-block__value">
+                ???40%
+              </div>
+              <div class="info-block__text">
+                ???is required as maximum
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+      </div>
+      
+      <div class="info__sub-title">General terms of the contract</div>
+      <div class="info-blocks">
+        <div class="info-block">
+          <el-row>
+            <el-col :sm="24">
+              <div class="info-block__value">???Link to the document for current procurement category published on MTender web portal</div>
+            </el-col>
+          </el-row>
+        </div>
+      </div>
+      
+      <div class="info__sub-title">Special conditions of the contract</div>
+      <div class="info-blocks">
+        <div class="info-block">
+          <el-row>
+            <el-col :sm="16">
+              <div class="info-block__value">Contract performance guarantee</div>
+              <div class="info-block__text">The economic operator's number of managerial staff for the last three years were as follows</div>
+            </el-col>
+            <el-col :sm="8">
+              <div class="info-block__value">???15’000,00 MDL</div>
+              <div class="info-block__text">???is required as minimum</div>
+            </el-col>
+          </el-row>
+        </div>
+      </div>
+      
+      <div class="info__title">Procedure</div>
+      <div class="info__sub-title">Description</div>
+      <div class="info-blocks">
+        <div class="info-block">
+          <el-row>
+            <el-col :sm="10">
+              <div class="info-block__text">Type of procedure</div>
+              <div class="info-block__value">
+                {{ gd(msRecord, _ => _.tender.procurementMethodDetails) }}
+              </div>
+            </el-col>
+            <el-col :sm="14">
+              <div class="info-block__text">Accelerated procedure</div>
+              <div class="info-block__value">???Justification:</div>
+            </el-col>
+          </el-row>
+        </div>
+        
+        <div class="info-block">
+          <el-row>
+            <el-col :sm="10">
+              <div class="info-block__text">Information about electronic auction</div>
+              <div class="info-block__value">
+                ???An electronic auction will (or will not) be used
+              </div>
+            </el-col>
+            <el-col :sm="14">
+              <div class="info-block__text">Additional information about electronic auction</div>
+              <div class="info-block__value">???Start date: 20/09/2018, 14:30, number of rounds: 3, mode: multiple round</div>
+            </el-col>
+          </el-row>
+        </div>
+      </div>
+      
+      <div class="info__sub-title">Administrative information</div>
+      <div class="info-blocks">
+        <div class="info-block">
+          <el-row>
+            <el-col :sm="24">
+              <div class="info-block__text">Previous publication concerning this procedure</div>
+              <div class="info-block__value">
+                Procurement plan / Buyer’s profile / PN:  No
+                <a
+                    :href="`/plans/${gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === 'planning')), _ => _.identifier)}`"
+                    target="_blank">
+                  {{ gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === "planning")), _ => _.identifier) }}
+                </a>
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+        
+        <div class="info-block">
+          <el-row>
+            <el-col :sm="24">
+              <div class="info-block__text">Time limit for receipt of tenders or requests to participate</div>
+              <div class="info-block__value">
+                ???Date: (dd/mm/yyyy) Local time: (hh:mm)
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+        
+        <div class="info-block">
+          <el-row>
+            <el-col :sm="24">
+              <div class="info-block__text">Estimated date of dispatch of invitations to tender or to participate to selected candidates</div>
+              <div class="info-block__value">
+                ???Date: (dd/mm/yyyy)
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+        
+        <div class="info-block">
+          <el-row>
+            <el-col :sm="24">
+              <div class="info-block__text">Languages in which tenders or requests to participate may be submitted</div>
+              <div class="info-block__value">
+                ???Romanian, Russian
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+        
+        <div class="info-block">
+          <el-row>
+            <el-col :sm="24">
+              <div class="info-block__text">Conditions for opening of tenders</div>
+              <div class="info-block__value">
+                ???Date: (dd/mm/yyyy) Local time: (hh:mm)
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+        
+        <div class="info-block">
+          <el-row>
+            <el-col :sm="24">
+              <div class="info-block__text">
+                For electronic tendering procedures upon expiry of submission deadlines, MTender shall disclose received tender forms or requests to participate online on the MTender web portal and generate an electronic document with a record of opening.
+              </div>
+              <div class="info-block__text">
+                For non-electronic procedures: negotiated with publication of contract notice, competitive dialogue, design contest and innovative partnership
+              </div>
+            </el-col>
+            <el-col :sm="16">
+              <div class="info-block__text"> Information about authorised persons and opening procedure</div>
+              <div class="info-block__value">
+                ???Full name of the persone
+              </div>
+            </el-col>
+            <el-col :sm="8">
+              <div class="info-block__text">
+                ???Place
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+      </div>
+      
+      <div class="info__title">Complementary information</div>
+      <div class="info__sub-title">Information about electronic workflows</div>
+      <ul class="info-list">
+        <li>Electronic ordering may be used.</li>
+        <li>Electronic invoicing (e-Factura) will be accepted.</li>
+        <li>Electronic payment in local currency (MDL) will be used.</li>
+        <li>The MTender does not require the use of tools and devices that are not generally available for electronic communication.</li>
+        <li>Use of mobile devices is not recommended for participating in the electronic auction.</li>
+      </ul>
+      <div class="info__sub-title">Additional information</div>
+      <ul class="info-list">
+        <li>The contract does not involve joint procurement and is not awarded by a CPB.</li>
+        <li>This is not a recurrent procurement.</li>
+        <li>Minimum time frame during which the tenderer must maintain the tender is 90 days starting from opening of the tenders.</li>
+        <li>The amount and currency of the bid guarantee is - % of estimated value MDL and must be valid 90 days starting from opening of the tenders. </li>
+        <li>Failure of the selected Economic Operator to submit the contract performance guarantee, if applicable, or to sign the contract shall constitute sufficient grounds for the annulment of the award of the contract and forfeiture of the bid guarantee.</li>
+        <li>???+Free text from CA</li>
+      </ul>
     </div>
   </div>
 </template>
@@ -564,8 +919,7 @@
         required: true
       },
       evRecord: {
-        type: Object,
-        required: true
+        type: Object
       }
     },
     data() {
@@ -640,7 +994,7 @@
       font-size: 20px;
       font-weight: 700;
     }
-
+  
     &-block {
       &:not(:last-child) {
         border-bottom: 1px solid #d9d9d9;
