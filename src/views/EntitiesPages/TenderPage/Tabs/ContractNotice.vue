@@ -227,7 +227,7 @@
               <div class="info-block__text">
                 Tenders or requests to participate must be submitted electronically via:
               </div>
-              <div class="info-block__value flex">
+              <div class="info-block__value info-block__value-platform">
                 <a
                     class="partner-link"
                     v-for="platform of randomSortPlatforms"
@@ -274,7 +274,6 @@
             </el-col>
             <el-col :sm="8">
               <div class="info-block__text">Type of contract</div>
-              <!-- @TODO need do first letter big -->
               <div class="info-block__value info-block__value_name">{{ gd(msRecord, _ =>
                 _.tender.mainProcurementCategory) }}
               </div>
@@ -640,20 +639,19 @@ export default {
         margin-bottom: 5px;
         padding-right: 10px;
         font-size: 15px;
+        &_name:first-letter{
+          text-transform: uppercase;
+        }
         img {
           max-width: 150px;
         }
+        &-platform{
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          margin-top: 20px;
+        }
       }
-      .flex {
-        display: flex;
-        justify-content: space-around;
-        margin-top: 20px;
-      }
-    }
-    .accordion-header {
-      width: 100%;
-      line-height: 1;
-      padding: 10px;
     }
   }
 
