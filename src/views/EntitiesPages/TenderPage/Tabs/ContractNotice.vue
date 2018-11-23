@@ -529,6 +529,17 @@
                 </el-col>
               </el-row>
             </div>
+            
+            <div class="info-block">
+              <el-row>
+                <el-col :sm="24">
+                  <div class="info-block__text">Additional information</div>
+                  <div class="info-block__value">
+                  
+                  </div>
+                </el-col>
+              </el-row>
+            </div>
           </div>
         </el-collapse-item>
       </el-collapse>
