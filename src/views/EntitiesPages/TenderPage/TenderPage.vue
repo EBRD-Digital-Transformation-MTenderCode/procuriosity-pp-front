@@ -19,8 +19,7 @@
                   TIMELINE
                 </div>
               </el-col>
-              <el-col :xs="24" :sm="2"></el-col>
-              <el-col :xs=24 :sm="8">
+              <el-col :xs=24 :sm="8" :offset="2">
                 <div class="entity-main-info__value">
                   <div> Estimated value excluding VAT</div>
                   <span class="entity-main-info__amount">
@@ -73,6 +72,7 @@
                   <el-tab-pane label="Contract Notice" name="cn" lazy>
                     <contract-notice
                         :msRecord="gd(tender, _ => _.MSRecord.compiledRelease)"
+                        :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
                     />
                   </el-tab-pane>
                   <el-tab-pane label="Clarification and review" name="clarification" lazy>
