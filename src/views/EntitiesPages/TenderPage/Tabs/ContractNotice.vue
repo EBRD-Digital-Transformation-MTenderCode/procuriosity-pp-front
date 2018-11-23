@@ -321,7 +321,7 @@
       </div>
 
       <div class="info__sub-title">Description</div>
-      <el-collapse accordion>
+      <el-collapse accordion :value="gd(evRecord, _ => _.tender.lots[0].id, '0') + '0'">
         <el-collapse-item
             v-for="(lot, index) of gd(evRecord, _ => _.tender.lots)"
             :key="lot.id + index"
@@ -384,6 +384,151 @@
                 </el-col>
               </el-row>
             </div>
+
+            <div class="info-block">
+              <el-row>
+                <el-col :sm="16">
+                  <div class="info-block__text">Description of the procurement:</div>
+                  <div class="info-block__value">
+                    <div>Lucrări de construcţii complete sau parţiale şi lucrări publice</div>
+                    <div>45210000-2 Lucrări de construcţii de clădiri</div>
+                  </div>
+                </el-col>
+                <el-col :sm="8">
+                  <div class="info-block__value">
+                    589 Metru patrat
+                  </div>
+                </el-col>
+              </el-row>
+            </div>
+          </div>
+
+          <div class="info__sub-title">Level of Performance</div>
+          <div class="info-blocks">
+            <div class="info-block">
+              <el-row>
+                <el-col :sm="16">
+                  <div class="info-block__text">Warranty Period</div>
+                  <div class="info-block__value">
+                    A minimum product warranty of 1 year is required for all bids. Extended warranties receive an advantage
+                  </div>
+                </el-col>
+                <el-col :sm="8">
+                  <div class="info-block__text">???1 year</div>
+                  <div class="info-block__value">???is required as minimum</div>
+                </el-col>
+              </el-row>
+
+              <el-row>
+                <el-col :sm="16">
+                  <div class="info-block__text">Applicable options</div>
+                  <div class="info-block__value">
+                    <div>???1 year of warranty period guaranteed</div>
+                    <div>???2 year of warranty period guaranteed</div>
+                    <div>???3 year of warranty period guaranteed</div>
+                  </div>
+                </el-col>
+                <el-col :sm="8">
+                  <div class="info-block__text">Coefficients</div>
+                  <div class="info-block__value">
+                    <div>???1.0</div>
+                    <div>???0.95</div>
+                    <div>???0.9</div>
+                  </div>
+                </el-col>
+              </el-row>
+
+              <el-row>
+                <el-col :sm="16">
+                  <div class="info-block__text">Terms of delivery</div>
+                  <div class="info-block__value">
+                    A minimum product warranty of 1 year is required for all bids. Extended warranties receive an advantage
+                  </div>
+                </el-col>
+                <el-col :sm="8">
+                  <div class="info-block__text">???4 weeks</div>
+                  <div class="info-block__value">???is required as maximum</div>
+                </el-col>
+              </el-row>
+
+              <el-row>
+                <el-col :sm="16">
+                  <div class="info-block__text">Applicable options</div>
+                  <div class="info-block__value">
+                    <div>???Delivery during 4 weeks </div>
+                    <div>???Delivery during 3 weeks </div>
+                    <div>???Delivery during 2 weeks </div>
+                  </div>
+                </el-col>
+                <el-col :sm="8">
+                  <div class="info-block__text">Coefficients</div>
+                  <div class="info-block__value">
+                    <div>???0.94</div>
+                    <div>???0.93</div>
+                    <div>???0.92</div>
+                  </div>
+                </el-col>
+              </el-row>
+
+              <el-row>
+                <el-col :sm="16">
+                  <div class="info-block__text info-block__text_accent">
+                    Price–Weighting
+                  </div>
+                </el-col>
+                <el-col :sm="8">
+                  <div class="info-block__value info-block__value_accent">
+                    ???60%
+                  </div>
+                </el-col>
+              </el-row>
+            </div>
+
+            <div class="info-block">
+              <el-row>
+                <el-col :sm="24">
+                  <div class="info-block__text">Destimated value excluding VAT</div>
+                  <div class="info-block__value">
+                    {{ gd(lot, _ => _.value.amount) }} {{ gd(lot, _ => _.value.currency) }}
+                  </div>
+                </el-col>
+              </el-row>
+            </div>
+
+            <div class="info-block">
+              <el-row>
+                <el-col :sm="24">
+                  <div class="info-block__text">Duration of the contract, framework agreement or dynamic purchasing system</div>
+                  <div class="info-block__value">
+                    Start: {{ fd(gd(lot, _ => _.contractPeriod.startDate), "DD/MM/YYYY") }} /
+                    End: {{ fd(gd(lot, _ => _.contractPeriod.endDate), "DD/MM/YYYY") }}
+                    <div>???This contract is not a subject to renewal</div>
+                  </div>
+                </el-col>
+              </el-row>
+            </div>
+
+            <div class="info-block">
+              <el-row>
+                <el-col :sm="24">
+                  <div class="info-block__text">Information about variants</div>
+                  <div class="info-block__value">
+                    Variants will not be accepted
+                  </div>
+                </el-col>
+              </el-row>
+            </div>
+
+            <div class="info-block">
+              <el-row>
+                <el-col :sm="24">
+                  <div class="info-block__text">Information about options</div>
+                  <div class="info-block__value">
+                    No options
+                  </div>
+                </el-col>
+              </el-row>
+            </div>
           </div>
         </el-collapse-item>
       </el-collapse>
@@ -392,73 +537,76 @@
 </template>
 
 <script>
-  import typesOfBuyers from "./../../../../store/types/buyers-types";
-  import mainGeneralActivites from "./../../../../store/types/main-general-activity-types";
+import typesOfBuyers from "./../../../../store/types/buyers-types";
+import mainGeneralActivites from "./../../../../store/types/main-general-activity-types";
 
-  import { getDataFromObject, formatDate } from "../../../../utils";
+import { getDataFromObject, formatDate } from "../../../../utils";
 
-  export default {
-    name: "ContractNotice",
-    props: {
-      msRecord: {
-        type: Object,
-        required: true
-      },
-      evRecord: {
-        type: Object,
-        required: true
-      }
+export default {
+  name: "ContractNotice",
+  props: {
+    msRecord: {
+      type: Object,
+      required: true
     },
-    data() {
-      return {
-        platforms: [
-          {
-            href: "https://yptender.md/",
-            src: "/img/yptender.png",
-            name: "YPTENDER.MD"
-          },
-          {
-            href: "https://e-licitatie.md/",
-            src: "/img/e-lici.png",
-            name: "e-licitatie.md"
-          },
-          {
-            href: "https://achizitii.md/",
-            src: "/img/achizitii.md.png",
-            name: "achizitii.md"
-          }
-        ]
-      };
-    },
-    created() {
-      console.log("MS", this.msRecord);
-      console.log("EV", this.evRecord);
-    },
-    computed: {
-      getTypeOfBuyer() {
-        if (!this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.typeOfBuyer)) {
-          return "n/a";
-        }
-
-        return typesOfBuyers.find(type => type.value === this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.typeOfBuyer)).name[this.$i18n.locale];
-      },
-      getMainGeneralActivity() {
-        if (!this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.mainGeneralActivity)) {
-          return "n/a";
-        }
-
-        return mainGeneralActivites.find(activity => activity.value === this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.mainGeneralActivity)).name[this.$i18n.locale];
-      },
-      randomSortPlatforms() {
-        return [...this.platforms].sort(() => 0.5 - Math.random());
-      }
-    },
-    methods: {
-      gd(...args) {
-        return getDataFromObject(...args);
-      }
+    evRecord: {
+      type: Object,
+      required: true
     }
-  };
+  },
+  data() {
+    return {
+      platforms: [
+        {
+          href: "https://yptender.md/",
+          src: "/img/yptender.png",
+          name: "YPTENDER.MD"
+        },
+        {
+          href: "https://e-licitatie.md/",
+          src: "/img/e-lici.png",
+          name: "e-licitatie.md"
+        },
+        {
+          href: "https://achizitii.md/",
+          src: "/img/achizitii.md.png",
+          name: "achizitii.md"
+        }
+      ]
+    };
+  },
+  created() {
+    console.log("MS", this.msRecord);
+    console.log("EV", this.evRecord);
+  },
+  computed: {
+    getTypeOfBuyer() {
+      if (!this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.typeOfBuyer)) {
+        return "n/a";
+      }
+
+      return typesOfBuyers.find(type => type.value === this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.typeOfBuyer)).name[this.$i18n.locale];
+    },
+    getMainGeneralActivity() {
+      if (!this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.mainGeneralActivity)) {
+        return "n/a";
+      }
+
+      return mainGeneralActivites.find(activity => activity.value === this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.mainGeneralActivity)).name[this.$i18n.locale];
+    },
+    randomSortPlatforms() {
+      return [...this.platforms].sort(() => 0.5 - Math.random());
+    }
+  },
+  methods: {
+    gd(...args) {
+      return getDataFromObject(...args);
+    },
+    fd(...ars) {
+      return formatDate(...ars);
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
