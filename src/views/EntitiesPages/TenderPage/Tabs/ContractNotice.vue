@@ -664,5 +664,25 @@
       }
     }
   }
+  .entity-nav{
+    display: flex;
+    font-size: 15px;
+    justify-content: space-around;
+    border-bottom: 1px solid  #d9d9d9;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    color: #727272;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 20;
+
+    a{
+      transition: 0.4s;
+      &:hover{
+        color: #235aa6;
+      }
+    }
+  }
 
 </style>
