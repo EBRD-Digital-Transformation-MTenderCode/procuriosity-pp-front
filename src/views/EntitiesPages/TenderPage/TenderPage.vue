@@ -88,7 +88,7 @@
                     <evaluation />
                   </el-tab-pane>
                   <el-tab-pane label="Contracts" name="can" lazy>
-                    <contracts/>
+                    <contracts />
                   </el-tab-pane>
                 </el-tabs>
               </el-col>
@@ -183,34 +183,34 @@
       background-color: $mainC;
       &__title {
         margin-bottom: 33px;
-        color: #ffffff;
+        color: #fff;
         font-size: 30px;
       }
       &__description {
         margin-bottom: 40px;
         font-size: 12px;
         font-weight: 300;
-        color: #ffffff;
+        color: #fff;
       }
       &__value {
         margin-bottom: 70px;
         font-size: 13px;
         font-weight: 400;
-        color: #ffffff;
+        color: #fff;
       }
       &__amount {
         position: relative;
         display: inline-block;
         margin-top: 6px;
         padding-right: 35px;
-        color: #ffffff;
-        .whole{
+        color: #fff;
+        .whole {
           display: inline-block;
           margin-right: 2px;
           line-height: 0.8;
           font-size: 44px;
         }
-        .fraction{
+        .fraction {
           position: absolute;
           top: 0;
           right: 0;
@@ -218,7 +218,7 @@
           font-size: 22px;
           line-height: 1;
         }
-        .dot{
+        .dot {
           margin-right: 2px;
         }
       }
@@ -243,9 +243,12 @@
         &-value {
           font-size: 15px;
           font-weight: 400;
-          color: #ffffff;
+          color: #fff;
         }
       }
+    }
+    &-tabs {
+      background-color: #fff;
     }
   }
 </style>

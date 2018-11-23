@@ -65,3 +65,22 @@
 .el-date-editor .el-range-separator {
   width: 10%;
 }
+
+.el-collapse {
+  .info-blocks {
+    padding: 0 10px;
+  }
+  &-item {
+    background: #f3f3f3;
+    &__header {
+      height: auto;
+      background: transparent;
+      .info-block__value {
+        font-weight: 700;
+      }
+    }
+    &__wrap {
+      background: transparent;
+    }
+  }
+}

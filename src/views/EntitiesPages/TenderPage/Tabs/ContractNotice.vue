@@ -19,7 +19,8 @@
                 Official name
               </div>
               <div class="info-block__value">
-                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.name) }}
+                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ =>
+                _.name) }}
               </div>
             </el-col>
             <el-col :sm="8">
@@ -27,8 +28,10 @@
                 National registration number
               </div>
               <div class="info-block__value">
-                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.identifier.scheme) }}:
-                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.identifier.id) }}
+                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ =>
+                _.identifier.scheme) }}:
+                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ =>
+                _.identifier.id) }}
               </div>
             </el-col>
           </el-row>
@@ -41,8 +44,10 @@
                 Postal address
               </div>
               <div class="info-block__value">
-                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.address.addressDetails.region.description) }},
-                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.address.streetAddress) }}
+                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ =>
+                _.address.addressDetails.region.description) }},
+                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ =>
+                _.address.streetAddress) }}
               </div>
             </el-col>
           </el-row>
@@ -55,7 +60,8 @@
                 Town
               </div>
               <div class="info-block__value">
-                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.address.addressDetails.locality.description) }}
+                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ =>
+                _.address.addressDetails.locality.description) }}
               </div>
             </el-col>
             <el-col :sm="4">
@@ -71,7 +77,8 @@
                 Postal Code
               </div>
               <div class="info-block__value">
-                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.address.postalCode, "n/a") }}
+                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ =>
+                _.address.postalCode, "n/a") }}
               </div>
             </el-col>
             <el-col :sm="8">
@@ -79,7 +86,8 @@
                 Country
               </div>
               <div class="info-block__value">
-                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.address.addressDetails.country.description) }}
+                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ =>
+                _.address.addressDetails.country.description) }}
               </div>
             </el-col>
           </el-row>
@@ -92,7 +100,8 @@
                 Contact Persone
               </div>
               <div class="info-block__value">
-                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.contactPoint.name) }}
+                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ =>
+                _.contactPoint.name) }}
               </div>
             </el-col>
             <el-col :sm="6">
@@ -100,7 +109,8 @@
                 Telephone
               </div>
               <div class="info-block__value">
-                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.contactPoint.telephone) }}
+                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ =>
+                _.contactPoint.telephone) }}
               </div>
             </el-col>
             <el-col :sm="8">
@@ -109,9 +119,10 @@
               </div>
               <div class="info-block__value">
                 <a
-                  :href="`mailto:${gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === 'buyer')), _ => _.contactPoint.email) }`"
+                    :href="`mailto:${gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === 'buyer')), _ => _.contactPoint.email) }`"
                 >
-                  {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.contactPoint.email) }}
+                  {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ =>
+                  _.contactPoint.email) }}
                 </a>
               </div>
             </el-col>
@@ -134,9 +145,11 @@
               </div>
               <div class="info-block__value">
                 <a
-                  :href="`/plans/${gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === 'planning')), _ => _.identifier)}`"
-                  target="_blank">
-                  www.mtender.gov.md/{{ $i18n.locale !== "ro" ? `${$i18n.locale}/` : "" }}plans/{{ gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === "planning")), _ => _.identifier) }}
+                    :href="`/plans/${gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === 'planning')), _ => _.identifier)}`"
+                    target="_blank">
+                  www.mtender.gov.md/{{ $i18n.locale !== "ro" ? `${$i18n.locale}/` : "" }}plans/{{ gd(gd(msRecord, _ =>
+                  _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship ===
+                  "planning")), _ => _.identifier) }}
                 </a>
               </div>
             </el-col>
@@ -174,7 +187,8 @@
                 The procurement documents are available for unrestricted and full direct access, free of charge, at:
               </div>
               <div class="info-block__value">
-                www.mtender.gov.md/{{ $i18n.locale !== "ro" ? `${$i18n.locale}/` : "" }}tenders/{{ gd(msRecord, _ => _.ocid) }}
+                www.mtender.gov.md/{{ $i18n.locale !== "ro" ? `${$i18n.locale}/` : "" }}tenders/{{ gd(msRecord, _ =>
+                _.ocid) }}
               </div>
             </el-col>
           </el-row>
@@ -213,13 +227,13 @@
               <div class="info-block__text">
                 Tenders or requests to participate must be submitted electronically via:
               </div>
-              <div class="info-block__value">
+              <div class="info-block__value flex">
                 <a
-                  class="partner-link"
-                  v-for="platform of randomSortPlatforms"
-                  :key="platform.name"
-                  :href="platform.href"
-                  :title="platform.name"
+                    class="partner-link"
+                    v-for="platform of randomSortPlatforms"
+                    :key="platform.name"
+                    :href="platform.href"
+                    :title="platform.name"
                 >
                   <img :src="platform.src" :alt="platform.name" class="partner-img">
                 </a>
@@ -261,7 +275,9 @@
             <el-col :sm="8">
               <div class="info-block__text">Type of contract</div>
               <!-- @TODO need do first letter big -->
-              <div class="info-block__value info-block__value_name">{{ gd(msRecord, _ => _.tender.mainProcurementCategory) }}</div>
+              <div class="info-block__value info-block__value_name">{{ gd(msRecord, _ =>
+                _.tender.mainProcurementCategory) }}
+              </div>
             </el-col>
           </el-row>
         </div>
@@ -281,9 +297,10 @@
         <div class="info-block">
           <el-row>
             <el-col :sm="24">
-              <div class="info-block__text">Short description	</div>
+              <div class="info-block__text">Short description</div>
               <div class="info-block__value">
-                ???Achiziționarea lucrărilor la obiectul ”Reparația capitală a sistemului de încălzire la instituția preșcolară nr.4 din str.Fedico,8 din mun.Bălți” conform necesităților DÎTS a
+                ???Achiziționarea lucrărilor la obiectul ”Reparația capitală a sistemului de încălzire la instituția
+                preșcolară nr.4 din str.Fedico,8 din mun.Bălți” conform necesităților DÎTS a
                 Primăriei mun.Bălți
               </div>
             </el-col>
@@ -306,9 +323,9 @@
       <div class="info__sub-title">Description</div>
       <el-collapse accordion>
         <el-collapse-item
-          v-for="(lot, index) of gd(evRecord, _ => _.tender.lots)"
-          :key="lot.id + index"
-          :name="lot.id + index"
+            v-for="(lot, index) of gd(evRecord, _ => _.tender.lots)"
+            :key="lot.id + index"
+            :name="lot.id + index"
         >
           <template slot="title">
             <div class="info-block accordion-header">
@@ -375,71 +392,120 @@
 </template>
 
 <script>
-import typesOfBuyers from "./../../../../store/types/buyers-types";
-import mainGeneralActivites from "./../../../../store/types/main-general-activity-types";
+  import typesOfBuyers from "./../../../../store/types/buyers-types";
+  import mainGeneralActivites from "./../../../../store/types/main-general-activity-types";
 
-import { getDataFromObject, formatDate } from "../../../../utils";
+  import { getDataFromObject, formatDate } from "../../../../utils";
 
-export default {
-  name: "ContractNotice",
-  props: {
-    msRecord: {
-      type: Object,
-      required: true
+  export default {
+    name: "ContractNotice",
+    props: {
+      msRecord: {
+        type: Object,
+        required: true
+      },
+      evRecord: {
+        type: Object,
+        required: true
+      }
     },
-    evRecord: {
-      type: Object,
-      required: true
-    }
-  },
-  data() {
-    return {
-      platforms: [
-        {
-          href: "https://yptender.md/",
-          src: "/img/yptender.png",
-          name: "YPTENDER.MD"
-        },
-        {
-          href: "https://e-licitatie.md/",
-          src: "/img/e-lici.png",
-          name: "e-licitatie.md"
-        },
-        {
-          href: "https://achizitii.md/",
-          src: "/img/achizitii.md.png",
-          name: "achizitii.md"
+    data() {
+      return {
+        platforms: [
+          {
+            href: "https://yptender.md/",
+            src: "/img/yptender.png",
+            name: "YPTENDER.MD"
+          },
+          {
+            href: "https://e-licitatie.md/",
+            src: "/img/e-lici.png",
+            name: "e-licitatie.md"
+          },
+          {
+            href: "https://achizitii.md/",
+            src: "/img/achizitii.md.png",
+            name: "achizitii.md"
+          }
+        ]
+      };
+    },
+    created() {
+      console.log("MS", this.msRecord);
+      console.log("EV", this.evRecord);
+    },
+    computed: {
+      getTypeOfBuyer() {
+        if (!this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.typeOfBuyer)) {
+          return "n/a";
         }
-      ]
-    };
-  },
-  created() {
-    console.log("MS", this.msRecord);
-    console.log("EV", this.evRecord);
-  },
-  computed: {
-    getTypeOfBuyer() {
-      if (!this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.typeOfBuyer)) {
-        return "n/a";
-      }
 
-      return typesOfBuyers.find(type => type.value === this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.typeOfBuyer)).name[this.$i18n.locale];
-    },
-    getMainGeneralActivity() {
-      if (!this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.mainGeneralActivity)) {
-        return "n/a";
-      }
+        return typesOfBuyers.find(type => type.value === this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.typeOfBuyer)).name[this.$i18n.locale];
+      },
+      getMainGeneralActivity() {
+        if (!this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.mainGeneralActivity)) {
+          return "n/a";
+        }
 
-      return mainGeneralActivites.find(activity => activity.value === this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.mainGeneralActivity)).name[this.$i18n.locale];
+        return mainGeneralActivites.find(activity => activity.value === this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.mainGeneralActivity)).name[this.$i18n.locale];
+      },
+      randomSortPlatforms() {
+        return [...this.platforms].sort(() => 0.5 - Math.random());
+      }
     },
-    randomSortPlatforms() {
-      return [...this.platforms].sort(() => 0.5 - Math.random());
+    methods: {
+      gd(...args) {
+        return getDataFromObject(...args);
+      }
     }
-  },
-  methods: {
-    gd(...args) {
-      return getDataFromObject(...args);
+  };
+</script>
+<style lang="scss" scoped>
+  @import "../../../../styles/variables";
+
+  .info {
+    &__title {
+      padding: 25px 0;
+      border-bottom: 1px solid #d9d9d9;
+      font-size: 30px;
+      font-weight: 700;
+      color: $mainC;
+    }
+    &__sub-title {
+      margin-top: 30px;
+      margin-bottom: 15px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    &-block {
+      &:not(:last-child) {
+        border-bottom: 1px solid #d9d9d9;
+      }
+      padding: 10px 0;
+      &__text {
+        margin-bottom: 5px;
+        font-size: 13px;
+      }
+      &__value {
+        margin-bottom: 5px;
+        padding-right: 10px;
+        font-size: 15px;
+        img {
+          max-width: 150px;
+        }
+      }
+      .flex {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+      }
+    }
+    .accordion-header {
+      width: 100%;
+      line-height: 1;
+      padding: 10px;
     }
   }
-};
-</script>
+
+</style>
