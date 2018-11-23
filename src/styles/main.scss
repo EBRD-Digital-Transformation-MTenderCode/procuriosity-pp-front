@@ -67,10 +67,12 @@
 }
 
 .el-collapse {
-  .info-blocks {
-    padding: 0 10px;
+  .accordion-header {
+    width: 100%;
+    line-height: 1;
   }
   &-item {
+    padding: 0 10px;
     background: #f3f3f3;
     &__header {
       height: auto;
@@ -81,6 +83,9 @@
     }
     &__wrap {
       background: transparent;
+    }
+    &__arrow{
+     display: none;
     }
   }
 }

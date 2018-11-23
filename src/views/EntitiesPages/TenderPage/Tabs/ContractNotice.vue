@@ -227,7 +227,7 @@
               <div class="info-block__text">
                 Tenders or requests to participate must be submitted electronically via:
               </div>
-              <div class="info-block__value flex">
+              <div class="info-block__value info-block__value-platform">
                 <a
                     class="partner-link"
                     v-for="platform of randomSortPlatforms"
@@ -274,7 +274,6 @@
             </el-col>
             <el-col :sm="8">
               <div class="info-block__text">Type of contract</div>
-              <!-- @TODO need do first letter big -->
               <div class="info-block__value info-block__value_name">{{ gd(msRecord, _ =>
                 _.tender.mainProcurementCategory) }}
               </div>
@@ -410,7 +409,8 @@
                 <el-col :sm="16">
                   <div class="info-block__text">Warranty Period</div>
                   <div class="info-block__value">
-                    A minimum product warranty of 1 year is required for all bids. Extended warranties receive an advantage
+                    A minimum product warranty of 1 year is required for all bids. Extended warranties receive an
+                    advantage
                   </div>
                 </el-col>
                 <el-col :sm="8">
@@ -442,7 +442,8 @@
                 <el-col :sm="16">
                   <div class="info-block__text">Terms of delivery</div>
                   <div class="info-block__value">
-                    A minimum product warranty of 1 year is required for all bids. Extended warranties receive an advantage
+                    A minimum product warranty of 1 year is required for all bids. Extended warranties receive an
+                    advantage
                   </div>
                 </el-col>
                 <el-col :sm="8">
@@ -455,9 +456,9 @@
                 <el-col :sm="16">
                   <div class="info-block__text">Applicable options</div>
                   <div class="info-block__value">
-                    <div>???Delivery during 4 weeks </div>
-                    <div>???Delivery during 3 weeks </div>
-                    <div>???Delivery during 2 weeks </div>
+                    <div>???Delivery during 4 weeks</div>
+                    <div>???Delivery during 3 weeks</div>
+                    <div>???Delivery during 2 weeks</div>
                   </div>
                 </el-col>
                 <el-col :sm="8">
@@ -498,7 +499,9 @@
             <div class="info-block">
               <el-row>
                 <el-col :sm="24">
-                  <div class="info-block__text">Duration of the contract, framework agreement or dynamic purchasing system</div>
+                  <div class="info-block__text">Duration of the contract, framework agreement or dynamic purchasing
+                    system
+                  </div>
                   <div class="info-block__value">
                     Start: {{ fd(gd(lot, _ => _.contractPeriod.startDate), "DD/MM/YYYY") }} /
                     End: {{ fd(gd(lot, _ => _.contractPeriod.endDate), "DD/MM/YYYY") }}
@@ -548,76 +551,76 @@
 </template>
 
 <script>
-import typesOfBuyers from "./../../../../store/types/buyers-types";
-import mainGeneralActivites from "./../../../../store/types/main-general-activity-types";
+  import typesOfBuyers from "./../../../../store/types/buyers-types";
+  import mainGeneralActivites from "./../../../../store/types/main-general-activity-types";
 
-import { getDataFromObject, formatDate } from "../../../../utils";
+  import { getDataFromObject, formatDate } from "../../../../utils";
 
-export default {
-  name: "ContractNotice",
-  props: {
-    msRecord: {
-      type: Object,
-      required: true
+  export default {
+    name: "ContractNotice",
+    props: {
+      msRecord: {
+        type: Object,
+        required: true
+      },
+      evRecord: {
+        type: Object,
+        required: true
+      }
     },
-    evRecord: {
-      type: Object,
-      required: true
-    }
-  },
-  data() {
-    return {
-      platforms: [
-        {
-          href: "https://yptender.md/",
-          src: "/img/yptender.png",
-          name: "YPTENDER.MD"
-        },
-        {
-          href: "https://e-licitatie.md/",
-          src: "/img/e-lici.png",
-          name: "e-licitatie.md"
-        },
-        {
-          href: "https://achizitii.md/",
-          src: "/img/achizitii.md.png",
-          name: "achizitii.md"
+    data() {
+      return {
+        platforms: [
+          {
+            href: "https://yptender.md/",
+            src: "/img/yptender.png",
+            name: "YPTENDER.MD"
+          },
+          {
+            href: "https://e-licitatie.md/",
+            src: "/img/e-lici.png",
+            name: "e-licitatie.md"
+          },
+          {
+            href: "https://achizitii.md/",
+            src: "/img/achizitii.md.png",
+            name: "achizitii.md"
+          }
+        ]
+      };
+    },
+    created() {
+      console.log("MS", this.msRecord);
+      console.log("EV", this.evRecord);
+    },
+    computed: {
+      getTypeOfBuyer() {
+        if (!this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.typeOfBuyer)) {
+          return "n/a";
         }
-      ]
-    };
-  },
-  created() {
-    console.log("MS", this.msRecord);
-    console.log("EV", this.evRecord);
-  },
-  computed: {
-    getTypeOfBuyer() {
-      if (!this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.typeOfBuyer)) {
-        return "n/a";
-      }
 
-      return typesOfBuyers.find(type => type.value === this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.typeOfBuyer)).name[this.$i18n.locale];
-    },
-    getMainGeneralActivity() {
-      if (!this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.mainGeneralActivity)) {
-        return "n/a";
-      }
+        return typesOfBuyers.find(type => type.value === this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.typeOfBuyer)).name[this.$i18n.locale];
+      },
+      getMainGeneralActivity() {
+        if (!this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.mainGeneralActivity)) {
+          return "n/a";
+        }
 
-      return mainGeneralActivites.find(activity => activity.value === this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.mainGeneralActivity)).name[this.$i18n.locale];
+        return mainGeneralActivites.find(activity => activity.value === this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.mainGeneralActivity)).name[this.$i18n.locale];
+      },
+      randomSortPlatforms() {
+        return [...this.platforms].sort(() => 0.5 - Math.random());
+      }
     },
-    randomSortPlatforms() {
-      return [...this.platforms].sort(() => 0.5 - Math.random());
+    methods: {
+      gd(...args) {
+        return getDataFromObject(...args);
+      },
+      fd(...ars) {
+        return formatDate(...ars);
+      }
     }
-  },
-  methods: {
-    gd(...args) {
-      return getDataFromObject(...args);
-    },
-    fd(...ars) {
-      return formatDate(...ars);
-    }
-  }
-};
+  };
 </script>
 
 <style lang="scss" scoped>
@@ -651,20 +654,25 @@ export default {
         margin-bottom: 5px;
         padding-right: 10px;
         font-size: 15px;
+        &_name:first-letter {
+          text-transform: uppercase;
+        }
         img {
           max-width: 150px;
         }
+        &-platform {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          margin-top: 20px;
+        }
+        a {
+          text-decoration: underline;
+          &:hover {
+            text-decoration: none;
+          }
+        }
       }
-      .flex {
-        display: flex;
-        justify-content: space-around;
-        margin-top: 20px;
-      }
-    }
-    .accordion-header {
-      width: 100%;
-      line-height: 1;
-      padding: 10px;
     }
   }
 
