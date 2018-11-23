@@ -532,21 +532,22 @@
                 </el-col>
               </el-row>
             </div>
-            
+
             <div class="info-block">
               <el-row
                   v-for="(doc, index) of gd(evRecord, _ => _.tender.documents).filter(doc => gd(doc, _ => _.relatedLots[0], '') === gd(lot, _ => _.id), [])"
                   :key="doc.id + index"
               >
                 <el-col :sm="16">
-                  <div class="info-block__value">
-                    <!-- @TODO human-readeble document type -->
-                    {{ gd(doc, _ => _.documentType) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a>
+                  <div class="info-block__documents">
+                    <div class="info-block__value">
+                      <!-- @TODO human-readeble document type -->
+                      {{ gd(doc, _ => _.documentType) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a>
+                    </div>
+                    <div class="info-block__text">
+                      ID: {{ gd(doc, _ => _.id) }}
+                    </div>
                   </div>
-                  <div class="info-block__text">
-                    ID: {{ gd(doc, _ => _.id) }}
-                  </div>
-                  
                 </el-col>
                 <el-col :sm="8">
                   <div class="info-block__text">
@@ -561,45 +562,52 @@
           </div>
         </el-collapse-item>
       </el-collapse>
-      
+
       <div class="info__title">Legal, economic, financial and technical information</div>
       <div class="info__sub-title">Conditions for participation</div>
       <div class="info-blocks">
         <div class="info-block">
           <el-row>
             <el-col :sm="24">
-              <div class="info-block__text">Suitability to pursue the professional activity, including requirements relating to enrolment on professional or trade registers</div>
+              <div class="info-block__text">Suitability to pursue the professional activity, including requirements
+                relating to enrolment on professional or trade registers
+              </div>
             </el-col>
           </el-row>
-          
+
           <el-row>
             <el-col :sm="24">
               <div class="info-block__value">Enrolment in a relevant professional register</div>
               <div class="info-block__text">
-                It is enrolled in relevant professional registers kept in the Member State of its establishment as described in Annex XI economic operators from certain Member States may have to comply with other requirements set out in that Annex.
+                It is enrolled in relevant professional registers kept in the Member State of its establishment as
+                described in Annex XI economic operators from certain Member States may have to comply with other
+                requirements set out in that Annex.
               </div>
             </el-col>
           </el-row>
-          
+
           <el-row>
             <el-col :sm="24">
               <div class="info-block__value">Enrolment in a trade register</div>
               <div class="info-block__text">
-                It is enrolled in trade registers kept in the Member State of its establishment as described in Annex XI of Directive  2014/24/EU; EOs from certain Member States may have to comply with other requirements set out in that Annex.
+                It is enrolled in trade registers kept in the Member State of its establishment as described in Annex XI
+                of Directive 2014/24/EU; EOs from certain Member States may have to comply with other requirements set
+                out in that Annex.
               </div>
             </el-col>
           </el-row>
-          
+
           <el-row>
             <el-col :sm="24">
               <div class="info-block__value">Authorisation of particular organisation needed</div>
               <div class="info-block__text">
-                ???Is a particular authorisation of a particular organisation needed in order to be able to perform the service in question in the country of establishment of the economic operator?
+                ???Is a particular authorisation of a particular organisation needed in order to be able to perform the
+                service in question in the country of establishment of the economic operator?
               </div>
             </el-col>
           </el-row>
         </div>
-        
+
         <div class="info-block">
           <el-row>
             <el-col :sm="24">
@@ -608,14 +616,15 @@
               </div>
             </el-col>
           </el-row>
-          
+
           <el-row>
             <el-col :sm="16">
               <div class="info-block__value">
                 Economic and financial standing
               </div>
               <div class="info-block__text">
-                Its general yearly turnover for the number of financial years required in the relevant notice, the procurement documents or the ESPD is as follows more information
+                Its general yearly turnover for the number of financial years required in the relevant notice, the
+                procurement documents or the ESPD is as follows more information
               </div>
             </el-col>
             <el-col :sm="8">
@@ -627,14 +636,16 @@
               </div>
             </el-col>
           </el-row>
-          
+
           <el-row>
             <el-col :sm="16">
               <div class="info-block__value">
                 Average yearly turnover
               </div>
               <div class="info-block__text">
-                It is enrolled in trade registers kept in the Member State of its establishment as described in Annex XI of Directive 2014/24/EU; EOs from certain Member States may have to comply with other requirements set out in that Annex.
+                It is enrolled in trade registers kept in the Member State of its establishment as described in Annex XI
+                of Directive 2014/24/EU; EOs from certain Member States may have to comply with other requirements set
+                out in that Annex.
               </div>
             </el-col>
             <el-col :sm="8">
@@ -646,14 +657,15 @@
               </div>
             </el-col>
           </el-row>
-          
+
           <el-row>
             <el-col :sm="16">
               <div class="info-block__value">
                 Set up of economic operator
               </div>
               <div class="info-block__text">
-                ???Is a particular authorisation of a particular organisation needed in order to be able to perform the service in question in the country of establishment of the economic operator?
+                ???Is a particular authorisation of a particular organisation needed in order to be able to perform the
+                service in question in the country of establishment of the economic operator?
               </div>
             </el-col>
             <el-col :sm="8">
@@ -666,7 +678,7 @@
             </el-col>
           </el-row>
         </div>
-        
+
         <div class="info-block">
           <el-row>
             <el-col :sm="24">
@@ -675,7 +687,7 @@
               </div>
             </el-col>
           </el-row>
-          
+
           <el-row>
             <el-col :sm="16">
               <div class="info-block__value">
@@ -694,7 +706,7 @@
               </div>
             </el-col>
           </el-row>
-          
+
           <el-row>
             <el-col :sm="16">
               <div class="info-block__value">
@@ -713,14 +725,15 @@
               </div>
             </el-col>
           </el-row>
-          
+
           <el-row>
             <el-col :sm="16">
               <div class="info-block__value">
                 Subcontracting proportion
               </div>
               <div class="info-block__text">
-                Is a particular authorisation of a particular organisation needed in order to be able to perform the service in question in the country of establishment of the economic operator?
+                Is a particular authorisation of a particular organisation needed in order to be able to perform the
+                service in question in the country of establishment of the economic operator?
               </div>
             </el-col>
             <el-col :sm="8">
@@ -734,25 +747,29 @@
           </el-row>
         </div>
       </div>
-      
+
       <div class="info__sub-title">General terms of the contract</div>
       <div class="info-blocks">
         <div class="info-block">
           <el-row>
             <el-col :sm="24">
-              <div class="info-block__value">???Link to the document for current procurement category published on MTender web portal</div>
+              <div class="info-block__value">???Link to the document for current procurement category published on
+                MTender web portal
+              </div>
             </el-col>
           </el-row>
         </div>
       </div>
-      
+
       <div class="info__sub-title">Special conditions of the contract</div>
       <div class="info-blocks">
         <div class="info-block">
           <el-row>
             <el-col :sm="16">
               <div class="info-block__value">Contract performance guarantee</div>
-              <div class="info-block__text">The economic operator's number of managerial staff for the last three years were as follows</div>
+              <div class="info-block__text">The economic operator's number of managerial staff for the last three years
+                were as follows
+              </div>
             </el-col>
             <el-col :sm="8">
               <div class="info-block__value">???15’000,00 MDL</div>
@@ -761,7 +778,7 @@
           </el-row>
         </div>
       </div>
-      
+
       <div class="info__title">Procedure</div>
       <div class="info__sub-title">Description</div>
       <div class="info-blocks">
@@ -779,7 +796,7 @@
             </el-col>
           </el-row>
         </div>
-        
+
         <div class="info-block">
           <el-row>
             <el-col :sm="10">
@@ -790,12 +807,14 @@
             </el-col>
             <el-col :sm="14">
               <div class="info-block__text">Additional information about electronic auction</div>
-              <div class="info-block__value">???Start date: 20/09/2018, 14:30, number of rounds: 3, mode: multiple round</div>
+              <div class="info-block__value">???Start date: 20/09/2018, 14:30, number of rounds: 3, mode: multiple
+                round
+              </div>
             </el-col>
           </el-row>
         </div>
       </div>
-      
+
       <div class="info__sub-title">Administrative information</div>
       <div class="info-blocks">
         <div class="info-block">
@@ -803,7 +822,7 @@
             <el-col :sm="24">
               <div class="info-block__text">Previous publication concerning this procedure</div>
               <div class="info-block__value">
-                Procurement plan / Buyer’s profile / PN:  No
+                Procurement plan / Buyer’s profile / PN: No
                 <a
                     :href="`/plans/${gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === 'planning')), _ => _.identifier)}`"
                     target="_blank">
@@ -813,7 +832,7 @@
             </el-col>
           </el-row>
         </div>
-        
+
         <div class="info-block">
           <el-row>
             <el-col :sm="24">
@@ -824,18 +843,20 @@
             </el-col>
           </el-row>
         </div>
-        
+
         <div class="info-block">
           <el-row>
             <el-col :sm="24">
-              <div class="info-block__text">Estimated date of dispatch of invitations to tender or to participate to selected candidates</div>
+              <div class="info-block__text">Estimated date of dispatch of invitations to tender or to participate to
+                selected candidates
+              </div>
               <div class="info-block__value">
                 ???Date: (dd/mm/yyyy)
               </div>
             </el-col>
           </el-row>
         </div>
-        
+
         <div class="info-block">
           <el-row>
             <el-col :sm="24">
@@ -846,7 +867,7 @@
             </el-col>
           </el-row>
         </div>
-        
+
         <div class="info-block">
           <el-row>
             <el-col :sm="24">
@@ -857,15 +878,18 @@
             </el-col>
           </el-row>
         </div>
-        
+
         <div class="info-block">
           <el-row>
             <el-col :sm="24">
               <div class="info-block__text">
-                For electronic tendering procedures upon expiry of submission deadlines, MTender shall disclose received tender forms or requests to participate online on the MTender web portal and generate an electronic document with a record of opening.
+                For electronic tendering procedures upon expiry of submission deadlines, MTender shall disclose received
+                tender forms or requests to participate online on the MTender web portal and generate an electronic
+                document with a record of opening.
               </div>
               <div class="info-block__text">
-                For non-electronic procedures: negotiated with publication of contract notice, competitive dialogue, design contest and innovative partnership
+                For non-electronic procedures: negotiated with publication of contract notice, competitive dialogue,
+                design contest and innovative partnership
               </div>
             </el-col>
             <el-col :sm="16">
@@ -882,23 +906,32 @@
           </el-row>
         </div>
       </div>
-      
+
       <div class="info__title">Complementary information</div>
       <div class="info__sub-title">Information about electronic workflows</div>
       <ul class="info-list">
         <li>Electronic ordering may be used.</li>
         <li>Electronic invoicing (e-Factura) will be accepted.</li>
         <li>Electronic payment in local currency (MDL) will be used.</li>
-        <li>The MTender does not require the use of tools and devices that are not generally available for electronic communication.</li>
+        <li>The MTender does not require the use of tools and devices that are not generally available for electronic
+          communication.
+        </li>
         <li>Use of mobile devices is not recommended for participating in the electronic auction.</li>
       </ul>
       <div class="info__sub-title">Additional information</div>
       <ul class="info-list">
         <li>The contract does not involve joint procurement and is not awarded by a CPB.</li>
         <li>This is not a recurrent procurement.</li>
-        <li>Minimum time frame during which the tenderer must maintain the tender is 90 days starting from opening of the tenders.</li>
-        <li>The amount and currency of the bid guarantee is - % of estimated value MDL and must be valid 90 days starting from opening of the tenders. </li>
-        <li>Failure of the selected Economic Operator to submit the contract performance guarantee, if applicable, or to sign the contract shall constitute sufficient grounds for the annulment of the award of the contract and forfeiture of the bid guarantee.</li>
+        <li>Minimum time frame during which the tenderer must maintain the tender is 90 days starting from opening of
+          the tenders.
+        </li>
+        <li>The amount and currency of the bid guarantee is - % of estimated value MDL and must be valid 90 days
+          starting from opening of the tenders.
+        </li>
+        <li>Failure of the selected Economic Operator to submit the contract performance guarantee, if applicable, or to
+          sign the contract shall constitute sufficient grounds for the annulment of the award of the contract and
+          forfeiture of the bid guarantee.
+        </li>
         <li>???+Free text from CA</li>
       </ul>
     </div>
@@ -994,7 +1027,7 @@
       font-size: 20px;
       font-weight: 700;
     }
-  
+
     &-block {
       &:not(:last-child) {
         border-bottom: 1px solid #d9d9d9;
@@ -1005,7 +1038,7 @@
         font-size: 13px;
       }
       &__value {
-        margin-bottom: 5px;
+        line-height: 2;
         padding-right: 10px;
         font-size: 15px;
         &_name:first-letter {
@@ -1027,13 +1060,25 @@
           }
         }
       }
+      &__documents{
+        padding-left: 41px;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAjCAYAAACKPxqrAAABl0lEQVRIS+2X3VXCQBCF72wD2oF0oFYgdmAHMpsCLEHowAayCxVoCdABdgAdUAHjmZwkJ8FN2ITk6AP7ms18udk7P0ve+wcR+QQwwQBLRDhJkuVpKHLO7QDcAdhcyNEP1TggomdmXlfjKUgUYq2dXgJK03RORO95jEMO2xYxxwCtALwCqMEGB6mS4/E4ISKfwx6ZeTcKSM/HOfcB4A3AVuGDgxrOeTsYyHs/FZEvADch2GCgJsc659TmT9GgNE1nRKRuKpeIrELJWd3TB1TNkyyWiCySJJm35d8VhJMSc/11zfb23t+KyH1ZfYlmIjKrlX6ipYiUvYeIvpn50NnezjkNUsudFiuvrLW1D9G90faOhAUhnUD55jZljZDOoBZYK6QXKAA7C+kNqsAQOviQUaLNcMnAclaRtgRjTDY6MfMiBqYlyhiTTVTVUatVUfFQAdZaigHlY9uv1vH/QDFqTrpurRlGKxoVpGboO/QbY9bRZuiqYtCZoS/8TxK2uB/V7jN9FQTe0+vQnvIbn46yWSUYYe2J6OUHjjTEmmNtDa4AAAAASUVORK5CYII=);
+        background-position: left;
+        background-repeat: no-repeat;
+      }
+    }
+    li:before {
+      content: "■";
+      color: $mainC;
+      padding-right: 10px;
     }
   }
-  .entity-nav{
+
+  .entity-nav {
     display: flex;
     font-size: 15px;
     justify-content: space-around;
-    border-bottom: 1px solid  #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
     padding-top: 30px;
     padding-bottom: 20px;
     color: #727272;
@@ -1042,9 +1087,9 @@
     background-color: #fff;
     z-index: 20;
 
-    a{
+    a {
       transition: 0.4s;
-      &:hover{
+      &:hover {
         color: #235aa6;
       }
     }

@@ -99,6 +99,10 @@
       &:after {
         display: none;
       }
+      .is-active{
+        background-color: #fff;
+        color: #235aa6;
+      }
     }
     &__item {
       font-size: 19px;
@@ -107,10 +111,6 @@
       line-height: 1;
       height: auto;
       user-select: none;
-    }
-    .is-active {
-      background-color: #fff;
-      color: #235aa6;
     }
     &__active-bar {
       display: none;
