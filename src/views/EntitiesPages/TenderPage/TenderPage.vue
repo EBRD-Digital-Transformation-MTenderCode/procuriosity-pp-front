@@ -16,7 +16,7 @@
                   {{ gd(tender, _ => _.MSRecord.compiledRelease.tender.description) }}
                 </div>
                 <div class="entity-main-info__timeline">
-                  TIMELINE
+
                 </div>
               </el-col>
               <el-col :xs=24 :sm="8" :offset="2">
@@ -188,7 +188,7 @@
       }
       &__description {
         margin-bottom: 40px;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 300;
         color: #fff;
       }
@@ -246,8 +246,12 @@
           color: #fff;
         }
       }
+      .el-container>.el-row>.el-col {
+        display: block;
+      }
     }
     &-tabs {
+      margin-bottom: -20px;
       background-color: #fff;
     }
   }

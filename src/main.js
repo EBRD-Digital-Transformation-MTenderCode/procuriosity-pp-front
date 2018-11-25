@@ -15,6 +15,7 @@ import "@/views/EntitiesPages/_entity-info.scss";
 import Vue from "vue";
 
 import Element from "element-ui";
+import scrollSpy, { Easing } from 'vue2-scrollspy';
 
 import i18n from "./i18n/index";
 import router from "./router";
@@ -24,6 +25,10 @@ import App from "./App.vue";
 
 Vue.use(Element, {
   i18n: (key, value) => i18n.t(key, value)
+});
+
+Vue.use(scrollSpy, {
+  easing: Easing.Circular.InOut
 });
 
 Vue.config.productionTip = false;
