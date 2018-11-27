@@ -554,9 +554,7 @@
                   <el-col :sm="16">
                     <div class="info-block__documents">
                       <div class="info-block__value">
-                        <!-- @TODO human-readeble document type -->
-                        {{ gd(doc, _ => _.documentType) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a>
-                      </div>
+                        {{ convertCase(gd(doc, _ => _.documentType)) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a></div>
                       <div class="info-block__text">
                         ID: {{ gd(doc, _ => _.id) }}
                       </div>
@@ -968,8 +966,7 @@
               <el-col :sm="16">
                 <div class="info-block__documents">
                   <div class="info-block__value">
-                    <!-- @TODO human-readeble document type -->
-                    {{ gd(doc, _ => _.documentType) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a>
+                    {{ convertCase(gd(doc, _ => _.documentType) ) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a>
                   </div>
                   <div class="info-block__text">
                     ID: {{ gd(doc, _ => _.id) }}
@@ -1252,7 +1249,7 @@
   import typesOfBuyers from "./../../../../store/types/buyers-types";
   import mainGeneralActivites from "./../../../../store/types/main-general-activity-types";
 
-  import { getDataFromObject, formatDate } from "../../../../utils";
+  import { getDataFromObject, formatDate, convertCamelCaseToTitleCase} from "./../../../../utils";
 
   export default {
     name: "ContractNotice",
@@ -1325,6 +1322,9 @@
       },
       fd(...ars) {
         return formatDate(...ars);
+      },
+      convertCase(str) {
+        return convertCamelCaseToTitleCase(str)
       }
     }
   };

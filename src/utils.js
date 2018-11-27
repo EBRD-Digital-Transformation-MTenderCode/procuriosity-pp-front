@@ -26,3 +26,12 @@ export const convertObjectToQueryParamsString = obj => {
     return `${accVal}${i !== 0 ? "&" : ""}${key}=${encodeURIComponent(Array.isArray(val) ? JSON.stringify(val) : val)}`;
   }, "?");
 };
+
+export const convertCamelCaseToTitleCase = str =>{
+  if (!str && typeof str !== "string") {
+    throw new Error;
+  }
+
+  const result = str.replace(/([A-Z])/g, " $1");
+  return result.charAt(0).toUpperCase() + result.slice(1);
+};
