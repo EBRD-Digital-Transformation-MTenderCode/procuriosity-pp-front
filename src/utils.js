@@ -27,11 +27,19 @@ export const convertObjectToQueryParamsString = obj => {
   }, "?");
 };
 
-export const convertCamelCaseToTitleCase = str =>{
+export const convertCamelCaseToTitleCase = str => {
   if (!str && typeof str !== "string") {
     throw new Error;
   }
 
   const result = str.replace(/([A-Z])/g, " $1");
   return result.charAt(0).toUpperCase() + result.slice(1);
+};
+
+export const transformSpecialSymbols = str => {
+  if(!str && typeof str !== "string"){
+    throw new Error;
+  }
+  const parser = new DOMParser;
+  return parser.parseFromString(`<!doctype html><html><body> ${str}</body></html>` ,'text/html').body.textContent;
 };

@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="entity-nav" v-scroll-spy-active="{selector: 'a', class: 'active'}" v-scroll-spy-link>
+    <div class="entity-nav" data-scroll-spy-id="clarification" v-scroll-spy-active="{selector: 'a', class: 'active'}" v-scroll-spy-link>
       <a>Clarification</a>
     </div>
-    <div class="info" v-scroll-spy="{offset: 75}">
+    <div class="info" data-scroll-spy-id="clarification" v-scroll-spy="{offset: 75, allowNoActive: true}">
       <div>
         <div class="info__title">Clarifications</div>
         <div v-if="evRecord.tender.hasOwnProperty('enquiries')">
@@ -19,7 +19,7 @@
                     Title
                   </div>
                   <div class="info-block__value">
-                    {{ gd(question, _ => _.title) }}
+                    {{ transformSS(gd(question, _ => _.title)) }}
                   </div>
                 </el-col>
                 <el-col :sm="8">
@@ -39,7 +39,7 @@
                     Description
                   </div>
                   <div class="info-block__value">
-                    {{ gd(question, _ => _.description) }}
+                    <div class="info-block__value__pre">{{ transformSS(gd(question, _ => _.description)) }}</div>
                   </div>
                 </el-col>
               </el-row>
@@ -50,7 +50,7 @@
                 <el-row>
                   <el-col :sm="16">
                     <div class="info-block__value">
-                      <span class="arrow">⮡</span> {{ gd(question, _ => _.title) }}
+                      <span class="arrow">⮡</span> {{ transformSS(gd(question, _ => _.title)) }}
                     </div>
                   </el-col>
                   <el-col :sm="8">
@@ -64,7 +64,7 @@
                 <el-row>
                   <el-col :sm="24">
                     <div class="info-block__value info-block__value__italic">
-                      {{ gd(question, _ => _.answer) }}
+                      <div class="info-block__value__pre">{{ transformSS(gd(question, _ => _.answer)) }}</div>
                     </div>
                   </el-col>
                 </el-row>
@@ -79,7 +79,7 @@
 </template>
 
 <script>
-  import { getDataFromObject, formatDate } from "./../../../../utils";
+  import { getDataFromObject, formatDate, transformSpecialSymbols } from "./../../../../utils";
 
   export default {
     name: "Clarification",
@@ -95,6 +95,9 @@
       fd(...ars) {
         return formatDate(...ars);
       },
+      transformSS(str){
+        return transformSpecialSymbols(str)
+      }
     }
   };
 </script>

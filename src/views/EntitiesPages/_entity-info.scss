@@ -348,6 +348,9 @@
       &__italic{
         font-style: italic;
       }
+      &__pre{
+        white-space: pre-wrap;
+      }
     }
     &__documents {
       padding-left: 41px;
@@ -356,7 +359,7 @@
       background-repeat: no-repeat;
     }
     &__answer{
-      background-color: #f3f3f3;
+      background-color: #D8D8D8;
       padding: 10px 10px 10px 40px;
       .arrow{
         font-size: 25px;
@@ -420,7 +423,7 @@
   justify-content: space-between;
   padding: 18px 0;
   border-bottom: 1px solid #d9d9d9;
-  background-color: #fff;
+  background-color: #efefef;;
   font-size: 15px;
   color: #727272;
   a {

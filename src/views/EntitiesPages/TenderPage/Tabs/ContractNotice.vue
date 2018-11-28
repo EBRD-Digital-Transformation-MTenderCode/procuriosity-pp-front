@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="entity-nav" v-scroll-spy-active="{selector: 'a', class: 'active'}" v-scroll-spy-link>
+    <div class="entity-nav"   data-scroll-spy-id="cn"  v-scroll-spy-active="{selector: 'a', class: 'active'}" v-scroll-spy-link>
       <a>Contracting authority</a>
       <a>Object</a>
       <a>Legal, economic, financial and technical information</a>
@@ -8,7 +8,7 @@
       <a>Complementary information</a>
       <a>Budget</a>
     </div>
-    <div class="info" v-scroll-spy="{offset: 75}">
+    <div class="info"  data-scroll-spy-id="cn" v-scroll-spy="{offset: 75, allowNoActive: true}">
 
       <!-- Contracting authority -->
       <div>
