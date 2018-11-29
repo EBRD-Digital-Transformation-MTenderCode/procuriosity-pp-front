@@ -139,7 +139,14 @@
                   Main Internet address (URL)
                 </div>
                 <div class="info-block__value">
-                  <a href="https://www.fisc.md" target="_blank">www.fisc.md</a>
+                  <a
+                      v-if="gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === 'buyer')), _ =>_.contactPoint.url)"
+                      :href="gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === 'buyer')), _ =>_.contactPoint.url)"
+                      target="_blank"
+                  >
+                    {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === 'buyer')), _ =>_.contactPoint.url) }}
+                  </a>
+                  <span v-else>n/a</span>
                 </div>
               </el-col>
               <el-col :sm="14">
@@ -147,17 +154,16 @@
                   Address of the buyer profile (URL)
                 </div>
                 <div class="info-block__value">
+                  <!-- @TODO need link to plans with buyer identifier id search params -->
                   <!--<a
-                    :href="`/plans/${gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === 'planning')), _ => _.identifier)}`"
+                    :href="`/${$i18n.locale !== 'ro' ? `${$i18n.locale}/` : '' }plans/${gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === 'planning')), _ => _.identifier)}`"
                     target="_blank"
                   >
                     www.mtender.gov.md/{{ $i18n.locale !== "ro" ? `${$i18n.locale}/` : "" }}plans/{{ gd(gd(msRecord, _ =>
                     _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship ===
                     "planning")), _ => _.identifier) }}
                   </a>-->
-                  www.mtender.gov.md/{{ $i18n.locale !== "ro" ? `${$i18n.locale}/` : "" }}plans/{{ gd(gd(msRecord, _ =>
-                    _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship ===
-                    "planning")), _ => _.identifier) }}
+                  www.mtender.gov.md/{{ $i18n.locale !== "ro" ? `${$i18n.locale}/` : "" }}plans
                 </div>
               </el-col>
             </el-row>
@@ -194,13 +200,14 @@
                 The procurement documents are available for unrestricted and full direct access, free of charge, at:
               </div>
               <div class="info-block__value">
-                www.mtender.gov.md/{{ $i18n.locale !== "ro" ? `${$i18n.locale}/` : "" }}tenders/{{ gd(msRecord, _ =>
-                _.ocid) }}
+                <!-- @TODO need do link -->
+                www.mtender.gov.md/{{ $i18n.locale !== "ro" ? `${$i18n.locale}/` : "" }}tenders/{{ gd(msRecord, _ => _.ocid) }}
               </div>
             </el-col>
           </el-row>
         </div>
-
+        
+        <!-- @TODO info from PE -->
         <div class="info-block">
           <el-row>
             <el-col :sm="10">
@@ -229,7 +236,8 @@
             </el-col>
           </el-row>
         </div>
-
+        <!-- @TODO end of info from PE -->
+        
         <div class="info-block">
           <el-row>
             <el-col :sm="24">
@@ -261,13 +269,10 @@
         <div class="info-blocks">
           <div class="info-block">
             <el-row>
-              <el-col :sm="16">
+              <el-col :sm="24">
                 <div class="info-block__text">Title</div>
+                <!-- @TODO paste tender title -->
                 <div class="info-block__value">???Lucrări de instalaţii pentru clădiri</div>
-              </el-col>
-              <el-col :sm="8">
-                <div class="info-block__text">Reference number</div>
-                <div class="info-block__value">???MD-IDNO: 1007601009037</div>
               </el-col>
             </el-row>
           </div>
@@ -281,11 +286,11 @@
                   {{ gd(msRecord, _ => _.tender.classification.description) }}
                 </div>
               </el-col>
-              <el-col :sm="6">
+              <!--<el-col :sm="6">
                 <div class="info-block__text">Supplementary CPV code</div>
                 <div class="info-block__value">???n/a</div>
-              </el-col>
-              <el-col :sm="8">
+              </el-col>-->
+              <el-col :sm="14">
                 <div class="info-block__text">Type of contract</div>
                 <div class="info-block__value info-block__value_name">{{ gd(msRecord, _ =>
                   _.tender.mainProcurementCategory) }}
@@ -311,6 +316,7 @@
               <el-col :sm="24">
                 <div class="info-block__text">Short description</div>
                 <div class="info-block__value">
+                  <!-- @TODO description tender -->
                   ???Achiziționarea lucrărilor la obiectul ”Reparația capitală a sistemului de încălzire la instituția
                   preșcolară nr.4 din str.Fedico,8 din mun.Bălți” conform necesităților DÎTS a
                   Primăriei mun.Bălți
@@ -324,14 +330,15 @@
               <el-col :sm="24">
                 <div class="info-block__text">Information about lots</div>
                 <div class="info-block__value">
-                  <div>???This contract is divided into lots</div>
-                  <div>???Tenders may be submitted for all lots</div>
+                  <div>This contract is divided into lots</div>
+                  <div>Tenders may be submitted for all lots</div>
                 </div>
               </el-col>
             </el-row>
           </div>
         </div>
-
+        <!-- @TODO for class ...text and ...value mb=5px -->
+        <!-- @TODO need margins between lots -->
         <div class="info__sub-title">Description</div>
         <el-collapse accordion :value="gd(evRecord, _ => _.tender.lots[0].id, '0') + '0'">
           <el-collapse-item
@@ -345,12 +352,14 @@
                   <el-col :sm="16">
                     <div class="info-block__text">Title</div>
                     <div class="info-block__value">
+                      <!-- @TODO < line hight -->
                       {{ gd(lot, _ => _.title) }}
                     </div>
                   </el-col>
                   <el-col :sm="8">
-                    <div class="info-block__text">Lot number</div>
+                    <div class="info-block__text">Lot identifier</div>
                     <div class="info-block__value">
+                      <!-- @TODO lot id not bold -->
                       {{ index + 1 }}
                     </div>
                   </el-col>
@@ -359,7 +368,7 @@
             </template>
 
             <div class="info-blocks">
-              <div class="info-block">
+              <!--<div class="info-block">
                 <el-row>
                   <el-col :sm="16">
                     <div class="info-block__text">Additional CPV codes</div>
@@ -374,11 +383,11 @@
                     </div>
                   </el-col>
                 </el-row>
-              </div>
+              </div>-->
 
               <div class="info-block">
                 <el-row>
-                  <el-col :sm="16">
+                  <el-col :sm="24">
                     <div class="info-block__text">Place of performance</div>
                     <div class="info-block__value">
                       {{ gd(lot, _ => _.placeOfPerformance.address.postalCode, "n/a") }},
@@ -388,15 +397,16 @@
                       {{ gd(lot, _ => _.placeOfPerformance.address.streetAddress) }}
                     </div>
                   </el-col>
-                  <el-col :sm="8">
+                  <!--<el-col :sm="8">
                     <div class="info-block__text">NUTS code</div>
                     <div class="info-block__value">
                       n/a
                     </div>
-                  </el-col>
+                  </el-col>-->
                 </el-row>
               </div>
 
+              <!-- @TODO list items -->
               <div class="info-block">
                 <el-row>
                   <el-col :sm="16">
@@ -415,9 +425,9 @@
               </div>
             </div>
 
-            <div class="info__sub-title">Level of Performance</div>
+           <!-- <div class="info__sub-title">Level of Performance</div>-->
             <div class="info-blocks">
-              <div class="info-block">
+              <!--<div class="info-block">
                 <el-row>
                   <el-col :sm="16">
                     <div class="info-block__text">Warranty Period</div>
@@ -496,12 +506,12 @@
                     </div>
                   </el-col>
                 </el-row>
-              </div>
+              </div>-->
 
               <div class="info-block">
                 <el-row>
                   <el-col :sm="24">
-                    <div class="info-block__text">Destimated value excluding VAT</div>
+                    <div class="info-block__text">Estimated value excluding VAT</div>
                     <div class="info-block__value">
                       {{ gd(lot, _ => _.value.amount) }} {{ gd(lot, _ => _.value.currency) }}
                     </div>
@@ -516,9 +526,9 @@
                       system
                     </div>
                     <div class="info-block__value">
-                      Start: {{ fd(gd(lot, _ => _.contractPeriod.startDate), "DD/MM/YYYY") }} /
-                      End: {{ fd(gd(lot, _ => _.contractPeriod.endDate), "DD/MM/YYYY") }}
-                      <div>???This contract is not a subject to renewal</div>
+                      Start: {{ fd(gd(lot, _ => _.contractPeriod.startDate), "DD.MM.YYYY") }} /
+                      End: {{ fd(gd(lot, _ => _.contractPeriod.endDate), "DD.MM.YYYY") }}
+                      <div>This contract is not a subject to renewal</div>
                     </div>
                   </el-col>
                 </el-row>
@@ -551,6 +561,9 @@
                   v-for="(doc, index) of gd(evRecord, _ => _.tender.documents).filter(doc => gd(doc, _ => _.relatedLots[0], '') === gd(lot, _ => _.id), [])"
                   :key="doc.id + index"
                 >
+                  <!-- @TODO title full line -->
+                  <!-- @TODO change ico  -->
+                  <!-- @TODO hight text = hight ico  -->
                   <el-col :sm="16">
                     <div class="info-block__documents">
                       <div class="info-block__value">
@@ -563,9 +576,6 @@
                   <el-col :sm="8">
                     <div class="info-block__text">
                       Published: {{ fd(gd(doc, _ => _.datePublished)) }}
-                    </div>
-                    <div class="info-block__text">
-                      Last modified: {{ fd(gd(doc, _ => _.datePublished)) }}
                     </div>
                   </el-col>
                 </el-row>
@@ -615,14 +625,14 @@
               <el-col :sm="24">
                 <div class="info-block__value">Authorisation of particular organisation needed</div>
                 <div class="info-block__text">
-                  ???Is a particular authorisation of a particular organisation needed in order to be able to perform the
+                  Is a particular authorisation of a particular organisation needed in order to be able to perform the
                   service in question in the country of establishment of the economic operator?
                 </div>
               </el-col>
             </el-row>
           </div>
 
-          <div class="info-block">
+          <!--<div class="info-block">
             <el-row>
               <el-col :sm="24">
                 <div class="info-block__text">
@@ -691,9 +701,9 @@
                 </div>
               </el-col>
             </el-row>
-          </div>
+          </div>-->
 
-          <div class="info-block">
+          <!--<div class="info-block">
             <el-row>
               <el-col :sm="24">
                 <div class="info-block__text">
@@ -759,7 +769,7 @@
                 </div>
               </el-col>
             </el-row>
-          </div>
+          </div>-->
         </div>
 
         <div class="info__sub-title">General terms of the contract</div>
@@ -767,31 +777,32 @@
           <div class="info-block">
             <el-row>
               <el-col :sm="24">
-                <div class="info-block__value">???Link to the document for current procurement category published on
-                  MTender web portal
+                <div class="info-block__value">
+                  <!-- @TODO link to current contract template -->
+                  ???Link to the document for current procurement category published on MTender web portal
                 </div>
               </el-col>
             </el-row>
           </div>
         </div>
 
-        <div class="info__sub-title">Special conditions of the contract</div>
+        <!--<div class="info__sub-title">Special conditions of the contract</div>
         <div class="info-blocks">
-        <div class="info-block">
-          <el-row>
-            <el-col :sm="16">
-              <div class="info-block__value">Contract performance guarantee</div>
-              <div class="info-block__text">The economic operator's number of managerial staff for the last three years
-                were as follows
-              </div>
-            </el-col>
-            <el-col :sm="8">
-              <div class="info-block__value">???15’000,00 MDL</div>
-              <div class="info-block__text">???is required as minimum</div>
-            </el-col>
-          </el-row>
-        </div>
-      </div>
+          <div class="info-block">
+            <el-row>
+              <el-col :sm="16">
+                <div class="info-block__value">Contract performance guarantee</div>
+                <div class="info-block__text">The economic operator's number of managerial staff for the last three years
+                  were as follows
+                </div>
+              </el-col>
+              <el-col :sm="8">
+                <div class="info-block__value">???15’000,00 MDL</div>
+                <div class="info-block__text">???is required as minimum</div>
+              </el-col>
+            </el-row>
+          </div>
+        </div>-->
       </div>
 
       <!-- Procedure -->
@@ -801,16 +812,16 @@
         <div class="info-blocks">
           <div class="info-block">
             <el-row>
-              <el-col :sm="10">
+              <el-col :sm="24">
                 <div class="info-block__text">Type of procedure</div>
                 <div class="info-block__value">
                   {{ gd(msRecord, _ => _.tender.procurementMethodDetails) }}
                 </div>
               </el-col>
-              <el-col :sm="14">
+              <!--<el-col :sm="14">
                 <div class="info-block__text">Accelerated procedure</div>
                 <div class="info-block__value">???Justification:</div>
-              </el-col>
+              </el-col>-->
             </el-row>
           </div>
 
@@ -819,11 +830,13 @@
               <el-col :sm="10">
                 <div class="info-block__text">Information about electronic auction</div>
                 <div class="info-block__value">
+                  <!-- @TODO check has auction -->
                   ???An electronic auction will (or will not) be used
                 </div>
               </el-col>
               <el-col :sm="14">
                 <div class="info-block__text">Additional information about electronic auction</div>
+                <!-- @TODO date only -->
                 <div class="info-block__value">???Start date: 20/09/2018, 14:30, number of rounds: 3, mode: multiple
                   round
                 </div>
@@ -839,7 +852,7 @@
             <el-col :sm="24">
               <div class="info-block__text">Previous publication concerning this procedure</div>
               <div class="info-block__value">
-                Procurement plan / Buyer’s profile / PN: No
+                Procurement plan / Buyer’s profile / PIN: No
                 <a
                   :href="`/plans/${gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === 'planning')), _ => _.identifier)}`"
                   target="_blank">
@@ -855,6 +868,7 @@
             <el-col :sm="24">
               <div class="info-block__text">Time limit for receipt of tenders or requests to participate</div>
               <div class="info-block__value">
+                <!-- @TODO tender period end date -->
                 ???Date: (dd/mm/yyyy) Local time: (hh:mm)
               </div>
             </el-col>
@@ -864,10 +878,11 @@
         <div class="info-block">
           <el-row>
             <el-col :sm="24">
-              <div class="info-block__text">Estimated date of dispatch of invitations to tender or to participate to
-                selected candidates
+              <div class="info-block__text">
+                Estimated date of dispatch of invitations to tender or to participate to selected candidates
               </div>
               <div class="info-block__value">
+                <!-- @TODO tender period end start -->
                 ???Date: (dd/mm/yyyy)
               </div>
             </el-col>
@@ -879,7 +894,7 @@
             <el-col :sm="24">
               <div class="info-block__text">Languages in which tenders or requests to participate may be submitted</div>
               <div class="info-block__value">
-                ???Romanian, Russian
+                Romanian, Russian
               </div>
             </el-col>
           </el-row>
@@ -890,6 +905,7 @@
             <el-col :sm="24">
               <div class="info-block__text">Conditions for opening of tenders</div>
               <div class="info-block__value">
+                <!-- @TODO action ? auction.startDate + 1 local time 9:00  : tender.endDate + 1 local time 9:00 -->
                 ???Date: (dd/mm/yyyy) Local time: (hh:mm)
               </div>
             </el-col>
@@ -912,11 +928,13 @@
             <el-col :sm="16">
               <div class="info-block__text"> Information about authorised persons and opening procedure</div>
               <div class="info-block__value">
+                <!-- @TODO text from Pasha -->
                 ???Full name of the persone
               </div>
             </el-col>
             <el-col :sm="8">
               <div class="info-block__text">
+                <!-- @TODO PE.country and locality -->
                 ???Place
               </div>
             </el-col>
@@ -946,14 +964,14 @@
           <li>Minimum time frame during which the tenderer must maintain the tender is 90 days starting from opening of
             the tenders.
           </li>
-          <li>The amount and currency of the bid guarantee is - % of estimated value MDL and must be valid 90 days
+          <!-- @TODO for > 400 000 goods and service and > 1 500 000 works -->
+          <li>The amount and currency of the bid guarantee is - <!-- @TODO Pasha -->% of estimated value MDL and must be valid 90 days
             starting from opening of the tenders.
           </li>
           <li>Failure of the selected Economic Operator to submit the contract performance guarantee, if applicable, or to
             sign the contract shall constitute sufficient grounds for the annulment of the award of the contract and
             forfeiture of the bid guarantee.
           </li>
-          <li>???+Free text from CA</li>
         </ul>
 
         <div class="info__sub-title">Procedure documents</div>
@@ -985,6 +1003,7 @@
           </div>
         </div>
 
+        <!-- @TODO after budget -->
         <div class="info__sub-title">Procudures for review</div>
         <div class="info-blocks">
           <div class="info-block">
@@ -1103,6 +1122,8 @@
       </ol>
       </div>
 
+      <!-- @TODO need formated amounts -->
+      
       <!-- Budget -->
       <div>
         <div class="info__title">Budget</div>
@@ -1130,6 +1151,7 @@
           </div>
         </div>
 
+        <!-- @ -->
         <div class="info__sub-title">Budget breakdown</div>
         <el-collapse accordion :value="gd(msRecord, _ => _.planning.budget.budgetBreakdown[0].id, '0') + '0'">
           <el-collapse-item
@@ -1153,12 +1175,12 @@
                       {{ gd(budgetBreakdown, _ => _.amount.currency) }}
                     </div>
                   </el-col>
-                  <el-col :sm="4">
+                  <!--<el-col :sm="4">
                     <div class="info-block__text">Status</div>
                     <div class="info-block__value">
                       ???Verified
                     </div>
-                  </el-col>
+                  </el-col>-->
                 </el-row>
               </div>
             </template>
@@ -1239,7 +1261,7 @@
           </el-collapse-item>
         </el-collapse>
 
-        <div class="info__sub-title">Date of dispatch of this notice: ???(dd/mm/yyyy)</div>
+        <div class="info__sub-title">Date of online publication of notice: <!-- @TODO tender period start date -->???(dd/mm/yyyy)</div>
       </div>
     </div>
   </div>
@@ -1280,11 +1302,14 @@
             src: "/img/achizitii.md.png",
             name: "achizitii.md"
           },
+          /* @TODO change img */
+          /* @TODO delete link and do disabled */
           {
             href: "https://ebs-integrator.com/",
             src: "/img/ebs-integrator.png",
             name: "ebs-integrator"
           },
+          /* @TODO delete link and do disabled */
           {
             href: "http://lonar-it.com/",
             src: "/img/lonar.png",

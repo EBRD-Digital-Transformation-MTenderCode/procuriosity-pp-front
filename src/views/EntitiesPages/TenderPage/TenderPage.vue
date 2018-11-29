@@ -139,7 +139,7 @@
     },
     data() {
       return {
-        activeTab: "clarification"
+        activeTab: "cn"
       };
     },
     created() {
