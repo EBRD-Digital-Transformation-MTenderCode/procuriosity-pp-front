@@ -19,6 +19,14 @@ export function formatDate(date, formatType = "DD.MM.YYYY / HH:mm", def = "none"
   }
 }
 
+export function addDay(date) {
+    return dayjs(date).add(1, 'day')
+}
+
+export function formatAmount(amount) {
+  return amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$& ')
+}
+
 export const convertObjectToQueryParamsString = obj => {
   return Object.entries(obj).filter(([key, val]) => {
     return Array.isArray(val) ? !!val.length : !!val;

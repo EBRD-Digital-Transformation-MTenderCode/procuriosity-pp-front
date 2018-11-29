@@ -32,19 +32,21 @@
                 </div>
                 <div class="entity-main-info__additional">
                   <div class="entity-main-info__additional-block">
-                    <div class="entity-main-info__additional-title">Процедура закупки</div>
+                    <div class="entity-main-info__additional-title">Procedure type</div>
                     <div class="entity-main-info__additional-value">
-                      {{ gd(tender, _ => _.MSRecord.compiledRelease.tender.procurementMethodDetails) }}
+                      {{ selectProcedure(gd(tender, _ =>
+                      _.MSRecord.compiledRelease.tender.mainProcurementCategory),gd(tender, _ =>
+                      _.MSRecord.compiledRelease.tender.value.amount)) }}
                     </div>
                   </div>
                   <div class="entity-main-info__additional-block">
-                    <div class="entity-main-info__additional-title">Закупающая организация</div>
+                    <div class="entity-main-info__additional-title">Procuring Entity Name</div>
                     <div class="entity-main-info__additional-value">
                       {{ gd(tender, _ => _.MSRecord.compiledRelease.tender.procuringEntity.name) }}
                     </div>
                   </div>
                   <div class="entity-main-info__additional-block">
-                    <div class="entity-main-info__additional-title">Регион</div>
+                    <div class="entity-main-info__additional-title">Region</div>
                     <div class="entity-main-info__additional-value">
                       {{ gd(tender, _ => _.MSRecord.compiledRelease.parties, []).find(part => part.roles.some(role =>
                       role === "procuringEntity")).address.addressDetails.region.description }}
@@ -66,30 +68,33 @@
             <el-row>
               <el-col :xs="24">
                 <el-tabs v-model="activeTab" stretch>
-                  <el-tab-pane label="PN" name="pn" lazy>
+                  <el-tab-pane disabled label="PN" name="pn" lazy>
                     <planning-notice />
                   </el-tab-pane>
                   <el-tab-pane label="Contract Notice" name="cn" lazy>
                     <contract-notice
                         :msRecord="gd(tender, _ => _.MSRecord.compiledRelease)"
                         :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
+                        :procedureType="selectProcedure(gd(tender, _ =>
+                      _.MSRecord.compiledRelease.tender.mainProcurementCategory),gd(tender, _ =>
+                      _.MSRecord.compiledRelease.tender.value.amount))"
                     />
                   </el-tab-pane>
-                  <el-tab-pane label="Clarification and review" name="clarification" lazy>
+                  <el-tab-pane :disabled="!gd(tender, _ => _.EVRecord.compiledRelease.tender.hasEnquiries)" label="Clarification and review" name="clarification" lazy>
                     <clarification
                         :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
                     />
                   </el-tab-pane>
-                  <el-tab-pane label="e-Auction" name="auction" lazy>
+                  <el-tab-pane disabled label="e-Auction" name="auction" lazy>
                     <auction />
                   </el-tab-pane>
-                  <el-tab-pane label="Received offers" name="offer" lazy>
+                  <el-tab-pane disabled label="Received offers" name="offer" lazy>
                     <received-offers />
                   </el-tab-pane>
-                  <el-tab-pane label="Evaluation" name="ev" lazy>
+                  <el-tab-pane disabled label="Evaluation" name="ev" lazy>
                     <evaluation />
                   </el-tab-pane>
-                  <el-tab-pane label="Contracts" name="can" lazy>
+                  <el-tab-pane disabled label="Contracts" name="can" lazy>
                     <contracts />
                   </el-tab-pane>
                 </el-tabs>
@@ -155,6 +160,25 @@
       },
       gd(...args) {
         return getDataFromObject(...args);
+      },
+      selectProcedure(category, amount) {
+        if (category === "goods" || category === "services") {
+          if (amount < 80000) {
+            return "Micro Value";
+          } else if (amount <= 400000) {
+            return "Small Value";
+          } else {
+            return "Open Tender";
+          }
+        }else if (category === "works") {
+          if (amount < 100000) {
+            return "Micro Value";
+          } else if (amount <= 1500000) {
+            return "Small Value";
+          } else {
+            return "Open Tender";
+          }
+        }
       }
     },
     computed: {
@@ -248,7 +272,7 @@
           color: #fff;
         }
       }
-      .el-container>.el-row>.el-col {
+      .el-container > .el-row > .el-col {
         display: block;
       }
     }

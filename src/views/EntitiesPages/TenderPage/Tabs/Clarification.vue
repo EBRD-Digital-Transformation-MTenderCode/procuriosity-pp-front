@@ -72,7 +72,7 @@
             </div>
           </div>
         </div>
-        <div v-else>NO DATA</div>
+        <div v-else>No Clarifications</div>
       </div>
     </div>
   </div>
