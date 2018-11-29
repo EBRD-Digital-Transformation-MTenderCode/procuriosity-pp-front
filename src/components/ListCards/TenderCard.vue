@@ -51,10 +51,10 @@
             <div class="title">{{$t("tender.buyer_region")}}:</div>
             <div class="text">{{ region }}</div>
           </div>
-          <div class="entity-type">
+          <!--<div class="entity-type">
             <div class="title">{{$t("tender.procedure_type")}}:</div>
             <div class="text text__status">{{ type }}</div>
-          </div>
+          </div>-->
           <div class="entity-id">
             <div class="title">{{$t("tender.tender_id")}}:</div>
             <div class="text">{{ entityId }}</div>

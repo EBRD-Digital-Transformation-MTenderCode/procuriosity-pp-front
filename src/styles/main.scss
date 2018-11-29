@@ -75,7 +75,7 @@
     }
     &-item {
       padding: 0 18px;
-      background-color: #e6e6e6;
+      background-color: #f3f3f3;
 
       &:not(:last-child) {
         margin-bottom: 15px;
@@ -105,19 +105,19 @@
 .entity-tabs {
   .el-tabs {
     &__nav-wrap {
-      margin-top: -47px;
+      margin-top: -62px;
       &:after {
         display: none;
       }
       .is-active{
-        background-color: #efefef;
+        background-color: #fff;
         color: #235aa6;
       }
     }
     &__item {
       font-size: 19px;
       color: #2da9e2;
-      padding: 14px;
+      padding: 24px 14px 19px;
       line-height: 1;
       height: auto;
       user-select: none;
@@ -140,6 +140,6 @@
 }
 
 .el-tabs__item.is-disabled {
-  color: #abaaaa;;
+  color: #abaaaa;
   pointer-events: none;
 }
