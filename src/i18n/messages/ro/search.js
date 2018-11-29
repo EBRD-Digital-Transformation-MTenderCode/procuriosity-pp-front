@@ -35,4 +35,5 @@ export default {
   "reset_button": "Restabili",
 
   "list_total_found": "Total găsit",
+  "list_refresh": "Reîmprospăta"
 }

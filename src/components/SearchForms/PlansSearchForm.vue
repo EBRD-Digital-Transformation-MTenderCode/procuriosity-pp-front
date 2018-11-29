@@ -4,6 +4,7 @@
       <!-- Strict search -->
       <search-switch
           name="titlesOrDescriptionsStrict"
+          entity="plans"
           :value="titlesOrDescriptionsStrict"
           :setValue="setFormParams"
           :label="$t('search.strict')"
@@ -17,10 +18,11 @@
           prefixIcon
           :placeholder="$t('search.titles_or_descriptions')"
       />
-      <button class="search-form__btn search-form__btn_search" />
+      <button class="search-form__btn search-form__btn_search" tabindex="-1" />
   
       <!-- @TODO need write more readable classes -->
       <button
+          tabindex="-1"
           @click="actionExpand"
           :class="moreCriterions ? 'search-form__btn search-form__btn_more search-form__btn_more_close': 'search-form__btn search-form__btn_more search-form__btn_more_open'"
       />
@@ -217,7 +219,7 @@
   import { REGIONS, CPV_CODES } from "./../../store/types/directories-types";
 
   import SearchInput from "./../FormsComponents/SearchInput";
-  import SearchSwitch from "../FormsComponents/SearchCheckboxButton";
+  import SearchSwitch from "../FormsComponents/SearchStrictButton";
   import SearchAutoCompleteInput from "./../FormsComponents/SearchAutoCompleteInput";
   import SearchRegions from "./../FormsComponents/SearchRegions";
   import SearchClassifications from "./../FormsComponents/SearchClassifications";

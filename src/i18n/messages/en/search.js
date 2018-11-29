@@ -35,4 +35,5 @@ export default {
   "reset_button": "Reset",
 
   "list_total_found": "Total found",
+  "list_refresh": "Refresh"
 }

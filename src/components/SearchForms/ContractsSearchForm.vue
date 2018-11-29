@@ -4,6 +4,7 @@
       <!-- Strict search -->
       <search-switch
         name="titlesOrDescriptionsStrict"
+        entity="contracts"
         :value="titlesOrDescriptionsStrict"
         :setValue="setFormParams"
         :label="$t('search.strict')"
@@ -17,10 +18,11 @@
         prefixIcon
         :placeholder="$t('search.titles_or_descriptions')"
       />
-      <button class="search-form__btn search-form__btn_search" />
+      <button class="search-form__btn search-form__btn_search" tabindex="-1" />
 
       <!-- @TODO need write more readable classes -->
       <button
+        tabindex="-1"
         @click="actionExpand"
         :class="moreCriterions ? 'search-form__btn search-form__btn_more search-form__btn_more_close': 'search-form__btn search-form__btn_more search-form__btn_more_open'"
       />
@@ -50,18 +52,6 @@
                   :setValues="setFormParams"
                   needFetch
                   :placeholder="$t('search.buyers_region_placeholder')"
-                />
-              </div>
-
-              <!-- Delivery regions -->
-              <div class="search-form-element">
-                <search-regions
-                  name="deliveriesRegions"
-                  :items="regionsList"
-                  :values="deliveriesRegions"
-                  :setValues="setFormParams"
-                  needFetch
-                  :placeholder="$t('search.deliveries_regions_placeholder')"
                 />
               </div>
 
@@ -135,6 +125,18 @@
             </el-col>
             <el-col :xs="24" :sm="12">
 
+               <!-- Delivery regions -->
+              <div class="search-form-element">
+                <search-regions
+                    name="deliveriesRegions"
+                    :items="regionsList"
+                    :values="deliveriesRegions"
+                    :setValues="setFormParams"
+                    needFetch
+                    :placeholder="$t('search.deliveries_regions_placeholder')"
+                />
+              </div>
+              
               <!-- Procedure types -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -237,11 +239,12 @@
               <!-- Classifications -->
               <div class="search-form-element">
                 <search-classifications
-                    name="classifications"
-                    :items="CPVCodesList"
-                    :values="classifications"
-                    :setValues="setFormParams"
-                    :placeholder="$t('search.classifications_placeholder')"
+                  name="classifications"
+                  :items="CPVCodesList"
+                  :values="classifications"
+                  :setValues="setFormParams"
+                  needFetch
+                  :placeholder="$t('search.classifications_placeholder')"
                 />
               </div>
             </el-col>
@@ -262,7 +265,7 @@
   import { REGIONS, CPV_CODES } from "./../../store/types/directories-types";
 
   import SearchInput from "./../FormsComponents/SearchInput";
-  import SearchSwitch from "../FormsComponents/SearchCheckboxButton";
+  import SearchSwitch from "../FormsComponents/SearchStrictButton";
   import SearchAutoCompleteInput from "./../FormsComponents/SearchAutoCompleteInput";
   import SearchRegions from "./../FormsComponents/SearchRegions";
   import SearchClassifications from "./../FormsComponents/SearchClassifications";
@@ -287,16 +290,6 @@
       "search-period": SearchPeriods,
       "multiple-input": MultipleInput,
       "reset-button": ResetButton
-    },
-    created() {
-      const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
-      if (localStorageEntities.contracts.hasOwnProperty("isExpanded")) {
-        this.moreCriterions = localStorageEntities.contracts.isExpanded;
-      }
-      else {
-        localStorageEntities.contracts.isExpanded = this.moreCriterions;
-        localStorage.setItem("entities", JSON.stringify(localStorageEntities));
-      }
     },
     data() {
       return {
@@ -378,6 +371,16 @@
         this.moreCriterions = !this.moreCriterions;
 
         const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
+        localStorageEntities.contracts.isExpanded = this.moreCriterions;
+        localStorage.setItem("entities", JSON.stringify(localStorageEntities));
+      }
+    },
+    created() {
+      const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
+      if (localStorageEntities.contracts.hasOwnProperty("isExpanded")) {
+        this.moreCriterions = localStorageEntities.contracts.isExpanded;
+      }
+      else {
         localStorageEntities.contracts.isExpanded = this.moreCriterions;
         localStorage.setItem("entities", JSON.stringify(localStorageEntities));
       }
