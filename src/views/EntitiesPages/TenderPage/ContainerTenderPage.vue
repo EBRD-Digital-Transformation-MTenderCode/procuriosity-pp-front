@@ -5,14 +5,16 @@
 </template>
 
 <script>
-  import TenderPage from "./TenderPage";
-  import TenderPageOld from "./TenderPage_old";
+  import MTender1Page from "./MTender1Page";
+  import MTender2Page from "./MTender2Page";
+  import Error from "./../../Error";
 
   export default {
     name: "ContainerTenderPage",
     components: {
-      "tender-page": TenderPage,
-      "tender-page-old": TenderPageOld
+      "mtender1-page": MTender1Page,
+      "mtender2-page": MTender2Page,
+      "error": Error
     },
     data() {
       return {
@@ -24,9 +26,11 @@
       const regexMtender2Id = /^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/;
 
       if (regexMtender1Id.test(this.$route.params.id)) {
-        this.component = "tender-page-old";
+        this.component = "mtender1-page";
       } else if (regexMtender2Id.test(this.$route.params.id)) {
-        this.component = "tender-page";
+        this.component = "mtender2-page";
+      } else {
+        this.component = "error"
       }
     }
   };
