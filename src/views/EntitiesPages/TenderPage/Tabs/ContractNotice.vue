@@ -308,7 +308,7 @@
               <el-col :sm="24">
                 <div class="info-block__text">Estimated total value excluding VAT</div>
                 <div class="info-block__value">
-                  {{ addSpace(gd(msRecord, _ => _.tender.value.amount)) }}
+                  {{ fa(gd(msRecord, _ => _.tender.value.amount)) }}
                   {{ gd(msRecord, _ => _.tender.value.currency) }}
                 </div>
               </el-col>
@@ -338,7 +338,7 @@
             </el-row>
           </div>
         </div>
-        <!-- @TODO for class ...text and ...value mb=5px -->
+        
         <div class="info__sub-title">Description</div>
         <el-collapse accordion :value="gd(evRecord, _ => _.tender.lots[0].id, '0') + '0'">
           <el-collapse-item
@@ -404,30 +404,31 @@
                   </el-col>-->
                 </el-row>
               </div>
-
-              <!-- @TODO margins -->
+              
               <div class="info-block">
                 <div class="info-block__text">Description of the procurement:</div>
-                <el-row
-                    v-for="(item) of gd(evRecord, _ => _.tender.items).filter(item => gd(item, _ => _.relatedLot, '') === gd(lot, _ => _.id), [])"
+                <div
+                    v-for="item of gd(evRecord, _ => _.tender.items, []).filter(item => gd(item, _ => _.relatedLot, '') === gd(lot, _ => _.id), [])"
+                    :key="item.id"
                 >
-                  <el-col :sm="16">
-                    <div class="info-block__value">
-                      <div>{{ gd(item, _ => _.description) }}</div>
-                      <div class="info-block__text_small">{{ gd(item, _ => _.classification.id) }} {{ gd(item, _ => _.classification.description) }}</div>
-                    </div>
-                  </el-col>
-                  <el-col :sm="8">
-                    <div class="info-block__value">
-                      {{ gd(item, _ => _.quantity) }} {{ gd(item, _ => _.unit.name) }}
-                    </div>
-                  </el-col>
-                </el-row>
+                  <el-row>
+                    <el-col :sm="16">
+                      <div class="info-block__value">
+                        <div>{{ gd(item, _ => _.description) }}</div>
+                        <div class="info-block__text_small">{{ gd(item, _ => _.classification.id) }} {{ gd(item, _ => _.classification.description) }}</div>
+                      </div>
+                    </el-col>
+                    <el-col :sm="8">
+                      <div class="info-block__value">
+                        {{ gd(item, _ => _.quantity) }} {{ gd(item, _ => _.unit.name) }}
+                      </div>
+                    </el-col>
+                  </el-row>
+                </div>
               </div>
-            </div>
-
+              
            <!-- <div class="info__sub-title">Level of Performance</div>-->
-            <div class="info-blocks">
+            
               <!--<div class="info-block">
                 <el-row>
                   <el-col :sm="16">
@@ -514,7 +515,7 @@
                   <el-col :sm="24">
                     <div class="info-block__text">Estimated value excluding VAT</div>
                     <div class="info-block__value">
-                      {{ addSpace(gd(lot, _ => _.value.amount)) }} {{ gd(lot, _ => _.value.currency) }}
+                      {{ fa(gd(lot, _ => _.value.amount)) }} {{ gd(lot, _ => _.value.currency) }}
                     </div>
                   </el-col>
                 </el-row>
@@ -816,7 +817,7 @@
               <el-col :sm="24">
                 <div class="info-block__text">Type of procedure</div>
                 <div class="info-block__value">
-                  {{ gd(msRecord, _ => _.tender.procurementMethodDetails) }}
+                  {{ procedureType }}
                 </div>
               </el-col>
               <!--<el-col :sm="14">
@@ -846,100 +847,100 @@
 
         <div class="info__sub-title">Administrative information</div>
         <div class="info-blocks">
-        <div class="info-block">
-          <el-row>
-            <el-col :sm="24">
-              <div class="info-block__text">Previous publication concerning this procedure</div>
-              <div class="info-block__value">
-                Procurement plan / Buyer’s profile / PIN: No
-                <!--<a
-                  :href="`/plans/${gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === 'planning')), _ => _.identifier)}`"
-                  target="_blank">-->
-                  {{ gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === "planning")), _ => _.identifier) }}
-                <!--</a>-->
-              </div>
-            </el-col>
-          </el-row>
-        </div>
+          <div class="info-block">
+            <el-row>
+              <el-col :sm="24">
+                <div class="info-block__text">Previous publication concerning this procedure</div>
+                <div class="info-block__value">
+                  Procurement plan / Buyer’s profile / PIN: No
+                  <!--<a
+                    :href="`/plans/${gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === 'planning')), _ => _.identifier)}`"
+                    target="_blank">-->
+                    {{ gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === "planning")), _ => _.identifier) }}
+                  <!--</a>-->
+                </div>
+              </el-col>
+            </el-row>
+          </div>
 
-        <div class="info-block">
-          <el-row>
-            <el-col :sm="24">
-              <div class="info-block__text">Time limit for receipt of tenders or requests to participate</div>
-              <div class="info-block__value">
-                {{ fd(gd(evRecord, _ => _.tender.tenderPeriod.endDate), "DD.MM.YYYY") }}
-              </div>
-            </el-col>
-          </el-row>
-        </div>
+          <div class="info-block">
+            <el-row>
+              <el-col :sm="24">
+                <div class="info-block__text">Time limit for receipt of tenders or requests to participate</div>
+                <div class="info-block__value">
+                  {{ fd(gd(evRecord, _ => _.tender.tenderPeriod.endDate), "DD.MM.YYYY") }}
+                </div>
+              </el-col>
+            </el-row>
+          </div>
 
-        <div class="info-block">
-          <el-row>
-            <el-col :sm="24">
-              <div class="info-block__text">
-                Estimated date of dispatch of invitations to tender or to participate to selected candidates
-              </div>
-              <div class="info-block__value">
-                {{ fd(gd(evRecord, _ => _.tender.tenderPeriod.startDate), "DD.MM.YYYY") }}
-              </div>
-            </el-col>
-          </el-row>
-        </div>
+          <div class="info-block">
+            <el-row>
+              <el-col :sm="24">
+                <div class="info-block__text">
+                  Estimated date of dispatch of invitations to tender or to participate to selected candidates
+                </div>
+                <div class="info-block__value">
+                  {{ fd(gd(evRecord, _ => _.tender.tenderPeriod.startDate), "DD.MM.YYYY") }}
+                </div>
+              </el-col>
+            </el-row>
+          </div>
 
-        <div class="info-block">
-          <el-row>
-            <el-col :sm="24">
-              <div class="info-block__text">Languages in which tenders or requests to participate may be submitted</div>
-              <div class="info-block__value">
-                Romanian, Russian
-              </div>
-            </el-col>
-          </el-row>
+          <div class="info-block">
+            <el-row>
+              <el-col :sm="24">
+                <div class="info-block__text">Languages in which tenders or requests to participate may be submitted</div>
+                <div class="info-block__value">
+                  Romanian, Russian
+                </div>
+              </el-col>
+            </el-row>
+          </div>
+  
+          <div class="info-block">
+            <el-row>
+              <el-col :sm="24">
+                <div class="info-block__text">Conditions for opening of tenders</div>
+                <div class="info-block__value">
+                  {{ fd(gd(evRecord, _ => _.tender, {}).hasOwnProperty("auctionPeriod") ? add(gd(evRecord, _ => _.tender.auctionPeriod.startDate)) : add(gd(evRecord, _ => _.tender.tenderPeriod.endDate)),"DD.MM.YYYY") }} / 9:00
+                </div>
+              </el-col>
+            </el-row>
+          </div>
+  
+          <div class="info-block">
+            <el-row>
+              <el-col :sm="24">
+                <div class="info-block__text">
+                  <span class="info-block__text_accent">For electronic tendering procedures: </span>upon expiry of submission deadlines, MTender shall disclose received
+                  tender forms or requests to participate online on the MTender web portal and generate an electronic
+                  document with a record of opening.
+                </div>
+                <div class="info-block__text">
+                  <span class="info-block__text_accent">For non-electronic procedures: </span>negotiated with publication of contract notice, competitive dialogue,
+                  design contest and innovative partnership
+                </div>
+              </el-col>
+             <!-- <el-col :sm="16">
+                <div class="info-block__text"> Information about authorised persons and opening procedure</div>
+                <div class="info-block__value">
+                -->
+                  <!-- @TODO text from Pasha -->
+                  <!--Full name of the persone
+                </div>
+              </el-col>
+              <el-col :sm="8">
+                <div class="info-block__text">
+                  {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "procuringEntity")), _ =>
+                  _.address.addressDetails.country.description) }}, {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "procuringEntity")), _ =>
+                  _.address.addressDetails.locality.description) }}
+                </div>
+              </el-col>
+            -->
+            </el-row>
+          </div>
         </div>
-
-        <div class="info-block">
-          <el-row>
-            <el-col :sm="24">
-              <div class="info-block__text">Conditions for opening of tenders</div>
-              <div class="info-block__value">
-                {{ fd(gd(evRecord, _ => _.tender, {}).hasOwnProperty("auctionPeriod") ? add(gd(evRecord, _ => _.tender.auctionPeriod.startDate)) : add(gd(evRecord, _ => _.tender.tenderPeriod.endDate)),"DD.MM.YYYY") }} / 9:00
-              </div>
-            </el-col>
-          </el-row>
-        </div>
-
-        <div class="info-block">
-          <el-row>
-            <el-col :sm="24">
-              <div class="info-block__text">
-                <span class="info-block__text_accent">For electronic tendering procedures: </span>upon expiry of submission deadlines, MTender shall disclose received
-                tender forms or requests to participate online on the MTender web portal and generate an electronic
-                document with a record of opening.
-              </div>
-              <div class="info-block__text">
-                <span class="info-block__text_accent">For non-electronic procedures: </span>negotiated with publication of contract notice, competitive dialogue,
-                design contest and innovative partnership
-              </div>
-            </el-col>
-           <!-- <el-col :sm="16">
-              <div class="info-block__text"> Information about authorised persons and opening procedure</div>
-              <div class="info-block__value">
-              -->
-                <!-- @TODO text from Pasha -->
-                <!--Full name of the persone
-              </div>
-            </el-col>
-            <el-col :sm="8">
-              <div class="info-block__text">
-                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "procuringEntity")), _ =>
-                _.address.addressDetails.country.description) }}, {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "procuringEntity")), _ =>
-                _.address.addressDetails.locality.description) }}
-              </div>
-            </el-col>
-          -->
-          </el-row>
-        </div>
-      </div>
       </div>
 
       <!-- Budget -->
@@ -947,11 +948,14 @@
         <div class="info__title">Budget</div>
 
         <div class="info__sub-title">Budget breakdown</div>
-        <el-collapse accordion :value="gd(msRecord, _ => _.planning.budget.budgetBreakdown[0].id, '0') + '0'">
+        <el-collapse
+            accordion
+            @change="getFS"
+        >
           <el-collapse-item
               v-for="(budgetBreakdown, index) of gd(msRecord, _ => _.planning.budget.budgetBreakdown, [])"
               :key="budgetBreakdown.id + index"
-              :name="budgetBreakdown.id + index"
+              :name="budgetBreakdown.id"
           >
             <template slot="title">
               <div class="info-block accordion-header">
@@ -965,7 +969,7 @@
                   <el-col :sm="4">
                     <div class="info-block__text">Amount</div>
                     <div class="info-block__value">
-                      {{ addSpace(gd(budgetBreakdown, _ => _.amount.amount)) }}
+                      {{ fa(gd(budgetBreakdown, _ => _.amount.amount)) }}
                       {{ gd(budgetBreakdown, _ => _.amount.currency) }}
                     </div>
                   </el-col>
@@ -979,12 +983,12 @@
               </div>
             </template>
 
-            <!--<div class="info-blocks">
+            <div class="info-blocks">
               <div class="info-block">
                 <el-row>
                   <el-col :sm="16">
                     <div class="info-block__text">Budget details or rationale</div>
-                    <div class="info-block__value">???45330000-9 Lucrări de instalaţii de apă</div>
+                    <div class="info-block__value">{{ gd(budgetBreakdown, _ => _.description, "n/a") }}</div>
                   </el-col>
                   <el-col :sm="8">
                     <div class="info-block__text">Validity Period</div>
@@ -1001,13 +1005,13 @@
                   <el-col :sm="16">
                     <div class="info-block__text">Budget Project</div>
                     <div class="info-block__value">
-                      {{ gd(budgetBreakdown, _ => _.description, "n/a") }}
+                      {{ gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].project, "n/a") }}
                     </div>
                   </el-col>
                   <el-col :sm="8">
                     <div class="info-block__text">Project ID</div>
                     <div class="info-block__value">
-                      ???MD-768762875482167
+                      {{ gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].projectId, "n/a") }}
                     </div>
                   </el-col>
                 </el-row>
@@ -1017,11 +1021,15 @@
                 <el-row>
                   <el-col :sm="16">
                     <div class="info-block__text">Budget owner</div>
-                    <div class="info-block__value">???Primaria Tintareni, rl. Anenii Noi</div>
+                    <div class="info-block__value">
+                      {{ gd(gd(msRecord, _ => _.parties, []).find(part => gd(part, _ => _.roles, []).some(role => role === "buyer")), _ => _.name) }}
+                    </div>
                   </el-col>
                   <el-col :sm="8">
                     <div class="info-block__text">National registration number</div>
-                    <div class="info-block__value">???MD-IDNO: 1007601009037</div>
+                    <div class="info-block__value">
+                      {{ gd(gd(msRecord, _ => _.parties, []).find(part => gd(part, _ => _.roles, []).some(role => role === "buyer")), _ => _.id) }}
+                    </div>
                   </el-col>
                 </el-row>
               </div>
@@ -1030,11 +1038,15 @@
                 <el-row>
                   <el-col :sm="16">
                     <div class="info-block__text">Payer Entity</div>
-                    <div class="info-block__value">???Primaria Tintareni, rl. Anenii Noi</div>
+                    <div class="info-block__value">
+                      {{ gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].payer.name, "n/a") }}
+                    </div>
                   </el-col>
                   <el-col :sm="8">
                     <div class="info-block__text">National registration number</div>
-                    <div class="info-block__value">???MD-IDNO: 1007601009037</div>
+                    <div class="info-block__value">
+                      {{ gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].payer.id, "n/a") }}
+                    </div>
                   </el-col>
                 </el-row>
               </div>
@@ -1043,15 +1055,19 @@
                 <el-row>
                   <el-col :sm="16">
                     <div class="info-block__text">Funding Entity</div>
-                    <div class="info-block__value">???Primaria Tintareni, rl. Anenii Noi</div>
+                    <div class="info-block__value">
+                      {{ FSs.hasOwnProperty(gd(budgetBreakdown, _ => _.id)) ? gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].funder.name, "State Money") : "n/a" }}
+                    </div>
                   </el-col>
-                  <el-col :sm="8">
+                  <el-col :sm="8" v-if="gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].funder.id)">
                     <div class="info-block__text">National registration number</div>
-                    <div class="info-block__value">???MD-IDNO: 1007601009037</div>
+                    <div class="info-block__value">
+                      {{ gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].funder.id) }}
+                    </div>
                   </el-col>
                 </el-row>
               </div>
-            </div>-->
+            </div>
           </el-collapse-item>
         </el-collapse>
 
@@ -1079,6 +1095,7 @@
           </div>
         </div>
       </div>
+      
       <!-- Complementary information -->
       <div>
         <div class="info__title">Complementary information</div>
@@ -1263,6 +1280,8 @@
 </template>
 
 <script>
+  import axios from "axios";
+  
   import typesOfBuyers from "./../../../../store/types/buyers-types";
   import mainGeneralActivites from "./../../../../store/types/main-general-activity-types";
 
@@ -1279,7 +1298,8 @@
         type: Object
       },
       procedureType:{
-        type: String
+        type: String,
+        required: true
       }
     },
     data() {
@@ -1310,7 +1330,8 @@
             src: "/img/lonar.png",
             name: "lonar"
           }
-        ]
+        ],
+        FSs: {}
       };
     },
     created() {
@@ -1349,8 +1370,46 @@
       add(date){
         return addDay(date)
       },
-      addSpace(amount){
+      fa(amount){
         return formatAmount(amount)
+      },
+      async getFS(ocidFS) {
+        if (!ocidFS || this.FSs.hasOwnProperty(ocidFS)) {
+          return false;
+        }
+        
+        const cpidEI = ocidFS.replace(/-FS-[0-9]{13}$/, "");
+        
+        try {
+          const responseFS = await axios({
+            method: "get",
+            url: `https://public.mtender.gov.md/budgets/${cpidEI}/${ocidFS}`
+          });
+          
+          const FS = responseFS.data.releases[0];
+          
+          const payer = FS.parties.find(part => part.roles.some(role => role === "payer"));
+          const funder = FS.parties.find(part => part.roles.some(role => role === "funder"));
+          
+          this.FSs = Object.assign({}, this.FSs, {
+            [FS.ocid]: {
+              project: FS.planning.project,
+              projectId: FS.planning.projectId,
+              payer: {
+                name: payer.name,
+                id: payer.id
+              },
+              funder: {
+                name: funder ? funder.name : null,
+                id: funder ? funder.id : null,
+              }
+            }
+          });
+          
+        }
+        catch (e) {
+          console.log(e);
+        }
       }
     }
   };

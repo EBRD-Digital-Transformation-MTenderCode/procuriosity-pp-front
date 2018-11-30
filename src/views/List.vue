@@ -1,66 +1,68 @@
 <template>
-  <el-container direction="vertical">
-    <component
-        :is="renderSearchForm"
-        class="search-form"
-    />
-    <search-status-bar
-        :entity="entityName"
-    />
-    <transition-group
-        @before-enter="beforeEnter"
-        @enter="enter"
-        @leave="leave"
-    >
-      <div
-          v-if="entities[entityName].loaded && entities[entityName].list.length"
-          :key="'list'"
-          id="entity-list"
-          class="list"
-      >
-        <component
-            :is="renderCard"
-            v-for="entity of entities[entityName].list"
-            :entity="entity"
-            needLink
-            :key="entity.id"
-        />
-      </div>
-      <div
-          class="list__no-data-title"
-          v-if="entities[entityName].loaded && !entities[entityName].list.length && !entities[entityName].error.status"
-          :key="'no-data'"
-      >
-        {{$t("search.list_no_data")}}
-      </div>
-      <div
-          class="list__error"
-          v-if="entities[entityName].loaded && entities[entityName].error.status"
-          :key="'error'">
-        <div class="list__error-message">{{ entities[entityName].error.message }}</div>
-        <button
-            class="list__refresh-btn"
-            @click="getList"
-        >
-          {{$t("search.list_refresh")}}
-        </button>
-      </div>
-      <stub-card
-          v-if="!entities[entityName].loaded"
-          v-for="item of 3"
-          :key="item"
+  <div class="list">
+    <el-container direction="vertical">
+      <component
+          :is="renderSearchForm"
+          class="search-form"
       />
-    </transition-group>
-    <list-pagination
-        v-if="needPagination"
-        :total="entities[entityName].paginationInfo.totalCount"
-        :pageCount="entities[entityName].paginationInfo.pageCount"
-        :currentPage="entities[entityName].searchParams.page"
-        :pageSize="entities[entityName].searchParams.pageSize"
-        :changePage="changePage"
-        :key="'pagination'"
-    />
-  </el-container>
+      <search-status-bar
+          :entity="entityName"
+      />
+      <transition-group
+          @before-enter="beforeEnter"
+          @enter="enter"
+          @leave="leave"
+      >
+        <div
+            v-if="entities[entityName].loaded && entities[entityName].list.length"
+            :key="'list'"
+            id="entity-list"
+            class="list"
+        >
+          <component
+              :is="renderCard"
+              v-for="entity of entities[entityName].list"
+              :entity="entity"
+              needLink
+              :key="entity.id"
+          />
+        </div>
+        <div
+            class="list__no-data-title"
+            v-if="entities[entityName].loaded && !entities[entityName].list.length && !entities[entityName].error.status"
+            :key="'no-data'"
+        >
+          {{$t("search.list_no_data")}}
+        </div>
+        <div
+            class="list__error"
+            v-if="entities[entityName].loaded && entities[entityName].error.status"
+            :key="'error'">
+          <div class="list__error-message">{{ entities[entityName].error.message }}</div>
+          <button
+              class="list__refresh-btn"
+              @click="getList"
+          >
+            {{$t("search.list_refresh")}}
+          </button>
+        </div>
+        <stub-card
+            v-if="!entities[entityName].loaded"
+            v-for="item of 3"
+            :key="item"
+        />
+      </transition-group>
+      <list-pagination
+          v-if="needPagination"
+          :total="entities[entityName].paginationInfo.totalCount"
+          :pageCount="entities[entityName].paginationInfo.pageCount"
+          :currentPage="entities[entityName].searchParams.page"
+          :pageSize="entities[entityName].searchParams.pageSize"
+          :changePage="changePage"
+          :key="'pagination'"
+      />
+    </el-container>
+  </div>
 </template>
 
 <script>
@@ -196,6 +198,9 @@
   @import "./../styles/variables";
 
   .list {
+    margin-bottom: -20px;
+    padding-bottom: 20px;
+    background-color: #efefef;
     &__no-data-title,
     &__error{
       margin: 20px 0;
