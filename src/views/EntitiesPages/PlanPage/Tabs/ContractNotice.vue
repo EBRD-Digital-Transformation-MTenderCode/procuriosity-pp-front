@@ -3,7 +3,7 @@
     <div class="entity-nav"   data-scroll-spy-id="cn"  v-scroll-spy-active="{selector: 'a', class: 'active'}" v-scroll-spy-link>
       <a>Contracting authority</a>
       <a>Object</a>
-      <a>Legal, economic, financial and technical information</a>
+      <!--<a>Legal, economic, financial and technical information</a>-->
       <a>Procedure</a>
       <a>Budget</a>
       <a>Complementary information</a>
@@ -589,7 +589,7 @@
       </div>
 
       <!-- Legal, economic, financial and technical information -->
-      <div>
+      <!--<div>
         <div class="info__title">Legal, economic, financial and technical information</div>
         <div class="info__sub-title">Conditions for participation</div>
         <div class="info-blocks">
@@ -635,7 +635,7 @@
             </el-row>
           </div>
 
-          <!--<div class="info-block">
+          &lt;!&ndash;<div class="info-block">
             <el-row>
               <el-col :sm="24">
                 <div class="info-block__text">
@@ -704,9 +704,9 @@
                 </div>
               </el-col>
             </el-row>
-          </div>-->
+          </div>&ndash;&gt;
 
-          <!--<div class="info-block">
+          &lt;!&ndash;<div class="info-block">
             <el-row>
               <el-col :sm="24">
                 <div class="info-block__text">
@@ -772,10 +772,10 @@
                 </div>
               </el-col>
             </el-row>
-          </div>-->
+          </div>&ndash;&gt;
         </div>
 
-        <!--<div class="info__sub-title">General terms of the contract</div>
+        &lt;!&ndash;<div class="info__sub-title">General terms of the contract</div>
         <div class="info-blocks">
           <div class="info-block">
             <el-row>
@@ -787,9 +787,9 @@
               </el-col>
             </el-row>
           </div>
-        </div>-->
+        </div>&ndash;&gt;
 
-        <!--<div class="info__sub-title">Special conditions of the contract</div>
+        &lt;!&ndash;<div class="info__sub-title">Special conditions of the contract</div>
         <div class="info-blocks">
           <div class="info-block">
             <el-row>
@@ -805,8 +805,8 @@
               </el-col>
             </el-row>
           </div>
-        </div>-->
-      </div>
+        </div>&ndash;&gt;
+      </div>-->
 
       <!-- Procedure -->
       <div>
