@@ -3,7 +3,7 @@
     <div class="entity-nav"   data-scroll-spy-id="cn"  v-scroll-spy-active="{selector: 'a', class: 'active'}" v-scroll-spy-link>
       <a>Contracting authority</a>
       <a>Object</a>
-      <a>Legal, economic, financial and technical information</a>
+      <!--<a>Legal, economic, financial and technical information</a>-->
       <a>Procedure</a>
       <a>Budget</a>
       <a>Complementary information</a>
@@ -352,7 +352,6 @@
                   <el-col :sm="16">
                     <div class="info-block__text">Title</div>
                     <div class="info-block__value info-block__value__bold">
-                      <!-- @TODO < line hight -->
                       {{ gd(lot, _ => _.title) }}
                     </div>
                   </el-col>
@@ -588,7 +587,7 @@
       </div>
 
       <!-- Legal, economic, financial and technical information -->
-      <div>
+      <!--<div>
         <div class="info__title">Legal, economic, financial and technical information</div>
         <div class="info__sub-title">Conditions for participation</div>
         <div class="info-blocks">
@@ -634,7 +633,7 @@
             </el-row>
           </div>
 
-          <!--<div class="info-block">
+          &lt;!&ndash;<div class="info-block">
             <el-row>
               <el-col :sm="24">
                 <div class="info-block__text">
@@ -703,9 +702,9 @@
                 </div>
               </el-col>
             </el-row>
-          </div>-->
+          </div>&ndash;&gt;
 
-          <!--<div class="info-block">
+          &lt;!&ndash;<div class="info-block">
             <el-row>
               <el-col :sm="24">
                 <div class="info-block__text">
@@ -771,10 +770,10 @@
                 </div>
               </el-col>
             </el-row>
-          </div>-->
+          </div>&ndash;&gt;
         </div>
 
-        <!--<div class="info__sub-title">General terms of the contract</div>
+        &lt;!&ndash;<div class="info__sub-title">General terms of the contract</div>
         <div class="info-blocks">
           <div class="info-block">
             <el-row>
@@ -786,9 +785,9 @@
               </el-col>
             </el-row>
           </div>
-        </div>-->
+        </div>&ndash;&gt;
 
-        <!--<div class="info__sub-title">Special conditions of the contract</div>
+        &lt;!&ndash;<div class="info__sub-title">Special conditions of the contract</div>
         <div class="info-blocks">
           <div class="info-block">
             <el-row>
@@ -804,8 +803,8 @@
               </el-col>
             </el-row>
           </div>
-        </div>-->
-      </div>
+        </div>&ndash;&gt;
+      </div>-->
 
       <!-- Procedure -->
       <div>
@@ -922,12 +921,12 @@
                   design contest and innovative partnership
                 </div>
               </el-col>
-             <!-- <el-col :sm="16">
+              <!-- <el-col :sm="16">
                 <div class="info-block__text"> Information about authorised persons and opening procedure</div>
                 <div class="info-block__value">
                 -->
-                  <!-- @TODO text from Pasha -->
-                  <!--Full name of the persone
+                <!-- @TODO text from Pasha -->
+              <!--Full name of the persone
                 </div>
               </el-col>
               <el-col :sm="8">
