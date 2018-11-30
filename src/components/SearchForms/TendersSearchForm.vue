@@ -4,6 +4,7 @@
       <!-- Strict search -->
       <search-switch
           name="titlesOrDescriptionsStrict"
+          entity="tenders"
           :value="titlesOrDescriptionsStrict"
           :setValue="setFormParams"
           :label="$t('search.strict')"
@@ -17,10 +18,11 @@
           prefixIcon
           :placeholder="$t('search.titles_or_descriptions')"
       />
-      <button class="search-form__btn search-form__btn_search" />
+      <button class="search-form__btn search-form__btn_search" tabindex="-1" />
   
       <!-- @TODO need write more readable classes -->
       <button
+          tabindex="-1"
           @click="actionExpand"
           :class="moreCriterions ? 'search-form__btn search-form__btn_more search-form__btn_more_close': 'search-form__btn search-form__btn_more search-form__btn_more_open'"
       />
@@ -43,7 +45,7 @@
   
               <!-- Buyers regions -->
               <div class="search-form-element">
-                <search-auto-complete-input
+                <search-regions
                     name="buyersRegions"
                     :items="regionsList"
                     :values="buyersRegions"
@@ -98,7 +100,7 @@
   
               <!-- Delivery regions -->
               <div class="search-form-element">
-                <search-auto-complete-input
+                <search-regions
                     name="deliveriesRegions"
                     :items="regionsList"
                     :values="deliveriesRegions"
@@ -235,12 +237,11 @@
   
               <!-- Classifications -->
               <div class="search-form-element">
-                <search-auto-complete-input
+                <search-classifications
                     name="classifications"
                     :items="CPVCodesList"
                     :values="classifications"
                     :setValues="setFormParams"
-                    needFetch
                     :placeholder="$t('search.classifications_placeholder')"
                 />
               </div>
@@ -258,22 +259,24 @@
 
 <script>
   import { mapState } from "vuex";
-  import { SET_ENTITY_SEARCH_PARAMS } from "../../store/types/mutations-types";
+  import { SET_ENTITY_SEARCH_PARAMS } from "./../../store/types/mutations-types";
   import { REGIONS, CPV_CODES } from "./../../store/types/directories-types";
 
   import SearchInput from "./../FormsComponents/SearchInput";
-  import SearchSwitch from "../FormsComponents/SearchCheckboxButton";
+  import SearchSwitch from "../FormsComponents/SearchStrictButton";
   import SearchAutoCompleteInput from "./../FormsComponents/SearchAutoCompleteInput";
+  import SearchRegions from "./../FormsComponents/SearchRegions";
+  import SearchClassifications from "./../FormsComponents/SearchClassifications";
   import SearchPeriods from "./../FormsComponents/SearchPeriods";
+  import MultipleInput from "./../FormsComponents/MultipleInput";
+  import ResetButton from "./../FormsComponents/ResetButton";
 
   import proceduresTypesList from "./../../store/types/procedures-types";
   import proceduresStatusesList from "./../../store/types/procedure-status-types";
   import buyersTypesList from "./../../store/types/buyers-types";
   import mainGeneralActivityList from "./../../store/types/main-general-activity-types";
   import mainSectoralActivityList from "./../../store/types/main-sectoral-activity";
-  import entities from "../../store/entities";
-  import MultipleInput from "./../FormsComponents/MultipleInput";
-  import ResetButton from "./../FormsComponents/ResetButton";
+  import entities from "./../../store/entities";
 
   export default {
     name: "TendersSearchForm",
@@ -281,6 +284,8 @@
       "search-input": SearchInput,
       "search-switch": SearchSwitch,
       "search-auto-complete-input": SearchAutoCompleteInput,
+      "search-regions": SearchRegions,
+      "search-classifications": SearchClassifications,
       "search-period": SearchPeriods,
       "multiple-input": MultipleInput,
       "reset-button": ResetButton

@@ -41,15 +41,23 @@ export default {
       }
     },
     async [FETCH_CPV_CODES]({ commit }, { lang, idOrName }) {
-      const res = await axios(getCPVCodesConfig(lang, idOrName));
-      commit(SET_CPV_CODES, {
-        CPVCodes: res.data.data.map(item => {
-          return {
-            value: `${item.id}`,
-            label: `${item.id} ${item.name}`
-          };
-        })
-      });
+      try {
+        const res = await axios(getCPVCodesConfig(lang, idOrName));
+
+        if (res.data.code === 200) {
+          commit(SET_CPV_CODES, {
+            CPVCodes: res.data.data.map(item => {
+              return {
+                value: `${item.id}`,
+                label: `${item.id} ${item.name}`
+              };
+            })
+          });
+        }
+      }
+      catch (e) {
+        console.log(e);
+      }
     }
   }
 };

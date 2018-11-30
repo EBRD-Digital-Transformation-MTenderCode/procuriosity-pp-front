@@ -35,4 +35,5 @@ export default {
   "reset_button": "Сбросить",
 
   "list_total_found": "Всего найдено",
+  "list_refresh": "Обновить"
 }

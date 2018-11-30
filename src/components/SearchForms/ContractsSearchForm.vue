@@ -4,6 +4,7 @@
       <!-- Strict search -->
       <search-switch
         name="titlesOrDescriptionsStrict"
+        entity="contracts"
         :value="titlesOrDescriptionsStrict"
         :setValue="setFormParams"
         :label="$t('search.strict')"
@@ -17,10 +18,11 @@
         prefixIcon
         :placeholder="$t('search.titles_or_descriptions')"
       />
-      <button class="search-form__btn search-form__btn_search" />
+      <button class="search-form__btn search-form__btn_search" tabindex="-1" />
 
       <!-- @TODO need write more readable classes -->
       <button
+        tabindex="-1"
         @click="actionExpand"
         :class="moreCriterions ? 'search-form__btn search-form__btn_more search-form__btn_more_close': 'search-form__btn search-form__btn_more search-form__btn_more_open'"
       />
@@ -43,25 +45,13 @@
 
               <!-- Buyers regions -->
               <div class="search-form-element">
-                <search-auto-complete-input
+                <search-regions
                   name="buyersRegions"
                   :items="regionsList"
                   :values="buyersRegions"
                   :setValues="setFormParams"
                   needFetch
                   :placeholder="$t('search.buyers_region_placeholder')"
-                />
-              </div>
-
-              <!-- Delivery regions -->
-              <div class="search-form-element">
-                <search-auto-complete-input
-                  name="deliveriesRegions"
-                  :items="regionsList"
-                  :values="deliveriesRegions"
-                  :setValues="setFormParams"
-                  needFetch
-                  :placeholder="$t('search.deliveries_regions_placeholder')"
                 />
               </div>
 
@@ -135,6 +125,18 @@
             </el-col>
             <el-col :xs="24" :sm="12">
 
+               <!-- Delivery regions -->
+              <div class="search-form-element">
+                <search-regions
+                    name="deliveriesRegions"
+                    :items="regionsList"
+                    :values="deliveriesRegions"
+                    :setValues="setFormParams"
+                    needFetch
+                    :placeholder="$t('search.deliveries_regions_placeholder')"
+                />
+              </div>
+              
               <!-- Procedure types -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -236,7 +238,7 @@
 
               <!-- Classifications -->
               <div class="search-form-element">
-                <search-auto-complete-input
+                <search-classifications
                   name="classifications"
                   :items="CPVCodesList"
                   :values="classifications"
@@ -263,8 +265,10 @@
   import { REGIONS, CPV_CODES } from "./../../store/types/directories-types";
 
   import SearchInput from "./../FormsComponents/SearchInput";
-  import SearchSwitch from "../FormsComponents/SearchCheckboxButton";
+  import SearchSwitch from "../FormsComponents/SearchStrictButton";
   import SearchAutoCompleteInput from "./../FormsComponents/SearchAutoCompleteInput";
+  import SearchRegions from "./../FormsComponents/SearchRegions";
+  import SearchClassifications from "./../FormsComponents/SearchClassifications";
   import SearchPeriods from "./../FormsComponents/SearchPeriods";
   import MultipleInput from "./../FormsComponents/MultipleInput";
   import ResetButton from "./../FormsComponents/ResetButton";
@@ -281,6 +285,8 @@
       "search-input": SearchInput,
       "search-switch": SearchSwitch,
       "search-auto-complete-input": SearchAutoCompleteInput,
+      "search-regions": SearchRegions,
+      "search-classifications": SearchClassifications,
       "search-period": SearchPeriods,
       "multiple-input": MultipleInput,
       "reset-button": ResetButton

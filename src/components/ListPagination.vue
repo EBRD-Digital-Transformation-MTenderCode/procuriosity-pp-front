@@ -7,7 +7,7 @@
         :current-page="currentPage"
         :page-size="pageSize"
         :total="total"
-        :pager-count="5"
+        :pager-count="pagesNumber"
     
         @prev-click="_changePage"
         @next-click="_changePage"
@@ -41,6 +41,18 @@
         required: true
       }
     },
+    mounted() {
+      this.$nextTick(function() {
+        window.addEventListener('resize', this.getWindowWidth);
+        
+        this.getWindowWidth();
+      })
+    },
+    data() {
+      return {
+        pagesNumber: 9
+      }
+    },
     methods: {
       _changePage(page) {
         window.scroll({
@@ -50,7 +62,21 @@
         });
 
         this.changePage(page);
-      }
+      },
+      getWindowWidth() {
+        const windowWidth = window.screen.width;
+        
+        switch (true) {
+          case windowWidth < 767:
+            this.pagesNumber = 5;
+            break;
+          default:
+            this.pagesNumber = 7;
+        }
+      },
+    },
+    beforeDestroy() {
+      window.removeEventListener('resize', this.getWindowWidth);
     }
   };
 </script>
@@ -62,6 +88,7 @@
     .el-pagination {
       @media (max-width: 525px) {
         display: flex;
+        justify-content: center;
         white-space: normal;
       }
       .btn-prev,

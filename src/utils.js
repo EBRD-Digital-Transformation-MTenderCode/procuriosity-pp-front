@@ -19,10 +19,35 @@ export function formatDate(date, formatType = "DD.MM.YYYY / HH:mm", def = "none"
   }
 }
 
+export function addDay(date) {
+    return dayjs(date).add(1, 'day')
+}
+
+export function formatAmount(amount) {
+  return amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$& ')
+}
+
 export const convertObjectToQueryParamsString = obj => {
   return Object.entries(obj).filter(([key, val]) => {
     return Array.isArray(val) ? !!val.length : !!val;
   }).reduce((accVal, [key, val], i) => {
     return `${accVal}${i !== 0 ? "&" : ""}${key}=${encodeURIComponent(Array.isArray(val) ? JSON.stringify(val) : val)}`;
   }, "?");
+};
+
+export const convertCamelCaseToTitleCase = str => {
+  if (!str && typeof str !== "string") {
+    throw new Error;
+  }
+
+  const result = str.replace(/([A-Z])/g, " $1");
+  return result.charAt(0).toUpperCase() + result.slice(1);
+};
+
+export const transformSpecialSymbols = str => {
+  if(!str && typeof str !== "string"){
+    throw new Error;
+  }
+  const parser = new DOMParser;
+  return parser.parseFromString(`<!doctype html><html><body> ${str}</body></html>` ,'text/html').body.textContent;
 };
