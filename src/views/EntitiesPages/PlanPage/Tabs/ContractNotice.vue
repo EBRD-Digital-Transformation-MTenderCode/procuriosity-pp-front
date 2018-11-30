@@ -122,7 +122,7 @@
                 </div>
                 <div class="info-block__value">
                   <a
-                    :href="`mailto:${gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === 'buyer')), _ => _.contactPoint.email) }`"
+                      :href="`mailto:${gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === 'buyer')), _ => _.contactPoint.email) }`"
                   >
                     {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ =>
                     _.contactPoint.email) }}
@@ -193,78 +193,78 @@
 
         <div class="info__sub-title">Communication</div>
         <div class="info-blocks">
-        <div class="info-block">
-          <el-row>
-            <el-col>
-              <div class="info-block__text">
-                The procurement documents are available for unrestricted and full direct access, free of charge, at:
-              </div>
-              <div class="info-block__value">
-                <a :href="`https://www.mtender.gov.md/${$i18n.locale !== 'ro' ? `${$i18n.locale}/` : ''}tenders/${gd(msRecord, _ => _.ocid) }`" target="_blank">
-                  www.mtender.gov.md/{{ $i18n.locale !== "ro" ? `${$i18n.locale}/` : "" }}tenders/{{ gd(msRecord, _ => _.ocid) }}</a>
-              </div>
-            </el-col>
-          </el-row>
-        </div>
+          <div class="info-block">
+            <el-row>
+              <el-col>
+                <div class="info-block__text">
+                  The procurement documents are available for unrestricted and full direct access, free of charge, at:
+                </div>
+                <div class="info-block__value">
+                  <a :href="`https://www.mtender.gov.md/${$i18n.locale !== 'ro' ? `${$i18n.locale}/` : ''}tenders/${gd(msRecord, _ => _.ocid) }`" target="_blank">
+                    www.mtender.gov.md/{{ $i18n.locale !== "ro" ? `${$i18n.locale}/` : "" }}tenders/{{ gd(msRecord, _ => _.ocid) }}</a>
+                </div>
+              </el-col>
+            </el-row>
+          </div>
 
-        <div class="info-block">
-          <el-row>
-            <el-col :sm="10">
-              <div class="info-block__text">
-                Additional information can be obtained from
-              </div>
-              <div class="info-block__value">
-                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "procuringEntity")), _ =>
-                _.contactPoint.name) }}
-              </div>
-            </el-col>
-            <el-col :sm="6">
-              <div class="info-block__text">
-                Telephone
-              </div>
-              <div class="info-block__value">
-                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "procuringEntity")), _ =>
-                _.contactPoint.telephone) }}
-              </div>
-            </el-col>
-            <el-col :sm="8">
-              <div class="info-block__text">
-                E-mail
-              </div>
-              <div class="info-block__value">
-                <a
-                    :href="`mailto:${gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === 'procuringEntity')), _ => _.contactPoint.email) }`"
-                >
-                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "procuringEntity")), _ =>
-                _.contactPoint.email) }}
-                </a>
-              </div>
-            </el-col>
-          </el-row>
+          <div class="info-block">
+            <el-row>
+              <el-col :sm="10">
+                <div class="info-block__text">
+                  Additional information can be obtained from
+                </div>
+                <div class="info-block__value">
+                  {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "procuringEntity")), _ =>
+                  _.contactPoint.name) }}
+                </div>
+              </el-col>
+              <el-col :sm="6">
+                <div class="info-block__text">
+                  Telephone
+                </div>
+                <div class="info-block__value">
+                  {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "procuringEntity")), _ =>
+                  _.contactPoint.telephone) }}
+                </div>
+              </el-col>
+              <el-col :sm="8">
+                <div class="info-block__text">
+                  E-mail
+                </div>
+                <div class="info-block__value">
+                  <a
+                      :href="`mailto:${gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === 'procuringEntity')), _ => _.contactPoint.email) }`"
+                  >
+                    {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "procuringEntity")), _ =>
+                    _.contactPoint.email) }}
+                  </a>
+                </div>
+              </el-col>
+            </el-row>
+          </div>
+
+          <div class="info-block">
+            <el-row>
+              <el-col :sm="24">
+                <div class="info-block__text">
+                  Tenders or requests to participate must be submitted electronically via:
+                </div>
+                <div class="info-block__value info-block__value-platform">
+                  <a
+                      class="platform-link"
+                      v-for="platform of randomSortPlatforms"
+                      :key="platform.name"
+                      :href="platform.href"
+                      :title="platform.name"
+                      target="_blank"
+                  >
+                    <img :src="platform.src" :alt="platform.name" class="platform-img">
+                  </a>
+                </div>
+              </el-col>
+            </el-row>
+          </div>
         </div>
-        
-        <div class="info-block">
-          <el-row>
-            <el-col :sm="24">
-              <div class="info-block__text">
-                Tenders or requests to participate must be submitted electronically via:
-              </div>
-              <div class="info-block__value info-block__value-platform">
-                <a
-                  class="platform-link"
-                  v-for="platform of randomSortPlatforms"
-                  :key="platform.name"
-                  :href="platform.href"
-                  :title="platform.name"
-                  target="_blank"
-                >
-                  <img :src="platform.src" :alt="platform.name" class="platform-img">
-                </a>
-              </div>
-            </el-col>
-          </el-row>
-        </div>
-      </div>
       </div>
 
       <!-- Object -->
@@ -338,13 +338,13 @@
             </el-row>
           </div>
         </div>
-        
+
         <div class="info__sub-title">Description</div>
-        <el-collapse accordion :value="gd(evRecord, _ => _.tender.lots[0].id, '0') + '0'">
+        <el-collapse accordion v-if="gd(pnRecord, _ => _.tender.hasOwnProperty('lots'))" :value="gd(pnRecord, _ => _.tender.lots[0].id, '0') + '0'">
           <el-collapse-item
-            v-for="(lot, index) of gd(evRecord, _ => _.tender.lots, [])"
-            :key="lot.id + index"
-            :name="lot.id + index"
+              v-for="(lot, index) of gd(pnRecord, _ => _.tender.lots, [])"
+              :key="lot.id + index"
+              :name="lot.id + index"
           >
             <template slot="title">
               <div class="info-block accordion-header">
@@ -404,11 +404,11 @@
                   </el-col>-->
                 </el-row>
               </div>
-              
+
               <div class="info-block">
                 <div class="info-block__text">Description of the procurement:</div>
                 <div
-                    v-for="item of gd(evRecord, _ => _.tender.items, []).filter(item => gd(item, _ => _.relatedLot, '') === gd(lot, _ => _.id))"
+                    v-for="item of gd(pnRecord, _ => _.tender.items, []).filter(item => gd(item, _ => _.relatedLot, '') === gd(lot, _ => _.id))"
                     :key="item.id"
                 >
                   <el-row>
@@ -426,9 +426,9 @@
                   </el-row>
                 </div>
               </div>
-              
-           <!-- <div class="info__sub-title">Level of Performance</div>-->
-            
+
+              <!-- <div class="info__sub-title">Level of Performance</div>-->
+
               <!--<div class="info-block">
                 <el-row>
                   <el-col :sm="16">
@@ -558,9 +558,9 @@
                 </el-row>
               </div>
 
-              <div class="info-block" v-if="gd(evRecord, _ => _.tender.documents, []).filter(doc => gd(doc, _ => _.relatedLots[0], '') === gd(lot, _ => _.id)).length">
+              <div class="info-block" v-if="gd(pnRecord, _ => _.tender.documents, []).filter(doc => gd(doc, _ => _.relatedLots[0], '') === gd(lot, _ => _.id)).length">
                 <div class="info-block__documents"
-                     v-for="(doc, index) of gd(evRecord, _ => _.tender.documents,[]) .filter(doc => gd(doc, _ => _.relatedLots[0], '') === gd(lot, _ => _.id))"
+                     v-for="(doc, index) of gd(pnRecord, _ => _.tender.documents,[]) .filter(doc => gd(doc, _ => _.relatedLots[0], '') === gd(lot, _ => _.id))"
                      :key="doc.id + index">
                   <el-row>
                     <el-col :sm="24">
@@ -568,23 +568,24 @@
                         {{ convertCase(gd(doc, _ => _.documentType)) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a></div>
                     </el-col>
                   </el-row>
-                <el-row>
-                  <el-col :sm="16">
+                  <el-row>
+                    <el-col :sm="16">
                       <div class="info-block__text info-block__text__small">
                         ID: {{ gd(doc, _ => _.id) }}
                       </div>
-                  </el-col>
-                  <el-col :sm="8">
-                    <div class="info-block__text info-block__text__small">
-                      Published: {{ fd(gd(doc, _ => _.datePublished)) }}
-                    </div>
-                  </el-col>
-                </el-row>
-              </div>
+                    </el-col>
+                    <el-col :sm="8">
+                      <div class="info-block__text info-block__text__small">
+                        Published: {{ fd(gd(doc, _ => _.datePublished)) }}
+                      </div>
+                    </el-col>
+                  </el-row>
+                </div>
               </div>
             </div>
           </el-collapse-item>
         </el-collapse>
+        <div v-else>No lots</div>
       </div>
 
       <!-- Legal, economic, financial and technical information -->
@@ -826,23 +827,6 @@
               </el-col>-->
             </el-row>
           </div>
-
-          <div class="info-block" >
-            <el-row>
-              <el-col :sm="10">
-                <div class="info-block__text">Information about electronic auction</div>
-                <div class="info-block__value">
-                  An electronic auction will <span v-if="!gd(evRecord, _ => _.tender, {}).hasOwnProperty('auctionPeriod')">not</span> be used
-                </div>
-              </el-col>
-              <el-col :sm="14" v-if="gd(evRecord, _ => _.tender, {}).hasOwnProperty('auctionPeriod')">
-                <div class="info-block__text">Additional information about electronic auction</div>
-                <div class="info-block__value">
-                  Start date:  {{ fd(gd(evRecord, _ => _.tender.auctionPeriod.startDate),"DD.MM.YYYY", "n/a") }}
-                </div>
-              </el-col>
-            </el-row>
-          </div>
         </div>
 
         <div class="info__sub-title">Administrative information</div>
@@ -856,19 +840,8 @@
                   <!--<a
                     :href="`/plans/${gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === 'planning')), _ => _.identifier)}`"
                     target="_blank">-->
-                    {{ gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === "planning")), _ => _.identifier) }}
+                  {{ gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === "planning")), _ => _.identifier) }}
                   <!--</a>-->
-                </div>
-              </el-col>
-            </el-row>
-          </div>
-
-          <div class="info-block">
-            <el-row>
-              <el-col :sm="24">
-                <div class="info-block__text">Time limit for receipt of tenders or requests to participate</div>
-                <div class="info-block__value">
-                  {{ fd(gd(evRecord, _ => _.tender.tenderPeriod.endDate), "DD.MM.YYYY") }}
                 </div>
               </el-col>
             </el-row>
@@ -881,7 +854,7 @@
                   Estimated date of dispatch of invitations to tender or to participate to selected candidates
                 </div>
                 <div class="info-block__value">
-                  {{ fd(gd(evRecord, _ => _.tender.tenderPeriod.startDate), "DD.MM.YYYY") }}
+                  {{ fd(gd(pnRecord, _ => _.tender.tenderPeriod.startDate), "DD.MM.YYYY") }}
                 </div>
               </el-col>
             </el-row>
@@ -897,18 +870,7 @@
               </el-col>
             </el-row>
           </div>
-  
-          <div class="info-block">
-            <el-row>
-              <el-col :sm="24">
-                <div class="info-block__text">Conditions for opening of tenders</div>
-                <div class="info-block__value">
-                  {{ fd(gd(evRecord, _ => _.tender, {}).hasOwnProperty("auctionPeriod") ? add(gd(evRecord, _ => _.tender.auctionPeriod.startDate)) : add(gd(evRecord, _ => _.tender.tenderPeriod.endDate)),"DD.MM.YYYY") }} / 9:00
-                </div>
-              </el-col>
-            </el-row>
-          </div>
-  
+
           <div class="info-block">
             <el-row>
               <el-col :sm="24">
@@ -922,22 +884,22 @@
                   design contest and innovative partnership
                 </div>
               </el-col>
-             <!-- <el-col :sm="16">
-                <div class="info-block__text"> Information about authorised persons and opening procedure</div>
-                <div class="info-block__value">
-                -->
-                  <!-- @TODO text from Pasha -->
-                  <!--Full name of the persone
-                </div>
-              </el-col>
-              <el-col :sm="8">
-                <div class="info-block__text">
-                  {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "procuringEntity")), _ =>
-                  _.address.addressDetails.country.description) }}, {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "procuringEntity")), _ =>
-                  _.address.addressDetails.locality.description) }}
-                </div>
-              </el-col>
-            -->
+              <!-- <el-col :sm="16">
+                 <div class="info-block__text"> Information about authorised persons and opening procedure</div>
+                 <div class="info-block__value">
+                 -->
+              <!-- @TODO text from Pasha -->
+              <!--Full name of the persone
+            </div>
+          </el-col>
+          <el-col :sm="8">
+            <div class="info-block__text">
+              {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "procuringEntity")), _ =>
+              _.address.addressDetails.country.description) }}, {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "procuringEntity")), _ =>
+              _.address.addressDetails.locality.description) }}
+            </div>
+          </el-col>
+        -->
             </el-row>
           </div>
         </div>
@@ -1095,7 +1057,7 @@
           </div>
         </div>
       </div>
-      
+
       <!-- Complementary information -->
       <div>
         <div class="info__title">Complementary information</div>
@@ -1127,10 +1089,10 @@
         </ul>
 
         <div class="info__sub-title">Procedure documents</div>
-        <div class="info-blocks">
+        <div v-if="gd(pnRecord, _ => _.tender.hasOwnProperty('documents'))" class="info-blocks">
           <div class="info-block">
             <div class="info-block__documents"
-                 v-for="(doc, index) of gd(evRecord, _ => _.tender.documents, []).filter(doc => !doc.hasOwnProperty('relatedLots'))"
+                 v-for="(doc, index) of gd(pnRecord, _ => _.tender.documents, []).filter(doc => !doc.hasOwnProperty('relatedLots'))"
                  :key="doc.id + index"
             >
               <el-row>
@@ -1140,21 +1102,22 @@
                   </div>
                 </el-col>
               </el-row>
-            <el-row>
-              <el-col :sm="16">
+              <el-row>
+                <el-col :sm="16">
                   <div class="info-block__text info-block__text_small">
                     ID: {{ gd(doc, _ => _.id) }}
                   </div>
-              </el-col>
-              <el-col :sm="8">
-                <div class="info-block__text info-block__text_small">
-                  Published: {{ fd(gd(doc, _ => _.datePublished)) }}
-                </div>
-              </el-col>
-            </el-row>
-          </div>
+                </el-col>
+                <el-col :sm="8">
+                  <div class="info-block__text info-block__text_small">
+                    Published: {{ fd(gd(doc, _ => _.datePublished)) }}
+                  </div>
+                </el-col>
+              </el-row>
+            </div>
           </div>
         </div>
+        <div v-else>No documents</div>
         <div class="info__sub-title">Procudures for review</div>
         <div class="info-blocks">
           <div class="info-block">
@@ -1269,19 +1232,19 @@
               Filing of the complaint regarding deeds of the contracting authority which are issued or take place before opening of the tenders, is shall be done meeting the terms set out under para. (1), however no later than the deadline for submission of the tenders set by the contracting authority with the observance of provisions under Art. 34.
             </li>
             <li>
-               In case that the complaint referred to under para.(1) is related to documents published in electronic format, the acknowledgment date shall be their publication date.
+              In case that the complaint referred to under para.(1) is related to documents published in electronic format, the acknowledgment date shall be their publication date.
             </li>
-        </ol>
+          </ol>
+        </div>
       </div>
-      </div>
-      <div class="info__sub-title">Date of online publication of notice:  {{ fd(gd(evRecord, _ => _.tender.tenderPeriod.startDate), "DD/MM/YYYY") }}</div>
+      <div class="info__sub-title">Date of online publication of notice:  {{ fd(gd(pnRecord, _ => _.tender.tenderPeriod.startDate), "DD/MM/YYYY") }}</div>
     </div>
   </div>
 </template>
 
 <script>
   import axios from "axios";
-  
+
   import typesOfBuyers from "./../../../../store/types/buyers-types";
   import mainGeneralActivites from "./../../../../store/types/main-general-activity-types";
 
@@ -1294,7 +1257,7 @@
         type: Object,
         required: true
       },
-      evRecord: {
+      pnRecord: {
         type: Object
       },
       procedureType:{
@@ -1336,7 +1299,7 @@
     },
     created() {
       console.log("MS", this.msRecord);
-      console.log("EV", this.evRecord);
+      console.log("PN", this.pnRecord);
     },
     computed: {
       getTypeOfBuyer() {
@@ -1377,20 +1340,20 @@
         if (!ocidFS || this.FSs.hasOwnProperty(ocidFS)) {
           return false;
         }
-        
+
         const cpidEI = ocidFS.replace(/-FS-[0-9]{13}$/, "");
-        
+
         try {
           const responseFS = await axios({
             method: "get",
             url: `https://public.mtender.gov.md/budgets/${cpidEI}/${ocidFS}`
           });
-          
+
           const FS = responseFS.data.releases[0];
-          
+
           const payer = FS.parties.find(part => part.roles.some(role => role === "payer"));
           const funder = FS.parties.find(part => part.roles.some(role => role === "funder"));
-          
+
           this.FSs = Object.assign({}, this.FSs, {
             [FS.ocid]: {
               project: FS.planning.project,
@@ -1405,7 +1368,7 @@
               }
             }
           });
-          
+
         }
         catch (e) {
           console.log(e);

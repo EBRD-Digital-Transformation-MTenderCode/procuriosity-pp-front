@@ -28,6 +28,13 @@ export const getTenderConfig = (cdb, id) => {
   };
 };
 
+export const getPlanConfig = (cdb, id) => {
+  return {
+    method: "get",
+    url: `${cdb === "mtender1" ? mTender1 : mTender2}/tenders/${id}`
+  };
+};
+
 export const getContractConfig = (cdb, id) => {
   return {
     method: "get",

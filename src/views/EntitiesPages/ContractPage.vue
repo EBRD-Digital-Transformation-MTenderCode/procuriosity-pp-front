@@ -9,101 +9,101 @@
       />
 
       <!-- Procuring entity -->
-      <div class="info">
-        <div class="info__title">{{ $t("contract.procuring_entity") }}</div>
-        <div class="info__text">
+      <div class="old-info">
+        <div class="old-info__title">{{ $t("contract.procuring_entity") }}</div>
+        <div class="old-info__text">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
-              <div class="info__name">{{ $t("contract.procuring_entity_full_name") }}</div>
+              <div class="old-info__name">{{ $t("contract.procuring_entity_full_name") }}</div>
             </el-col>
             <el-col :xs="24" :sm="14">
-              <div class="info__value">{{ procuringEntity.fullName }}</div>
+              <div class="old-info__value">{{ procuringEntity.fullName }}</div>
             </el-col>
           </el-row>
         </div>
-        <div class="info__text">
+        <div class="old-info__text">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
-              <div class="info__name">{{ $t("contract.procuring_entity_identifier") }}</div>
+              <div class="old-info__name">{{ $t("contract.procuring_entity_identifier") }}</div>
             </el-col>
             <el-col :xs="24" :sm="14">
-              <div class="info__value">{{ procuringEntity.identifier }}</div>
+              <div class="old-info__value">{{ procuringEntity.identifier }}</div>
             </el-col>
           </el-row>
         </div>
-        <div class="info__text">
+        <div class="old-info__text">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
-              <div class="info__name">{{ $t("contract.procuring_entity_address") }}</div>
+              <div class="old-info__name">{{ $t("contract.procuring_entity_address") }}</div>
             </el-col>
             <el-col :xs="24" :sm="14">
-              <div class="info__value">{{ procuringEntity.address }}</div>
+              <div class="old-info__value">{{ procuringEntity.address }}</div>
             </el-col>
           </el-row>
         </div>
-        <div class="info__text">
+        <div class="old-info__text">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
-              <div class="info__name">{{ $t("contract.procuring_entity_responsible_person") }}</div>
+              <div class="old-info__name">{{ $t("contract.procuring_entity_responsible_person") }}</div>
             </el-col>
             <el-col :xs="24" :sm="14">
-              <div class="info__value">{{ procuringEntity.responsiblePerson }}</div>
+              <div class="old-info__value">{{ procuringEntity.responsiblePerson }}</div>
             </el-col>
           </el-row>
         </div>
       </div>
 
       <!-- Suppliers -->
-      <div class="info">
-        <div class="info__title">{{ $t("contract.suppliers") }}</div>
+      <div class="old-info">
+        <div class="old-info__title">{{ $t("contract.suppliers") }}</div>
         <div v-for="(supplier, index) of suppliers" :key="supplier.identifier">
-          <div class="info__text">
+          <div class="old-info__text">
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10">
-                <div class="info__name">{{ $t("contract.suppliers_full_name") }}</div>
+                <div class="old-info__name">{{ $t("contract.suppliers_full_name") }}</div>
               </el-col>
               <el-col :xs="24" :sm="14">
-                <div class="info__value">{{ supplier.fullName }}</div>
+                <div class="old-info__value">{{ supplier.fullName }}</div>
               </el-col>
             </el-row>
           </div>
-          <div class="info__text">
+          <div class="old-info__text">
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10">
-                <div class="info__name">{{ $t("contract.suppliers_identifier") }}</div>
+                <div class="old-info__name">{{ $t("contract.suppliers_identifier") }}</div>
               </el-col>
               <el-col :xs="24" :sm="14">
-                <div class="info__value">{{ supplier.identifier }}</div>
+                <div class="old-info__value">{{ supplier.identifier }}</div>
               </el-col>
             </el-row>
           </div>
-          <div class="info__text">
+          <div class="old-info__text">
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10">
-                <div class="info__name">{{ $t("contract.suppliers_address") }}</div>
+                <div class="old-info__name">{{ $t("contract.suppliers_address") }}</div>
               </el-col>
               <el-col :xs="24" :sm="14">
-                <div class="info__value">{{ supplier.address }}</div>
+                <div class="old-info__value">{{ supplier.address }}</div>
               </el-col>
             </el-row>
           </div>
-          <div class="info__text">
+          <div class="old-info__text">
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10">
-                <div class="info__name">{{ $t("contract.suppliers_responsible_person") }}</div>
+                <div class="old-info__name">{{ $t("contract.suppliers_responsible_person") }}</div>
               </el-col>
               <el-col :xs="24" :sm="14">
-                <div class="info__value">{{ supplier.responsiblePerson }}</div>
+                <div class="old-info__value">{{ supplier.responsiblePerson }}</div>
               </el-col>
             </el-row>
           </div>
-          <div class="info__text" v-if="index !== 0">
+          <div class="old-info__text" v-if="index !== 0">
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10">
-                <div class="info__name" />
+                <div class="old-info__name" />
               </el-col>
               <el-col :xs="24" :sm="14">
-                <div class="info__value" />
+                <div class="old-info__value" />
               </el-col>
             </el-row>
           </div>
@@ -111,81 +111,81 @@
       </div>
 
       <!-- Procurement info -->
-      <div class="info">
-        <div class="info__title">{{ $t("contract.procuring_info") }}</div>
-        <div class="info__text">
+      <div class="old-info">
+        <div class="old-info__title">{{ $t("contract.procuring_info") }}</div>
+        <div class="old-info__text">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
-              <div class="info__name">{{ $t("contract.procuring_info_value") }} ({{ procurementInfo.currency }})</div>
+              <div class="old-info__name">{{ $t("contract.procuring_info_value") }} ({{ procurementInfo.currency }})</div>
             </el-col>
             <el-col :xs="24" :sm="14">
-              <div class="info__value info__value_accent">{{ procurementInfo.amount }}</div>
+              <div class="old-info__value info__value_accent">{{ procurementInfo.amount }}</div>
             </el-col>
           </el-row>
         </div>
       </div>
 
       <!-- Documents -->
-      <div class="info" v-if="documents.length">
-        <div class="info__title">{{ $t("contract.documents") }}</div>
-        <div class="info__text" v-for="(document, key) of documents" :key="document.id + key">
+      <div class="old-info" v-if="documents.length">
+        <div class="old-info__title">{{ $t("contract.documents") }}</div>
+        <div class="old-info__text" v-for="(document, key) of documents" :key="document.id + key">
           <el-row :gutter="30">
             <el-col :xs="24" :sm="10">
-              <div class="info-document_name">
+              <div class="old-info-document_name">
                 <div>
                   <a :href="document.url" :title="document.name">{{ document.name }}</a>
                 </div>
               </div>
             </el-col>
             <el-col :xs="24" :sm="14">
-              <div class="info-document_date-published">{{ $t("contract.documents_published") }} {{
+              <div class="old-info-document_date-published">{{ $t("contract.documents_published") }} {{
                 document.datePublished }}
               </div>
-              <div class="info-document_id">{{ $t("contract.documents_id") }}: {{ document.id }}</div>
+              <div class="old-info-document_id">{{ $t("contract.documents_id") }}: {{ document.id }}</div>
             </el-col>
           </el-row>
 
-          <el-row v-for="(oldDoc, index) of document.oldVersions" :key="oldDoc.id + index" class="info-old-document"
+          <el-row v-for="(oldDoc, index) of document.oldVersions" :key="oldDoc.id + index" class="old-info-old-document"
                   :gutter="30">
             <el-col :xs="24" :sm="10">
-              <div class="info-document_name">
+              <div class="old-info-document_name">
                 <div>
                   <a :href="oldDoc.url" :title="oldDoc.name">{{ oldDoc.name }}</a>
                 </div>
               </div>
             </el-col>
             <el-col :xs="24" :sm="14">
-              <div class="info-document_date-published">{{ $t("contract.documents_published") }} {{ oldDoc.datePublished
+              <div class="old-info-document_date-published">{{ $t("contract.documents_published") }} {{ oldDoc.datePublished
                 }}
               </div>
-              <div class="info-document_id">{{ $t("contract.documents_id") }}: {{ oldDoc.id }}</div>
+              <div class="old-info-document_id">{{ $t("contract.documents_id") }}: {{ oldDoc.id }}</div>
             </el-col>
           </el-row>
         </div>
       </div>
 
       <!-- Items -->
-      <div class="info">
-        <div class="info__title">{{ $t("contract.items") }}</div>
+      <div class="old-info">
+        <div class="old-info__title">{{ $t("contract.items") }}</div>
         <template v-for="item in items">
-          <div class="info__text" :key="item.id">
+          <div class="old-info__text" :key="item.id">
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10">
-                <div class="info__name" :title="item.description">{{ item.description }}</div>
+                <div class="old-info__name" :title="item.description">{{ item.description }}</div>
               </el-col>
               <el-col :xs="24" :sm="14">
-                <div class="info__value_accent">{{ item.quantityAndUnit }}</div>
+                <div class="old-info__value_accent">{{ item.quantityAndUnit }}</div>
               </el-col>
             </el-row>
           </div>
-          <div class="info__text" :key="item.id + 1">
+          <div class="old-info__text" :key="item.id + 1">
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10" />
               <el-col :xs="24" :sm="14">
-                <div class="info__value info__value_muted">
+                <div class="old-info__value info__value_muted">
                   {{ $t("contract.items_cpv") }}: {{ item.cpv }}
                 </div>
-                <div class="info__value info__value_muted">
+                <div class="old-info__value info__value_muted">
                   {{ $t("contract.items_delivery_address") }}: {{ item.deliveryAddress}}
                 </div>
               </el-col>
@@ -241,8 +241,8 @@
     },
     computed: {
       ...mapState({
-        cdb: state => state.entities.contracts.currentContract.cdb,
-        contract: state => state.entities.contracts.currentContract.contractData,
+        cdb: state => state.entities.contracts.currentEntity.cdb,
+        contract: state => state.entities.contracts.currentEntity.entityData,
         loaded: state => state.entities.contracts.loaded,
         error: state => state.entities.contracts.error
       }),
