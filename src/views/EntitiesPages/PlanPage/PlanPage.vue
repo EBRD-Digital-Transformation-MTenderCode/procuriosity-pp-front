@@ -4,16 +4,16 @@
       <el-container key="loading" v-if="!loaded && !error.status">
         <div class="loading"></div>
       </el-container>
-      <div v-else-if="loaded && Object.keys(tender).length" key="info">
+      <div v-else-if="loaded && Object.keys(plan).length" key="info">
         <div class="entity-main-info">
           <el-container direction="vertical">
             <el-row>
               <el-col :xs="24" :sm="14">
                 <div class="entity-main-info__title">
-                  {{ gd(tender, _ => _.MSRecord.compiledRelease.tender.title) }}
+                  {{ gd(plan, _ => _.MSRecord.compiledRelease.tender.title) }}
                 </div>
                 <div class="entity-main-info__description">
-                  {{ gd(tender, _ => _.MSRecord.compiledRelease.tender.description) }}
+                  {{ gd(plan, _ => _.MSRecord.compiledRelease.tender.description) }}
                 </div>
                 <div class="entity-main-info__timeline">
 
@@ -26,7 +26,7 @@
                     <span class="whole">{{ wholeAmount }} </span>
                     <span class="fraction"> <span class="dot">.</span>{{ fractionAmount }}</span>
                     <span class="entity-main-info__currency">
-                      {{ gd(tender, _ => _.MSRecord.compiledRelease.tender.value.currency) }}
+                      {{ gd(plan, _ => _.MSRecord.compiledRelease.tender.value.currency) }}
                     </span>
                   </span>
                 </div>
@@ -34,28 +34,28 @@
                   <div class="entity-main-info__additional-block">
                     <div class="entity-main-info__additional-title">Procedure type</div>
                     <div class="entity-main-info__additional-value">
-                      {{ selectProcedure(gd(tender, _ =>
-                      _.MSRecord.compiledRelease.tender.mainProcurementCategory),gd(tender, _ =>
+                      {{ selectProcedure(gd(plan, _ =>
+                      _.MSRecord.compiledRelease.tender.mainProcurementCategory),gd(plan, _ =>
                       _.MSRecord.compiledRelease.tender.value.amount)) }}
                     </div>
                   </div>
                   <div class="entity-main-info__additional-block">
                     <div class="entity-main-info__additional-title">Procuring Entity Name</div>
                     <div class="entity-main-info__additional-value">
-                      {{ gd(tender, _ => _.MSRecord.compiledRelease.tender.procuringEntity.name) }}
+                      {{ gd(plan, _ => _.MSRecord.compiledRelease.tender.procuringEntity.name) }}
                     </div>
                   </div>
                   <div class="entity-main-info__additional-block">
                     <div class="entity-main-info__additional-title">Region</div>
                     <div class="entity-main-info__additional-value">
-                      {{ gd(tender, _ => _.MSRecord.compiledRelease.parties, []).find(part => part.roles.some(role =>
+                      {{ gd(plan, _ => _.MSRecord.compiledRelease.parties, []).find(part => part.roles.some(role =>
                       role === "procuringEntity")).address.addressDetails.region.description }}
                     </div>
                   </div>
                   <div class="entity-main-info__additional-block">
                     <div class="entity-main-info__additional-title">Number of notice</div>
                     <div class="entity-main-info__additional-value">
-                      {{ gd(tender, _ => _.MSRecord.compiledRelease.ocid) }}
+                      {{ gd(plan, _ => _.MSRecord.compiledRelease.ocid) }}
                     </div>
                   </div>
                 </div>
@@ -63,51 +63,23 @@
             </el-row>
           </el-container>
         </div>
-        <div class="entity-tabs">
-          <el-container>
-            <el-row>
-              <el-col :xs="24">
-                <el-tabs v-model="activeTab" stretch>
-                  <el-tab-pane disabled label="PN" name="pn" lazy>
-                    <planning-notice />
-                  </el-tab-pane>
-                  <el-tab-pane label="Contract Notice" name="cn" lazy>
-                    <contract-notice
-                        :msRecord="gd(tender, _ => _.MSRecord.compiledRelease)"
-                        :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
-                        :procedureType="selectProcedure(gd(tender, _ =>
-                      _.MSRecord.compiledRelease.tender.mainProcurementCategory),gd(tender, _ =>
-                      _.MSRecord.compiledRelease.tender.value.amount))"
-                    />
-                  </el-tab-pane>
-                  <el-tab-pane :disabled="!gd(tender, _ => _.EVRecord.compiledRelease.tender.hasEnquiries)" label="Clarification and review" name="clarification" lazy>
-                    <clarification
-                        :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
-                    />
-                  </el-tab-pane>
-                  <el-tab-pane disabled label="e-Auction" name="auction" lazy>
-                    <auction />
-                  </el-tab-pane>
-                  <el-tab-pane disabled label="Received offers" name="offer" lazy>
-                    <received-offers />
-                  </el-tab-pane>
-                  <el-tab-pane disabled label="Evaluation" name="ev" lazy>
-                    <evaluation />
-                  </el-tab-pane>
-                  <el-tab-pane disabled label="Contracts" name="can" lazy>
-                    <contracts />
-                  </el-tab-pane>
-                </el-tabs>
-              </el-col>
-            </el-row>
-          </el-container>
-        </div>
+        <el-container>
+          <contract-notice
+              :msRecord="gd(plan, _ => _.MSRecord.compiledRelease)"
+              :pnRecord="gd(plan, _ => _.PNRecord.compiledRelease)"
+              :procedureType="selectProcedure(gd(plan, _ =>
+              _.MSRecord.compiledRelease.tender.mainProcurementCategory),gd(plan, _ =>
+              _.MSRecord.compiledRelease.tender.value.amount))"
+          />
+        </el-container>
+
+
       </div>
       <el-container class="error" key="error" v-else>
         <div class="error-message"> {{error.message}}</div>
         <button
             class="refresh-btn"
-            @click="getTender"
+            @click="getPlan"
         >
           {{$t("refresh")}}
         </button>
@@ -119,28 +91,17 @@
 
 <script>
   import { mapState } from "vuex";
-  import { FETCH_CURRENT_TENDER_INFO } from "../../../store/types/actions-types";
+  import { FETCH_CURRENT_PLAN_INFO } from "../../../store/types/actions-types";
 
-  import PlanningNotice from "./Tabs/PlanningNotice";
   import ContractNotice from "./Tabs/ContractNotice";
-  import Clarification from "./Tabs/Clarification";
-  import Auction from "./Tabs/Auction";
-  import ReceivedOffers from "./Tabs/ReceivedOffers";
-  import Evaluation from "./Tabs/Evaluation";
-  import Contracts from "./Tabs/Contracts";
 
-  import { getDataFromObject, formatDate } from "../../../utils";
+
+  import { getDataFromObject } from "../../../utils";
 
   export default {
-    name: "TenderPage",
+    name: "PlanPage",
     components: {
-      "planning-notice": PlanningNotice,
-      "contract-notice": ContractNotice,
-      clarification: Clarification,
-      auction: Auction,
-      "received-offers": ReceivedOffers,
-      evaluation: Evaluation,
-      contracts: Contracts
+      "contract-notice": ContractNotice
     },
     data() {
       return {
@@ -148,14 +109,15 @@
       };
     },
     created() {
-      this.getTender();
+      this.getPlan();
     },
     methods: {
-      async getTender() {
-        await this.$store.dispatch(FETCH_CURRENT_TENDER_INFO, {
+      async getPlan() {
+        await this.$store.dispatch(FETCH_CURRENT_PLAN_INFO, {
           id: this.$route.params.id
         });
 
+        console.log(this.plan);
       },
       gd(...args) {
         return getDataFromObject(...args);
@@ -182,16 +144,16 @@
     },
     computed: {
       ...mapState({
-        tender: state => state.entities.tenders.currentEntity.entityData,
-        loaded: state => state.entities.tenders.loaded,
-        error: state => state.entities.tenders.error
+        plan: state => state.entities.plans.currentEntity.entityData,
+        loaded: state => state.entities.plans.loaded,
+        error: state => state.entities.plans.error
       }),
       wholeAmount() {
-        const amountStr = this.gd(this.tender, _ => _.MSRecord.compiledRelease.tender.value.amount, 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        const amountStr = this.gd(this.plan, _ => _.MSRecord.compiledRelease.tender.value.amount, 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
         return /\./.test(amountStr) ? amountStr.slice(0, amountStr.indexOf(".")) : amountStr;
       },
       fractionAmount() {
-        const amountStr = this.gd(this.tender, _ => _.MSRecord.compiledRelease.tender.value.amount, 0).toString();
+        const amountStr = this.gd(this.plan, _ => _.MSRecord.compiledRelease.tender.value.amount, 0).toString();
         return /\./.test(amountStr) ? amountStr.slice(amountStr.indexOf(".") + 1).length === 1 ? amountStr.slice(amountStr.indexOf(".") + 1) + "0" : amountStr.slice(amountStr.indexOf(".") + 1) : "00";
       },
     }
