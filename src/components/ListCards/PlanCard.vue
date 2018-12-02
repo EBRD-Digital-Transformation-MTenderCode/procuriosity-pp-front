@@ -40,10 +40,10 @@
             <div class="title">{{$t("plan.delivery_regions")}}:</div>
             <div class="text">{{ region }}</div>
           </div>
-          <div class="entity-type">
+          <!--<div class="entity-type">
             <div class="title">{{$t("plan.procedure_type")}}:</div>
             <div class="text">{{ type }}</div>
-          </div>
+          </div>-->
           <div class="entity-id">
             <div class="title">{{$t("plan.tender_id")}}:</div>
             <div class="text">{{ entityId }}</div>
@@ -56,7 +56,7 @@
 
 <script>
   import procedureTypes from "../../store/types/procedures-types"
-  
+
   import { getDataFromObject, formatDate } from "../../utils";
 
   export default {

@@ -514,8 +514,8 @@
     },
     computed: {
       ...mapState({
-        cdb: state => state.entities.tenders.currentTender.cdb,
-        tender: state => state.entities.tenders.currentTender.tenderData,
+        cdb: state => state.entities.tenders.currentEntity.cdb,
+        tender: state => state.entities.tenders.currentEntity.entityData,
         loaded: state => state.entities.tenders.loaded,
         error: state => state.entities.tenders.error
       }),

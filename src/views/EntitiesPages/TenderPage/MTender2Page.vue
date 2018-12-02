@@ -67,34 +67,39 @@
           <el-container>
             <el-row>
               <el-col :xs="24">
-                <el-tabs v-model="activeTab" stretch>
-                  <el-tab-pane disabled label="PN" name="pn" lazy>
+                <el-tabs v-model="activeTab" stretch @tab-click="checkTab">
+                  <el-tab-pane label="Procurement Plan" name="pn" lazy>
                     <planning-notice />
                   </el-tab-pane>
                   <el-tab-pane label="Contract Notice" name="cn" lazy>
                     <contract-notice
-                        :msRecord="gd(tender, _ => _.MSRecord.compiledRelease)"
-                        :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
-                        :procedureType="selectProcedure(gd(tender, _ =>
+                      :msRecord="gd(tender, _ => _.MSRecord.compiledRelease)"
+                      :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
+                      :procedureType="selectProcedure(gd(tender, _ =>
                       _.MSRecord.compiledRelease.tender.mainProcurementCategory),gd(tender, _ =>
                       _.MSRecord.compiledRelease.tender.value.amount))"
                     />
                   </el-tab-pane>
-                  <el-tab-pane :disabled="!gd(tender, _ => _.EVRecord.compiledRelease.tender.hasEnquiries)" label="Clarification and review" name="clarification" lazy>
+                  <el-tab-pane
+                    :disabled="!gd(tender, _ => _.EVRecord.compiledRelease.tender.hasEnquiries)"
+                    label="Clarification and changes"
+                    name="clarification"
+                    lazy
+                  >
                     <clarification
-                        :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
+                      :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
                     />
                   </el-tab-pane>
-                  <el-tab-pane disabled label="e-Auction" name="auction" lazy>
+                  <el-tab-pane disabled label="Review procedures" name="auction" lazy>
                     <auction />
                   </el-tab-pane>
-                  <el-tab-pane disabled label="Received offers" name="offer" lazy>
+                  <el-tab-pane disabled label="Electronic auction" name="offer" lazy>
                     <received-offers />
                   </el-tab-pane>
-                  <el-tab-pane disabled label="Evaluation" name="ev" lazy>
+                  <el-tab-pane disabled label="Electronic bids" name="ev" lazy>
                     <evaluation />
                   </el-tab-pane>
-                  <el-tab-pane disabled label="Contracts" name="can" lazy>
+                  <el-tab-pane disabled label="Evaluation of bids" name="can" lazy>
                     <contracts />
                   </el-tab-pane>
                 </el-tabs>
@@ -106,8 +111,8 @@
       <el-container class="error" key="error" v-else>
         <div class="error-message"> {{error.message}}</div>
         <button
-            class="refresh-btn"
-            @click="getTender"
+          class="refresh-btn"
+          @click="getTender"
         >
           {{$t("refresh")}}
         </button>
@@ -121,6 +126,8 @@
   import { mapState } from "vuex";
   import { FETCH_CURRENT_TENDER_INFO } from "../../../store/types/actions-types";
 
+  import procedureTypes from "./../../../store/types/procedures-types";
+
   import PlanningNotice from "./Tabs/PlanningNotice";
   import ContractNotice from "./Tabs/ContractNotice";
   import Clarification from "./Tabs/Clarification";
@@ -129,7 +136,7 @@
   import Evaluation from "./Tabs/Evaluation";
   import Contracts from "./Tabs/Contracts";
 
-  import { getDataFromObject, formatDate } from "../../../utils";
+  import { getDataFromObject } from "../../../utils";
 
   export default {
     name: "TenderPage",
@@ -150,36 +157,6 @@
     created() {
       this.getTender();
     },
-    methods: {
-      async getTender() {
-        await this.$store.dispatch(FETCH_CURRENT_TENDER_INFO, {
-          id: this.$route.params.id
-        });
-
-      },
-      gd(...args) {
-        return getDataFromObject(...args);
-      },
-      selectProcedure(category, amount) {
-        if (category === "goods" || category === "services") {
-          if (amount < 80000) {
-            return "Micro Value";
-          } else if (amount <= 400000) {
-            return "Small Value";
-          } else {
-            return "Open Tender";
-          }
-        }else if (category === "works") {
-          if (amount < 100000) {
-            return "Micro Value";
-          } else if (amount <= 1500000) {
-            return "Small Value";
-          } else {
-            return "Open Tender";
-          }
-        }
-      }
-    },
     computed: {
       ...mapState({
         tender: state => state.entities.tenders.currentEntity.entityData,
@@ -193,7 +170,96 @@
       fractionAmount() {
         const amountStr = this.gd(this.tender, _ => _.MSRecord.compiledRelease.tender.value.amount, 0).toString();
         return /\./.test(amountStr) ? amountStr.slice(amountStr.indexOf(".") + 1).length === 1 ? amountStr.slice(amountStr.indexOf(".") + 1) + "0" : amountStr.slice(amountStr.indexOf(".") + 1) : "00";
+      }
+    },
+    methods: {
+      async getTender() {
+        await this.$store.dispatch(FETCH_CURRENT_TENDER_INFO, {
+          id: this.$route.params.id
+        });
+
       },
+      gd(...args) {
+        return getDataFromObject(...args);
+      },
+      selectProcedure(category, amount) {
+        if (category === "goods" || category === "services") {
+          if (amount < 80000) {
+            switch (this.$i18n.locale) {
+              case "en":
+                return "Micro Value";
+              case "ro":
+                return "Micro procedură";
+              case "ru":
+                return "Микро-процедура";
+              default:
+                return "Micro Value";
+            }
+          } else if (amount <= 400000) {
+            switch (this.$i18n.locale) {
+              case "en":
+                return "Request for price quotation";
+              case "ro":
+                return "Achiziții de valoare mica";
+              case "ru":
+                return "Закупка малой стоимости";
+              default:
+                return "Request for price quotation";
+            }
+          } else {
+            switch (this.$i18n.locale) {
+              case "en":
+                return "Open Tender";
+              case "ro":
+                return "Licitație deschisă";
+              case "ru":
+                return "Открытые торги";
+              default:
+                return "Open Tender";
+            }
+          }
+        } else if (category === "works") {
+          if (amount < 100000) {
+            switch (this.$i18n.locale) {
+              case "en":
+                return "Micro Value";
+              case "ro":
+                return "Micro procedură";
+              case "ru":
+                return "Микро-процедура";
+              default:
+                return "Micro Value";
+            }
+          } else if (amount <= 1500000) {
+            switch (this.$i18n.locale) {
+              case "en":
+                return "Request for price quotation";
+              case "ro":
+                return "Achiziții de valoare mica";
+              case "ru":
+                return "Закупка малой стоимости";
+              default:
+                return "Request for price quotation";
+            }
+          } else {
+            switch (this.$i18n.locale) {
+              case "en":
+                return "Open Tender";
+              case "ro":
+                return "Licitație deschisă";
+              case "ru":
+                return "Открытые торги";
+              default:
+                return "Open Tender";
+            }
+          }
+        }
+      },
+      checkTab(tab) {
+        if (tab.name === "pn") {
+          this.$router.push({path: `/plans/${this.tender.MSRecord.ocid}`})
+        }
+      }
     }
   };
 </script>
@@ -204,7 +270,7 @@
   .entity {
     &-main-info {
       padding-top: 45px;
-      padding-bottom: 70px;
+      padding-bottom: 90px;
       background-color: $mainC;
       &__title {
         margin-bottom: 33px;

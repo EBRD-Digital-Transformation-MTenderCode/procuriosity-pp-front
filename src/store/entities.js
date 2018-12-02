@@ -484,7 +484,6 @@ export default {
               }
               if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-PN-[0-9]{13}$/) !== -1) {
                 Object.assign(PNRecord, record);
-                console.log("PN", PNRecord);
               }
               if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-EV-[0-9]{13}$/) !== -1) {
                 Object.assign(EVRecord, record);

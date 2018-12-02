@@ -521,6 +521,19 @@
                 </el-row>
               </div>
 
+              <div class="info-block" v-if="procedureType==='Open Tender' || procedureType==='Licitație deschisă' || procedureType==='Открытые торги'">
+                <el-row>
+                  <el-col :sm="24">
+                    <div class="info-block__text">
+                      The amount and currency of the big guarantee that must be valid 90 deays starting from opening of the tenders
+                    </div>
+                    <div class="info-block__value">
+                      {{ fa(gd(lot, _ => _.value.amount) * 0.02) }} {{ gd(lot, _ => _.value.currency) }}
+                    </div>
+                  </el-col>
+                </el-row>
+              </div>
+
               <div class="info-block">
                 <el-row>
                   <el-col :sm="24">
@@ -1079,7 +1092,7 @@
           <li>Minimum time frame during which the tenderer must maintain the tender is 90 days starting from opening of
             the tenders.
           </li>
-          <li v-if="procedureType==='Open Tender'">The amount and currency of the bid guarantee is - <!-- @TODO Pasha -->% of estimated value MDL and must be valid 90 days
+          <li v-if="procedureType==='Open Tender' || procedureType==='Licitație deschisă' || procedureType==='Открытые торги'">The amount and currency of the bid guarantee is - {{ fa(gd(msRecord, _ => _.tender.value.amount) * 0.02) }} of estimated value MDL and must be valid 90 days
             starting from opening of the tenders.
           </li>
           <li>Failure of the selected Economic Operator to submit the contract performance guarantee, if applicable, or to
@@ -1298,8 +1311,8 @@
       };
     },
     created() {
-      console.log("MS", this.msRecord);
-      console.log("PN", this.pnRecord);
+      /*console.log("MS", this.msRecord);
+      console.log("PN", this.pnRecord);*/
     },
     computed: {
       getTypeOfBuyer() {

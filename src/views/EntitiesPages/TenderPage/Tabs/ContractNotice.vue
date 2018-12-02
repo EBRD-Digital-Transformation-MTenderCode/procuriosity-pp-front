@@ -242,7 +242,7 @@
             </el-col>
           </el-row>
         </div>
-        
+
         <div class="info-block">
           <el-row>
             <el-col :sm="24">
@@ -338,7 +338,7 @@
             </el-row>
           </div>
         </div>
-        
+
         <div class="info__sub-title">Description</div>
         <el-collapse accordion :value="gd(evRecord, _ => _.tender.lots[0].id, '0') + '0'">
           <el-collapse-item
@@ -403,7 +403,7 @@
                   </el-col>-->
                 </el-row>
               </div>
-              
+
               <div class="info-block">
                 <div class="info-block__text">Description of the procurement:</div>
                 <div
@@ -425,9 +425,9 @@
                   </el-row>
                 </div>
               </div>
-              
+
            <!-- <div class="info__sub-title">Level of Performance</div>-->
-            
+
               <!--<div class="info-block">
                 <el-row>
                   <el-col :sm="16">
@@ -515,6 +515,19 @@
                     <div class="info-block__text">Estimated value excluding VAT</div>
                     <div class="info-block__value">
                       {{ fa(gd(lot, _ => _.value.amount)) }} {{ gd(lot, _ => _.value.currency) }}
+                    </div>
+                  </el-col>
+                </el-row>
+              </div>
+
+              <div class="info-block" v-if="procedureType==='Open Tender' || procedureType==='Licitație deschisă' || procedureType==='Открытые торги'">
+                <el-row>
+                  <el-col :sm="24">
+                    <div class="info-block__text">
+                      The amount and currency of the big guarantee that must be valid 90 deays starting from opening of the tenders
+                    </div>
+                    <div class="info-block__value">
+                      {{ fa(gd(lot, _ => _.value.amount) * 0.02) }} {{ gd(lot, _ => _.value.currency) }}
                     </div>
                   </el-col>
                 </el-row>
@@ -896,7 +909,7 @@
               </el-col>
             </el-row>
           </div>
-  
+
           <div class="info-block">
             <el-row>
               <el-col :sm="24">
@@ -907,7 +920,7 @@
               </el-col>
             </el-row>
           </div>
-  
+
           <div class="info-block">
             <el-row>
               <el-col :sm="24">
@@ -1094,7 +1107,7 @@
           </div>
         </div>
       </div>
-      
+
       <!-- Complementary information -->
       <div>
         <div class="info__title">Complementary information</div>
@@ -1116,7 +1129,7 @@
           <li>Minimum time frame during which the tenderer must maintain the tender is 90 days starting from opening of
             the tenders.
           </li>
-          <li v-if="procedureType==='Open Tender'">The amount and currency of the bid guarantee is - <!-- @TODO Pasha -->% of estimated value MDL and must be valid 90 days
+          <li v-if="procedureType==='Open Tender' || procedureType==='Licitație deschisă' || procedureType==='Открытые торги'">The amount and currency of the bid guarantee is - {{ fa(gd(msRecord, _ => _.tender.value.amount) * 0.02) }} of estimated value MDL and must be valid 90 days
             starting from opening of the tenders.
           </li>
           <li>Failure of the selected Economic Operator to submit the contract performance guarantee, if applicable, or to
@@ -1273,14 +1286,14 @@
         </ol>
       </div>
       </div>
-      <div class="info__sub-title">Date of online publication of notice:  {{ fd(gd(evRecord, _ => _.tender.tenderPeriod.startDate), "DD/MM/YYYY") }}</div>
+      <div class="info__sub-title">Date of online publication of notice:  {{ fd(gd(evRecord, _ => _.tender.enquiryPeriod.startDate), "DD/MM/YYYY") }}</div>
     </div>
   </div>
 </template>
 
 <script>
   import axios from "axios";
-  
+
   import typesOfBuyers from "./../../../../store/types/buyers-types";
   import mainGeneralActivites from "./../../../../store/types/main-general-activity-types";
 
@@ -1334,8 +1347,8 @@
       };
     },
     created() {
-      console.log("MS", this.msRecord);
-      console.log("EV", this.evRecord);
+      /*console.log("MS", this.msRecord);
+      console.log("EV", this.evRecord);*/
     },
     computed: {
       getTypeOfBuyer() {
@@ -1376,20 +1389,20 @@
         if (!ocidFS || this.FSs.hasOwnProperty(ocidFS)) {
           return false;
         }
-        
+
         const cpidEI = ocidFS.replace(/-FS-[0-9]{13}$/, "");
-        
+
         try {
           const responseFS = await axios({
             method: "get",
             url: `https://public.mtender.gov.md/budgets/${cpidEI}/${ocidFS}`
           });
-          
+
           const FS = responseFS.data.releases[0];
-          
+
           const payer = FS.parties.find(part => part.roles.some(role => role === "payer"));
           const funder = FS.parties.find(part => part.roles.some(role => role === "funder"));
-          
+
           this.FSs = Object.assign({}, this.FSs, {
             [FS.ocid]: {
               project: FS.planning.project,
@@ -1404,7 +1417,7 @@
               }
             }
           });
-          
+
         }
         catch (e) {
           console.log(e);

@@ -105,7 +105,7 @@
 .entity-tabs {
   .el-tabs {
     &__nav-wrap {
-      margin-top: -62px;
+      margin-top: -81px;
       &:after {
         display: none;
       }
@@ -115,11 +115,13 @@
       }
     }
     &__item {
+      height: auto;
+      padding: 24px 14px 19px;
+      white-space: normal;
+      text-align: left;
+      line-height: 1;
       font-size: 19px;
       color: #2da9e2;
-      padding: 24px 14px 19px;
-      line-height: 1;
-      height: auto;
       user-select: none;
     }
     &__active-bar {
