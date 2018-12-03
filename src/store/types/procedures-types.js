@@ -28,7 +28,7 @@ export default {
     },
     {
       name: {
-        en: "Micro value",
+        en: "Request for price quotation",
         ro: "Achiziții de valoare mica",
         ru: "Закупки малой стоимости"
       },

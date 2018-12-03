@@ -117,7 +117,7 @@
           id: this.$route.params.id
         });
 
-        console.log(this.plan);
+        /*console.log(this.plan);*/
       },
       gd(...args) {
         return getDataFromObject(...args);
@@ -125,22 +125,76 @@
       selectProcedure(category, amount) {
         if (category === "goods" || category === "services") {
           if (amount < 80000) {
-            return "Micro Value";
+            switch (this.$i18n.locale) {
+              case "en":
+                return "Micro Value";
+              case "ro":
+                return "Micro procedură";
+              case "ru":
+                return "Микро-процедура";
+              default:
+                return "Micro Value";
+            }
           } else if (amount <= 400000) {
-            return "Small Value";
+            switch (this.$i18n.locale) {
+              case "en":
+                return "Request for price quotation";
+              case "ro":
+                return "Achiziții de valoare mica";
+              case "ru":
+                return "Закупка малой стоимости";
+              default:
+                return "Request for price quotation";
+            }
           } else {
-            return "Open Tender";
+            switch (this.$i18n.locale) {
+              case "en":
+                return "Open Tender";
+              case "ro":
+                return "Licitație deschisă";
+              case "ru":
+                return "Открытые торги";
+              default:
+                return "Open Tender";
+            }
           }
-        }else if (category === "works") {
+        } else if (category === "works") {
           if (amount < 100000) {
-            return "Micro Value";
+            switch (this.$i18n.locale) {
+              case "en":
+                return "Micro Value";
+              case "ro":
+                return "Micro procedură";
+              case "ru":
+                return "Микро-процедура";
+              default:
+                return "Micro Value";
+            }
           } else if (amount <= 1500000) {
-            return "Small Value";
+            switch (this.$i18n.locale) {
+              case "en":
+                return "Request for price quotation";
+              case "ro":
+                return "Achiziții de valoare mica";
+              case "ru":
+                return "Закупка малой стоимости";
+              default:
+                return "Request for price quotation";
+            }
           } else {
-            return "Open Tender";
+            switch (this.$i18n.locale) {
+              case "en":
+                return "Open Tender";
+              case "ro":
+                return "Licitație deschisă";
+              case "ru":
+                return "Открытые торги";
+              default:
+                return "Open Tender";
+            }
           }
         }
-      }
+      },
     },
     computed: {
       ...mapState({

@@ -13,7 +13,7 @@
                :name="question.id + index"
           >
             <div class="info-block">
-              <el-row>
+              <el-row :gutter="25">
                 <el-col :sm="16">
                   <div class="info-block__text">
                     Title
@@ -33,7 +33,7 @@
               </el-row>
             </div>
             <div class="info-block">
-              <el-row>
+              <el-row :gutter="15">
                 <el-col :sm="24">
                   <div class="info-block__text">
                     Description
@@ -44,10 +44,9 @@
                 </el-col>
               </el-row>
             </div>
-            <div class="info-block__answer"
-                 v-if="question.hasOwnProperty('answer')">
+            <div class="info-block__answer" v-if="question.hasOwnProperty('answer')">
               <div class="info-block">
-                <el-row>
+                <el-row :gutter="15">
                   <el-col :sm="16">
                     <div class="info-block__value">
                       <span class="arrow">⮡</span> {{ transformSS(gd(question, _ => _.title)) }}
@@ -61,7 +60,7 @@
                 </el-row>
               </div>
               <div class="info-block">
-                <el-row>
+                <el-row :gutter="15">
                   <el-col :sm="24">
                     <div class="info-block__value info-block__value__italic">
                       <div class="info-block__value__pre">{{ transformSS(gd(question, _ => _.answer)) }}</div>
