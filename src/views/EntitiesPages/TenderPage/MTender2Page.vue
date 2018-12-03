@@ -21,7 +21,7 @@
               </el-col>
               <el-col :xs=24 :sm="8" :offset="2">
                 <div class="entity-main-info__value">
-                  <div> Estimated value excluding VAT</div>
+                  <div>{{ $t("tender.estimated_value_excluding_VAT") }}</div>
                   <span class="entity-main-info__amount">
                     <span class="whole">{{ wholeAmount }} </span>
                     <span class="fraction"> <span class="dot">.</span>{{ fractionAmount }}</span>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="entity-main-info__additional">
                   <div class="entity-main-info__additional-block">
-                    <div class="entity-main-info__additional-title">Procedure type</div>
+                    <div class="entity-main-info__additional-title">{{ $t("tender.procedure_type") }}</div>
                     <div class="entity-main-info__additional-value">
                       {{ selectProcedure(gd(tender, _ =>
                       _.MSRecord.compiledRelease.tender.mainProcurementCategory),gd(tender, _ =>
@@ -40,20 +40,20 @@
                     </div>
                   </div>
                   <div class="entity-main-info__additional-block">
-                    <div class="entity-main-info__additional-title">Procuring Entity Name</div>
+                    <div class="entity-main-info__additional-title">{{ $t("tender.procuring_entity_name") }}</div>
                     <div class="entity-main-info__additional-value">
                       {{ gd(tender, _ => _.MSRecord.compiledRelease.tender.procuringEntity.name) }}
                     </div>
                   </div>
                   <div class="entity-main-info__additional-block">
-                    <div class="entity-main-info__additional-title">Region</div>
+                    <div class="entity-main-info__additional-title">{{ $t("tender.buyer_region") }}</div>
                     <div class="entity-main-info__additional-value">
                       {{ gd(tender, _ => _.MSRecord.compiledRelease.parties, []).find(part => part.roles.some(role =>
                       role === "procuringEntity")).address.addressDetails.region.description }}
                     </div>
                   </div>
                   <div class="entity-main-info__additional-block">
-                    <div class="entity-main-info__additional-title">Number of notice</div>
+                    <div class="entity-main-info__additional-title">{{ $t("tender.tender_id") }}</div>
                     <div class="entity-main-info__additional-value">
                       {{ gd(tender, _ => _.MSRecord.compiledRelease.ocid) }}
                     </div>
@@ -68,10 +68,10 @@
             <el-row>
               <el-col :xs="24">
                 <el-tabs v-model="activeTab" stretch @tab-click="checkTab">
-                  <el-tab-pane label="Procurement Plan" name="pn" lazy>
+                  <el-tab-pane :label='$t("tender.procurement_plan")' name="pn" lazy>
                     <planning-notice />
                   </el-tab-pane>
-                  <el-tab-pane label="Contract Notice" name="cn" lazy>
+                  <el-tab-pane :label='$t("tender.contract_notice")' name="cn" lazy>
                     <contract-notice
                       :msRecord="gd(tender, _ => _.MSRecord.compiledRelease)"
                       :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
@@ -82,7 +82,7 @@
                   </el-tab-pane>
                   <el-tab-pane
                     :disabled="!gd(tender, _ => _.EVRecord.compiledRelease.tender.hasEnquiries)"
-                    label="Clarification and changes"
+                    :label='$t("tender.clarification_and_changes")'
                     name="clarification"
                     lazy
                   >
@@ -90,16 +90,16 @@
                       :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
                     />
                   </el-tab-pane>
-                  <el-tab-pane disabled label="Review procedures" name="auction" lazy>
+                  <el-tab-pane disabled :label='$t("tender.review_procedures")' name="auction" lazy>
                     <auction />
                   </el-tab-pane>
-                  <el-tab-pane disabled label="Electronic auction" name="offer" lazy>
+                  <el-tab-pane disabled :label='$t("tender.electronic_auction")' name="offer" lazy>
                     <received-offers />
                   </el-tab-pane>
-                  <el-tab-pane disabled label="Electronic bids" name="ev" lazy>
+                  <el-tab-pane disabled :label='$t("tender.electronic_bids")' name="ev" lazy>
                     <evaluation />
                   </el-tab-pane>
-                  <el-tab-pane disabled label="Evaluation of bids" name="can" lazy>
+                  <el-tab-pane disabled :label='$t("tender.evaluation_of_bids")' name="can" lazy>
                     <contracts />
                   </el-tab-pane>
                 </el-tabs>
