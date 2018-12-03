@@ -68,8 +68,8 @@ export default {
   "contract_notice":"Contract Notice",
   "clarification_and_changes":"Clarification and changes",
   "electronic_auction":"Electronic auction",
-  "electronic_bids":"Electronic bids",
-  "evaluation_of_bids":"Evaluation of bids",
+  "electronic_bids":"Electronic<br/>bids",
+  "evaluation_of_bids":"Evaluation<br/>of bids",
   "contracting_authority":"Contracting authority",
   "object":"Object",
   "procedure":"Procedure",
@@ -177,6 +177,7 @@ export default {
   "date_online_publication":"Date of online publication of notice",
 
   "clarification":"Clarification",
+  "modification_documents":"Modifications of tender documents ",
   "question_received":"Question received",
   "no_clarifications":"No Clarifications",
 }

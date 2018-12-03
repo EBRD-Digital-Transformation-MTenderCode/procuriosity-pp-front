@@ -2,6 +2,7 @@
   <div>
     <div class="entity-nav" data-scroll-spy-id="clarification" v-scroll-spy-active="{selector: 'a', class: 'active'}" v-scroll-spy-link>
       <a>{{ $t("tender.clarification") }}</a>
+      <a disabled>{{ $t("tender.modification_documents") }}</a>
     </div>
     <div class="info" data-scroll-spy-id="clarification" v-scroll-spy="{offset: 75, allowNoActive: true}">
       <div>
@@ -48,8 +49,8 @@
               <div class="info-block">
                 <el-row :gutter="15">
                   <el-col :sm="16">
-                    <div class="info-block__value">
-                      <span class="arrow">⮡</span> {{ transformSS(gd(question, _ => _.title)) }}
+                    <div class="info-block__value info-block__value_answer">
+                      {{ transformSS(gd(question, _ => _.title)) }}
                     </div>
                   </el-col>
                   <el-col :sm="8">
@@ -62,8 +63,8 @@
               <div class="info-block">
                 <el-row :gutter="15">
                   <el-col :sm="24">
-                    <div class="info-block__value info-block__value__italic">
-                      <div class="info-block__value__pre">{{ transformSS(gd(question, _ => _.answer)) }}</div>
+                    <div class="info-block__value info-block__value_italic">
+                      <div class="info-block__value_pre">{{ transformSS(gd(question, _ => _.answer)) }}</div>
                     </div>
                   </el-col>
                 </el-row>
@@ -71,7 +72,7 @@
             </div>
           </div>
         </div>
-        <div v-else>{{ $t("tender.no_clarifications") }}<</div>
+        <div v-else>{{ $t("tender.no_clarifications") }}</div>
       </div>
     </div>
   </div>
@@ -100,7 +101,3 @@
     }
   };
 </script>
-
-<style scoped>
-
-</style>

@@ -1341,11 +1341,6 @@
         FSs: {}
       };
     },
-    created() {
-      /*console.log("MS", this.msRecord);
-      console.log("EV", this.evRecord);
-      */
-    },
     computed: {
       getTypeOfBuyer() {
         if (!this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.typeOfBuyer)) {
@@ -1422,9 +1417,3 @@
     }
   };
 </script>
-
-<style lang="scss" scoped>
-  @import "../../../../styles/variables";
-
-
-</style>

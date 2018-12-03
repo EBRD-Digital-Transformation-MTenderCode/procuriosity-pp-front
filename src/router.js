@@ -5,7 +5,7 @@ import List from "./views/List";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -16,7 +16,7 @@ export default new Router({
     },
     {
       path: `/:lang?/plans/:id`,
-      name: "plan-page",
+      name: "plan",
       component: () => import(/* webpackChunkName: "PlanPage" */ "./views/EntitiesPages/PlanPage/ContainerPlanPage.vue")
     },
     /*{
@@ -26,12 +26,12 @@ export default new Router({
      },*/
     {
       path: `/:lang?/tenders/:id`,
-      name: "tender-page",
+      name: "tender",
       component: () => import(/* webpackChunkName: "TenderPage" */ "./views/EntitiesPages/TenderPage/ContainerTenderPage.vue")
     },
     {
       path: `/:lang?/contracts/:id`,
-      name: "contract-page",
+      name: "contract",
       component: () => import(/* webpackChunkName: "ContractPage" */ "./views/EntitiesPages/ContractPage.vue")
     }
   ],
@@ -43,3 +43,17 @@ export default new Router({
     }
   }
 });
+
+router.beforeEach((to, from, next) => {
+  if (process.env.NODE_ENV !== "development") {
+    if (from.name) {
+      if (document.querySelector(`.header-entity-nav a[href*=${from.name}]`) && document.querySelector(`.header-entity-nav a[href*=${to.name}]`)) {
+        document.querySelector(`.header-entity-nav a[href*=${from.name}]`).classList.remove("is-active");
+        document.querySelector(`.header-entity-nav a[href*=${to.name}]`).classList.add("is-active");
+      }
+    }
+  }
+  next();
+});
+
+export default router;

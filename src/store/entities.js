@@ -170,7 +170,9 @@ export default {
 
     [SET_CURRENT_ENTITY_INFO](state, { entity, cdb, entityData }) {
       state[entity] = {
+        ...state[entity],
         currentEntity: {
+          ...state[entity].currentEntity,
           cdb,
           entityData
         }
