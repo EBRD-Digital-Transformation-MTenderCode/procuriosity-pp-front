@@ -67,37 +67,54 @@
           <el-container>
             <el-row>
               <el-col :xs="24">
-                <el-tabs v-model="activeTab" stretch @tab-click="checkTab">
-                  <el-tab-pane label="Procurement Plan" name="pn" lazy>
-                    <planning-notice />
-                  </el-tab-pane>
-                  <el-tab-pane label="Contract Notice" name="cn" lazy>
+                <el-tabs
+                    v-model="activeTab"
+                    stretch
+                    :before-leave="checkTab"
+                >
+                  <el-tab-pane
+                      :disabled="!gd(tender, _ => _.EVRecord.compiledRelease.hasPreviousNotice)"
+                      label="Procurement Plan"
+                      name="pn" lazy
+                  />
+                  <el-tab-pane
+                      label="Contract Notice"
+                      name="cn"
+                      lazy
+                  >
                     <contract-notice
-                      :msRecord="gd(tender, _ => _.MSRecord.compiledRelease)"
-                      :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
-                      :procedureType="selectProcedure(gd(tender, _ =>
+                        :msRecord="gd(tender, _ => _.MSRecord.compiledRelease)"
+                        :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
+                        :procedureType="selectProcedure(gd(tender, _ =>
                       _.MSRecord.compiledRelease.tender.mainProcurementCategory),gd(tender, _ =>
                       _.MSRecord.compiledRelease.tender.value.amount))"
                     />
                   </el-tab-pane>
                   <el-tab-pane
-                    :disabled="!gd(tender, _ => _.EVRecord.compiledRelease.tender.hasEnquiries)"
-                    label="Clarification and changes"
-                    name="clarification"
-                    lazy
+                      :disabled="!gd(tender, _ => _.EVRecord.compiledRelease.tender.hasEnquiries)"
+                      label="Clarification and changes"
+                      name="clarification"
+                      lazy
                   >
                     <clarification
-                      :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
+                        :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
                     />
                   </el-tab-pane>
                   <el-tab-pane disabled label="Review procedures" name="auction" lazy>
                     <auction />
                   </el-tab-pane>
-                  <el-tab-pane disabled label="Electronic auction" name="offer" lazy>
-                    <received-offers />
+                  <el-tab-pane disabled label="Electronic auction" name="ev" lazy>
+                  
                   </el-tab-pane>
-                  <el-tab-pane disabled label="Electronic bids" name="ev" lazy>
-                    <evaluation />
+                  <el-tab-pane
+                      disabled
+                      name="offers"
+                      lazy
+                  >
+                    <span slot="label">Electronic<br/>bids</span>
+                    <offers
+                        :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
+                    />
                   </el-tab-pane>
                   <el-tab-pane disabled label="Evaluation of bids" name="can" lazy>
                     <contracts />
@@ -111,8 +128,8 @@
       <el-container class="error" key="error" v-else>
         <div class="error-message"> {{error.message}}</div>
         <button
-          class="refresh-btn"
-          @click="getTender"
+            class="refresh-btn"
+            @click="getTender"
         >
           {{$t("refresh")}}
         </button>
@@ -126,26 +143,22 @@
   import { mapState } from "vuex";
   import { FETCH_CURRENT_TENDER_INFO } from "../../../store/types/actions-types";
 
-  import procedureTypes from "./../../../store/types/procedures-types";
-
-  import PlanningNotice from "./Tabs/PlanningNotice";
   import ContractNotice from "./Tabs/ContractNotice";
   import Clarification from "./Tabs/Clarification";
   import Auction from "./Tabs/Auction";
-  import ReceivedOffers from "./Tabs/ReceivedOffers";
+  import Offers from "./Tabs/Offers";
   import Evaluation from "./Tabs/Evaluation";
   import Contracts from "./Tabs/Contracts";
 
-  import { getDataFromObject } from "../../../utils";
+  import { getDataFromObject } from "./../../../utils";
 
   export default {
     name: "TenderPage",
     components: {
-      "planning-notice": PlanningNotice,
       "contract-notice": ContractNotice,
       clarification: Clarification,
       auction: Auction,
-      "received-offers": ReceivedOffers,
+      "offers": Offers,
       evaluation: Evaluation,
       contracts: Contracts
     },
@@ -177,7 +190,7 @@
         await this.$store.dispatch(FETCH_CURRENT_TENDER_INFO, {
           id: this.$route.params.id
         });
-
+        console.log(this.tender);
       },
       gd(...args) {
         return getDataFromObject(...args);
@@ -256,94 +269,10 @@
         }
       },
       checkTab(tab) {
-        if (tab.name === "pn") {
-          this.$router.push({path: `${this.$i18n.locale !== "ro" ? `/${this.$i18n.locale}` : ""}/plans/${this.tender.MSRecord.ocid}`})
+        if (tab === "pn") {
+          this.$router.push({ path: `${this.$i18n.locale !== "ro" ? `/${this.$i18n.locale}` : ""}/plans/${this.tender.MSRecord.ocid}` });
         }
       }
     }
   };
 </script>
-
-<style lang="scss" scoped>
-  @import "../../../styles/variables";
-
-  .entity {
-    &-main-info {
-      padding-top: 45px;
-      padding-bottom: 90px;
-      background-color: $mainC;
-      &__title {
-        margin-bottom: 33px;
-        color: #fff;
-        font-size: 30px;
-      }
-      &__description {
-        margin-bottom: 40px;
-        font-size: 14px;
-        font-weight: 300;
-        color: #fff;
-      }
-      &__value {
-        margin-bottom: 70px;
-        font-size: 13px;
-        font-weight: 400;
-        color: #fff;
-      }
-      &__amount {
-        position: relative;
-        display: inline-block;
-        margin-top: 6px;
-        padding-right: 35px;
-        color: #fff;
-        .whole {
-          display: inline-block;
-          margin-right: 2px;
-          line-height: 0.8;
-          font-size: 44px;
-        }
-        .fraction {
-          position: absolute;
-          top: 0;
-          right: 0;
-          display: inline-block;
-          font-size: 22px;
-          line-height: 1;
-        }
-        .dot {
-          margin-right: 2px;
-        }
-      }
-      &__currency {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        font-size: 13px;
-        font-weight: 400;
-        text-transform: uppercase;
-        color: #2da9e2;
-      }
-      &__additional {
-        &-block {
-          margin-bottom: 10px;
-        }
-        &-title {
-          margin-bottom: 2px;
-          font-size: 13px;
-          color: #2da9e2;
-        }
-        &-value {
-          font-size: 15px;
-          font-weight: 400;
-          color: #fff;
-        }
-      }
-      .el-container > .el-row > .el-col {
-        display: block;
-      }
-    }
-    &-tabs {
-      margin-bottom: -20px;
-    }
-  }
-
-</style>
