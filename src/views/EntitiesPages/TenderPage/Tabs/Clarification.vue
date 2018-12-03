@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="entity-nav" data-scroll-spy-id="clarification" v-scroll-spy-active="{selector: 'a', class: 'active'}" v-scroll-spy-link>
-      <a>Clarification</a>
-      <a disabled>Modifications of tender documents </a>
+      <a>{{ $t("tender.clarification") }}</a>
+      <a disabled>{{ $t("tender.modification_documents") }}</a>
     </div>
     <div class="info" data-scroll-spy-id="clarification" v-scroll-spy="{offset: 75, allowNoActive: true}">
       <div>
-        <div class="info__title">Clarifications</div>
+        <div class="info__title">{{ $t("tender.clarification") }}</div>
         <div v-if="evRecord.tender.hasOwnProperty('enquiries')">
           <div class="info-blocks info-blocks__questions"
                v-for="(question, index) of gd(evRecord, _ => _.tender.enquiries, [])"
@@ -17,7 +17,7 @@
               <el-row :gutter="25">
                 <el-col :sm="16">
                   <div class="info-block__text">
-                    Title
+                    {{ $t("tender.title") }}
                   </div>
                   <div class="info-block__value">
                     {{ transformSS(gd(question, _ => _.title)) }}
@@ -25,7 +25,7 @@
                 </el-col>
                 <el-col :sm="8">
                   <div class="info-block__text">
-                    Question received
+                    {{ $t("tender.question_received") }}
                   </div>
                   <div class="info-block__value">
                     {{ fd(gd(question, _ => _.date)) }}
@@ -37,7 +37,7 @@
               <el-row :gutter="15">
                 <el-col :sm="24">
                   <div class="info-block__text">
-                    Description
+                    {{ $t("tender.description") }}
                   </div>
                   <div class="info-block__value">
                     <div class="info-block__value__pre">{{ transformSS(gd(question, _ => _.description)) }}</div>
@@ -72,7 +72,7 @@
             </div>
           </div>
         </div>
-        <div v-else>No Clarifications</div>
+        <div v-else>{{ $t("tender.no_clarifications") }}</div>
       </div>
     </div>
   </div>
