@@ -187,24 +187,24 @@
           if (amount < 80000) {
             switch (this.$i18n.locale) {
               case "en":
-                return "Micro Value";
+                return "Low value procedure";
               case "ro":
-                return "Micro procedură";
+                return "Procedură de valoare mică";
               case "ru":
-                return "Микро-процедура";
+                return "Закупка малой стоимости";
               default:
-                return "Micro Value";
+                return "Low value procedure";
             }
           } else if (amount <= 400000) {
             switch (this.$i18n.locale) {
               case "en":
-                return "Request for price quotation";
+                return "Request for Proposals";
               case "ro":
-                return "Achiziții de valoare mica";
+                return "COP";
               case "ru":
-                return "Закупка малой стоимости";
+                return "Запрос ценовых предложений";
               default:
-                return "Request for price quotation";
+                return "Request for Proposals";
             }
           } else {
             switch (this.$i18n.locale) {
@@ -222,29 +222,29 @@
           if (amount < 100000) {
             switch (this.$i18n.locale) {
               case "en":
-                return "Micro Value";
+                return "Low value procedure";
               case "ro":
-                return "Micro procedură";
+                return "Procedură de valoare mică";
               case "ru":
-                return "Микро-процедура";
+                return "Закупка малой стоимости";
               default:
-                return "Micro Value";
+                return "Low value procedure";
             }
           } else if (amount <= 1500000) {
             switch (this.$i18n.locale) {
               case "en":
-                return "Request for price quotation";
+                return "Request for Proposals";
               case "ro":
-                return "Achiziții de valoare mica";
+                return "COP";
               case "ru":
-                return "Закупка малой стоимости";
+                return "Запрос ценовых предложений";
               default:
-                return "Request for price quotation";
+                return "Request for Proposals";
             }
           } else {
             switch (this.$i18n.locale) {
               case "en":
-                return "Open Tender";
+                return "Open tender";
               case "ro":
                 return "Licitație deschisă";
               case "ru":
@@ -257,7 +257,7 @@
       },
       checkTab(tab) {
         if (tab.name === "pn") {
-          this.$router.push({path: `/plans/${this.tender.MSRecord.ocid}`})
+          this.$router.push({path: `${this.$i18n.locale !== "ro" ? `/${this.$i18n.locale}` : ""}/plans/${this.tender.MSRecord.ocid}`})
         }
       }
     }

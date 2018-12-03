@@ -16,7 +16,7 @@
         <div class="info__sub-title">Name and address</div>
         <div class="info-blocks">
           <div class="info-block">
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="16">
                 <div class="info-block__text">
                   Official name
@@ -41,7 +41,7 @@
           </div>
 
           <div class="info-block">
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__text">
                   Postal address
@@ -57,7 +57,7 @@
           </div>
 
           <div class="info-block">
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="6">
                 <div class="info-block__text">
                   Town
@@ -97,7 +97,7 @@
           </div>
 
           <div class="info-block">
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="10">
                 <div class="info-block__text">
                   Contact Persone
@@ -133,7 +133,7 @@
           </div>
 
           <div class="info-block">
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="10">
                 <div class="info-block__text">
                   Main Internet address (URL)
@@ -170,7 +170,7 @@
           </div>
 
           <div class="info-block">
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="10">
                 <div class="info-block__text">
                   Type of buyer
@@ -194,7 +194,7 @@
         <div class="info__sub-title">Communication</div>
         <div class="info-blocks">
         <div class="info-block">
-          <el-row>
+          <el-row :gutter="15">
             <el-col>
               <div class="info-block__text">
                 The procurement documents are available for unrestricted and full direct access, free of charge, at:
@@ -208,7 +208,7 @@
         </div>
 
         <div class="info-block">
-          <el-row>
+          <el-row :gutter="15">
             <el-col :sm="10">
               <div class="info-block__text">
                 Additional information can be obtained from
@@ -244,7 +244,7 @@
         </div>
 
         <div class="info-block">
-          <el-row>
+          <el-row :gutter="15">
             <el-col :sm="24">
               <div class="info-block__text">
                 Tenders or requests to participate must be submitted electronically via:
@@ -273,7 +273,7 @@
         <div class="info__sub-title">Scope of procurement</div>
         <div class="info-blocks">
           <div class="info-block">
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__text">Title</div>
                 <div class="info-block__value">{{ gd(msRecord, _ => _.tender.title) }}</div>
@@ -282,7 +282,7 @@
           </div>
 
           <div class="info-block">
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="16">
                 <div class="info-block__text">Main CPV code</div>
                 <div class="info-block__value">
@@ -304,7 +304,7 @@
           </div>
 
           <div class="info-block">
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__text">Estimated total value excluding VAT</div>
                 <div class="info-block__value">
@@ -316,7 +316,7 @@
           </div>
 
           <div class="info-block">
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__text">Short description</div>
                 <div class="info-block__value">
@@ -327,7 +327,7 @@
           </div>
 
           <div class="info-block">
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__text">Information about lots</div>
                 <div class="info-block__value">
@@ -348,7 +348,7 @@
           >
             <template slot="title">
               <div class="info-block accordion-header">
-                <el-row>
+                <el-row :gutter="15">
                   <el-col :sm="16">
                     <div class="info-block__text">Title</div>
                     <div class="info-block__value info-block__value__bold">
@@ -367,7 +367,7 @@
 
             <div class="info-blocks">
               <!--<div class="info-block">
-                <el-row>
+                <el-:rowrgutten"15>
                   <el-col :sm="16">
                     <div class="info-block__text">Additional CPV codes</div>
                     <div class="info-block__value">
@@ -384,7 +384,7 @@
               </div>-->
 
               <div class="info-block">
-                <el-row>
+                <el-row :gutter="15">
                   <el-col :sm="24">
                     <div class="info-block__text">Place of performance</div>
                     <div class="info-block__value">
@@ -410,7 +410,7 @@
                     v-for="item of gd(evRecord, _ => _.tender.items, []).filter(item => gd(item, _ => _.relatedLot, '') === gd(lot, _ => _.id))"
                     :key="item.id"
                 >
-                  <el-row>
+                  <el-row :gutter="15">
                     <el-col :sm="16">
                       <div class="info-block__value">
                         <div>{{ gd(item, _ => _.description) }}</div>
@@ -429,7 +429,7 @@
            <!-- <div class="info__sub-title">Level of Performance</div>-->
 
               <!--<div class="info-block">
-                <el-row>
+                <el-:rowrgutten"15>
                   <el-col :sm="16">
                     <div class="info-block__text">Warranty Period</div>
                     <div class="info-block__value">
@@ -443,7 +443,7 @@
                   </el-col>
                 </el-row>
 
-                <el-row>
+                <el-:rowrgutten"15>
                   <el-col :sm="16">
                     <div class="info-block__text">Applicable options</div>
                     <div class="info-block__value">
@@ -462,7 +462,7 @@
                   </el-col>
                 </el-row>
 
-                <el-row>
+                <el-:rowrgutten"15>
                   <el-col :sm="16">
                     <div class="info-block__text">Terms of delivery</div>
                     <div class="info-block__value">
@@ -476,7 +476,7 @@
                   </el-col>
                 </el-row>
 
-                <el-row>
+                <el-:rowrgutten"15>
                   <el-col :sm="16">
                     <div class="info-block__text">Applicable options</div>
                     <div class="info-block__value">
@@ -495,7 +495,7 @@
                   </el-col>
                 </el-row>
 
-                <el-row>
+                <el-:rowrgutten"15>
                   <el-col :sm="16">
                     <div class="info-block__text info-block__text_accent">
                       Price–Weighting
@@ -510,7 +510,7 @@
               </div>-->
 
               <div class="info-block">
-                <el-row>
+                <el-row :gutter="15">
                   <el-col :sm="24">
                     <div class="info-block__text">Estimated value excluding VAT</div>
                     <div class="info-block__value">
@@ -521,7 +521,7 @@
               </div>
 
               <div class="info-block" v-if="procedureType==='Open Tender' || procedureType==='Licitație deschisă' || procedureType==='Открытые торги'">
-                <el-row>
+                <el-row :gutter="15">
                   <el-col :sm="24">
                     <div class="info-block__text">
                       The amount and currency of the big guarantee that must be valid 90 deays starting from opening of the tenders
@@ -534,7 +534,7 @@
               </div>
 
               <div class="info-block">
-                <el-row>
+                <el-row :gutter="15">
                   <el-col :sm="24">
                     <div class="info-block__text">Duration of the contract, framework agreement or dynamic purchasing
                       system
@@ -549,7 +549,7 @@
               </div>
 
               <div class="info-block">
-                <el-row>
+                <el-row :gutter="15">
                   <el-col :sm="24">
                     <div class="info-block__text">Information about variants</div>
                     <div class="info-block__value">
@@ -560,7 +560,7 @@
               </div>
 
               <div class="info-block">
-                <el-row>
+                <el-row :gutter="15">
                   <el-col :sm="24">
                     <div class="info-block__text">Information about options</div>
                     <div class="info-block__value">
@@ -574,13 +574,13 @@
                 <div class="info-block__documents"
                      v-for="(doc, index) of gd(evRecord, _ => _.tender.documents,[]) .filter(doc => gd(doc, _ => _.relatedLots[0], '') === gd(lot, _ => _.id))"
                      :key="doc.id + index">
-                  <el-row>
+                  <el-row :gutter="15">
                     <el-col :sm="24">
                       <div class="info-block__value">
                         {{ convertCase(gd(doc, _ => _.documentType)) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a></div>
                     </el-col>
                   </el-row>
-                <el-row>
+                <el-row :gutter="15">
                   <el-col :sm="16">
                       <div class="info-block__text info-block__text__small">
                         ID: {{ gd(doc, _ => _.id) }}
@@ -605,7 +605,7 @@
         <div class="info__sub-title">Conditions for participation</div>
         <div class="info-blocks">
           <div class="info-block">
-            <el-row>
+            <el-:rowrgutten"15>
               <el-col :sm="24">
                 <div class="info-block__text">Suitability to pursue the professional activity, including requirements
                   relating to enrolment on professional or trade registers
@@ -613,7 +613,7 @@
               </el-col>
             </el-row>
 
-            <el-row>
+            <el-:rowrgutten"15>
               <el-col :sm="24">
                 <div class="info-block__value">Enrolment in a relevant professional register</div>
                 <div class="info-block__text">
@@ -624,7 +624,7 @@
               </el-col>
             </el-row>
 
-            <el-row>
+            <el-:rowrgutten"15>
               <el-col :sm="24">
                 <div class="info-block__value">Enrolment in a trade register</div>
                 <div class="info-block__text">
@@ -635,7 +635,7 @@
               </el-col>
             </el-row>
 
-            <el-row>
+            <el-:rowrgutten"15>
               <el-col :sm="24">
                 <div class="info-block__value">Authorisation of particular organisation needed</div>
                 <div class="info-block__text">
@@ -647,7 +647,7 @@
           </div>
 
           &lt;!&ndash;<div class="info-block">
-            <el-row>
+            <el-:rowrgutten"15>
               <el-col :sm="24">
                 <div class="info-block__text">
                   Economic and financial standing
@@ -655,7 +655,7 @@
               </el-col>
             </el-row>
 
-            <el-row>
+            <el-:rowrgutten"15>
               <el-col :sm="16">
                 <div class="info-block__value">
                   Economic and financial standing
@@ -675,7 +675,7 @@
               </el-col>
             </el-row>
 
-            <el-row>
+            <el-:rowrgutten"15>
               <el-col :sm="16">
                 <div class="info-block__value">
                   Average yearly turnover
@@ -696,7 +696,7 @@
               </el-col>
             </el-row>
 
-            <el-row>
+            <el-:rowrgutten"15>
               <el-col :sm="16">
                 <div class="info-block__value">
                   Set up of economic operator
@@ -718,7 +718,7 @@
           </div>&ndash;&gt;
 
           &lt;!&ndash;<div class="info-block">
-            <el-row>
+            <el-:rowrgutten"15>
               <el-col :sm="24">
                 <div class="info-block__text">
                   Technical and professional ability
@@ -726,7 +726,7 @@
               </el-col>
             </el-row>
 
-            <el-row>
+            <el-:rowrgutten"15>
               <el-col :sm="16">
                 <div class="info-block__value">
                   Number of managerial staff
@@ -745,7 +745,7 @@
               </el-col>
             </el-row>
 
-            <el-row>
+            <el-:rowrgutten"15>
               <el-col :sm="16">
                 <div class="info-block__value">
                   Average annual manpower
@@ -764,7 +764,7 @@
               </el-col>
             </el-row>
 
-            <el-row>
+            <el-:rowrgutten"15>
               <el-col :sm="16">
                 <div class="info-block__value">
                   Subcontracting proportion
@@ -789,7 +789,7 @@
         &lt;!&ndash;<div class="info__sub-title">General terms of the contract</div>
         <div class="info-blocks">
           <div class="info-block">
-            <el-row>
+            <el-:rowrgutten"15>
               <el-col :sm="24">
                 <div class="info-block__value">
                   &lt;!&ndash; @TODO link to current contract template &ndash;&gt;
@@ -803,7 +803,7 @@
         &lt;!&ndash;<div class="info__sub-title">Special conditions of the contract</div>
         <div class="info-blocks">
           <div class="info-block">
-            <el-row>
+            <el-:rowrgutten"15>
               <el-col :sm="16">
                 <div class="info-block__value">Contract performance guarantee</div>
                 <div class="info-block__text">The economic operator's number of managerial staff for the last three years
@@ -825,7 +825,7 @@
         <div class="info__sub-title">Description</div>
         <div class="info-blocks">
           <div class="info-block">
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__text">Type of procedure</div>
                 <div class="info-block__value">
@@ -840,7 +840,7 @@
           </div>
 
           <div class="info-block" >
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="10">
                 <div class="info-block__text">Information about electronic auction</div>
                 <div class="info-block__value">
@@ -860,7 +860,7 @@
         <div class="info__sub-title">Administrative information</div>
         <div class="info-blocks">
           <div class="info-block">
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__text">Previous publication concerning this procedure</div>
                 <div class="info-block__value">
@@ -876,7 +876,7 @@
           </div>
 
           <div class="info-block">
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__text">Time limit for receipt of tenders or requests to participate</div>
                 <div class="info-block__value">
@@ -887,7 +887,7 @@
           </div>
 
           <div class="info-block">
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__text">
                   Estimated date of dispatch of invitations to tender or to participate to selected candidates
@@ -900,7 +900,7 @@
           </div>
 
           <div class="info-block">
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__text">Languages in which tenders or requests to participate may be submitted</div>
                 <div class="info-block__value">
@@ -911,7 +911,7 @@
           </div>
 
           <div class="info-block">
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__text">Conditions for opening of tenders</div>
                 <div class="info-block__value">
@@ -922,7 +922,7 @@
           </div>
 
           <div class="info-block">
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__text">
                   <span class="info-block__text_accent">For electronic tendering procedures: </span>upon expiry of submission deadlines, MTender shall disclose received
@@ -971,7 +971,7 @@
           >
             <template slot="title">
               <div class="info-block accordion-header">
-                <el-row>
+                <el-row :gutter="15">
                   <el-col :sm="16">
                     <div class="info-block__text">Budgetline ID</div>
                     <div class="info-block__value">
@@ -997,7 +997,7 @@
 
             <div class="info-blocks">
               <div class="info-block">
-                <el-row>
+                <el-row :gutter="15">
                   <el-col :sm="16">
                     <div class="info-block__text">Budget details or rationale</div>
                     <div class="info-block__value">{{ gd(budgetBreakdown, _ => _.description, "n/a") }}</div>
@@ -1013,7 +1013,7 @@
               </div>
 
               <div class="info-block">
-                <el-row>
+                <el-row :gutter="15">
                   <el-col :sm="16">
                     <div class="info-block__text">Budget Project</div>
                     <div class="info-block__value">
@@ -1030,7 +1030,7 @@
               </div>
 
               <div class="info-block">
-                <el-row>
+                <el-row :gutter="15">
                   <el-col :sm="16">
                     <div class="info-block__text">Budget owner</div>
                     <div class="info-block__value">
@@ -1047,7 +1047,7 @@
               </div>
 
               <div class="info-block">
-                <el-row>
+                <el-row :gutter="15">
                   <el-col :sm="16">
                     <div class="info-block__text">Payer Entity</div>
                     <div class="info-block__value">
@@ -1064,7 +1064,7 @@
               </div>
 
               <div class="info-block">
-                <el-row>
+                <el-row :gutter="15">
                   <el-col :sm="16">
                     <div class="info-block__text">Funding Entity</div>
                     <div class="info-block__value">
@@ -1085,7 +1085,7 @@
 
         <div class="info-blocks">
           <div class="info-block">
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__text">The rationale for the procurement</div>
                 <div class="info-block__value">
@@ -1096,7 +1096,7 @@
           </div>
 
           <div class="info-block">
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__text">A short free text description of the budget</div>
                 <div class="info-block__value">
@@ -1145,14 +1145,14 @@
                  v-for="(doc, index) of gd(evRecord, _ => _.tender.documents, []).filter(doc => !doc.hasOwnProperty('relatedLots'))"
                  :key="doc.id + index"
             >
-              <el-row>
+              <el-row :gutter="15">
                 <el-col :sm="24">
                   <div class="info-block__value ">
                     {{ convertCase(gd(doc, _ => _.documentType) ) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a>
                   </div>
                 </el-col>
               </el-row>
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="16">
                   <div class="info-block__text info-block__text_small">
                     ID: {{ gd(doc, _ => _.id) }}
@@ -1170,7 +1170,7 @@
         <div class="info__sub-title">Procudures for review</div>
         <div class="info-blocks">
           <div class="info-block">
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__text">Official name</div>
                 <div class="info-block__value">
@@ -1181,7 +1181,7 @@
           </div>
 
           <div class="info-block">
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__text">Postal address</div>
                 <div class="info-block__value">
@@ -1192,7 +1192,7 @@
           </div>
 
           <div class="info-block">
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="6">
                 <div class="info-block__text">Town</div>
                 <div class="info-block__value">
@@ -1224,7 +1224,7 @@
           </div>
 
           <div class="info-block">
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="10">
                 <div class="info-block__text">E-mail</div>
                 <div class="info-block__value">
@@ -1249,7 +1249,7 @@
           </div>
 
           <div class="info-block">
-            <el-row>
+            <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__text">Main Internet address (URL)</div>
                 <div class="info-block__value">
