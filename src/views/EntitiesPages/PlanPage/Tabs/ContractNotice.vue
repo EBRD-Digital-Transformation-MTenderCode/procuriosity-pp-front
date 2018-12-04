@@ -1,25 +1,25 @@
 <template>
   <div>
     <div class="entity-nav"   data-scroll-spy-id="cn"  v-scroll-spy-active="{selector: 'a', class: 'active'}" v-scroll-spy-link>
-      <a>Contracting authority</a>
-      <a>Object</a>
+      <a>{{ $t("plan.contracting_authority") }}</a>
+      <a>{{ $t("plan.object") }}</a>
       <!--<a>Legal, economic, financial and technical information</a>-->
-      <a>Procedure</a>
-      <a>Budget</a>
-      <a>Complementary information</a>
+      <a>{{ $t("plan.procedure") }}</a>
+      <a>{{ $t("plan.budget") }}</a>
+      <a>{{ $t("plan.complementary_information") }}</a>
     </div>
     <div class="info"  data-scroll-spy-id="cn" v-scroll-spy="{offset: 75, allowNoActive: true}">
 
       <!-- Contracting authority -->
       <div>
-        <div class="info__title">Contracting authority</div>
-        <div class="info__sub-title">Name and address</div>
+        <div class="info__title">{{ $t("plan.contracting_authority") }}</div>
+        <div class="info__sub-title">{{ $t("plan.name_and_address") }}</div>
         <div class="info-blocks">
           <div class="info-block">
             <el-row :gutter="15">
               <el-col :sm="16">
                 <div class="info-block__text">
-                  Official name
+                  {{ $t("plan.official_name") }}
                 </div>
                 <div class="info-block__value">
                   {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ =>
@@ -28,7 +28,7 @@
               </el-col>
               <el-col :sm="8">
                 <div class="info-block__text">
-                  National registration number
+                  {{ $t("plan.national_registration_number") }}
                 </div>
                 <div class="info-block__value">
                   {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ =>
@@ -44,7 +44,7 @@
             <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__text">
-                  Postal address
+                  {{ $t("plan.postal_address") }}
                 </div>
                 <div class="info-block__value">
                   {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ =>
@@ -60,7 +60,7 @@
             <el-row :gutter="15">
               <el-col :sm="6">
                 <div class="info-block__text">
-                  Town
+                  {{ $t("plan.town") }}
                 </div>
                 <div class="info-block__value">
                   {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ =>
@@ -69,7 +69,7 @@
               </el-col>
               <el-col :sm="4">
                 <div class="info-block__text">
-                  Nuts code
+                  {{ $t("plan.nuts_code") }}
                 </div>
                 <div class="info-block__value">
                   n/a
@@ -77,7 +77,7 @@
               </el-col>
               <el-col :sm="6">
                 <div class="info-block__text">
-                  Postal Code
+                  {{ $t("plan.postal_code") }}
                 </div>
                 <div class="info-block__value">
                   {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ =>
@@ -86,7 +86,7 @@
               </el-col>
               <el-col :sm="8">
                 <div class="info-block__text">
-                  Country
+                  {{ $t("plan.country") }}
                 </div>
                 <div class="info-block__value">
                   {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ =>
@@ -100,7 +100,7 @@
             <el-row :gutter="15">
               <el-col :sm="10">
                 <div class="info-block__text">
-                  Contact Persone
+                  {{ $t("plan.contact_persone") }}
                 </div>
                 <div class="info-block__value">
                   {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ =>
@@ -109,7 +109,7 @@
               </el-col>
               <el-col :sm="6">
                 <div class="info-block__text">
-                  Telephone
+                  {{ $t("plan.telephone") }}
                 </div>
                 <div class="info-block__value">
                   {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ =>
@@ -118,7 +118,7 @@
               </el-col>
               <el-col :sm="8">
                 <div class="info-block__text">
-                  E-mail
+                  {{ $t("plan.email") }}
                 </div>
                 <div class="info-block__value">
                   <a
@@ -136,7 +136,7 @@
             <el-row :gutter="15">
               <el-col :sm="10">
                 <div class="info-block__text">
-                  Main Internet address (URL)
+                  {{ $t("plan.main_internet_address") }}
                 </div>
                 <div class="info-block__value">
                   <a
@@ -151,7 +151,7 @@
               </el-col>
               <el-col :sm="14">
                 <div class="info-block__text">
-                  Address of the buyer profile (URL)
+                  {{ $t("plan.address_of_buyer_profile") }}
                 </div>
                 <div class="info-block__value">
                   <!-- @TODO need link to plans with buyer identifier id search params -->
@@ -173,7 +173,7 @@
             <el-row :gutter="15">
               <el-col :sm="10">
                 <div class="info-block__text">
-                  Type of buyer
+                  {{ $t("plan.type_of_buyer") }}
                 </div>
                 <div class="info-block__value">
                   {{ getTypeOfBuyer }}
@@ -181,7 +181,7 @@
               </el-col>
               <el-col :sm="14">
                 <div class="info-block__text">
-                  Main activity
+                  {{ $t("plan.main_activity") }}
                 </div>
                 <div class="info-block__value">
                   {{ getMainGeneralActivity }}
@@ -191,13 +191,13 @@
           </div>
         </div>
 
-        <div class="info__sub-title">Communication</div>
+        <div class="info__sub-title">{{ $t("plan.communication") }}</div>
         <div class="info-blocks">
           <div class="info-block">
             <el-row :gutter="15">
               <el-col>
                 <div class="info-block__text">
-                  The procurement documents are available for unrestricted and full direct access, free of charge, at:
+                  {{ $t("plan.procurement_documents_links") }}:
                 </div>
                 <div class="info-block__value">
                   <a :href="`https://www.mtender.gov.md/${$i18n.locale !== 'ro' ? `${$i18n.locale}/` : ''}tenders/${gd(msRecord, _ => _.ocid) }`" target="_blank">
@@ -211,7 +211,7 @@
             <el-row :gutter="15">
               <el-col :sm="10">
                 <div class="info-block__text">
-                  Additional information can be obtained from
+                  {{ $t("plan.additional_information_obtained") }}
                 </div>
                 <div class="info-block__value">
                   {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "procuringEntity")), _ =>
@@ -220,7 +220,7 @@
               </el-col>
               <el-col :sm="6">
                 <div class="info-block__text">
-                  Telephone
+                  {{ $t("plan.telephone") }}
                 </div>
                 <div class="info-block__value">
                   {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "procuringEntity")), _ =>
@@ -229,7 +229,7 @@
               </el-col>
               <el-col :sm="8">
                 <div class="info-block__text">
-                  E-mail
+                  {{ $t("plan.email") }}
                 </div>
                 <div class="info-block__value">
                   <a
@@ -247,13 +247,13 @@
 
       <!-- Object -->
       <div>
-        <div class="info__title">Object</div>
-        <div class="info__sub-title">Scope of procurement</div>
+        <div class="info__title">{{ $t("plan.object") }}</div>
+        <div class="info__sub-title">{{ $t("plan.items") }}</div>
         <div class="info-blocks">
           <div class="info-block">
             <el-row :gutter="15">
               <el-col :sm="24">
-                <div class="info-block__text">Title</div>
+                <div class="info-block__text">{{ $t("plan.title") }}</div>
                 <div class="info-block__value">{{ gd(msRecord, _ => _.tender.title) }}</div>
               </el-col>
             </el-row>
@@ -262,7 +262,7 @@
           <div class="info-block">
             <el-row :gutter="15">
               <el-col :sm="16">
-                <div class="info-block__text">Main CPV code</div>
+                <div class="info-block__text">{{ $t("plan.main_CPV") }}</div>
                 <div class="info-block__value">
                   {{ gd(msRecord, _ => _.tender.classification.id) }} -
                   {{ gd(msRecord, _ => _.tender.classification.description) }}
@@ -273,7 +273,7 @@
                 <div class="info-block__value">???n/a</div>
               </el-col>-->
               <el-col :sm="8">
-                <div class="info-block__text">Type of contract</div>
+                <div class="info-block__text">{{ $t("plan.type_of_contract") }}</div>
                 <div class="info-block__value info-block__value_name">{{ gd(msRecord, _ =>
                   _.tender.mainProcurementCategory) }}
                 </div>
@@ -284,7 +284,7 @@
           <div class="info-block">
             <el-row :gutter="15">
               <el-col :sm="24">
-                <div class="info-block__text">Estimated total value excluding VAT</div>
+                <div class="info-block__text">{{ $t("plan.estimated_total_value_excluding_VAT") }}</div>
                 <div class="info-block__value">
                   {{ fa(gd(msRecord, _ => _.tender.value.amount)) }}
                   {{ gd(msRecord, _ => _.tender.value.currency) }}
@@ -296,7 +296,7 @@
           <div class="info-block">
             <el-row :gutter="15">
               <el-col :sm="24">
-                <div class="info-block__text">Short description</div>
+                <div class="info-block__text">{{ $t("plan.short_description") }}</div>
                 <div class="info-block__value">
                   {{ gd(msRecord, _ => _.tender.description) }}
                 </div>
@@ -307,17 +307,17 @@
           <div class="info-block">
             <el-row :gutter="15">
               <el-col :sm="24">
-                <div class="info-block__text">Information about lots</div>
+                <div class="info-block__text">{{ $t("plan.information_about_lots") }}</div>
                 <div class="info-block__value">
-                  <div>This contract is divided into lots</div>
-                  <div>Tenders may be submitted for all lots</div>
+                  <div>{{ $t("plan.contract_divided_into_lots") }}</div>
+                  <div>{{ $t("plan.tenders_submitted_all_lots") }}</div>
                 </div>
               </el-col>
             </el-row>
           </div>
         </div>
 
-        <div class="info__sub-title">Description</div>
+        <div class="info__sub-title">{{ $t("plan.description") }}</div>
         <el-collapse accordion v-if="gd(pnRecord, _ => _.tender.hasOwnProperty('lots'))" :value="gd(pnRecord, _ => _.tender.lots[0].id, '0') + '0'">
           <el-collapse-item
               v-for="(lot, index) of gd(pnRecord, _ => _.tender.lots, [])"
@@ -328,13 +328,13 @@
               <div class="info-block accordion-header">
                 <el-row :gutter="15">
                   <el-col :sm="16">
-                    <div class="info-block__text">Title</div>
+                    <div class="info-block__text">{{ $t("plan.title") }}</div>
                     <div class="info-block__value info-block__value__bold">
                       {{ gd(lot, _ => _.title) }}
                     </div>
                   </el-col>
                   <el-col :sm="8">
-                    <div class="info-block__text">Lot identifier</div>
+                    <div class="info-block__text">{{ $t("plan.lot_identifier") }}</div>
                     <div class="info-block__value">
                       {{ gd(lot, _ => _.id) }}
                     </div>
@@ -364,7 +364,7 @@
               <div class="info-block">
                 <el-row :gutter="15">
                   <el-col :sm="24">
-                    <div class="info-block__text">Place of performance</div>
+                    <div class="info-block__text">{{ $t("plan.place_of_performance") }}</div>
                     <div class="info-block__value">
                       {{ gd(lot, _ => _.placeOfPerformance.address.postalCode, "n/a") }},
                       {{ gd(lot, _ => _.placeOfPerformance.address.addressDetails.country.description) }},
@@ -383,7 +383,7 @@
               </div>
 
               <div class="info-block">
-                <div class="info-block__text">Description of the procurement:</div>
+                <div class="info-block__text">{{ $t("plan.description_of_procurement") }}:</div>
                 <div
                     v-for="item of gd(pnRecord, _ => _.tender.items, []).filter(item => gd(item, _ => _.relatedLot, '') === gd(lot, _ => _.id))"
                     :key="item.id"
@@ -490,7 +490,7 @@
               <div class="info-block">
                 <el-row :gutter="15">
                   <el-col :sm="24">
-                    <div class="info-block__text">Estimated value excluding VAT</div>
+                    <div class="info-block__text"> {{ $t("plan.estimated_value_excluding_VAT") }}</div>
                     <div class="info-block__value">
                       {{ fa(gd(lot, _ => _.value.amount)) }} {{ gd(lot, _ => _.value.currency) }}
                     </div>
@@ -502,7 +502,7 @@
                 <el-row :gutter="15">
                   <el-col :sm="24">
                     <div class="info-block__text">
-                      The amount and currency of the big guarantee that must be valid 90 deays starting from opening of the tenders
+                      {{ $t("plan.big_guarantee_must_be_valid") }}
                     </div>
                     <div class="info-block__value">
                       {{ fa(gd(lot, _ => _.value.amount) * 0.02) }} {{ gd(lot, _ => _.value.currency) }}
@@ -514,24 +514,13 @@
               <div class="info-block">
                 <el-row :gutter="15">
                   <el-col :sm="24">
-                    <div class="info-block__text">Duration of the contract, framework agreement or dynamic purchasing
-                      system
+                    <div class="info-block__text">
+                      {{ $t("plan.duration_of_contract") }}
                     </div>
                     <div class="info-block__value">
-                      Start: {{ fd(gd(lot, _ => _.contractPeriod.startDate), "DD.MM.YYYY") }} /
-                      End: {{ fd(gd(lot, _ => _.contractPeriod.endDate), "DD.MM.YYYY") }}
-                      <div>This contract is not a subject to renewal</div>
-                    </div>
-                  </el-col>
-                </el-row>
-              </div>
-
-              <div class="info-block">
-                <el-row :gutter="15">
-                  <el-col :sm="24">
-                    <div class="info-block__text">Information about variants</div>
-                    <div class="info-block__value">
-                      Variants will not be accepted
+                       {{ $t("plan.start") }}: {{ fd(gd(lot, _ => _.contractPeriod.startDate), "DD.MM.YYYY") }} /
+                      {{ $t("plan.end") }}:  {{ fd(gd(lot, _ => _.contractPeriod.endDate), "DD.MM.YYYY") }}
+                      <div>{{ $t("plan.is_not_renewal") }}</div>
                     </div>
                   </el-col>
                 </el-row>
@@ -540,9 +529,20 @@
               <div class="info-block">
                 <el-row :gutter="15">
                   <el-col :sm="24">
-                    <div class="info-block__text">Information about options</div>
+                    <div class="info-block__text">{{ $t("plan.information_about_variants") }}</div>
                     <div class="info-block__value">
-                      No options
+                      {{ gd(lot, _ => _.variants[0].hasVariants) ? $t("plan.variants_will_be_accepted") :  $t("plan.variants_will_not_be_accepted") }}
+                    </div>
+                  </el-col>
+                </el-row>
+              </div>
+
+              <div class="info-block">
+                <el-row :gutter="15">
+                  <el-col :sm="24">
+                    <div class="info-block__text">{{ $t("plan.information_about_options") }}</div>
+                    <div class="info-block__value">
+                      {{ gd(lot, _ => _.options[0].hasOptions) ? $t("plan.has_options") : $t("plan.no_options") }}
                     </div>
                   </el-col>
                 </el-row>
@@ -561,12 +561,12 @@
                   <el-row :gutter="15">
                     <el-col :sm="16">
                       <div class="info-block__text info-block__text__small">
-                        ID: {{ gd(doc, _ => _.id) }}
+                        {{ $t("plan.id") }}: {{ gd(doc, _ => _.id) }}
                       </div>
                     </el-col>
                     <el-col :sm="8">
                       <div class="info-block__text info-block__text__small">
-                        Published: {{ fd(gd(doc, _ => _.datePublished)) }}
+                        {{ $t("plan.published") }}: {{ fd(gd(doc, _ => _.datePublished)) }}
                       </div>
                     </el-col>
                   </el-row>
@@ -575,7 +575,7 @@
             </div>
           </el-collapse-item>
         </el-collapse>
-        <div v-else>No lots</div>
+        <div v-else>{{ $t("plan.no_lots")}}</div>
       </div>
 
       <!-- Legal, economic, financial and technical information -->
@@ -800,13 +800,13 @@
 
       <!-- Procedure -->
       <div>
-        <div class="info__title">Procedure</div>
-        <div class="info__sub-title">Description</div>
+        <div class="info__title">{{ $t("plan.procedure") }}</div>
+        <div class="info__sub-title">{{ $t("plan.description") }}</div>
         <div class="info-blocks">
           <div class="info-block">
             <el-row :gutter="15">
               <el-col :sm="24">
-                <div class="info-block__text">Type of procedure</div>
+                <div class="info-block__text">{{ $t("plan.type_of_procedure") }}</div>
                 <div class="info-block__value">
                   {{ procedureType }}
                 </div>
@@ -819,14 +819,14 @@
           </div>
         </div>
 
-        <div class="info__sub-title">Administrative information</div>
+        <div class="info__sub-title">{{ $t("plan.administrative_information") }}</div>
         <div class="info-blocks">
           <div class="info-block">
             <el-row :gutter="15">
               <el-col :sm="24">
-                <div class="info-block__text">Previous publication concerning this procedure</div>
+                <div class="info-block__text">{{ $t("plan.previous_publication_concerning_procedure") }}</div>
                 <div class="info-block__value">
-                  Procurement plan / Buyer’s profile / PIN: No
+                  {{ $t("plan.PP_Buyer_profile_PIN") }}
                   <!--<a
                     :href="`/plans/${gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === 'planning')), _ => _.identifier)}`"
                     target="_blank">-->
@@ -841,7 +841,7 @@
             <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__text">
-                  Estimated date of dispatch of invitations to tender or to participate to selected candidates
+                  {{ $t("plan.estimated_date") }}
                 </div>
                 <div class="info-block__value">
                   {{ fd(gd(pnRecord, _ => _.tender.tenderPeriod.startDate), "DD.MM.YYYY") }}
@@ -853,9 +853,9 @@
           <div class="info-block">
             <el-row :gutter="15">
               <el-col :sm="24">
-                <div class="info-block__text">Languages in which tenders or requests to participate may be submitted</div>
+                <div class="info-block__text">{{ $t("plan.languages_submitted") }}</div>
                 <div class="info-block__value">
-                  Romanian, Russian
+                  {{ $t("plan.romanian_russian") }}
                 </div>
               </el-col>
             </el-row>
@@ -865,14 +865,14 @@
             <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__text">
-                  <span class="info-block__text_accent">For electronic tendering procedures: </span>upon expiry of submission deadlines, MTender shall disclose received
-                  tender forms or requests to participate online on the MTender web portal and generate an electronic
-                  document with a record of opening.
+                  <span class="info-block__text_accent"> {{ $t("plan.for_electronic_tendering_procedures") }}: </span>
+                  {{ $t("plan.upon_expiry_of_submission_deadlines") }}
                 </div>
                 <div class="info-block__text">
-                  <span class="info-block__text_accent">For non-electronic procedures: </span>negotiated with publication of contract notice, competitive dialogue,
-                  design contest and innovative partnership
+                  <span class="info-block__text_accent">{{ $t("plan.for_non-electronic_procedures") }}: </span>
+                  {{ $t("plan.negotiated_with_publication") }}
                 </div>
+
               </el-col>
               <!-- <el-col :sm="16">
                  <div class="info-block__text"> Information about authorised persons and opening procedure</div>
@@ -897,9 +897,9 @@
 
       <!-- Budget -->
       <div>
-        <div class="info__title">Budget</div>
+        <div class="info__title">{{ $t("plan.budget") }}</div>
 
-        <div class="info__sub-title">Budget breakdown</div>
+        <div class="info__sub-title">{{ $t("plan.budget_breakdown") }}</div>
         <el-collapse
             accordion
             @change="getFS"
@@ -913,13 +913,13 @@
               <div class="info-block accordion-header">
                 <el-row :gutter="15">
                   <el-col :sm="16">
-                    <div class="info-block__text">Budgetline ID</div>
+                    <div class="info-block__text">{{ $t("plan.budgetline_id") }}</div>
                     <div class="info-block__value">
                       {{ gd(budgetBreakdown, _ => _.id) }}
                     </div>
                   </el-col>
                   <el-col :sm="4">
-                    <div class="info-block__text">Amount</div>
+                    <div class="info-block__text">{{ $t("plan.amount") }}</div>
                     <div class="info-block__value">
                       {{ fa(gd(budgetBreakdown, _ => _.amount.amount)) }}
                       {{ gd(budgetBreakdown, _ => _.amount.currency) }}
@@ -939,14 +939,14 @@
               <div class="info-block">
                 <el-row :gutter="15">
                   <el-col :sm="16">
-                    <div class="info-block__text">Budget details or rationale</div>
+                    <div class="info-block__text">{{ $t("plan.budget_details_rationale") }}</div>
                     <div class="info-block__value">{{ gd(budgetBreakdown, _ => _.description, "n/a") }}</div>
                   </el-col>
                   <el-col :sm="8">
-                    <div class="info-block__text">Validity Period</div>
+                    <div class="info-block__text">{{ $t("plan.validity_period") }}</div>
                     <div class="info-block__value">
-                      Start date: {{ fd(gd(budgetBreakdown, _ => _.period.startDate), "DD.MM.YYYY") }} -
-                      End date: {{ fd(gd(budgetBreakdown, _ => _.period.endDate), "DD.MM.YYYY") }}
+                      {{ $t("plan.start_date") }}: {{ fd(gd(budgetBreakdown, _ => _.period.startDate), "DD.MM.YYYY") }} -
+                      {{ $t("plan.end_date") }}: {{ fd(gd(budgetBreakdown, _ => _.period.endDate), "DD.MM.YYYY") }}
                     </div>
                   </el-col>
                 </el-row>
@@ -955,13 +955,13 @@
               <div class="info-block">
                 <el-row :gutter="15">
                   <el-col :sm="16">
-                    <div class="info-block__text">Budget Project</div>
+                    <div class="info-block__text">{{ $t("plan.budget_project") }}</div>
                     <div class="info-block__value">
                       {{ gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].project, "n/a") }}
                     </div>
                   </el-col>
                   <el-col :sm="8">
-                    <div class="info-block__text">Project ID</div>
+                    <div class="info-block__text">{{ $t("plan.project_ID") }}</div>
                     <div class="info-block__value">
                       {{ gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].projectId, "n/a") }}
                     </div>
@@ -972,13 +972,13 @@
               <div class="info-block">
                 <el-row :gutter="15">
                   <el-col :sm="16">
-                    <div class="info-block__text">Budget owner</div>
+                    <div class="info-block__text">{{ $t("plan.budget_owner") }}</div>
                     <div class="info-block__value">
                       {{ gd(gd(msRecord, _ => _.parties, []).find(part => gd(part, _ => _.roles, []).some(role => role === "buyer")), _ => _.name) }}
                     </div>
                   </el-col>
                   <el-col :sm="8">
-                    <div class="info-block__text">National registration number</div>
+                    <div class="info-block__text">{{ $t("plan.national_registration_number") }}</div>
                     <div class="info-block__value">
                       {{ gd(gd(msRecord, _ => _.parties, []).find(part => gd(part, _ => _.roles, []).some(role => role === "buyer")), _ => _.id) }}
                     </div>
@@ -989,13 +989,13 @@
               <div class="info-block">
                 <el-row :gutter="15">
                   <el-col :sm="16">
-                    <div class="info-block__text">Payer Entity</div>
+                    <div class="info-block__text">{{ $t("plan.payer_entity") }}</div>
                     <div class="info-block__value">
                       {{ gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].payer.name, "n/a") }}
                     </div>
                   </el-col>
                   <el-col :sm="8">
-                    <div class="info-block__text">National registration number</div>
+                    <div class="info-block__text">{{ $t("plan.national_registration_number") }}</div>
                     <div class="info-block__value">
                       {{ gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].payer.id, "n/a") }}
                     </div>
@@ -1006,13 +1006,13 @@
               <div class="info-block">
                 <el-row :gutter="15">
                   <el-col :sm="16">
-                    <div class="info-block__text">Funding Entity</div>
+                    <div class="info-block__text">{{ $t("plan.funding_entity") }}</div>
                     <div class="info-block__value">
-                      {{ FSs.hasOwnProperty(gd(budgetBreakdown, _ => _.id)) ? gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].funder.name, "State Money") : "n/a" }}
+                      {{ FSs.hasOwnProperty(gd(budgetBreakdown, _ => _.id)) ? gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].funder.name, $t('plan.state_money')) : "n/a" }}
                     </div>
                   </el-col>
                   <el-col :sm="8" v-if="gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].funder.id)">
-                    <div class="info-block__text">National registration number</div>
+                    <div class="info-block__text">{{ $t("plan.national_registration_number") }}</div>
                     <div class="info-block__value">
                       {{ gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].funder.id) }}
                     </div>
@@ -1027,7 +1027,7 @@
           <div class="info-block">
             <el-row :gutter="15">
               <el-col :sm="24">
-                <div class="info-block__text">The rationale for the procurement</div>
+                <div class="info-block__text">{{ $t("plan.rationale_procurement") }}</div>
                 <div class="info-block__value">
                   {{ gd(msRecord, _ => _.planning.rationale, "n/a") }}
                 </div>
@@ -1038,7 +1038,7 @@
           <div class="info-block">
             <el-row :gutter="15">
               <el-col :sm="24">
-                <div class="info-block__text">A short free text description of the budget</div>
+                <div class="info-block__text">{{ $t("plan.short_free_description") }}</div>
                 <div class="info-block__value">
                   {{ gd(msRecord, _ => _.planning.budget.description, "n/a") }}
                 </div>
@@ -1050,35 +1050,31 @@
 
       <!-- Complementary information -->
       <div>
-        <div class="info__title">Complementary information</div>
-        <div class="info__sub-title">Information about electronic workflows</div>
+        <div class="info__title">{{ $t("plan.complementary_information") }}</div>
+        <div class="info__sub-title">{{ $t("plan.information_about_electronic_workflows") }}</div>
         <ul class="info-list">
-          <li>Electronic ordering may be used.</li>
-          <li>Electronic invoicing (e-Factura) will be accepted.</li>
-          <li>Electronic payment in local currency (MDL) will be used.</li>
-          <li>The MTender does not require the use of tools and devices that are not generally available for electronic
-            communication.
-          </li>
-          <li>Use of mobile devices is not recommended for participating in the electronic auction.</li>
+          <li>{{ $t("plan.complementary_information_list1_p1") }}</li>
+          <li>{{ $t("plan.complementary_information_list1_p2") }}</li>
+          <li>{{ $t("plan.complementary_information_list1_p3") }}</li>
+          <li>{{ $t("plan.complementary_information_list1_p4") }} </li>
+          <li>{{ $t("plan.complementary_information_list1_p5") }}</li>
         </ul>
 
-        <div class="info__sub-title">Additional information</div>
+        <div class="info__sub-title">{{ $t("plan.additional_information") }}</div>
         <ul class="info-list">
-          <li>The contract does not involve joint procurement and is not awarded by a CPB.</li>
-          <li>This is not a recurrent procurement.</li>
-          <li>Minimum time frame during which the tenderer must maintain the tender is 90 days starting from opening of
-            the tenders.
+          <li>{{ $t("plan.complementary_information_list2_p1") }}</li>
+          <li>{{ $t("plan.complementary_information_list2_p2") }}</li>
+          <li>{{ $t("plan.complementary_information_list2_p3") }}</li>
+          <li v-if="procedureType==='Open Tender' || procedureType==='Licitație deschisă' || procedureType==='Открытые торги'">
+            {{ $t("plan.complementary_information_list2_p4_1") }}
+            {{ fa(gd(msRecord, _ => _.tender.value.amount) * 0.02) }}
+            {{ $t("plan.complementary_information_list2_p4_2") }}
           </li>
-          <li v-if="procedureType==='Open Tender' || procedureType==='Licitație deschisă' || procedureType==='Открытые торги'">The amount and currency of the bid guarantee is - {{ fa(gd(msRecord, _ => _.tender.value.amount) * 0.02) }} MDL and must be valid 90 days
-            starting from opening of the tenders.
-          </li>
-          <li>Failure of the selected Economic Operator to submit the contract performance guarantee, if applicable, or to
-            sign the contract shall constitute sufficient grounds for the annulment of the award of the contract and
-            forfeiture of the bid guarantee.
+          <li> {{ $t("plan.complementary_information_list2_p5") }}
           </li>
         </ul>
 
-        <div class="info__sub-title">Procedure documents</div>
+        <div class="info__sub-title">{{ $t("plan.procedure_documents") }}</div>
         <div v-if="gd(pnRecord, _ => _.tender.hasOwnProperty('documents'))" class="info-blocks">
           <div class="info-block">
             <div class="info-block__documents"
@@ -1095,25 +1091,25 @@
               <el-row :gutter="15">
                 <el-col :sm="16">
                   <div class="info-block__text info-block__text_small">
-                    ID: {{ gd(doc, _ => _.id) }}
+                    {{ $t("plan.id") }}: {{ gd(doc, _ => _.id) }}
                   </div>
                 </el-col>
                 <el-col :sm="8">
                   <div class="info-block__text info-block__text_small">
-                    Published: {{ fd(gd(doc, _ => _.datePublished)) }}
+                    {{ $t("plan.published") }}: {{ fd(gd(doc, _ => _.datePublished)) }}
                   </div>
                 </el-col>
               </el-row>
             </div>
           </div>
         </div>
-        <div v-else>No documents</div>
-        <div class="info__sub-title">Procudures for review</div>
+        <div v-else>{{ $t("plan.no_documents") }}</div>
+        <div class="info__sub-title">{{ $t("plan.procudures_for_review") }}</div>
         <div class="info-blocks">
           <div class="info-block">
             <el-row :gutter="15">
               <el-col :sm="24">
-                <div class="info-block__text">Official name</div>
+                <div class="info-block__text">{{ $t("plan.official_name")}}</div>
                 <div class="info-block__value">
                   Agenția Națională pentru Soluționarea Contestațiilor
                 </div>
@@ -1124,7 +1120,7 @@
           <div class="info-block">
             <el-row :gutter="15">
               <el-col :sm="24">
-                <div class="info-block__text">Postal address</div>
+                <div class="info-block__text">{{ $t("plan.postal_address")}}</div>
                 <div class="info-block__value">
                   bd. Ștefan cel Mare și Sfânt, 124, et. 4
                 </div>
@@ -1135,28 +1131,28 @@
           <div class="info-block">
             <el-row :gutter="15">
               <el-col :sm="6">
-                <div class="info-block__text">Town</div>
+                <div class="info-block__text">{{ $t("plan.town") }}</div>
                 <div class="info-block__value">
                   Chișinău
                 </div>
               </el-col>
 
               <el-col :sm="4">
-                <div class="info-block__text">Nuts code</div>
+                <div class="info-block__text">{{ $t("plan.nuts_code") }}</div>
                 <div class="info-block__value">
                   n/a
                 </div>
               </el-col>
 
               <el-col :sm="6">
-                <div class="info-block__text">Postal Code</div>
+                <div class="info-block__text">{{ $t("plan.postal_code") }}</div>
                 <div class="info-block__value">
                   MD-2001
                 </div>
               </el-col>
 
               <el-col :sm="8">
-                <div class="info-block__text">Country</div>
+                <div class="info-block__text">{{ $t("plan.country") }}</div>
                 <div class="info-block__value">
                   Republic of Moldova
                 </div>
@@ -1167,21 +1163,21 @@
           <div class="info-block">
             <el-row :gutter="15">
               <el-col :sm="10">
-                <div class="info-block__text">E-mail</div>
+                <div class="info-block__text">{{ $t("plan.email") }}</div>
                 <div class="info-block__value">
                   contestatii@ansc.md
                 </div>
               </el-col>
 
               <el-col :sm="6">
-                <div class="info-block__text">Telephone</div>
+                <div class="info-block__text">{{ $t("plan.telephone") }}</div>
                 <div class="info-block__value">
                   +373 22 820 652
                 </div>
               </el-col>
 
               <el-col :sm="8">
-                <div class="info-block__text">Fax</div>
+                <div class="info-block__text">{{ $t("plan.fax") }}</div>
                 <div class="info-block__value">
                   +373 22 820 651
                 </div>
@@ -1192,7 +1188,7 @@
           <div class="info-block">
             <el-row :gutter="15">
               <el-col :sm="24">
-                <div class="info-block__text">Main Internet address (URL)</div>
+                <div class="info-block__text">{{ $t("plan.main_internet_address") }}</div>
                 <div class="info-block__value">
                   <a href="https://www.ansc.md" target="_blank">www.ansc.md</a>
                 </div>
@@ -1201,33 +1197,31 @@
           </div>
         </div>
 
-        <div class="info__sub-title">Review procedure</div>
+        <div class="info__sub-title">{{ $t("plan.review_procedures") }}</div>
         <div class="info-block">
           <p>
-            The Economic Operator which has an interest in being awarded a public procurement contract and wishes to submit a complaint to the National Complaint Settlement Agency shall follow the procedures contained in Article 79-80 of the Law. Interim measures and suspention of the procedure may be requested.
+            {{ $t("plan.review_procedures_p1") }}
           </p>
           <ol>
             <li>
-              The Economic Operator may submit a complaint within:
+              {{ $t("plan.review_procedures_list1_p1") }}:
               <ol>
                 <li class="info-block__text">
-                  10 days, starting with the day following the acknowledgment, subject to the conditions of the Law, of a deed of the contracting authority deemed illegal, in case the value of the contract to be awarded, estimated pursuant to the provisions of Art. 3, is equal to or higher than the value thresholds set out under Art. 2 para.(3) of the Law;
-                </li>
+                  {{ $t("plan.review_procedures_list1_p2_1") }}</li>
                 <li class="info-block__text">
-                  5 days, starting with the day following the acknowledgment, subject to the conditions of the Law, of a deed of the contracting authority deemed illegal, in case the value of the contract to be awarded, estimated pursuant to the provisions of Art.3, is smaller than the value thresholds set out under a Art.2 para.(3) of the Law;
-                </li>
+                  {{ $t("plan.review_procedures_list1_p2_2") }}</li>
               </ol>
             </li>
             <li>
-              Filing of the complaint regarding deeds of the contracting authority which are issued or take place before opening of the tenders, is shall be done meeting the terms set out under para. (1), however no later than the deadline for submission of the tenders set by the contracting authority with the observance of provisions under Art. 34.
+              {{ $t("plan.review_procedures_list1_p3") }}
             </li>
             <li>
-              In case that the complaint referred to under para.(1) is related to documents published in electronic format, the acknowledgment date shall be their publication date.
+              {{ $t("plan.review_procedures_list1_p4") }}
             </li>
           </ol>
         </div>
       </div>
-      <div class="info__sub-title">Date of online publication of notice:  {{ fd(gd(pnRecord, _ => _.tender.tenderPeriod.startDate), "DD/MM/YYYY") }}</div>
+      <div class="info__sub-title">{{ $t("plan.date_online_publication") }}: {{ fd(gd(pnRecord, _ => _.tender.tenderPeriod.startDate), "DD/MM/YYYY") }}</div>
     </div>
   </div>
 </template>
