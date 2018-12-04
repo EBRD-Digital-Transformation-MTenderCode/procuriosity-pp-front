@@ -21,7 +21,7 @@
               </el-col>
               <el-col :xs=24 :sm="8" :offset="2">
                 <div class="entity-main-info__value">
-                  <div> Estimated value excluding VAT</div>
+                  <div> {{ $t("plan.estimated_value_excluding_VAT") }}</div>
                   <span class="entity-main-info__amount">
                     <span class="whole">{{ wholeAmount }} </span>
                     <span class="fraction"> <span class="dot">.</span>{{ fractionAmount }}</span>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="entity-main-info__additional">
                   <div class="entity-main-info__additional-block">
-                    <div class="entity-main-info__additional-title">Procedure type</div>
+                    <div class="entity-main-info__additional-title">{{ $t("plan.procedure_type") }}</div>
                     <div class="entity-main-info__additional-value">
                       {{ selectProcedure(gd(plan, _ =>
                       _.MSRecord.compiledRelease.tender.mainProcurementCategory),gd(plan, _ =>
@@ -40,20 +40,20 @@
                     </div>
                   </div>
                   <div class="entity-main-info__additional-block">
-                    <div class="entity-main-info__additional-title">Procuring Entity Name</div>
+                    <div class="entity-main-info__additional-title">{{ $t("plan.procuring_entity_name") }}</div>
                     <div class="entity-main-info__additional-value">
                       {{ gd(plan, _ => _.MSRecord.compiledRelease.tender.procuringEntity.name) }}
                     </div>
                   </div>
                   <div class="entity-main-info__additional-block">
-                    <div class="entity-main-info__additional-title">Region</div>
+                    <div class="entity-main-info__additional-title">{{ $t("plan.region") }}</div>
                     <div class="entity-main-info__additional-value">
                       {{ gd(plan, _ => _.MSRecord.compiledRelease.parties, []).find(part => part.roles.some(role =>
                       role === "procuringEntity")).address.addressDetails.region.description }}
                     </div>
                   </div>
                   <div class="entity-main-info__additional-block">
-                    <div class="entity-main-info__additional-title">Number of notice</div>
+                    <div class="entity-main-info__additional-title">{{ $t("plan.number_of_notice") }}</div>
                     <div class="entity-main-info__additional-value">
                       {{ gd(plan, _ => _.MSRecord.compiledRelease.ocid) }}
                     </div>

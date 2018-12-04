@@ -1070,7 +1070,7 @@
                   <el-col :sm="16">
                     <div class="info-block__text">{{ $t("tender.funding_entity") }}</div>
                     <div class="info-block__value">
-                      {{ FSs.hasOwnProperty(gd(budgetBreakdown, _ => _.id)) ? gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].funder.name, "State Money") : "n/a" }}
+                      {{ FSs.hasOwnProperty(gd(budgetBreakdown, _ => _.id)) ? gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].funder.name, $t('tender.state_money')): "n/a" }}
                     </div>
                   </el-col>
                   <el-col :sm="8" v-if="gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].funder.id)">
@@ -1100,7 +1100,7 @@
           <div class="info-block">
             <el-row :gutter="15">
               <el-col :sm="24">
-                <div class="info-block__text">{{ $t("tender.short_free_description") }}</div>
+                <div class="info-block__text">{{ $t("plan.short_free_description") }}</div>
                 <div class="info-block__value">
                   {{ gd(msRecord, _ => _.planning.budget.description, "n/a") }}
                 </div>
@@ -1122,7 +1122,7 @@
           <li>{{ $t("tender.complementary_information_list1_p5") }}</li>
         </ul>
 
-        <div class="info__sub-title">Additional information</div>
+        <div class="info__sub-title">{{ $t("tender.additional_information") }}</div>
         <ul class="info-list">
           <li>{{ $t("tender.complementary_information_list2_p1") }}</li>
           <li>{{ $t("tender.complementary_information_list2_p2") }}</li>

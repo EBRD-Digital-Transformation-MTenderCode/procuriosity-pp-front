@@ -65,16 +65,19 @@ export default {
   "estimated_value_excluding_VAT":"Estimated value excluding VAT",
   "review_procedures":"Review procedures",
   "procurement_plan":"Procurement Plan",
+
   "contract_notice":"Contract Notice",
   "clarification_and_changes":"Clarification and changes",
   "electronic_auction":"Electronic auction",
   "electronic_bids":"Electronic<br/>bids",
   "evaluation_of_bids":"Evaluation<br/>of bids",
+
   "contracting_authority":"Contracting authority",
   "object":"Object",
   "procedure":"Procedure",
   "budget":"Budget",
   "complementary_information":"Complementary information",
+
   "name_and_address":"Name and address",
   "town":"Town",
   "nuts_code":"Nuts code",
@@ -85,6 +88,7 @@ export default {
   "email":"E-mail",
   "main_internet_address":"Main Internet address (URL)",
   "address_of_buyer_profile":"Address of the buyer profile (URL)",
+
   "type_of_buyer":"Type of buyer",
   "main_activity":"Main activity",
   "communication":"Communication",
@@ -103,7 +107,7 @@ export default {
   "lot_identifier":"Lot identifier",
   "place_of_performance":"Place of performance",
   "description_of_procurement":"Description of the procurement",
-  "big_guarantee_must_be_valid":" The amount and currency of the big guarantee that must be valid 90 deays starting from opening of the tenders",
+  "big_guarantee_must_be_valid":" The amount and currency of the big guarantee that must be valid 90 days starting from opening of the tenders",
   "duration_of_contract":"Duration of the contract, framework agreement or dynamic purchasing system",
   "start":"Start",
   "end":"End",
@@ -159,6 +163,8 @@ export default {
   "complementary_information_list1_p3":"Electronic payment in local currency (MDL) will be used.",
   "complementary_information_list1_p4":"The MTender does not require the use of tools and devices that are not generally available for electronic communication.",
   "complementary_information_list1_p5":"Use of mobile devices is not recommended for participating in the electronic auction.",
+
+  "additional_information": "Additional information",
   "complementary_information_list2_p1":"The contract does not involve joint procurement and is not awarded by a CPB.",
   "complementary_information_list2_p2":"This is not a recurrent procurement.",
   "complementary_information_list2_p3":"Minimum time frame during which the tenderer must maintain the tender is 90 days starting from opening of the tenders.",
@@ -166,7 +172,7 @@ export default {
   "complementary_information_list2_p4_2":"of estimated value MDL and must be valid 90 days starting from opening of the tenders.",
   "complementary_information_list2_p5":"Failure of the selected Economic Operator to submit the contract performance guarantee, if applicable, or to sign the contract shall constitute sufficient grounds for the annulment of the award of the contract and forfeiture of the bid guarantee.",
   "procedure_documents":"Procedure documents",
-  "Procudures_for_review":"Procudures for review",
+  "procudures_for_review":"Procudures for review",
   "fax":"Fax",
   "review_procedures_p1":"The Economic Operator which has an interest in being awarded a public procurement contract and wishes to submit a complaint to the National Complaint Settlement Agency shall follow the procedures contained in Article 79-80 of the Law. Interim measures and suspention of the procedure may be requested",
   "review_procedures_list1_p1":"The Economic Operator may submit a complaint within",
@@ -180,4 +186,6 @@ export default {
   "modification_documents":"Modifications of tender documents ",
   "question_received":"Question received",
   "no_clarifications":"No Clarifications",
+
+  "state_money":"State Money",
 }
