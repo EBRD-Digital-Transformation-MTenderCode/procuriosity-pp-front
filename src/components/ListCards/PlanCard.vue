@@ -40,10 +40,10 @@
             <div class="title">{{$t("plan.delivery_regions")}}:</div>
             <div class="text">{{ region }}</div>
           </div>
-          <!--<div class="entity-type">
+          <div class="entity-type">
             <div class="title">{{$t("plan.procedure_type")}}:</div>
             <div class="text">{{ type }}</div>
-          </div>-->
+          </div>
           <div class="entity-id">
             <div class="title">{{$t("plan.tender_id")}}:</div>
             <div class="text">{{ entityId }}</div>
@@ -144,25 +144,7 @@
         return getDataFromObject(this.entity, _ => _.buyerRegion);
       },
       type() {
-        if (getDataFromObject(this.entity, _ => _.procedureType) === "reporting") {
-          return procedureTypes.tenders.find(it => it.value === "reporting").name[this.$i18n.locale];
-        } else if (getDataFromObject(this.entity, _ => _.procedureType) === "belowThreshold") {
-          return procedureTypes.tenders.find(it => it.value === "belowThreshold").name[this.$i18n.locale];
-        } else if (getDataFromObject(this.entity, _ => _.procedureType) === "Licitație deschisă" && getDataFromObject(this.entity, _ => _.amount) < 1500000) {
-          if (this.$i18n.locale === "en") {
-            return "Request for price quotations";
-          } else if (this.$i18n.locale === "ro") {
-            return "Cererea ofertelor de preț";
-          } else {
-            return "Запрос ценовых оферт"
-          }
-        } else if (getDataFromObject(this.entity, _ => _.procedureType) === "Licitație deschisă") {
-          return procedureTypes.tenders.find(it => it.value === "Licitație deschisă").name[this.$i18n.locale];
-        } else if (getDataFromObject(this.entity, _ => _.procedureType) === "Procedură de valoare mică") {
-          return procedureTypes.tenders.find(it => it.value === "Procedură de valoare mică").name[this.$i18n.locale];
-        } else {
-          return getDataFromObject(this.entity, _ => _.procedureType);
-        }
+        return procedureTypes.plans.find(it => it.value === getDataFromObject(this.entity, _=> _.procedureType)).name[this.$i18n.locale];
       },
       peName() {
         return getDataFromObject(this.entity, _ => _.buyerName);

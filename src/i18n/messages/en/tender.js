@@ -188,4 +188,23 @@ export default {
   "no_clarifications":"No Clarifications",
 
   "state_money":"State Money",
+
+  "record_opening_electronic_bids":"Record of the opening of Electronic bids",
+  "information_about_electronic_bids":"Information about Electronic bids (TED: V.2.2.)",
+  "number_of_tenders_received":"Number of tenders received",
+  "number_of_tenders_received_after_deadline":"Number of tenders received after expiry of submission deadline",
+  "number_of_tenders_received_from_SMEs":"Number of tenders received from SMEs",
+  "number_of_tenders_received_from_residents":"Number of tenders received from tenderers from residents",
+  "number_of_tenders_received_from_non-residents":"Number of tenders received from tenderers from non-residents",
+  "electronic_bids_received":"Electronic bids received",
+  "tenders":"tenders",
+  "lot":"Lot",
+  "tenderer":"Tenderer",
+  "submission_date":"Submission date",
+  "initial_offer":"Initial offer",
+  "eos_docs":"EOs docs",
+  "exluding_vat":"exluding VAT",
+  "idno_code":"IDNO Code",
+  "modal_documents":"Documents",
+
 }
