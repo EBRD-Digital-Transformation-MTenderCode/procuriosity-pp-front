@@ -64,7 +64,7 @@ export default {
 
   "estimated_value_excluding_VAT":"Estimated value excluding VAT",
   "review_procedures":"Review procedures",
-  "procurement_plan":"Procurement Plan",
+  "procurement_plan":"Procurement<br/>Plan",
 
   "contract_notice":"Contract Notice",
   "clarification_and_changes":"Clarification and changes",
@@ -197,10 +197,9 @@ export default {
   "number_of_tenders_received_from_residents":"Number of tenders received from tenderers from residents",
   "number_of_tenders_received_from_non-residents":"Number of tenders received from tenderers from non-residents",
   "electronic_bids_received":"Electronic bids received",
-  "tenders":"tenders",
   "lot":"Lot",
   "tenderer":"Tenderer",
-  "submission_date":"Submission date",
+  "discloser_date":"Discloser date",
   "initial_offer":"Initial offer",
   "eos_docs":"EOs docs",
   "exluding_vat":"exluding VAT",

@@ -144,6 +144,7 @@
         return getDataFromObject(this.entity, _ => _.buyerRegion);
       },
       type() {
+        // @TODO need add test for .name
         return procedureTypes.plans.find(it => it.value === getDataFromObject(this.entity, _=> _.procedureType)).name[this.$i18n.locale];
       },
       peName() {

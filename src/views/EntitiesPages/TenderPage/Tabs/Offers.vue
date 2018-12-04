@@ -9,7 +9,7 @@
             <div class="info-block__value">{{ $t("tender.number_of_tenders_received")}}:</div>
           </el-col>
           <el-col :sm="12">
-            <div class="info-block__value info-block__value_bold">{{ gd(evRecord, _ => _.bids.details, []).length }} {{$t("tender.tenders")}}</div>
+            <div class="info-block__value info-block__value_bold">{{ gd(evRecord, _ => _.bids.details, []).length }}</div>
           </el-col>
         </el-row>
 
@@ -18,7 +18,7 @@
             <div class="info-block__value">{{ $t("tender.number_of_tenders_received_after_deadline")}}:</div>
           </el-col>
           <el-col :sm="12">
-            <div class="info-block__value info-block__value_bold">none</div>
+            <div class="info-block__value info-block__value_bold">0</div>
           </el-col>
         </el-row>
 
@@ -29,7 +29,6 @@
           <el-col :sm="12">
             <div class="info-block__value info-block__value_bold">
               {{ gd( evRecord, _=> _.bids.details).filter(bid => gd( evRecord, _=> _.parties).find(part => part.id === bid.tenderers[0].id ).details.scale === "sme").length }}
-              {{ $t("tender.tenders")}}
             </div>
           </el-col>
         </el-row>
@@ -41,7 +40,7 @@
           <el-col :sm="12">
             <div class="info-block__value info-block__value_bold">
               {{ gd( evRecord, _=> _.bids.details).filter(bid => gd( evRecord, _=> _.parties).find(part => part.id === bid.tenderers[0].id ).address.addressDetails.country.id === "MD").length }}
-              {{ $t("tender.tenders")}}</div>
+            </div>
           </el-col>
         </el-row>
 
@@ -52,7 +51,7 @@
           <el-col :sm="12">
             <div class="info-block__value info-block__value_bold">
               {{ gd( evRecord, _=> _.bids.details).filter(bid => gd( evRecord, _=> _.parties).find(part => part.id === bid.tenderers[0].id ).address.addressDetails.country.id !== "MD").length }}
-              {{ $t("tender.tenders")}}</div>
+            </div>
           </el-col>
         </el-row>
       </div>
@@ -66,12 +65,15 @@
       <div style="margin-bottom: 15px; font-size: 16px; font-weight: 700;">
         {{ $t("tender.lot")}} {{ index + 1 }}: {{ lot.title }}
       </div>
-      <table class="info-table offers-table">
+      <table
+          class="info-table offers-table"
+          v-if="gd(evRecord, _ => _.bids.details, []).filter(_bid => _bid.relatedLots[0] === lot.id).length"
+      >
         <tr>
           <th>{{ $t("tender.tenderer")}}</th>
-          <th>{{ $t("tender.submission_date")}}</th>
+          <th>{{ $t("tender.discloser_date")}}</th>
           <th>{{ $t("tender.initial_offer")}}</th>
-          <!--<th>Self-declaration</th>-->
+          <th>Self-declaration</th>
           <th>{{ $t("tender.eos_docs")}}</th>
         </tr>
         <tr
@@ -90,9 +92,21 @@
             <div class="offers-table__amount">{{ fa(gd(bid, _ => _.value.amount)) }}</div>
             <div class="offers-table__currency">{{ gd(bid, _ => _.value.currency) }} {{ $t("tender.exluding_vat")}}</div>
           </td>
-          <!--<td>
-            ???
-          </td>-->
+          <td>
+            <button
+                type="button"
+                @click="$refs[bid.id + 'eligibilityDocuments'][0].open = true"
+                class="offers-table__docs-espd-button"
+            >
+              MTender ESPD
+            </button>
+            <documents-modal
+                :ref="bid.id + 'eligibilityDocuments'"
+                :open="false"
+                :documents="bid.documents.filter(_doc => _doc.documentType === 'x_eligibilityDocuments')"
+                noItemsText="No documents submitted"
+            />
+          </td>
           <td>
             <button
                 v-if="bid.documents ? bid.documents.length : 0"
@@ -103,11 +117,17 @@
             <documents-modal
                 :ref="bid.id"
                 :open="false"
-                :documents="bid.documents ? bid.documents: []"
+                :documents="bid.documents.filter(_doc => _doc.documentType !== 'x_eligibilityDocuments')"
             />
           </td>
         </tr>
       </table>
+      <div
+          v-else
+          style="margin-bottom: 25px"
+      >
+        No Bids received
+      </div>
     </div>
   </div>
 </template>
