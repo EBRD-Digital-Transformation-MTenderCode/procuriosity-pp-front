@@ -13,15 +13,15 @@
           class="info-table evaluation-table"
       >
         <tr>
-          <th>Supplier</th>
+          <th>Tenderer</th>
           <th>Final offer</th>
-          <!--<th>MTender ESPD</th>-->
+          <th>MTender ESPD</th>
           <th>EO docs</th>
           <!--<th>Declaration of no<br/>conflict of interets</th>-->
           <th>Status and<br/>resolution of TC</th>
         </tr>
         <tr
-            v-for="award of gd(evRecord, _ => _.awards, []).filter(_award => _award.relatedLots[0] === lot.id)"
+            v-for="award of gd(evRecord, _ => _.awards, []).filter(_award => _award.relatedLots[0] === lot.id).sort((awardA, awardB) => awardA.value.amount - awardB.value.amount)"
             :key="award.id"
         >
           <td>
@@ -32,7 +32,22 @@
             <div class="evaluation-table__amount">{{ fa(gd(award, _ => _.value.amount, 0)) }}</div>
             <div class="evaluation-table__currency">{{ gd(award, _ => _.value.currency) }} exluding VAT</div>
           </td>
-          <!--<td>???</td>-->
+          <td>
+            <button
+                v-if="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.length : 0"
+                type="button"
+                @click="$refs[award.id + 'eligibilityDocuments'][0].open = true"
+                class="evaluation-table__docs-espd-button"
+            >
+              MTender ESPD
+            </button>
+            <documents-modal
+                :ref="award.id + 'eligibilityDocuments'"
+                :open="false"
+                :documents="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.filter(_doc => _doc.documentType === 'x_eligibilityDocuments') : []"
+                noItemsText="No documents submitted"
+            />
+          </td>
           <td>
             <button
                 v-if="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.length : 0"
@@ -43,14 +58,14 @@
             <documents-modal
                 :ref="award.id"
                 :open="false"
-                :documents="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents : []"
+                :documents="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.filter(_doc => _doc.documentType !== 'x_eligibilityDocuments') : []"
             />
           </td>
           <!--<td>
             Declaration
           </td>-->
           <td>
-            <div class="evaluation-table__status">{{ gd(award, _ => _.status) }}</div>
+            <div class="evaluation-table__status">{{ parseStatus(gd(award, _ => _.status), gd(award, _ => _.statusDetails)) }}</div>
             <!--<div class="evaluation-table__status-time">time</div>-->
           </td>
         </tr>
@@ -66,7 +81,7 @@
 </template>
 
 <script>
-    import DocumentsModal from "./../DocumentsModal";
+  import DocumentsModal from "./../DocumentsModal";
 
     import {
       getDataFromObject,
@@ -94,6 +109,19 @@
       },
       fa(amount) {
         return formatAmount(amount);
+      },
+      parseStatus(status, statusDetails) {
+        if (status === "pending" && statusDetails === "empty") {
+          return "Pending";
+        } else if (status === "pending" && statusDetails === "consideration") {
+          return "Consideration";
+        } else if ((status === "pending" && statusDetails === "active") || (status === "active" && statusDetails === "empty")) {
+          return "Consideration";
+        } else if ((status === "pending" && statusDetails === "unsuccessful") || (status === "unsuccessful" && statusDetails === "empty")) {
+          return "Disqualified";
+        } else {
+          return "Pending";
+        }
       }
     }
   };

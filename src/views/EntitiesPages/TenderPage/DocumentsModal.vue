@@ -7,7 +7,7 @@
   >
     <slot>
       <div class="info-blocks">
-        <div class="info-block">
+        <div class="info-block" v-if="documents.length">
           <div class="info-block__documents"
                v-for="(doc, index) of documents"
                :key="doc.id + index"
@@ -33,6 +33,7 @@
             </el-row>
           </div>
         </div>
+        <div v-else>{{ noItemsText }}</div>
       </div>
     </slot>
   </el-dialog>
@@ -52,6 +53,9 @@
       documents: {
         type: Array,
         required: true
+      },
+      noItemsText: {
+        type: String
       }
     },
     methods: {

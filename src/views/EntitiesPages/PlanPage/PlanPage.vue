@@ -69,9 +69,15 @@
               <el-col :xs="24">
                 <el-tabs
                     v-model="activeTab"
-                    stretch
                     :before-leave="checkTab"
                 >
+                  <el-tab-pane
+                      :label='$t("tender.procurement_plan")'
+                      name="pn"
+                      lazy
+                  >
+                    <span slot="label" v-html="$t('tender.procurement_plan')" />
+                  </el-tab-pane>
                   <el-tab-pane
                       :disabled="!gd(plan, _ => _.MSRecord.compiledRelease.relatedProcesses, []).some(process => gd(process, _ => _.relationship, []).some(it => it === 'x_evaluation'))"
                       name="cn"

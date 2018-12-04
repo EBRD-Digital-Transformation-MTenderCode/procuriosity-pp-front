@@ -74,10 +74,11 @@
                 >
                   <el-tab-pane
                       :disabled="!gd(tender, _ => _.EVRecord.compiledRelease.hasPreviousNotice)"
-                      :label='$t("tender.procurement_plan")'
                       name="pn"
                       lazy
-                  />
+                  >
+                    <span slot="label" v-html="$t('tender.procurement_plan')" />
+                  </el-tab-pane>
                   <el-tab-pane
                       name="cn"
                       lazy
