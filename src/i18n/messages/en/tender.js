@@ -66,7 +66,7 @@ export default {
   "review_procedures":"Review procedures",
   "procurement_plan":"Procurement Plan",
 
-  "contract_notice":"Contract Notice",
+  "contract_notice":"Contract<br/>Notice",
   "clarification_and_changes":"Clarification and changes",
   "electronic_auction":"Electronic auction",
   "electronic_bids":"Electronic<br/>bids",

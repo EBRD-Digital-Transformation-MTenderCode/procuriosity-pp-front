@@ -63,17 +63,34 @@
             </el-row>
           </el-container>
         </div>
-        <el-container>
-          <contract-notice
-              :msRecord="gd(plan, _ => _.MSRecord.compiledRelease)"
-              :pnRecord="gd(plan, _ => _.PNRecord.compiledRelease)"
-              :procedureType="selectProcedure(gd(plan, _ =>
+        <div class="entity-tabs">
+          <el-container direction="vertical">
+            <el-row>
+              <el-col :xs="24">
+                <el-tabs
+                    v-model="activeTab"
+                    stretch
+                    :before-leave="checkTab"
+                >
+                  <el-tab-pane
+                      :disabled="!gd(plan, _ => _.MSRecord.compiledRelease.relatedProcesses, []).some(process => gd(process, _ => _.relationship, []).some(it => it === 'x_evaluation'))"
+                      name="cn"
+                      lazy
+                  >
+                    <span slot="label" v-html="$t('tender.contract_notice')" />
+                  </el-tab-pane>
+                </el-tabs>
+              </el-col>
+            </el-row>
+            <contract-notice
+                :msRecord="gd(plan, _ => _.MSRecord.compiledRelease)"
+                :pnRecord="gd(plan, _ => _.PNRecord.compiledRelease)"
+                :procedureType="selectProcedure(gd(plan, _ =>
               _.MSRecord.compiledRelease.tender.mainProcurementCategory),gd(plan, _ =>
               _.MSRecord.compiledRelease.tender.value.amount))"
-          />
-        </el-container>
-
-
+            />
+          </el-container>
+        </div>
       </div>
       <el-container class="error" key="error" v-else>
         <div class="error-message"> {{error.message}}</div>
@@ -105,11 +122,26 @@
     },
     data() {
       return {
-        activeTab: "cn"
+        activeTab: "pn"
       };
     },
     created() {
       this.getPlan();
+    },
+    computed: {
+      ...mapState({
+        plan: state => state.entities.plans.currentEntity.entityData,
+        loaded: state => state.entities.plans.loaded,
+        error: state => state.entities.plans.error
+      }),
+      wholeAmount() {
+        const amountStr = this.gd(this.plan, _ => _.MSRecord.compiledRelease.tender.value.amount, 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        return /\./.test(amountStr) ? amountStr.slice(0, amountStr.indexOf(".")) : amountStr;
+      },
+      fractionAmount() {
+        const amountStr = this.gd(this.plan, _ => _.MSRecord.compiledRelease.tender.value.amount, 0).toString();
+        return /\./.test(amountStr) ? amountStr.slice(amountStr.indexOf(".") + 1).length === 1 ? amountStr.slice(amountStr.indexOf(".") + 1) + "0" : amountStr.slice(amountStr.indexOf(".") + 1) : "00";
+      },
     },
     methods: {
       async getPlan() {
@@ -117,7 +149,7 @@
           id: this.$route.params.id
         });
 
-        /*console.log(this.plan);*/
+        console.log(this.plan);
       },
       gd(...args) {
         return getDataFromObject(...args);
@@ -195,21 +227,11 @@
           }
         }
       },
-    },
-    computed: {
-      ...mapState({
-        plan: state => state.entities.plans.currentEntity.entityData,
-        loaded: state => state.entities.plans.loaded,
-        error: state => state.entities.plans.error
-      }),
-      wholeAmount() {
-        const amountStr = this.gd(this.plan, _ => _.MSRecord.compiledRelease.tender.value.amount, 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-        return /\./.test(amountStr) ? amountStr.slice(0, amountStr.indexOf(".")) : amountStr;
-      },
-      fractionAmount() {
-        const amountStr = this.gd(this.plan, _ => _.MSRecord.compiledRelease.tender.value.amount, 0).toString();
-        return /\./.test(amountStr) ? amountStr.slice(amountStr.indexOf(".") + 1).length === 1 ? amountStr.slice(amountStr.indexOf(".") + 1) + "0" : amountStr.slice(amountStr.indexOf(".") + 1) : "00";
-      },
+      checkTab(tab) {
+        if (tab === "cn") {
+          this.$router.push({ path: `${this.$i18n.locale !== "ro" ? `/${this.$i18n.locale}` : ""}/tenders/${this.plan.MSRecord.ocid}` });
+        }
+      }
     }
   };
 </script>

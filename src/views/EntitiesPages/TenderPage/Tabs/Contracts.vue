@@ -7,7 +7,3 @@ export default {
   name: "Contracts"
 };
 </script>
-
-<style scoped>
-
-</style>

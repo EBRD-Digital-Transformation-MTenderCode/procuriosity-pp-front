@@ -75,13 +75,14 @@
                   <el-tab-pane
                       :disabled="!gd(tender, _ => _.EVRecord.compiledRelease.hasPreviousNotice)"
                       :label='$t("tender.procurement_plan")'
-                      name="pn" lazy
+                      name="pn"
+                      lazy
                   />
                   <el-tab-pane
-                      :label='$t("tender.contract_notice")'
                       name="cn"
                       lazy
                   >
+                    <span slot="label" v-html="$t('tender.contract_notice')" />
                     <contract-notice
                       :msRecord="gd(tender, _ => _.MSRecord.compiledRelease)"
                       :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
@@ -100,10 +101,10 @@
                       :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
                     />
                   </el-tab-pane>
-                  <el-tab-pane disabled :label='$t("tender.review_procedures")' name="auction" lazy>
+                  <el-tab-pane disabled :label='$t("tender.review_procedures")' name="review" lazy>
                     <auction />
                   </el-tab-pane>
-                  <el-tab-pane disabled :label='$t("tender.electronic_auction")' name="ev" lazy>
+                  <el-tab-pane disabled :label='$t("tender.electronic_auction")' name="auction" lazy>
                   
                   </el-tab-pane>
                   <el-tab-pane
@@ -116,10 +117,22 @@
                         :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
                     />
                   </el-tab-pane>
-                  <el-tab-pane disabled name="can" lazy>
+                  <el-tab-pane
+                      :disabled="!gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('awards')"
+                      name="ev"
+                      lazy
+                  >
                     <span slot="label" v-html="$t('tender.evaluation_of_bids')"></span>
-                    <contracts />
+                    <evaluation
+                        :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
+                    />
                   </el-tab-pane>
+                  <!--<el-tab-pane
+                    name="cans"
+                    lazy=""
+                  >
+                    <span slot="label">Contract&nbsp;awarded<br/>notices</span>
+                  </el-tab-pane>-->
                 </el-tabs>
               </el-col>
             </el-row>
