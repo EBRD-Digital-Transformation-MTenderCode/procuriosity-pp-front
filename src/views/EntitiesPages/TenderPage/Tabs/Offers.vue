@@ -1,71 +1,71 @@
 <template>
   <div>
-    <div class="info__title">Record of the opening of Electronic bids</div>
-    <div class="info__sub-title">Information about Electronic bids (TED: V.2.2.)</div>
+    <div class="info__title">{{ $t("tender.record_opening_electronic_bids")}}</div>
+    <div class="info__sub-title">{{ $t("tender.information_about_electronic_bids")}} </div>
     <div class="info-blocks">
       <div class="info-block">
         <el-row :gutter="15">
           <el-col :sm="12">
-            <div class="info-block__value">Number of tenders received:</div>
+            <div class="info-block__value">{{ $t("tender.number_of_tenders_received")}}:</div>
           </el-col>
           <el-col :sm="12">
-            <div class="info-block__value info-block__value_bold">{{ gd(evRecord, _ => _.bids.details, []).length }} tenders</div>
-          </el-col>
-        </el-row>
-        
-        <el-row :gutter="15">
-          <el-col :sm="12">
-            <div class="info-block__value">Number of tenders received after expiry of submission deadline:</div>
-          </el-col>
-          <el-col :sm="12">
-            <div class="info-block__value info-block__value_bold">1 tenders</div>
+            <div class="info-block__value info-block__value_bold">{{ gd(evRecord, _ => _.bids.details, []).length }} {{$t("tender.tenders")}}</div>
           </el-col>
         </el-row>
         
         <el-row :gutter="15">
           <el-col :sm="12">
-            <div class="info-block__value">Number of tenders received from SMEs:</div>
+            <div class="info-block__value">{{ $t("tender.number_of_tenders_received_after_deadline")}}:</div>
           </el-col>
           <el-col :sm="12">
-            <div class="info-block__value info-block__value_bold">1 tenders</div>
-          </el-col>
-        </el-row>
-        
-        <el-row :gutter="15">
-          <el-col :sm="12">
-            <div class="info-block__value">Number of tenders received from tenderers from residents: </div>
-          </el-col>
-          <el-col :sm="12">
-            <div class="info-block__value info-block__value_bold">{{ gd(evRecord, _ => _.bids.details, []).length }} tenders</div>
+            <div class="info-block__value info-block__value_bold">1 {{ $t("tender.tenders")}}</div>
           </el-col>
         </el-row>
         
         <el-row :gutter="15">
           <el-col :sm="12">
-            <div class="info-block__value">Number of tenders received from tenderers from non-residents: </div>
+            <div class="info-block__value">{{ $t("tender.number_of_tenders_received_from_SMEs")}}:</div>
           </el-col>
           <el-col :sm="12">
-            <div class="info-block__value info-block__value_bold">0 tenders</div>
+            <div class="info-block__value info-block__value_bold">1 {{ $t("tender.tenders")}}</div>
+          </el-col>
+        </el-row>
+        
+        <el-row :gutter="15">
+          <el-col :sm="12">
+            <div class="info-block__value">{{ $t("tender.number_of_tenders_received_from_residents")}}: </div>
+          </el-col>
+          <el-col :sm="12">
+            <div class="info-block__value info-block__value_bold">{{ gd(evRecord, _ => _.bids.details, []).length }} {{ $t("tender.tenders")}}</div>
+          </el-col>
+        </el-row>
+        
+        <el-row :gutter="15">
+          <el-col :sm="12">
+            <div class="info-block__value">{{ $t("tender.number_of_tenders_received_from_non-residents")}}: </div>
+          </el-col>
+          <el-col :sm="12">
+            <div class="info-block__value info-block__value_bold">0 {{ $t("tender.tenders")}}</div>
           </el-col>
         </el-row>
       </div>
     </div>
     
-    <div class="info__sub-title">Electronic bids received</div>
+    <div class="info__sub-title">{{ $t("tender.electronic_bids_received")}}</div>
     <div
         v-for="(lot, index) of gd(evRecord, _ => _.tender.lots, [])"
         :key="lot.id"
     >
       <div style="margin-bottom: 15px; font-size: 16px; font-weight: 700;">
-        Lot {{ index + 1 }}: {{ lot.title }}
+        {{ $t("tender.lot")}} {{ index + 1 }}: {{ lot.title }}
       </div>
       <table class="info-table offers-table">
         <tr>
-          <th>Tenderer</th>
-          <th>Submission date</th>
-          <th>Initial offer</th>
+          <th>{{ $t("tender.tenderer")}}</th>
+          <th>{{ $t("tender.submission_date")}}</th>
+          <th>{{ $t("tender.initial_offer")}}</th>
           <!--<th>Self-declaration</th>-->
-          <th>EOs docs</th>
+          <th>{{ $t("tender.eos_docs")}}</th>
         </tr>
         <tr
           v-for="bid of gd(evRecord, _ => _.bids.details, []).filter(_bid => _bid.relatedLots[0] === lot.id)"
@@ -73,7 +73,7 @@
         >
           <td>
             <div class="offers-table__tenderer-name">{{ gd(bid, _ => _.tenderers[0]).name }}</div>
-            <div class="offers-table__tenderer-id">IDNO Code: {{ gd(bid, _ => _.tenderers[0]).id }}</div>
+            <div class="offers-table__tenderer-id">{{ $t("tender.idno_code")}}: {{ gd(bid, _ => _.tenderers[0]).id }}</div>
           </td>
           <td>
             <div class="offers-table__date">{{ fd(gd(bid, _ => _.date), "DD/MM/YYYY") }}</div>
@@ -81,7 +81,7 @@
           </td>
           <td>
             <div class="offers-table__amount">{{ fa(gd(bid, _ => _.value.amount)) }}</div>
-            <div class="offers-table__currency">{{ gd(bid, _ => _.value.currency) }} exluding VAT</div>
+            <div class="offers-table__currency">{{ gd(bid, _ => _.value.currency) }} {{ $t("tender.exluding_vat")}}</div>
           </td>
           <!--<td>
             ???

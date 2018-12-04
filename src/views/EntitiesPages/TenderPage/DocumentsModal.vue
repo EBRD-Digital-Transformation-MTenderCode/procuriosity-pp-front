@@ -2,7 +2,7 @@
   <el-dialog
       :visible.sync="open"
       append-to-body
-      title="Documents"
+      :title="$t('tender.modal_documents')"
       width="75%"
   >
     <slot>
@@ -22,12 +22,12 @@
             <el-row :gutter="15">
               <el-col :sm="16">
                   <div class="info-block__text info-block__text_small">
-                    ID: {{ gd(doc, _ => _.id) }}
+                    {{$t("tender.id")}}: {{ gd(doc, _ => _.id) }}
                   </div>
               </el-col>
               <el-col :sm="8">
                 <div class="info-block__text info-block__text_small">
-                  Published: {{ fd(gd(doc, _ => _.datePublished)) }}
+                  {{$t("tender.published")}}: {{ fd(gd(doc, _ => _.datePublished)) }}
                 </div>
               </el-col>
             </el-row>
