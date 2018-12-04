@@ -107,7 +107,7 @@
                   
                   </el-tab-pane>
                   <el-tab-pane
-                      disabled
+                      :disabled="!gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('bids')"
                       name="offers"
                       lazy
                   >
