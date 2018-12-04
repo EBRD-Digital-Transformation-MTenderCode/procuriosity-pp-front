@@ -2,19 +2,27 @@ export default {
   plans: [
     {
       name: {
-        en: "Open Tender",
-        ro: "Licitație deschisă",
-        ru: "Открытые торги"
+        en: "Low value procedure",
+        ro: "Achiziții de valoare mică",
+        ru: "Закупка малой стоимости"
       },
-      value: "Licitație deschisă"
+      value: "mv"
     },
     {
       name: {
         en: "Request for Proposals",
-        ro: "COP",
-        ru: "Запрос ценовых предложений"
+        ro: "Cerere Oferte de Prețuri",
+        ru: "Запрос ценовых оферт"
       },
-      value: "Procedură de valoare mică"
+      value: "sv"
+    },
+    {
+      name: {
+        en: "Open Tender",
+        ro: "Licitație deschisă",
+        ru: "Открытые торги"
+      },
+      value: "ot"
     }
   ],
   tenders: [
@@ -29,36 +37,60 @@ export default {
     {
       name: {
         en: "Request for price quotation",
-        ro: "Achiziții de valoare mica",
-        ru: "Закупки малой стоимости"
+        ro: "Cerere de cotare de preț",
+        ru: "Запрос ценового предложения"
       },
       value: "belowThreshold"
     },
     {
       name: {
-        en: "Open Tender",
-        ro: "Licitație deschisă",
-        ru: "Открытые торги"
+        en: "Low value procedure",
+        ro: "Achiziții de valoare mică",
+        ru: "Закупка малой стоимости"
       },
-      value: "Licitație deschisă"
+      value: "mv"
     },
     {
       name: {
         en: "Request for Proposals",
-        ro: "COP",
-        ru: "Запрос ценовых предложений"
+        ro: "Cerere Oferte de Prețuri",
+        ru: "Запрос ценовых оферт"
       },
-      value: "Procedură de valoare mică"
+      value: "sv"
+    },
+    {
+      name: {
+        en: "Open Tender",
+        ro: "Licitație deschisă",
+        ru: "Открытые торги"
+      },
+      value: "ot"
     }
   ],
   contracts: [
     {
       name: {
+        en: "Low value procedure",
+        ro: "Achiziții de valoare mică",
+        ru: "Закупка малой стоимости"
+      },
+      value: "mv"
+    },
+    {
+      name: {
+        en: "Request for Proposals",
+        ro: "Cerere Oferte de Prețuri",
+        ru: "Запрос ценовых оферт"
+      },
+      value: "sv"
+    },
+    {
+      name: {
         en: "Open Tender",
         ro: "Licitație deschisă",
         ru: "Открытые торги"
       },
-      value: "Licitație deschisă"
+      value: "ot"
     }
   ]
 };

@@ -60,6 +60,7 @@
 
 <script>
   import { getDataFromObject, formatDate } from "../../utils";
+  import procedureTypes from "./../../store/types/procedures-types";
 
   export default {
     name: "TenderCard",
@@ -107,7 +108,7 @@
         return getDataFromObject(this.entity, _ => _.buyerRegion);
       },
       type() {
-        return getDataFromObject(this.entity, _ => _.procedureType);
+          return getDataFromObject(this.entity, _=> _.procedureType) ? procedureTypes.contracts.find(it => it.value === getDataFromObject(this.entity, _ => _.procedureType)).name[this.$i18n.locale] : "";
       },
       peName() {
         return getDataFromObject(this.entity, _ => _.buyerName);
