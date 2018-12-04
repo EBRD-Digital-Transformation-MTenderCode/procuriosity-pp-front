@@ -12,45 +12,52 @@
             <div class="info-block__value info-block__value_bold">{{ gd(evRecord, _ => _.bids.details, []).length }} {{$t("tender.tenders")}}</div>
           </el-col>
         </el-row>
-        
+
         <el-row :gutter="15">
           <el-col :sm="12">
             <div class="info-block__value">{{ $t("tender.number_of_tenders_received_after_deadline")}}:</div>
           </el-col>
           <el-col :sm="12">
-            <div class="info-block__value info-block__value_bold">1 {{ $t("tender.tenders")}}</div>
+            <div class="info-block__value info-block__value_bold">none</div>
           </el-col>
         </el-row>
-        
+
         <el-row :gutter="15">
           <el-col :sm="12">
             <div class="info-block__value">{{ $t("tender.number_of_tenders_received_from_SMEs")}}:</div>
           </el-col>
           <el-col :sm="12">
-            <div class="info-block__value info-block__value_bold">1 {{ $t("tender.tenders")}}</div>
+            <div class="info-block__value info-block__value_bold">
+              {{ gd( evRecord, _=> _.bids.details).filter(bid => gd( evRecord, _=> _.parties).find(part => part.id === bid.tenderers[0].id ).details.scale === "sme").length }}
+              {{ $t("tender.tenders")}}
+            </div>
           </el-col>
         </el-row>
-        
+
         <el-row :gutter="15">
           <el-col :sm="12">
             <div class="info-block__value">{{ $t("tender.number_of_tenders_received_from_residents")}}: </div>
           </el-col>
           <el-col :sm="12">
-            <div class="info-block__value info-block__value_bold">{{ gd(evRecord, _ => _.bids.details, []).length }} {{ $t("tender.tenders")}}</div>
+            <div class="info-block__value info-block__value_bold">
+              {{ gd( evRecord, _=> _.bids.details).filter(bid => gd( evRecord, _=> _.parties).find(part => part.id === bid.tenderers[0].id ).address.addressDetails.country.id === "MD").length }}
+              {{ $t("tender.tenders")}}</div>
           </el-col>
         </el-row>
-        
+
         <el-row :gutter="15">
           <el-col :sm="12">
             <div class="info-block__value">{{ $t("tender.number_of_tenders_received_from_non-residents")}}: </div>
           </el-col>
           <el-col :sm="12">
-            <div class="info-block__value info-block__value_bold">0 {{ $t("tender.tenders")}}</div>
+            <div class="info-block__value info-block__value_bold">
+              {{ gd( evRecord, _=> _.bids.details).filter(bid => gd( evRecord, _=> _.parties).find(part => part.id === bid.tenderers[0].id ).address.addressDetails.country.id !== "MD").length }}
+              {{ $t("tender.tenders")}}</div>
           </el-col>
         </el-row>
       </div>
     </div>
-    
+
     <div class="info__sub-title">{{ $t("tender.electronic_bids_received")}}</div>
     <div
         v-for="(lot, index) of gd(evRecord, _ => _.tender.lots, [])"
@@ -107,7 +114,7 @@
 
 <script>
   import DocumentsModal from "./../DocumentsModal";
-  
+
   import {
     getDataFromObject,
     formatDate,
