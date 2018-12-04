@@ -88,7 +88,7 @@
           </td>-->
           <td>
             <button
-                v-if="bid.documents.length"
+                v-if="bid.documents ? bid.documents.length : 0"
                 type="button"
                 @click="$refs[bid.id][0].open = true"
                 class="offers-table__docs-button"
@@ -96,7 +96,7 @@
             <documents-modal
                 :ref="bid.id"
                 :open="false"
-                :documents="bid.documents"
+                :documents="bid.documents ? bid.documents: []"
             />
           </td>
         </tr>
@@ -111,8 +111,6 @@
   import {
     getDataFromObject,
     formatDate,
-    convertCamelCaseToTitleCase,
-    addDay,
     formatAmount
   } from "./../../../../utils";
 
