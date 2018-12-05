@@ -21,21 +21,30 @@ export function formatDate(date, formatType = "DD.MM.YYYY / HH:mm", def = "none"
 
 export function addDay(date) {
   // @TODO need test parameter
-    return dayjs(date).add(1, 'day')
+  if (!date && !dayjs(date).isValid()) {
+    console.warn("date is not valid");
+  }
+  return dayjs(date).add(1, "day");
 }
 
-export function formatAmount(amount) {
-  // @TODO need test parameter
-  return amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$& ')
+export function formatAmount(amount, def = "0.00") {
+  if (typeof amount === "number" && !isNaN(amount)) {
+    return amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$& ");
+  }
+  else return def;
 }
 
 export const convertObjectToQueryParamsString = obj => {
-  // @TODO need test parameter
-  return Object.entries(obj).filter(([key, val]) => {
-    return Array.isArray(val) ? !!val.length : !!val;
-  }).reduce((accVal, [key, val], i) => {
-    return `${accVal}${i !== 0 ? "&" : ""}${key}=${encodeURIComponent(Array.isArray(val) ? JSON.stringify(val) : val)}`;
-  }, "?");
+  if (!obj && typeof obj !== "object") {
+    console.warn("data is not valid");
+  }
+  else {
+    return Object.entries(obj).filter(([key, val]) => {
+      return Array.isArray(val) ? !!val.length : !!val;
+    }).reduce((accVal, [key, val], i) => {
+      return `${accVal}${i !== 0 ? "&" : ""}${key}=${encodeURIComponent(Array.isArray(val) ? JSON.stringify(val) : val)}`;
+    }, "?");
+  }
 };
 
 export const convertCamelCaseToTitleCase = str => {
@@ -48,9 +57,9 @@ export const convertCamelCaseToTitleCase = str => {
 };
 
 export const transformSpecialSymbols = str => {
-  if(!str && typeof str !== "string"){
+  if (!str && typeof str !== "string") {
     throw new Error;
   }
   const parser = new DOMParser;
-  return parser.parseFromString(`<!doctype html><html><body> ${str}</body></html>` ,'text/html').body.textContent;
+  return parser.parseFromString(`<!doctype html><html><body> ${str}</body></html>`, "text/html").body.textContent;
 };

@@ -161,7 +161,7 @@
       },
       fa(amount){
         return formatAmount(amount)
-      },
+      }
     }
   };
 </script>
