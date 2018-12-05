@@ -1258,7 +1258,7 @@
           </div>
         </div>
 
-        <div class="info__sub-title">{{ $t("tender.review_procedures") }}</div>
+        <div class="info__sub-title">{{ $t("tender.review_procedures_title") }}</div>
         <div class="info-block">
           <p>
             {{ $t("tender.review_procedures_p1") }}</p>

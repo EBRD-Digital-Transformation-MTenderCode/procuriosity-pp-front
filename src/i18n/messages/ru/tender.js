@@ -63,6 +63,7 @@ export default {
   "documentation": "Документация",
 
   "estimated_value_excluding_VAT":"Estimated value excluding VAT",
+  "review_procedures_title": "Review procedures",
   "review_procedures":"Review procedures",
   "procurement_plan":"Procurement<br/>Plan",
 
@@ -205,4 +206,18 @@ export default {
   "exluding_vat":"exluding VAT",
   "idno_code":"IDNO Code",
   "modal_documents":"Documents",
+
+  "contract_award_notices":"Contract Award Notices",
+  "lot_title": "Lot title",
+  "award_of_contract": "Award of contract",
+  "way_of_awarded_contract": "The way of awarded contract",
+  "not_been_awarded_group_of_eos": "The contract has not been awarded to a group of economic operators",
+  "date_of_conclusion": "Date of conclusion of the contract",
+  "info_about_tenders": "Information about tenders",
+  "name_and_address_contractor": "Name and address of the contractor",
+  "info_on_value": "Information on value of the contract/lot (excluding VAT)",
+  "initial_total_contract_value": "Initial estimated total value of the contract/lot",
+  "total_contract_value": "Total value of the contract/lot",
+  "lowest_offer": "Lowest offer taken into consideration",
+  "highest_offer": "Highest offer taken into consideration",
 }

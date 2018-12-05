@@ -94,15 +94,20 @@
                   </el-tab-pane>
                   <el-tab-pane
                     :disabled="!gd(tender, _ => _.EVRecord.compiledRelease.tender.hasEnquiries)"
-                    :label='$t("tender.clarification_and_changes")'
                     name="clarification"
                     lazy
                   >
+                    <span slot="label" v-html="$t('tender.clarification_and_changes')" />
                     <clarification
                       :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
                     />
                   </el-tab-pane>
-                  <el-tab-pane disabled :label='$t("tender.review_procedures")' name="review" lazy>
+                  <el-tab-pane
+                      disabled
+                      name="review"
+                      lazy
+                  >
+                    <span slot="label" v-html="$t('tender.review_procedures')"/>
                     <auction />
                   </el-tab-pane>
                   <el-tab-pane disabled :label='$t("tender.electronic_auction")' name="auction" lazy>
@@ -128,12 +133,16 @@
                         :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
                     />
                   </el-tab-pane>
-                  <!--<el-tab-pane
+                  <el-tab-pane
+                    :disabled="!gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('contracts')"
                     name="cans"
-                    lazy=""
+                    lazy
                   >
-                    <span slot="label">Contract&nbsp;awarded<br/>notices</span>
-                  </el-tab-pane>-->
+                    <span slot="label">Contract<br/>awards</span>
+                    <contracts
+                      :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
+                    />
+                  </el-tab-pane>
                 </el-tabs>
               </el-col>
             </el-row>

@@ -571,8 +571,11 @@
       width: 100%;
       line-height: 1;
     }
+    .info__sub-title {
+      font-size: 15px;
+    }
     &-item {
-      padding: 0 18px;
+      padding: 5px 18px 12px;
       background-color: #f3f3f3;
 
       &:not(:last-child) {
