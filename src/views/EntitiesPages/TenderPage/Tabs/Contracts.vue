@@ -235,7 +235,7 @@
               <div class="info-block__text">{{ $t("tender.lowest_offer") }}:</div>
             </el-col>
             <el-col :sm="12">
-              <div class="info-block__text">{{ fa(Math.max(...gd(gd(evRecord, _ => _.awards, []).filter(award => gd(award, _ => _.relatedLots[0]) === gd(gd(evRecord, _ => _.tender.lots, []).find(lot => lot.id === gd(gd(evRecord, _ => _.awards, []).find(award => award.id === contract.awardId), _ => _.relatedLots[0])), _ => _.id) && gd(award, _ => _.status) !== "pending").map(award => award.value.amount), _ => _, []))) }} MDL</div>
+              <div class="info-block__text">{{ fa(Math.min(...gd(gd(evRecord, _ => _.awards, []).filter(award => gd(award, _ => _.relatedLots[0]) === gd(gd(evRecord, _ => _.tender.lots, []).find(lot => lot.id === gd(gd(evRecord, _ => _.awards, []).find(award => award.id === contract.awardId), _ => _.relatedLots[0])), _ => _.id) && gd(award, _ => _.status) !== "pending").map(award => award.value.amount), _ => _, []))) }} MDL</div>
             </el-col>
           </el-row>
           
@@ -244,7 +244,7 @@
               <div class="info-block__text">{{ $t("tender.highest_offer") }}:</div>
             </el-col>
             <el-col :sm="12">
-              <div class="info-block__text">{{ fa(Math.min(...gd(gd(evRecord, _ => _.awards, []).filter(award => gd(award, _ => _.relatedLots[0]) === gd(gd(evRecord, _ => _.tender.lots, []).find(lot => lot.id === gd(gd(evRecord, _ => _.awards, []).find(award => award.id === contract.awardId), _ => _.relatedLots[0])), _ => _.id) && gd(award, _ => _.status) !== "pending").map(award => award.value.amount), _ => _, []))) }} MDL</div>
+              <div class="info-block__text">{{ fa(Math.max(...gd(gd(evRecord, _ => _.awards, []).filter(award => gd(award, _ => _.relatedLots[0]) === gd(gd(evRecord, _ => _.tender.lots, []).find(lot => lot.id === gd(gd(evRecord, _ => _.awards, []).find(award => award.id === contract.awardId), _ => _.relatedLots[0])), _ => _.id) && gd(award, _ => _.status) !== "pending").map(award => award.value.amount), _ => _, []))) }} MDL</div>
             </el-col>
           </el-row>
         </div>
