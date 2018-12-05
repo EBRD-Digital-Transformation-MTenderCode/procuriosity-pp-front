@@ -881,7 +881,7 @@
               <el-col :sm="24">
                 <div class="info-block__text"> {{ $t("tender.time_limit") }}</div>
                 <div class="info-block__value">
-                  {{ fd(gd(evRecord, _ => _.tender.tenderPeriod.endDate), "DD.MM.YYYY") }}
+                  {{ fd(gd(evRecord, _ => _.tender.tenderPeriod.endDate), "DD.MM.YYYY / hh.mm ") }}
                 </div>
               </el-col>
             </el-row>
@@ -894,7 +894,7 @@
                   {{ $t("tender.estimated_date") }}
                 </div>
                 <div class="info-block__value">
-                  {{ fd(gd(evRecord, _ => _.tender.tenderPeriod.startDate), "DD.MM.YYYY") }}
+                  {{ fd(gd(evRecord, _ => _.tender.tenderPeriod.startDate), "DD.MM.YYYY / hh.mm ") }}
                 </div>
               </el-col>
             </el-row>
@@ -1327,7 +1327,7 @@
             src: "/img/achizitii.md.png",
             name: "achizitii.md"
           },
-          {
+          /*{
             href: "javascript:void(0)",
             src: "/img/ebs-integrator.png",
             name: "ebs-integrator"
@@ -1337,6 +1337,7 @@
             src: "/img/lonar.png",
             name: "lonar"
           }
+          */
         ],
         FSs: {}
       };
