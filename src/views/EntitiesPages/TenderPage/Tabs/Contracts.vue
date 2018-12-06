@@ -250,6 +250,7 @@
         </div>
       </el-collapse-item>
     </el-collapse>
+    </keep-alive>
   </div>
 </template>
 
@@ -259,7 +260,7 @@
     formatDate,
     formatAmount
   } from "./../../../../utils";
-  
+
   export default {
     name: "Contracts",
     props: {

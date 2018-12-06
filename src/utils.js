@@ -19,13 +19,21 @@ export function formatDate(date, formatType = "DD.MM.YYYY / HH:mm", def = "none"
   }
 }
 
-export function addDay(date) {
-  // @TODO need test parameter
-  if (!date && !dayjs(date).isValid()) {
-    console.warn("date is not valid");
+export function addPeriod(date, timePeriod, count) {
+  if (!date || !dayjs(date).isValid()) {
+    console.warn(`date ${ date } is not valid`);
+    return date;
+  } else if (!timePeriod || timePeriod !== "day" && timePeriod !== "month" && timePeriod !== "year" && timePeriod !== "week") {
+    console.warn(`period ${timePeriod} is not valid `);
+    return date;
+  } else if (!count || typeof count !== "number" && isNaN(count)) {
+    console.warn(`count ${count} is not valid`);
+    return date;
+  } else {
+    return dayjs(date).add(count, timePeriod);
   }
-  return dayjs(date).add(1, "day");
 }
+
 
 export function formatAmount(amount, def = "0.00") {
   if (typeof amount === "number" && !isNaN(amount)) {

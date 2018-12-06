@@ -145,7 +145,7 @@
       },
       type() {
         if( !getDataFromObject(procedureTypes, _ => _.plans.find(it => it.value === getDataFromObject(this.entity, _=> _.procedureType))).hasOwnProperty("name")) {
-            console.warn("Can't find 'name' property");
+            console.warn(`Can't find procedure type "${getDataFromObject(this.entity, _=> _.procedureType)}" `);
         }
         else return procedureTypes.plans.find(it => it.value === getDataFromObject(this.entity, _=> _.procedureType)).name[this.$i18n.locale];
       },
