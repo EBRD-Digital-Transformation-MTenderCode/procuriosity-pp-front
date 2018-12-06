@@ -34,7 +34,7 @@
           </td>
           <td>
             <button
-                v-if="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.length : 0"
+                v-if="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.length : false"
                 type="button"
                 @click="$refs[award.id + 'eligibilityDocuments'][0].open = true"
                 class="evaluation-table__docs-espd-button"
@@ -116,7 +116,7 @@
         } else if (status === "pending" && statusDetails === "consideration") {
           return "Consideration";
         } else if ((status === "pending" && statusDetails === "active") || (status === "active" && statusDetails === "empty")) {
-          return "Consideration";
+          return "Winner";
         } else if ((status === "pending" && statusDetails === "unsuccessful") || (status === "unsuccessful" && statusDetails === "empty")) {
           return "Disqualified";
         } else {

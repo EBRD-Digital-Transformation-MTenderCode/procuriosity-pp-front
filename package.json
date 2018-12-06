@@ -12,18 +12,18 @@
     "axios": "^0.18.0",
     "dayjs": "^1.7.7",
     "element-ui": "^2.4.11",
-    "idx": "^2.5.0",
+    "idx": "^2.5.2",
     "velocity-animate": "^1.5.2",
     "vue": "^2.5.17",
-    "vue-i18n": "^8.3.2",
-    "vue-router": "^3.0.1",
+    "vue-i18n": "^8.4.0",
+    "vue-router": "^3.0.2",
     "vue2-scrollspy": "^2.3.1",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.1.1",
-    "@vue/cli-plugin-eslint": "^3.1.5",
-    "@vue/cli-service": "^3.1.4",
+    "@vue/cli-plugin-babel": "^3.2.0",
+    "@vue/cli-plugin-eslint": "^3.2.1",
+    "@vue/cli-service": "^3.2.0",
     "eslint-plugin-vue": "^4.7.1",
     "node-sass": "^4.10.0",
     "sass-loader": "^7.0.1",
@@ -32,6 +32,7 @@
   "eslintConfig": {
     "root": true,
     "env": {
+      "browser": true,
       "node": true
     },
     "extends": [

@@ -28,7 +28,7 @@
           </el-col>
           <el-col :sm="12">
             <div class="info-block__value info-block__value_bold">
-              {{ gd( evRecord, _=> _.bids.details).filter(bid => gd( evRecord, _=> _.parties).find(part => part.id === bid.tenderers[0].id ).details.scale === "sme").length }}
+              {{ gd( evRecord, _=> _.bids.details, []).filter(bid => gd( evRecord, _=> _.parties).find(part => part.id === bid.tenderers[0].id ).details.scale === "sme").length }}
             </div>
           </el-col>
         </el-row>
@@ -39,7 +39,7 @@
           </el-col>
           <el-col :sm="12">
             <div class="info-block__value info-block__value_bold">
-              {{ gd( evRecord, _=> _.bids.details).filter(bid => gd( evRecord, _=> _.parties).find(part => part.id === bid.tenderers[0].id ).address.addressDetails.country.id === "MD").length }}
+              {{ gd( evRecord, _=> _.bids.details, []).filter(bid => gd( evRecord, _=> _.parties).find(part => part.id === bid.tenderers[0].id ).address.addressDetails.country.id === "MD").length }}
             </div>
           </el-col>
         </el-row>
@@ -50,7 +50,7 @@
           </el-col>
           <el-col :sm="12">
             <div class="info-block__value info-block__value_bold">
-              {{ gd( evRecord, _=> _.bids.details).filter(bid => gd( evRecord, _=> _.parties).find(part => part.id === bid.tenderers[0].id ).address.addressDetails.country.id !== "MD").length }}
+              {{ gd( evRecord, _=> _.bids.details, []).filter(bid => gd( evRecord, _=> _.parties).find(part => part.id === bid.tenderers[0].id ).address.addressDetails.country.id !== "MD").length }}
             </div>
           </el-col>
         </el-row>
@@ -103,13 +103,13 @@
             <documents-modal
                 :ref="bid.id + 'eligibilityDocuments'"
                 :open="false"
-                :documents="bid.documents.filter(_doc => _doc.documentType === 'x_eligibilityDocuments')"
+                :documents="bid.hasOwnProperty('documents') ? bid.documents.filter(_doc => _doc.documentType === 'x_eligibilityDocuments'): []"
                 noItemsText="No documents submitted"
             />
           </td>
           <td>
             <button
-                v-if="bid.documents ? bid.documents.length : 0"
+                v-if="bid.hasOwnProperty('documents') ? bid.documents.length : false"
                 type="button"
                 @click="$refs[bid.id][0].open = true"
                 class="offers-table__docs-button"
@@ -117,7 +117,7 @@
             <documents-modal
                 :ref="bid.id"
                 :open="false"
-                :documents="bid.documents.filter(_doc => _doc.documentType !== 'x_eligibilityDocuments')"
+                :documents="bid.hasOwnProperty('documents') ? bid.documents.filter(_doc => _doc.documentType !== 'x_eligibilityDocuments'): []"
             />
           </td>
         </tr>
