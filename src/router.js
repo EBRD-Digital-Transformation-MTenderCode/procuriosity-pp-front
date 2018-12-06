@@ -46,11 +46,14 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (process.env.NODE_ENV !== "development") {
-    if (from.name) {
-      if (document.querySelector(`.header-entity-nav a[href*=${from.name}]`) && document.querySelector(`.header-entity-nav a[href*=${to.name}]`)) {
-        document.querySelector(`.header-entity-nav a[href*=${from.name}]`).classList.remove("is-active");
-        document.querySelector(`.header-entity-nav a[href*=${to.name}]`).classList.add("is-active");
-      }
+    if (from.name && document.querySelector(`.header-entity-nav a[href*=${from.name}]`) && document.querySelector(`.header-entity-nav a[href*=${to.name}]`)) {
+      document.querySelector(`.header-entity-nav a[href*=${from.name}]`).classList.remove("is-active");
+      document.querySelector(`.header-entity-nav a[href*=${to.name}]`).classList.add("is-active");
+    }
+  } else {
+    if (document.querySelector(`.header-entity-nav a[href*=${from.name}]`) && document.querySelector(`.header-entity-nav a[href*=${to.name}]`)) {
+      document.querySelector(`.header-entity-nav a[href*=${from.name}]`).classList.remove("is-active");
+      document.querySelector(`.header-entity-nav a[href*=${to.name}]`).classList.add("is-active");
     }
   }
   next();

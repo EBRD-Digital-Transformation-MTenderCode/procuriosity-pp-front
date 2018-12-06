@@ -11,7 +11,7 @@
       </div>
       <el-row type="flex" :gutter="18">
         <el-col :xs="24" :sm="14">
-          <router-link v-if="needLink" :to="`${$i18n.locale !== 'ro' ? `/${$i18n.locale}` : ''}/plans/${entityId}`" data-link class="entity-title">
+          <router-link v-if="needLink && entity.cdb !== 'mtender1'" :to="`${$i18n.locale !== 'ro' ? `/${$i18n.locale}` : ''}/plans/${entityId}`" data-link class="entity-title">
             {{ title }}
           </router-link>
           <div v-else class="entity-title">
@@ -55,9 +55,9 @@
 </template>
 
 <script>
-  import procedureTypes from "../../store/types/procedures-types"
+  import procedureTypes from "./../../store/types/procedures-types"
 
-  import { getDataFromObject, formatDate } from "../../utils";
+  import { getDataFromObject, formatDate } from "./../../utils";
 
   export default {
     name: "PlanCard",

@@ -14,12 +14,12 @@ export const getListConfig = (entity, params = "") => {
   };
 };
 
-export const getBudgetConfig = id => {
+/*export const getBudgetConfig = id => {
   return {
     method: "get",
     url: `${mTender2}/budgets/${id}`
   };
-};
+};*/
 
 export const getTenderConfig = (cdb, id) => {
   return {

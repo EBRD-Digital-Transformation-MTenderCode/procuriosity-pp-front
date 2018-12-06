@@ -18,7 +18,7 @@
             </el-row>
             <el-row :gutter="15">
               <el-col :sm="16">
-                <div class="info-block__text">{{ $t("tender.contract_award_notices") }}</div>
+                <div class="info-block__text">{{ $t("tender.lot_title") }}</div>
                 <div class="info-block__value">
                   {{ gd(gd(evRecord, _ => _.tender.lots, []).find(lot => lot.id === gd(gd(evRecord, _ => _.awards, []).find(award => award.id === contract.awardId), _ => _.relatedLots[0])), _ => _.title) }}
                 </div>

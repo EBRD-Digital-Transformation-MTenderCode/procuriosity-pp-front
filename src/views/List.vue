@@ -112,7 +112,7 @@
     computed: {
       ...mapState(["entities"]),
       entityName() {
-        return this.$route.params[0];
+        return this.$route.params.pathMatch;
       },
       renderSearchForm() {
         switch (this.entityName) {
@@ -152,12 +152,12 @@
       getList() {
         this.$store.dispatch(FETCH_ENTITY_LIST, {
           params: convertObjectToQueryParamsString(this.$store.state.entities[this.entityName].searchParams),
-          entity: this.entityName
+          entityName: this.entityName
         });
       },
       changePage(page) {
         this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
-          entity: this.entityName,
+          entityName: this.entityName,
           params: {
             page
           }
