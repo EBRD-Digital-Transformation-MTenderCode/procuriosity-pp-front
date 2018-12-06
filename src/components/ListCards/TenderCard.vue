@@ -128,7 +128,10 @@
         return getDataFromObject(this.entity, _ => _.buyerRegion);
       },
       type() {
-        return procedureTypes.tenders.find(it => it.value === getDataFromObject(this.entity, _=> _.procedureType)).name[this.$i18n.locale];
+        if( !getDataFromObject(procedureTypes, _ => _.tenders.find(it => it.value === getDataFromObject(this.entity, _=> _.procedureType))).hasOwnProperty("name")) {
+          console.warn(`Can't find procedure type : "${getDataFromObject(this.entity, _=> _.procedureType)}"`);
+        }
+        else return procedureTypes.tenders.find(it => it.value === getDataFromObject(this.entity, _=> _.procedureType)).name[this.$i18n.locale];
       },
       peName() {
         return getDataFromObject(this.entity, _ => _.buyerName);
