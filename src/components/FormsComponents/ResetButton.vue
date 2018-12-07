@@ -22,7 +22,7 @@
     methods: {
       reset() {
         this.$store.commit(SET_INITIAL_SEARCH_PARAMS, {
-          entity: this.entity
+          entityName: this.entity
         });
       }
     }

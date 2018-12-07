@@ -35,7 +35,8 @@
             </el-row>
           </div>
         </template>
-        <div v-if="activeItemId === contract.id + index">
+        <transition name="fade" mode="out-in" appear>
+          <div v-if="activeItemId === contract.id + index">
           <div class="info-blocks">
             <div class="info-block">
               <div class="info__sub-title">{{ $t("tender.award_of_contract") }}</div>
@@ -297,6 +298,7 @@
             </el-row>
           </div>
         </div>
+        </transition>
       </el-collapse-item>
     </el-collapse>
   </div>

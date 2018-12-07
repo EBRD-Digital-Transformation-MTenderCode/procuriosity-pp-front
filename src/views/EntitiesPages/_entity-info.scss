@@ -365,6 +365,7 @@
       display: block;
     }
   }
+
   &-tabs {
     margin-bottom: -20px;
     .el-tabs {
@@ -376,6 +377,7 @@
         .is-active{
           background-color: #fff;
           color: #235aa6;
+          transition: 0.4s;
         }
       }
       &__item {
