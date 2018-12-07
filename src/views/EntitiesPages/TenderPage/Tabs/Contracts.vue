@@ -1,7 +1,7 @@
 <template>
   <div class="info">
     <div class="info__title">{{ $t("tender.contract_award_notices") }}</div>
-    <el-collapse accordion @change="moreInfo" :value="gd(evRecord, _ => _.contracts[0].id, '0') + '0'">
+    <el-collapse accordion @change="changeActiveItem">
       <el-collapse-item
           v-for="(contract, index) of gd(evRecord, _ => _.contracts, [])"
           :key="contract.id + index"
@@ -35,7 +35,7 @@
             </el-row>
           </div>
         </template>
-        <div v-if="active === contract.id + index">
+        <div v-if="activeItemId === contract.id + index">
           <div class="info-blocks">
             <div class="info-block">
               <div class="info__sub-title">{{ $t("tender.award_of_contract") }}</div>
@@ -245,7 +245,8 @@
                 <div class="info-block__text">{{ $t("tender.initial_total_contract_value") }}:</div>
               </el-col>
               <el-col :sm="12">
-                <div class="info-block__text">{{ fa(gd(gd(evRecord, _ => _.tender.lots, []).find(lot => lot.id ===
+                <div class="info-block__text">
+                  {{ fa(gd(gd(evRecord, _ => _.tender.lots, []).find(lot => lot.id ===
                   gd(gd(evRecord, _ => _.tender.lots, []).find(lot => lot.id === gd(gd(evRecord, _ => _.awards,
                   []).find(award => award.id === contract.awardId), _ => _.relatedLots[0])), _ => _.id)), _ =>
                   _.value.amount)) }} MDL
@@ -258,7 +259,8 @@
                 <div class="info-block__text">{{ $t("tender.total_contract_value") }}:</div>
               </el-col>
               <el-col :sm="12">
-                <div class="info-block__text">{{ fa(gd(gd(evRecord, _ => _.awards, []).find(award => award.id ===
+                <div class="info-block__text">
+                  {{ fa(gd(gd(evRecord, _ => _.awards, []).find(award => award.id ===
                   contract.awardId), _ => _.value.amount)) }} MDL
                 </div>
               </el-col>
@@ -269,7 +271,8 @@
                 <div class="info-block__text">{{ $t("tender.lowest_offer") }}:</div>
               </el-col>
               <el-col :sm="12">
-                <div class="info-block__text">{{ fa(Math.min(...gd(gd(evRecord, _ => _.awards, []).filter(award =>
+                <div class="info-block__text">
+                  {{ fa(Math.min(...gd(gd(evRecord, _ => _.awards, []).filter(award =>
                   gd(award, _ => _.relatedLots[0]) === gd(gd(evRecord, _ => _.tender.lots, []).find(lot => lot.id ===
                   gd(gd(evRecord, _ => _.awards, []).find(award => award.id === contract.awardId), _ =>
                   _.relatedLots[0])), _ => _.id) && gd(award, _ => _.status) !== "pending").map(award =>
@@ -283,7 +286,8 @@
                 <div class="info-block__text">{{ $t("tender.highest_offer") }}:</div>
               </el-col>
               <el-col :sm="12">
-                <div class="info-block__text">{{ fa(Math.max(...gd(gd(evRecord, _ => _.awards, []).filter(award =>
+                <div class="info-block__text">
+                  {{ fa(Math.max(...gd(gd(evRecord, _ => _.awards, []).filter(award =>
                   gd(award, _ => _.relatedLots[0]) === gd(gd(evRecord, _ => _.tender.lots, []).find(lot => lot.id ===
                   gd(gd(evRecord, _ => _.awards, []).find(award => award.id === contract.awardId), _ =>
                   _.relatedLots[0])), _ => _.id) && gd(award, _ => _.status) !== "pending").map(award =>
@@ -304,7 +308,6 @@
     formatDate,
     formatAmount
   } from "./../../../../utils";
-  import { mapState } from "vuex";
 
   export default {
     name: "Contracts",
@@ -316,15 +319,9 @@
     },
     data() {
       return {
-        active: ""
+        activeItemId: ""
       };
     },
-    computed: {
-      ...mapState({
-        numberDisplayedContracts: state => state.entities.tenders.numberDisplayedContracts
-      }),
-    },
-
     methods: {
       gd(...args) {
         return getDataFromObject(...args);
@@ -335,8 +332,8 @@
       fa(amount) {
         return formatAmount(amount);
       },
-      moreInfo(item) {
-        this.active = item;
+      changeActiveItem(item) {
+        this.activeItemId = item;
       }
     }
   };
