@@ -41,6 +41,7 @@
             >
               MTender ESPD
             </button>
+            <div class="evaluation-table__docs-espd-text">Self-declaration</div>
             <documents-modal
                 :ref="award.id + 'eligibilityDocuments'"
                 :open="false"
@@ -66,7 +67,9 @@
           </td>-->
           <td>
             <div class="evaluation-table__status">{{ parseStatus(gd(award, _ => _.status), gd(award, _ => _.statusDetails)) }}</div>
-            <!--<div class="evaluation-table__status-time">time</div>-->
+            <div class="evaluation-table__status-time">
+              {{ fd(gd(award, _ => _.date)) }}
+            </div>
           </td>
         </tr>
       </table>
