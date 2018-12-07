@@ -348,7 +348,7 @@
     methods: {
       setFormParams(name, value) {
         this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
-          entity: "tenders",
+          entityName: "tenders",
           params: {
             page: 1,
             [name]: value
@@ -365,7 +365,3 @@
     }
   };
 </script>
-
-<style lang="scss" scoped>
-
-</style>
