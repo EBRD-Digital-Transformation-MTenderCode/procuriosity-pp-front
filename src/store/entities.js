@@ -184,17 +184,17 @@ export default {
       };
     },
 
-    [SET_INITIAL_SEARCH_PARAMS](state, { entity }) {
-      state[entity].searchParams = initialSearchProps[entity];
+    [SET_INITIAL_SEARCH_PARAMS](state, { entityName }) {
+      state[entityName].searchParams = initialSearchProps[entityName];
 
       const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
 
-      localStorageEntities[entity].searchParams = initialSearchProps[entity];
+      localStorageEntities[entityName].searchParams = initialSearchProps[entityName];
       localStorage.setItem("entities", JSON.stringify(localStorageEntities));
 
       this.dispatch(FETCH_ENTITY_LIST, {
-        entity: entity,
-        params: convertObjectToQueryParamsString(state[entity].searchParams)
+        entityName,
+        params: convertObjectToQueryParamsString(state[entityName].searchParams)
       });
     }
   },

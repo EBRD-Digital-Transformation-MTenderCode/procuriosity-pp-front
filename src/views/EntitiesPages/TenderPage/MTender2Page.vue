@@ -76,12 +76,14 @@
                       :disabled="!gd(tender, _ => _.EVRecord.compiledRelease.hasPreviousNotice)"
                       name="pn"
                       lazy
+                      key="pn"
                   >
                     <span slot="label" v-html="$t('tender.procurement_plan')" />
                   </el-tab-pane>
                   <el-tab-pane
                       name="cn"
                       lazy
+                      key="cn"
                   >
                     <span slot="label" v-html="$t('tender.contract_notice')" />
                     <contract-notice
@@ -90,12 +92,13 @@
                       :procedureType="selectProcedure(gd(tender, _ =>
                       _.MSRecord.compiledRelease.tender.mainProcurementCategory),gd(tender, _ =>
                       _.MSRecord.compiledRelease.tender.value.amount))"
-                    />
+                  />
                   </el-tab-pane>
                   <el-tab-pane
                     :disabled="!gd(tender, _ => _.EVRecord.compiledRelease.tender.hasEnquiries)"
                     name="clarification"
                     lazy
+                    key="clarification"
                   >
                     <span slot="label" v-html="$t('tender.clarification_and_changes')" />
                     <clarification
@@ -106,17 +109,25 @@
                       disabled
                       name="review"
                       lazy
+                      key="review"
                   >
                     <span slot="label" v-html="$t('tender.review_procedures')"/>
                     <auction />
                   </el-tab-pane>
-                  <el-tab-pane disabled :label='$t("tender.electronic_auction")' name="auction" lazy>
+                  <el-tab-pane
+                      disabled
+                      :label='$t("tender.electronic_auction")'
+                      name="auction"
+                      lazy
+                      key="auction"
+                  >
                   
                   </el-tab-pane>
                   <el-tab-pane
                       :disabled="!gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('bids')"
                       name="offers"
                       lazy
+                      key="offers"
                   >
                     <span slot="label" v-html="$t('tender.electronic_bids')"></span>
                     <offers
@@ -127,6 +138,7 @@
                       :disabled="!gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('awards')"
                       name="ev"
                       lazy
+                      key="ev"
                   >
                     <span slot="label" v-html="$t('tender.evaluation_of_bids')"></span>
                     <evaluation
@@ -137,6 +149,7 @@
                     :disabled="!gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('contracts')"
                     name="cans"
                     lazy
+                    key="cans"
                   >
                     <span slot="label">Contract<br/>awards</span>
                     <contracts
