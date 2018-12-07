@@ -360,7 +360,7 @@
     methods: {
       setFormParams(name, value) {
         this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
-          entity: "contracts",
+          entityName: "contracts",
           params: {
             page: 1,
             [name]: value
