@@ -65,13 +65,13 @@ export default {
   "estimated_value_excluding_VAT":"Estimated value excluding VAT",
   "review_procedures_title": "Review procedures",
   "review_procedures":"Review procedures",
-  "procurement_plan":"Procurement<br/>Plan",
+  "procurement_plan":"Procurement<br class='notDisplay' />Plan",
 
   "contract_notice":"Contract Notice",
   "clarification_and_changes":"Clarification and changes",
   "electronic_auction":"Electronic auction",
-  "electronic_bids":"Electronic<br/>bids",
-  "evaluation_of_bids":"Evaluation<br/>of bids",
+  "electronic_bids":"Electronic<br class='notDisplay' />bids",
+  "evaluation_of_bids":"Evaluation<br class='notDisplay' />of bids",
 
   "contracting_authority":"Contracting authority",
   "object":"Object",

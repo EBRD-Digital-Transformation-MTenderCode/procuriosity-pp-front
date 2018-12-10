@@ -283,7 +283,7 @@
 
           <div class="info-block">
             <el-row :gutter="15">
-              <el-col :sm="16">
+              <el-col :sm="12">
                 <div class="info-block__text">{{ $t("tender.main_CPV") }}</div>
                 <div class="info-block__value">
                   {{ gd(msRecord, _ => _.tender.classification.id) }} -

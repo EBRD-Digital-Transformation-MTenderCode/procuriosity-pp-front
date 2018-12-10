@@ -24,15 +24,15 @@
             v-for="award of gd(evRecord, _ => _.awards, []).filter(_award => _award.relatedLots[0] === lot.id).sort((awardA, awardB) => awardA.value.amount - awardB.value.amount)"
             :key="award.id"
         >
-          <td>
+          <td data-th = "Tenderer">
             <div class="evaluation-table__supplier-name">{{ gd(award, _ => _.suppliers[0]).name }}</div>
             <div class="evaluation-table__supplier-id">IDNO Code: {{ gd(award, _ => _.suppliers[0]).id }}</div>
           </td>
-          <td>
+          <td data-th = "Final offer">
             <div class="evaluation-table__amount">{{ fa(gd(award, _ => _.value.amount, 0)) }}</div>
             <div class="evaluation-table__currency">{{ gd(award, _ => _.value.currency) }} exluding VAT</div>
           </td>
-          <td>
+          <td data-th = "MTender ESPD">
             <button
                 v-if="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.length : false"
                 type="button"
@@ -48,7 +48,7 @@
                 noItemsText="No documents submitted"
             />
           </td>
-          <td>
+          <td data-th = "EO docs">
             <button
                 v-if="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.length : 0"
                 type="button"
@@ -64,7 +64,7 @@
           <!--<td>
             Declaration
           </td>-->
-          <td>
+          <td data-th="Status and resolution of TC">
             <div class="evaluation-table__status">{{ parseStatus(gd(award, _ => _.status), gd(award, _ => _.statusDetails)) }}</div>
             <!--<div class="evaluation-table__status-time">time</div>-->
           </td>
