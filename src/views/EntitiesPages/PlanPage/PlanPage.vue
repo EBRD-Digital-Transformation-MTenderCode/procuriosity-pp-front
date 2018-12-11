@@ -5,7 +5,7 @@
         <div class="loading"></div>
       </el-container>
       <div v-else-if="loaded && Object.keys(plan).length" key="info">
-        <div class="entity-main-info">
+        <div class="entity-main-info entity-main-info__plan ">
           <el-container direction="vertical">
             <el-row>
               <el-col :xs="24" :sm="14">
@@ -19,7 +19,7 @@
 
                 </div>
               </el-col>
-              <el-col :xs=24 :sm="8" :offset="2">
+              <el-col :xs=22 :sm="6" :offset="2">
                 <div class="entity-main-info__value">
                   <div> {{ $t("plan.estimated_value_excluding_VAT") }}</div>
                   <span class="entity-main-info__amount">

@@ -80,19 +80,19 @@
           v-for="bid of gd(evRecord, _ => _.bids.details, []).filter(_bid => _bid.relatedLots[0] === lot.id)"
           :key="bid.id"
         >
-          <td>
+          <td :data-th="$t('tender.tenderer')" >
             <div class="offers-table__tenderer-name">{{ gd(bid, _ => _.tenderers[0]).name }}</div>
-            <div class="offers-table__tenderer-id">{{ $t("tender.idno_code")}}: {{ gd(bid, _ => _.tenderers[0]).id }}</div>
+            <div class="offers-table__tenderer-id">{{ $t("tender.idno_code")}}:  {{ gd(bid, _ => _.tenderers[0]).id }}</div>
           </td>
-          <td>
-            <div class="offers-table__date">{{ fd(gd(bid, _ => _.date), "DD/MM/YYYY") }}</div>
-            <div class="offers-table__time">{{ fd(gd(bid, _ => _.date), "HH:mm") }}</div>
+          <td :data-th="$t('tender.discloser_date')">
+            <div class="offers-table__date">{{ fd(gd(bid, _ => _.date), "DD/MM/YYYY")}} </div>
+            <div class="offers-table__time"> {{ fd(gd(bid, _ => _.date), "HH:mm") }}</div>
           </td>
-          <td>
-            <div class="offers-table__amount">{{ fa(gd(bid, _ => _.value.amount)) }}</div>
+          <td :data-th="$t('tender.initial_offer')">
+            <div class="offers-table__amount">{{ fa(gd(bid, _ => _.value.amount)) }} &#8194;</div>
             <div class="offers-table__currency">{{ gd(bid, _ => _.value.currency) }} {{ $t("tender.exluding_vat")}}</div>
           </td>
-          <td>
+          <td data-th="Self-declaration">
             <button
                 type="button"
                 @click="$refs[bid.id + 'eligibilityDocuments'][0].open = true"
@@ -107,7 +107,7 @@
                 noItemsText="No documents submitted"
             />
           </td>
-          <td>
+          <td :data-th="$t('tender.eos_docs')">
             <button
                 v-if="bid.hasOwnProperty('documents') ? bid.documents.length : false"
                 type="button"

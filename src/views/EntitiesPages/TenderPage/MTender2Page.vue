@@ -1,5 +1,5 @@
 <template>
-  <div class="entity-wp">
+  <div class="entity-wp entity__tender">
     <transition name="fade" mode="out-in" appear>
       <el-container key="loading" v-if="!loaded && !error.status">
         <div class="loading"></div>
@@ -19,7 +19,7 @@
 
                 </div>
               </el-col>
-              <el-col :xs=24 :sm="8" :offset="2">
+              <el-col :xs=22 :sm="6" :offset="2">
                 <div class="entity-main-info__value">
                   <div>{{ $t("tender.estimated_value_excluding_VAT") }}</div>
                   <span class="entity-main-info__amount">
@@ -151,7 +151,7 @@
                     lazy
                     key="cans"
                   >
-                    <span slot="label">Contract<br/>awards</span>
+                    <span slot="label">Contract <br class="notDisplay"/>awards</span>
                     <contracts
                       :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
                     />
