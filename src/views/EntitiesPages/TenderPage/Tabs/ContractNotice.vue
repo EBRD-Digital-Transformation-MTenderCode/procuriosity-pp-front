@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="entity-nav"   data-scroll-spy-id="cn"  v-scroll-spy-active="{selector: 'a', class: 'active'}" v-scroll-spy-link>
+    <div class="entity-nav"  data-scroll-spy-id="cn"  v-scroll-spy-active="{selector: 'a', class: 'active'}" v-scroll-spy-link>
       <a>{{ $t("tender.contracting_authority") }}</a>
       <a>{{ $t("tender.object") }}</a>
       <!--<a>Legal, economic, financial and technical information</a>-->
@@ -283,7 +283,7 @@
 
           <div class="info-block">
             <el-row :gutter="15">
-              <el-col :sm="16">
+              <el-col :sm="12">
                 <div class="info-block__text">{{ $t("tender.main_CPV") }}</div>
                 <div class="info-block__value">
                   {{ gd(msRecord, _ => _.tender.classification.id) }} -
@@ -1414,7 +1414,7 @@
         catch (e) {
           console.log(e);
         }
-      }
+      },
     }
   };
 </script>
