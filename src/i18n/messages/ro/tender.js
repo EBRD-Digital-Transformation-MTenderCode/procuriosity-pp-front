@@ -190,7 +190,7 @@ export default {
   "clarification": "Clarificări",
   "modification_documents": "Modifications of tender documents", // @TODO need translate
   "question_received": "Question received", // @TODO need translate
-  "no_clarifications": "No Clarifications", // @TODO need translate
+  "no_clarifications": "No data", // @TODO need translate
 
   "state_money": "State Money", // @TODO need translate
 

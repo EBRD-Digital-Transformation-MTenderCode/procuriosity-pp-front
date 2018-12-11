@@ -1,0 +1,94 @@
+<template>
+  <el-dialog
+      :visible.sync="open"
+      append-to-body
+      title="Information of the decision"
+      width="75%"
+  >
+    <slot>
+      <div class="info-blocks">
+        <div class="info__sub-title">Decision information</div>
+        <div class="info-block">
+          <el-row :gutter="15">
+            <el-col :sm="24">
+              <div class="info-block__text">Award date:</div>
+              <div class="info-block__value">
+                {{ fd(gd(award, _ => _.date)) }}
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+
+        <div class="info-block">
+          <el-row :gutter="15">
+            <el-col :sm="24">
+              <div class="info-block__text">Award description:</div>
+              <div class="info-block__value">
+                {{ gd(award, _ => _.description, "n/a") }}
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+
+        <div class="info__sub-title">Decision Documents</div>
+        <div class="info-block" v-if="gd(award, _ => _.documents, []).length">
+          <div class="info-block__documents"
+               v-for="(doc, index) of gd(award, _ => _.documents, [])"
+               :key="doc.id + index"
+          >
+            <el-row :gutter="15">
+              <el-col :sm="24">
+                <div class="info-block__value ">
+                  {{ convertCase(gd(doc, _ => _.documentType) ) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a>
+                </div>
+              </el-col>
+            </el-row>
+            <el-row :gutter="15">
+              <el-col :sm="16">
+                  <div class="info-block__text info-block__text_small">
+                    {{$t("tender.id")}}: {{ gd(doc, _ => _.id) }}
+                  </div>
+              </el-col>
+              <el-col :sm="8">
+                <div class="info-block__text info-block__text_small">
+                  {{$t("tender.published")}}: {{ fd(gd(doc, _ => _.datePublished)) }}
+                </div>
+              </el-col>
+            </el-row>
+          </div>
+        </div>
+        <div v-else>No documents</div>
+      </div>
+    </slot>
+  </el-dialog>
+</template>
+
+<script>
+  import { getDataFromObject, formatDate, convertCamelCaseToTitleCase} from "./../../../utils";
+
+  export default {
+    name: "AwardInfoModal",
+    props: {
+      open: {
+        type: Boolean,
+        required: true,
+        default: false
+      },
+      award: {
+        type: Object,
+        required: true
+      }
+    },
+    methods: {
+      gd(...args) {
+        return getDataFromObject(...args);
+      },
+      fd(...ars) {
+        return formatDate(...ars);
+      },
+      convertCase(str) {
+        return convertCamelCaseToTitleCase(str)
+      },
+    }
+  };
+</script>
