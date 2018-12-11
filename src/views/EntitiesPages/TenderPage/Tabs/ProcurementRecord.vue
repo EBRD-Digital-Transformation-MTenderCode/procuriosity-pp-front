@@ -59,6 +59,7 @@
       </div>
     </div>
 
+    <div class="info__sub-title">General information about Electronic tendering procedure</div>
     <div class="info-blocks">
       <div class="info-block">
         <el-row :gutter="15">
@@ -82,7 +83,7 @@
             <div class="info-block__text">Supplementary CPV code</div>
             <div class="info-block__value">???n/a</div>
           </el-col>-->
-          <el-col :sm="8">
+          <el-col :sm="12">
             <div class="info-block__text">{{ $t("tender.type_of_contract") }}</div>
             <div class="info-block__value info-block__value_name">{{ gd(msRecord, _ =>
               _.tender.mainProcurementCategory) }}
@@ -93,11 +94,17 @@
 
       <div class="info-block">
         <el-row :gutter="15">
-          <el-col :sm="24">
+          <el-col :sm="12">
             <div class="info-block__text">{{ $t("tender.estimated_total_value_excluding_VAT") }}</div>
             <div class="info-block__value">
-              {{ fa(gd(msRecord, _ => _.tender.value.amount)) }}
+              {{ fa(gd(msRecord, _ => _.tender.value.amount)) }}{{ " " }}
               {{ gd(msRecord, _ => _.tender.value.currency) }}
+            </div>
+          </el-col>
+          <el-col :sm="12">
+            <div class="info-block__text">Type of procedure</div>
+            <div class="info-block__value">
+              {{ procedureType }}
             </div>
           </el-col>
         </el-row>

@@ -329,7 +329,7 @@
         display: inline-block;
         margin-right: 2px;
         line-height: 0.8;
-        font-size: 44px;
+        font-size: 41px;
         @media (max-width: 990px) {
           font-size: 40px;
         }
@@ -792,7 +792,8 @@
     }
   }
   &__time,
-  &__currency {
+  &__currency,
+  &__docs-espd-text {
     font-size: 12px;
   }
   &__docs-button {
