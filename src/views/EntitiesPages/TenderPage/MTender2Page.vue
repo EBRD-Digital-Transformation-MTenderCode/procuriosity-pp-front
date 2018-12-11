@@ -19,7 +19,7 @@
 
                 </div>
               </el-col>
-              <el-col :xs=22 :sm="6" :offset="2">
+              <el-col :sm="6" :offset="2" :xs=({span:22,offset:0})>
                 <div class="entity-main-info__value">
                   <div>{{ $t("tender.estimated_value_excluding_VAT") }}</div>
                   <span class="entity-main-info__amount">
@@ -64,7 +64,7 @@
           </el-container>
         </div>
         <div class="entity-tabs">
-          <el-container>
+          <el-container direction="vertical">
             <el-row>
               <el-col :xs="24">
                 <el-tabs
@@ -87,9 +87,9 @@
                   >
                     <span slot="label" v-html="$t('tender.contract_notice')" />
                     <contract-notice
-                      :msRecord="gd(tender, _ => _.MSRecord.compiledRelease)"
-                      :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
-                      :procedureType="selectProcedure(gd(tender, _ =>
+                        :msRecord="gd(tender, _ => _.MSRecord.compiledRelease)"
+                        :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
+                        :procedureType="selectProcedure(gd(tender, _ =>
                       _.MSRecord.compiledRelease.tender.mainProcurementCategory),gd(tender, _ =>
                       _.MSRecord.compiledRelease.tender.value.amount))"
                     />
@@ -101,7 +101,7 @@
                   >
                     <span slot="label" v-html="$t('tender.clarification_and_changes')" />
                     <clarification
-                      :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
+                        :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
                     />
                   </el-tab-pane>
                   <el-tab-pane
@@ -145,14 +145,14 @@
                     />
                   </el-tab-pane>
                   <el-tab-pane
-                    :disabled="!gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('contracts')"
-                    name="cans"
-                    lazy
-                    key="cans"
+                      :disabled="!gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('contracts')"
+                      name="cans"
+                      lazy
+                      key="cans"
                   >
-                    <span slot="label">Contract <br class="notDisplay" />awards</span>
+                    <span slot="label" v-html="$t('tender.contract_awards')"></span>
                     <contracts
-                      :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
+                        :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
                     />
                   </el-tab-pane>
                   <el-tab-pane
@@ -182,8 +182,8 @@
       <el-container class="error" key="error" v-else>
         <div class="error-message"> {{error.message}}</div>
         <button
-          class="refresh-btn"
-          @click="getTender"
+            class="refresh-btn"
+            @click="getTender"
         >
           {{$t("refresh")}}
         </button>

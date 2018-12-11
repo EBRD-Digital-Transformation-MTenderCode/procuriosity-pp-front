@@ -357,8 +357,8 @@
           font-size: 13px;
         }
         @media (max-width: 760px) {
-        font-size: 22px;
-      }
+          font-size: 22px;
+        }
       }
       .dot {
         margin-right: 2px;
@@ -401,20 +401,25 @@
 
   &-tabs {
     margin-bottom: -20px;
-    .el-tabs__nav {
-      //flex-wrap: wrap;
-    }
     .el-tabs {
       &__nav-wrap {
         margin-top: -79px;
         &:after {
           display: none;
         }
-        .is-active{
+        .is-active {
           background-color: #fff;
           color: #235aa6;
           transition: 0.4s;
         }
+      }
+      &__nav-prev,
+      &__nav-next {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        color: #2da9e2;
+        font-size: 20px;
       }
       &__item {
         height: auto;
@@ -433,14 +438,14 @@
       &__active-bar {
         display: none;
       }
-      &__content{
+      &__content {
         overflow: inherit;
       }
       .is-top {
         &:last-child {
           padding-right: 14px;
         }
-        &:nth-child(2){
+        &:nth-child(2) {
           padding-left: 14px;
         }
       }
@@ -479,43 +484,6 @@
       &[disabled] {
         color: #adaaaa;
         pointer-events: none;
-      }
-    }
-  }
-  &__tender{
-    .entity-main-info {
-      @media (max-width: 940px) {
-        padding-bottom: 180px;
-      }
-      @media (max-width: 560px) {
-        padding-bottom: 520px;
-      }
-    }
-    .el-tabs{
-      &__nav-wrap {
-      margin-top: -79px;
-      @media (max-width: 940px) {
-        margin-top: -158px;
-      }
-      @media (max-width: 560px) {
-        margin-top: -500px;
-        text-align: center;
-        margin-bottom: 50px;
-      }
-    }
-      &__item{
-        @media (max-width: 940px) {
-          min-width: calc(100% / 4);
-        }
-        @media (max-width: 560px) {
-          min-width:100%;
-          text-align: center;
-        }
-      }
-    }
-    .notDisplay{
-      @media (max-width: 560px) {
-        display: none;
       }
     }
   }
@@ -558,14 +526,14 @@
     }
     &__text {
       font-size: 13px !important;
-      color: #525252  !important;
+      color: #525252 !important;
       margin: 5px 0;
       line-height: 1.3;
       &_small {
         font-size: 11px;
         line-height: 1.6;
       }
-      &_accent{
+      &_accent {
         color: $mainC !important;
       }
       & + .info-block__value {
@@ -597,7 +565,7 @@
         @media (max-width: 560px) {
           width: 100%;
           text-align: center;
-          &:not(:last-child){
+          &:not(:last-child) {
             margin-bottom: 30px;
           }
         }
@@ -657,55 +625,55 @@
     td {
       padding: 14px 0;
       line-height: 1;
+      @media (max-width: 860px) {
+        &:first-child {
+          width: 45% !important;
+        }
+      }
     }
     th {
       text-align: left;
       line-height: 1;
       font-size: 13px;
-    }
-    @media (max-width: 860px) {
-      th:first-child,
-      td:first-child{
-        width: 45%!important;
-      }
-    }
-    @media (max-width: 700px) {
-      th {
+      @media (max-width: 700px) {
         display: none;
       }
-      td {
+    }
+    td {
+      @media (max-width: 700px) {
         display: block;
-        padding: 5px 0;
+        padding: 7px 0;
         width: 100%;
 
         &:first-child {
           padding-top: 10px;
-          width: 100%!important;
+          width: 100% !important;
         }
         &:last-child {
           padding-bottom: 10px;
-
         }
 
         &:before {
+          content: attr(data-th) ": ";
+          display: inline-block;
+          width: 30%;
+          margin-right: 10px;
           text-align: left;
           line-height: 1;
           font-size: 13px;
-          content: attr(data-th)": ";
-          min-width: 30%;
-          margin-right: 10px;
-          display: inline-block;
         }
       }
-      div{
+    }
+    div {
+      @media (max-width: 700px) {
         display: inline-block;
       }
-      .offers-table__date:after{
-        content: " /";
-        width: 5px;
-      }
-      .offers-table__tenderer-name{
+    }
+    .offers-table__tenderer-id,
+    .evaluation-table__supplier-id {
+      @media (max-width: 700px) {
         display: block;
+        margin-top: 5px;
       }
     }
   }
@@ -816,6 +784,12 @@
   &__docs-espd-button {
     line-height: 1.75;
     font-size: 15px;
+  }
+  &__date:after {
+    @media (max-width: 700px) {
+      content: " /";
+      width: 5px;
+    }
   }
   &__time,
   &__currency {
