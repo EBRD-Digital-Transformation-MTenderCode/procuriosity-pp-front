@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="entity-nav"   data-scroll-spy-id="cn"  v-scroll-spy-active="{selector: 'a', class: 'active'}" v-scroll-spy-link>
+    <div class="entity-nav"  data-scroll-spy-id="cn"  v-scroll-spy-active="{selector: 'a', class: 'active'}" v-scroll-spy-link>
       <a>{{ $t("tender.contracting_authority") }}</a>
       <a>{{ $t("tender.object") }}</a>
       <!--<a>Legal, economic, financial and technical information</a>-->
@@ -1414,7 +1414,7 @@
         catch (e) {
           console.log(e);
         }
-      }
+      },
     }
   };
 </script>

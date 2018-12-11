@@ -63,11 +63,11 @@ export default {
   "documentation": "Documentation",
 
   "estimated_value_excluding_VAT":"Estimated value excluding VAT",
-  "review_procedures_title": "Review procedures",
-  "review_procedures":"Review procedures",
-  "procurement_plan":"Procurement<br class='notDisplay' />Plan",
+  "review_procedures_title": "Review/complaint procedures",
+  "review_procedures":"Review/complaint procedures",
 
-  "contract_notice":"Contract<br class='notDisplay' />Notice",
+  "procurement_plan":"Procurement<br/>Plan",
+  "contract_notice":"Contract<br/>Notice",
   "clarification_and_changes":"Clarification and changes",
   "electronic_auction":"Electronic auction",
   "electronic_bids":"Electronic<br class='notDisplay' />bids",
@@ -104,9 +104,10 @@ export default {
   "information_about_lots":"Information about lots",
   "contract_divided_into_lots":"This contract is divided into lots",
   "tenders_submitted_all_lots":"Tenders may be submitted for all lots",
+
   "description":"Description",
   "lot_identifier":"Lot identifier",
-  "place_of_performance":"Place of performance",
+  "place_of_performance":"Place of delivery",
   "description_of_procurement":"Description of the procurement",
   "big_guarantee_must_be_valid":" The amount and currency of the big guarantee that must be valid 90 days starting from opening of the tenders",
   "duration_of_contract":"Duration of the contract, framework agreement or dynamic purchasing system",
@@ -132,7 +133,7 @@ export default {
   "start_date":"Start date",
   "administrative_information":"Administrative information",
   "previous_publication_concerning_procedure":"Previous publication concerning this procedure",
-  "PP_Buyer_profile_PIN":"Procurement plan / Buyer’s profile / PIN: No",
+  "PP_Buyer_profile_PIN":"Prior Information Notice: No",
   "time_limit":"Time limit for receipt of tenders or requests to participate",
   "estimated_date":"Estimated date of dispatch of invitations to tender or to participate to selected candidates",
   "languages_submitted":"Languages in which tenders or requests to participate may be submitted",
@@ -191,7 +192,7 @@ export default {
   "state_money":"State Money",
 
   "record_opening_electronic_bids":"Record of the opening of Electronic bids",
-  "information_about_electronic_bids":"Information about Electronic bids (TED: V.2.2.)",
+  "information_about_electronic_bids":"Information about Electronic bids",
   "number_of_tenders_received":"Number of tenders received",
   "number_of_tenders_received_after_deadline":"Number of tenders received after expiry of submission deadline",
   "number_of_tenders_received_from_SMEs":"Number of tenders received from SMEs",
@@ -207,6 +208,7 @@ export default {
   "idno_code":"IDNO Code",
   "modal_documents":"Documents",
 
+  "contract_awards":"Contract Award",
   "contract_award_notices":"Contract Award Notices",
   "lot_title": "Lot title",
   "award_of_contract": "Award of contract",
@@ -220,4 +222,13 @@ export default {
   "total_contract_value": "Total value of the contract/lot",
   "lowest_offer": "Lowest offer taken into consideration",
   "highest_offer": "Highest offer taken into consideration",
+
+  "evaluation_of_winning_bid":"Evaluation of winning bid",
+  "mtender_espd":"MTender ESPD",
+  "status_and_resolution_tc":"Status and<br/>resolution of TC",
+  "status_and_resolution_tc_withoutBreak":"Status and resolution of TC",
+  "excluding_vat":"excluding VAT",
+  "self_declaration":"Self-declaration",
+  "lot_is_not_awarded":"The lot is not awarded",
+  "no_bids)received":"No Bids received"
 }

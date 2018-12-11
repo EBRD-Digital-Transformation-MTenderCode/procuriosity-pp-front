@@ -1,47 +1,51 @@
 <template>
   <div>
-    <div class="info__title">Evaluation of winning bid</div>
+    <div class="info__title">{{ $t("tender.evaluation_of_winning_bid")}}</div>
     <div
         v-for="(lot, index) of gd(evRecord, _ => _.tender.lots, [])"
         :key="lot.id"
     >
       <div style="font-size: 16px; font-weight: 700;">
-        Lot {{ index + 1 }}: {{ lot.title }}
+        {{ $t("tender.lot")}} {{ index + 1 }}: {{ lot.title }}
       </div>
       <table
           v-if="gd(evRecord, _ => _.awards, []).find(award => award.relatedLots[0] === lot.id).hasOwnProperty('relatedBid')"
           class="info-table evaluation-table"
       >
         <tr>
-          <th>Tenderer</th>
-          <th>Final offer</th>
-          <th>MTender ESPD</th>
-          <th>EO docs</th>
+          <th>{{ $t("tender.tenderer")}}</th>
+          <th>{{ $t("tender.bids_final_amount")}}</th>
+          <th> {{ $t("tender.mtender_espd")}}</th>
+          <th>{{ $t("tender.eos_docs")}}</th>
           <!--<th>Declaration of no<br/>conflict of interets</th>-->
-          <th>Status and<br/>resolution of TC</th>
+          <th v-html="$t('tender.status_and_resolution_tc')"></th>
         </tr>
         <tr
             v-for="award of gd(evRecord, _ => _.awards, []).filter(_award => _award.relatedLots[0] === lot.id).sort((awardA, awardB) => awardA.value.amount - awardB.value.amount)"
             :key="award.id"
         >
-          <td data-th = "Tenderer">
+          <td :data-th="$t('tender.tenderer')">
             <div class="evaluation-table__supplier-name">{{ gd(award, _ => _.suppliers[0]).name }}</div>
-            <div class="evaluation-table__supplier-id">IDNO Code: {{ gd(award, _ => _.suppliers[0]).id }}</div>
+            <div class="evaluation-table__supplier-id">{{ $t("tender.awards_supplier_identifier")}}: {{ gd(award, _ =>
+              _.suppliers[0]).id }}
+            </div>
           </td>
-          <td data-th = "Final offer">
-            <div class="evaluation-table__amount">{{ fa(gd(award, _ => _.value.amount, 0)) }}</div>
-            <div class="evaluation-table__currency">{{ gd(award, _ => _.value.currency) }} exluding VAT</div>
+          <td :data-th="$t('tender.bids_final_amount')">
+            <div class="evaluation-table__amount">{{ fa(gd(award, _ => _.value.amount, 0)) }}&#8194;</div>
+            <div class="evaluation-table__currency">{{ gd(award, _ => _.value.currency) }} {{
+              $t("tender.excluding_vat")}}
+            </div>
           </td>
-          <td data-th = "MTender ESPD">
+          <td :data-th="$t('tender.mtender_espd')">
             <button
                 v-if="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.length : false"
                 type="button"
                 @click="$refs[award.id + 'eligibilityDocuments'][0].open = true"
                 class="evaluation-table__docs-espd-button"
             >
-              MTender ESPD
+              {{ $t("tender.mtender_espd")}}
             </button>
-            <div class="evaluation-table__docs-espd-text">Self-declaration</div>
+            <div class="evaluation-table__docs-espd-text">&#8194;{{ $t("tender.self_declaration")}}</div>
             <documents-modal
                 :ref="award.id + 'eligibilityDocuments'"
                 :open="false"
@@ -49,7 +53,7 @@
                 noItemsText="No documents submitted"
             />
           </td>
-          <td data-th = "EO docs">
+          <td :data-th="$t('tender.eos_docs')">
             <button
                 v-if="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.length : 0"
                 type="button"
@@ -65,10 +69,12 @@
           <!--<td>
             Declaration
           </td>-->
-          <td data-th="Status and resolution of TC">
-            <div class="evaluation-table__status">{{ parseStatus(gd(award, _ => _.status), gd(award, _ => _.statusDetails)) }}</div>
+          <td :data-th="$t('tender.status_and_resolution_tc_withoutBreak')">
+            <div class="evaluation-table__status">{{ parseStatus(gd(award, _ => _.status), gd(award, _ =>
+              _.statusDetails)) }}
+            </div>
             <div class="evaluation-table__status-time">
-              {{ fd(gd(award, _ => _.date)) }}
+              &#8194;{{ fd(gd(award, _ => _.date)) }}
             </div>
           </td>
         </tr>
@@ -77,7 +83,7 @@
           v-else
           style="margin-bottom: 25px"
       >
-        The lot is not awarded
+        {{$t("tender.lot_is_not_awarded")}}
       </div>
     </div>
   </div>
@@ -86,12 +92,12 @@
 <script>
   import DocumentsModal from "./../DocumentsModal";
 
-    import {
-      getDataFromObject,
-      formatDate,
-      formatAmount
-    } from "./../../../../utils";
-  
+  import {
+    getDataFromObject,
+    formatDate,
+    formatAmount
+  } from "./../../../../utils";
+
   export default {
     name: "Evaluation",
     components: {
