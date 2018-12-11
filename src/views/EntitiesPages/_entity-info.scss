@@ -433,6 +433,9 @@
       &__active-bar {
         display: none;
       }
+      &__content{
+        overflow: inherit;
+      }
       .is-top {
         &:last-child {
           padding-right: 14px;
@@ -440,9 +443,6 @@
         &:nth-child(2){
           padding-left: 14px;
         }
-      }
-      &__content{
-        overflow: inherit;
       }
     }
   }
@@ -565,11 +565,11 @@
         font-size: 11px;
         line-height: 1.6;
       }
-      & + .info-block__value {
-        margin-top: -5px;
-      }
       &_accent{
         color: $mainC;
+      }
+      & + .info-block__value {
+        margin-top: -5px;
       }
     }
     &__value {
@@ -591,15 +591,15 @@
       }
       a {
         text-decoration: underline;
+        &:hover {
+          text-decoration: none;
+        }
         @media (max-width: 560px) {
           width: 100%;
           text-align: center;
           &:not(:last-child){
             margin-bottom: 30px;
           }
-        }
-        &:hover {
-          text-decoration: none;
         }
         &[title="ebs-integrator"],
         &[title="lonar"] {

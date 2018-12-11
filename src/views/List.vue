@@ -112,7 +112,7 @@
     computed: {
       ...mapState(["entities"]),
       entityName() {
-        return this.$route.params.pathMatch;
+        return this.$route.params.entityName;
       },
       renderSearchForm() {
         switch (this.entityName) {
