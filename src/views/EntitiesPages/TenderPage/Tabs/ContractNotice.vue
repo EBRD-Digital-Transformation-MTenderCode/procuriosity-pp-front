@@ -918,7 +918,7 @@
               <el-col :sm="24">
                 <div class="info-block__text"> {{ $t("tender.conditions_for_opening_tenders") }}</div>
                 <div class="info-block__value">
-                  {{ fd(gd(evRecord, _ => _.tender, {}).hasOwnProperty("auctionPeriod") ? add(gd(evRecord, _ => _.tender.auctionPeriod.startDate), 'day', 1) : add(gd(evRecord, _ => _.tender.tenderPeriod.endDate), "day", 1),"DD.MM.YYYY") }} / 9:00
+                  {{ fd(gd(evRecord, _ => _.tender, {}).hasOwnProperty("auctionPeriod") ? gd(evRecord, _ => _.tender.auctionPeriod.endDate) : gd(evRecord, _ => _.tender.tenderPeriod.endDate),"DD.MM.YYYY / HH:mm") }}
                 </div>
               </el-col>
             </el-row>

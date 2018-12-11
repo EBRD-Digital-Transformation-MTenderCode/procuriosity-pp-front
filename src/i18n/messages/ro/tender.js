@@ -212,7 +212,6 @@ export default {
   "idno_code": "Codul IDNO",
   "modal_documents": "Documentația",
 
-//Not translated
   //TODO add translations
   "contract_awards":"Contract Award",
   "contract_award_notices": "Contract Award Notices",

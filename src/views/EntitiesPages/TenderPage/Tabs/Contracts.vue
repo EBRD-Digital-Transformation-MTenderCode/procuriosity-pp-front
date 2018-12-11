@@ -1,7 +1,11 @@
 <template>
   <div class="info">
     <div class="info__title">{{ $t("tender.contract_award_notices") }}</div>
-    <el-collapse accordion @change="changeActiveItem">
+    <el-collapse
+      accordion
+      @change="changeActiveItem"
+      :value="gd(evRecord, _ => _.contracts[0].id, '0') + '0'"
+    >
       <el-collapse-item
           v-for="(contract, index) of gd(evRecord, _ => _.contracts, [])"
           :key="contract.id + index"
@@ -104,8 +108,7 @@
                   </el-col>
                   <el-col :sm="12">
                     <div class="info-block__text">
-                      {{ gd( evRecord, _=> _.bids.details).filter(bid => gd( evRecord, _=> _.parties).find(part =>
-                      part.id
+                      {{ gd( evRecord, _=> _.bids.details).filter(bid => gd( evRecord, _=> _.parties).find(part => part.id
                       === bid.tenderers[0].id ).address.addressDetails.country.id !== "MD").length }}
                     </div>
                   </el-col>
@@ -210,8 +213,7 @@
                     </div>
                     <div class="info-block__value">
                       {{ gd(gd(evRecord, _ => _.parties, []).find(part => part.id === gd(gd(evRecord, _ => _.awards,
-                      []).find(award => award.status === "active"), _ => _.suppliers[0].id)), _ => _.contactPoint.name)
-                      }}
+                      []).find(award => award.status === "active"), _ => _.suppliers[0].id)), _ => _.contactPoint.name) }}
                     </div>
                   </el-col>
                   <el-col :sm="6">
@@ -231,11 +233,10 @@
                     </div>
                     <div class="info-block__value">
                       <a
-                          :href="`mailto:${ gd(gd(evRecord, _ => _.parties, []).find(part => part.id === gd(gd(evRecord, _ => _.awards, []).find(award => award.status === 'active'), _ => _.suppliers[0].id)), _ => _.contactPoint.email) }`"
+                        :href="`mailto:${ gd(gd(evRecord, _ => _.parties, []).find(part => part.id === gd(gd(evRecord, _ => _.awards, []).find(award => award.status === 'active'), _ => _.suppliers[0].id)), _ => _.contactPoint.email) }`"
                       >
                         {{ gd(gd(evRecord, _ => _.parties, []).find(part => part.id === gd(gd(evRecord, _ => _.awards,
-                        []).find(award => award.status === "active"), _ => _.suppliers[0].id)), _ =>
-                        _.contactPoint.email)
+                        []).find(award => award.status === "active"), _ => _.suppliers[0].id)), _ => _.contactPoint.email)
                         }}
                       </a>
                     </div>
@@ -326,6 +327,9 @@
       return {
         activeItemId: ""
       };
+    },
+    created() {
+      this.changeActiveItem(this.gd(this.evRecord, _ => _.contracts[0].id, '0') + '0')
     },
     methods: {
       gd(...args) {

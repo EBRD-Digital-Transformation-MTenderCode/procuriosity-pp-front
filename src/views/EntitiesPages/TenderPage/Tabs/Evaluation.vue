@@ -70,9 +70,18 @@
             Declaration
           </td>-->
           <td :data-th="$t('tender.status_and_resolution_tc_withoutBreak')">
-            <div class="evaluation-table__status">{{ parseStatus(gd(award, _ => _.status), gd(award, _ =>
-              _.statusDetails)) }}
-            </div>
+            <button
+              type="button"
+              @click="$refs[award.id + 'info'][0].open = true"
+              class="evaluation-table__status"
+            >
+              {{ parseStatus(gd(award, _ => _.status), gd(award, _ => _.statusDetails)) }}
+            </button>
+            <award-info-modal
+              :ref="award.id + 'info'"
+              :open="false"
+              :award="award"
+            />
             <div class="evaluation-table__status-time">
               &#8194;{{ fd(gd(award, _ => _.date)) }}
             </div>
@@ -91,6 +100,7 @@
 
 <script>
   import DocumentsModal from "./../DocumentsModal";
+  import AwardInfoModal from "./../AwardInfoModal";
 
   import {
     getDataFromObject,
@@ -101,7 +111,8 @@
   export default {
     name: "Evaluation",
     components: {
-      "documents-modal": DocumentsModal
+      "documents-modal": DocumentsModal,
+      "award-info-modal": AwardInfoModal
     },
     props: {
       evRecord: {

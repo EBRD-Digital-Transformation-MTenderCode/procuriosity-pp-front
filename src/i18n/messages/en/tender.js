@@ -187,7 +187,7 @@ export default {
   "clarification":"Clarification",
   "modification_documents":"Modifications of tender documents ",
   "question_received":"Question received",
-  "no_clarifications":"No Clarifications",
+  "no_clarifications":"No data",
 
   "state_money":"State Money",
 
