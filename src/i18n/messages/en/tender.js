@@ -70,8 +70,8 @@ export default {
   "contract_notice":"Contract<br/>Notice",
   "clarification_and_changes":"Clarification and changes",
   "electronic_auction":"Electronic auction",
-  "electronic_bids":"Electronic<br class='notDisplay' />bids",
-  "evaluation_of_bids":"Evaluation<br class='notDisplay' />of bids",
+  "electronic_bids":"Electronic<br/>bids",
+  "evaluation_of_bids":"Evaluation<br/>of bids",
 
   "contracting_authority":"Contracting authority",
   "object":"Object",
