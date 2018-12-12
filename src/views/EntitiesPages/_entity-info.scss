@@ -402,6 +402,9 @@
   &-tabs {
     margin-bottom: -20px;
     .el-tabs {
+      &__header{
+        margin: 0;
+      }
       &__nav-wrap {
         margin-top: -79px;
         &:after {
@@ -419,7 +422,18 @@
         display: flex;
         align-items: center;
         color: #2da9e2;
-        font-size: 20px;
+        font-size: 25px;
+        font-weight: 700 !important;
+      }
+      &__nav-prev{
+        transform: translateX(-5px);
+      }
+      &__nav-next{
+        transform: translateX(5px);
+      }
+      .el-icon-arrow-right,
+      .el-icon-arrow-left{
+        font-weight: 700;
       }
       &__item {
         height: auto;
@@ -442,13 +456,13 @@
         overflow: inherit;
       }
       .is-top {
-        &:last-child {
-          padding-right: 14px;
-        }
         &:nth-child(2) {
           padding-left: 14px;
         }
       }
+    }
+    .el-col{
+      display: block!important;
     }
   }
   &-nav {
@@ -461,15 +475,29 @@
     background-color: #fff;;
     font-size: 15px;
     color: #727272;
-    @media (max-width: 750px) {
-      display: none;
+    @media (max-width: 775px) {
+      flex-direction: column;
+      align-items: center;
     }
     a {
       padding: 0 20px;
       transition: 0.4s;
       cursor: pointer;
       user-select: none;
-      &:hover {
+      @media (max-width: 775px)  {
+        padding: 7px;
+        &:not(.active){
+          display: none;
+        }
+        &[displayLink = true]{
+          @media (max-width: 775px) {
+            display: block !important;
+            width: 100%;
+            text-align: center;
+          }
+        }
+      }
+      :hover {
         color: $mainC;
       }
       &:first-child {
@@ -490,6 +518,7 @@
 }
 
 .info {
+  margin-bottom: 10px;
   &__title {
     margin: 35px 0 30px;
     padding-bottom: 25px;
@@ -683,6 +712,9 @@
     .accordion-header {
       width: 100%;
       line-height: 1;
+      @media (max-width: 500px) {
+        text-align: center;
+      }
     }
     .info__sub-title {
       font-size: 15px;

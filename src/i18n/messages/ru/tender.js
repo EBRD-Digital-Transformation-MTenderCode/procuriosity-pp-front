@@ -232,5 +232,5 @@ export default {
   "excluding_vat":"excluding VAT",
   "self_declaration":"Self-declaration",
   "lot_is_not_awarded":"The lot is not awarded",
-  "no_bids)received":"No Bids received"
+  "no_bids_received":"No Bids received"
 }
