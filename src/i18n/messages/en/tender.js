@@ -64,11 +64,11 @@ export default {
 
   "estimated_value_excluding_VAT":"Estimated value excluding VAT",
   "review_procedures_title": "Review/complaint procedures",
-  "review_procedures":"Review/complaint procedures",
+  "review_procedures":"Review procedures",
 
   "procurement_plan":"Procurement<br/>Plan",
   "contract_notice":"Contract<br/>Notice",
-  "clarification_and_changes":"Clarification and changes",
+  "clarification_and_changes":"Clarifications and changes",
   "electronic_auction":"Electronic auction",
   "electronic_bids":"Electronic<br/>bids",
   "evaluation_of_bids":"Evaluation<br/>of bids",
@@ -174,7 +174,7 @@ export default {
   "complementary_information_list2_p4_2":"of estimated value MDL and must be valid 90 days starting from opening of the tenders.",
   "complementary_information_list2_p5":"Failure of the selected Economic Operator to submit the contract performance guarantee, if applicable, or to sign the contract shall constitute sufficient grounds for the annulment of the award of the contract and forfeiture of the bid guarantee.",
   "procedure_documents":"Procedure documents",
-  "procudures_for_review":"Procudures for review",
+  "procudures_for_review":"Procedures for review",
   "fax":"Fax",
   "review_procedures_p1":"The Economic Operator which has an interest in being awarded a public procurement contract and wishes to submit a complaint to the National Complaint Settlement Agency shall follow the procedures contained in Article 79-80 of the Law. Interim measures and suspention of the procedure may be requested",
   "review_procedures_list1_p1":"The Economic Operator may submit a complaint within",
@@ -184,8 +184,8 @@ export default {
   "review_procedures_list1_p4":"In case that the complaint referred to under para.(1) is related to documents published in electronic format, the acknowledgment date shall be their publication date.",
   "date_online_publication":"Date of online publication of notice",
 
-  "clarification":"Clarification",
-  "modification_documents":"Modifications of tender documents ",
+  "clarification":"Clarifications",
+  "modification_documents":"Modifications of tender documents",
   "question_received":"Question received",
   "no_clarifications":"No data",
 

@@ -30,7 +30,7 @@
       } else if (regexMtender2Id.test(this.$route.params.id)) {
         this.component = "mtender2-page";
       } else {
-        this.component = "error"
+        this.component = "error";
       }
     }
   };

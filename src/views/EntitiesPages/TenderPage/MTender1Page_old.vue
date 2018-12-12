@@ -8,7 +8,7 @@
         <tender-card
             :entity="entity"
         />
-
+  
         <!-- Procuring entity -->
         <div class="old-info">
           <div class="old-info__title">{{ $t("tender.procuring_entity") }}</div>
@@ -53,14 +53,15 @@
             </el-row>
           </div>
         </div>
-
+  
         <!-- Procurement info -->
         <div class="old-info">
           <div class="old-info__title">{{ $t("tender.procuring_info") }}</div>
           <div class="old-info__text">
             <el-row :gutter="30">
               <el-col :xs="24" :sm="10">
-                <div class="old-info__name">{{ $t("tender.procuring_info_value") }} ({{ procurementInfo.currency }})</div>
+                <div
+                    class="old-info__name">{{ $t("tender.procuring_info_value") }} ({{ procurementInfo.currency }})</div>
               </el-col>
               <el-col :xs="24" :sm="14">
                 <div class="old-info__value info__value_accent">{{ procurementInfo.amount }}</div>
@@ -79,7 +80,7 @@
             </el-row>
           </div>
         </div>
-
+  
         <!-- Dates -->
         <div class="old-info" v-if="dates">
           <div class="old-info__title">{{ $t("tender.dates") }}</div>
@@ -114,7 +115,7 @@
             </el-row>
           </div>
         </div>
-
+  
         <!-- Documents -->
         <div class="old-info" v-if="documents.length">
           <div class="old-info__title">{{ $t("tender.documents") }}</div>
@@ -135,7 +136,8 @@
               </el-col>
             </el-row>
 
-            <el-row v-for="(oldDoc, index) of document.oldVersions" :key="oldDoc.id + index" class="old-info-old-document"
+            <el-row v-for="(oldDoc, index) of document.oldVersions" :key="oldDoc.id + index"
+                    class="old-info-old-document"
                     :gutter="30">
               <el-col :xs="24" :sm="10">
                 <div class="old-info-document_name">
@@ -153,7 +155,7 @@
             </el-row>
           </div>
         </div>
-
+  
         <!-- Items -->
         <div class="old-info">
           <div class="old-info__title">{{ $t("tender.items") }}</div>
@@ -183,7 +185,7 @@
             </div>
           </template>
         </div>
-
+  
         <!-- Bids -->
         <div class="old-info" v-if="bids.length">
           <div class="old-info__title">{{ $t("tender.bids") }}</div>
@@ -234,7 +236,7 @@
             </table>
           </div>
         </div>
-
+  
         <!-- Awards -->
         <div class="old-info" v-if="awards.length">
           <div class="old-info__title">
@@ -290,7 +292,7 @@
             </table>
           </div>
         </div>
-
+  
         <!-- Active awards -->
         <div class="old-info" v-if="activeAwards.length">
           <div class="old-info__title">{{ $t("tender.active_awards") }}</div>
@@ -324,7 +326,7 @@
             </table>
           </div>
         </div>
-
+  
         <!-- Contracts -->
         <div class="old-info" v-if="contracts.length">
           <div class="old-info__title">{{ $t("tender.contracts") }}</div>
@@ -426,7 +428,7 @@
             </div>
           </div>
         </div>
-
+  
         <!-- Documentation -->
         <div class="old-info" v-if="documentation.length">
           <div class="old-info__title">{{ $t("tender.documentation") }}</div>
@@ -510,7 +512,7 @@
         this.$store.dispatch(FETCH_CURRENT_TENDER_INFO, {
           id: this.$route.params.id
         });
-      },
+      }
     },
     computed: {
       ...mapState({

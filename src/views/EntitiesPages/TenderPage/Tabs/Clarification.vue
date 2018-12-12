@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="entity-nav" data-scroll-spy-id="clarification" v-scroll-spy-active="{selector: 'a', class: 'active'}" v-scroll-spy-link>
+    <div class="entity-nav" data-scroll-spy-id="clarification" v-scroll-spy-active="{selector: 'a', class: 'active'}"
+         v-scroll-spy-link>
       <a>{{ $t("tender.clarification") }}</a>
       <a>{{ $t("tender.modification_documents") }}</a>
     </div>
@@ -126,8 +127,8 @@
       fd(...ars) {
         return formatDate(...ars);
       },
-      transformSS(str){
-        return transformSpecialSymbols(str)
+      transformSS(str) {
+        return transformSpecialSymbols(str);
       }
     }
   };

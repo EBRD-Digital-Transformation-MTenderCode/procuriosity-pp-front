@@ -45,7 +45,9 @@
             >
               {{ $t("tender.mtender_espd")}}
             </button>
-            <div class="evaluation-table__docs-espd-text">&#8194;{{ $t("tender.self_declaration")}}</div>
+            <div class="evaluation-table__docs-espd-text">
+              {{ $t("tender.self_declaration")}}
+            </div>
             <documents-modal
                 :ref="award.id + 'eligibilityDocuments'"
                 :open="false"
@@ -71,22 +73,23 @@
           </td>-->
           <td :data-th="$t('tender.status_and_resolution_tc_withoutBreak')">
             <button
-              v-if="!(gd(award, _ => _.status) === 'pending' && gd(award, _ => _.statusDetails) === 'empty')"
-              type="button"
-              @click="$refs[award.id + 'info'][0].open = true"
-              class="evaluation-table__status"
+                v-if="!(gd(award, _ => _.status) === 'pending' && gd(award, _ => _.statusDetails) === 'empty')"
+                type="button"
+                @click="$refs[award.id + 'info'][0].open = true"
+                class="evaluation-table__status"
             >
               {{ parseStatus(gd(award, _ => _.status), gd(award, _ => _.statusDetails)) }}
             </button>
             <div v-else>{{ parseStatus(gd(award, _ => _.status), gd(award, _ => _.statusDetails)) }}</div>
             <award-info-modal
-              v-if="!(gd(award, _ => _.status) === 'pending' && gd(award, _ => _.statusDetails) === 'empty')"
-              :ref="award.id + 'info'"
-              :open="false"
-              :award="award"
+                v-if="!(gd(award, _ => _.status) === 'pending' && gd(award, _ => _.statusDetails) === 'empty')"
+                :ref="award.id + 'info'"
+                :open="false"
+                :award="award"
             />
-            <div class="evaluation-table__status-time" v-if="!(gd(award, _ => _.status) === 'pending' && gd(award, _ => _.statusDetails) === 'empty')">
-              &#8194;{{ fd(gd(award, _ => _.date)) }}
+            <div class="evaluation-table__status-time"
+                 v-if="!(gd(award, _ => _.status) === 'pending' && gd(award, _ => _.statusDetails) === 'empty')">
+              {{ fd(gd(award, _ => _.date)) }}
             </div>
           </td>
         </tr>
