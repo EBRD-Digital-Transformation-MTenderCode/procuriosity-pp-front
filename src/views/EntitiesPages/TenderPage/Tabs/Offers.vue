@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="info">
     <div class="info__title">{{ $t("tender.record_opening_electronic_bids")}}</div>
     <div class="info__sub-title">{{ $t("tender.information_about_electronic_bids")}}</div>
     <div class="info-blocks">
@@ -112,7 +112,7 @@
                 :documents="bid.hasOwnProperty('documents') ? bid.documents.filter(_doc => _doc.documentType === 'x_eligibilityDocuments'): []"
                 noItemsText="No documents submitted"
             />
-            <div class="offers-table__docs-espd-text">{{ $t("tender.self_declaration")}}</div>
+            <div class="offers-table__docs-espd-text">&#8194;{{ $t("tender.self_declaration")}}</div>
           </td>
           <td :data-th="$t('tender.eos_docs')">
             <button

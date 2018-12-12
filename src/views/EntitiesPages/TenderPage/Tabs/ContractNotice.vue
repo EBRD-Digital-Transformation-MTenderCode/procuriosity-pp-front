@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div class="entity-nav"  data-scroll-spy-id="cn"  v-scroll-spy-active="{selector: 'a', class: 'active'}" v-scroll-spy-link>
-      <a>{{ $t("tender.contracting_authority") }}</a>
-      <a>{{ $t("tender.object") }}</a>
+    <div class="entity-nav"  data-scroll-spy-id="cn" @click="needDisplay =! needDisplay"  v-scroll-spy-active="{selector: 'a', class: 'active'}" v-scroll-spy-link>
+      <a :displayLink = needDisplay>{{ $t("tender.contracting_authority") }}</a>
+      <a :displayLink = needDisplay>{{ $t("tender.object") }}</a>
       <!--<a>Legal, economic, financial and technical information</a>-->
-      <a>{{ $t("tender.procedure") }}</a>
-      <a>{{ $t("tender.budget") }}</a>
-      <a>{{ $t("tender.complementary_information") }}</a>
+      <a :displayLink = needDisplay>{{ $t("tender.procedure") }}</a>
+      <a :displayLink = needDisplay>{{ $t("tender.budget") }}</a>
+      <a :displayLink = needDisplay>{{ $t("tender.complementary_information") }}</a>
     </div>
-    <div class="info"  data-scroll-spy-id="cn" v-scroll-spy="{offset: 75, allowNoActive: true}">
+    <div class="info"  data-scroll-spy-id="cn" v-scroll-spy="{offset: computedOffset, allowNoActive: true}">
 
       <!-- Contracting authority -->
       <div>
@@ -1339,7 +1339,10 @@
           }
           */
         ],
-        FSs: {}
+        FSs: {},
+        needDisplay: false,
+        windowWidth: 0,
+        computedOffset: 75
       };
     },
     computed: {
@@ -1360,6 +1363,22 @@
       randomSortPlatforms() {
         return [...this.platforms].sort(() => 0.5 - Math.random());
       }
+    },
+    watch: {
+      windowWidth(width) {
+        if (width <= 775) {
+          this.computedOffset = 230;
+        } else this.computedOffset = 75;
+      }
+    },
+    mounted() {
+      this.$nextTick(() => {
+        window.addEventListener("resize", this.setWindowSize);
+        this.windowWidth = window.innerWidth;
+      });
+    },
+    destroyed(){
+        window.removeEventListener("resize", this.setWindowSize)
     },
     methods: {
       gd(...args) {
@@ -1415,6 +1434,9 @@
           console.log(e);
         }
       },
+      setWindowSize(){
+          this.windowWidth = window.innerWidth;
+      }
     }
   };
 </script>

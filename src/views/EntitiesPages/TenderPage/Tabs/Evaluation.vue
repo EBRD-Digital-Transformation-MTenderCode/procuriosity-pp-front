@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="info">
     <div class="info__title">{{ $t("tender.evaluation_of_winning_bid")}}</div>
     <div
         v-for="(lot, index) of gd(evRecord, _ => _.tender.lots, [])"
@@ -45,7 +45,7 @@
             >
               {{ $t("tender.mtender_espd")}}
             </button>
-            <div class="evaluation-table__docs-espd-text">{{ $t("tender.self_declaration")}}</div>
+            <div class="evaluation-table__docs-espd-text">&#8194;{{ $t("tender.self_declaration")}}</div>
             <documents-modal
                 :ref="award.id + 'eligibilityDocuments'"
                 :open="false"
@@ -86,7 +86,7 @@
               :award="award"
             />
             <div class="evaluation-table__status-time" v-if="!(gd(award, _ => _.status) === 'pending' && gd(award, _ => _.statusDetails) === 'empty')">
-              {{ fd(gd(award, _ => _.date)) }}
+              &#8194;{{ fd(gd(award, _ => _.date)) }}
             </div>
           </td>
         </tr>

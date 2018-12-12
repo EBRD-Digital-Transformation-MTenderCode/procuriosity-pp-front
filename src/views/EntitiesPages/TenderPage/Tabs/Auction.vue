@@ -1,5 +1,5 @@
 <template>
-  <div>e-Auction</div>
+  <div class="info">e-Auction</div>
 </template>
 
 <script>
