@@ -1,14 +1,15 @@
 <template>
   <div>
-    <div class="entity-nav"  data-scroll-spy-id="cn" @click="needDisplay =! needDisplay"  v-scroll-spy-active="{selector: 'a', class: 'active'}" v-scroll-spy-link>
-      <a :displayLink = needDisplay>{{ $t("tender.contracting_authority") }}</a>
-      <a :displayLink = needDisplay>{{ $t("tender.object") }}</a>
+    <div class="entity-nav" data-scroll-spy-id="cn" @click="needDisplay =! needDisplay"
+         v-scroll-spy-active="{selector: 'a', class: 'active'}" v-scroll-spy-link>
+      <a :displayLink=needDisplay>{{ $t("tender.contracting_authority") }}</a>
+      <a :displayLink=needDisplay>{{ $t("tender.object") }}</a>
       <!--<a>Legal, economic, financial and technical information</a>-->
-      <a :displayLink = needDisplay>{{ $t("tender.procedure") }}</a>
-      <a :displayLink = needDisplay>{{ $t("tender.budget") }}</a>
-      <a :displayLink = needDisplay>{{ $t("tender.complementary_information") }}</a>
+      <a :displayLink=needDisplay>{{ $t("tender.procedure") }}</a>
+      <a :displayLink=needDisplay>{{ $t("tender.budget") }}</a>
+      <a :displayLink=needDisplay>{{ $t("tender.complementary_information") }}</a>
     </div>
-    <div class="info"  data-scroll-spy-id="cn" v-scroll-spy="{offset: computedOffset, allowNoActive: true}">
+    <div class="info" data-scroll-spy-id="cn" v-scroll-spy="{offset: computedOffset, allowNoActive: true}">
 
       <!-- Contracting authority -->
       <div>
@@ -122,7 +123,7 @@
                 </div>
                 <div class="info-block__value">
                   <a
-                    :href="`mailto:${gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === 'buyer')), _ => _.contactPoint.email) }`"
+                      :href="`mailto:${gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === 'buyer')), _ => _.contactPoint.email) }`"
                   >
                     {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ =>
                     _.contactPoint.email) }}
@@ -144,7 +145,7 @@
                       :href="gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === 'buyer')), _ =>_.contactPoint.url)"
                       target="_blank"
                   >
-                    {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === 'buyer')), _ =>_.contactPoint.url) }}
+                    {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ =>_.contactPoint.url) }}
                   </a>
                   <span v-else>n/a</span>
                 </div>
@@ -200,7 +201,8 @@
                 {{ $t("tender.procurement_documents_links") }}:
               </div>
               <div class="info-block__value">
-                <a :href="`https://mtender.gov.md/${$i18n.locale !== 'ro' ? `${$i18n.locale}/` : ''}tenders/${gd(msRecord, _ => _.ocid) }`" target="_blank">
+                <a :href="`https://mtender.gov.md/${$i18n.locale !== 'ro' ? `${$i18n.locale}/` : ''}tenders/${gd(msRecord, _ => _.ocid) }`"
+                   target="_blank">
                   mtender.gov.md/{{ $i18n.locale !== "ro" ? `${$i18n.locale}/` : "" }}tenders/{{ gd(msRecord, _ => _.ocid) }}</a>
               </div>
             </el-col>
@@ -251,12 +253,12 @@
               </div>
               <div class="info-block__value info-block__value-platform">
                 <a
-                  class="platform-link"
-                  v-for="platform of randomSortPlatforms"
-                  :key="platform.name"
-                  :href="platform.href"
-                  :title="platform.name"
-                  target="_blank"
+                    class="platform-link"
+                    v-for="platform of randomSortPlatforms"
+                    :key="platform.name"
+                    :href="platform.href"
+                    :title="platform.name"
+                    target="_blank"
                 >
                   <img :src="platform.src" :alt="platform.name" class="platform-img">
                 </a>
@@ -266,7 +268,7 @@
         </div>
       </div>
       </div>
-
+  
       <!-- Object -->
       <div>
         <div class="info__title">{{ $t("tender.object") }}</div>
@@ -342,9 +344,9 @@
         <div class="info__sub-title">{{ $t("tender.description") }}</div>
         <el-collapse accordion :value="gd(evRecord, _ => _.tender.lots[0].id, '0') + '0'">
           <el-collapse-item
-            v-for="(lot, index) of gd(evRecord, _ => _.tender.lots, [])"
-            :key="lot.id + index"
-            :name="lot.id + index"
+              v-for="(lot, index) of gd(evRecord, _ => _.tender.lots, [])"
+              :key="lot.id + index"
+              :name="lot.id + index"
           >
             <template slot="title">
               <div class="info-block accordion-header">
@@ -425,9 +427,9 @@
                   </el-row>
                 </div>
               </div>
-
-           <!-- <div class="info__sub-title">Level of Performance</div>-->
-
+  
+              <!-- <div class="info__sub-title">Level of Performance</div>-->
+  
               <!--<div class="info-block">
                 <el-:rowrgutten"15>
                   <el-col :sm="16">
@@ -520,7 +522,8 @@
                 </el-row>
               </div>
 
-              <div class="info-block" v-if="procedureType==='Open Tender' || procedureType==='Licitație deschisă' || procedureType==='Открытые торги'">
+              <div class="info-block"
+                   v-if="procedureType==='Open Tender' || procedureType==='Licitație deschisă' || procedureType==='Открытые торги'">
                 <el-row :gutter="15">
                   <el-col :sm="24">
                     <div class="info-block__text">
@@ -570,7 +573,8 @@
                 </el-row>
               </div>
 
-              <div class="info-block" v-if="gd(evRecord, _ => _.tender.documents, []).filter(doc => gd(doc, _ => _.relatedLots[0], '') === gd(lot, _ => _.id)).length">
+              <div class="info-block"
+                   v-if="gd(evRecord, _ => _.tender.documents, []).filter(doc => gd(doc, _ => _.relatedLots[0], '') === gd(lot, _ => _.id)).length">
                 <div class="info-block__documents"
                      v-for="(doc, index) of gd(evRecord, _ => _.tender.documents,[]) .filter(doc => gd(doc, _ => _.relatedLots[0], '') === gd(lot, _ => _.id))"
                      :key="doc.id + index">
@@ -598,7 +602,7 @@
           </el-collapse-item>
         </el-collapse>
       </div>
-
+  
       <!-- Legal, economic, financial and technical information -->
       <!--<div>
         <div class="info__title">Legal, economic, financial and technical information</div>
@@ -818,7 +822,7 @@
           </div>
         </div>&ndash;&gt;
       </div>-->
-
+  
       <!-- Procedure -->
       <div>
         <div class="info__title">{{ $t("tender.procedure") }}</div>
@@ -839,12 +843,13 @@
             </el-row>
           </div>
 
-          <div class="info-block" >
+          <div class="info-block">
             <el-row :gutter="15">
               <el-col :sm="10">
                 <div class="info-block__text">{{ $t("tender.information_about_electronic_auction") }}</div>
                 <div class="info-block__value">
-                  {{ $t("tender.an_electronic_auction_will") }} <span v-if="!gd(evRecord, _ => _.tender, {}).hasOwnProperty('auctionPeriod')"> {{ $t("tender.not") }}</span>
+                  {{ $t("tender.an_electronic_auction_will") }} <span
+                    v-if="!gd(evRecord, _ => _.tender, {}).hasOwnProperty('auctionPeriod')"> {{ $t("tender.not") }}</span>
                   {{ $t("tender.be_used") }}
                 </div>
               </el-col>
@@ -940,7 +945,7 @@
                 <div class="info-block__text"> Information about authorised persons and opening procedure</div>
                 <div class="info-block__value">
                 -->
-                <!-- @TODO text from Pasha -->
+              <!-- @TODO text from Pasha -->
               <!--Full name of the persone
                 </div>
               </el-col>
@@ -956,7 +961,7 @@
           </div>
         </div>
       </div>
-
+  
       <!-- Budget -->
       <div>
         <div class="info__title">{{ $t("tender.budget") }}</div>
@@ -1070,7 +1075,7 @@
                   <el-col :sm="16">
                     <div class="info-block__text">{{ $t("tender.funding_entity") }}</div>
                     <div class="info-block__value">
-                      {{ FSs.hasOwnProperty(gd(budgetBreakdown, _ => _.id)) ? gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].funder.name, $t('tender.state_money')): "n/a" }}
+                      {{ FSs.hasOwnProperty(gd(budgetBreakdown, _ => _.id)) ? gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].funder.name, $t("tender.state_money")): "n/a" }}
                     </div>
                   </el-col>
                   <el-col :sm="8" v-if="gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].funder.id)">
@@ -1109,7 +1114,7 @@
           </div>
         </div>
       </div>
-
+  
       <!-- Complementary information -->
       <div>
         <div class="info__title">{{ $t("tender.complementary_information") }}</div>
@@ -1291,7 +1296,13 @@
   import typesOfBuyers from "./../../../../store/types/buyers-types";
   import mainGeneralActivites from "./../../../../store/types/main-general-activity-types";
 
-  import { getDataFromObject, formatDate, convertCamelCaseToTitleCase, addPeriod, formatAmount} from "./../../../../utils";
+  import {
+    getDataFromObject,
+    formatDate,
+    convertCamelCaseToTitleCase,
+    addPeriod,
+    formatAmount
+  } from "./../../../../utils";
 
   export default {
     name: "ContractNotice",
@@ -1303,7 +1314,7 @@
       evRecord: {
         type: Object
       },
-      procedureType:{
+      procedureType: {
         type: String,
         required: true
       }
@@ -1325,18 +1336,18 @@
             href: "https://achizitii.md/",
             src: "/img/achizitii.md.png",
             name: "achizitii.md"
-          },
-          /*{
-            href: "javascript:void(0)",
-            src: "/img/ebs-integrator.png",
-            name: "ebs-integrator"
-          },
-          {
-            href: "javascript:void(0)",
-            src: "/img/lonar.png",
-            name: "lonar"
           }
-          */
+          /*{
+           href: "javascript:void(0)",
+           src: "/img/ebs-integrator.png",
+           name: "ebs-integrator"
+           },
+           {
+           href: "javascript:void(0)",
+           src: "/img/lonar.png",
+           name: "lonar"
+           }
+           */
         ],
         FSs: {},
         needDisplay: false,
@@ -1376,8 +1387,8 @@
         this.windowWidth = window.innerWidth;
       });
     },
-    destroyed(){
-        window.removeEventListener("resize", this.setWindowSize)
+    destroyed() {
+      window.removeEventListener("resize", this.setWindowSize);
     },
     methods: {
       gd(...args) {
@@ -1387,13 +1398,13 @@
         return formatDate(...ars);
       },
       convertCase(str) {
-        return convertCamelCaseToTitleCase(str)
+        return convertCamelCaseToTitleCase(str);
       },
-      add(date, timePeriod, count){
-        return addPeriod(date, timePeriod, count)
+      add(date, timePeriod, count) {
+        return addPeriod(date, timePeriod, count);
       },
-      fa(amount){
-        return formatAmount(amount)
+      fa(amount) {
+        return formatAmount(amount);
       },
       async getFS(ocidFS) {
         if (!ocidFS || this.FSs.hasOwnProperty(ocidFS)) {
@@ -1423,18 +1434,17 @@
               },
               funder: {
                 name: funder ? funder.name : null,
-                id: funder ? funder.id : null,
+                id: funder ? funder.id : null
               }
             }
           });
 
-        }
-        catch (e) {
+        } catch (e) {
           console.log(e);
         }
       },
-      setWindowSize(){
-          this.windowWidth = window.innerWidth;
+      setWindowSize() {
+        this.windowWidth = window.innerWidth;
       }
     }
   };

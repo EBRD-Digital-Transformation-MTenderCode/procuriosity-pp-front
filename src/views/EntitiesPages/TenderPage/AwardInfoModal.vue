@@ -63,7 +63,7 @@
 </template>
 
 <script>
-  import { getDataFromObject, formatDate, convertCamelCaseToTitleCase} from "./../../../utils";
+  import { getDataFromObject, formatDate, convertCamelCaseToTitleCase } from "./../../../utils";
 
   export default {
     name: "AwardInfoModal",
@@ -86,8 +86,8 @@
         return formatDate(...ars);
       },
       convertCase(str) {
-        return convertCamelCaseToTitleCase(str)
-      },
+        return convertCamelCaseToTitleCase(str);
+      }
     }
   };
 </script>

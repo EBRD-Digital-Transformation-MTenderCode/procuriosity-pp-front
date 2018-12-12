@@ -11,7 +11,7 @@
           <span class="info-block__text">Last updated:</span>{{ " " }}
           <span class="info-block__value">{{ fd(gd(msRecord, _ => _.date), "DD/MM/YYYY, HH:mm") }}</span>
         </div>
-        <br/>
+        <br />
         <p class="info-block__value">
           Procurement record for each Electronic tendering procedure is electronically generated, authenticated and electronically signed using MSign signed by MTender services. It records proceedings of Contracting Authority in real-time, including detailed information related to the subject matter of the public procurement contract, the tender specifications and any documentation related to the award procedure of such contract. When generated, the Procurement record includes a reference or record of original electronic documents. Each Procurement record is published online in the contract register for audit trail, no hard copies or separate signatures are required or shall be retained.
         </p>
@@ -25,7 +25,7 @@
     <div class="info-block__value">
       {{ $t("tender.PP_Buyer_profile_PIN") }}
       <a
-        :href="`/${$i18n.locale !== 'ro' ? $i18n.locale + '/' : ''}plans/${gd(msRecord, _ => _.ocid)}`"
+          :href="`/${$i18n.locale !== 'ro' ? $i18n.locale + '/' : ''}plans/${gd(msRecord, _ => _.ocid)}`"
       >
         {{ gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === "planning")), _ => _.identifier) }}
       </a>
@@ -124,13 +124,13 @@
 
     <div class="info__sub-title">{{ $t("tender.budget") }}</div>
     <el-collapse
-      accordion
-      @change="getFS"
+        accordion
+        @change="getFS"
     >
       <el-collapse-item
-        v-for="(budgetBreakdown, index) of gd(msRecord, _ => _.planning.budget.budgetBreakdown, [])"
-        :key="budgetBreakdown.id + index"
-        :name="budgetBreakdown.id"
+          v-for="(budgetBreakdown, index) of gd(msRecord, _ => _.planning.budget.budgetBreakdown, [])"
+          :key="budgetBreakdown.id + index"
+          :name="budgetBreakdown.id"
       >
         <template slot="title">
           <div class="info-block accordion-header">
@@ -231,7 +231,7 @@
               <el-col :sm="16">
                 <div class="info-block__text">{{ $t("tender.funding_entity") }}</div>
                 <div class="info-block__value">
-                  {{ FSs.hasOwnProperty(gd(budgetBreakdown, _ => _.id)) ? gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].funder.name, $t('tender.state_money')): "n/a" }}
+                  {{ FSs.hasOwnProperty(gd(budgetBreakdown, _ => _.id)) ? gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].funder.name, $t("tender.state_money")): "n/a" }}
                 </div>
               </el-col>
               <el-col :sm="8" v-if="gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].funder.id)">
@@ -250,9 +250,9 @@
     <ul class="info-list">
       <li>
         <button
-          type="button"
-          class="info-block__link"
-          @click="selectTab('cn')"
+            type="button"
+            class="info-block__link"
+            @click="selectTab('cn')"
         >
           Official publication of this procedure
         </button>
@@ -263,9 +263,9 @@
     <ul class="info-list">
       <li>
         <button
-          type="button"
-          class="info-block__link"
-          @click="selectTab('clarification')"
+            type="button"
+            class="info-block__link"
+            @click="selectTab('clarification')"
         >
           Any clarifications, changes or cancellations related to this procedure
         </button>
@@ -277,9 +277,9 @@
       <ul class="info-list">
         <li>
           <button
-            type="button"
-            class="info-block__link"
-            @click="selectTab('offers')"
+              type="button"
+              class="info-block__link"
+              @click="selectTab('offers')"
           >
             Record of the opening of Electronic bids
           </button>
@@ -293,18 +293,18 @@
         <!--<li>Record of Electronic auction</li>-->
         <li>
           <button
-            type="button"
-            class="info-block__link"
-            @click="selectTab('ev')"
+              type="button"
+              class="info-block__link"
+              @click="selectTab('ev')"
           >
             Evaluation report of the Tender Committee
           </button>
         </li>
         <li v-if="hasCANs">
           <button
-            type="button"
-            class="info-block__link"
-            @click="selectTab('cans')"
+              type="button"
+              class="info-block__link"
+              @click="selectTab('cans')"
           >
             Report on recommended awards
           </button>
@@ -317,7 +317,7 @@
 <script>
   import axios from "axios";
 
-  import { getDataFromObject, formatDate, formatAmount} from "./../../../../utils";
+  import { getDataFromObject, formatDate, formatAmount } from "./../../../../utils";
 
   export default {
     name: "ProcurementRecord",
@@ -330,7 +330,7 @@
         type: Object,
         required: true
       },
-      procedureType:{
+      procedureType: {
         type: String,
         required: true
       },
@@ -354,7 +354,7 @@
     data() {
       return {
         FSs: {}
-      }
+      };
     },
     methods: {
       gd(...args) {
@@ -363,8 +363,8 @@
       fd(...ars) {
         return formatDate(...ars);
       },
-      fa(amount){
-        return formatAmount(amount)
+      fa(amount) {
+        return formatAmount(amount);
       },
       async getFS(ocidFS) {
         if (!ocidFS || this.FSs.hasOwnProperty(ocidFS)) {
@@ -394,13 +394,12 @@
               },
               funder: {
                 name: funder ? funder.name : null,
-                id: funder ? funder.id : null,
+                id: funder ? funder.id : null
               }
             }
           });
 
-        }
-        catch (e) {
+        } catch (e) {
           console.log(e);
         }
       }

@@ -68,22 +68,22 @@
             <el-row>
               <el-col :xs="24">
                 <el-tabs
-                  v-model="activeTab"
-                  stretch
-                  :before-leave="checkTab"
+                    v-model="activeTab"
+                    stretch
+                    :before-leave="checkTab"
                 >
                   <el-tab-pane
-                    :disabled="!gd(tender, _ => _.EVRecord.compiledRelease.hasPreviousNotice)"
-                    name="pn"
-                    lazy
-                    key="pn"
+                      :disabled="!gd(tender, _ => _.EVRecord.compiledRelease.hasPreviousNotice)"
+                      name="pn"
+                      lazy
+                      key="pn"
                   >
                     <span slot="label" v-html="$t('tender.procurement_plan')" />
                   </el-tab-pane>
                   <el-tab-pane
-                    name="cn"
-                    lazy
-                    key="cn"
+                      name="cn"
+                      lazy
+                      key="cn"
                   >
                     <span slot="label" v-html="$t('tender.contract_notice')" />
                     <contract-notice
@@ -95,9 +95,9 @@
                     />
                   </el-tab-pane>
                   <el-tab-pane
-                    name="clarification"
-                    lazy
-                    key="clarification"
+                      name="clarification"
+                      lazy
+                      key="clarification"
                   >
                     <span slot="label" v-html="$t('tender.clarification_and_changes')" />
                     <clarification
@@ -105,43 +105,43 @@
                     />
                   </el-tab-pane>
                   <el-tab-pane
-                    disabled
-                    name="review"
-                    lazy
-                    key="review"
+                      disabled
+                      name="review"
+                      lazy
+                      key="review"
                   >
                     <span slot="label" v-html="$t('tender.review_procedures')" />
                     <auction />
                   </el-tab-pane>
                   <el-tab-pane
-                    disabled
-                    :label='$t("tender.electronic_auction")'
-                    name="auction"
-                    lazy
-                    key="auction"
+                      disabled
+                      :label='$t("tender.electronic_auction")'
+                      name="auction"
+                      lazy
+                      key="auction"
                   >
 
                   </el-tab-pane>
                   <el-tab-pane
-                    :disabled="!gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('bids')"
-                    name="offers"
-                    lazy
-                    key="offers"
+                      :disabled="!gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('bids')"
+                      name="offers"
+                      lazy
+                      key="offers"
                   >
                     <span slot="label" v-html="$t('tender.electronic_bids')"></span>
                     <offers
-                      :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
+                        :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
                     />
                   </el-tab-pane>
                   <el-tab-pane
-                    :disabled="!gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('awards')"
-                    name="ev"
-                    lazy
-                    key="ev"
+                      :disabled="!gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('awards')"
+                      name="ev"
+                      lazy
+                      key="ev"
                   >
                     <span slot="label" v-html="$t('tender.evaluation_of_bids')"></span>
                     <evaluation
-                      :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
+                        :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
                     />
                   </el-tab-pane>
                   <el-tab-pane
@@ -156,21 +156,21 @@
                     />
                   </el-tab-pane>
                   <el-tab-pane
-                    name="pr"
-                    lazy
-                    key="pr"
+                      name="pr"
+                      lazy
+                      key="pr"
                   >
                     <span slot="label">Procurement <br />record</span>
                     <procurement-record
-                      :msRecord="gd(tender, _ => _.MSRecord.compiledRelease)"
-                      :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
-                      :procedureType="selectProcedure(gd(tender, _ =>
+                        :msRecord="gd(tender, _ => _.MSRecord.compiledRelease)"
+                        :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
+                        :procedureType="selectProcedure(gd(tender, _ =>
                       _.MSRecord.compiledRelease.tender.mainProcurementCategory),gd(tender, _ =>
                       _.MSRecord.compiledRelease.tender.value.amount))"
-                      :selectTab="selectTab"
-                      :hasBids="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('bids')"
-                      :hasAwards="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('awards')"
-                      :hasCANs="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('contracts')"
+                        :selectTab="selectTab"
+                        :hasBids="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('bids')"
+                        :hasAwards="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('awards')"
+                        :hasCANs="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('contracts')"
                     />
                   </el-tab-pane>
                 </el-tabs>
@@ -334,7 +334,7 @@
       },
       checkTab(tab) {
         if (tab === "pn") {
-          this.$router.push({path: `${this.$i18n.locale !== "ro" ? `/${this.$i18n.locale}` : ""}/plans/${this.tender.MSRecord.ocid}`});
+          this.$router.push({ path: `${this.$i18n.locale !== "ro" ? `/${this.$i18n.locale}` : ""}/plans/${this.tender.MSRecord.ocid}` });
         }
       }
     }
