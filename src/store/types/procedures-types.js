@@ -44,9 +44,9 @@ export default {
     },
     {
       name: {
-        en: "Request for price quotation",
-        ro: "Cerere de cotare de preț",
-        ru: "Запрос ценового предложения"
+        en: "Request for quotation",
+        ro: "Cerere Oferte de Prețuri",
+        ru: "Запрос ценовых оферт"
       },
       value: "belowThreshold"
     },
@@ -60,7 +60,7 @@ export default {
     },
     {
       name: {
-        en: "Request for Proposals",
+        en: "Request for quotation",
         ro: "Cerere Oferte de Prețuri",
         ru: "Запрос ценовых оферт"
       },

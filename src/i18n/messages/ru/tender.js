@@ -211,7 +211,7 @@ export default {
   //Not translated
   //TODO add translations
   "contract_awards":"Contract Award",
-  "contract_award_notices":"Contract Award Notices",
+  "contract_award_notices":"Contract Award Notice",
   "lot_title": "Lot title",
   "award_of_contract": "Award of contract",
   "way_of_awarded_contract": "The way of awarded contract",
