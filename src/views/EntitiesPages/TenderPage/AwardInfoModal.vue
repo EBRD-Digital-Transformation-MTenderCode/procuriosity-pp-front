@@ -7,7 +7,6 @@
   >
     <slot>
       <div class="info-blocks">
-        <div class="info__sub-title">Decision information</div>
         <div class="info-block">
           <el-row :gutter="15">
             <el-col :sm="24">
@@ -30,7 +29,7 @@
           </el-row>
         </div>
 
-        <div class="info__sub-title">Decision Documents</div>
+        <div class="info__sub-title">Documents of decision</div>
         <div class="info-block" v-if="gd(award, _ => _.documents, []).length">
           <div class="info-block__documents"
                v-for="(doc, index) of gd(award, _ => _.documents, [])"

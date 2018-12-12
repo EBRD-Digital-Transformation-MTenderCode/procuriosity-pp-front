@@ -2,7 +2,7 @@
   <div>
     <div class="entity-nav" data-scroll-spy-id="clarification" v-scroll-spy-active="{selector: 'a', class: 'active'}" v-scroll-spy-link>
       <a>{{ $t("tender.clarification") }}</a>
-      <a disabled>{{ $t("tender.modification_documents") }}</a>
+      <a>{{ $t("tender.modification_documents") }}</a>
     </div>
     <div class="info" data-scroll-spy-id="clarification" v-scroll-spy="{offset: 75, allowNoActive: true}">
       <div>
@@ -73,6 +73,37 @@
           </div>
         </div>
         <div v-else>{{ $t("tender.no_clarifications") }}</div>
+      </div>
+      
+      <div>
+        <div class="info__title">Modifications of tender documents</div>
+        <div v-if="evRecord.tender.hasOwnProperty('amendments')">
+          <div class="info-blocks">
+            <div
+                class="info-block"
+                v-for="amendment of [...gd(evRecord, _ => _.tender.amendments, [])].sort((amendmentA, amendmentB) => +(new Date(amendmentB.date)) - +(new Date(amendmentA.date)))"
+                :key="amendment.id"
+            >
+              <el-row :gutter="25">
+                <el-col :sm="16">
+                  <div class="info-block__text">Amendment release</div>
+                  <div class="info-block__value">{{ amendment.amendsReleaseID }}</div>
+                </el-col>
+                <el-col :sm="8">
+                  <div class="info-block__text">Date of change</div>
+                  <div class="info-block__value">{{ fd(amendment.date) }}</div>
+                </el-col>
+              </el-row>
+              <el-row :gutter="25">
+                <el-col :xs="24">
+                  <div class="info-block__text">Description of the scope of change</div>
+                  <div class="info-block__value">n/a</div>
+                </el-col>
+              </el-row>
+            </div>
+          </div>
+        </div>
+        <div v-else>No data</div>
       </div>
     </div>
   </div>

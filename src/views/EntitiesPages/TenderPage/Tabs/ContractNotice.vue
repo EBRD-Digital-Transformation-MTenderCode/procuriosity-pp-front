@@ -1132,8 +1132,7 @@
             {{ fa(gd(msRecord, _ => _.tender.value.amount) * 0.02) }}
             {{ $t("tender.complementary_information_list2_p4_2") }}
           </li>
-          <li> {{ $t("tender.complementary_information_list2_p5") }}
-          </li>
+          <li>{{ $t("tender.complementary_information_list2_p5") }}</li>
         </ul>
 
         <div class="info__sub-title">{{ $t("tender.procedure_documents") }}</div>
