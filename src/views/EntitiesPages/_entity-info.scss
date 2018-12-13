@@ -487,6 +487,10 @@
           padding-right: 14px !important;
         }
       }
+      &__nav-wrap {
+        display: flex;
+        padding: 0;
+      }
       &__nav-prev,
       &__nav-next {
         display: flex;
@@ -507,10 +511,6 @@
         order: 3;
         padding-left: 10px;
         margin-right: -5px;
-      }
-      &__nav-wrap {
-        display: flex;
-        padding: 0;
       }
       .el-icon-arrow-right,
       .el-icon-arrow-left {
