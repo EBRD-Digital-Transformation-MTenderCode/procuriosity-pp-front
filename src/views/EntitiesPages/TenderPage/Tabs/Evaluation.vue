@@ -89,7 +89,7 @@
             />
             <div class="evaluation-table__status-time"
                  v-if="!(gd(award, _ => _.status) === 'pending' && gd(award, _ => _.statusDetails) === 'empty')">
-              {{ fd(gd(award, _ => _.date)) }}
+              {{ fd(gd(award, _ => _.date), "DD.MM.YYYY / HH:mm", "") }}
             </div>
           </td>
         </tr>

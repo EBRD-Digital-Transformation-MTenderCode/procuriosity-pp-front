@@ -2,12 +2,12 @@
   <div>
     <div class="entity-nav" data-scroll-spy-id="cn" @click="needDisplay =! needDisplay"
          v-scroll-spy-active="{selector: 'a', class: 'active'}" v-scroll-spy-link>
-      <a :displayLink=needDisplay>{{ $t("tender.contracting_authority") }}</a>
-      <a :displayLink=needDisplay>{{ $t("tender.object") }}</a>
+      <a :data-displayLink=needDisplay>{{ $t("tender.contracting_authority") }}</a>
+      <a :data-displayLink=needDisplay>{{ $t("tender.object") }}</a>
       <!--<a>Legal, economic, financial and technical information</a>-->
-      <a :displayLink=needDisplay>{{ $t("tender.procedure") }}</a>
-      <a :displayLink=needDisplay>{{ $t("tender.budget") }}</a>
-      <a :displayLink=needDisplay>{{ $t("tender.complementary_information") }}</a>
+      <a :data-displayLink=needDisplay>{{ $t("tender.procedure") }}</a>
+      <a :data-displayLink=needDisplay>{{ $t("tender.budget") }}</a>
+      <a :data-displayLink=needDisplay>{{ $t("tender.complementary_information") }}</a>
     </div>
     <div class="info" data-scroll-spy-id="cn" v-scroll-spy="{offset: computedOffset, allowNoActive: true}">
 
