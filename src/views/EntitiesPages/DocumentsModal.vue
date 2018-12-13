@@ -38,6 +38,6 @@
         type: Array,
         required: true
       }
-    }
+    },
   };
 </script>

@@ -1,5 +1,6 @@
 import idx from "idx";
 import dayjs from "dayjs";
+import documentsTypes from "./store/types/documents-types";
 
 export function getDataFromObject(obj, getFunc, def = "") {
   return idx(obj, getFunc) || def;
@@ -55,15 +56,6 @@ export const convertObjectToQueryParamsString = obj => {
   }
 };
 
-export const convertCamelCaseToTitleCase = str => {
-  if (!str && typeof str !== "string") {
-    throw new Error;
-  }
-
-  const result = str.replace(/([A-Z])/g, " $1");
-  return result.charAt(0).toUpperCase() + result.slice(1);
-};
-
 export const transformSpecialSymbols = str => {
   if (!str && typeof str !== "string") {
     throw new Error;
@@ -71,3 +63,14 @@ export const transformSpecialSymbols = str => {
   const parser = new DOMParser;
   return parser.parseFromString(`<!doctype html><html><body> ${str}</body></html>`, "text/html").body.textContent;
 };
+export function parseDocumentsTypes(documentsType, lang) {
+  if (documentsTypes.hasOwnProperty(documentsType)) {
+    return documentsTypes[documentsType][lang];
+  } else {
+    if (!documentsType && typeof documentsType !== "string") {
+      throw new Error;
+    }
+    const result = documentsType.replace(/([A-Z])/g, " $1");
+    return result.charAt(0).toUpperCase() + result.slice(1);
+  }
+}
