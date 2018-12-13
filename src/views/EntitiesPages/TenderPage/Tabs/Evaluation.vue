@@ -31,7 +31,7 @@
             </div>
           </td>
           <td :data-th="$t('tender.bids_final_amount')">
-            <div class="evaluation-table__amount">{{ fa(gd(award, _ => _.value.amount, 0)) }}&#8194;</div>
+            <div class="evaluation-table__amount">{{ fa(gd(award, _ => _.value.amount, 0)) }}</div>
             <div class="evaluation-table__currency">{{ gd(award, _ => _.value.currency) }} {{
               $t("tender.excluding_vat")}}
             </div>
@@ -89,7 +89,7 @@
             />
             <div class="evaluation-table__status-time"
                  v-if="!(gd(award, _ => _.status) === 'pending' && gd(award, _ => _.statusDetails) === 'empty')">
-              {{ fd(gd(award, _ => _.date)) }}
+              {{ fd(gd(award, _ => _.date), "DD.MM.YYYY / HH:mm", "") }}
             </div>
           </td>
         </tr>

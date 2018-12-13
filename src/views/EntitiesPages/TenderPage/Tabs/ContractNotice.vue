@@ -2,12 +2,12 @@
   <div>
     <div class="entity-nav" data-scroll-spy-id="cn" @click="needDisplay =! needDisplay"
          v-scroll-spy-active="{selector: 'a', class: 'active'}" v-scroll-spy-link>
-      <a :displayLink=needDisplay>{{ $t("tender.contracting_authority") }}</a>
-      <a :displayLink=needDisplay>{{ $t("tender.object") }}</a>
+      <a :data-displayLink=needDisplay>{{ $t("tender.contracting_authority") }}</a>
+      <a :data-displayLink=needDisplay>{{ $t("tender.object") }}</a>
       <!--<a>Legal, economic, financial and technical information</a>-->
-      <a :displayLink=needDisplay>{{ $t("tender.procedure") }}</a>
-      <a :displayLink=needDisplay>{{ $t("tender.budget") }}</a>
-      <a :displayLink=needDisplay>{{ $t("tender.complementary_information") }}</a>
+      <a :data-displayLink=needDisplay>{{ $t("tender.procedure") }}</a>
+      <a :data-displayLink=needDisplay>{{ $t("tender.budget") }}</a>
+      <a :data-displayLink=needDisplay>{{ $t("tender.complementary_information") }}</a>
     </div>
     <div class="info" data-scroll-spy-id="cn" v-scroll-spy="{offset: computedOffset, allowNoActive: true}">
 
@@ -268,7 +268,7 @@
         </div>
       </div>
       </div>
-  
+
       <!-- Object -->
       <div>
         <div class="info__title">{{ $t("tender.object") }}</div>
@@ -427,9 +427,9 @@
                   </el-row>
                 </div>
               </div>
-  
+
               <!-- <div class="info__sub-title">Level of Performance</div>-->
-  
+
               <!--<div class="info-block">
                 <el-:rowrgutten"15>
                   <el-col :sm="16">
@@ -581,7 +581,7 @@
                   <el-row :gutter="15">
                     <el-col :sm="24">
                       <div class="info-block__value">
-                        {{ convertCase(gd(doc, _ => _.documentType)) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a></div>
+                        {{ parseDocType(gd(doc, _ => _.documentType)) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a></div>
                     </el-col>
                   </el-row>
                 <el-row :gutter="15">
@@ -602,7 +602,7 @@
           </el-collapse-item>
         </el-collapse>
       </div>
-  
+
       <!-- Legal, economic, financial and technical information -->
       <!--<div>
         <div class="info__title">Legal, economic, financial and technical information</div>
@@ -822,7 +822,7 @@
           </div>
         </div>&ndash;&gt;
       </div>-->
-  
+
       <!-- Procedure -->
       <div>
         <div class="info__title">{{ $t("tender.procedure") }}</div>
@@ -961,7 +961,7 @@
           </div>
         </div>
       </div>
-  
+
       <!-- Budget -->
       <div>
         <div class="info__title">{{ $t("tender.budget") }}</div>
@@ -1114,7 +1114,7 @@
           </div>
         </div>
       </div>
-  
+
       <!-- Complementary information -->
       <div>
         <div class="info__title">{{ $t("tender.complementary_information") }}</div>
@@ -1150,7 +1150,7 @@
               <el-row :gutter="15">
                 <el-col :sm="24">
                   <div class="info-block__value ">
-                    {{ convertCase(gd(doc, _ => _.documentType) ) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a>
+                    {{ parseDocType(gd(doc, _ => _.documentType) ) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a>
                   </div>
                 </el-col>
               </el-row>
@@ -1299,7 +1299,7 @@
   import {
     getDataFromObject,
     formatDate,
-    convertCamelCaseToTitleCase,
+    parseDocumentType,
     addPeriod,
     formatAmount
   } from "./../../../../utils";
@@ -1397,8 +1397,8 @@
       fd(...ars) {
         return formatDate(...ars);
       },
-      convertCase(str) {
-        return convertCamelCaseToTitleCase(str);
+      parseDocType(type) {
+        return parseDocumentType(type, this.$i18n.locale );
       },
       add(date, timePeriod, count) {
         return addPeriod(date, timePeriod, count);

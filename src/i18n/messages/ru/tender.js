@@ -64,7 +64,7 @@ export default {
 
   "estimated_value_excluding_VAT":"Ожидаемая стоимость закупки без учета НДС",
   "review_procedures_title": "Процедура разрешения споров",
-  "review_procedures":"Процедура разрешения споров",
+  "review_procedures":"Процедура разрешения&nbsp;споров",
   "procurement_plan":"План <br/>закупки",
 
   "contract_notice":"Объявление на участие",

@@ -479,25 +479,39 @@
           transition: 0.4s;
         }
       }
-
+      &__item {
+        &:nth-child(2) {
+          padding-left: 14px !important;
+        }
+        &:last-child {
+          padding-right: 14px !important;
+        }
+      }
+      &__nav-wrap {
+        display: flex;
+        padding: 0;
+      }
       &__nav-prev,
       &__nav-next {
-        height: 100%;
         display: flex;
         align-items: center;
+        position: static;
+        height: auto;
         color: #2da9e2;
         font-size: 25px;
         font-weight: 700 !important;
       }
 
       &__nav-prev {
-        transform: translateX(-5px);
+        margin-left: -5px;
+        padding-right: 10px;
       }
 
       &__nav-next {
-        transform: translateX(5px);
+        order: 3;
+        padding-left: 10px;
+        margin-right: -5px;
       }
-
       .el-icon-arrow-right,
       .el-icon-arrow-left {
         font-weight: 700;
@@ -525,16 +539,6 @@
 
       &__content {
         overflow: inherit;
-      }
-
-      .is-top {
-        &:last-child {
-          padding-right: 14px;
-        }
-
-        &:nth-child(2) {
-          padding-left: 14px;
-        }
       }
     }
 
@@ -568,7 +572,7 @@
         &:not(.active) {
           display: none;
         }
-        &[displayLink = true] {
+        &[data-displayLink] {
           @media (max-width: 775px) {
             display: block !important;
             width: 100%;
@@ -580,11 +584,9 @@
       :hover {
         color: $mainC;
       }
-
       &:first-child {
         padding-left: 0;
       }
-
       &:last-child {
         padding-right: 0;
       }
@@ -943,6 +945,7 @@
   &__amount,
   &__docs-espd-button {
     line-height: 1.75;
+    padding-right: 5px;
     font-size: 15px;
   }
 
@@ -989,6 +992,7 @@
   &__amount,
   &__status,
   &__docs-espd-button {
+    padding-right: 5px;
     line-height: 1.75;
     font-size: 15px;
   }
@@ -1008,8 +1012,8 @@
   &__docs-espd-button,
   &__status {
     text-decoration: underline;
+    padding-right: 5px;
   }
-
   &__status {
     &:first-letter {
       text-transform: uppercase;
