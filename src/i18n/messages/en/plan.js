@@ -111,6 +111,7 @@ export default {
   "procudures_for_review":"Procudures for review",
 
   "fax":"Fax",
+  "review_procedures_title": "Review/complaint procedures",
   "review_procedures":"Review procedures",
   "review_procedures_p1":"The Economic Operator which has an interest in being awarded a public procurement contract and wishes to submit a complaint to the National Complaint Settlement Agency shall follow the procedures contained in Article 79-80 of the Law. Interim measures and suspention of the procedure may be requested",
   "review_procedures_list1_p1":"The Economic Operator may submit a complaint within",

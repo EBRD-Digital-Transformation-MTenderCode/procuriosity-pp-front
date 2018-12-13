@@ -116,7 +116,7 @@ export default {
   "procudures_for_review": "Procedura de contestare",
 
   "fax": "Fax",
-
+  "review_procedures_title": "Procedura de contestare",
   "review_procedures": "Procedura de contestare",
   "review_procedures_p1": "Operatorul economic care are interes  în atribuirea unui contract de achiziție publică și dorește să depună o contestație la Agenția Națională pentru Soluționarea Contestațiilor va trebui să se conformeze procedurilor prevăzute la art. 82-86 din Lege. Se pot solicita măsuri interimare și suspendarea procedurii.",
   "review_procedures_list1_p1": "Operatorul economic poate depune o contestație în ",
