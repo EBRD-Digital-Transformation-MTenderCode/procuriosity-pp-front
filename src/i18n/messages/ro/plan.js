@@ -68,7 +68,7 @@ export default {
   "administrative_information": "Informații administrative",
 
   "previous_publication_concerning_procedure": "Publicare anterioară privind această procedură",
-  "PP_Buyer_profile_PIN": "Anunț de intenție: Nr.",
+  "PP_Buyer_profile_PIN": "Anunț de intenție: №",
   "estimated_date": "Data estimată a expedierii invitațiilor de prezentare a ofertelor sau de participare către candidații selectați",
   "languages_submitted": "Limbile în care pot fi depuse ofertele sau cererile de participare",
   "romanian_russian": " Română, Rusă",

@@ -241,7 +241,7 @@
           </el-col>
           <el-col :sm="12">
             <div class="info-block__text">
-              {{ fa(Math.min(...gd(gd(evRecord, _ => _.awards, []).filter(award => gd(award, _ => _.relatedLots[0]) === lot.id && gd(award, _ => _.status) !== "pending").map(award => award.value.amount), _ => _, []))) }} MDL
+              {{ fa(Math.min(...gd(gd(evRecord, _ => _.awards, []).filter(award => gd(award, _ => _.relatedLots[0]) === lot.id && gd(award, _ => _.status) !== "pending").map(award => gd(award, _ => _.value.amount, 0)), _ => _, []))) }} MDL
             </div>
           </el-col>
         </el-row>
@@ -252,7 +252,7 @@
           </el-col>
           <el-col :sm="12">
             <div class="info-block__text">
-              {{ fa(Math.max(...gd(gd(evRecord, _ => _.awards, []).filter(award => gd(award, _ => _.relatedLots[0]) === lot.id&& gd(award, _ => _.status) !== "pending").map(award => award.value.amount), _ => _, []))) }} MDL
+              {{ fa(Math.max(...gd(gd(evRecord, _ => _.awards, []).filter(award => gd(award, _ => _.relatedLots[0]) === lot.id&& gd(award, _ => _.status) !== "pending").map(award => gd(award, _ => _.value.amount, 0)), _ => _, []))) }} MDL
             </div>
           </el-col>
         </el-row>

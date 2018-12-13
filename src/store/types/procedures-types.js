@@ -2,14 +2,6 @@ export default {
   plans: [
     {
       name: {
-        en: "Request for price quotation",
-        ro: "Cerere de cotare de preț",
-        ru: "Запрос ценового предложения"
-      },
-      value: "belowThreshold"
-    },
-    {
-      name: {
         en: "Low value procedure",
         ro: "Achiziții de valoare mică",
         ru: "Закупка малой стоимости"
@@ -18,7 +10,7 @@ export default {
     },
     {
       name: {
-        en: "Request for Proposals",
+        en: "Request for quotation",
         ro: "Cerere Oferte de Prețuri",
         ru: "Запрос ценовых оферт"
       },
@@ -41,14 +33,6 @@ export default {
         ru: "Переговоры без публикации"
       },
       value: "reporting"
-    },
-    {
-      name: {
-        en: "Request for quotation",
-        ro: "Cerere Oferte de Prețuri",
-        ru: "Запрос ценовых оферт"
-      },
-      value: "belowThreshold"
     },
     {
       name: {

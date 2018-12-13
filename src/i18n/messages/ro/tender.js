@@ -134,7 +134,7 @@ export default {
   "start_date": "Data începerii",
   "administrative_information": "Informații administrative",
   "previous_publication_concerning_procedure": "Publicare anterioară privind această procedură",
-  "PP_Buyer_profile_PIN": "Anunț de intenție: Nr.",
+  "PP_Buyer_profile_PIN": "Anunț de intenție: №",
   "time_limit": "Termen limită pentru primirea ofertelor sau a cererilor de participare",
   "estimated_date": "Data estimată a expedierii invitațiilor de prezentare a ofertelor sau de participare către candidații selectați",
   "languages_submitted": "Limbile în care pot fi depuse ofertele sau cererile de participare",
