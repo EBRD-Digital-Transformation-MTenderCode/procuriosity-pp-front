@@ -66,6 +66,7 @@
                 :ref="award.id"
                 :open="false"
                 :documents="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.filter(_doc => _doc.documentType !== 'x_eligibilityDocuments') : []"
+                noItemsText="No documents"
             />
           </td>
           <!--<td>

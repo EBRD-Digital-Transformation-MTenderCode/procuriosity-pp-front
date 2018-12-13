@@ -125,6 +125,7 @@
                 :ref="bid.id"
                 :open="false"
                 :documents="bid.hasOwnProperty('documents') ? bid.documents.filter(_doc => _doc.documentType !== 'x_eligibilityDocuments'): []"
+                noItemsText="No documents"
             />
           </td>
         </tr>
