@@ -67,7 +67,7 @@ export default {
   "review_procedures":"Процедура разрешения&nbsp;споров",
   "procurement_plan":"План <br/>закупки",
 
-  "contract_notice":"Объявление на участие",
+  "contract_notice":"Объявление<br/> на участие",
   "clarification_and_changes":"Разъяснения и изменения",
   "electronic_auction":"Электронный аукцион",
   "electronic_bids":"Электронные <br/>оферты",

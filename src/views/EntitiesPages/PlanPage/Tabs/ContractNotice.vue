@@ -1104,7 +1104,7 @@
           </div>
         </div>
         <div v-else>{{ $t("plan.no_documents") }}</div>
-        <div class="info__sub-title">{{ $t("plan.procudures_for_review") }}</div>
+        <div class="info__sub-title" v-html="$t('plan.procudures_for_review')"></div>
         <div class="info-blocks">
           <div class="info-block">
             <el-row :gutter="15">
@@ -1197,7 +1197,7 @@
           </div>
         </div>
 
-        <div class="info__sub-title">{{ $t("plan.review_procedures") }}</div>
+        <div class="info__sub-title">{{ $t("plan.review_procedures_title") }}</div>
         <div class="info-block">
           <p>
             {{ $t("plan.review_procedures_p1") }}
