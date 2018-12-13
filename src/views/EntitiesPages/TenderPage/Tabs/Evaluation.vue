@@ -31,7 +31,7 @@
             </div>
           </td>
           <td :data-th="$t('tender.bids_final_amount')">
-            <div class="evaluation-table__amount">{{ fa(gd(award, _ => _.value.amount, 0)) }}&#8194;</div>
+            <div class="evaluation-table__amount">{{ fa(gd(award, _ => _.value.amount, 0)) }}</div>
             <div class="evaluation-table__currency">{{ gd(award, _ => _.value.currency) }} {{
               $t("tender.excluding_vat")}}
             </div>

@@ -15,7 +15,7 @@
             <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__value ">
-                  {{ parseDT(gd(doc, _ => _.documentType)) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a>
+                  {{ parseDocType(gd(doc, _ => _.documentType)) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a>
                 </div>
               </el-col>
             </el-row>
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-  import { getDataFromObject, formatDate, convertCamelCaseToTitleCase, parseDocumentsTypes } from "./../../../utils";
+  import { getDataFromObject, formatDate, parseDocumentType } from "./../../../utils";
 
   export default {
     name: "DocumentsModal",
@@ -68,8 +68,8 @@
       convertCase(str) {
         return convertCamelCaseToTitleCase(str);
       },
-      parseDT(type) {
-        return parseDocumentsTypes(type, this.$i18n.locale );
+      parseDocType(type) {
+        return parseDocumentType(type, this.$i18n.locale );
       }
     }
   };

@@ -581,7 +581,7 @@
                   <el-row :gutter="15">
                     <el-col :sm="24">
                       <div class="info-block__value">
-                        {{ parseDT(gd(doc, _ => _.documentType)) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a></div>
+                        {{ parseDocType(gd(doc, _ => _.documentType)) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a></div>
                     </el-col>
                   </el-row>
                 <el-row :gutter="15">
@@ -1150,7 +1150,7 @@
               <el-row :gutter="15">
                 <el-col :sm="24">
                   <div class="info-block__value ">
-                    {{ parseDT(gd(doc, _ => _.documentType) ) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a>
+                    {{ parseDocType(gd(doc, _ => _.documentType) ) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a>
                   </div>
                 </el-col>
               </el-row>
@@ -1299,7 +1299,7 @@
   import {
     getDataFromObject,
     formatDate,
-    parseDocumentsTypes,
+    parseDocumentType,
     addPeriod,
     formatAmount
   } from "./../../../../utils";
@@ -1397,8 +1397,8 @@
       fd(...ars) {
         return formatDate(...ars);
       },
-      parseDT(type) {
-        return parseDocumentsTypes(type, this.$i18n.locale );
+      parseDocType(type) {
+        return parseDocumentType(type, this.$i18n.locale );
       },
       add(date, timePeriod, count) {
         return addPeriod(date, timePeriod, count);

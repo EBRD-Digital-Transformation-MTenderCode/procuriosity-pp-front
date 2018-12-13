@@ -63,7 +63,7 @@ export const transformSpecialSymbols = str => {
   const parser = new DOMParser;
   return parser.parseFromString(`<!doctype html><html><body> ${str}</body></html>`, "text/html").body.textContent;
 };
-export function parseDocumentsTypes(documentsType, lang) {
+export function parseDocumentType(documentsType, lang) {
   if (documentsTypes.hasOwnProperty(documentsType)) {
     return documentsTypes[documentsType][lang];
   } else {

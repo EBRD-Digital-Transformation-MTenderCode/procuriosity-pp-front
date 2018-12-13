@@ -94,7 +94,7 @@
             <div class="offers-table__time"> {{ fd(gd(bid, _ => _.date), "HH:mm") }}</div>
           </td>
           <td :data-th="$t('tender.initial_offer')">
-            <div class="offers-table__amount">{{ fa(gd(bid, _ => _.value.amount)) }} &#8194;</div>
+            <div class="offers-table__amount">{{ fa(gd(bid, _ => _.value.amount)) }}</div>
             <div class="offers-table__currency">{{ gd(bid, _ => _.value.currency) }} {{ $t("tender.exluding_vat")}}
             </div>
           </td>

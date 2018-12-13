@@ -555,7 +555,7 @@
                   <el-row :gutter="15">
                     <el-col :sm="24">
                       <div class="info-block__value">
-                        {{ parseDT(gd(doc, _ => _.documentType)) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a></div>
+                        {{ parseDocType(gd(doc, _ => _.documentType)) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a></div>
                     </el-col>
                   </el-row>
                   <el-row :gutter="15">
@@ -1084,7 +1084,7 @@
               <el-row :gutter="15">
                 <el-col :sm="24">
                   <div class="info-block__value ">
-                    {{ parseDT(gd(doc, _ => _.documentType) ) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a>
+                    {{ parseDocType(gd(doc, _ => _.documentType) ) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a>
                   </div>
                 </el-col>
               </el-row>
@@ -1232,7 +1232,7 @@
   import typesOfBuyers from "./../../../../store/types/buyers-types";
   import mainGeneralActivites from "./../../../../store/types/main-general-activity-types";
 
-  import { getDataFromObject, formatDate, parseDocumentsTypes, formatAmount} from "./../../../../utils";
+  import { getDataFromObject, formatDate, parseDocumentType, formatAmount} from "./../../../../utils";
 
   export default {
     name: "ContractNotice",
@@ -1284,8 +1284,8 @@
       fd(...ars) {
         return formatDate(...ars);
       },
-      parseDT(type) {
-        return parseDocumentsTypes(type, this.$i18n.locale );
+      parseDocType(type) {
+        return parseDocumentType(type, this.$i18n.locale );
       },
       add(date){
         return addDay(date)
