@@ -38,7 +38,7 @@
             <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__value ">
-                  {{ convertCase(gd(doc, _ => _.documentType) ) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a>
+                  {{ parseDocType(gd(doc, _ => _.documentType) ) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a>
                 </div>
               </el-col>
             </el-row>
@@ -63,7 +63,7 @@
 </template>
 
 <script>
-  import { getDataFromObject, formatDate, convertCamelCaseToTitleCase } from "./../../../utils";
+  import { getDataFromObject, formatDate, parseDocumentType} from "./../../../utils";
 
   export default {
     name: "AwardInfoModal",
@@ -85,9 +85,9 @@
       fd(...ars) {
         return formatDate(...ars);
       },
-      convertCase(str) {
-        return convertCamelCaseToTitleCase(str);
-      }
+      parseDocType(type) {
+        return parseDocumentType(type, this.$i18n.locale );
+      },
     }
   };
 </script>

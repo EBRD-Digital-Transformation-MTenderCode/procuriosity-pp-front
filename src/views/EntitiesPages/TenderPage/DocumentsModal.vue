@@ -65,9 +65,6 @@
       fd(...ars) {
         return formatDate(...ars);
       },
-      convertCase(str) {
-        return convertCamelCaseToTitleCase(str);
-      },
       parseDocType(type) {
         return parseDocumentType(type, this.$i18n.locale );
       }
