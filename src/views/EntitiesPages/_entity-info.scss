@@ -489,24 +489,22 @@
       }
       &__nav-prev,
       &__nav-next {
-        position: static;
-        height: 100%;
         display: flex;
         align-items: center;
+        position: static;
+        height: auto;
         color: #2da9e2;
         font-size: 25px;
         font-weight: 700 !important;
       }
 
       &__nav-prev {
-        height: auto;
         margin-left: -5px;
         padding-right: 10px;
       }
 
       &__nav-next {
         order: 3;
-        height: auto;
         padding-left: 10px;
         margin-right: -5px;
       }

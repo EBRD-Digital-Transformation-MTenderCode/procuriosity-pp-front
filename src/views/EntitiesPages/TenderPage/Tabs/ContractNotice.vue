@@ -268,7 +268,7 @@
         </div>
       </div>
       </div>
-  
+
       <!-- Object -->
       <div>
         <div class="info__title">{{ $t("tender.object") }}</div>
@@ -427,9 +427,9 @@
                   </el-row>
                 </div>
               </div>
-  
+
               <!-- <div class="info__sub-title">Level of Performance</div>-->
-  
+
               <!--<div class="info-block">
                 <el-:rowrgutten"15>
                   <el-col :sm="16">
@@ -602,7 +602,7 @@
           </el-collapse-item>
         </el-collapse>
       </div>
-  
+
       <!-- Legal, economic, financial and technical information -->
       <!--<div>
         <div class="info__title">Legal, economic, financial and technical information</div>
@@ -822,7 +822,7 @@
           </div>
         </div>&ndash;&gt;
       </div>-->
-  
+
       <!-- Procedure -->
       <div>
         <div class="info__title">{{ $t("tender.procedure") }}</div>
@@ -961,7 +961,7 @@
           </div>
         </div>
       </div>
-  
+
       <!-- Budget -->
       <div>
         <div class="info__title">{{ $t("tender.budget") }}</div>
@@ -1114,7 +1114,7 @@
           </div>
         </div>
       </div>
-  
+
       <!-- Complementary information -->
       <div>
         <div class="info__title">{{ $t("tender.complementary_information") }}</div>
