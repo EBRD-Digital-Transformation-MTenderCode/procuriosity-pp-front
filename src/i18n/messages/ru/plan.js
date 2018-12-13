@@ -69,7 +69,7 @@ export default {
   "start_date":"Дата начала",
   "administrative_information":"Административная информация",
   "previous_publication_concerning_procedure":"Предыдущая публикация по этой процедуре",
-  "PP_Buyer_profile_PIN":"Объявление о намерении: но.",
+  "PP_Buyer_profile_PIN":"Объявление о намерении: №.",
   "estimated_date":"Ориентировочная дата отправки приглашений для подачи оферты или на участия выбранным кандидатам.",
   "languages_submitted":"Языки на которых могут быть подданы оферты или заявки на участие",
   "romanian_russian":" Румынский, Русский",
