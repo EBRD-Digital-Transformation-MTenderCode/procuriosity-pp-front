@@ -4,7 +4,7 @@
       <a>{{ $t("plan.contracting_authority") }}</a>
       <a>{{ $t("plan.object") }}</a>
       <!--<a>Legal, economic, financial and technical information</a>-->
-      <a>{{ $t("plan.procedure") }}</a>
+      <!--<a>{{ $t("plan.procedure") }}</a>-->
       <a>{{ $t("plan.budget") }}</a>
       <a>{{ $t("plan.complementary_information") }}</a>
     </div>
@@ -799,7 +799,7 @@
       </div>-->
 
       <!-- Procedure -->
-      <div>
+      <!--<div>
         <div class="info__title">{{ $t("plan.procedure") }}</div>
         <div class="info__sub-title">{{ $t("plan.description") }}</div>
         <div class="info-blocks">
@@ -811,10 +811,10 @@
                   {{ procedureType }}
                 </div>
               </el-col>
-              <!--<el-col :sm="14">
+              &lt;!&ndash;<el-col :sm="14">
                 <div class="info-block__text">Accelerated procedure</div>
                 <div class="info-block__value">???Justification:</div>
-              </el-col>-->
+              </el-col>&ndash;&gt;
             </el-row>
           </div>
         </div>
@@ -827,11 +827,11 @@
                 <div class="info-block__text">{{ $t("plan.previous_publication_concerning_procedure") }}</div>
                 <div class="info-block__value">
                   {{ $t("plan.PP_Buyer_profile_PIN") }}
-                  <!--<a
+                  &lt;!&ndash;<a
                     :href="`/plans/${gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === 'planning')), _ => _.identifier)}`"
-                    target="_blank">-->
+                    target="_blank">&ndash;&gt;
                   {{ gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === "planning")), _ => _.identifier) }}
-                  <!--</a>-->
+                  &lt;!&ndash;</a>&ndash;&gt;
                 </div>
               </el-col>
             </el-row>
@@ -874,12 +874,12 @@
                 </div>
 
               </el-col>
-              <!-- <el-col :sm="16">
+              &lt;!&ndash; <el-col :sm="16">
                  <div class="info-block__text"> Information about authorised persons and opening procedure</div>
                  <div class="info-block__value">
-                 -->
-              <!-- @TODO text from Pasha -->
-              <!--Full name of the persone
+                 &ndash;&gt;
+              &lt;!&ndash; @TODO text from Pasha &ndash;&gt;
+              &lt;!&ndash;Full name of the persone
             </div>
           </el-col>
           <el-col :sm="8">
@@ -889,11 +889,11 @@
               _.address.addressDetails.locality.description) }}
             </div>
           </el-col>
-        -->
+        &ndash;&gt;
             </el-row>
           </div>
         </div>
-      </div>
+      </div>-->
 
       <!-- Budget -->
       <div>
@@ -1051,19 +1051,19 @@
       <!-- Complementary information -->
       <div>
         <div class="info__title">{{ $t("plan.complementary_information") }}</div>
-        <div class="info__sub-title">{{ $t("plan.information_about_electronic_workflows") }}</div>
+        <!--<div class="info__sub-title">{{ $t("plan.information_about_electronic_workflows") }}</div>
         <ul class="info-list">
           <li>{{ $t("plan.complementary_information_list1_p1") }}</li>
           <li>{{ $t("plan.complementary_information_list1_p2") }}</li>
           <li>{{ $t("plan.complementary_information_list1_p3") }}</li>
           <li>{{ $t("plan.complementary_information_list1_p4") }} </li>
           <li>{{ $t("plan.complementary_information_list1_p5") }}</li>
-        </ul>
+        </ul>-->
 
         <div class="info__sub-title">{{ $t("plan.additional_information") }}</div>
         <ul class="info-list">
           <li>{{ $t("plan.complementary_information_list2_p1") }}</li>
-          <li>{{ $t("plan.complementary_information_list2_p2") }}</li>
+          <!--<li>{{ $t("plan.complementary_information_list2_p2") }}</li>
           <li>{{ $t("plan.complementary_information_list2_p3") }}</li>
           <li v-if="procedureType==='Open Tender' || procedureType==='Licitație deschisă' || procedureType==='Открытые торги'">
             {{ $t("plan.complementary_information_list2_p4_1") }}
@@ -1071,7 +1071,7 @@
             {{ $t("plan.complementary_information_list2_p4_2") }}
           </li>
           <li> {{ $t("plan.complementary_information_list2_p5") }}
-          </li>
+          </li>-->
         </ul>
 
         <div class="info__sub-title">{{ $t("plan.procedure_documents") }}</div>
@@ -1104,7 +1104,8 @@
           </div>
         </div>
         <div v-else>{{ $t("plan.no_documents") }}</div>
-        <div class="info__sub-title" v-html="$t('plan.procudures_for_review')"></div>
+
+        <!--<div class="info__sub-title" v-html="$t('plan.procudures_for_review')"></div>
         <div class="info-blocks">
           <div class="info-block">
             <el-row :gutter="15">
@@ -1219,7 +1220,8 @@
               {{ $t("plan.review_procedures_list1_p4") }}
             </li>
           </ol>
-        </div>
+        </div>-->
+
       </div>
       <div class="info__sub-title">{{ $t("plan.date_online_publication") }}: {{ fd(gd(pnRecord, _ => _.tender.tenderPeriod.startDate), "DD/MM/YYYY") }}</div>
     </div>

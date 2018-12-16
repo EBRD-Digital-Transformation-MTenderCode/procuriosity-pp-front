@@ -298,8 +298,8 @@
               </el-col>-->
               <el-col :sm="8">
                 <div class="info-block__text">{{ $t("tender.type_of_contract") }}</div>
-                <div class="info-block__value info-block__value_name">{{ gd(msRecord, _ =>
-                  _.tender.mainProcurementCategory) }}
+                <div class="info-block__value info-block__value_name">
+                  {{ getMainProcurementCategory }}
                 </div>
               </el-col>
             </el-row>
@@ -1293,6 +1293,8 @@
 <script>
   import axios from "axios";
 
+
+  import mainProcurementCategory from "./../../../../store/types/main-procurement-category";
   import typesOfBuyers from "./../../../../store/types/buyers-types";
   import mainGeneralActivites from "./../../../../store/types/main-general-activity-types";
 
@@ -1370,25 +1372,12 @@
 
         return mainGeneralActivites.find(activity => activity.value === this.gd(this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")), _ => _.details.mainGeneralActivity)).name[this.$i18n.locale];
       },
+      getMainProcurementCategory() {
+        return mainProcurementCategory[this.gd(this.msRecord, _ => _.tender.mainProcurementCategory)][this.$i18n.locale];
+      },
       randomSortPlatforms() {
         return [...this.platforms].sort(() => 0.5 - Math.random());
       }
-    },
-    watch: {
-      windowWidth(width) {
-        if (width <= 775) {
-          this.computedOffset = 230;
-        } else this.computedOffset = 75;
-      }
-    },
-    mounted() {
-      this.$nextTick(() => {
-        window.addEventListener("resize", this.setWindowSize);
-        this.windowWidth = window.innerWidth;
-      });
-    },
-    destroyed() {
-      window.removeEventListener("resize", this.setWindowSize);
     },
     methods: {
       gd(...args) {
@@ -1446,6 +1435,22 @@
       setWindowSize() {
         this.windowWidth = window.innerWidth;
       }
+    },
+    mounted() {
+      this.$nextTick(() => {
+        window.addEventListener("resize", this.setWindowSize);
+        this.windowWidth = window.innerWidth;
+      });
+    },
+    watch: {
+      windowWidth(width) {
+        if (width <= 775) {
+          this.computedOffset = 230;
+        } else this.computedOffset = 75;
+      }
+    },
+    destroyed() {
+      window.removeEventListener("resize", this.setWindowSize);
     }
   };
 </script>

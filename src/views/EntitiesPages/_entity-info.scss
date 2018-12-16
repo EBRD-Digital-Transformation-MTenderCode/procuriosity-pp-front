@@ -762,7 +762,7 @@
 
     th,
     td {
-      padding: 14px 0;
+      padding: 14px 5px;
       line-height: 1;
       @media (max-width: 860px) {
         &:first-child {
@@ -928,7 +928,7 @@
 .offers-table {
   th:first-child,
   td:first-child {
-    width: 50%;
+    width: 45%;
   }
 
   &__tenderer-name {

@@ -73,11 +73,11 @@
             </div>
           </div>
         </div>
-        <div v-else>{{ $t("tender.no_clarifications") }}</div>
+        <div v-else>{{ $t("tender.no_data") }}</div>
       </div>
-      
+
       <div>
-        <div class="info__title">Modifications of tender documents</div>
+        <div class="info__title">{{ $t("tender.modification_documents") }}</div>
         <div v-if="evRecord.tender.hasOwnProperty('amendments')">
           <div class="info-blocks">
             <div
@@ -87,24 +87,24 @@
             >
               <el-row :gutter="25">
                 <el-col :sm="16">
-                  <div class="info-block__text">Amendment release</div>
+                  <div class="info-block__text">{{ $t("tender.amended_release") }}</div>
                   <div class="info-block__value">{{ amendment.amendsReleaseID }}</div>
                 </el-col>
                 <el-col :sm="8">
-                  <div class="info-block__text">Date of change</div>
+                  <div class="info-block__text">{{ $t("tender.date_of_change") }}</div>
                   <div class="info-block__value">{{ fd(amendment.date) }}</div>
                 </el-col>
               </el-row>
               <el-row :gutter="25">
                 <el-col :xs="24">
-                  <div class="info-block__text">Description of the scope of change</div>
+                  <div class="info-block__text">{{ $t("tender.description_of_changes") }}</div>
                   <div class="info-block__value">n/a</div>
                 </el-col>
               </el-row>
             </div>
           </div>
         </div>
-        <div v-else>No data</div>
+        <div v-else>{{ $t("tender.no_data") }}</div>
       </div>
     </div>
   </div>

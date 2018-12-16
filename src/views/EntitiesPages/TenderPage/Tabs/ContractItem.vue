@@ -1,6 +1,6 @@
 <template>
   <el-collapse-item
-      :name="lot.id + index"
+    :name="lot.id + index"
   >
     <template slot="title">
       <div class="info-blocks accordion-header">
@@ -8,7 +8,7 @@
           <el-row :gutter="15">
             <el-col :sm="16">
               <div class="info-block__text">
-                Lot
+                {{ $t("tender.lot") }}
               </div>
               <div class="info-block__value info-block__value__bold">
                 № {{ index + 1 }} - {{ lot.title }}
@@ -16,7 +16,7 @@
             </el-col>
             <el-col :sm="8">
               <div class="info-block__text">
-                Lot identifier
+                {{ $t("tender.lot_identifier") }}
               </div>
               <div class="info-block__value">
                 {{ lot.id }}
@@ -24,18 +24,18 @@
             </el-col>
           </el-row>
         </div>
-        
+
         <div class="info-block">
           <el-row :gutter="15">
             <el-col :sm="lot.status !== 'canceled' && lot.status !== 'unsuccessful' ? 16: 24">
               <div class="info-block__text">
-                Lot is {{ lot.status === "canceled" || lot.status === "unsuccessful" ? "not": ""}} awarded
+                {{ lot.status === "canceled" || lot.status === "unsuccessful" ? $t("tender.lot_is_not_awarded"): $t("tender.lot_is_awarded") }}
               </div>
               <div v-if="lot.status !== 'canceled' && lot.status !== 'unsuccessful'" class="info-block__value">
                 {{ gd(gd(contractForCurrentLot, _ => _.relatedProcesses, []).find(proc => gd(proc, _ => _.relationship, []).some(relationship => relationship === "x_contracting")), _ => _.identifier) }}
               </div>
               <div v-else>
-                {{ lot.status === "canceled" ? "Lot canceled": "No tenders or requests to participate / no minimum required number tenders or requests to participate were received" }}
+                {{ lot.status === "canceled" ? $t("tender.lot_is_canceled"): $t("tender.no_tenderers_or_request") }}
               </div>
             </el-col>
             <el-col :sm="8" v-if="lot.status !== 'canceled' && lot.status !== 'unsuccessful'">
@@ -50,7 +50,7 @@
         </div>
       </div>
     </template>
-    
+
     <transition name="fade" mode="out-in" appear>
       <div v-if="activeItemId === lot.id + index && (lot.status !== 'canceled')">
         <div class="info-blocks">
@@ -102,7 +102,7 @@
               </el-col>
             </el-row>
         </div>
-        
+
         <div v-if="lot.status !== 'canceled' && lot.status !== 'unsuccessful'">
           <div class="info__sub-title">{{ $t("tender.name_and_address_contractor") }}</div>
           <div class="info-blocks">
@@ -127,7 +127,7 @@
                 </el-col>
               </el-row>
             </div>
-            
+
             <div class="info-block">
               <el-row :gutter="15">
                 <el-col :sm="24">
@@ -141,7 +141,7 @@
                 </el-col>
               </el-row>
             </div>
-            
+
             <div class="info-block">
               <el-row :gutter="15">
                 <el-col :sm="6">
@@ -178,7 +178,7 @@
                 </el-col>
               </el-row>
             </div>
-            
+
             <div class="info-block">
               <el-row :gutter="15">
                 <el-col :sm="10">
@@ -211,54 +211,58 @@
             </div>
           </div>
         </div>
-        
-        <div class="info__sub-title">{{ $t("tender.info_on_value") }}</div>
-        <el-row :gutter="15">
-          <el-col :sm="12">
-            <div class="info-block__text">{{ $t("tender.initial_total_contract_value") }}:</div>
-          </el-col>
-          <el-col :sm="12">
-            <div class="info-block__text">
-              {{ fa(gd(lot, _ => _.value.amount)) }} MDL
-            </div>
-          </el-col>
-        </el-row>
 
-        <el-row v-if="lot.status !== 'canceled' && lot.status !== 'unsuccessful'" :gutter="15">
-          <el-col :sm="12">
-            <div class="info-block__text">{{ $t("tender.total_contract_value") }}:</div>
-          </el-col>
-          <el-col :sm="12">
-            <div class="info-block__text">
-              {{ fa(gd(winnerAwardForCurrentLot, _ => _.value.amount)) }} MDL
-            </div>
-          </el-col>
-        </el-row>
+        <div
+          v-if="gd(evRecord, _ => _.bids.details, []).filter(bid => gd(bid, _ => _.relatedLots[0]) === lot.id).length"
+        >
+          <div class="info__sub-title">{{ $t("tender.info_on_value") }}</div>
+          <el-row :gutter="15">
+            <el-col :sm="12">
+              <div class="info-block__text">{{ $t("tender.initial_total_contract_value") }}:</div>
+            </el-col>
+            <el-col :sm="12">
+              <div class="info-block__text">
+                {{ fa(gd(lot, _ => _.value.amount)) }} MDL
+              </div>
+            </el-col>
+          </el-row>
 
-        <el-row :gutter="15">
-          <el-col :sm="12">
-            <div class="info-block__text">{{ $t("tender.lowest_offer") }}:</div>
-          </el-col>
-          <el-col :sm="12">
-            <div class="info-block__text">
-              {{ fa(Math.min(...gd(gd(evRecord, _ => _.awards, []).filter(award => gd(award, _ => _.relatedLots[0]) === lot.id && gd(award, _ => _.status) !== "pending").map(award => gd(award, _ => _.value.amount, 0)), _ => _, []))) }} MDL
-            </div>
-          </el-col>
-        </el-row>
+          <el-row v-if="lot.status !== 'canceled' && lot.status !== 'unsuccessful'" :gutter="15">
+            <el-col :sm="12">
+              <div class="info-block__text">{{ $t("tender.total_contract_value") }}:</div>
+            </el-col>
+            <el-col :sm="12">
+              <div class="info-block__text">
+                {{ fa(gd(winnerAwardForCurrentLot, _ => _.value.amount)) }} MDL
+              </div>
+            </el-col>
+          </el-row>
 
-        <el-row :gutter="15">
-          <el-col :sm="12">
-            <div class="info-block__text">{{ $t("tender.highest_offer") }}:</div>
-          </el-col>
-          <el-col :sm="12">
-            <div class="info-block__text">
-              {{ fa(Math.max(...gd(gd(evRecord, _ => _.awards, []).filter(award => gd(award, _ => _.relatedLots[0]) === lot.id&& gd(award, _ => _.status) !== "pending").map(award => gd(award, _ => _.value.amount, 0)), _ => _, []))) }} MDL
-            </div>
-          </el-col>
-        </el-row>
-        
+          <el-row :gutter="15">
+            <el-col :sm="12">
+              <div class="info-block__text">{{ $t("tender.lowest_offer") }}:</div>
+            </el-col>
+            <el-col :sm="12">
+              <div class="info-block__text">
+                {{ fa(Math.min(...gd(gd(evRecord, _ => _.awards, []).filter(award => gd(award, _ => _.relatedLots[0]) === lot.id && gd(award, _ => _.status) !== "pending").map(award => gd(award, _ => _.value.amount, 0)), _ => _, []))) }} MDL
+              </div>
+            </el-col>
+          </el-row>
+
+          <el-row :gutter="15">
+            <el-col :sm="12">
+              <div class="info-block__text">{{ $t("tender.highest_offer") }}:</div>
+            </el-col>
+            <el-col :sm="12">
+              <div class="info-block__text">
+                {{ fa(Math.max(...gd(gd(evRecord, _ => _.awards, []).filter(award => gd(award, _ => _.relatedLots[0]) === lot.id&& gd(award, _ => _.status) !== "pending").map(award => gd(award, _ => _.value.amount, 0)), _ => _, []))) }} MDL
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+
         <div v-if="lot.status !== 'canceled' && lot.status !== 'unsuccessful'">
-          <div class="info__sub-title">Request for contract performance guarantee</div>
+          <div class="info__sub-title">{{ $t("tender.request_for_contract_performance_guarantee") }}</div>
           <div class="info-blocks">
           <div class="info-block">
             <div class="info-block__text">

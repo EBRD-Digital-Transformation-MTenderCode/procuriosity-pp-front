@@ -1,31 +1,31 @@
 <template>
   <div class="info">
-    <div class="info__title">Procurement Record № {{ gd(msRecord, _ => _.ocid) }}</div>
+    <div class="info__title">{{ $t("tender.procurement_record") }} № {{ gd(msRecord, _ => _.ocid) }}</div>
     <div class="info-blocks">
       <div class="info-block">
         <div>
-          <span class="info-block__text">Electronic tendering procedure started:</span>{{ " " }}
+          <span class="info-block__text">{{ $t("tender.electronic_tendering_procedure_started") }}:</span>{{ " " }}
           <span class="info-block__value">{{ fd(gd(evRecord, _ => _.tender.enquiryPeriod.startDate), "DD/MM/YYYY, HH:mm") }}</span>
         </div>
         <div>
-          <span class="info-block__text">Last updated:</span>{{ " " }}
+          <span class="info-block__text">{{ $t("tender.last_updated") }}:</span>{{ " " }}
           <span class="info-block__value">{{ fd(gd(msRecord, _ => _.date), "DD/MM/YYYY, HH:mm") }}</span>
         </div>
         <br />
         <p class="info-block__value">
-          Procurement record for each Electronic tendering procedure is electronically generated, authenticated and electronically signed using MSign signed by MTender services. It records proceedings of Contracting Authority in real-time, including detailed information related to the subject matter of the public procurement contract, the tender specifications and any documentation related to the award procedure of such contract. When generated, the Procurement record includes a reference or record of original electronic documents. Each Procurement record is published online in the contract register for audit trail, no hard copies or separate signatures are required or shall be retained.
+          {{ $t("tender.procurement_record_text") }}
         </p>
         <br>
       </div>
       <div class="info-block" />
     </div>
 
-    <div class="info__sub-title">Procurement Plan / Buyer's profile / PIN</div>
-    <div class="info-block__text">Previous publication concerning this procedure</div>
+    <div class="info__sub-title">{{ $t("tender.procurement_plan_buyers_profile_PIN") }}</div>
+    <div class="info-block__text">{{ $t("tender.previous_publication_concerning_procedure") }}</div>
     <div class="info-block__value">
       {{ $t("tender.PP_Buyer_profile_PIN") }}
       <a
-          :href="`/${$i18n.locale !== 'ro' ? $i18n.locale + '/' : ''}plans/${gd(msRecord, _ => _.ocid)}`"
+        :href="`/${$i18n.locale !== 'ro' ? $i18n.locale + '/' : ''}plans/${gd(msRecord, _ => _.ocid)}`"
       >
         {{ gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === "planning")), _ => _.identifier) }}
       </a>
@@ -59,7 +59,7 @@
       </div>
     </div>
 
-    <div class="info__sub-title">General information about Electronic tendering procedure</div>
+    <div class="info__sub-title">{{ $t("tender.general_info_about_electronic_procedure") }}</div>
     <div class="info-blocks">
       <div class="info-block">
         <el-row :gutter="15">
@@ -85,8 +85,8 @@
           </el-col>-->
           <el-col :sm="12">
             <div class="info-block__text">{{ $t("tender.type_of_contract") }}</div>
-            <div class="info-block__value info-block__value_name">{{ gd(msRecord, _ =>
-              _.tender.mainProcurementCategory) }}
+            <div class="info-block__value info-block__value_name">
+              {{ getMainProcurementCategory }}
             </div>
           </el-col>
         </el-row>
@@ -124,13 +124,13 @@
 
     <div class="info__sub-title">{{ $t("tender.budget") }}</div>
     <el-collapse
-        accordion
-        @change="getFS"
+      accordion
+      @change="getFS"
     >
       <el-collapse-item
-          v-for="(budgetBreakdown, index) of gd(msRecord, _ => _.planning.budget.budgetBreakdown, [])"
-          :key="budgetBreakdown.id + index"
-          :name="budgetBreakdown.id"
+        v-for="(budgetBreakdown, index) of gd(msRecord, _ => _.planning.budget.budgetBreakdown, [])"
+        :key="budgetBreakdown.id + index"
+        :name="budgetBreakdown.id"
       >
         <template slot="title">
           <div class="info-block accordion-header">
@@ -246,67 +246,67 @@
       </el-collapse-item>
     </el-collapse>
 
-    <div class="info__sub-title">Information about procurement (Contract Notice)</div>
+    <div class="info__sub-title">{{ $t("tender.info_about_cn") }}</div>
     <ul class="info-list">
       <li>
         <button
-            type="button"
-            class="info-block__link"
-            @click="selectTab('cn')"
+          type="button"
+          class="info-block__link"
+          @click="selectTab('cn')"
         >
-          Official publication of this procedure
+          {{ $t("tender.official_publication_procedure") }}
         </button>
       </li>
     </ul>
 
-    <div class="info__sub-title">Clarifications, changes and cancellations</div>
+    <div class="info__sub-title">{{ $t("tender.clarifications_changes_and_cancellations") }}</div>
     <ul class="info-list">
       <li>
         <button
-            type="button"
-            class="info-block__link"
-            @click="selectTab('clarification')"
+          type="button"
+          class="info-block__link"
+          @click="selectTab('clarification')"
         >
-          Any clarifications, changes or cancellations related to this procedure
+          {{ $t("tender.clarifications_changes_and_cancellations_text") }}
         </button>
       </li>
     </ul>
 
     <div v-if="hasBids">
-      <div class="info__sub-title">Record of opening of the Electronic bids</div>
+      <div class="info__sub-title">{{ $t("tender.record_of_bids") }}</div>
       <ul class="info-list">
         <li>
           <button
-              type="button"
-              class="info-block__link"
-              @click="selectTab('offers')"
+            type="button"
+            class="info-block__link"
+            @click="selectTab('offers')"
           >
-            Record of the opening of Electronic bids
+            {{ $t("tender.record_of_bids_text") }}
           </button>
         </li>
       </ul>
     </div>
 
     <div v-if="hasAwards">
-      <div class="info__sub-title">Information about evaluation and award of contract</div>
+      <div class="info__sub-title">{{ $t("tender.information_about_evaluation_and_award") }}</div>
       <ul class="info-list">
         <!--<li>Record of Electronic auction</li>-->
         <li>
           <button
-              type="button"
-              class="info-block__link"
-              @click="selectTab('ev')"
+            type="button"
+            class="info-block__link"
+            @click="selectTab('ev')"
           >
-            Evaluation report of the Tender Committee
+            {{ $t("tender.information_about_evaluation_and_award_text") }}
           </button>
         </li>
         <li v-if="hasCANs">
           <button
-              type="button"
-              class="info-block__link"
-              @click="selectTab('cans')"
+            type="button"
+            class="info-block__link"
+            @click="selectTab('cans')"
           >
-            Report on recommended awards
+            {{ $t("tender.report_on_recommended_awards") }}
           </button>
         </li>
       </ul>
@@ -317,6 +317,7 @@
 <script>
   import axios from "axios";
 
+  import mainProcurementCategory from "./../../../../store/types/main-procurement-category";
   import { getDataFromObject, formatDate, formatAmount } from "./../../../../utils";
 
   export default {
@@ -355,6 +356,11 @@
       return {
         FSs: {}
       };
+    },
+    computed: {
+      getMainProcurementCategory() {
+        return mainProcurementCategory[this.gd(this.msRecord, _ => _.tender.mainProcurementCategory)][this.$i18n.locale];
+      }
     },
     methods: {
       gd(...args) {
