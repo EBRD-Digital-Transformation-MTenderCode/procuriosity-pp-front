@@ -40,7 +40,7 @@
             </el-col>
             <el-col :sm="8" v-if="lot.status !== 'canceled' && lot.status !== 'unsuccessful'">
               <div class="info-block__text">
-                Date of conclusion of the contract
+                {{ $t("tender.date_of_conclusion") }}
               </div>
               <div class="info-block__value">
                 {{ fd(gd(contractForCurrentLot, _ => _.date), "DD/MM/YYYY") }}
