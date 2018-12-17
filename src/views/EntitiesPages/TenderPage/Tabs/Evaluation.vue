@@ -2,27 +2,27 @@
   <div class="info">
     <div class="info__title">{{ $t("tender.evaluation_of_winning_bid")}}</div>
     <div
-        v-for="(lot, index) of gd(evRecord, _ => _.tender.lots, [])"
-        :key="lot.id"
+      v-for="(lot, index) of gd(evRecord, _ => _.tender.lots, [])"
+      :key="lot.id"
     >
       <div style="font-size: 16px; font-weight: 700;">
         {{ $t("tender.lot")}} {{ index + 1 }}: {{ lot.title }}
       </div>
       <table
-          v-if="gd(evRecord, _ => _.awards, []).find(award => award.relatedLots[0] === lot.id).hasOwnProperty('relatedBid')"
-          class="info-table evaluation-table"
+        v-if="gd(evRecord, _ => _.awards, []).find(award => award.relatedLots[0] === lot.id).hasOwnProperty('relatedBid')"
+        class="info-table evaluation-table"
       >
         <tr>
-          <th>{{ $t("tender.tenderer")}}</th>
-          <th>{{ $t("tender.bids_final_amount")}}</th>
-          <th> {{ $t("tender.mtender_espd")}}</th>
-          <th>{{ $t("tender.eos_docs")}}</th>
+          <th>{{ $t("tender.tenderer") }}</th>
+          <th>{{ $t("tender.bids_final_amount") }}</th>
+          <th>{{ $t("tender.self_declaration") }}</th>
+          <th>{{ $t("tender.eos_docs") }}</th>
           <!--<th>Declaration of no<br/>conflict of interets</th>-->
           <th v-html="$t('tender.status_and_resolution_tc')"></th>
         </tr>
         <tr
-            v-for="award of gd(evRecord, _ => _.awards, []).filter(_award => _award.relatedLots[0] === lot.id).sort((awardA, awardB) => awardA.value.amount - awardB.value.amount)"
-            :key="award.id"
+          v-for="award of gd(evRecord, _ => _.awards, []).filter(_award => _award.relatedLots[0] === lot.id).sort((awardA, awardB) => awardA.value.amount - awardB.value.amount)"
+          :key="award.id"
         >
           <td :data-th="$t('tender.tenderer')">
             <div class="evaluation-table__supplier-name">{{ gd(award, _ => _.suppliers[0]).name }}</div>
@@ -33,40 +33,40 @@
           <td :data-th="$t('tender.bids_final_amount')">
             <div class="evaluation-table__amount">{{ fa(gd(award, _ => _.value.amount, 0)) }}</div>
             <div class="evaluation-table__currency">{{ gd(award, _ => _.value.currency) }} {{
-              $t("tender.excluding_vat")}}
+              $t("tender.value_excluding_VAT")}}
             </div>
           </td>
           <td :data-th="$t('tender.mtender_espd')">
             <button
-                v-if="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.length : false"
-                type="button"
-                @click="$refs[award.id + 'eligibilityDocuments'][0].open = true"
-                class="evaluation-table__docs-espd-button"
+              v-if="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.length : false"
+              type="button"
+              @click="$refs[award.id + 'eligibilityDocuments'][0].open = true"
+              class="evaluation-table__docs-espd-button"
             >
               {{ $t("tender.mtender_espd")}}
             </button>
             <div class="evaluation-table__docs-espd-text">
-              {{ $t("tender.self_declaration")}}
+              {{ $t("tender.self_declaration") }}
             </div>
             <documents-modal
-                :ref="award.id + 'eligibilityDocuments'"
-                :open="false"
-                :documents="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.filter(_doc => _doc.documentType === 'x_eligibilityDocuments') : []"
-                noItemsText="No documents submitted"
+              :ref="award.id + 'eligibilityDocuments'"
+              :open="false"
+              :documents="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.filter(_doc => _doc.documentType === 'x_eligibilityDocuments') : []"
+              :noItemsText="$t('tender.no_documents_submitted')"
             />
           </td>
           <td :data-th="$t('tender.eos_docs')">
             <button
-                v-if="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.length : 0"
-                type="button"
-                @click="$refs[award.id][0].open = true"
-                class="evaluation-table__docs-button"
+              v-if="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.length : 0"
+              type="button"
+              @click="$refs[award.id][0].open = true"
+              class="evaluation-table__docs-button"
             />
             <documents-modal
-                :ref="award.id"
-                :open="false"
-                :documents="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.filter(_doc => _doc.documentType !== 'x_eligibilityDocuments') : []"
-                noItemsText="No documents"
+              :ref="award.id"
+              :open="false"
+              :documents="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.filter(_doc => _doc.documentType !== 'x_eligibilityDocuments') : []"
+              :noItemsText="$t('tender.no_documents')"
             />
           </td>
           <!--<td>
@@ -74,19 +74,19 @@
           </td>-->
           <td :data-th="$t('tender.status_and_resolution_tc_withoutBreak')">
             <button
-                v-if="!(gd(award, _ => _.status) === 'pending' && gd(award, _ => _.statusDetails) === 'empty')"
-                type="button"
-                @click="$refs[award.id + 'info'][0].open = true"
-                class="evaluation-table__status"
+              v-if="!(gd(award, _ => _.status) === 'pending' && gd(award, _ => _.statusDetails) === 'empty')"
+              type="button"
+              @click="$refs[award.id + 'info'][0].open = true"
+              class="evaluation-table__status"
             >
               {{ parseStatus(gd(award, _ => _.status), gd(award, _ => _.statusDetails)) }}
             </button>
             <div v-else>{{ parseStatus(gd(award, _ => _.status), gd(award, _ => _.statusDetails)) }}</div>
             <award-info-modal
-                v-if="!(gd(award, _ => _.status) === 'pending' && gd(award, _ => _.statusDetails) === 'empty')"
-                :ref="award.id + 'info'"
-                :open="false"
-                :award="award"
+              v-if="!(gd(award, _ => _.status) === 'pending' && gd(award, _ => _.statusDetails) === 'empty')"
+              :ref="award.id + 'info'"
+              :open="false"
+              :award="award"
             />
             <div class="evaluation-table__status-time"
                  v-if="!(gd(award, _ => _.status) === 'pending' && gd(award, _ => _.statusDetails) === 'empty')">
@@ -96,8 +96,8 @@
         </tr>
       </table>
       <div
-          v-else
-          style="margin-bottom: 25px"
+        v-else
+        style="margin-bottom: 25px"
       >
         {{$t("tender.lot_is_not_awarded")}}
       </div>
@@ -114,6 +114,8 @@
     formatDate,
     formatAmount
   } from "./../../../../utils";
+
+  import awardsStatuses from "./../../../../store/types/awards-statuses";
 
   export default {
     name: "Evaluation",
@@ -139,15 +141,19 @@
       },
       parseStatus(status, statusDetails) {
         if (status === "pending" && statusDetails === "empty") {
-          return "Pending";
+          return awardsStatuses["pending"][this.$i18n.locale];
+
         } else if (status === "pending" && statusDetails === "consideration") {
-          return "Consideration";
+          return awardsStatuses["consideration"][this.$i18n.locale];
+
         } else if ((status === "pending" && statusDetails === "active") || (status === "active" && statusDetails === "empty")) {
-          return "Winner";
+          return awardsStatuses["winner"][this.$i18n.locale];
+
         } else if ((status === "pending" && statusDetails === "unsuccessful") || (status === "unsuccessful" && statusDetails === "empty")) {
-          return "Disqualified";
+          return awardsStatuses["disqualified"][this.$i18n.locale];
+
         } else {
-          return "Pending";
+          return awardsStatuses["pending"][this.$i18n.locale];
         }
       }
     }

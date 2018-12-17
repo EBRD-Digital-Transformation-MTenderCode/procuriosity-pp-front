@@ -122,16 +122,26 @@
       },
       fractionAmount() {
         const amountStr = getDataFromObject(this.entity, _ => _.amount, 0).toString();
-        return /\./.test(amountStr) ? amountStr.slice(amountStr.indexOf(".") + 1).length === 1 ? amountStr.slice(amountStr.indexOf(".") + 1) + "0" : amountStr.slice(amountStr.indexOf(".") + 1) : "";
+        if (/\./.test(amountStr)) {
+          if (amountStr.slice(amountStr.indexOf(".") + 1).length === 1) {
+            return amountStr.slice(amountStr.indexOf(".") + 1) + "0";
+          } else if (amountStr.slice(amountStr.indexOf(".") + 1).length > 2) {
+            return Math.round(((+amountStr.slice(amountStr.indexOf(".") + 1).substr(0, 3) * 10 ** -1) * 10) / 10).toString();
+          } else {
+            return amountStr.slice(amountStr.indexOf(".") + 1);
+          }
+        } else {
+          return "";
+        }
       },
       region() {
         return getDataFromObject(this.entity, _ => _.buyerRegion);
       },
       type() {
-        if( !getDataFromObject(procedureTypes, _ => _.tenders.find(it => it.value === getDataFromObject(this.entity, _=> _.procedureType))).hasOwnProperty("name")) {
-          console.warn(`Can't find procedure type : "${getDataFromObject(this.entity, _=> _.procedureType)}"`);
+        if (!getDataFromObject(procedureTypes, _ => _.tenders.find(it => it.value === getDataFromObject(this.entity, _ => _.procedureType))).hasOwnProperty("name")) {
+          console.warn(`Can't find procedure type : "${getDataFromObject(this.entity, _ => _.procedureType)}"`);
         }
-        else return procedureTypes.tenders.find(it => it.value === getDataFromObject(this.entity, _=> _.procedureType)).name[this.$i18n.locale];
+        else return procedureTypes.tenders.find(it => it.value === getDataFromObject(this.entity, _ => _.procedureType)).name[this.$i18n.locale];
       },
       peName() {
         return getDataFromObject(this.entity, _ => _.buyerName);

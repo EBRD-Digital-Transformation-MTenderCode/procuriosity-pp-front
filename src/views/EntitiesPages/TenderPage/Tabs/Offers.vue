@@ -110,7 +110,7 @@
                 :ref="bid.id + 'eligibilityDocuments'"
                 :open="false"
                 :documents="bid.hasOwnProperty('documents') ? bid.documents.filter(_doc => _doc.documentType === 'x_eligibilityDocuments'): []"
-                noItemsText="No documents submitted"
+                :noItemsText="$t('tender.no_documents_submitted')"
             />
             <div class="offers-table__docs-espd-text">{{ $t("tender.self_declaration")}}</div>
           </td>
@@ -125,7 +125,7 @@
                 :ref="bid.id"
                 :open="false"
                 :documents="bid.hasOwnProperty('documents') ? bid.documents.filter(_doc => _doc.documentType !== 'x_eligibilityDocuments'): []"
-                noItemsText="No documents"
+                :noItemsText="$t('tender.no_documents')"
             />
           </td>
         </tr>

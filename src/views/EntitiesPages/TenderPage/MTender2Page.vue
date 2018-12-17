@@ -150,7 +150,7 @@
                       lazy
                       key="cans"
                   >
-                    <span slot="label" v-html="$t('tender.contract_awards')"></span>
+                    <span slot="label" v-html="$t('tender.contract_award')"></span>
                     <contracts
                         :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
                     />
@@ -160,13 +160,11 @@
                       lazy
                       key="pr"
                   >
-                    <span slot="label">Procurement <br />record</span>
+                    <span slot="label" v-html="$t('tender.procurement_record_title')"/>
                     <procurement-record
                         :msRecord="gd(tender, _ => _.MSRecord.compiledRelease)"
                         :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
-                        :procedureType="selectProcedure(gd(tender, _ =>
-                      _.MSRecord.compiledRelease.tender.mainProcurementCategory),gd(tender, _ =>
-                      _.MSRecord.compiledRelease.tender.value.amount))"
+                        :procedureType="selectProcedure(gd(tender, _ => _.MSRecord.compiledRelease.tender.mainProcurementCategory),gd(tender, _ => _.MSRecord.compiledRelease.tender.value.amount))"
                         :selectTab="selectTab"
                         :hasBids="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('bids')"
                         :hasAwards="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('awards')"

@@ -2,7 +2,7 @@
   <el-dialog
       :visible.sync="open"
       append-to-body
-      title="Information of the decision"
+      :title="$t('tender.information_of_the_decision')"
       width="75%"
   >
     <slot>
@@ -10,7 +10,7 @@
         <div class="info-block">
           <el-row :gutter="15">
             <el-col :sm="24">
-              <div class="info-block__text">Award date:</div>
+              <div class="info-block__text">{{ $t("tender.award_date") }}:</div>
               <div class="info-block__value">
                 {{ fd(gd(award, _ => _.date)) }}
               </div>
@@ -21,7 +21,7 @@
         <div class="info-block">
           <el-row :gutter="15">
             <el-col :sm="24">
-              <div class="info-block__text">Award description:</div>
+              <div class="info-block__text">{{ $t("tender.award_description") }}:</div>
               <div class="info-block__value">
                 {{ gd(award, _ => _.description, "n/a") }}
               </div>
@@ -29,7 +29,7 @@
           </el-row>
         </div>
 
-        <div class="info__sub-title">Documents of decision</div>
+        <div class="info__sub-title">{{ $t("tender.documents_of_decision") }}</div>
         <div class="info-block" v-if="gd(award, _ => _.documents, []).length">
           <div class="info-block__documents"
                v-for="(doc, index) of gd(award, _ => _.documents, [])"
@@ -56,7 +56,7 @@
             </el-row>
           </div>
         </div>
-        <div v-else>No documents</div>
+        <div v-else>{{ $t("tender.no_documents") }}</div>
       </div>
     </slot>
   </el-dialog>
