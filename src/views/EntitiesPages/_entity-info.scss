@@ -757,9 +757,11 @@
     margin-bottom: 35px;
 
     tr:not(:last-child) {
-      border-bottom: 1px solid rgba(85, 85, 85, 0.26);
+      border-bottom: 1px solid rgba(85, 85, 85, 0.2);
+      @media (max-width: 700px ) {
+        border-bottom: 2px solid rgba(85, 85, 85, 0.6);
+      }
     }
-
     th,
     td {
       padding: 14px 5px;
@@ -792,6 +794,9 @@
         }
         &:last-child {
           padding-bottom: 10px;
+        }
+        &:not(:last-child) {
+          border-bottom: 1px solid rgba(85, 85, 85, 0.3);
         }
 
         &:before {
@@ -958,7 +963,8 @@
 
   &__time,
   &__currency,
-  &__docs-espd-text {
+  &__docs-espd-text,
+  &__docs-eos-text{
     font-size: 12px;
   }
 
@@ -999,7 +1005,8 @@
 
   &__currency,
   &__status-time,
-  &__docs-espd-text {
+  &__docs-espd-text,
+  &__docs-eos-text{
     font-size: 12px;
   }
 

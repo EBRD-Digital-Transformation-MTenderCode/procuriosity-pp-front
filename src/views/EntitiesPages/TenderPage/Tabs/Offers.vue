@@ -121,6 +121,7 @@
                 @click="$refs[bid.id][0].open = true"
                 class="offers-table__docs-button"
             />
+            <div class="offers-table__docs-eos-text" v-else> {{$t("tender.no_documents")}}</div>
             <documents-modal
                 :ref="bid.id"
                 :open="false"

@@ -5,6 +5,7 @@ export default {
   "procedure_type": "Tip de procedură",
   "procuring_entity_name": "Obtinerea numelui entitatii",
   "tender_id": "Identificarea planului",
+  "region": "Raion",
 
   "estimated_value_excluding_VAT": "Valoarea estimată a achiziției fără TVA",
   "buyer_region": "Raion",

@@ -985,10 +985,10 @@
                       {{ gd(budgetBreakdown, _ => _.id) }}
                     </div>
                   </el-col>
-                  <el-col :sm="4">
+                  <el-col :sm="8">
                     <div class="info-block__text">{{ $t("tender.amount") }}</div>
                     <div class="info-block__value">
-                      {{ fa(gd(budgetBreakdown, _ => _.amount.amount)) }}
+                      {{ fa(gd(budgetBreakdown, _ => _.amount.amount))}}
                       {{ gd(budgetBreakdown, _ => _.amount.currency) }}
                     </div>
                   </el-col>
@@ -1012,8 +1012,8 @@
                   <el-col :sm="8">
                     <div class="info-block__text">{{ $t("tender.validity_period") }}</div>
                     <div class="info-block__value">
-                      {{ $t("tender.start_date") }}: {{ fd(gd(budgetBreakdown, _ => _.period.startDate), "DD.MM.YYYY") }} -
-                      {{ $t("tender.end_date") }}: {{ fd(gd(budgetBreakdown, _ => _.period.endDate), "DD.MM.YYYY") }}
+                      {{ $t("tender.start_date") }}:&nbsp;{{ fd(gd(budgetBreakdown, _ => _.period.startDate), "DD.MM.YYYY") }} -
+                      {{ $t("tender.end_date") }}:&nbsp;{{ fd(gd(budgetBreakdown, _ => _.period.endDate), "DD.MM.YYYY") }}
                     </div>
                   </el-col>
                 </el-row>

@@ -62,6 +62,7 @@
               @click="$refs[award.id][0].open = true"
               class="evaluation-table__docs-button"
             />
+            <div class="evaluation-table__docs-eos-text" v-else> {{$t("tender.no_documents")}}</div>
             <documents-modal
               :ref="award.id"
               :open="false"

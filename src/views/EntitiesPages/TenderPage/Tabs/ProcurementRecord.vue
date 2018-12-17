@@ -102,7 +102,7 @@
             </div>
           </el-col>
           <el-col :sm="12">
-            <div class="info-block__text">Type of procedure</div>
+            <div class="info-block__text">{{ $t("tender.type_of_procedure") }}</div>
             <div class="info-block__value">
               {{ procedureType }}
             </div>
@@ -141,7 +141,7 @@
                   {{ gd(budgetBreakdown, _ => _.id) }}
                 </div>
               </el-col>
-              <el-col :sm="4">
+              <el-col :sm="8">
                 <div class="info-block__text">{{ $t("tender.amount") }}</div>
                 <div class="info-block__value">
                   {{ fa(gd(budgetBreakdown, _ => _.amount.amount)) }}
