@@ -38,7 +38,7 @@
           </td>
           <td :data-th="$t('tender.mtender_espd')">
             <button
-              v-if="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.length : false"
+              v-if="bidForCurrentAward(award.relatedBid).hasOwnProperty('documents') ? bidForCurrentAward(award.relatedBid).documents.length : false"
               type="button"
               @click="$refs[award.id + 'eligibilityDocuments'][0].open = true"
               class="evaluation-table__docs-espd-button"
@@ -51,13 +51,13 @@
             <documents-modal
               :ref="award.id + 'eligibilityDocuments'"
               :open="false"
-              :documents="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.filter(_doc => _doc.documentType === 'x_eligibilityDocuments') : []"
+              :documents="bidForCurrentAward(award.relatedBid).hasOwnProperty('documents') ? bidForCurrentAward(award.relatedBid).documents.filter(_doc => _doc.documentType === 'x_eligibilityDocuments') : []"
               :noItemsText="$t('tender.no_documents_submitted')"
             />
           </td>
           <td :data-th="$t('tender.eos_docs')">
             <button
-              v-if="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.length : 0"
+              v-if="bidForCurrentAward(award.relatedBid).hasOwnProperty('documents') ? bidForCurrentAward(award.relatedBid).documents.length : 0"
               type="button"
               @click="$refs[award.id][0].open = true"
               class="evaluation-table__docs-button"
@@ -65,7 +65,7 @@
             <documents-modal
               :ref="award.id"
               :open="false"
-              :documents="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.filter(_doc => _doc.documentType !== 'x_eligibilityDocuments') : []"
+              :documents="bidForCurrentAward(award.relatedBid).hasOwnProperty('documents') ? bidForCurrentAward(award.relatedBid).documents.filter(_doc => _doc.documentType !== 'x_eligibilityDocuments') : []"
               :noItemsText="$t('tender.no_documents')"
             />
           </td>
@@ -155,6 +155,10 @@
         } else {
           return awardsStatuses["pending"][this.$i18n.locale];
         }
+      },
+      bidForCurrentAward(bidId) {
+        const currentBid = this.gd(this.evRecord, _ => _.bids.details, []).find(bid => bid.id === bidId);
+        return  currentBid ? currentBid : {}
       }
     }
   };
