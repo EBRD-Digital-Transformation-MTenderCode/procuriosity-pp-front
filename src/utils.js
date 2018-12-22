@@ -74,3 +74,29 @@ export function parseDocumentType(documentsType, lang) {
     return result.charAt(0).toUpperCase() + result.slice(1);
   }
 }
+export function transformDocumentation(docs) {
+  const obj = {};
+  for (const doc of [...docs].sort((doc1, doc2) => new Date(doc2.datePublished) - new Date(doc1.datePublished))) {
+    const idDoc = doc.id.replace(/-[0-9]{13}$/, "");
+    const timestamp = doc.id.replace(idDoc, "");
+    if (!obj.hasOwnProperty(idDoc)) {
+      obj[idDoc] = {
+        title:doc.title,
+        url:doc.url,
+        datePublished:doc.datePublished,
+        documentType: doc.documentType,
+        id: idDoc + timestamp,
+        oldVersions: []
+      };
+    } else {
+      obj[idDoc].oldVersions.push({
+        title:doc.title,
+        url:doc.url,
+        datePublished:doc.datePublished,
+        documentType:doc.documentType,
+        id: idDoc + timestamp,
+      });
+    }
+  }
+  return Object.values(obj);
+}

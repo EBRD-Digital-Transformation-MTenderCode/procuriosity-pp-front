@@ -101,14 +101,13 @@
           <td data-th="Self-declaration">
             <button
                 type="button"
-                @click="$refs[bid.id + 'eligibilityDocuments'][0].open = true"
+                @click="$refs[bid.id + 'eligibilityDocuments'][0].show = true"
                 class="offers-table__docs-espd-button"
             >
               {{ $t("tender.mtender_espd")}}
             </button>
             <documents-modal
                 :ref="bid.id + 'eligibilityDocuments'"
-                :open="false"
                 :documents="bid.hasOwnProperty('documents') ? bid.documents.filter(_doc => _doc.documentType === 'x_eligibilityDocuments'): []"
                 :noItemsText="$t('tender.no_documents_submitted')"
             />
@@ -118,13 +117,12 @@
             <button
                 v-if="bid.hasOwnProperty('documents') ? bid.documents.length : false"
                 type="button"
-                @click="$refs[bid.id][0].open = true"
+                @click="$refs[bid.id][0].show = true"
                 class="offers-table__docs-button"
             />
             <div class="offers-table__docs-eos-text" v-else> {{$t("tender.no_documents")}}</div>
             <documents-modal
                 :ref="bid.id"
-                :open="false"
                 :documents="bid.hasOwnProperty('documents') ? bid.documents.filter(_doc => _doc.documentType !== 'x_eligibilityDocuments'): []"
                 :noItemsText="$t('tender.no_documents')"
             />

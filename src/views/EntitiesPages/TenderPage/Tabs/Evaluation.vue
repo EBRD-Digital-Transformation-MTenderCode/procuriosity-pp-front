@@ -9,7 +9,7 @@
         {{ $t("tender.lot")}} {{ index + 1 }}: {{ lot.title }}
       </div>
       <table
-        v-if="gd(evRecord, _ => _.awards, []).find(award => award.relatedLots[0] === lot.id).hasOwnProperty('relatedBid')"
+        v-if="gd(gd(evRecord, _ => _.awards, []).find(award => award.relatedLots[0] === lot.id),_=>_,{}).hasOwnProperty('relatedBid')"
         class="info-table evaluation-table"
       >
         <tr>
@@ -40,7 +40,7 @@
             <button
               v-if="bidForCurrentAward(award.relatedBid).hasOwnProperty('documents') ? bidForCurrentAward(award.relatedBid).documents.length : false"
               type="button"
-              @click="$refs[award.id + 'eligibilityDocuments'][0].open = true"
+              @click="$refs[award.id + 'eligibilityDocuments'][0].show = true"
               class="evaluation-table__docs-espd-button"
             >
               {{ $t("tender.mtender_espd")}}
@@ -50,22 +50,20 @@
             </div>
             <documents-modal
               :ref="award.id + 'eligibilityDocuments'"
-              :open="false"
               :documents="bidForCurrentAward(award.relatedBid).hasOwnProperty('documents') ? bidForCurrentAward(award.relatedBid).documents.filter(_doc => _doc.documentType === 'x_eligibilityDocuments') : []"
               :noItemsText="$t('tender.no_documents_submitted')"
             />
           </td>
-          <td :data-th="$t('tender.eos_docs')">
+          <td class="evaluation-table__docs-eos" :data-th="$t('tender.eos_docs')">
             <button
               v-if="bidForCurrentAward(award.relatedBid).hasOwnProperty('documents') ? bidForCurrentAward(award.relatedBid).documents.length : 0"
               type="button"
-              @click="$refs[award.id][0].open = true"
+              @click="$refs[award.id][0].show = true"
               class="evaluation-table__docs-button"
             />
             <div class="evaluation-table__docs-eos-text" v-else> {{$t("tender.no_documents")}}</div>
             <documents-modal
               :ref="award.id"
-              :open="false"
               :documents="bidForCurrentAward(award.relatedBid).hasOwnProperty('documents') ? bidForCurrentAward(award.relatedBid).documents.filter(_doc => _doc.documentType !== 'x_eligibilityDocuments') : []"
               :noItemsText="$t('tender.no_documents')"
             />
@@ -77,7 +75,7 @@
             <button
               v-if="!(gd(award, _ => _.status) === 'pending' && gd(award, _ => _.statusDetails) === 'empty')"
               type="button"
-              @click="$refs[award.id + 'info'][0].open = true"
+              @click="$refs[award.id + 'info'][0].show = true"
               class="evaluation-table__status"
             >
               {{ parseStatus(gd(award, _ => _.status), gd(award, _ => _.statusDetails)) }}
@@ -86,7 +84,6 @@
             <award-info-modal
               v-if="!(gd(award, _ => _.status) === 'pending' && gd(award, _ => _.statusDetails) === 'empty')"
               :ref="award.id + 'info'"
-              :open="false"
               :award="award"
             />
             <div class="evaluation-table__status-time"
@@ -160,7 +157,7 @@
       bidForCurrentAward(bidId) {
         const currentBid = this.gd(this.evRecord, _ => _.bids.details, []).find(bid => bid.id === bidId);
         return  currentBid ? currentBid : {}
-      }
+      },
     }
   };
 </script>

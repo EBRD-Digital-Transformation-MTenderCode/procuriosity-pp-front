@@ -134,7 +134,7 @@
                     />
                   </el-tab-pane>
                   <el-tab-pane
-                      :disabled="!gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('awards')"
+                      :disabled="!gd(tender, _ => _.EVRecord.compiledRelease.tender, {}).hasOwnProperty('awardPeriod')"
                       name="ev"
                       lazy
                       key="ev"
@@ -334,7 +334,7 @@
         if (tab === "pn") {
           this.$router.push({ path: `${this.$i18n.locale !== "ro" ? `/${this.$i18n.locale}` : ""}/plans/${this.tender.MSRecord.ocid}` });
         }
-      }
+      },
     }
   };
 </script>
