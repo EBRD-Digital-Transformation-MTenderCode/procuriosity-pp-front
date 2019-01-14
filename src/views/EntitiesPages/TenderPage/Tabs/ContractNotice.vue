@@ -345,10 +345,11 @@
           </div>
         </div>
 
-        <div class="info__sub-title">{{ $t("tender.description") }}</div>
+        <div id="description" class="info__sub-title">{{ $t("tender.description") }}</div>
         <el-collapse accordion :value="gd(evRecord, _ => _.tender.lots[0].id, '0') + '0'">
           <el-collapse-item
               v-for="(lot, index) of gd(evRecord, _ => _.tender.lots, [])"
+              v-if ="index >= numberOfLastDisplayedLot - pageSize &&  index < numberOfLastDisplayedLot"
               :key="lot.id + index"
               :name="lot.id + index"
           >
@@ -641,6 +642,16 @@
             </div>
           </el-collapse-item>
         </el-collapse>
+        <list-pagination
+            v-if="gd(evRecord, _ => _.tender.lots, []).length > pageSize"
+            :total= "gd(evRecord, _ => _.tender.lots, []).length"
+            :pageCount= "0"
+            :currentPage= 1
+            :pageSize= pageSize
+            :changePage="changePage"
+            offsetTo="description"
+            :key="'pagination'"
+        />
       </div>
 
       <!-- Legal, economic, financial and technical information -->
@@ -1374,10 +1385,11 @@
 <script>
   import axios from "axios";
 
-
   import mainProcurementCategory from "./../../../../store/types/main-procurement-category";
   import typesOfBuyers from "./../../../../store/types/buyers-types";
   import mainGeneralActivites from "./../../../../store/types/main-general-activity-types";
+
+  import ListPagination from "./../../../../components/ListPagination";
 
   import {
     getDataFromObject,
@@ -1402,6 +1414,9 @@
         type: String,
         required: true
       }
+    },
+    components: {
+      "list-pagination": ListPagination
     },
     data() {
       return {
@@ -1436,7 +1451,9 @@
         FSs: {},
         needDisplay: false,
         windowWidth: 0,
-        computedOffset: 75
+        computedOffset: 75,
+        pageSize: 25,
+        numberOfLastDisplayedLot: 25
       };
     },
     computed: {
@@ -1519,8 +1536,10 @@
       },
       getDocs(docs) {
         return transformDocumentation(docs);
-      }
-
+      },
+      changePage(page) {
+        this.numberOfLastDisplayedLot =  page * this.pageSize;
+      },
     },
     mounted() {
       this.$nextTick(() => {

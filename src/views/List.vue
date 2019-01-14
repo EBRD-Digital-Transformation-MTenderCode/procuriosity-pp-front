@@ -59,6 +59,7 @@
           :currentPage="entities[entityName].searchParams.page"
           :pageSize="entities[entityName].searchParams.pageSize"
           :changePage="changePage"
+          offsetTo="entity-list"
           :key="'pagination'"
       />
     </el-container>
@@ -202,25 +203,25 @@
     padding-bottom: 20px;
     background-color: #efefef;
     &__no-data-title,
-    &__error{
+    &__error {
       margin: 20px 0;
       text-align: center;
       font-size: 38px;
     }
-    &__error{
-      &-message{
+    &__error {
+      &-message {
         margin-bottom: 20px;
       }
     }
-    &__refresh-btn{
+    &__refresh-btn {
       position: relative;
-      padding: 15px 10px 15px 45px ;
+      padding: 15px 10px 15px 45px;
       border-radius: 3px;
       background-color: $mainC;
       font-size: 18px;
       color: #fff;
       transition: 0.4s;
-      &:before{
+      &:before {
         content: "";
         position: absolute;
         left: 10px;
@@ -231,10 +232,10 @@
         background-repeat: no-repeat;
         transition: 0.4s;
       }
-      &:hover{
+      &:hover {
         background-color: lighten($mainC, 8%);
       }
-      &:hover:before{
+      &:hover:before {
         transform: rotate(180deg);
       }
     }

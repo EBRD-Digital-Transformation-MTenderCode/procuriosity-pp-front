@@ -317,10 +317,11 @@
           </div>
         </div>
 
-        <div class="info__sub-title">{{ $t("plan.description") }}</div>
+        <div id="description" class="info__sub-title">{{ $t("plan.description") }}</div>
         <el-collapse accordion v-if="gd(pnRecord, _ => _.tender.hasOwnProperty('lots'))" :value="gd(pnRecord, _ => _.tender.lots[0].id, '0') + '0'">
           <el-collapse-item
               v-for="(lot, index) of gd(pnRecord, _ => _.tender.lots, [])"
+              v-if ="index >= numberOfLastDisplayedLot - pageSize &&  index < numberOfLastDisplayedLot"
               :key="lot.id + index"
               :name="lot.id + index"
           >
@@ -606,6 +607,16 @@
           </el-collapse-item>
         </el-collapse>
         <div v-else>{{ $t("plan.no_lots")}}</div>
+        <list-pagination
+            v-if="gd(pnRecord, _ => _.tender.lots, []).length > pageSize"
+            :total= "gd(pnRecord, _ => _.tender.lots, []).length"
+            :pageCount= "0"
+            :currentPage= 1
+            :pageSize= pageSize
+            :changePage="changePage"
+            offsetTo="description"
+            :key="'pagination'"
+        />
       </div>
 
       <!-- Legal, economic, financial and technical information -->
@@ -1293,6 +1304,7 @@
 
   import typesOfBuyers from "./../../../../store/types/buyers-types";
   import mainGeneralActivites from "./../../../../store/types/main-general-activity-types";
+  import ListPagination from "../../../../components/ListPagination";
 
   import { getDataFromObject, formatDate, parseDocumentType, formatAmount, transformDocumentation} from "./../../../../utils";
 
@@ -1311,9 +1323,14 @@
         required: true
       }
     },
+    components: {
+      "list-pagination": ListPagination
+    },
     data() {
       return {
-        FSs: {}
+        FSs: {},
+        pageSize: 25,
+        numberOfLastDisplayedLot: 25
       };
     },
     created() {
@@ -1395,7 +1412,10 @@
       },
       getDocs(docs) {
         return transformDocumentation(docs);
-      }
+      },
+      changePage(page) {
+        this.numberOfLastDisplayedLot =  page * this.pageSize;
+      },
     }
   };
 </script>
