@@ -3,11 +3,19 @@
     <div class="list__status-bar__text">
       {{$t("search.list_total_found")}}: <span class="list__status-bar_count">{{ entities[entity].paginationInfo.totalCount }}</span>
     </div>
+    <page-number class="list__status-bar__page"
+        v-if="needPagination"
+        :current-page="entities[entity].searchParams.page"
+        :elements-amount="entities[entity].paginationInfo.totalCount"
+        :page-size="entities[entity].searchParams.pageSize"
+    />
   </div>
 </template>
 
 <script>
   import { mapState } from "vuex";
+
+  import PageNumber from "./PageNumber"
   
   export default {
     name: "SearchStatusBar",
@@ -15,10 +23,17 @@
       entity: {
         type: String,
         required: true
+      },
+      needPagination:{
+        type: Boolean,
+        required: true
       }
     },
+    components: {
+      "page-number": PageNumber
+    },
     computed: {
-      ...mapState(["entities"])
+      ...mapState(["entities"]),
     }
   };
 </script>
@@ -27,6 +42,8 @@
   .list {
     &__status-bar {
       position: sticky;
+      display: flex;
+      justify-content: space-between;
       left: 0;
       right: 0;
       bottom: 0;
@@ -37,7 +54,14 @@
       background-color: #f7f7f7;
       box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.19);
       font-size: 16px;
-      &_text {
+      @media (max-width: 480px) {
+        display: block;
+      }
+      &__text {
+        text-align: center;
+      }
+      &__page {
+        margin: 0;
       }
       &_count {
         font-weight: 700;

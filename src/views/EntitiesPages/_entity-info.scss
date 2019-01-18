@@ -560,6 +560,7 @@
     @media (max-width: 775px) {
       flex-direction: column;
       align-items: center;
+      padding: 10px 0;
     }
 
     a {
@@ -684,6 +685,7 @@
 
       a {
         text-decoration: underline;
+        word-break: break-word;
 
         &:hover {
           text-decoration: none;

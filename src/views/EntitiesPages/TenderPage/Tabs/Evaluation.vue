@@ -1,8 +1,15 @@
 <template>
   <div class="info">
-    <div class="info__title">{{ $t("tender.evaluation_of_winning_bid")}}</div>
-    <div
+    <div id="evaluation-title" class="info__title">{{ $t("tender.evaluation_of_winning_bid")}}</div>
+    <page-number
+        v-if="needPagination"
+        :current-page="currentPage"
+        :elements-amount="elementsAmount"
+        :page-size="pageSize"
+    />
+      <div
       v-for="(lot, index) of gd(evRecord, _ => _.tender.lots, [])"
+      v-if ="index >= numberOfLastDisplayedLot - pageSize &&  index < numberOfLastDisplayedLot"
       :key="lot.id"
     >
       <div style="font-size: 16px; font-weight: 700;">
@@ -100,12 +107,25 @@
         {{$t("tender.lot_is_not_awarded")}}
       </div>
     </div>
+    <list-pagination
+        v-if="needPagination"
+        :total="elementsAmount"
+        :pageCount="0"
+        :currentPage=currentPage
+        :pageSize=pageSize
+        :changePage="changePage"
+        offsetTo="evaluation-title"
+        :key="'pagination'"
+    />
   </div>
 </template>
 
 <script>
   import DocumentsModal from "./../DocumentsModal";
   import AwardInfoModal from "./../AwardInfoModal";
+
+  import ListPagination from "./../../../../components/ListPagination";
+  import PageNumber  from "./../../../../components/PageNumber"
 
   import {
     getDataFromObject,
@@ -119,12 +139,29 @@
     name: "Evaluation",
     components: {
       "documents-modal": DocumentsModal,
-      "award-info-modal": AwardInfoModal
+      "award-info-modal": AwardInfoModal,
+      "list-pagination": ListPagination,
+      "page-number": PageNumber
     },
     props: {
       evRecord: {
         type: Object,
         required: true
+      }
+    },
+    data(){
+      return {
+        pageSize: 25,
+        numberOfLastDisplayedLot: 25,
+        currentPage: 1
+      }
+    },
+    computed:{
+      needPagination(){
+        return this.elementsAmount > this.pageSize
+      },
+      elementsAmount(){
+        return this.gd(this.evRecord, _ => _.tender.lots, []).length
       }
     },
     methods: {
@@ -158,6 +195,10 @@
         const currentBid = this.gd(this.evRecord, _ => _.bids.details, []).find(bid => bid.id === bidId);
         return  currentBid ? currentBid : {}
       },
+      changePage(page) {
+        this.numberOfLastDisplayedLot =  page * this.pageSize;
+        this.currentPage = page;
+      }
     }
   };
 </script>

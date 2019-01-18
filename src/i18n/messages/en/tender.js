@@ -234,9 +234,9 @@ export default {
 
   "evaluation_of_winning_bid": "Evaluation of the winning bid",
   "mtender_espd": "MTender ESPD",
-  "status_and_resolution_tc": "Status and the decision<br/> of the Tender Committee",
+  "status_and_resolution_tc": "Evaluation report <br/> of the Tender Committee",
   // @TODO so bad
-  "status_and_resolution_tc_withoutBreak": "Status and the decision of the Tender Committee",
+  "status_and_resolution_tc_withoutBreak": "Evaluation report of the Tender Committee ",
   "self_declaration": "Self-declaration",
   "no_bids_received": "No Bids received",
 

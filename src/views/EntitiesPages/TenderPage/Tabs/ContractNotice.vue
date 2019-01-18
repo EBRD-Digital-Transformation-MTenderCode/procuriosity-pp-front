@@ -338,14 +338,20 @@
                 <div class="info-block__text">{{ $t("tender.information_about_lots") }}</div>
                 <div class="info-block__value">
                   <div>{{ $t("tender.contract_divided_into_lots") }}</div>
-                  <div>{{ $t("tender.tenders_submitted_all_lots") }}</div>
+                  <div id="scrollToDescription">{{ $t("tender.tenders_submitted_all_lots") }}</div>
                 </div>
               </el-col>
             </el-row>
           </div>
         </div>
 
-        <div id="description" class="info__sub-title">{{ $t("tender.description") }}</div>
+        <div class="info__sub-title">{{ $t("tender.description") }}</div>
+        <page-number
+            v-if="needPagination"
+            :current-page="currentPage"
+            :elements-amount="elementsAmount"
+            :page-size="pageSize"
+        />
         <el-collapse accordion :value="gd(evRecord, _ => _.tender.lots[0].id, '0') + '0'">
           <el-collapse-item
               v-for="(lot, index) of gd(evRecord, _ => _.tender.lots, [])"
@@ -643,13 +649,13 @@
           </el-collapse-item>
         </el-collapse>
         <list-pagination
-            v-if="gd(evRecord, _ => _.tender.lots, []).length > pageSize"
-            :total= "gd(evRecord, _ => _.tender.lots, []).length"
-            :pageCount= "0"
-            :currentPage= 1
-            :pageSize= pageSize
+            v-if="needPagination"
+            :total= "elementsAmount"
+            :pageCount="0"
+            :currentPage=currentPage
+            :pageSize=pageSize
             :changePage="changePage"
-            offsetTo="description"
+            offsetTo="scrollToDescription"
             :key="'pagination'"
         />
       </div>
@@ -1390,6 +1396,7 @@
   import mainGeneralActivites from "./../../../../store/types/main-general-activity-types";
 
   import ListPagination from "./../../../../components/ListPagination";
+  import PageNumber  from "./../../../../components/PageNumber"
 
   import {
     getDataFromObject,
@@ -1416,7 +1423,8 @@
       }
     },
     components: {
-      "list-pagination": ListPagination
+      "list-pagination": ListPagination,
+      "page-number": PageNumber
     },
     data() {
       return {
@@ -1453,7 +1461,8 @@
         windowWidth: 0,
         computedOffset: 75,
         pageSize: 25,
-        numberOfLastDisplayedLot: 25
+        numberOfLastDisplayedLot: 25,
+        currentPage: 1
       };
     },
     computed: {
@@ -1476,6 +1485,12 @@
       },
       randomSortPlatforms() {
         return [...this.platforms].sort(() => 0.5 - Math.random());
+      },
+      needPagination(){
+        return this.elementsAmount > this.pageSize
+      },
+      elementsAmount(){
+        return this.gd(this.evRecord, _ => _.tender.lots, []).length
       }
     },
     methods: {
@@ -1539,6 +1554,7 @@
       },
       changePage(page) {
         this.numberOfLastDisplayedLot =  page * this.pageSize;
+        this.currentPage = page;
       },
     },
     mounted() {

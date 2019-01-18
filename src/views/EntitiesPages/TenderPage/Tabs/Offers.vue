@@ -61,9 +61,16 @@
       </div>
     </div>
 
-    <div class="info__sub-title">{{ $t("tender.electronic_bids_received")}}</div>
+    <div id="sub-title" class="info__sub-title">{{ $t("tender.electronic_bids_received")}}</div>
+    <page-number
+        v-if="needPagination"
+        :current-page="currentPage"
+        :elements-amount="elementsAmount"
+        :page-size="pageSize"
+    />
     <div
         v-for="(lot, index) of gd(evRecord, _ => _.tender.lots, [])"
+        v-if ="index >= numberOfLastDisplayedLot - pageSize &&  index < numberOfLastDisplayedLot"
         :key="lot.id"
     >
       <div style="margin-bottom: 15px; font-size: 16px; font-weight: 700;">
@@ -136,11 +143,24 @@
         {{ $t("tender.no_bids_received")}}
       </div>
     </div>
+    <list-pagination
+        v-if="needPagination"
+        :total= "elementsAmount"
+        :pageCount="0"
+        :currentPage=currentPage
+        :pageSize=pageSize
+        :changePage="changePage"
+        offsetTo="sub-title"
+        :key="'pagination'"
+    />
   </div>
 </template>
 
 <script>
   import DocumentsModal from "./../DocumentsModal";
+
+  import ListPagination from "./../../../../components/ListPagination";
+  import PageNumber  from "./../../../../components/PageNumber"
 
   import {
     getDataFromObject,
@@ -151,12 +171,28 @@
   export default {
     name: "Offers",
     components: {
-      "documents-modal": DocumentsModal
-    },
+      "documents-modal": DocumentsModal,
+      "list-pagination": ListPagination,
+      "page-number": PageNumber},
     props: {
       evRecord: {
         type: Object,
         required: true
+      }
+    },
+    data(){
+      return {
+        pageSize: 25,
+        numberOfLastDisplayedLot: 25,
+        currentPage: 1
+      }
+    },
+    computed:{
+      needPagination(){
+        return this.elementsAmount > this.pageSize
+      },
+      elementsAmount(){
+        return this.gd(this.evRecord, _ => _.tender.lots, []).length
       }
     },
     methods: {
@@ -168,6 +204,10 @@
       },
       fa(amount) {
         return formatAmount(amount);
+      },
+      changePage(page) {
+        this.numberOfLastDisplayedLot =  page * this.pageSize;
+        this.currentPage = page;
       }
     }
   };

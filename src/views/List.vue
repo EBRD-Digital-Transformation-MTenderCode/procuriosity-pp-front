@@ -7,16 +7,17 @@
       />
       <search-status-bar
           :entity="entityName"
+          :needPagination="needPagination"
       />
       <transition-group
           @before-enter="beforeEnter"
           @enter="enter"
           @leave="leave"
+          id="transition-group"
       >
         <div
             v-if="entities[entityName].loaded && entities[entityName].list.length"
             :key="'list'"
-            id="entity-list"
             class="list"
         >
           <component
@@ -59,7 +60,7 @@
           :currentPage="entities[entityName].searchParams.page"
           :pageSize="entities[entityName].searchParams.pageSize"
           :changePage="changePage"
-          offsetTo="entity-list"
+          offsetTo="transition-group"
           :key="'pagination'"
       />
     </el-container>
@@ -145,8 +146,7 @@
       },
       needPagination() {
         const entityInfoObj = this.entities[this.entityName];
-
-        return entityInfoObj.paginationInfo.pageCount !== 1 && entityInfoObj.list.length;
+        return !!(entityInfoObj.paginationInfo.pageCount !== 1 && entityInfoObj.list.length);
       }
     },
     methods: {

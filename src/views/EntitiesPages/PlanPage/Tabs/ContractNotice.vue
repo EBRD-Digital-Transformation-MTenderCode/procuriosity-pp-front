@@ -310,14 +310,20 @@
                 <div class="info-block__text">{{ $t("plan.information_about_lots") }}</div>
                 <div class="info-block__value">
                   <div>{{ $t("plan.contract_divided_into_lots") }}</div>
-                  <div>{{ $t("plan.tenders_submitted_all_lots") }}</div>
+                  <div id="scrollToDescription">{{ $t("plan.tenders_submitted_all_lots") }}</div>
                 </div>
               </el-col>
             </el-row>
           </div>
         </div>
 
-        <div id="description" class="info__sub-title">{{ $t("plan.description") }}</div>
+        <div class="info__sub-title">{{ $t("plan.description") }}</div>
+        <page-number
+            v-if="needPagination"
+            :current-page="currentPage"
+            :elements-amount="elementsAmount"
+            :page-size="pageSize"
+        />
         <el-collapse accordion v-if="gd(pnRecord, _ => _.tender.hasOwnProperty('lots'))" :value="gd(pnRecord, _ => _.tender.lots[0].id, '0') + '0'">
           <el-collapse-item
               v-for="(lot, index) of gd(pnRecord, _ => _.tender.lots, [])"
@@ -608,13 +614,13 @@
         </el-collapse>
         <div v-else>{{ $t("plan.no_lots")}}</div>
         <list-pagination
-            v-if="gd(pnRecord, _ => _.tender.lots, []).length > pageSize"
-            :total= "gd(pnRecord, _ => _.tender.lots, []).length"
-            :pageCount= "0"
-            :currentPage= 1
+            v-if="needPagination"
+            :total= "elementsAmount"
+            :pageCount="0"
+            :currentPage=currentPage
             :pageSize= pageSize
             :changePage="changePage"
-            offsetTo="description"
+            offsetTo="scrollToDescription"
             :key="'pagination'"
         />
       </div>
@@ -1304,7 +1310,8 @@
 
   import typesOfBuyers from "./../../../../store/types/buyers-types";
   import mainGeneralActivites from "./../../../../store/types/main-general-activity-types";
-  import ListPagination from "../../../../components/ListPagination";
+  import ListPagination from "./../../../../components/ListPagination";
+  import PageNumber  from "./../../../../components/PageNumber"
 
   import { getDataFromObject, formatDate, parseDocumentType, formatAmount, transformDocumentation} from "./../../../../utils";
 
@@ -1324,13 +1331,15 @@
       }
     },
     components: {
-      "list-pagination": ListPagination
+      "list-pagination": ListPagination,
+      "page-number": PageNumber
     },
     data() {
       return {
         FSs: {},
         pageSize: 25,
-        numberOfLastDisplayedLot: 25
+        numberOfLastDisplayedLot: 25,
+        currentPage: 1
       };
     },
     created() {
@@ -1354,6 +1363,12 @@
       },
       randomSortPlatforms() {
         return [...this.platforms].sort(() => 0.5 - Math.random());
+      },
+      needPagination(){
+        return this.elementsAmount > this.pageSize
+      },
+      elementsAmount(){
+        return this.gd(this.pnRecord, _ => _.tender.lots, []).length
       }
     },
     methods: {
@@ -1415,6 +1430,7 @@
       },
       changePage(page) {
         this.numberOfLastDisplayedLot =  page * this.pageSize;
+        this.currentPage = page;
       },
     }
   };
