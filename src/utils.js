@@ -77,33 +77,35 @@ export function parseDocumentType(documentsType, lang) {
 }
 
 export function transformDocumentation(docs) {
-  const obj = {};
 
-  const transformDocId = (doc) => {
-    const idDoc = doc.id.replace(/-[0-9]{13}$/, "");
-    return { idDoc, timestamp: doc.id.replace(idDoc, "") };
-  };
+  const transformDocId = (doc) => ({
+    docId: doc.id.replace(/-[0-9]{13}$/, ""),
+    timestamp: doc.id.replace(doc.id.replace(/-[0-9]{13}$/, ""), "")
+  });
 
-  for (const doc of [...docs].sort((doc1, doc2) => transformDocId(doc1).timestamp - transformDocId(doc2).timestamp)) {
-    const transformedDoc = transformDocId(doc);
-    if (!obj.hasOwnProperty(transformedDoc.idDoc)) {
-      obj[transformedDoc.idDoc] = {
-        title: doc.title,
-        url: doc.url,
-        datePublished: doc.datePublished,
-        documentType: doc.documentType,
-        id: transformedDoc.idDoc + transformedDoc.timestamp,
-        oldVersions: []
-      };
-    } else {
-      obj[transformedDoc.idDoc].oldVersions.push({
-        title: doc.title,
-        url: doc.url,
-        datePublished: doc.datePublished,
-        documentType: doc.documentType,
-        id: transformedDoc.idDoc + transformedDoc.timestamp,
-      });
-    }
-  }
-  return Object.values(obj);
+  return Object.values([...docs].sort((doc1, doc2) => transformDocId(doc1).timestamp - transformDocId(doc2).timestamp).reduce((obj, doc) => {
+        const transformedDoc = transformDocId(doc);
+        const docObj = {
+          title: doc.title,
+          url: doc.url,
+          datePublished: doc.datePublished,
+          documentType: doc.documentType,
+          id: transformedDoc.docId + transformedDoc.timestamp,
+        };
+
+        if (!obj.hasOwnProperty(transformedDoc.docId)) {
+          obj[transformedDoc.docId] = {
+            oldVersions: [],
+            ...docObj
+          };
+        } else {
+          obj[transformedDoc.docId].oldVersions = [
+            ...obj[transformedDoc.docId].oldVersions,
+            {
+              ...docObj
+            }];
+        }
+        return obj
+      }, {}
+  ));
 }
