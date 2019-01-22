@@ -63,6 +63,7 @@ export const transformSpecialSymbols = str => {
   const parser = new DOMParser;
   return parser.parseFromString(`<!doctype html><html><body> ${str}</body></html>`, "text/html").body.textContent;
 };
+
 export function parseDocumentType(documentsType, lang) {
   if (documentsTypes.hasOwnProperty(documentsType)) {
     return documentsTypes[documentsType][lang];
@@ -74,27 +75,33 @@ export function parseDocumentType(documentsType, lang) {
     return result.charAt(0).toUpperCase() + result.slice(1);
   }
 }
+
 export function transformDocumentation(docs) {
   const obj = {};
-  for (const doc of [...docs].sort((doc1, doc2) => new Date(doc2.datePublished) - new Date(doc1.datePublished))) {
+
+  const transformDocId = (doc) => {
     const idDoc = doc.id.replace(/-[0-9]{13}$/, "");
-    const timestamp = doc.id.replace(idDoc, "");
-    if (!obj.hasOwnProperty(idDoc)) {
-      obj[idDoc] = {
-        title:doc.title,
-        url:doc.url,
-        datePublished:doc.datePublished,
+    return { idDoc, timestamp: doc.id.replace(idDoc, "") };
+  };
+
+  for (const doc of [...docs].sort((doc1, doc2) => transformDocId(doc1).timestamp - transformDocId(doc2).timestamp)) {
+    const transformedDoc = transformDocId(doc);
+    if (!obj.hasOwnProperty(transformedDoc.idDoc)) {
+      obj[transformedDoc.idDoc] = {
+        title: doc.title,
+        url: doc.url,
+        datePublished: doc.datePublished,
         documentType: doc.documentType,
-        id: idDoc + timestamp,
+        id: transformedDoc.idDoc + transformedDoc.timestamp,
         oldVersions: []
       };
     } else {
-      obj[idDoc].oldVersions.push({
-        title:doc.title,
-        url:doc.url,
-        datePublished:doc.datePublished,
-        documentType:doc.documentType,
-        id: idDoc + timestamp,
+      obj[transformedDoc.idDoc].oldVersions.push({
+        title: doc.title,
+        url: doc.url,
+        datePublished: doc.datePublished,
+        documentType: doc.documentType,
+        id: transformedDoc.idDoc + transformedDoc.timestamp,
       });
     }
   }
