@@ -63,6 +63,7 @@ export const transformSpecialSymbols = str => {
   const parser = new DOMParser;
   return parser.parseFromString(`<!doctype html><html><body> ${str}</body></html>`, "text/html").body.textContent;
 };
+
 export function parseDocumentType(documentsType, lang) {
   if (documentsTypes.hasOwnProperty(documentsType)) {
     return documentsTypes[documentsType][lang];
@@ -73,4 +74,38 @@ export function parseDocumentType(documentsType, lang) {
     const result = documentsType.replace(/([A-Z])/g, " $1");
     return result.charAt(0).toUpperCase() + result.slice(1);
   }
+}
+
+export function transformDocumentation(docs) {
+
+  const transformDocId = (doc) => ({
+    docId: doc.id.replace(/-[0-9]{13}$/, ""),
+    timestamp: doc.id.replace(doc.id.replace(/-[0-9]{13}$/, ""), "")
+  });
+
+  return Object.values([...docs].sort((doc1, doc2) => transformDocId(doc1).timestamp - transformDocId(doc2).timestamp).reduce((obj, doc) => {
+        const transformedDoc = transformDocId(doc);
+        const docObj = {
+          title: doc.title,
+          url: doc.url,
+          datePublished: doc.datePublished,
+          documentType: doc.documentType,
+          id: transformedDoc.docId + transformedDoc.timestamp,
+        };
+
+        if (!obj.hasOwnProperty(transformedDoc.docId)) {
+          obj[transformedDoc.docId] = {
+            oldVersions: [],
+            ...docObj
+          };
+        } else {
+          obj[transformedDoc.docId].oldVersions = [
+            ...obj[transformedDoc.docId].oldVersions,
+            {
+              ...docObj
+            }];
+        }
+        return obj
+      }, {}
+  ));
 }

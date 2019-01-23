@@ -194,79 +194,83 @@
 
         <div class="info__sub-title"> {{ $t("tender.communication") }}</div>
         <div class="info-blocks">
-        <div class="info-block">
-          <el-row :gutter="15">
-            <el-col>
-              <div class="info-block__text">
-                {{ $t("tender.procurement_documents_links") }}:
-              </div>
-              <div class="info-block__value">
-                <a :href="`https://mtender.gov.md/${$i18n.locale !== 'ro' ? `${$i18n.locale}/` : ''}tenders/${gd(msRecord, _ => _.ocid) }`"
-                   target="_blank">
-                  mtender.gov.md/{{ $i18n.locale !== "ro" ? `${$i18n.locale}/` : "" }}tenders/{{ gd(msRecord, _ => _.ocid) }}</a>
-              </div>
-            </el-col>
-          </el-row>
-        </div>
+          <div class="info-block">
+            <el-row :gutter="15">
+              <el-col>
+                <div class="info-block__text">
+                  {{ $t("tender.procurement_documents_links") }}:
+                </div>
+                <div class="info-block__value">
+                  <a :href="`https://mtender.gov.md/${$i18n.locale !== 'ro' ? `${$i18n.locale}/` : ''}tenders/${gd(msRecord, _ => _.ocid) }`"
+                     target="_blank">
+                    mtender.gov.md/{{ $i18n.locale !== "ro" ? `${$i18n.locale}/` : "" }}tenders/{{ gd(msRecord, _ =>
+                    _.ocid) }}</a>
+                </div>
+              </el-col>
+            </el-row>
+          </div>
 
-        <div class="info-block">
-          <el-row :gutter="15">
-            <el-col :sm="10">
-              <div class="info-block__text">
-                {{ $t("tender.additional_information_obtained") }}
-              </div>
-              <div class="info-block__value">
-                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "procuringEntity")), _ =>
-                _.contactPoint.name) }}
-              </div>
-            </el-col>
-            <el-col :sm="6">
-              <div class="info-block__text">
-                {{ $t("tender.telephone") }}
-              </div>
-              <div class="info-block__value">
-                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "procuringEntity")), _ =>
-                _.contactPoint.telephone) }}
-              </div>
-            </el-col>
-            <el-col :sm="8">
-              <div class="info-block__text">
-                {{ $t("tender.email") }}
-              </div>
-              <div class="info-block__value">
-                <a
-                    :href="`mailto:${gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === 'procuringEntity')), _ => _.contactPoint.email) }`"
-                >
-                {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "procuringEntity")), _ =>
-                _.contactPoint.email) }}
-                </a>
-              </div>
-            </el-col>
-          </el-row>
-        </div>
+          <div class="info-block">
+            <el-row :gutter="15">
+              <el-col :sm="10">
+                <div class="info-block__text">
+                  {{ $t("tender.additional_information_obtained") }}
+                </div>
+                <div class="info-block__value">
+                  {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role ===
+                  "procuringEntity")), _ =>
+                  _.contactPoint.name) }}
+                </div>
+              </el-col>
+              <el-col :sm="6">
+                <div class="info-block__text">
+                  {{ $t("tender.telephone") }}
+                </div>
+                <div class="info-block__value">
+                  {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role ===
+                  "procuringEntity")), _ =>
+                  _.contactPoint.telephone) }}
+                </div>
+              </el-col>
+              <el-col :sm="8">
+                <div class="info-block__text">
+                  {{ $t("tender.email") }}
+                </div>
+                <div class="info-block__value">
+                  <a
+                      :href="`mailto:${gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === 'procuringEntity')), _ => _.contactPoint.email) }`"
+                  >
+                    {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role ===
+                    "procuringEntity")), _ =>
+                    _.contactPoint.email) }}
+                  </a>
+                </div>
+              </el-col>
+            </el-row>
+          </div>
 
-        <div class="info-block">
-          <el-row :gutter="15">
-            <el-col :sm="24">
-              <div class="info-block__text">
-                {{ $t("tender.must_be_submitted") }}:
-              </div>
-              <div class="info-block__value info-block__value-platform">
-                <a
-                    class="platform-link"
-                    v-for="platform of randomSortPlatforms"
-                    :key="platform.name"
-                    :href="platform.href"
-                    :title="platform.name"
-                    target="_blank"
-                >
-                  <img :src="platform.src" :alt="platform.name" class="platform-img">
-                </a>
-              </div>
-            </el-col>
-          </el-row>
+          <div class="info-block">
+            <el-row :gutter="15">
+              <el-col :sm="24">
+                <div class="info-block__text">
+                  {{ $t("tender.must_be_submitted") }}:
+                </div>
+                <div class="info-block__value info-block__value-platform">
+                  <a
+                      class="platform-link"
+                      v-for="platform of randomSortPlatforms"
+                      :key="platform.name"
+                      :href="platform.href"
+                      :title="platform.name"
+                      target="_blank"
+                  >
+                    <img :src="platform.src" :alt="platform.name" class="platform-img">
+                  </a>
+                </div>
+              </el-col>
+            </el-row>
+          </div>
         </div>
-      </div>
       </div>
 
       <!-- Object -->
@@ -334,7 +338,7 @@
                 <div class="info-block__text">{{ $t("tender.information_about_lots") }}</div>
                 <div class="info-block__value">
                   <div>{{ $t("tender.contract_divided_into_lots") }}</div>
-                  <div>{{ $t("tender.tenders_submitted_all_lots") }}</div>
+                  <div id="scrollToDescription">{{ $t("tender.tenders_submitted_all_lots") }}</div>
                 </div>
               </el-col>
             </el-row>
@@ -342,9 +346,16 @@
         </div>
 
         <div class="info__sub-title">{{ $t("tender.description") }}</div>
+        <page-number
+            v-if="needPagination"
+            :current-page="currentPage"
+            :elements-amount="elementsAmount"
+            :page-size="pageSize"
+        />
         <el-collapse accordion :value="gd(evRecord, _ => _.tender.lots[0].id, '0') + '0'">
           <el-collapse-item
               v-for="(lot, index) of gd(evRecord, _ => _.tender.lots, [])"
+              v-if ="index >= numberOfLastDisplayedLot - pageSize &&  index < numberOfLastDisplayedLot"
               :key="lot.id + index"
               :name="lot.id + index"
           >
@@ -416,7 +427,9 @@
                     <el-col :sm="16">
                       <div class="info-block__value">
                         <div>{{ gd(item, _ => _.description) }}</div>
-                        <div class="info-block__text_small">{{ gd(item, _ => _.classification.id) }} {{ gd(item, _ => _.classification.description) }}</div>
+                        <div class="info-block__text_small">{{ gd(item, _ => _.classification.id) }} {{ gd(item, _ =>
+                          _.classification.description) }}
+                        </div>
                       </div>
                     </el-col>
                     <el-col :sm="8">
@@ -556,7 +569,8 @@
                   <el-col :sm="24">
                     <div class="info-block__text">{{ $t("tender.information_about_variants") }}</div>
                     <div class="info-block__value">
-                      {{ gd(lot, _ => _.variants[0].hasVariants) ? $t("tender.variants_will_be_accepted") :  $t("tender.variants_will_not_be_accepted") }}
+                      {{ gd(lot, _ => _.variants[0].hasVariants) ? $t("tender.variants_will_be_accepted") :
+                      $t("tender.variants_will_not_be_accepted") }}
                     </div>
                   </el-col>
                 </el-row>
@@ -573,34 +587,77 @@
                 </el-row>
               </div>
 
-              <div class="info-block"
-                   v-if="gd(evRecord, _ => _.tender.documents, []).filter(doc => gd(doc, _ => _.relatedLots[0], '') === gd(lot, _ => _.id)).length">
-                <div class="info-block__documents"
-                     v-for="(doc, index) of gd(evRecord, _ => _.tender.documents,[]) .filter(doc => gd(doc, _ => _.relatedLots[0], '') === gd(lot, _ => _.id))"
-                     :key="doc.id + index">
-                  <el-row :gutter="15">
-                    <el-col :sm="24">
-                      <div class="info-block__value">
-                        {{ parseDocType(gd(doc, _ => _.documentType)) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a></div>
-                    </el-col>
-                  </el-row>
-                <el-row :gutter="15">
-                  <el-col :sm="16">
-                      <div class="info-block__text info-block__text__small">
-                        {{ $t("tender.id") }}: {{ gd(doc, _ => _.id) }}
-                      </div>
-                  </el-col>
-                  <el-col :sm="8">
-                    <div class="info-block__text info-block__text__small">
-                      {{ $t("tender.published") }}: {{ fd(gd(doc, _ => _.datePublished)) }}
-                    </div>
-                  </el-col>
-                </el-row>
-              </div>
+              <div
+                  class="info-block"
+                  v-if="gd(evRecord, _ => _.tender.documents, []).filter(doc => gd(doc, _ => _.relatedLots[0], '') === gd(lot, _ => _.id)).length"
+              >
+                <div
+                    class="info-block__documents"
+                    v-for="(doc, index) of getDocs(gd(gd(evRecord, _ => _.tender.documents,[]).filter(_doc => gd(_doc, _ => _.relatedLots[0], '') === gd(lot, _ => _.id)),_=>_,[]))"
+                    :key="doc.id + index"
+                >
+                  <div class="info-block__document">
+                    <el-row :gutter="15">
+                      <el-col :sm="24">
+                        <div class="info-block__value ">
+                          {{ parseDocType(gd(doc, _ => _.documentType) ) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a>
+                        </div>
+                      </el-col>
+                    </el-row>
+                    <el-row :gutter="15">
+                      <el-col :sm="16">
+                        <div class="info-block__text info-block__text_small">
+                          {{ $t("tender.id") }}: {{ gd(doc, _ => _.id) }}
+                        </div>
+                      </el-col>
+                      <el-col :sm="8">
+                        <div class="info-block__text info-block__text_small">
+                          {{ $t("tender.published") }}: {{ fd(gd(doc, _ => _.datePublished)) }}
+                        </div>
+                      </el-col>
+                    </el-row>
+                  </div>
+                  <div
+                      v-for="(oldDoc, index) of gd(doc, _ => _.oldVersions, [])"
+                       :key="oldDoc.id + index"
+                       class="info-block__document info-block__document_old"
+                  >
+                    <el-row :gutter="15">
+                      <el-col :sm="24">
+                        <div class="info-block__value">
+                          {{ parseDocType(gd(oldDoc, _ => _.documentType) ) }}
+                          <a :href="gd(oldDoc, _ => _.url)">{{ gd(oldDoc, _ => _.title) }}</a>
+                        </div>
+                      </el-col>
+                    </el-row>
+                    <el-row :gutter="15">
+                      <el-col :sm="16" class="info-block__text_oldDoc">
+                        <div class="info-block__text info-block__text_small">
+                          {{ $t("tender.id") }}: {{ gd(oldDoc, _ => _.id) }}
+                        </div>
+                      </el-col>
+                      <el-col :sm="8">
+                        <div class="info-block__text info-block__text_small">
+                          {{ $t("tender.published") }}: {{ fd(gd(oldDoc, _ => _.datePublished)) }}
+                        </div>
+                      </el-col>
+                    </el-row>
+                  </div>
+                </div>
               </div>
             </div>
           </el-collapse-item>
         </el-collapse>
+        <list-pagination
+            v-if="needPagination"
+            :total= "elementsAmount"
+            :pageCount="0"
+            :currentPage=currentPage
+            :pageSize=pageSize
+            :changePage="changePage"
+            offsetTo="scrollToDescription"
+            :key="'pagination'"
+        />
       </div>
 
       <!-- Legal, economic, financial and technical information -->
@@ -856,7 +913,8 @@
               <el-col :sm="14" v-if="gd(evRecord, _ => _.tender, {}).hasOwnProperty('auctionPeriod')">
                 <div class="info-block__text"> {{ $t("tender.additional_information_electronic_auction") }}</div>
                 <div class="info-block__value">
-                  {{ $t("tender.start_date") }}:  {{ fd(gd(evRecord, _ => _.tender.auctionPeriod.startDate),"DD.MM.YYYY", "n/a") }}
+                  {{ $t("tender.start_date") }}: {{ fd(gd(evRecord, _ => _.tender.auctionPeriod.startDate),"DD.MM.YYYY",
+                  "n/a") }}
                 </div>
               </el-col>
             </el-row>
@@ -874,7 +932,7 @@
                   <!--<a
                     :href="`/plans/${gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === 'planning')), _ => _.identifier)}`"
                     target="_blank">-->
-                    {{ gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === "planning")), _ => _.identifier) }}
+                  {{ gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === "planning")), _ => _.identifier) }}
                   <!--</a>-->
                 </div>
               </el-col>
@@ -923,7 +981,8 @@
               <el-col :sm="24">
                 <div class="info-block__text"> {{ $t("tender.conditions_for_opening_tenders") }}</div>
                 <div class="info-block__value">
-                  {{ fd(gd(evRecord, _ => _.tender, {}).hasOwnProperty("auctionPeriod") ? gd(evRecord, _ => _.tender.auctionPeriod.endDate) : gd(evRecord, _ => _.tender.tenderPeriod.endDate),"DD.MM.YYYY / HH:mm") }}
+                  {{ fd(gd(evRecord, _ => _.tender, {}).hasOwnProperty("auctionPeriod") ? gd(evRecord, _ =>
+                  _.tender.auctionPeriod.endDate) : gd(evRecord, _ => _.tender.tenderPeriod.endDate),"DD.MM.YYYY / HH:mm") }}
                 </div>
               </el-col>
             </el-row>
@@ -985,10 +1044,10 @@
                       {{ gd(budgetBreakdown, _ => _.id) }}
                     </div>
                   </el-col>
-                  <el-col :sm="4">
+                  <el-col :sm="8">
                     <div class="info-block__text">{{ $t("tender.amount") }}</div>
                     <div class="info-block__value">
-                      {{ fa(gd(budgetBreakdown, _ => _.amount.amount)) }}
+                      {{ fa(gd(budgetBreakdown, _ => _.amount.amount))}}
                       {{ gd(budgetBreakdown, _ => _.amount.currency) }}
                     </div>
                   </el-col>
@@ -1012,8 +1071,10 @@
                   <el-col :sm="8">
                     <div class="info-block__text">{{ $t("tender.validity_period") }}</div>
                     <div class="info-block__value">
-                      {{ $t("tender.start_date") }}: {{ fd(gd(budgetBreakdown, _ => _.period.startDate), "DD.MM.YYYY") }} -
-                      {{ $t("tender.end_date") }}: {{ fd(gd(budgetBreakdown, _ => _.period.endDate), "DD.MM.YYYY") }}
+                      {{ $t("tender.start_date") }}:&nbsp;f{{ fd(gd(budgetBreakdown, _ => _.period.startDate),
+                      "DD.MM.YYYY") }} -
+                      {{ $t("tender.end_date") }}:&nbsp;{{ fd(gd(budgetBreakdown, _ => _.period.endDate), "DD.MM.YYYY")
+                      }}
                     </div>
                   </el-col>
                 </el-row>
@@ -1041,13 +1102,15 @@
                   <el-col :sm="16">
                     <div class="info-block__text">{{ $t("tender.budget_owner") }}</div>
                     <div class="info-block__value">
-                      {{ gd(gd(msRecord, _ => _.parties, []).find(part => gd(part, _ => _.roles, []).some(role => role === "buyer")), _ => _.name) }}
+                      {{ gd(gd(msRecord, _ => _.parties, []).find(part => gd(part, _ => _.roles, []).some(role => role
+                      === "buyer")), _ => _.name) }}
                     </div>
                   </el-col>
                   <el-col :sm="8">
                     <div class="info-block__text">{{ $t("tender.procuring_entity_identifier") }}</div>
                     <div class="info-block__value">
-                      {{ gd(gd(msRecord, _ => _.parties, []).find(part => gd(part, _ => _.roles, []).some(role => role === "buyer")), _ => _.id) }}
+                      {{ gd(gd(msRecord, _ => _.parties, []).find(part => gd(part, _ => _.roles, []).some(role => role
+                      === "buyer")), _ => _.id) }}
                     </div>
                   </el-col>
                 </el-row>
@@ -1075,7 +1138,8 @@
                   <el-col :sm="16">
                     <div class="info-block__text">{{ $t("tender.funding_entity") }}</div>
                     <div class="info-block__value">
-                      {{ FSs.hasOwnProperty(gd(budgetBreakdown, _ => _.id)) ? gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].funder.name, $t("tender.state_money")): "n/a" }}
+                      {{ FSs.hasOwnProperty(gd(budgetBreakdown, _ => _.id)) ? gd(FSs, _ => _[gd(budgetBreakdown, _ =>
+                      _.id)].funder.name, $t("tender.state_money")): "n/a" }}
                     </div>
                   </el-col>
                   <el-col :sm="8" v-if="gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].funder.id)">
@@ -1123,7 +1187,7 @@
           <li>{{ $t("tender.complementary_information_list1_p1") }}</li>
           <li>{{ $t("tender.complementary_information_list1_p2") }}</li>
           <li>{{ $t("tender.complementary_information_list1_p3") }}</li>
-          <li>{{ $t("tender.complementary_information_list1_p4") }} </li>
+          <li>{{ $t("tender.complementary_information_list1_p4") }}</li>
           <li>{{ $t("tender.complementary_information_list1_p5") }}</li>
         </ul>
 
@@ -1143,149 +1207,183 @@
         <div class="info__sub-title">{{ $t("tender.procedure_documents") }}</div>
         <div class="info-blocks">
           <div class="info-block">
-            <div class="info-block__documents"
-                 v-for="(doc, index) of gd(evRecord, _ => _.tender.documents, []).filter(doc => !doc.hasOwnProperty('relatedLots'))"
-                 :key="doc.id + index"
+            <div
+                class="info-block__documents"
+                v-for="(doc, index) of getDocs(gd(gd(evRecord, _ => _.tender.documents, []).filter(_doc => !_doc.hasOwnProperty('relatedLots')), _ => _, []))"
+                :key="doc.id + index"
             >
-              <el-row :gutter="15">
-                <el-col :sm="24">
-                  <div class="info-block__value ">
-                    {{ parseDocType(gd(doc, _ => _.documentType) ) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a>
-                  </div>
-                </el-col>
-              </el-row>
-            <el-row :gutter="15">
-              <el-col :sm="16">
-                  <div class="info-block__text info-block__text_small">
-                    {{ $t("tender.id") }}: {{ gd(doc, _ => _.id) }}
-                  </div>
-              </el-col>
-              <el-col :sm="8">
-                <div class="info-block__text info-block__text_small">
-                  {{ $t("tender.published") }}: {{ fd(gd(doc, _ => _.datePublished)) }}
-                </div>
-              </el-col>
-            </el-row>
-          </div>
-          </div>
-        </div>
-        <div class="info__sub-title">{{ $t("tender.procudures_for_review") }}</div>
-        <div class="info-blocks">
-          <div class="info-block">
-            <el-row :gutter="15">
-              <el-col :sm="24">
-                <div class="info-block__text">  {{ $t("tender.procuring_entity_full_name") }}</div>
-                <div class="info-block__value">
-                  Agenția Națională pentru Soluționarea Contestațiilor
-                </div>
-              </el-col>
-            </el-row>
-          </div>
-
-          <div class="info-block">
-            <el-row :gutter="15">
-              <el-col :sm="24">
-                <div class="info-block__text">{{ $t("tender.procuring_entity_address") }}</div>
-                <div class="info-block__value">
-                  bd. Ștefan cel Mare și Sfânt, 124, et. 4
-                </div>
-              </el-col>
-            </el-row>
-          </div>
-
-          <div class="info-block">
-            <el-row :gutter="15">
-              <el-col :sm="6">
-                <div class="info-block__text">{{ $t("tender.town") }}</div>
-                <div class="info-block__value">
-                  Chișinău
-                </div>
-              </el-col>
-
-              <el-col :sm="4">
-                <div class="info-block__text">{{ $t("tender.nuts_code") }}</div>
-                <div class="info-block__value">
-                  n/a
-                </div>
-              </el-col>
-
-              <el-col :sm="6">
-                <div class="info-block__text">{{ $t("tender.postal_code") }}</div>
-                <div class="info-block__value">
-                  MD-2001
-                </div>
-              </el-col>
-
-              <el-col :sm="8">
-                <div class="info-block__text">{{ $t("tender.country") }}</div>
-                <div class="info-block__value">
-                  Republic of Moldova
-                </div>
-              </el-col>
-            </el-row>
-          </div>
-
-          <div class="info-block">
-            <el-row :gutter="15">
-              <el-col :sm="10">
-                <div class="info-block__text">{{ $t("tender.email") }}</div>
-                <div class="info-block__value">
-                  contestatii@ansc.md
-                </div>
-              </el-col>
-
-              <el-col :sm="6">
-                <div class="info-block__text"> {{ $t("tender.telephone") }}</div>
-                <div class="info-block__value">
-                  +373 22 820 652
-                </div>
-              </el-col>
-
-              <el-col :sm="8">
-                <div class="info-block__text">{{ $t("tender.fax") }}</div>
-                <div class="info-block__value">
-                  +373 22 820 651
-                </div>
-              </el-col>
-            </el-row>
-          </div>
-
-          <div class="info-block">
-            <el-row :gutter="15">
-              <el-col :sm="24">
-                <div class="info-block__text">{{ $t("tender.main_internet_address") }}</div>
-                <div class="info-block__value">
-                  <a href="https://www.ansc.md" target="_blank">www.ansc.md</a>
-                </div>
-              </el-col>
-            </el-row>
+              <div class="info-block__document">
+                <el-row :gutter="15">
+                  <el-col :sm="24">
+                    <div class="info-block__value ">
+                      {{ parseDocType(gd(doc, _ => _.documentType) ) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ =>
+                      _.title) }}</a>
+                    </div>
+                  </el-col>
+                </el-row>
+                <el-row :gutter="15">
+                  <el-col :sm="16">
+                    <div class="info-block__text info-block__text_small">
+                      {{ $t("tender.id") }}: {{ gd(doc, _ => _.id) }}
+                    </div>
+                  </el-col>
+                  <el-col :sm="8">
+                    <div class="info-block__text info-block__text_small">
+                      {{ $t("tender.published") }}: {{ fd(gd(doc, _ => _.datePublished)) }}
+                    </div>
+                  </el-col>
+                </el-row>
+              </div>
+              <div
+                  v-for="(oldDoc, index) of gd(doc, _ => _.oldVersions, [])"
+                  :key="oldDoc.id + index"
+                  class="info-block__document info-block__document_old"
+              >
+                <el-row :gutter="15">
+                  <el-col :sm="24">
+                    <div class="info-block__value">
+                      {{ parseDocType(gd(oldDoc, _ => _.documentType) ) }}
+                      <a :href="gd(oldDoc, _ => _.url)">{{ gd(oldDoc, _ => _.title) }}</a>
+                    </div>
+                  </el-col>
+                </el-row>
+                <el-row :gutter="15">
+                  <el-col :sm="16" class="info-block__text_oldDoc">
+                    <div class="info-block__text info-block__text_small">
+                      {{ $t("tender.id") }}: {{ gd(oldDoc, _ => _.id) }}
+                    </div>
+                  </el-col>
+                  <el-col :sm="8">
+                    <div class="info-block__text info-block__text_small">
+                      {{ $t("tender.published") }}: {{ fd(gd(oldDoc, _ => _.datePublished)) }}
+                    </div>
+                  </el-col>
+                </el-row>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div class="info__sub-title">{{ $t("tender.review_procedures_title") }}</div>
+      </div>
+      <div class="info__sub-title">{{ $t("tender.procudures_for_review") }}</div>
+      <div class="info-blocks">
         <div class="info-block">
-          <p>
-            {{ $t("tender.review_procedures_p1") }}</p>
-          <ol>
-            <li>
-              {{ $t("tender.review_procedures_list1_p1") }}:
-              <ol>
-                <li class="info-block__text">
-                  {{ $t("tender.review_procedures_list1_p2_1") }}</li>
-                <li class="info-block__text">
-                  {{ $t("tender.review_procedures_list1_p2_2") }}</li>
-              </ol>
-            </li>
-            <li>
-              {{ $t("tender.review_procedures_list1_p3") }}
-            </li>
-            <li>
-              {{ $t("tender.review_procedures_list1_p4") }}
-            </li>
+          <el-row :gutter="15">
+            <el-col :sm="24">
+              <div class="info-block__text"> {{ $t("tender.procuring_entity_full_name") }}</div>
+              <div class="info-block__value">
+                Agenția Națională pentru Soluționarea Contestațiilor
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+
+        <div class="info-block">
+          <el-row :gutter="15">
+            <el-col :sm="24">
+              <div class="info-block__text">{{ $t("tender.procuring_entity_address") }}</div>
+              <div class="info-block__value">
+                bd. Ștefan cel Mare și Sfânt, 124, et. 4
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+
+        <div class="info-block">
+          <el-row :gutter="15">
+            <el-col :sm="6">
+              <div class="info-block__text">{{ $t("tender.town") }}</div>
+              <div class="info-block__value">
+                Chișinău
+              </div>
+            </el-col>
+
+            <el-col :sm="4">
+              <div class="info-block__text">{{ $t("tender.nuts_code") }}</div>
+              <div class="info-block__value">
+                n/a
+              </div>
+            </el-col>
+
+            <el-col :sm="6">
+              <div class="info-block__text">{{ $t("tender.postal_code") }}</div>
+              <div class="info-block__value">
+                MD-2001
+              </div>
+            </el-col>
+
+            <el-col :sm="8">
+              <div class="info-block__text">{{ $t("tender.country") }}</div>
+              <div class="info-block__value">
+                Republic of Moldova
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+
+        <div class="info-block">
+          <el-row :gutter="15">
+            <el-col :sm="10">
+              <div class="info-block__text">{{ $t("tender.email") }}</div>
+              <div class="info-block__value">
+                contestatii@ansc.md
+              </div>
+            </el-col>
+
+            <el-col :sm="6">
+              <div class="info-block__text"> {{ $t("tender.telephone") }}</div>
+              <div class="info-block__value">
+                +373 22 820 652
+              </div>
+            </el-col>
+
+            <el-col :sm="8">
+              <div class="info-block__text">{{ $t("tender.fax") }}</div>
+              <div class="info-block__value">
+                +373 22 820 651
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+
+        <div class="info-block">
+          <el-row :gutter="15">
+            <el-col :sm="24">
+              <div class="info-block__text">{{ $t("tender.main_internet_address") }}</div>
+              <div class="info-block__value">
+                <a href="https://www.ansc.md" target="_blank">www.ansc.md</a>
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+      </div>
+
+      <div class="info__sub-title">{{ $t("tender.review_procedures_title") }}</div>
+      <div class="info-block">
+        <p>
+          {{ $t("tender.review_procedures_p1") }}</p>
+        <ol>
+          <li>
+            {{ $t("tender.review_procedures_list1_p1") }}:
+            <ol>
+              <li class="info-block__text">
+                {{ $t("tender.review_procedures_list1_p2_1") }}
+              </li>
+              <li class="info-block__text">
+                {{ $t("tender.review_procedures_list1_p2_2") }}
+              </li>
+            </ol>
+          </li>
+          <li>
+            {{ $t("tender.review_procedures_list1_p3") }}
+          </li>
+          <li>
+            {{ $t("tender.review_procedures_list1_p4") }}
+          </li>
         </ol>
       </div>
-      </div>
-      <div class="info__sub-title"> {{ $t("tender.date_online_publication") }}: {{ fd(gd(evRecord, _ => _.tender.enquiryPeriod.startDate), "DD/MM/YYYY") }}</div>
+    </div>
+    <div class="info__sub-title"> {{ $t("tender.date_online_publication") }}: {{ fd(gd(evRecord, _ =>
+      _.tender.enquiryPeriod.startDate), "DD/MM/YYYY") }}
     </div>
   </div>
 </template>
@@ -1293,17 +1391,20 @@
 <script>
   import axios from "axios";
 
-
   import mainProcurementCategory from "./../../../../store/types/main-procurement-category";
   import typesOfBuyers from "./../../../../store/types/buyers-types";
   import mainGeneralActivites from "./../../../../store/types/main-general-activity-types";
+
+  import ListPagination from "./../../../../components/ListPagination";
+  import PageNumber  from "./../../../../components/PageNumber"
 
   import {
     getDataFromObject,
     formatDate,
     parseDocumentType,
     addPeriod,
-    formatAmount
+    formatAmount,
+    transformDocumentation
   } from "./../../../../utils";
 
   export default {
@@ -1320,6 +1421,10 @@
         type: String,
         required: true
       }
+    },
+    components: {
+      "list-pagination": ListPagination,
+      "page-number": PageNumber
     },
     data() {
       return {
@@ -1354,7 +1459,10 @@
         FSs: {},
         needDisplay: false,
         windowWidth: 0,
-        computedOffset: 75
+        computedOffset: 75,
+        pageSize: 25,
+        numberOfLastDisplayedLot: 25,
+        currentPage: 1
       };
     },
     computed: {
@@ -1377,6 +1485,12 @@
       },
       randomSortPlatforms() {
         return [...this.platforms].sort(() => 0.5 - Math.random());
+      },
+      needPagination(){
+        return this.elementsAmount > this.pageSize
+      },
+      elementsAmount(){
+        return this.gd(this.evRecord, _ => _.tender.lots, []).length
       }
     },
     methods: {
@@ -1387,7 +1501,7 @@
         return formatDate(...ars);
       },
       parseDocType(type) {
-        return parseDocumentType(type, this.$i18n.locale );
+        return parseDocumentType(type, this.$i18n.locale);
       },
       add(date, timePeriod, count) {
         return addPeriod(date, timePeriod, count);
@@ -1434,7 +1548,14 @@
       },
       setWindowSize() {
         this.windowWidth = window.innerWidth;
-      }
+      },
+      getDocs(docs) {
+        return transformDocumentation(docs);
+      },
+      changePage(page) {
+        this.numberOfLastDisplayedLot =  page * this.pageSize;
+        this.currentPage = page;
+      },
     },
     mounted() {
       this.$nextTick(() => {

@@ -61,9 +61,16 @@
       </div>
     </div>
 
-    <div class="info__sub-title">{{ $t("tender.electronic_bids_received")}}</div>
+    <div id="sub-title" class="info__sub-title">{{ $t("tender.electronic_bids_received")}}</div>
+    <page-number
+        v-if="needPagination"
+        :current-page="currentPage"
+        :elements-amount="elementsAmount"
+        :page-size="pageSize"
+    />
     <div
         v-for="(lot, index) of gd(evRecord, _ => _.tender.lots, [])"
+        v-if ="index >= numberOfLastDisplayedLot - pageSize &&  index < numberOfLastDisplayedLot"
         :key="lot.id"
     >
       <div style="margin-bottom: 15px; font-size: 16px; font-weight: 700;">
@@ -101,14 +108,13 @@
           <td data-th="Self-declaration">
             <button
                 type="button"
-                @click="$refs[bid.id + 'eligibilityDocuments'][0].open = true"
+                @click="$refs[bid.id + 'eligibilityDocuments'][0].show = true"
                 class="offers-table__docs-espd-button"
             >
               {{ $t("tender.mtender_espd")}}
             </button>
             <documents-modal
                 :ref="bid.id + 'eligibilityDocuments'"
-                :open="false"
                 :documents="bid.hasOwnProperty('documents') ? bid.documents.filter(_doc => _doc.documentType === 'x_eligibilityDocuments'): []"
                 :noItemsText="$t('tender.no_documents_submitted')"
             />
@@ -118,12 +124,12 @@
             <button
                 v-if="bid.hasOwnProperty('documents') ? bid.documents.length : false"
                 type="button"
-                @click="$refs[bid.id][0].open = true"
+                @click="$refs[bid.id][0].show = true"
                 class="offers-table__docs-button"
             />
+            <div class="offers-table__docs-eos-text" v-else> {{$t("tender.no_documents")}}</div>
             <documents-modal
                 :ref="bid.id"
-                :open="false"
                 :documents="bid.hasOwnProperty('documents') ? bid.documents.filter(_doc => _doc.documentType !== 'x_eligibilityDocuments'): []"
                 :noItemsText="$t('tender.no_documents')"
             />
@@ -137,11 +143,24 @@
         {{ $t("tender.no_bids_received")}}
       </div>
     </div>
+    <list-pagination
+        v-if="needPagination"
+        :total= "elementsAmount"
+        :pageCount="0"
+        :currentPage=currentPage
+        :pageSize=pageSize
+        :changePage="changePage"
+        offsetTo="sub-title"
+        :key="'pagination'"
+    />
   </div>
 </template>
 
 <script>
   import DocumentsModal from "./../DocumentsModal";
+
+  import ListPagination from "./../../../../components/ListPagination";
+  import PageNumber  from "./../../../../components/PageNumber"
 
   import {
     getDataFromObject,
@@ -152,12 +171,28 @@
   export default {
     name: "Offers",
     components: {
-      "documents-modal": DocumentsModal
-    },
+      "documents-modal": DocumentsModal,
+      "list-pagination": ListPagination,
+      "page-number": PageNumber},
     props: {
       evRecord: {
         type: Object,
         required: true
+      }
+    },
+    data(){
+      return {
+        pageSize: 25,
+        numberOfLastDisplayedLot: 25,
+        currentPage: 1
+      }
+    },
+    computed:{
+      needPagination(){
+        return this.elementsAmount > this.pageSize
+      },
+      elementsAmount(){
+        return this.gd(this.evRecord, _ => _.tender.lots, []).length
       }
     },
     methods: {
@@ -169,6 +204,10 @@
       },
       fa(amount) {
         return formatAmount(amount);
+      },
+      changePage(page) {
+        this.numberOfLastDisplayedLot =  page * this.pageSize;
+        this.currentPage = page;
       }
     }
   };

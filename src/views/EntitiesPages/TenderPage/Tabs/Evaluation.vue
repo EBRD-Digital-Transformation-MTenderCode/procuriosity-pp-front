@@ -1,15 +1,22 @@
 <template>
   <div class="info">
-    <div class="info__title">{{ $t("tender.evaluation_of_winning_bid")}}</div>
-    <div
+    <div id="evaluation-title" class="info__title">{{ $t("tender.evaluation_of_winning_bid")}}</div>
+    <page-number
+        v-if="needPagination"
+        :current-page="currentPage"
+        :elements-amount="elementsAmount"
+        :page-size="pageSize"
+    />
+      <div
       v-for="(lot, index) of gd(evRecord, _ => _.tender.lots, [])"
+      v-if ="index >= numberOfLastDisplayedLot - pageSize &&  index < numberOfLastDisplayedLot"
       :key="lot.id"
     >
       <div style="font-size: 16px; font-weight: 700;">
         {{ $t("tender.lot")}} {{ index + 1 }}: {{ lot.title }}
       </div>
       <table
-        v-if="gd(evRecord, _ => _.awards, []).find(award => award.relatedLots[0] === lot.id).hasOwnProperty('relatedBid')"
+        v-if="gd(gd(evRecord, _ => _.awards, []).find(award => award.relatedLots[0] === lot.id),_=>_,{}).hasOwnProperty('relatedBid')"
         class="info-table evaluation-table"
       >
         <tr>
@@ -38,9 +45,9 @@
           </td>
           <td :data-th="$t('tender.mtender_espd')">
             <button
-              v-if="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.length : false"
+              v-if="bidForCurrentAward(award.relatedBid).hasOwnProperty('documents') ? bidForCurrentAward(award.relatedBid).documents.length : false"
               type="button"
-              @click="$refs[award.id + 'eligibilityDocuments'][0].open = true"
+              @click="$refs[award.id + 'eligibilityDocuments'][0].show = true"
               class="evaluation-table__docs-espd-button"
             >
               {{ $t("tender.mtender_espd")}}
@@ -50,22 +57,21 @@
             </div>
             <documents-modal
               :ref="award.id + 'eligibilityDocuments'"
-              :open="false"
-              :documents="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.filter(_doc => _doc.documentType === 'x_eligibilityDocuments') : []"
+              :documents="bidForCurrentAward(award.relatedBid).hasOwnProperty('documents') ? bidForCurrentAward(award.relatedBid).documents.filter(_doc => _doc.documentType === 'x_eligibilityDocuments') : []"
               :noItemsText="$t('tender.no_documents_submitted')"
             />
           </td>
-          <td :data-th="$t('tender.eos_docs')">
+          <td class="evaluation-table__docs-eos" :data-th="$t('tender.eos_docs')">
             <button
-              v-if="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.length : 0"
+              v-if="bidForCurrentAward(award.relatedBid).hasOwnProperty('documents') ? bidForCurrentAward(award.relatedBid).documents.length : 0"
               type="button"
-              @click="$refs[award.id][0].open = true"
+              @click="$refs[award.id][0].show = true"
               class="evaluation-table__docs-button"
             />
+            <div class="evaluation-table__docs-eos-text" v-else> {{$t("tender.no_documents")}}</div>
             <documents-modal
               :ref="award.id"
-              :open="false"
-              :documents="gd(gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid), _ => _.documents) ? gd(evRecord, _ => _.bids.details, []).find(bid => bid.id === award.relatedBid).documents.filter(_doc => _doc.documentType !== 'x_eligibilityDocuments') : []"
+              :documents="bidForCurrentAward(award.relatedBid).hasOwnProperty('documents') ? bidForCurrentAward(award.relatedBid).documents.filter(_doc => _doc.documentType !== 'x_eligibilityDocuments') : []"
               :noItemsText="$t('tender.no_documents')"
             />
           </td>
@@ -76,7 +82,7 @@
             <button
               v-if="!(gd(award, _ => _.status) === 'pending' && gd(award, _ => _.statusDetails) === 'empty')"
               type="button"
-              @click="$refs[award.id + 'info'][0].open = true"
+              @click="$refs[award.id + 'info'][0].show = true"
               class="evaluation-table__status"
             >
               {{ parseStatus(gd(award, _ => _.status), gd(award, _ => _.statusDetails)) }}
@@ -85,7 +91,6 @@
             <award-info-modal
               v-if="!(gd(award, _ => _.status) === 'pending' && gd(award, _ => _.statusDetails) === 'empty')"
               :ref="award.id + 'info'"
-              :open="false"
               :award="award"
             />
             <div class="evaluation-table__status-time"
@@ -102,12 +107,25 @@
         {{$t("tender.lot_is_not_awarded")}}
       </div>
     </div>
+    <list-pagination
+        v-if="needPagination"
+        :total="elementsAmount"
+        :pageCount="0"
+        :currentPage=currentPage
+        :pageSize=pageSize
+        :changePage="changePage"
+        offsetTo="evaluation-title"
+        :key="'pagination'"
+    />
   </div>
 </template>
 
 <script>
   import DocumentsModal from "./../DocumentsModal";
   import AwardInfoModal from "./../AwardInfoModal";
+
+  import ListPagination from "./../../../../components/ListPagination";
+  import PageNumber  from "./../../../../components/PageNumber"
 
   import {
     getDataFromObject,
@@ -121,12 +139,29 @@
     name: "Evaluation",
     components: {
       "documents-modal": DocumentsModal,
-      "award-info-modal": AwardInfoModal
+      "award-info-modal": AwardInfoModal,
+      "list-pagination": ListPagination,
+      "page-number": PageNumber
     },
     props: {
       evRecord: {
         type: Object,
         required: true
+      }
+    },
+    data(){
+      return {
+        pageSize: 25,
+        numberOfLastDisplayedLot: 25,
+        currentPage: 1
+      }
+    },
+    computed:{
+      needPagination(){
+        return this.elementsAmount > this.pageSize
+      },
+      elementsAmount(){
+        return this.gd(this.evRecord, _ => _.tender.lots, []).length
       }
     },
     methods: {
@@ -155,6 +190,14 @@
         } else {
           return awardsStatuses["pending"][this.$i18n.locale];
         }
+      },
+      bidForCurrentAward(bidId) {
+        const currentBid = this.gd(this.evRecord, _ => _.bids.details, []).find(bid => bid.id === bidId);
+        return  currentBid ? currentBid : {}
+      },
+      changePage(page) {
+        this.numberOfLastDisplayedLot =  page * this.pageSize;
+        this.currentPage = page;
       }
     }
   };

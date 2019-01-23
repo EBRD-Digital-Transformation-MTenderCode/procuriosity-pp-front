@@ -329,6 +329,10 @@ export default {
 
         try {
           const res = await axios(getPlanConfig(cdb, id));
+
+          if (!Object.keys(res.data).length) {
+            throw new Error(VueI18n.t("invalid-id"));
+          }
           const planData = {};
 
           const MSRecord = {};
@@ -473,6 +477,11 @@ export default {
 
         try {
           const res = await axios(getTenderConfig(cdb, id));
+
+          if (!Object.keys(res.data).length) {
+            throw new Error(VueI18n.t("invalid-id"));
+          }
+
           const tenderData = {};
 
           const MSRecord = {};

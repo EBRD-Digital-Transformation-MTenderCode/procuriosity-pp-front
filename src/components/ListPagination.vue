@@ -8,7 +8,7 @@
         :page-size="pageSize"
         :total="total"
         :pager-count="pagesNumber"
-    
+
         @prev-click="_changePage"
         @next-click="_changePage"
         @current-change="_changePage"
@@ -39,33 +39,31 @@
       changePage: {
         type: Function,
         required: true
+      },
+      offsetTo: {
+        type: String
       }
     },
     mounted() {
       this.$nextTick(function() {
-        window.addEventListener('resize', this.getWindowWidth);
-        
+        window.addEventListener("resize", this.getWindowWidth);
+
         this.getWindowWidth();
-      })
+      });
     },
     data() {
       return {
         pagesNumber: 9
-      }
+      };
     },
     methods: {
       _changePage(page) {
-        window.scroll({
-          behavior: "smooth",
-          left: 0,
-          top: document.getElementById("entity-list").offsetTop
-        });
-
+        document.getElementById(this.offsetTo).scrollIntoView({ block: "start", behavior: "smooth" });
         this.changePage(page);
       },
       getWindowWidth() {
         const windowWidth = window.screen.width;
-        
+
         switch (true) {
           case windowWidth < 767:
             this.pagesNumber = 5;
@@ -76,7 +74,7 @@
       },
     },
     beforeDestroy() {
-      window.removeEventListener('resize', this.getWindowWidth);
+      window.removeEventListener("resize", this.getWindowWidth);
     }
   };
 </script>

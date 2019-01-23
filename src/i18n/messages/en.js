@@ -12,5 +12,9 @@ export default {
   contract,
   "refresh": "Refresh",
   "back": "Back",
-  "invalid-id" : "Invalid ID"
+  "invalid-id" : "Invalid ID",
+
+  "page":"Page",
+  "of":"of",
+  "pages":"pages"
 };

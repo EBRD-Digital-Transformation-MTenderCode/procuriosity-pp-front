@@ -7,16 +7,17 @@
       />
       <search-status-bar
           :entity="entityName"
+          :needPagination="needPagination"
       />
       <transition-group
           @before-enter="beforeEnter"
           @enter="enter"
           @leave="leave"
+          id="transition-group"
       >
         <div
             v-if="entities[entityName].loaded && entities[entityName].list.length"
             :key="'list'"
-            id="entity-list"
             class="list"
         >
           <component
@@ -59,6 +60,7 @@
           :currentPage="entities[entityName].searchParams.page"
           :pageSize="entities[entityName].searchParams.pageSize"
           :changePage="changePage"
+          offsetTo="transition-group"
           :key="'pagination'"
       />
     </el-container>
@@ -144,8 +146,7 @@
       },
       needPagination() {
         const entityInfoObj = this.entities[this.entityName];
-
-        return entityInfoObj.paginationInfo.pageCount !== 1 && entityInfoObj.list.length;
+        return !!(entityInfoObj.paginationInfo.pageCount !== 1 && entityInfoObj.list.length);
       }
     },
     methods: {
@@ -202,25 +203,25 @@
     padding-bottom: 20px;
     background-color: #efefef;
     &__no-data-title,
-    &__error{
+    &__error {
       margin: 20px 0;
       text-align: center;
       font-size: 38px;
     }
-    &__error{
-      &-message{
+    &__error {
+      &-message {
         margin-bottom: 20px;
       }
     }
-    &__refresh-btn{
+    &__refresh-btn {
       position: relative;
-      padding: 15px 10px 15px 45px ;
+      padding: 15px 10px 15px 45px;
       border-radius: 3px;
       background-color: $mainC;
       font-size: 18px;
       color: #fff;
       transition: 0.4s;
-      &:before{
+      &:before {
         content: "";
         position: absolute;
         left: 10px;
@@ -231,10 +232,10 @@
         background-repeat: no-repeat;
         transition: 0.4s;
       }
-      &:hover{
+      &:hover {
         background-color: lighten($mainC, 8%);
       }
-      &:hover:before{
+      &:hover:before {
         transform: rotate(180deg);
       }
     }

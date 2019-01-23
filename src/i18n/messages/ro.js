@@ -12,5 +12,9 @@ export default {
   contract,
   "refresh": "Reîmprospăta",
   "back": "Înapoi",
-  "invalid-id" : "ID nevalid"
+  "invalid-id" : "ID nevalid",
+
+  "page":"Pagină",
+  "of":"din",
+  "pages":"de pagini"
 };

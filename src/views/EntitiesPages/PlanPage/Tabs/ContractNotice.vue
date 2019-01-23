@@ -310,7 +310,7 @@
                 <div class="info-block__text">{{ $t("plan.information_about_lots") }}</div>
                 <div class="info-block__value">
                   <div>{{ $t("plan.contract_divided_into_lots") }}</div>
-                  <div>{{ $t("plan.tenders_submitted_all_lots") }}</div>
+                  <div id="scrollToDescription">{{ $t("plan.tenders_submitted_all_lots") }}</div>
                 </div>
               </el-col>
             </el-row>
@@ -318,9 +318,16 @@
         </div>
 
         <div class="info__sub-title">{{ $t("plan.description") }}</div>
+        <page-number
+            v-if="needPagination"
+            :current-page="currentPage"
+            :elements-amount="elementsAmount"
+            :page-size="pageSize"
+        />
         <el-collapse accordion v-if="gd(pnRecord, _ => _.tender.hasOwnProperty('lots'))" :value="gd(pnRecord, _ => _.tender.lots[0].id, '0') + '0'">
           <el-collapse-item
               v-for="(lot, index) of gd(pnRecord, _ => _.tender.lots, [])"
+              v-if ="index >= numberOfLastDisplayedLot - pageSize &&  index < numberOfLastDisplayedLot"
               :key="lot.id + index"
               :name="lot.id + index"
           >
@@ -550,32 +557,72 @@
 
               <div class="info-block" v-if="gd(pnRecord, _ => _.tender.documents, []).filter(doc => gd(doc, _ => _.relatedLots[0], '') === gd(lot, _ => _.id)).length">
                 <div class="info-block__documents"
-                     v-for="(doc, index) of gd(pnRecord, _ => _.tender.documents,[]) .filter(doc => gd(doc, _ => _.relatedLots[0], '') === gd(lot, _ => _.id))"
+                     v-for="(doc, index) of getDocs(gd(pnRecord, _ => _.tender.documents,[]) .filter(doc => gd(doc, _ => _.relatedLots[0], '') === gd(lot, _ => _.id)))"
                      :key="doc.id + index">
-                  <el-row :gutter="15">
-                    <el-col :sm="24">
-                      <div class="info-block__value">
-                        {{ parseDocType(gd(doc, _ => _.documentType)) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a></div>
-                    </el-col>
-                  </el-row>
-                  <el-row :gutter="15">
-                    <el-col :sm="16">
-                      <div class="info-block__text info-block__text__small">
-                        {{ $t("plan.id") }}: {{ gd(doc, _ => _.id) }}
-                      </div>
-                    </el-col>
-                    <el-col :sm="8">
-                      <div class="info-block__text info-block__text__small">
-                        {{ $t("plan.published") }}: {{ fd(gd(doc, _ => _.datePublished)) }}
-                      </div>
-                    </el-col>
-                  </el-row>
+                  <div class="info-block__document">
+                    <el-row :gutter="15">
+                      <el-col :sm="24">
+                        <div class="info-block__value ">
+                          {{ parseDocType(gd(doc, _ => _.documentType) ) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ =>
+                          _.title) }}</a>
+                        </div>
+                      </el-col>
+                    </el-row>
+                    <el-row :gutter="15">
+                      <el-col :sm="16">
+                        <div class="info-block__text info-block__text_small">
+                          {{ $t("plan.id") }}: {{ gd(doc, _ => _.id) }}
+                        </div>
+                      </el-col>
+                      <el-col :sm="8">
+                        <div class="info-block__text info-block__text_small">
+                          {{ $t("plan.published") }}: {{ fd(gd(doc, _ => _.datePublished)) }}
+                        </div>
+                      </el-col>
+                    </el-row>
+                  </div>
+                  <div
+                      v-for="(oldDoc, index) of gd(doc, _ => _.oldVersions, [])"
+                      :key="oldDoc.id + index"
+                      class="info-block__document info-block__document_old"
+                  >
+                    <el-row :gutter="15">
+                      <el-col :sm="24">
+                        <div class="info-block__value">
+                          {{ parseDocType(gd(oldDoc, _ => _.documentType) ) }}
+                          <a :href="gd(oldDoc, _ => _.url)">{{ gd(oldDoc, _ => _.title) }}</a>
+                        </div>
+                      </el-col>
+                    </el-row>
+                    <el-row :gutter="15">
+                      <el-col :sm="16" class="info-block__text_oldDoc">
+                        <div class="info-block__text info-block__text_small">
+                          {{ $t("plan.id") }}: {{ gd(oldDoc, _ => _.id) }}
+                        </div>
+                      </el-col>
+                      <el-col :sm="8">
+                        <div class="info-block__text info-block__text_small">
+                          {{ $t("plan.published") }}: {{ fd(gd(oldDoc, _ => _.datePublished)) }}
+                        </div>
+                      </el-col>
+                    </el-row>
+                  </div>
                 </div>
               </div>
             </div>
           </el-collapse-item>
         </el-collapse>
         <div v-else>{{ $t("plan.no_lots")}}</div>
+        <list-pagination
+            v-if="needPagination"
+            :total= "elementsAmount"
+            :pageCount="0"
+            :currentPage=currentPage
+            :pageSize= pageSize
+            :changePage="changePage"
+            offsetTo="scrollToDescription"
+            :key="'pagination'"
+        />
       </div>
 
       <!-- Legal, economic, financial and technical information -->
@@ -1077,29 +1124,59 @@
         <div class="info__sub-title">{{ $t("plan.procedure_documents") }}</div>
         <div v-if="gd(pnRecord, _ => _.tender.hasOwnProperty('documents'))" class="info-blocks">
           <div class="info-block">
-            <div class="info-block__documents"
-                 v-for="(doc, index) of gd(pnRecord, _ => _.tender.documents, []).filter(doc => !doc.hasOwnProperty('relatedLots'))"
-                 :key="doc.id + index"
+            <div
+                class="info-block__documents"
+                v-for="(doc, index) of getDocs(gd(gd(pnRecord, _ => _.tender.documents, []).filter(_doc => !_doc.hasOwnProperty('relatedLots')), _ => _, []))"
+                :key="doc.id + index"
             >
-              <el-row :gutter="15">
-                <el-col :sm="24">
-                  <div class="info-block__value ">
-                    {{ parseDocType(gd(doc, _ => _.documentType) ) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a>
-                  </div>
-                </el-col>
-              </el-row>
-              <el-row :gutter="15">
-                <el-col :sm="16">
-                  <div class="info-block__text info-block__text_small">
-                    {{ $t("plan.id") }}: {{ gd(doc, _ => _.id) }}
-                  </div>
-                </el-col>
-                <el-col :sm="8">
-                  <div class="info-block__text info-block__text_small">
-                    {{ $t("plan.published") }}: {{ fd(gd(doc, _ => _.datePublished)) }}
-                  </div>
-                </el-col>
-              </el-row>
+              <div class="info-block__document">
+                <el-row :gutter="15">
+                  <el-col :sm="24">
+                    <div class="info-block__value ">
+                      {{ parseDocType(gd(doc, _ => _.documentType) ) }} <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ =>
+                      _.title) }}</a>
+                    </div>
+                  </el-col>
+                </el-row>
+                <el-row :gutter="15">
+                  <el-col :sm="16">
+                    <div class="info-block__text info-block__text_small">
+                      {{ $t("plan.id") }}: {{ gd(doc, _ => _.id) }}
+                    </div>
+                  </el-col>
+                  <el-col :sm="8">
+                    <div class="info-block__text info-block__text_small">
+                      {{ $t("plan.published") }}: {{ fd(gd(doc, _ => _.datePublished)) }}
+                    </div>
+                  </el-col>
+                </el-row>
+              </div>
+              <div
+                  v-for="(oldDoc, index) of gd(doc, _ => _.oldVersions, [])"
+                  :key="oldDoc.id + index"
+                  class="info-block__document info-block__document_old"
+              >
+                <el-row :gutter="15">
+                  <el-col :sm="24">
+                    <div class="info-block__value">
+                      {{ parseDocType(gd(oldDoc, _ => _.documentType) ) }}
+                      <a :href="gd(oldDoc, _ => _.url)">{{ gd(oldDoc, _ => _.title) }}</a>
+                    </div>
+                  </el-col>
+                </el-row>
+                <el-row :gutter="15">
+                  <el-col :sm="16" class="info-block__text_oldDoc">
+                    <div class="info-block__text info-block__text_small">
+                      {{ $t("plan.id") }}: {{ gd(oldDoc, _ => _.id) }}
+                    </div>
+                  </el-col>
+                  <el-col :sm="8">
+                    <div class="info-block__text info-block__text_small">
+                      {{ $t("plan.published") }}: {{ fd(gd(oldDoc, _ => _.datePublished)) }}
+                    </div>
+                  </el-col>
+                </el-row>
+              </div>
             </div>
           </div>
         </div>
@@ -1233,8 +1310,10 @@
 
   import typesOfBuyers from "./../../../../store/types/buyers-types";
   import mainGeneralActivites from "./../../../../store/types/main-general-activity-types";
+  import ListPagination from "./../../../../components/ListPagination";
+  import PageNumber  from "./../../../../components/PageNumber"
 
-  import { getDataFromObject, formatDate, parseDocumentType, formatAmount} from "./../../../../utils";
+  import { getDataFromObject, formatDate, parseDocumentType, formatAmount, transformDocumentation} from "./../../../../utils";
 
   export default {
     name: "ContractNotice",
@@ -1251,9 +1330,16 @@
         required: true
       }
     },
+    components: {
+      "list-pagination": ListPagination,
+      "page-number": PageNumber
+    },
     data() {
       return {
-        FSs: {}
+        FSs: {},
+        pageSize: 25,
+        numberOfLastDisplayedLot: 25,
+        currentPage: 1
       };
     },
     created() {
@@ -1277,6 +1363,12 @@
       },
       randomSortPlatforms() {
         return [...this.platforms].sort(() => 0.5 - Math.random());
+      },
+      needPagination(){
+        return this.elementsAmount > this.pageSize
+      },
+      elementsAmount(){
+        return this.gd(this.pnRecord, _ => _.tender.lots, []).length
       }
     },
     methods: {
@@ -1332,7 +1424,14 @@
         catch (e) {
           console.log(e);
         }
-      }
+      },
+      getDocs(docs) {
+        return transformDocumentation(docs);
+      },
+      changePage(page) {
+        this.numberOfLastDisplayedLot =  page * this.pageSize;
+        this.currentPage = page;
+      },
     }
   };
 </script>
