@@ -505,7 +505,7 @@
                 </el-row>
               </div>
 
-              <div class="info-block" v-if="procedureType==='Open Tender' || procedureType==='Licitație deschisă' || procedureType==='Открытые торги'">
+              <!--<div class="info-block" v-if="procedureType==='Open Tender' || procedureType==='Licitație deschisă' || procedureType==='Открытые торги'">
                 <el-row :gutter="15">
                   <el-col :sm="24">
                     <div class="info-block__text">
@@ -516,7 +516,7 @@
                     </div>
                   </el-col>
                 </el-row>
-              </div>
+              </div>-->
 
               <div class="info-block">
                 <el-row :gutter="15">

@@ -535,7 +535,7 @@
                 </el-row>
               </div>
 
-              <div class="info-block"
+              <!--<div class="info-block"
                    v-if="procedureType==='Open Tender' || procedureType==='Licitație deschisă' || procedureType==='Открытые торги'">
                 <el-row :gutter="15">
                   <el-col :sm="24">
@@ -547,7 +547,7 @@
                     </div>
                   </el-col>
                 </el-row>
-              </div>
+              </div>-->
 
               <div class="info-block">
                 <el-row :gutter="15">
@@ -1196,11 +1196,11 @@
           <li>{{ $t("tender.complementary_information_list2_p1") }}</li>
           <li>{{ $t("tender.complementary_information_list2_p2") }}</li>
           <li>{{ $t("tender.complementary_information_list2_p3") }}</li>
-          <li v-if="procedureType==='Open Tender' || procedureType==='Licitație deschisă' || procedureType==='Открытые торги'">
+          <!--<li v-if="procedureType==='Open Tender' || procedureType==='Licitație deschisă' || procedureType==='Открытые торги'">
             {{ $t("tender.complementary_information_list2_p4_1") }}
             {{ fa(gd(msRecord, _ => _.tender.value.amount) * 0.02) }}
             {{ $t("tender.complementary_information_list2_p4_2") }}
-          </li>
+          </li>-->
           <li>{{ $t("tender.complementary_information_list2_p5") }}</li>
         </ul>
 
