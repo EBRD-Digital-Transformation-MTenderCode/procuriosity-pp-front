@@ -193,7 +193,7 @@
 
         <div class="info__sub-title">{{ $t("plan.communication") }}</div>
         <div class="info-blocks">
-          <div class="info-block">
+          <div class="info-block" v-if="hasTender">
             <el-row :gutter="15">
               <el-col>
                 <div class="info-block__text">
@@ -1328,7 +1328,8 @@
       procedureType:{
         type: String,
         required: true
-      }
+      },
+      hasTender: Boolean
     },
     components: {
       "list-pagination": ListPagination,
