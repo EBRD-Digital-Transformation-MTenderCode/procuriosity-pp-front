@@ -74,7 +74,7 @@
         :key="lot.id"
     >
       <div style="margin-bottom: 15px; font-size: 16px; font-weight: 700;">
-        {{ $t("tender.lot")}} {{ index + 1 }}: {{ lot.title }}
+      {{ lot.title }}
       </div>
       <table
           class="info-table offers-table"
