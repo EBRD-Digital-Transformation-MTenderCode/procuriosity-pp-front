@@ -13,7 +13,7 @@
       :key="lot.id"
     >
       <div style="font-size: 16px; font-weight: 700;">
-        {{ $t("tender.lot")}} {{ index + 1 }}: {{ lot.title }}
+        {{ lot.title }}
       </div>
       <table
         v-if="gd(gd(evRecord, _ => _.awards, []).find(award => award.relatedLots[0] === lot.id),_=>_,{}).hasOwnProperty('relatedBid')"
