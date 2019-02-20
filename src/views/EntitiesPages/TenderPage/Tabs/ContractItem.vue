@@ -11,7 +11,7 @@
                 {{ $t("tender.lot") }}
               </div>
               <div class="info-block__value info-block__value__bold">
-                № {{ index + 1 }} - {{ lot.title }}
+                {{ lot.title }}
               </div>
             </el-col>
             <el-col :sm="8">

@@ -245,7 +245,7 @@ export default {
   "procurement_plan_buyers_profile_PIN": "План закупок / Профиль Закупщика / Объявление о намерении",
   "general_info_about_electronic_procedure": "Общая информция об электронной процедуре закупки",
   "info_about_cn": "Информация о закупке (объявления на участие)",
-  "official_publication_procedure": "Официальная опубликования этой процедуры",
+  "official_publication_procedure": "Официальная публикация этой процедуры",
   "clarifications_changes_and_cancellations": "Разъяснения, изменения и аннулирования",
   "clarifications_changes_and_cancellations_text": "Любые разъяснения, изменения или аннулирования, связанные с этой процедурой",
   "record_of_bids": "Информация об оценке и присуждении договора",

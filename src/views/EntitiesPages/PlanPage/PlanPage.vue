@@ -79,7 +79,7 @@
                     <span slot="label" v-html="$t('tender.procurement_plan')" />
                   </el-tab-pane>
                   <el-tab-pane
-                      :disabled="!gd(plan, _ => _.MSRecord.compiledRelease.relatedProcesses, []).some(process => gd(process, _ => _.relationship, []).some(it => it === 'x_evaluation'))"
+                      :disabled="!hasTender"
                       name="cn"
                       lazy
                   >
@@ -94,6 +94,7 @@
                 :procedureType="selectProcedure(gd(plan, _ =>
               _.MSRecord.compiledRelease.tender.mainProcurementCategory),gd(plan, _ =>
               _.MSRecord.compiledRelease.tender.value.amount))"
+                :hasTender="hasTender"
             />
           </el-container>
         </div>
@@ -148,6 +149,9 @@
         const amountStr = this.gd(this.plan, _ => _.MSRecord.compiledRelease.tender.value.amount, 0).toString();
         return /\./.test(amountStr) ? amountStr.slice(amountStr.indexOf(".") + 1).length === 1 ? amountStr.slice(amountStr.indexOf(".") + 1) + "0" : amountStr.slice(amountStr.indexOf(".") + 1) : "00";
       },
+      hasTender() {
+        return this.gd(this.plan, _ => _.MSRecord.compiledRelease.relatedProcesses, []).some(process => this.gd(process, _ => _.relationship, []).some(it => it === "x_evaluation"));
+      }
     },
     methods: {
       async getPlan() {
