@@ -3,10 +3,11 @@ import VueI18n from "./../i18n/index";
 
 import {
   getListConfig,
-  /*getBudgetConfig,*/
+  getBudgetConfig,
   getTenderConfig,
   getContractConfig,
   getPlanConfig,
+
 } from "./../configs/requests-configs";
 
 import initialSearchProps from "./types/initial-search-props";
@@ -64,6 +65,10 @@ export default {
       },
       list: [],
       searchParams: { ...localStorageEntities.budgets.searchParams },
+      currentEntity: {
+        cdb: "",
+        entityData: {},
+      },
       paginationInfo: {
         totalCount: 0,
         pageCount: 0,
@@ -249,19 +254,75 @@ export default {
       }
     },
 
-    /*async [FETCH_CURRENT_BUDGET_INFO]({ commit }, { id }) {
-     try {
-     const res = await axios(getBudgetConfig(id));
-     console.log(res);
+    async [FETCH_CURRENT_BUDGET_INFO]({ commit }, { id }) {
+      const entityName = "budgets";
+      commit(SET_ENTITY_LOADED, {
+        entityName,
+        loaded: false,
+      });
 
-     commit(SET_CURRENT_BUDGET_INFO, {
-     budgetData: res.data
-     });
-     }
-     catch (e) {
-     console.log(e);
-     }
-     },*/
+      commit(SET_ENTITY_LOADED_ERROR, {
+        entityName,
+        error: {
+          status: false,
+          message: "",
+        },
+      });
+      try {
+        const res = await axios(getBudgetConfig(id));
+        const formattedRes = res.data.records.reduce((acc, curr) => {
+          if (curr.ocid.match(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/)) {
+            return {
+              ...acc,
+              EI: curr
+            };
+          }
+          else {
+            return {
+              ...acc,
+              FS: [
+                ...acc.FS,
+                curr
+              ]
+            };
+          }
+        }, {
+          EI: {},
+          FS: []
+        });
+        commit(SET_CURRENT_ENTITY_INFO, {
+          entityName,
+          cdb: MTENDER2,
+          entityData: formattedRes,
+        });
+        commit(SET_ENTITY_LOADED, {
+          entityName,
+          loaded: true,
+        });
+
+        commit(SET_ENTITY_LOADED_ERROR, {
+          entityName,
+          error: {
+            status: false,
+            message: "",
+          },
+        });
+      }
+      catch (e) {
+        commit(SET_ENTITY_LOADED, {
+          entityName,
+          loaded: true,
+        });
+
+        commit(SET_ENTITY_LOADED_ERROR, {
+          entityName,
+          error: {
+            status: true,
+            message: e.message,
+          },
+        });
+      }
+    },
 
     async [FETCH_CURRENT_PLAN_INFO]({ commit }, { id }) {
       const entityName = "plans";
