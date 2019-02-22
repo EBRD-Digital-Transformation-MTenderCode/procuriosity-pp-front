@@ -3,8 +3,12 @@ export default {
     titlesOrDescriptions: "",
     titlesOrDescriptionsStrict: false,
 
+    buyersNames: [],
+    buyersIdentifiers: [],
+    buyersTypes: [],
+    buyersMainGeneralActivities: [],
+    buyersMainSectoralActivities: [],
     buyersRegions: [],
-    budgetStatuses: [],
 
     id: "",
 
@@ -14,12 +18,6 @@ export default {
     classifications: [],
 
     periodPlanning: [],
-
-    buyersNames: [],
-    buyersIdentifiers: [],
-    buyersTypes: [],
-    buyersMainGeneralActivities: [],
-    buyersMainSectoralActivities: [],
 
     page: 1,
     pageSize: 10

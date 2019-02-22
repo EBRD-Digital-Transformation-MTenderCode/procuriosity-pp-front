@@ -9,6 +9,7 @@ export default {
   "buyers_types_placeholder": "Types of Buyers",
   "buyers_main_general_activity_placeholder": "Buyers main general activity",
   "buyers_main_sectoral_activity_placeholder": "Buyers main sectoral activity",
+  "buyers_regions": "Buyers regions",
 
   "amount_from": "Amount From",
   "amount_to": "Amount To",
