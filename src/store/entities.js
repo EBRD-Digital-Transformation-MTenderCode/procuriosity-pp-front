@@ -2,11 +2,11 @@ import axios from "axios";
 import VueI18n from "./../i18n/index";
 
 import {
-  /*getBudgetConfig,*/
   getListConfig,
+  /*getBudgetConfig,*/
   getTenderConfig,
   getContractConfig,
-  getPlanConfig
+  getPlanConfig,
 } from "./../configs/requests-configs";
 
 import initialSearchProps from "./types/initial-search-props";
@@ -14,21 +14,18 @@ import initialSearchProps from "./types/initial-search-props";
 import {
   SET_ENTITY_LOADED,
   SET_ENTITY_LOADED_ERROR,
-
   SET_ENTITY_LIST,
   SET_ENTITY_PAGINATION_INFO,
   SET_ENTITY_SEARCH_PARAMS,
-
   SET_CURRENT_ENTITY_INFO,
-
-  SET_INITIAL_SEARCH_PARAMS
+  SET_INITIAL_SEARCH_PARAMS,
 } from "./types/mutations-types";
 import {
   FETCH_ENTITY_LIST,
   FETCH_CURRENT_TENDER_INFO,
   FETCH_CURRENT_CONTRACT_INFO,
   FETCH_CURRENT_BUDGET_INFO,
-  FETCH_CURRENT_PLAN_INFO
+  FETCH_CURRENT_PLAN_INFO,
 } from "./types/actions-types";
 
 import { MTENDER1, MTENDER2 } from "./types/cbd-types";
@@ -37,18 +34,18 @@ import { convertObjectToQueryParamsString } from "./../utils";
 
 if (!localStorage.getItem("entities")) {
   const entities = {
-    "budgets": {
-      searchParams: initialSearchProps.budgets
+    budgets: {
+      searchParams: initialSearchProps.budgets,
     },
-    "plans": {
-      searchParams: initialSearchProps.plans
+    plans: {
+      searchParams: initialSearchProps.plans,
     },
-    "tenders": {
-      searchParams: initialSearchProps.tenders
+    tenders: {
+      searchParams: initialSearchProps.tenders,
     },
-    "contracts": {
-      searchParams: initialSearchProps.contracts
-    }
+    contracts: {
+      searchParams: initialSearchProps.contracts,
+    },
   };
 
   localStorage.setItem("entities", JSON.stringify(entities));
@@ -58,69 +55,74 @@ const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
 
 export default {
   state: {
-    /*budgets: {
-     name: "entities.budgets",
-     loaded: false,
-     list: [],
-     searchParams: {...localStorageEntities.budgets.searchParams},
-     paginationInfo: {
-     totalCount: 0, pageCount: 0
-     }
-     },*/
+    budgets: {
+      name: "entities.budgets",
+      loaded: false,
+      error: {
+        status: false,
+        message: "",
+      },
+      list: [],
+      searchParams: { ...localStorageEntities.budgets.searchParams },
+      paginationInfo: {
+        totalCount: 0,
+        pageCount: 0,
+      },
+    },
     plans: {
       name: "entities.plans",
       loaded: false,
       error: {
         status: false,
-        message: ""
+        message: "",
       },
       list: [],
       searchParams: { ...localStorageEntities.plans.searchParams },
       currentEntity: {
         cdb: "",
-        entityData: {}
+        entityData: {},
       },
       paginationInfo: {
         totalCount: 0,
-        pageCount: 0
-      }
+        pageCount: 0,
+      },
     },
     tenders: {
       name: "entities.tenders",
       loaded: false,
       error: {
         status: false,
-        message: ""
+        message: "",
       },
       list: [],
       searchParams: { ...localStorageEntities.tenders.searchParams },
       currentEntity: {
         cdb: "",
-        entityData: {}
+        entityData: {},
       },
       paginationInfo: {
         totalCount: 0,
-        pageCount: 0
-      }
+        pageCount: 0,
+      },
     },
     contracts: {
       name: "entities.contracts",
       loaded: false,
       error: {
         status: false,
-        message: ""
+        message: "",
       },
       list: [],
       searchParams: { ...localStorageEntities.contracts.searchParams },
       currentEntity: {
         cdb: "",
-        entityData: {}
+        entityData: {},
       },
       paginationInfo: {
         totalCount: 0,
-        pageCount: 0
-      }
-    }
+        pageCount: 0,
+      },
+    },
   },
   mutations: {
     [SET_ENTITY_LOADED](state, { entityName, loaded }) {
@@ -130,14 +132,14 @@ export default {
     [SET_ENTITY_LOADED_ERROR](state, { entityName, error }) {
       state[entityName].error = {
         status: error.status,
-        message: error.message
+        message: error.message,
       };
     },
 
     [SET_ENTITY_LIST](state, { entityName, list }) {
       state[entityName] = {
         ...state[entityName],
-        list
+        list,
       };
     },
 
@@ -146,8 +148,8 @@ export default {
         ...state[entityName],
         paginationInfo: {
           totalCount,
-          pageCount
-        }
+          pageCount,
+        },
       };
     },
 
@@ -156,19 +158,19 @@ export default {
         ...state[entityName],
         searchParams: {
           ...state[entityName].searchParams,
-          ...params
-        }
+          ...params,
+        },
       };
 
       this.dispatch(FETCH_ENTITY_LIST, {
         entityName,
-        params: convertObjectToQueryParamsString(state[entityName].searchParams)
+        params: convertObjectToQueryParamsString(state[entityName].searchParams),
       });
 
       const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
       localStorageEntities[entityName].searchParams = {
         ...localStorageEntities[entityName].searchParams,
-        ...params
+        ...params,
       };
       localStorage.setItem("entities", JSON.stringify(localStorageEntities));
     },
@@ -179,8 +181,8 @@ export default {
         currentEntity: {
           ...state[entityName].currentEntity,
           cdb,
-          entityData
-        }
+          entityData,
+        },
       };
     },
 
@@ -194,23 +196,23 @@ export default {
 
       this.dispatch(FETCH_ENTITY_LIST, {
         entityName,
-        params: convertObjectToQueryParamsString(state[entityName].searchParams)
+        params: convertObjectToQueryParamsString(state[entityName].searchParams),
       });
-    }
+    },
   },
   actions: {
     async [FETCH_ENTITY_LIST]({ commit }, { entityName, params }) {
       commit(SET_ENTITY_LOADED, {
         entityName,
-        loaded: false
+        loaded: false,
       });
 
       commit(SET_ENTITY_LOADED_ERROR, {
         entityName,
         error: {
           status: false,
-          message: ""
-        }
+          message: "",
+        },
       });
 
       try {
@@ -218,31 +220,31 @@ export default {
 
         commit(SET_ENTITY_LIST, {
           entityName,
-          list: res.data.data
+          list: res.data.data,
         });
 
         commit(SET_ENTITY_PAGINATION_INFO, {
           entityName,
           totalCount: res.data._meta.totalCount,
-          pageCount: res.data._meta.pageCount
+          pageCount: res.data._meta.pageCount,
         });
 
         commit(SET_ENTITY_LOADED, {
           entityName,
-          loaded: true
+          loaded: true,
         });
       } catch (e) {
         commit(SET_ENTITY_LOADED, {
           entityName,
-          loaded: true
+          loaded: true,
         });
 
         commit(SET_ENTITY_LOADED_ERROR, {
           entityName,
           error: {
             status: true,
-            message: e.message
-          }
+            message: e.message,
+          },
         });
       }
     },
@@ -270,15 +272,15 @@ export default {
 
       commit(SET_ENTITY_LOADED, {
         entityName,
-        loaded: false
+        loaded: false,
       });
 
       commit(SET_ENTITY_LOADED_ERROR, {
         entityName,
         error: {
           status: false,
-          message: ""
-        }
+          message: "",
+        },
       });
 
       if (regexMtender1Id.test(id)) {
@@ -294,34 +296,33 @@ export default {
           commit(SET_CURRENT_ENTITY_INFO, {
             entityName,
             cdb,
-            entityData: planData
+            entityData: planData,
           });
 
           commit(SET_ENTITY_LOADED, {
             entityName,
-            loaded: true
+            loaded: true,
           });
 
           commit(SET_ENTITY_LOADED_ERROR, {
             entityName,
             error: {
               status: false,
-              message: ""
-            }
+              message: "",
+            },
           });
-
         } catch (e) {
           commit(SET_ENTITY_LOADED, {
             entityName,
-            loaded: true
+            loaded: true,
           });
 
           commit(SET_ENTITY_LOADED_ERROR, {
             entityName,
             error: {
               status: true,
-              message: e.message
-            }
+              message: e.message,
+            },
           });
         }
       } else if (regexMtender2Id.test(id)) {
@@ -342,7 +343,7 @@ export default {
           if (Object.keys(res.data).length) {
             const tenderRecords = res.data.records;
 
-            tenderRecords.forEach(record => {
+            tenderRecords.forEach((record) => {
               if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/) !== -1) {
                 Object.assign(MSRecord, record);
               }
@@ -357,54 +358,54 @@ export default {
             Object.assign(planData, {
               MSRecord,
               PNRecord,
-              EVRecord
+              EVRecord,
             });
 
             commit(SET_CURRENT_ENTITY_INFO, {
               entityName,
               cdb,
-              entityData: planData
+              entityData: planData,
             });
 
             commit(SET_ENTITY_LOADED, {
               entityName,
-              loaded: true
+              loaded: true,
             });
 
             commit(SET_ENTITY_LOADED_ERROR, {
               entityName,
               error: {
                 status: false,
-                message: ""
-              }
+                message: "",
+              },
             });
           }
         } catch (e) {
           commit(SET_ENTITY_LOADED, {
             entityName,
-            loaded: true
+            loaded: true,
           });
 
           commit(SET_ENTITY_LOADED_ERROR, {
             entityName,
             error: {
               status: true,
-              message: e.message
-            }
+              message: e.message,
+            },
           });
         }
       } else {
         commit(SET_ENTITY_LOADED, {
           entityName,
-          loaded: true
+          loaded: true,
         });
 
         commit(SET_ENTITY_LOADED_ERROR, {
           entityName,
           error: {
             status: true,
-            message: VueI18n.t("invalid-id")
-          }
+            message: VueI18n.t("invalid-id"),
+          },
         });
       }
     },
@@ -418,15 +419,15 @@ export default {
 
       commit(SET_ENTITY_LOADED, {
         entityName,
-        loaded: false
+        loaded: false,
       });
 
       commit(SET_ENTITY_LOADED_ERROR, {
         entityName,
         error: {
           status: false,
-          message: ""
-        }
+          message: "",
+        },
       });
 
       if (regexMtender1Id.test(id)) {
@@ -442,34 +443,33 @@ export default {
           commit(SET_CURRENT_ENTITY_INFO, {
             entityName,
             cdb,
-            entityData: tenderData
+            entityData: tenderData,
           });
 
           commit(SET_ENTITY_LOADED, {
             entityName,
-            loaded: true
+            loaded: true,
           });
 
           commit(SET_ENTITY_LOADED_ERROR, {
             entityName,
             error: {
               status: false,
-              message: ""
-            }
+              message: "",
+            },
           });
-
         } catch (e) {
           commit(SET_ENTITY_LOADED, {
             entityName,
-            loaded: true
+            loaded: true,
           });
 
           commit(SET_ENTITY_LOADED_ERROR, {
             entityName,
             error: {
               status: true,
-              message: e.message
-            }
+              message: e.message,
+            },
           });
         }
       } else if (regexMtender2Id.test(id)) {
@@ -491,7 +491,7 @@ export default {
           if (Object.keys(res.data).length) {
             const tenderRecords = res.data.records;
 
-            tenderRecords.forEach(record => {
+            tenderRecords.forEach((record) => {
               if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/) !== -1) {
                 Object.assign(MSRecord, record);
               }
@@ -506,53 +506,53 @@ export default {
             Object.assign(tenderData, {
               MSRecord,
               PNRecord,
-              EVRecord
+              EVRecord,
             });
 
             commit(SET_CURRENT_ENTITY_INFO, {
               entityName,
               cdb,
-              entityData: tenderData
+              entityData: tenderData,
             });
             commit(SET_ENTITY_LOADED, {
               entityName,
-              loaded: true
+              loaded: true,
             });
 
             commit(SET_ENTITY_LOADED_ERROR, {
               entityName,
               error: {
                 status: false,
-                message: ""
-              }
+                message: "",
+              },
             });
           }
         } catch (e) {
           commit(SET_ENTITY_LOADED, {
             entityName,
-            loaded: true
+            loaded: true,
           });
 
           commit(SET_ENTITY_LOADED_ERROR, {
             entityName,
             error: {
               status: true,
-              message: e.message
-            }
+              message: e.message,
+            },
           });
         }
       } else {
         commit(SET_ENTITY_LOADED, {
           entityName,
-          loaded: true
+          loaded: true,
         });
 
         commit(SET_ENTITY_LOADED_ERROR, {
           entityName,
           error: {
             status: true,
-            message: VueI18n.t("invalid-id")
-          }
+            message: VueI18n.t("invalid-id"),
+          },
         });
       }
     },
@@ -562,15 +562,15 @@ export default {
 
       commit(SET_ENTITY_LOADED, {
         entityName,
-        loaded: false
+        loaded: false,
       });
 
       commit(SET_ENTITY_LOADED_ERROR, {
         entityName,
         error: {
           status: false,
-          message: ""
-        }
+          message: "",
+        },
       });
       if (cdb === MTENDER1) {
         try {
@@ -585,51 +585,50 @@ export default {
             commit(SET_CURRENT_ENTITY_INFO, {
               entityName,
               cdb,
-              entityData: contractData
+              entityData: contractData,
             });
 
             commit(SET_ENTITY_LOADED, {
               entityName,
-              loaded: true
+              loaded: true,
             });
 
             commit(SET_ENTITY_LOADED_ERROR, {
               entityName,
               error: {
                 status: false,
-                message: ""
-              }
+                message: "",
+              },
             });
           } else {
             commit(SET_ENTITY_LOADED, {
               entityName,
-              loaded: true
+              loaded: true,
             });
 
             commit(SET_ENTITY_LOADED_ERROR, {
               entityName,
               error: {
                 status: true,
-                message: VueI18n.t("invalid-id")
-              }
+                message: VueI18n.t("invalid-id"),
+              },
             });
           }
-
         } catch (e) {
           commit(SET_ENTITY_LOADED, {
             entityName,
-            loaded: true
+            loaded: true,
           });
 
           commit(SET_ENTITY_LOADED_ERROR, {
             entityName,
             error: {
               status: true,
-              message: e.message
-            }
+              message: e.message,
+            },
           });
         }
       }
-    }
-  }
+    },
+  },
 };

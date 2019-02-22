@@ -9,6 +9,7 @@ export default {
   "buyers_types_placeholder": "Tipuri de cumpărători",
   "buyers_main_general_activity_placeholder": "Activitatea generală a cumpărătorilor",
   "buyers_main_sectoral_activity_placeholder": "Activitatea sectorială principală a cumpărătorilor",
+  "buyers_regions": "Regiuni de cumpărători",
 
   "amount_from": "Sumă de la",
   "amount_to": "Sumă de",

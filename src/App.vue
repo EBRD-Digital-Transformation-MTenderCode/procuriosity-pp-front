@@ -6,7 +6,7 @@
           <el-container direction="vertical">
             <nav class="header-entity-nav">
               <router-link
-                  v-for="(entity, key) in {plans: {name: 'Plans'}, tenders: {name: 'Tenders'}, contracts: {name: 'Contracts'}}"
+                  v-for="(entity, key) in {budgets: {name: 'Budgets'}, plans: {name: 'Plans'}, tenders: {name: 'Tenders'}, contracts: {name: 'Contracts'}}"
                   :key="entity.name"
                   :to="`/${key}`"
                   active-class="is-active"
@@ -58,7 +58,8 @@
 </script>
 
 <style lang="scss">
-  .fade-enter-active, .fade-leave-active {
+  .fade-enter-active,
+  .fade-leave-active {
     transition: opacity 0.2s ease;
   }
 
