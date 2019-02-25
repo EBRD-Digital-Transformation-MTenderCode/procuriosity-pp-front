@@ -638,6 +638,9 @@
       margin-bottom: 50px;
     }
   }
+  .table-header {
+    padding: 5px 10px 12px;
+  }
 
   &-block {
     padding: 5px 0;
@@ -664,7 +667,7 @@
       & + .info-block__value {
         margin-top: -5px;
       }
-      &_bold{
+      &_bold {
         font-weight: 700;
       }
     }

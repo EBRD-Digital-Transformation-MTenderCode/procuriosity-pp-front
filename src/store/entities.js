@@ -129,6 +129,35 @@ export default {
       },
     },
   },
+  getters: {
+    getOrganizationName: store => (index, organizationRole) => {
+      const parties = store.budgets.currentEntity.entityData.FS[index].compiledRelease.parties;
+      for (let part of parties) {
+        if (part.roles.find(role => role === organizationRole)) {
+          return part.name;
+        } else {
+          if (organizationRole === "funder") return "State money";
+        }
+      }
+    },
+    getSourceOfMoney: store => index => {
+      const parties = store.budgets.currentEntity.entityData.FS[index].compiledRelease.parties;
+      const buyerId = store.budgets.currentEntity.entityData.EI.compiledRelease.buyer.id;
+
+      let source = "";
+      for (let part of parties) {
+        if (part.roles.find(role => role === "funder")) {
+          if (part.id === buyerId) {
+            source = VueI18n.t("budget.own_money");
+            break;
+          }
+          else source = VueI18n.t("budget.donors_money");
+        }
+      }
+      return source || VueI18n.t("budget.state_money");
+    },
+
+  },
   mutations: {
     [SET_ENTITY_LOADED](state, { entityName, loaded }) {
       state[entityName].loaded = loaded;
@@ -269,12 +298,12 @@ export default {
         },
       });
       try {
-        const res = await axios(getBudgetConfig(id));
-        const formattedRes = res.data.records.reduce((acc, curr) => {
-          if (curr.ocid.match(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/)) {
+        const { data } = await axios(getBudgetConfig(id));
+        const entityData = data.records.reduce((acc, record) => {
+          if (record.ocid.match(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/)) {
             return {
               ...acc,
-              EI: curr
+              EI: record
             };
           }
           else {
@@ -282,7 +311,7 @@ export default {
               ...acc,
               FS: [
                 ...acc.FS,
-                curr
+                record
               ]
             };
           }
@@ -293,11 +322,7 @@ export default {
         commit(SET_CURRENT_ENTITY_INFO, {
           entityName,
           cdb: MTENDER2,
-          entityData: formattedRes,
-        });
-        commit(SET_ENTITY_LOADED, {
-          entityName,
-          loaded: true,
+          entityData
         });
 
         commit(SET_ENTITY_LOADED_ERROR, {
@@ -309,17 +334,18 @@ export default {
         });
       }
       catch (e) {
-        commit(SET_ENTITY_LOADED, {
-          entityName,
-          loaded: true,
-        });
-
         commit(SET_ENTITY_LOADED_ERROR, {
           entityName,
           error: {
             status: true,
             message: e.message,
           },
+        });
+      }
+      finally {
+        commit(SET_ENTITY_LOADED, {
+          entityName,
+          loaded: true,
         });
       }
     },

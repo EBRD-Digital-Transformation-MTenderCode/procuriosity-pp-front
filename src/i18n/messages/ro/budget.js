@@ -16,7 +16,11 @@ export default {
   "procedure_type": "Tip de procedură",
   "procuring_entity_name": "Obtinerea numelui entitatii",
 
-  "source_of_financing":"Item source of financing",
-  "execution":"Execution",
-  "spending":"Spending"
-}
+  "source_of_financing": "Item source of financing",
+  "execution": "Execution",
+  "spending": "Spending",
+
+  "own_money": "Own money",
+  "donors_money": "Donor's money",
+  "state_money": "State money",
+};

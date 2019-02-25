@@ -10,13 +10,17 @@ export default {
   "procedure_cpv": "CPV код процедуры",
   "id": "ID статьи расходов",
 
-  "estimated_value_excluding_VAT":"Ожидаемая стоимость закупки без учета НДС",
-  "region" : "Административный район",
+  "estimated_value_excluding_VAT": "Ожидаемая стоимость закупки без учета НДС",
+  "region": "Административный район",
   "number_of_notice": "Номер уведомления",
   "procedure_type": "Тип процедуры",
   "procuring_entity_name": "Название закупающей организации",
 
-  "source_of_financing":"Item source of financing",
-  "execution":"Execution",
-  "spending":"Spending"
-}
+  "source_of_financing": "Item source of financing",
+  "execution": "Execution",
+  "spending": "Spending",
+
+  "own_money": "Own money",
+  "donors_money": "Donor's money",
+  "state_money": "State money",
+};

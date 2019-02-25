@@ -22,8 +22,8 @@
               <el-col :xs=22 :sm="6" :offset="2">
                 <div class="entity-main-info__value">
                   <div v-if="this.gd(this.budget, _ => _.EI.compiledRelease.planning.budget.amount.amount, 0)">
-                  <div> {{ $t("budget.estimated_value_excluding_VAT") }}</div>
-                  <span class="entity-main-info__amount">
+                    <div> {{ $t("budget.estimated_value_excluding_VAT") }}</div>
+                    <span class="entity-main-info__amount">
                     <span class="whole">{{ wholeAmount }} </span>
                     <span class="fraction"> <span class="dot">.</span>{{ fractionAmount }}</span>
                     <span class="entity-main-info__currency">
@@ -60,7 +60,7 @@
             </el-row>
           </el-container>
         </div>
-       <div class="entity-tabs entity-tabs_budget">
+        <div class="entity-tabs entity-tabs_budget">
           <el-container direction="vertical">
             <el-row>
               <el-col :xs="24">
@@ -73,7 +73,9 @@
                       key="sourceOfFinancing"
                   >
                     <span slot="label" v-html="$t('budget.source_of_financing')" />
-                    <sourceOfFinancing  :FS="gd(budget, _ => _.FS)"/>
+                    <sourceOfFinancing
+                        :FS="gd(budget, _ => _.FS)"
+                    />
                   </el-tab-pane>
                   <el-tab-pane
                       name="execution"
@@ -81,7 +83,7 @@
                       key="execution"
                   >
                     <span slot="label" v-html="$t('budget.execution')" />
-                    <execution/>
+                    <execution />
                   </el-tab-pane>
                   <el-tab-pane
                       name="spending"
@@ -89,7 +91,7 @@
                       key="spending"
                   >
                     <span slot="label" v-html="$t('budget.spending')" />
-                    <spending/>
+                    <spending />
                   </el-tab-pane>
                 </el-tabs>
               </el-col>
@@ -124,7 +126,7 @@
     name: "BudgetPage",
     components: {
       spending: Spending,
-      execution:Execution,
+      execution: Execution,
       sourceOfFinancing: SourceOfFinancing
     },
     data() {

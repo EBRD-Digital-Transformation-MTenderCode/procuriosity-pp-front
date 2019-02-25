@@ -10,13 +10,17 @@ export default {
   "procedure_cpv": "Procedure CPV",
   "id": "Budget ID",
 
-  "estimated_value_excluding_VAT":"Estimated value excluding VAT",
-  "region" : "Region",
+  "estimated_value_excluding_VAT": "Estimated value excluding VAT",
+  "region": "Region",
   "number_of_notice": "Number of Notice",
   "procedure_type": "Procedure type",
   "procuring_entity_name": "Procuring Entity Name",
 
-  "source_of_financing":"Item source of financing",
-  "execution":"Execution",
-  "spending":"Spending"
-}
+  "source_of_financing": "Item source of financing",
+  "execution": "Execution",
+  "spending": "Spending",
+
+  "own_money": "Own money",
+  "donors_money": "Donor's money",
+  "state_money": "State money",
+};
