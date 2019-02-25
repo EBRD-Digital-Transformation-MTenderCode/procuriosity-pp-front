@@ -1,6 +1,7 @@
 export default {
   "strict": "Strictă",
   "no_strict": "Nu este strictă",
+  "tooltip_strict_button": "Introduceți interogarea de căutare în bara de căutare",
   "titles_or_descriptions": "căutare",
 
   "buyers_names_placeholder": "Numele cumpărătorilor",

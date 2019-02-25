@@ -1,6 +1,7 @@
 export default {
   "strict": "Strict",
   "no_strict": "No strict",
+  "tooltip_strict_button": "Enter query in search bar",
   "titles_or_descriptions": "search",
 
   "buyers_names_placeholder": "Buyers names",

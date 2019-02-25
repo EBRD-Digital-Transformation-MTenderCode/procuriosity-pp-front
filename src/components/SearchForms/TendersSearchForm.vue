@@ -9,7 +9,7 @@
           :setValue="setFormParams"
           :label="$t('search.strict')"
       />
-  
+
       <!-- Titles or descriptions -->
       <search-input
           name="titlesOrDescriptions"
@@ -19,7 +19,7 @@
           :placeholder="$t('search.titles_or_descriptions')"
       />
       <button class="search-form__btn search-form__btn_search" tabindex="-1" />
-  
+
       <!-- @TODO need write more readable classes -->
       <button
           tabindex="-1"
@@ -42,7 +42,7 @@
                     :placeholder="$t('search.buyers_names_placeholder')"
                 />
               </div>
-  
+
               <!-- Buyers regions -->
               <div class="search-form-element">
                 <search-regions
@@ -54,7 +54,7 @@
                     :placeholder="$t('search.buyers_region_placeholder')"
                 />
               </div>
-  
+
               <!-- Buyers identifiers -->
               <div class="search-form-element">
                 <multiple-input
@@ -64,7 +64,7 @@
                     :placeholder="$t('search.buyers_identifiers_placeholder')"
                 />
               </div>
-  
+
               <!-- Types of buyers -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -75,7 +75,7 @@
                     :placeholder="$t('search.buyers_types_placeholder')"
                 />
               </div>
-  
+
               <!-- Main general activity -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -86,7 +86,7 @@
                     :placeholder="$t('search.buyers_main_general_activity_placeholder')"
                 />
               </div>
-  
+
               <!-- Main sectoral activity -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -97,7 +97,7 @@
                     :placeholder="$t('search.buyers_main_sectoral_activity_placeholder')"
                 />
               </div>
-  
+
               <!-- Delivery regions -->
               <div class="search-form-element">
                 <search-regions
@@ -109,7 +109,7 @@
                     :placeholder="$t('search.deliveries_regions_placeholder')"
                 />
               </div>
-  
+
               <!-- Amount from -->
               <div class="search-form-element">
                 <search-input
@@ -121,7 +121,7 @@
                     :placeholder="$t('search.amount_from')"
                 />
               </div>
-  
+
               <!-- Amount to -->
               <div class="search-form-element">
                 <search-input
@@ -133,7 +133,7 @@
                     :placeholder="$t('search.amount_to')"
                 />
               </div>
-  
+
               <!-- Procedure types -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -144,9 +144,9 @@
                     :placeholder="$t('search.types_procedures_placeholder')"
                 />
               </div>
-  
+
               <!-- Procedure statuses -->
-              <div class="search-form-element">
+              <div class="search-form-element" v-if="procedures === 'all'">
                 <search-auto-complete-input
                     name="proceduresStatuses"
                     :items="proceduresStatusesList"
@@ -156,6 +156,8 @@
                 />
               </div>
             </el-col>
+
+
             <el-col :xs="24" :sm="12">
 
               <!-- Period published -->
@@ -168,7 +170,7 @@
                   {{$t("search.published_period")}}:
                 </search-period>
               </div>
-  
+
               <!-- Period delivery -->
               <div class="search-form-element">
                 <search-period
@@ -179,7 +181,7 @@
                   {{$t("search.delivery_period")}}:
                 </search-period>
               </div>
-  
+
               <!-- Period enquiry -->
               <div class="search-form-element">
                 <search-period
@@ -190,7 +192,7 @@
                   {{$t("search.enquiry_period")}}:
                 </search-period>
               </div>
-  
+
               <!-- Period offer -->
               <div class="search-form-element">
                 <search-period
@@ -201,7 +203,7 @@
                   {{$t("search.offer_period")}}:
                 </search-period>
               </div>
-  
+
               <!-- Period auction -->
               <div class="search-form-element">
                 <search-period
@@ -212,7 +214,7 @@
                   {{$t("search.auction_period")}}:
                 </search-period>
               </div>
-  
+
               <!-- Period Award -->
               <div class="search-form-element">
                 <search-period
@@ -223,7 +225,7 @@
                   {{$t("search.award_period")}}:
                 </search-period>
               </div>
-  
+
               <!-- id -->
               <div class="search-form-element">
                 <search-input
@@ -234,7 +236,7 @@
                     prefixIcon=""
                 />
               </div>
-  
+
               <!-- Classifications -->
               <div class="search-form-element">
                 <search-classifications
@@ -271,6 +273,7 @@
   import MultipleInput from "./../FormsComponents/MultipleInput";
   import ResetButton from "./../FormsComponents/ResetButton";
 
+  import initialSearchProps from "./../../store/types/initial-search-props.js";
   import proceduresTypesList from "./../../store/types/procedures-types";
   import proceduresStatusesList from "./../../store/types/procedure-status-types";
   import buyersTypesList from "./../../store/types/buyers-types";
@@ -299,9 +302,22 @@
         localStorageEntities.tenders.isExpanded = this.moreCriterions;
         localStorage.setItem("entities", JSON.stringify(localStorageEntities));
       }
+
+      if (this.$route.query.procedures && (this.$route.query.procedures === "new" || this.$route.query.procedures === "bidding")) {
+        this.procedures = this.$route.query.procedures;
+
+        if (this.$route.query.procedures === "new") {
+          initialSearchProps.tenders.proceduresStatuses = ["published", "clarification", "suspended"];
+        }
+
+        if (this.$route.query.procedures === "bidding") {
+          initialSearchProps.tenders.proceduresStatuses = ["tendering"];
+        }
+      }
     },
     data() {
       return {
+        procedures: "all",
         moreCriterions: false,
         proceduresTypesList: proceduresTypesList["tenders"],
         proceduresStatusesList: proceduresStatusesList["tenders"],
@@ -314,27 +330,27 @@
       ...mapState({
         /* + */titlesOrDescriptions: state => state.entities.tenders.searchParams.titlesOrDescriptions,
         /* + */titlesOrDescriptionsStrict: state => state.entities.tenders.searchParams.titlesOrDescriptionsStrict,
-      
+
         /* + */buyersRegions: state => state.entities.tenders.searchParams.buyersRegions,
         /* + */deliveriesRegions: state => state.entities.tenders.searchParams.deliveriesRegions,
-      
+
         /* + */proceduresTypes: state => state.entities.tenders.searchParams.proceduresTypes,
         /* + */proceduresStatuses: state => state.entities.tenders.searchParams.proceduresStatuses,
-      
+
         /* + */entityId: state => state.entities.tenders.searchParams.entityId,
-      
+
         /* + */amountFrom: state => state.entities.tenders.searchParams.amountFrom,
         /* + */amountTo: state => state.entities.tenders.searchParams.amountTo,
-      
+
         /* + */ classifications: state => state.entities.tenders.searchParams.classifications,
-      
+
         /* + */periodPublished: state => state.entities.tenders.searchParams.periodPublished,
         /* + */periodDelivery: state => state.entities.tenders.searchParams.periodDelivery,
         /* + */periodEnquiry: state => state.entities.tenders.searchParams.periodEnquiry,
         /* + */periodOffer: state => state.entities.tenders.searchParams.periodOffer,
         /* + */periodAuction: state => state.entities.tenders.searchParams.periodAuction,
         /* + */periodAward: state => state.entities.tenders.searchParams.periodAward,
-      
+
         /* + */buyersNames: state => state.entities.tenders.searchParams.buyersNames,
         /* + */buyersIdentifiers: state => state.entities.tenders.searchParams.buyersIdentifiers,
         /* + */buyersTypes: state => state.entities.tenders.searchParams.buyersTypes,
@@ -347,19 +363,50 @@
     },
     methods: {
       setFormParams(name, value) {
+        let params = {};
+
+        switch(this.procedures) {
+          case "new":
+            params = {
+              page: 1,
+              [name]: value,
+              proceduresStatuses: ["published", "clarification", "suspended"]
+            };
+            break;
+          case "bidding":
+            params = {
+               page: 1,
+              [name]: value,
+              proceduresStatuses: ["tendering"]
+            };
+            break;
+          default:
+            params = {
+               page: 1,
+              [name]: value
+            };
+        }
+
         this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
           entityName: "tenders",
-          params: {
-            page: 1,
-            [name]: value
-          }
+          params
         });
       },
+
       actionExpand() {
         this.moreCriterions = !this.moreCriterions;
 
         const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
         localStorageEntities.tenders.isExpanded = this.moreCriterions;
+        localStorage.setItem("entities", JSON.stringify(localStorageEntities));
+      }
+    },
+    destroyed() {
+      if (this.procedures !== "all") {
+        initialSearchProps.tenders.proceduresStatuses = [];
+
+        const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
+        localStorageEntities.tenders.proceduresStatuses = [];
         localStorage.setItem("entities", JSON.stringify(localStorageEntities));
       }
     }

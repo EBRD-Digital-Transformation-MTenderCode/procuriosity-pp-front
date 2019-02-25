@@ -1,6 +1,7 @@
 export default {
   "strict": "Строгий",
   "no_strict": "Не строгий",
+  "tooltip_strict_button": "Ведите запрос в строку поиска",
   "titles_or_descriptions": "поиск",
 
   "buyers_names_placeholder": "Имена закупщиков",
