@@ -146,7 +146,7 @@
               </div>
 
               <!-- Procedure statuses -->
-              <div class="search-form-element" v-if="type === 'all'">
+              <div class="search-form-element" v-if="procedures === 'all'">
                 <search-auto-complete-input
                     name="proceduresStatuses"
                     :items="proceduresStatusesList"
