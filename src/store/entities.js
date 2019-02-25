@@ -3,10 +3,11 @@ import VueI18n from "./../i18n/index";
 
 import {
   getListConfig,
-  /*getBudgetConfig,*/
+  getBudgetConfig,
   getTenderConfig,
   getContractConfig,
   getPlanConfig,
+
 } from "./../configs/requests-configs";
 
 import initialSearchProps from "./types/initial-search-props";
@@ -64,6 +65,10 @@ export default {
       },
       list: [],
       searchParams: { ...localStorageEntities.budgets.searchParams },
+      currentEntity: {
+        cdb: "",
+        entityData: {},
+      },
       paginationInfo: {
         totalCount: 0,
         pageCount: 0,
@@ -123,6 +128,35 @@ export default {
         pageCount: 0,
       },
     },
+  },
+  getters: {
+    getOrganizationName: store => (index, organizationRole) => {
+      const parties = store.budgets.currentEntity.entityData.FS[index].compiledRelease.parties;
+      for (let part of parties) {
+        if (part.roles.find(role => role === organizationRole)) {
+          return part.name;
+        } else {
+          if (organizationRole === "funder") return "State money";
+        }
+      }
+    },
+    getSourceOfMoney: store => index => {
+      const parties = store.budgets.currentEntity.entityData.FS[index].compiledRelease.parties;
+      const buyerId = store.budgets.currentEntity.entityData.EI.compiledRelease.buyer.id;
+
+      let source = "";
+      for (let part of parties) {
+        if (part.roles.find(role => role === "funder")) {
+          if (part.id === buyerId) {
+            source = VueI18n.t("budget.own_money");
+            break;
+          }
+          else source = VueI18n.t("budget.donors_money");
+        }
+      }
+      return source || VueI18n.t("budget.state_money");
+    },
+
   },
   mutations: {
     [SET_ENTITY_LOADED](state, { entityName, loaded }) {
@@ -249,19 +283,72 @@ export default {
       }
     },
 
-    /*async [FETCH_CURRENT_BUDGET_INFO]({ commit }, { id }) {
-     try {
-     const res = await axios(getBudgetConfig(id));
-     console.log(res);
+    async [FETCH_CURRENT_BUDGET_INFO]({ commit }, { id }) {
+      const entityName = "budgets";
+      commit(SET_ENTITY_LOADED, {
+        entityName,
+        loaded: false,
+      });
 
-     commit(SET_CURRENT_BUDGET_INFO, {
-     budgetData: res.data
-     });
-     }
-     catch (e) {
-     console.log(e);
-     }
-     },*/
+      commit(SET_ENTITY_LOADED_ERROR, {
+        entityName,
+        error: {
+          status: false,
+          message: "",
+        },
+      });
+      try {
+        const { data } = await axios(getBudgetConfig(id));
+        const entityData = data.records.reduce((acc, record) => {
+          if (record.ocid.match(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/)) {
+            return {
+              ...acc,
+              EI: record
+            };
+          }
+          else {
+            return {
+              ...acc,
+              FS: [
+                ...acc.FS,
+                record
+              ]
+            };
+          }
+        }, {
+          EI: {},
+          FS: []
+        });
+        commit(SET_CURRENT_ENTITY_INFO, {
+          entityName,
+          cdb: MTENDER2,
+          entityData
+        });
+
+        commit(SET_ENTITY_LOADED_ERROR, {
+          entityName,
+          error: {
+            status: false,
+            message: "",
+          },
+        });
+      }
+      catch (e) {
+        commit(SET_ENTITY_LOADED_ERROR, {
+          entityName,
+          error: {
+            status: true,
+            message: e.message,
+          },
+        });
+      }
+      finally {
+        commit(SET_ENTITY_LOADED, {
+          entityName,
+          loaded: true,
+        });
+      }
+    },
 
     async [FETCH_CURRENT_PLAN_INFO]({ commit }, { id }) {
       const entityName = "plans";

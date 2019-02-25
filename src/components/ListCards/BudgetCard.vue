@@ -140,6 +140,9 @@
       id() {
         return getDataFromObject(this.entity, _ => _.id);
       }
-    }
+    },
+    mounted() {
+      console.log(this.entity)
+  },
   };
 </script>
