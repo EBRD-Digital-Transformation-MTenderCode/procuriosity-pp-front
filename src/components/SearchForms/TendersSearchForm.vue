@@ -303,21 +303,21 @@
         localStorage.setItem("entities", JSON.stringify(localStorageEntities));
       }
 
-      if (this.$route.query.type && (this.$route.query.type === "new" || this.$route.query.type === "bidding")) {
-        this.type = this.$route.query.type;
+      if (this.$route.query.procedures && (this.$route.query.procedures === "new" || this.$route.query.procedures === "bidding")) {
+        this.procedures = this.$route.query.procedures;
 
-        if (this.$route.query.type === "new") {
+        if (this.$route.query.procedures === "new") {
           initialSearchProps.tenders.proceduresStatuses = ["published", "clarification", "suspended"];
         }
 
-        if (this.$route.query.type === "bidding") {
+        if (this.$route.query.procedures === "bidding") {
           initialSearchProps.tenders.proceduresStatuses = ["tendering"];
         }
       }
     },
     data() {
       return {
-        type: "all",
+        procedures: "all",
         moreCriterions: false,
         proceduresTypesList: proceduresTypesList["tenders"],
         proceduresStatusesList: proceduresStatusesList["tenders"],
@@ -365,7 +365,7 @@
       setFormParams(name, value) {
         let params = {};
 
-        switch(this.type) {
+        switch(this.procedures) {
           case "new":
             params = {
               page: 1,
@@ -402,7 +402,7 @@
       }
     },
     destroyed() {
-      if (this.type !== "all") {
+      if (this.procedures !== "all") {
         initialSearchProps.tenders.proceduresStatuses = [];
 
         const localStorageEntities = JSON.parse(localStorage.getItem("entities"));

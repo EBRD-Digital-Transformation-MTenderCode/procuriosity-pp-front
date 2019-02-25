@@ -100,8 +100,8 @@ export default {
     if (entityName === "tenders") {
       const { query } = this.$route;
 
-      if (query.type && (query.type === "new" || query.type === "bidding")) {
-        if (query.type === "new") {
+      if (query.procedures && (query.procedures === "new" || query.procedures === "bidding")) {
+        if (query.procedures === "new") {
           this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
             entityName: "tenders",
             params: {
@@ -110,7 +110,7 @@ export default {
           });
         }
 
-        if (query.type === "bidding") {
+        if (query.procedures === "bidding") {
           this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
             entityName: "tenders",
             params: {
@@ -206,7 +206,7 @@ export default {
     entityName: "getList"
   },
   destroyed() {
-    if (this.entityName === "tenders" && this.$route.query.type) {
+    if (this.entityName === "tenders" && this.$route.query.procedures) {
       this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
         entityName: "tenders",
         params: {
