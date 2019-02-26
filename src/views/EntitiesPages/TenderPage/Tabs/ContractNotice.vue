@@ -1071,7 +1071,7 @@
                   <el-col :sm="8">
                     <div class="info-block__text">{{ $t("tender.validity_period") }}</div>
                     <div class="info-block__value">
-                      {{ $t("tender.start_date") }}:&nbsp;f{{ fd(gd(budgetBreakdown, _ => _.period.startDate),
+                      {{ $t("tender.start_date") }}:&nbsp;{{ fd(gd(budgetBreakdown, _ => _.period.startDate),
                       "DD.MM.YYYY") }} -
                       {{ $t("tender.end_date") }}:&nbsp;{{ fd(gd(budgetBreakdown, _ => _.period.endDate), "DD.MM.YYYY")
                       }}
