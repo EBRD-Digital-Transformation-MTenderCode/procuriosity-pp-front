@@ -2,10 +2,10 @@ export default {
   "strict": "Strict",
   "no_strict": "No strict",
   "tooltip_strict_button": "Enter query in search bar",
-  "titles_or_descriptions": "search (title, description, procedure ID, etc.)",
+  "titles_or_descriptions": "search (title, description, procedure ID)",
   "action_of_search": "Go",
-  "moreCriterions": "More criterions",
-  "lessCriterions": "Less criterions",
+  "moreCriterions": "More criteria",
+  "lessCriterions": "Less criteria",
 
   "buyers_names_placeholder": "Buyers names",
   "buyers_region_placeholder": "Buyers Regions",
