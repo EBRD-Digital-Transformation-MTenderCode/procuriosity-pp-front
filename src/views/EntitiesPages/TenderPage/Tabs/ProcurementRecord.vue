@@ -23,7 +23,7 @@
     <div class="info__sub-title">{{ $t("tender.procurement_plan_buyers_profile_PIN") }}</div>
     <div class="info-block__text">{{ $t("tender.previous_publication_concerning_procedure") }}</div>
     <div class="info-block__value">
-      {{ $t("tender.PP_Buyer_profile_PIN") }}
+      {{ $t("tender.PP_Buyer_profile_PIN") }} №
       <a
         :href="`/${$i18n.locale !== 'ro' ? $i18n.locale + '/' : ''}plans/${gd(msRecord, _ => _.ocid)}`"
       >

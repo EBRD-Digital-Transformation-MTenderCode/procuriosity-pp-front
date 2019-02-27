@@ -1,6 +1,16 @@
 <template>
-  <div class="info">
+  <transition  name="fade" mode="out-in" appear>
+  <div key="loading" v-if="!loaded && !error.status">
+    <div class="loading"></div>
+  </div>
+  <div key="info" v-else-if="loaded && !error.status" class="info">
     <div id="contract-title" class="info__title">{{ $t("budget.execution") }}</div>
+    <page-number
+        v-if="needPagination"
+        :current-page="currentPage"
+        :elements-amount="elementsAmount"
+        :page-size="pageSize"
+    />
     <div class="info-blocks">
       <div class="info-block table-header">
         <el-row :gutter="15">
@@ -39,13 +49,34 @@
     >
       <execution-item
           v-for="(procedure, index) of procedures"
+          v-if="index >= numberOfLastDisplayedProcedure - pageSize &&  index < numberOfLastDisplayedProcedure"
           :key="procedure.id"
           :index="index"
           :activeItemId="activeItemId"
           :procedure="procedure"
       />
     </el-collapse>
+    <list-pagination
+        v-if="needPagination"
+        :total="elementsAmount"
+        :pageCount="0"
+        :currentPage=currentPage
+        :pageSize=pageSize
+        :changePage="changePage"
+        offsetTo="contract-title"
+        :key="'pagination'"
+    />
   </div>
+  <div key="error" class="error" v-else>
+    <div class="error-message">{{error.message}}</div>
+    <button
+        class="refresh-btn"
+        @click="getProcedures"
+    >
+      {{$t("refresh")}}
+    </button>
+  </div>
+  </transition>
 </template>
 
 <script>
@@ -53,7 +84,10 @@
   import { getTenderConfig } from "../../../../configs/requests-configs";
 
   import ExecutionItem from "./ExecutionItem";
+  import ListPagination from "./../../../../components/ListPagination";
+  import PageNumber from "./../../../../components/PageNumber";
 
+  import { MTENDER2 } from "./../../../../store/types/cbd-types";
   import {
     getDataFromObject
   } from "./../../../../utils";
@@ -62,6 +96,8 @@
     name: "Execution",
     components: {
       "execution-item": ExecutionItem,
+      "list-pagination": ListPagination,
+      "page-number": PageNumber
     },
     props: {
       getExecutionsId: {
@@ -73,42 +109,26 @@
       return {
         activeItemId: "",
         procedures: [],
+        pageSize: 25,
+        numberOfLastDisplayedProcedure: 25,
+        currentPage: 1,
+        loaded: false,
+        error: {
+          status: false,
+          message: "",
+        },
       };
     },
+    computed: {
+      needPagination() {
+        return this.elementsAmount > this.pageSize;
+      },
+      elementsAmount() {
+        return this.procedures.length;
+      }
+    },
     created() {
-      console.log(this.activeItemId);
-      this.getExecutionsId.forEach(async id => {
-        try {
-          //@TODO mtender2 from cdb-types
-          const { data } = await axios(getTenderConfig("mtender2", id));
-          const entityData = data.records.reduce((acc, record) => {
-            if (record.ocid.match(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/)) {
-              return {
-                ...acc,
-                MS: record
-              };
-            } else if (record.ocid.match(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-PN-[0-9]{13}$/)) {
-              return {
-                ...acc,
-                PN: record
-              };
-            } else if (record.ocid.match(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-EV-[0-9]{13}$/)) {
-              return {
-                ...acc,
-                EV: record
-              };
-            }
-          }, {});
-
-          this.procedures = [
-            ...this.procedures,
-            { ...entityData }
-          ];
-        } catch (e) {
-          //@TODO need catch errors
-          console.log(e);
-        }
-      });
+      this.getProcedures();
     },
     methods: {
       gd(...args) {
@@ -117,6 +137,58 @@
       changeActiveItem(item) {
         this.activeItemId = item;
       },
+      changePage(page) {
+        this.numberOfLastDisplayedProcedure = page * this.pageSize;
+        this.currentPage = page;
+      },
+      async getProcedures() {
+        this.loaded = false;
+        this.error = {
+          status: false,
+          message: "",
+        };
+        for await (let id of this.getExecutionsId) {
+          try {
+            const { data } = await axios(getTenderConfig(MTENDER2, id));
+            const entityData = data.records.reduce((acc, record) => {
+              if (record.ocid.match(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/)) {
+                return {
+                  ...acc,
+                  MS: record
+                };
+              } else if (record.ocid.match(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-PN-[0-9]{13}$/)) {
+                return {
+                  ...acc,
+                  PN: record
+                };
+              } else if (record.ocid.match(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-EV-[0-9]{13}$/)) {
+                return {
+                  ...acc,
+                  EV: record
+                };
+              }
+            }, {});
+
+            this.procedures = [
+              ...this.procedures,
+              { ...entityData }
+            ];
+            this.error = {
+              status: false,
+              message: "",
+            };
+          } catch (e) {
+            this.error = {
+              status: true,
+              message: e.message,
+            };
+            break;
+          }
+          finally {
+            this.loaded = true;
+          }
+        }
+      }
     }
   };
 </script>

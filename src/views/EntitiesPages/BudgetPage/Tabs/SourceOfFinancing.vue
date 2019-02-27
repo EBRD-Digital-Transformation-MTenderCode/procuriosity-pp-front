@@ -1,6 +1,12 @@
 <template>
   <div class="info" v-if="FSs.length">
     <div id="contract-title" class="info__title">{{ $t("budget.source_of_financing") }}</div>
+    <page-number
+        v-if="needPagination"
+        :current-page="currentPage"
+        :elements-amount="elementsAmount"
+        :page-size="pageSize"
+    />
     <div class="info-blocks">
       <div class="info-block table-header">
         <el-row :gutter="15">
@@ -44,18 +50,31 @@
     >
       <source-item
           v-for="(fs, index) of FSs"
+          v-if ="index >= numberOfLastDisplayedSource - pageSize &&  index < numberOfLastDisplayedSource"
           :key="fs.ocid"
           :fs="fs"
           :index="index"
           :activeItemId="activeItemId"
       />
     </el-collapse>
+    <list-pagination
+        v-if="needPagination"
+        :total="elementsAmount"
+        :pageCount="0"
+        :currentPage=currentPage
+        :pageSize=pageSize
+        :changePage="changePage"
+        offsetTo="contract-title"
+        :key="'pagination'"
+    />
   </div>
   <div class="info__no-data" v-else>{{$t("budget.no_finances_sources")}}</div>
 </template>
 
 <script>
   import SourceItem from "./SourceItem";
+  import ListPagination from "./../../../../components/ListPagination";
+  import PageNumber  from "./../../../../components/PageNumber"
 
   import {
     getDataFromObject
@@ -65,6 +84,8 @@
     name: "SourceItem",
     components: {
       "source-item": SourceItem,
+      "list-pagination": ListPagination,
+      "page-number": PageNumber
     },
     props: {
       FSs: {
@@ -75,7 +96,18 @@
     data() {
       return {
         activeItemId: "",
+        pageSize: 25,
+        numberOfLastDisplayedSource: 25,
+        currentPage: 1
       };
+    },
+    computed:{
+      needPagination(){
+        return this.elementsAmount > this.pageSize
+      },
+      elementsAmount() {
+        return this.FSs.length;
+      }
     },
     methods: {
       gd(...args) {
@@ -84,6 +116,10 @@
       changeActiveItem(item) {
         this.activeItemId = item;
       },
+      changePage(page) {
+        this.numberOfLastDisplayedSource =  page * this.pageSize;
+        this.currentPage = page;
+      }
     }
   };
 </script>

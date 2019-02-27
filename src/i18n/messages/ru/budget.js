@@ -46,4 +46,9 @@ export default {
   "contract_id":"Contract ID",
   "budget_project_id(s)":"Budget Project ID(s)",
   "type":"Type",
+  "verified": "Verified",
+  "not_verified": "Not verified",
+  "yes":"Yes",
+  "no":"No",
+
 };

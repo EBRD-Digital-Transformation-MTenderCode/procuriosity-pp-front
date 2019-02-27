@@ -65,7 +65,7 @@ export default {
 
   "administrative_information":"Administrative information",
   "previous_publication_concerning_procedure":"Previous publication concerning this procedure",
-  "PP_Buyer_profile_PIN":"Procurement plan / Buyer’s profile / PIN: №",
+  "PP_Buyer_profile_PIN":"Procurement plan / Buyer’s profile / PIN: ",
   "estimated_date":"Estimated date of dispatch of invitations to tender or to participate to selected candidates",
   "languages_submitted":"Languages in which tenders or requests to participate may be submitted",
   "romanian_russian":" Romanian, Russian",

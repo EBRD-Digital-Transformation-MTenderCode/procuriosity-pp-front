@@ -4,16 +4,16 @@
       <el-container key="loading" v-if="!loaded && !error.status">
         <div class="loading"></div>
       </el-container>
-      <div v-else-if="loaded && Object.keys(budget).length" key="info">
+      <div v-else-if="loaded && Object.keys(EI).length" key="info">
         <div class="entity-main-info entity-main-info__budget ">
           <el-container direction="vertical">
             <el-row>
               <el-col :xs="24" :sm="14">
                 <div class="entity-main-info__title">
-                  {{ gd(budget, _ => _.EI.compiledRelease.tender.title) }}
+                  {{ gd(EI, _ => _.tender.title) }}
                 </div>
                 <div class="entity-main-info__description">
-                  {{ gd(budget, _ => _.EI.compiledRelease.tender.classification.description) }}
+                  {{ gd(EI, _ => _.tender.classification.description) }}
                 </div>
                 <div class="entity-main-info__timeline">
 
@@ -21,13 +21,13 @@
               </el-col>
               <el-col :xs=22 :sm="6" :offset="2">
                 <div class="entity-main-info__value">
-                  <div v-if="gd(budget, _ => _.EI.compiledRelease.planning.budget,{}).hasOwnProperty('amount')">
+                  <div v-if="gd(EI, _ => _.planning.budget,{}).hasOwnProperty('amount')">
                     <div> {{ $t("budget.estimated_value_excluding_VAT") }}</div>
                     <span class="entity-main-info__amount">
                     <span class="whole">{{ wholeAmount }} </span>
                     <span class="fraction"> <span class="dot">.</span>{{ fractionAmount }}</span>
                     <span class="entity-main-info__currency">
-                      {{ gd(budget, _ => _.EI.compiledRelease.planning.budget.amount.currency) }}
+                      {{ gd(EI, _ => _.planning.budget.amount.currency) }}
                     </span>
                   </span>
                   </div>
@@ -39,20 +39,20 @@
                   <div class="entity-main-info__additional-block">
                     <div class="entity-main-info__additional-title">{{ $t("budget.procuring_entity_name") }}</div>
                     <div class="entity-main-info__additional-value">
-                      {{ gd(budget, _ => _.EI.compiledRelease.buyer.name) }}
+                      {{ gd(EI, _ => _.buyer.name) }}
                     </div>
                   </div>
                   <div class="entity-main-info__additional-block">
                     <div class="entity-main-info__additional-title">{{ $t("budget.region") }}</div>
                     <div class="entity-main-info__additional-value">
-                      {{ gd(budget, _ => _.EI.compiledRelease.parties, []).find(part => part.roles.some(role =>
+                      {{ gd(EI, _ => _.parties, []).find(part => part.roles.some(role =>
                       role === "buyer")).address.addressDetails.region.description }}
                     </div>
                   </div>
                   <div class="entity-main-info__additional-block">
                     <div class="entity-main-info__additional-title">{{ $t("budget.number_of_notice") }}</div>
                     <div class="entity-main-info__additional-value">
-                      {{ gd(budget, _ => _.EI.compiledRelease.ocid) }}
+                      {{ gd(EI, _ => _.ocid) }}
                     </div>
                   </div>
                 </div>
@@ -64,7 +64,6 @@
           <el-container direction="vertical">
             <el-row>
               <el-col :xs="24">
-                <!-- @TODO add pagination on tabs -->
                 <el-tabs
                     v-model="activeTab"
                 >
@@ -75,7 +74,7 @@
                   >
                     <span slot="label" v-html="$t('budget.source_of_financing')" />
                     <source-of-financing
-                        :FSs="gd(budget, _ => _.FSs)"
+                        :FSs="FSs"
                     />
                   </el-tab-pane>
                   <el-tab-pane
@@ -91,6 +90,7 @@
                       name="spending"
                       lazy
                       key="spending"
+                      disabled
                   >
                     <span slot="label" v-html="$t('budget.spending')" />
                     <spending />
@@ -142,21 +142,21 @@
     },
     computed: {
       ...mapState({
-        // @TODO need change budget to EI and FSs
-        budget: state => state.entities.budgets.currentEntity.entityData,
+        EI:  state => state.entities.budgets.currentEntity.entityData.EI.compiledRelease,
+        FSs: state => state.entities.budgets.currentEntity.entityData.FSs,
         loaded: state => state.entities.budgets.loaded,
         error: state => state.entities.budgets.error
       }),
       wholeAmount() {
-        const amountStr = this.gd(this.budget, _ => _.EI.compiledRelease.planning.budget.amount.amount, 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        const amountStr = this.gd(this.EI, _ => _.planning.budget.amount.amount, 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
         return /\./.test(amountStr) ? amountStr.slice(0, amountStr.indexOf(".")) : amountStr;
       },
       fractionAmount() {
-        const amountStr = this.gd(this.budget, _ => _.EI.compiledRelease.planning.budget.amount.amount, 0).toString();
+        const amountStr = this.gd(this.EI, _ => _.planning.budget.amount.amount, 0).toString();
         return /\./.test(amountStr) ? amountStr.slice(amountStr.indexOf(".") + 1).length === 1 ? amountStr.slice(amountStr.indexOf(".") + 1) + "0" : amountStr.slice(amountStr.indexOf(".") + 1) : "00";
       },
       getExecutionsId() {
-        return this.gd(this.budget, _ => _.EI.compiledRelease.relatedProcesses, []).filter(relatedProcesses => relatedProcesses.relationship.find(value => value === "x_execution")).map(process => process.identifier);
+        return this.gd(this.EI, _ => _.relatedProcesses, []).filter(relatedProcesses => relatedProcesses.relationship.find(value => value === "x_execution")).map(process => process.identifier);
       }
     },
     methods: {

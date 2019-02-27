@@ -36,8 +36,7 @@
             </el-col>
             <el-col :sm="2">
               <div class="info-block__text info-block__text_bold">
-                <!--@TODO add translates -->
-                {{ gd(fs, _ => _.compiledRelease.planning.budget.status)? "Verified" : "Not verified" }}
+                {{ gd(fs, _ => _.compiledRelease.planning.budget.status)? $t("budget.verified") :$t("budget.not_verified") }}
               </div>
             </el-col>
           </el-row>
@@ -58,8 +57,7 @@
           </el-col>
           <el-col :sm="12">
             <div class="info-block__text">
-              <!--@TODO add translates -->
-              {{ gd(fs, _ => _.compiledRelease.planning.budget.isEuropeanUnionFunded)? "Yes": "No"}}
+              {{ gd(fs, _ => _.compiledRelease.planning.budget.isEuropeanUnionFunded)? $t("budget.yes"): $t("budget.no")}}
             </div>
           </el-col>
         </el-row>
