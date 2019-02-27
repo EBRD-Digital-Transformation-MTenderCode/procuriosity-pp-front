@@ -60,7 +60,10 @@ export default {
       searchParams: { ...localStorageEntities.budgets.searchParams },
       currentEntity: {
         cdb: "",
-        entityData: {},
+        entityData: {
+          EI: {},
+          FSs: []
+        },
       },
       paginationInfo: {
         totalCount: 0,
@@ -123,18 +126,8 @@ export default {
     },
   },
   getters: {
-    getOrganizationName: (store) => (index, organizationRole) => {
-      const parties = store.budgets.currentEntity.entityData.FS[index].compiledRelease.parties;
-      for (let part of parties) {
-        if (part.roles.find((role) => role === organizationRole)) {
-          return part.name;
-        } else {
-          if (organizationRole === "funder") return "State money";
-        }
-      }
-    },
-    getSourceOfMoney: (store) => (index) => {
-      const parties = store.budgets.currentEntity.entityData.FS[index].compiledRelease.parties;
+    getSourceOfMoney: store => index => {
+      const parties = store.budgets.currentEntity.entityData.FSs[index].compiledRelease.parties;
       const buyerId = store.budgets.currentEntity.entityData.EI.compiledRelease.buyer.id;
 
       let source = "";
@@ -290,25 +283,26 @@ export default {
       });
       try {
         const { data } = await axios(getBudgetConfig(id));
-        const entityData = data.records.reduce(
-          (acc, record) => {
-            if (record.ocid.match(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/)) {
-              return {
-                ...acc,
-                EI: record,
-              };
-            } else {
-              return {
-                ...acc,
-                FS: [...acc.FS, record],
-              };
-            }
-          },
-          {
-            EI: {},
-            FS: [],
+        const entityData = data.records.reduce((acc, record) => {
+          if (record.ocid.match(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/)) {
+            return {
+              ...acc,
+              EI: record
+            };
           }
-        );
+          else {
+            return {
+              ...acc,
+              FSs: [
+                ...acc.FSs,
+                record
+              ]
+            };
+          }
+        }, {
+          EI: {},
+          FSs: []
+        });
         commit(SET_CURRENT_ENTITY_INFO, {
           entityName,
           cdb: MTENDER2,

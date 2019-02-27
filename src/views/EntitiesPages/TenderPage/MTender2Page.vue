@@ -203,7 +203,7 @@
   import Contracts from "./Tabs/Contracts";
   import ProcurementRecord from "./Tabs/ProcurementRecord";
 
-  import { getDataFromObject } from "./../../../utils";
+  import { getDataFromObject, selectProcedure } from "./../../../utils";
 
   export default {
     name: "TenderPage",
@@ -249,79 +249,6 @@
       gd(...args) {
         return getDataFromObject(...args);
       },
-      selectProcedure(category, amount) {
-        if (category === "goods" || category === "services") {
-          if (amount < 80000) {
-            switch (this.$i18n.locale) {
-              case "en":
-                return "Low value procedure";
-              case "ro":
-                return "Procedură de valoare mică";
-              case "ru":
-                return "Закупка малой стоимости";
-              default:
-                return "Low value procedure";
-            }
-          } else if (amount <= 400000) {
-            switch (this.$i18n.locale) {
-              case "en":
-                return "Request for Proposals";
-              case "ro":
-                return "COP";
-              case "ru":
-                return "Запрос ценовых предложений";
-              default:
-                return "Request for Proposals";
-            }
-          } else {
-            switch (this.$i18n.locale) {
-              case "en":
-                return "Open Tender";
-              case "ro":
-                return "Licitație deschisă";
-              case "ru":
-                return "Открытые торги";
-              default:
-                return "Open Tender";
-            }
-          }
-        } else if (category === "works") {
-          if (amount < 100000) {
-            switch (this.$i18n.locale) {
-              case "en":
-                return "Low value procedure";
-              case "ro":
-                return "Procedură de valoare mică";
-              case "ru":
-                return "Закупка малой стоимости";
-              default:
-                return "Low value procedure";
-            }
-          } else if (amount <= 1500000) {
-            switch (this.$i18n.locale) {
-              case "en":
-                return "Request for Proposals";
-              case "ro":
-                return "COP";
-              case "ru":
-                return "Запрос ценовых предложений";
-              default:
-                return "Request for Proposals";
-            }
-          } else {
-            switch (this.$i18n.locale) {
-              case "en":
-                return "Open tender";
-              case "ro":
-                return "Licitație deschisă";
-              case "ru":
-                return "Открытые торги";
-              default:
-                return "Open Tender";
-            }
-          }
-        }
-      },
       selectTab(tab) {
         this.activeTab = tab;
         window.scrollTo({
@@ -335,6 +262,9 @@
           this.$router.push({ path: `${this.$i18n.locale !== "ro" ? `/${this.$i18n.locale}` : ""}/plans/${this.tender.MSRecord.ocid}` });
         }
       },
+      selectProcedure(category, amount){
+        return selectProcedure(category, amount)
+      }
     }
   };
 </script>

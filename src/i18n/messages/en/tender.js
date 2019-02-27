@@ -135,8 +135,7 @@ export default {
   "start_date": "Start date",
   "administrative_information": "Administrative information",
   "previous_publication_concerning_procedure": "Previous publication concerning this procedure",
-  // @TODO symbols go away from translates
-  "PP_Buyer_profile_PIN": "Prior Information Notice: №",
+  "PP_Buyer_profile_PIN": "Prior Information Notice:",
   "time_limit": "Time limit for receipt of tenders or requests to participate",
   "estimated_date": "Estimated date of dispatch of invitations to tender or to participate to selected candidates",
   "languages_submitted": "Languages in which tenders or requests to participate may be submitted",
