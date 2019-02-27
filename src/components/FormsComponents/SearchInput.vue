@@ -63,23 +63,22 @@ export default {
   },
   data() {
     return {
-      localValue: this.value
+      localValue: this.value || null
     };
   },
   methods: {
     handleChange(type, name, value) {
-      this.localValue = value;
       if (type === "text") {
-        const clearValue = value.trim();
-        if (clearValue && clearValue.length > 2) {
-          this.setValue(name, clearValue);
-        } else {
-          this.setValue(name, "");
-        }
+        this.setValue(name, value.trim());
       }
       if (type === "number") {
-        this.setValue(name, value);
+        this.setValue(name, !isNaN(Number(value)) ? Number(value): null);
       }
+    }
+  },
+  watch: {
+    value(newVal) {
+      this.localValue = newVal;
     }
   }
 };
