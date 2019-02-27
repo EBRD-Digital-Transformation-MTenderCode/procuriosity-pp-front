@@ -166,7 +166,7 @@
                   ...acc,
                   EV: record
                 };
-              }
+              }else return {...acc}
             }, {});
 
             this.procedures = [

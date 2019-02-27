@@ -637,6 +637,32 @@
     &__questions {
       margin-bottom: 50px;
     }
+    .accordion-table {
+      &__th {
+        @media (max-width: 800px) {
+          position: relative;
+          padding-left: 50%;
+          text-align: left;
+          &:before {
+            content: attr(data-th) ": ";
+            display: inline-block;
+            position: absolute;
+            left: 0;
+            width: 30%;
+            margin-right: 10px;
+            white-space: nowrap;
+            text-align: left;
+            line-height: 1;
+            font-size: 13px;
+          }
+        }
+      }
+    }
+    .table-header {
+      @media (max-width: 800px) {
+        display: none;
+      }
+    }
   }
   .table-header {
     padding: 5px 10px 12px;
