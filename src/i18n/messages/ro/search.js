@@ -2,7 +2,10 @@ export default {
   "strict": "Strictă",
   "no_strict": "Nu este strictă",
   "tooltip_strict_button": "Introduceți interogarea de căutare în bara de căutare",
-  "titles_or_descriptions": "căutare",
+  "titles_or_descriptions": "căutare (titlu, descriere, cod de procedură etc.)",
+  "action_of_search": "Сăutați",
+  "moreCriterions": "Mai multe criterii",
+  "lessCriterions": "Mai puține criterii",
 
   "buyers_names_placeholder": "Numele cumpărătorilor",
   "buyers_region_placeholder": "Regiunile cumpărătorilor",

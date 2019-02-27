@@ -1,15 +1,6 @@
 <template>
   <div>
     <div class="main-search">
-      <!-- Strict search -->
-      <search-switch
-          name="titlesOrDescriptionsStrict"
-          entity="plans"
-          :value="titlesOrDescriptionsStrict"
-          :setValue="setFormParams"
-          :label="$t('search.strict')"
-      />
-  
       <!-- Titles or descriptions -->
       <search-input
           name="titlesOrDescriptions"
@@ -219,7 +210,6 @@
   import { REGIONS, CPV_CODES } from "./../../store/types/directories-types";
 
   import SearchInput from "./../FormsComponents/SearchInput";
-  import SearchSwitch from "../FormsComponents/SearchStrictButton";
   import SearchAutoCompleteInput from "./../FormsComponents/SearchAutoCompleteInput";
   import SearchRegions from "./../FormsComponents/SearchRegions";
   import SearchClassifications from "./../FormsComponents/SearchClassifications";
@@ -237,7 +227,6 @@
     name: "PlansSearchForm",
     components: {
       "search-input": SearchInput,
-      "search-switch": SearchSwitch,
       "search-auto-complete-input": SearchAutoCompleteInput,
       "search-regions": SearchRegions,
       "search-classifications": SearchClassifications,

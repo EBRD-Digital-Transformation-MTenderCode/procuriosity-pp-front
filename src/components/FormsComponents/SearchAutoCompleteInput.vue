@@ -1,5 +1,6 @@
 <template>
   <div>
+    <label class="search-form__label">{{ label }}</label>
     <el-select
         :items="items"
         multiple
@@ -39,6 +40,9 @@
       setValues: {
         type: Function,
         required: true
+      },
+      label: {
+        type: String
       },
       placeholder: {
         type: String

@@ -55,7 +55,7 @@ export default {
     margin: 15px 0 0;
     padding: 14px 16px;
     background-color: #f7f7f7;
-    box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.19);
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.19);
     font-size: 16px;
     @media (max-width: 480px) {
       display: block;

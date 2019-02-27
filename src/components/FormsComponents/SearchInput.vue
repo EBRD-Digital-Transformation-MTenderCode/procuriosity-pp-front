@@ -1,10 +1,9 @@
 <template>
   <div class="search-form-field-wp">
+    <label class="search-form__label">{{ label }}</label>
     <el-input
       v-if="type === 'text'"
       :type="type"
-      :prefix-icon="prefixIcon"
-      :suffix-icon="suffixIcon"
       :placeholder="placeholder"
       clearable
       maxlength="255"
@@ -14,8 +13,6 @@
     <el-input
       v-if="type === 'number'"
       :type="type"
-      :prefix-icon="prefixIcon"
-      :suffix-icon="suffixIcon"
       :placeholder="placeholder"
       controls-position="right"
       :min="min"
@@ -57,13 +54,8 @@ export default {
       type: Number,
       default: 10000000
     },
-    prefixIcon: {
-      type: String,
-      default: "el-icon-search"
-    },
-    suffixIcon: {
-      type: String,
-      default: ""
+    label: {
+      type: String
     },
     placeholder: {
       type: String
@@ -71,11 +63,8 @@ export default {
   },
   data() {
     return {
-      localValue: null
-    }
-  },
-  created() {
-    this.localValue = this.value;
+      localValue: this.value
+    };
   },
   methods: {
     handleChange(type, name, value) {
