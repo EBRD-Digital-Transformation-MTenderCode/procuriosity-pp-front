@@ -68,7 +68,7 @@ export default {
   tenders: [
     {
       name: {
-        en: "Negotiatian with one or Negotiation with several",
+        en: "Negotiation with one or Negotiation with several",
         ro: "Procedura negocieri fără publicare",
         ru: "Переговоры без публикации"
       },

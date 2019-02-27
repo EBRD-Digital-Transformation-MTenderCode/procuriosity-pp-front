@@ -2,7 +2,7 @@ export default {
   "strict": "Строгий",
   "no_strict": "Не строгий",
   "tooltip_strict_button": "Ведите запрос в строку поиска",
-  "titles_or_descriptions": "поиск (название, описание, идентификатор процедуры и т. д.)",
+  "titles_or_descriptions": "поиск (название, описание, идентификатор процедуры)",
   "action_of_search": "Искать",
   "moreCriterions": "Больше критериев",
   "lessCriterions": "Меньше критериев",
