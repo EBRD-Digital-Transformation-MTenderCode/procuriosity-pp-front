@@ -121,6 +121,8 @@ export default {
       } else {
         this.getList();
       }
+    } else {
+       this.getList();
     }
   },
   computed: {
