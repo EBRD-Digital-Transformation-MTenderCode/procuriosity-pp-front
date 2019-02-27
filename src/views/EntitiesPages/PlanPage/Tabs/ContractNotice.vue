@@ -873,7 +873,7 @@
               <el-col :sm="24">
                 <div class="info-block__text">{{ $t("plan.previous_publication_concerning_procedure") }}</div>
                 <div class="info-block__value">
-                  {{ $t("plan.PP_Buyer_profile_PIN") }}
+                  {{ $t("plan.PP_Buyer_profile_PIN") }} №
                   &lt;!&ndash;<a
                     :href="`/plans/${gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === 'planning')), _ => _.identifier)}`"
                     target="_blank">&ndash;&gt;

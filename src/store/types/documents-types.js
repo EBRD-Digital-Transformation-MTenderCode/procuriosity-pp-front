@@ -49,10 +49,10 @@ export default {
     ro: "Conflicte de interese descoperite",
     ru: "Обнаруженные конфликты интересов"
   },
-  "procurementPlan": { //TODO add translates
-    en: "",
-    ro: "",
-    ru: ""
+  "procurementPlan": {
+    en: "Procurement Plan",
+    ro: "Planul de achiziții",
+    ru: "План закупок"
   },
   "evaluationReports": {
     en: "Evaluation report",
@@ -79,15 +79,15 @@ export default {
     ro: "Garanții",
     ru: "Гарантии исполнения договора"
   },
-  "illustration": {//TODO add translates
-    en: "",
-    ro: "",
-    ru: ""
+  "illustration": {
+    en: "Illustration",
+    ro: "Ilustrare",
+    ru: "Иллюстрация"
   },
-  "cancellationDetails": {//TODO add translates
-    en: "",
-    ro: "",
-    ru: ""
+  "cancellationDetails": {
+    en: "Details of cancellation",
+    ro: "Detalii privind anularea",
+    ru: "Детали отмены"
   },
   "awardNotice": {
     en: "Award Notification",
@@ -125,14 +125,14 @@ export default {
     ru: "Субконтракты"
   },
   "contractSummary": {//TODO add translates
-    en: "",
-    ro: "",
-    ru: ""
+    en: "Contract summary",
+    ro: "Contract summary",
+    ru: "Contract summary"
   },
   "x_commercialOffer": {
     en: "Financial proposal",
     ro: "Propunere financiară",
-    ru: "Financial proposal"//TODO add translates
+    ru: "Финансовое предложение"
   },
   "x_qualificationDocuments": {
     en: "Qualification documents",
@@ -144,9 +144,9 @@ export default {
     ro: "Documente de eligibilitate",
     ru: "Документы соответствия"
   },
-  "submissionDocuments": {//TODO add translates
-    en: "",
-    ro: "",
-    ru: ""
+  "submissionDocuments": {
+    en: "Documents of submission",
+    ro: "Documente de depunere",
+    ru: "Документы для представления"
   },
 };

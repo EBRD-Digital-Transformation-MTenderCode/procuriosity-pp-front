@@ -67,7 +67,10 @@ export default {
       searchParams: { ...localStorageEntities.budgets.searchParams },
       currentEntity: {
         cdb: "",
-        entityData: {},
+        entityData: {
+          EI: {},
+          FSs: []
+        },
       },
       paginationInfo: {
         totalCount: 0,
@@ -130,18 +133,8 @@ export default {
     },
   },
   getters: {
-    getOrganizationName: store => (index, organizationRole) => {
-      const parties = store.budgets.currentEntity.entityData.FS[index].compiledRelease.parties;
-      for (let part of parties) {
-        if (part.roles.find(role => role === organizationRole)) {
-          return part.name;
-        } else {
-          if (organizationRole === "funder") return "State money";
-        }
-      }
-    },
     getSourceOfMoney: store => index => {
-      const parties = store.budgets.currentEntity.entityData.FS[index].compiledRelease.parties;
+      const parties = store.budgets.currentEntity.entityData.FSs[index].compiledRelease.parties;
       const buyerId = store.budgets.currentEntity.entityData.EI.compiledRelease.buyer.id;
 
       let source = "";
@@ -309,15 +302,15 @@ export default {
           else {
             return {
               ...acc,
-              FS: [
-                ...acc.FS,
+              FSs: [
+                ...acc.FSs,
                 record
               ]
             };
           }
         }, {
           EI: {},
-          FS: []
+          FSs: []
         });
         commit(SET_CURRENT_ENTITY_INFO, {
           entityName,

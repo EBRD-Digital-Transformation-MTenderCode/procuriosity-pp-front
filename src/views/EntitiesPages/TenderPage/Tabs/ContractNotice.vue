@@ -928,7 +928,7 @@
               <el-col :sm="24">
                 <div class="info-block__text">{{ $t("tender.previous_publication_concerning_procedure") }}</div>
                 <div class="info-block__value">
-                  {{ $t("tender.PP_Buyer_profile_PIN") }}
+                  {{ $t("tender.PP_Buyer_profile_PIN") }} №
                   <!--<a
                     :href="`/plans/${gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === 'planning')), _ => _.identifier)}`"
                     target="_blank">-->
@@ -1071,7 +1071,7 @@
                   <el-col :sm="8">
                     <div class="info-block__text">{{ $t("tender.validity_period") }}</div>
                     <div class="info-block__value">
-                      {{ $t("tender.start_date") }}:&nbsp;f{{ fd(gd(budgetBreakdown, _ => _.period.startDate),
+                      {{ $t("tender.start_date") }}:&nbsp;{{ fd(gd(budgetBreakdown, _ => _.period.startDate),
                       "DD.MM.YYYY") }} -
                       {{ $t("tender.end_date") }}:&nbsp;{{ fd(gd(budgetBreakdown, _ => _.period.endDate), "DD.MM.YYYY")
                       }}
