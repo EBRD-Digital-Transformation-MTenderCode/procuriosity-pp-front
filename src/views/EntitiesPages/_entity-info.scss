@@ -670,6 +670,10 @@
       &_bold {
         font-weight: 700;
       }
+      &_link {
+        text-decoration: underline;
+        color: $mainC;
+      }
     }
 
     &__value {
@@ -898,7 +902,10 @@
       }
     }
   }
-
+  &__no-data {
+    font-size: 20px;
+    margin: 20px 0;
+  }
   ul,
   ol {
     margin-bottom: 10px;

@@ -14,7 +14,10 @@
       <el-row type="flex" :gutter="18">
         <el-col :xs="24" :sm="14">
           <div class="entity-title">
-            {{ title }}
+            <router-link :to="`${$i18n.locale !== 'ro' ? `/${$i18n.locale}` : ''}/budgets/${id}`"
+                         data-link class="entity-title">
+              {{ title }}
+            </router-link>
           </div>
           <div class="entity-description">
             {{ description }}
@@ -141,8 +144,5 @@
         return getDataFromObject(this.entity, _ => _.id);
       }
     },
-    mounted() {
-      console.log(this.entity)
-  },
   };
 </script>

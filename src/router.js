@@ -20,7 +20,7 @@ const router = new Router({
       component: () => import(/* webpackChunkName: "PlanPage" */ "./views/EntitiesPages/PlanPage/ContainerPlanPage.vue")
     },
      {
-     path: "/budgets/:id",
+     path: "/:lang?/budgets/:id",
      name: "budget-page",
      component: () => import(/* webpackChunkName: "BudgetPage" */ "./views/EntitiesPages/BudgetPage/ContainerBudgetPage.vue")
      },

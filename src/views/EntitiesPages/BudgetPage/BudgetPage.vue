@@ -21,13 +21,13 @@
               </el-col>
               <el-col :xs=22 :sm="6" :offset="2">
                 <div class="entity-main-info__value">
-                  <div v-if="this.gd(this.budget, _ => _.EI.compiledRelease.planning.budget.amount.amount, 0)">
+                  <div v-if="gd(budget, _ => _.EI.compiledRelease.planning.budget,{}).hasOwnProperty('amount')">
                     <div> {{ $t("budget.estimated_value_excluding_VAT") }}</div>
                     <span class="entity-main-info__amount">
                     <span class="whole">{{ wholeAmount }} </span>
                     <span class="fraction"> <span class="dot">.</span>{{ fractionAmount }}</span>
                     <span class="entity-main-info__currency">
-                      {{ gd(budget, _ => _.EI.compiledRelease.tender.value.currency) }}
+                      {{ gd(budget, _ => _.EI.compiledRelease.planning.budget.amount.currency) }}
                     </span>
                   </span>
                   </div>
@@ -64,6 +64,7 @@
           <el-container direction="vertical">
             <el-row>
               <el-col :xs="24">
+                <!-- @TODO add pagination on tabs -->
                 <el-tabs
                     v-model="activeTab"
                 >
@@ -73,17 +74,18 @@
                       key="sourceOfFinancing"
                   >
                     <span slot="label" v-html="$t('budget.source_of_financing')" />
-                    <sourceOfFinancing
-                        :FS="gd(budget, _ => _.FS)"
+                    <source-of-financing
+                        :FSs="gd(budget, _ => _.FSs)"
                     />
                   </el-tab-pane>
                   <el-tab-pane
                       name="execution"
                       lazy
                       key="execution"
+                      :disabled="!getExecutionsId.length"
                   >
                     <span slot="label" v-html="$t('budget.execution')" />
-                    <execution />
+                    <execution :getExecutionsId="getExecutionsId" />
                   </el-tab-pane>
                   <el-tab-pane
                       name="spending"
@@ -117,17 +119,18 @@
   import { mapState } from "vuex";
   import { FETCH_CURRENT_BUDGET_INFO } from "../../../store/types/actions-types";
 
-  import { getDataFromObject } from "../../../utils";
   import Execution from "./Tabs/Execution";
   import Spending from "./Tabs/Spending";
   import SourceOfFinancing from "./Tabs/SourceOfFinancing";
+
+  import { getDataFromObject } from "../../../utils";
 
   export default {
     name: "BudgetPage",
     components: {
       spending: Spending,
       execution: Execution,
-      sourceOfFinancing: SourceOfFinancing
+      "source-of-financing": SourceOfFinancing
     },
     data() {
       return {
@@ -139,6 +142,7 @@
     },
     computed: {
       ...mapState({
+        // @TODO need change budget to EI and FSs
         budget: state => state.entities.budgets.currentEntity.entityData,
         loaded: state => state.entities.budgets.loaded,
         error: state => state.entities.budgets.error
@@ -151,8 +155,8 @@
         const amountStr = this.gd(this.budget, _ => _.EI.compiledRelease.planning.budget.amount.amount, 0).toString();
         return /\./.test(amountStr) ? amountStr.slice(amountStr.indexOf(".") + 1).length === 1 ? amountStr.slice(amountStr.indexOf(".") + 1) + "0" : amountStr.slice(amountStr.indexOf(".") + 1) : "00";
       },
-      hasTender() {
-        return this.gd(this.budget, _ => _.EI.compiledRelease.relatedProcesses, []).some(process => this.gd(process, _ => _.relationship, []).some(it => it === "x_evaluation"));
+      getExecutionsId() {
+        return this.gd(this.budget, _ => _.EI.compiledRelease.relatedProcesses, []).filter(relatedProcesses => relatedProcesses.relationship.find(value => value === "x_execution")).map(process => process.identifier);
       }
     },
     methods: {
@@ -160,7 +164,6 @@
         await this.$store.dispatch(FETCH_CURRENT_BUDGET_INFO, {
           id: this.$route.params.id
         });
-        console.log(this.budget);
       },
       gd(...args) {
         return getDataFromObject(...args);

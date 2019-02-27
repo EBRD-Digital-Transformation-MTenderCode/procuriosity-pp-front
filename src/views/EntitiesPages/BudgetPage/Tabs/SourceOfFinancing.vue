@@ -1,5 +1,5 @@
 <template>
-  <div class="info" v-if="FS.length !== 0">
+  <div class="info" v-if="FSs.length">
     <div id="contract-title" class="info__title">{{ $t("budget.source_of_financing") }}</div>
     <div class="info-blocks">
       <div class="info-block table-header">
@@ -11,27 +11,27 @@
           </el-col>
           <el-col :sm="10">
             <div class="info-block__text info-block__text_bold">
-              ProjectID
+              {{$t("budget.projectID")}}
             </div>
           </el-col>
           <el-col :sm="3">
             <div class="info-block__text info-block__text_bold">
-              Source of Money
+              {{$t("budget.source_of_money")}}
             </div>
           </el-col>
           <el-col :sm="4">
             <div class="info-block__text info-block__text_bold">
-              Validity period
+              {{$t("budget.validity_period")}}
             </div>
           </el-col>
           <el-col :sm="3">
             <div class="info-block__text info-block__text_bold">
-              Amount
+              {{$t("budget.amount")}}
             </div>
           </el-col>
           <el-col :sm="2">
             <div class="info-block__text info-block__text_bold">
-              Status
+              {{$t("budget.status")}}
             </div>
           </el-col>
         </el-row>
@@ -39,20 +39,19 @@
     </div>
     <el-collapse
         accordion
-        :value="FS[0].ocid"
+        :value="FSs[0].ocid"
         @change="changeActiveItem"
     >
       <source-item
-          v-for="(item, index) of FS"
-          :key="item.ocid + index"
-          :item="item"
+          v-for="(fs, index) of FSs"
+          :key="fs.ocid"
+          :fs="fs"
           :index="index"
-          :FS="FS"
           :activeItemId="activeItemId"
       />
     </el-collapse>
   </div>
-  <div v-else> Bugetul nu are încă surse de finanțare</div>
+  <div class="info__no-data" v-else>{{$t("budget.no_finances_sources")}}</div>
 </template>
 
 <script>
@@ -68,7 +67,7 @@
       "source-item": SourceItem,
     },
     props: {
-      FS: {
+      FSs: {
         type: Array,
         required: true
       },
