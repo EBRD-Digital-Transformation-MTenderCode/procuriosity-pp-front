@@ -1,14 +1,7 @@
 import axios from "axios";
 import VueI18n from "./../i18n/index";
 
-import {
-  getListConfig,
-  getBudgetConfig,
-  getTenderConfig,
-  getContractConfig,
-  getPlanConfig,
-
-} from "./../configs/requests-configs";
+import { getListConfig, getBudgetConfig, getTenderConfig, getContractConfig, getPlanConfig } from "./../configs/requests-configs";
 
 import initialSearchProps from "./types/initial-search-props";
 
@@ -130,33 +123,31 @@ export default {
     },
   },
   getters: {
-    getOrganizationName: store => (index, organizationRole) => {
+    getOrganizationName: (store) => (index, organizationRole) => {
       const parties = store.budgets.currentEntity.entityData.FS[index].compiledRelease.parties;
       for (let part of parties) {
-        if (part.roles.find(role => role === organizationRole)) {
+        if (part.roles.find((role) => role === organizationRole)) {
           return part.name;
         } else {
           if (organizationRole === "funder") return "State money";
         }
       }
     },
-    getSourceOfMoney: store => index => {
+    getSourceOfMoney: (store) => (index) => {
       const parties = store.budgets.currentEntity.entityData.FS[index].compiledRelease.parties;
       const buyerId = store.budgets.currentEntity.entityData.EI.compiledRelease.buyer.id;
 
       let source = "";
       for (let part of parties) {
-        if (part.roles.find(role => role === "funder")) {
+        if (part.roles.find((role) => role === "funder")) {
           if (part.id === buyerId) {
             source = VueI18n.t("budget.own_money");
             break;
-          }
-          else source = VueI18n.t("budget.donors_money");
+          } else source = VueI18n.t("budget.donors_money");
         }
       }
       return source || VueI18n.t("budget.state_money");
     },
-
   },
   mutations: {
     [SET_ENTITY_LOADED](state, { entityName, loaded }) {
@@ -299,30 +290,29 @@ export default {
       });
       try {
         const { data } = await axios(getBudgetConfig(id));
-        const entityData = data.records.reduce((acc, record) => {
-          if (record.ocid.match(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/)) {
-            return {
-              ...acc,
-              EI: record
-            };
+        const entityData = data.records.reduce(
+          (acc, record) => {
+            if (record.ocid.match(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/)) {
+              return {
+                ...acc,
+                EI: record,
+              };
+            } else {
+              return {
+                ...acc,
+                FS: [...acc.FS, record],
+              };
+            }
+          },
+          {
+            EI: {},
+            FS: [],
           }
-          else {
-            return {
-              ...acc,
-              FS: [
-                ...acc.FS,
-                record
-              ]
-            };
-          }
-        }, {
-          EI: {},
-          FS: []
-        });
+        );
         commit(SET_CURRENT_ENTITY_INFO, {
           entityName,
           cdb: MTENDER2,
-          entityData
+          entityData,
         });
 
         commit(SET_ENTITY_LOADED_ERROR, {
@@ -332,8 +322,7 @@ export default {
             message: "",
           },
         });
-      }
-      catch (e) {
+      } catch (e) {
         commit(SET_ENTITY_LOADED_ERROR, {
           entityName,
           error: {
@@ -341,8 +330,7 @@ export default {
             message: e.message,
           },
         });
-      }
-      finally {
+      } finally {
         commit(SET_ENTITY_LOADED, {
           entityName,
           loaded: true,

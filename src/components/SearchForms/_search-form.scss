@@ -1,97 +1,116 @@
 @import "./../../styles/variables";
 
-.main-search {
-  display: flex;
-  position: relative;
-  @media (max-width: 480px) {
-    flex-wrap: wrap;
-  }
-  .el-input__inner {
-    border-radius: 0 3px 3px 0;
-    @media (max-width: 480px) {
-      border-radius: 0  0 4px 4px;
-    }
-  }
-}
-
 .search-form {
+  position: relative;
+  margin-bottom: 52px;
   padding: 25px 30px;
   background-color: $mainC;
-  @media (max-width: 480px) {
+  @media (max-width: 580px) {
     padding: 16px 18px;
   }
-  .main-search &-field-wp {
+  .main-search {
     flex-grow: 1;
+    display: flex;
+    @media (max-width: 580px) {
+      flex-wrap: wrap;
+    }
     .el-input__inner {
-      padding-right: 105px;
-      @media (max-width: 480px) {
-        padding-right: 50px;
-      }
+      border-radius: 0;
     }
   }
   &__btn {
     display: inline-block;
-    position: absolute;
-    width: 52px;
-    height: 52px;
-    background-position: center;
-    background-repeat: no-repeat;
     transition: 0.4s;
+    &_strict {
+      @media (max-width: 580px) {
+        width: 100%;
+      }
+      .el-checkbox-button__inner {
+        border-right: none;
+        border-color: #dcdfe6 !important;
+        border-radius: 3px 0 0 3px !important;
+        background-color: transparent !important;
+        color: #fff !important;
+        @media (max-width: 580px) {
+          width: 100%;
+          border-right: 1px solid #fff;
+          border-bottom: none;
+          border-radius: 4px 4px 0 0 !important;
+        }
+      }
+      &.is-checked {
+         .el-checkbox-button__inner {
+          background-color: #fff !important;
+          color: $mainC !important;
+        }
+      }
+      &.is-disabled {
+        .el-checkbox-button__inner {
+          background-color: #d2d2d2 !important;
+          color: #868686 !important;
+        }
+      }
+    }
     &_search {
-      top: 0;
-      right: 0;
-      border-radius: 3px;
-      background-color: #9e9e9e;
-      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAACIUlEQVRIS72WjVHbQBBGv62AdACuIKECoIJABSEVBCqAVBCoIKEC6ACoIHQQ6AAqWOZ59jQrRbLuAHtnPB7Ld/f29zuZ3mHuviPpm6R9SV8kfYrj7iQ9SLoyM77/M3sLN4Bnko4r9uPE6dCBZrC7E9ltiq6CreeA/ymLm8AT0HtJHPhAVJENnDuMMmTHjszshgfVYHenfv9SpC+kuhw0FnY4Cmg7/ifyAxxsAV9I+hEHAN2fapzsRDhMgxX4nZkdVIEjfURb7LuZdfWaK7K70/X0RbHdWjDd+zt2PZkZY9Rk7o6jjB52WQumTl9j008zO2+iSnL37Px9LZhZ3AsYzcHvJotG+1uabGNggO7uxduNgQcN9lIL7jeG2UlTnt9RY1ToOmCPZrZ4A5hxYqyw09qIUa1HSVvdRjMEpcrcPTvOnkUVOBqDEeJGKtbp7ir6iL5zVR63gImaMfqcQCdmdjkFdnckFofLPY3U7pjZ8ywYrWVhRI1iobsl5TymBAjM8tYJo5YIRla4nr6vBIfa/Co3SoIDyZHP1fqJazJfKpPggcR111nASR0jxSdHP3SAKGnCi5K1smAUPICWtT14coC00rU5raSffrgZAifBE9AMX0wdNpfv/H8v4hko+5ru4VWOdOBNQnFoCd40dAkekbNhhj4svb0auzvvUlOvMmuBlogZk7FZXBu0gPO7UMnGWqHD5kJhiB7hz7rbMp7Va18B9VkBwW9J/vkAAAAASUVORK5CYII=);
-      transition: 0.2s;
+      height: 52px;
+      border-left: none;
+      border-radius: 0 3px 3px 0;
+      background-color: #ff7900 !important;
+      font-size: 18px;
       &:hover {
-        background-color: #939393;
+        background-color: #fb9d47 !important;
       }
       &:active {
         box-shadow: inset 0 0 3px 1px #666;
       }
-      @media (max-width: 480px) {
-        display: none;
+      @media (max-width: 580px) {
+        width: 100%;
+        border-top: none;
+        border-radius: 0 0 4px 4px !important;
       }
+      .el-icon-back {
+        margin-left: 5px;
+        transform: rotate(180deg);
+      }
+    }
+    &_reset {
+      &-wp {
+        margin-top: 16px;
+        text-align: right;
+        @media (max-width: 767px) {
+          text-align: center;
+        }
+      }
+      padding: 12px 20px;
+      border-radius: 3px;
+      color: #fff !important;
+      font-size: 18px;
     }
     &_more {
-      top: 0;
-      right: 52px;
-      @media (max-width: 480px) {
-        top: inherit;
-        bottom: 0;
-        right: 0;
-      }
-      &_open {
-        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAeCAYAAAA/xX6fAAABWElEQVRIS62W4XHCMAxG9WUBOgIbFCYoI3QFOwO0GxQ2aAeIvQIblG4AGzACLBD1lEu41IGCLPtfcie9+2zrnUEFVozxiYjemPmViBZEtAewJaIv59xpjICVJzBm/u5Babu9935ZFNg0zRrAR9/0LOl6+Ez+MfOmruv1AEVSYAl8BjCXLYwxLph5R0QddFgCRwiBLZRR7Y/3fjV8hxAE+JL2LpnwBGDpnDv2CeVc5TL9TWhNlxyJ3MjhDDvY5AytQKkPIQjk+Uqvg/dexuSyzGMhnWQ02rZ9ByBzKOADM2+rqvosPofaHSqSUAOdADWa0oAugz8u0mrKDNRqKgt4Q213NZUD+09tD2kqB3pLbXc1lQPrEo4LtZrKgU7GQqOpIkCNpooAc5poarLUZrGRGmi1kRpotZHliaG2kfURlWUjS0K1jSameeR6W22kvjTaR1MaIgtosdEvEGcbw/0yunAAAAAASUVORK5CYII=);
-      }
-      &_close {
-        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAArklEQVQ4T73V4RGCMAwF4LwJdQS9LuBCDbiBo+kE4cqJB5g0NCj85Jqv7eURwMwPIjqJyDWl1FPgyTlfAHQAejCzTEYEnbC38cLqBbWgWi2KHEGtmhFsRWsH+IBbUe82C9BDPazUf4EWOi4GOi8RKqih83jWkmCCFurF6jhw3YBdV9a6GW5KLRrNsdlS4K35z6fn7aqNSHM4RLDaQPn1gH0WsIz9s4jc9v4CiOg+AFyWAxuInlMVAAAAAElFTkSuQmCC);
+      height: 52px;
+      position: absolute;
+      bottom: -52px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 12px 20px;
+      border-radius: 0 0 3px 3px;
+      background-color: $mainC;
+      white-space: nowrap;
+      font-size: 18px;
+      color: #fff;
+      &:hover {
+        background-color: lighten($mainC, 10%);
       }
     }
+  }
+  &__label {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #fff;
   }
   &-more {
     padding-top: 40px;
-  }
-  &__reset-button {
-    padding: 13px 44px;
-    border: 0;
-    border-radius: 3px;
-    background-color: #ff7900 !important;
-    color: #f7f7f7 !important;
-    font-size: 25px;
-    transition: 0.4s;
-    &:hover {
-      background-color: #fb9d47 !important;
-    }
-    &-wp {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 10px;
-      @media (max-width: 767px) {
-        justify-content: center;
-      }
-    }
   }
   &-element {
     & + & {
@@ -142,30 +161,6 @@
       max-width: 100%;
     }
   }
-  .el-checkbox-button {
-    @media (max-width: 480px) {
-      width: 100%;
-    }
-    &__inner {
-      border-right: none;
-      border-color: #dcdfe6 !important;
-      border-radius: 3px 0 0 3px;
-      background-color: transparent;
-      color: #fff;
-      @media (max-width: 480px) {
-        width: 100%;
-        border-right: 1px solid #fff;
-        border-bottom: none;
-        border-radius: 4px 4px 0 0 !important;
-      }
-    }
-  }
-  .is-checked .el-checkbox-button {
-    &__inner {
-      background-color: #fff;
-      color: $mainC;
-    }
-  }
   .el-range {
     &-input {
       font-size: 18px;
@@ -188,12 +183,6 @@
     &__close {
       flex-shrink: 0;
     }
-  }
-  &__period-label {
-    display: inline-block;
-    margin-bottom: 10px;
-    font-size: 14px;
-    color: #fff;
   }
 }
 

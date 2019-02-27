@@ -2,7 +2,10 @@ export default {
   "strict": "Строгий",
   "no_strict": "Не строгий",
   "tooltip_strict_button": "Ведите запрос в строку поиска",
-  "titles_or_descriptions": "поиск",
+  "titles_or_descriptions": "поиск (название, описание, идентификатор процедуры и т. д.)",
+  "action_of_search": "Искать",
+  "moreCriterions": "Больше критериев",
+  "lessCriterions": "Меньше критериев",
 
   "buyers_names_placeholder": "Имена закупщиков",
   "buyers_region_placeholder": "Регионы закупщиков",

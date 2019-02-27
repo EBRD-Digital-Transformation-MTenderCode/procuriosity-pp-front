@@ -118,10 +118,10 @@ export default {
             }
           });
         }
+      } else {
+        this.getList();
       }
     }
-
-    this.getList();
   },
   computed: {
     ...mapState(["entities"]),
