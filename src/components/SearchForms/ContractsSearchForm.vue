@@ -1,24 +1,11 @@
 <template>
   <div>
-    <div class="main-search">
-      <!-- Titles or descriptions -->
-      <search-input
-        name="titlesOrDescriptions"
-        :value="titlesOrDescriptions"
-        :setValue="setFormParams"
-        prefixIcon
-        :placeholder="$t('search.titles_or_descriptions')"
-      />
-      <button class="search-form__btn search-form__btn_search" tabindex="-1" />
-
-      <!-- @TODO need write more readable classes -->
-      <button
-        tabindex="-1"
-        @click="actionExpand"
-        :class="moreCriterions ? 'search-form__btn search-form__btn_more search-form__btn_more_close': 'search-form__btn search-form__btn_more search-form__btn_more_open'"
-      />
-    </div>
-    <el-collapse-transition name="el-zoom-in-top">
+    <main-search
+        entityName="contracts"
+        :titlesOrDescriptionsStrict="titlesOrDescriptionsStrict"
+        :titlesOrDescriptions="titlesOrDescriptions"
+    />
+    <el-collapse-transition mode="in-out" name="el-zoom-in-top">
       <div v-show="moreCriterions">
         <div class="search-form-more">
           <el-row :gutter="40">
@@ -30,6 +17,7 @@
                   name="buyersNames"
                   :values="buyersNames"
                   :setValues="setFormParams"
+                  :label="$t('search.buyers_names_placeholder')"
                   :placeholder="$t('search.buyers_names_placeholder')"
                 />
               </div>
@@ -42,6 +30,7 @@
                   :values="buyersRegions"
                   :setValues="setFormParams"
                   needFetch
+                  :label="$t('search.buyers_region_placeholder')"
                   :placeholder="$t('search.buyers_region_placeholder')"
                 />
               </div>
@@ -52,6 +41,7 @@
                   name="buyersIdentifiers"
                   :values="buyersIdentifiers"
                   :setValues="setFormParams"
+                  :label="$t('search.buyers_identifiers_placeholder')"
                   :placeholder="$t('search.buyers_identifiers_placeholder')"
                 />
               </div>
@@ -63,6 +53,7 @@
                   :items="buyersTypesList"
                   :values="buyersTypes"
                   :setValues="setFormParams"
+                  :label="$t('search.buyers_types_placeholder')"
                   :placeholder="$t('search.buyers_types_placeholder')"
                 />
               </div>
@@ -74,6 +65,7 @@
                   :items="mainGeneralActivityList"
                   :values="buyersMainGeneralActivities"
                   :setValues="setFormParams"
+                  :label="$t('search.buyers_main_general_activity_placeholder')"
                   :placeholder="$t('search.buyers_main_general_activity_placeholder')"
                 />
               </div>
@@ -85,6 +77,7 @@
                   :items="mainSectoralActivityList"
                   :values="buyersMainSectoralActivities"
                   :setValues="setFormParams"
+                  :label="$t('search.buyers_main_sectoral_activity_placeholder')"
                   :placeholder="$t('search.buyers_main_sectoral_activity_placeholder')"
                 />
               </div>
@@ -97,6 +90,7 @@
                   prefixIcon
                   :value="amountFrom"
                   :setValue="setFormParams"
+                  :label="$t('search.amount_from')"
                   :placeholder="$t('search.amount_from')"
                 />
               </div>
@@ -109,6 +103,7 @@
                   prefixIcon
                   :value="amountTo"
                   :setValue="setFormParams"
+                  :label="$t('search.amount_to')"
                   :placeholder="$t('search.amount_to')"
                 />
               </div>
@@ -124,6 +119,7 @@
                     :values="deliveriesRegions"
                     :setValues="setFormParams"
                     needFetch
+                    :label="$t('search.deliveries_regions_placeholder')"
                     :placeholder="$t('search.deliveries_regions_placeholder')"
                 />
               </div>
@@ -135,6 +131,7 @@
                   :items="proceduresTypesList"
                   :values="proceduresTypes"
                   :setValues="setFormParams"
+                  :label="$t('search.types_procedures_placeholder')"
                   :placeholder="$t('search.types_procedures_placeholder')"
                 />
               </div>
@@ -146,6 +143,7 @@
                   :items="proceduresStatusesList"
                   :values="proceduresStatuses"
                   :setValues="setFormParams"
+                  :label="$t('search.statuses_procedures_placeholder')"
                   :placeholder="$t('search.statuses_procedures_placeholder')"
                 />
               </div>
@@ -156,6 +154,7 @@
                   name="periodPublished"
                   :value="periodPublished"
                   :setValue="setFormParams"
+                  :label="$t('search.published_period')"
                 >
                   {{$t("search.published_period")}}:
                 </search-period>
@@ -167,54 +166,11 @@
                   name="periodDelivery"
                   :value="periodDelivery"
                   :setValue="setFormParams"
+                  :label="$t('search.delivery_period')"
                 >
                   {{$t("search.delivery_period")}}:
                 </search-period>
               </div>
-
-              <!-- Period enquiry -->
-              <!--<div class="search-form-element">
-                <search-period
-                    name="periodEnquiry"
-                    :value="periodEnquiry"
-                    :setValue="setFormParams"
-                >
-                  {{$t("search.enquiry_period")}}:
-                </search-period>
-              </div>-->
-
-              <!-- Period offer -->
-              <!--<div class="search-form-element">
-                <search-period
-                    name="periodOffer"
-                    :value="periodOffer"
-                    :setValue="setFormParams"
-                >
-                  {{$t("search.offer_period")}}:
-                </search-period>
-              </div>-->
-
-              <!-- Period auction -->
-              <!--<div class="search-form-element">
-                <search-period
-                    name="periodAuction"
-                    :value="periodAuction"
-                    :setValue="setFormParams"
-                >
-                  {{$t("search.auction_period")}}:
-                </search-period>
-              </div>-->
-
-              <!-- Period Award -->
-              <!--<div class="search-form-element">
-                <search-period
-                    name="periodAward"
-                    :value="periodAward"
-                    :setValue="setFormParams"
-                >
-                  {{$t("search.award_period")}}:
-                </search-period>
-              </div>-->
 
               <!-- id -->
               <div class="search-form-element">
@@ -222,6 +178,7 @@
                   name="entityId"
                   :value="entityId"
                   :setValue="setFormParams"
+                  :label="$t('search.id_placeholder')"
                   :placeholder="$t('search.id_placeholder')"
                   prefixIcon=""
                 />
@@ -235,18 +192,26 @@
                   :values="classifications"
                   :setValues="setFormParams"
                   needFetch
+                  :label="$t('search.classifications_placeholder')"
                   :placeholder="$t('search.classifications_placeholder')"
                 />
               </div>
             </el-col>
           </el-row>
           <!-- Reset button -->
-          <div class=" search-form__reset-button-wp">
+          <div  class="search-form__btn_reset-wp">
             <reset-button entity="contracts" />
           </div>
         </div>
       </div>
     </el-collapse-transition>
+    <button class="search-form__btn search-form__btn_more" @click="actionExpand" tabindex="-1">
+      <i :class="['icon-right', moreCriterions ? 'el-icon-arrow-up' : 'el-icon-arrow-down']"/>
+      {{ moreCriterions ? $t("search.lessCriterions") : $t("search.moreCriterions") }}
+      <i
+          :class="['icon-left', moreCriterions ? 'el-icon-arrow-up' : 'el-icon-arrow-down']"
+      />
+    </button>
   </div>
 </template>
 
@@ -255,6 +220,7 @@
   import { SET_ENTITY_SEARCH_PARAMS } from "../../store/types/mutations-types";
   import { REGIONS, CPV_CODES } from "./../../store/types/directories-types";
 
+  import MainSearch from "./../FormsComponents/MainSearch";
   import SearchInput from "./../FormsComponents/SearchInput";
   import SearchAutoCompleteInput from "./../FormsComponents/SearchAutoCompleteInput";
   import SearchRegions from "./../FormsComponents/SearchRegions";
@@ -272,6 +238,7 @@
   export default {
     name: "ContractsSearchForm",
     components: {
+      "main-search": MainSearch,
       "search-input": SearchInput,
       "search-auto-complete-input": SearchAutoCompleteInput,
       "search-regions": SearchRegions,

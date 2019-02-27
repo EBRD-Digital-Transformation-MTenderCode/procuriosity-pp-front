@@ -51,9 +51,9 @@
           </el-col>
           <el-col :sm="12">
             <div class="info-block__text">
-              <router-link :to="`${$i18n.locale !== 'ro' ? `/${$i18n.locale}` : ''}/${getEntityName}/${gd(ms, _ => _.ocid)}`" data-link class="info-block__text_link">
+              <a :href="`${$i18n.locale !== 'ro' ? `/${$i18n.locale}` : ''}/${getEntityName}/${gd(ms, _ => _.ocid)}`" target="_blank" data-link class="info-block__text_link">
                 {{ gd(ms, _ => _.ocid)}}
-              </router-link>
+              </a>
             </div>
           </el-col>
         </el-row>
