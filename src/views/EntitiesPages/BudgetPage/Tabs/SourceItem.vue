@@ -3,39 +3,39 @@
       :name=" gd(fs, _ => _.compiledRelease.ocid)"
   >
     <template slot="title">
-      <div class="info-blocks accordion-header">
-        <div class="info-block">
+      <div class="info-blocks accordion-header ">
+        <div class="info-block accordion-table">
           <el-row :gutter="15">
             <el-col :sm="2">
-              <div class="info-block__text info-block__text_bold">
+              <div data-th="№" class="info-block__text info-block__text_bold accordion-table__th">
                 {{index+1}}
               </div>
             </el-col>
             <el-col :sm="10">
-              <div class="info-block__text info-block__text_bold">
+              <div :data-th="$t('budget.projectID')" class="info-block__text info-block__text_bold accordion-table__th">
                 {{ gd(fs, _ => _.compiledRelease.ocid) }}
               </div>
             </el-col>
             <el-col :sm="3">
-              <div class="info-block__text info-block__text_bold">
+              <div :data-th="$t('budget.source_of_money')" class="info-block__text info-block__text_bold accordion-table__th">
                 {{getSourceOfMoney(index)}}
               </div>
             </el-col>
             <el-col :sm="4">
-              <div class="info-block__text info-block__text_bold">
+              <div :data-th="$t('budget.validity_period')" class="info-block__text info-block__text_bold accordion-table__th">
                 {{ fd(gd(fs, _ => _.compiledRelease.planning.budget.period.startDate), "DD.MM.YYYY") }}
                 -
                 {{ fd(gd(fs, _ => _.compiledRelease.planning.budget.period.endDate), "DD.MM.YYYY") }}
               </div>
             </el-col>
             <el-col :sm="3">
-              <div class="info-block__text info-block__text_bold">
+              <div :data-th="$t('budget.amount')" class="info-block__text info-block__text_bold accordion-table__th">
                 {{ fa(gd(fs, _ => _.compiledRelease.planning.budget.amount.amount)) }} {{ gd(fs, _ =>
                 _.compiledRelease.planning.budget.amount.currency) }}
               </div>
             </el-col>
             <el-col :sm="2">
-              <div class="info-block__text info-block__text_bold">
+              <div :data-th="$t('budget.status')" class="info-block__text info-block__text_bold accordion-table__th">
                 {{ gd(fs, _ => _.compiledRelease.planning.budget.status)? $t("budget.verified") :$t("budget.not_verified") }}
               </div>
             </el-col>

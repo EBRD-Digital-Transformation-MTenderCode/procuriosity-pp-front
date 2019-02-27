@@ -4,31 +4,31 @@
   >
     <template slot="title">
       <div class="info-blocks accordion-header">
-        <div class="info-block">
+        <div class="info-block accordion-table">
           <el-row :gutter="15">
             <el-col :sm="2">
-              <div class="info-block__text info-block__text_bold">
+              <div data-th="№" class="info-block__text info-block__text_bold accordion-table__th">
                 {{index+1}}
               </div>
             </el-col>
             <el-col :sm="10">
-              <div class="info-block__text info-block__text_bold">
+              <div :data-th="$t('budget.cpv')" class="info-block__text info-block__text_bold accordion-table__th">
                 {{ gd(ms, _ => _.tender.classification.id)}},
                 {{ gd(ms, _ => _.tender.classification.description)}}
               </div>
             </el-col>
             <el-col :sm="4">
-              <div class="info-block__text info-block__text_bold">
+              <div :data-th="$t('budget.method')" class="info-block__text info-block__text_bold accordion-table__th">
                 {{selectProcedure(gd(ms, _ => _.tender.mainProcurementCategory), gd(ms, _ => _.tender.value.amount))}}
               </div>
             </el-col>
             <el-col :sm="4">
-              <div class="info-block__text info-block__text_bold">
+              <div :data-th="$t('budget.current_status')" class="info-block__text info-block__text_bold accordion-table__th">
                 {{mapProcedureStatus}}
               </div>
             </el-col>
             <el-col :sm="4">
-              <div class="info-block__text info-block__text_bold">
+              <div :data-th="$t('budget.expected_value')" class="info-block__text info-block__text_bold accordion-table__th">
                 {{ fa(gd(ms, _ => _.tender.value.amount)) }} {{ gd(ms, _ => _.tender.value.currency) }}
               </div>
             </el-col>
@@ -157,13 +157,13 @@
             case "active.awarding":
               return procedureStatusType.tenders.find(val => val.value === "awarding").name[this.$i18n.locale];
             case "active.awardedContractPreparation":
-              return procedureStatusType.tenders.find(val => val.value === "awarded ").name[this.$i18n.locale];
+              return procedureStatusType.tenders.find(val => val.value === "awarded").name[this.$i18n.locale];
             case "active.suspended":
-              return procedureStatusType.tenders.find(val => val.value === "suspended ").name[this.$i18n.locale];
+              return procedureStatusType.tenders.find(val => val.value === "suspended").name[this.$i18n.locale];
             case "complete.empty":
-              return procedureStatusType.tenders.find(val => val.value === "complete ").name[this.$i18n.locale];
+              return procedureStatusType.tenders.find(val => val.value === "complete").name[this.$i18n.locale];
             case "cancelled.empty":
-              return procedureStatusType.tenders.find(val => val.value === "cancelled ").name[this.$i18n.locale];
+              return procedureStatusType.tenders.find(val => val.value === "cancelled").name[this.$i18n.locale];
           }
         }
       },

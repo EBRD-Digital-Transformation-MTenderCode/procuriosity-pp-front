@@ -7,7 +7,7 @@
         :elements-amount="elementsAmount"
         :page-size="pageSize"
     />
-    <div class="info-blocks">
+    <div class="info-blocks ">
       <div class="info-block table-header">
         <el-row :gutter="15">
           <el-col :sm="2">
