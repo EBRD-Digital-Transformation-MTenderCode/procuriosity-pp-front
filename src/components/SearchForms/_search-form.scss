@@ -1,10 +1,19 @@
 @import "./../../styles/variables";
 
 .search-form {
+  z-index: 10;
   position: relative;
-  margin-bottom: 52px;
   padding: 25px 30px;
   background-color: $mainC;
+  &-wp {
+    position: relative;
+    margin-bottom: $fieldHeight;
+    &:hover {
+      .search-form__btn_more {
+        bottom: -$fieldHeight;
+      }
+    }
+  }
   @media (max-width: 580px) {
     padding: 16px 18px;
   }
@@ -16,6 +25,16 @@
     }
     .el-input__inner {
       border-radius: 0;
+    }
+  }
+  &__group {
+    @media (max-width: 767px) {
+      margin-bottom: 40px;
+    }
+    &-title {
+      margin-bottom: 8px;
+      font-size: 18px;
+      color: #fff;
     }
   }
   &__btn {
@@ -52,11 +71,11 @@
       }
     }
     &_search {
-      height: 52px;
+      height: $fieldHeight;
       border-left: none;
       border-radius: 0 3px 3px 0;
       background-color: #ff7900 !important;
-      font-size: 18px;
+      font-size: 16px;
       &:hover {
         background-color: #fb9d47 !important;
       }
@@ -81,25 +100,31 @@
           text-align: center;
         }
       }
-      padding: 12px 20px;
+      padding: 12px 16px;
       border-radius: 3px;
+      font-size: $fieldFontSize;
       color: #fff !important;
-      font-size: 18px;
     }
     &_more {
-      height: 52px;
+      z-index: 9;
+      height: $fieldHeight;
       position: absolute;
-      bottom: -52px;
+      bottom: 0;
       left: 50%;
       transform: translateX(-50%);
       padding: 12px 20px;
       border-radius: 0 0 3px 3px;
       background-color: $mainC;
       white-space: nowrap;
-      font-size: 18px;
+      line-height: 1;
+      font-size: 16px;
       color: #fff;
+      transition: 0.4s;
       &:hover {
         background-color: lighten($mainC, 10%);
+      }
+      @media (max-width: 767px) {
+        bottom: -$fieldHeight;
       }
     }
   }
@@ -110,7 +135,7 @@
     color: #fff;
   }
   &-more {
-    padding-top: 40px;
+    padding-top: 25px;
   }
   &-element {
     & + & {
@@ -160,14 +185,16 @@
     &__tags > span {
       max-width: 100%;
     }
+    &__caret {
+      font-size: 20px !important;
+    }
   }
   .el-range {
     &-input {
-      font-size: 18px;
+      font-size: $fieldFontSize;
     }
     &-separator {
-      line-height: 42px;
-      font-size: 18px;
+      font-size: $fieldFontSize;
       min-width: 14%;
     }
     &__close-icon {
@@ -183,40 +210,6 @@
     &__close {
       flex-shrink: 0;
     }
-  }
-}
-
-.el-select-dropdown {
-  margin-top: -1px !important;
-  margin-bottom: -1px !important;
-  background-color: #efefef;
-  border-left: none;
-  border-right: none;
-  border-radius: 0 0 4px 4px;
-  &__item {
-    height: 52px;
-    line-height: 52px;
-    border-bottom: 1px solid #d2d2d2;
-    transition: 0.1s;
-    &.selected {
-      padding-right: 35px;
-    }
-    &.hover {
-      background-color: #d9d9d9;
-    }
-  }
-  .popper__arrow {
-    display: none !important;
-    &:after {
-      content: none !important;
-    }
-  }
-
-}
-
-.multiple_input {
-  .el-input__inner {
-    cursor: text !important;
   }
 }
 

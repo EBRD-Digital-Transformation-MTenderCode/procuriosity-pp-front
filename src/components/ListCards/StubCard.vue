@@ -67,7 +67,7 @@
   import { getDataFromObject, formatDate } from "../../utils";
 
   export default {
-    name: "TenderCard",
+    name: "StubCard",
     computed: {
       parseStatusIco() {
         const status = getDataFromObject(this.entity, _ => _.procedureStatus);

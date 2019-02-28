@@ -78,7 +78,7 @@
   import { getDataFromObject, formatDate } from "../../utils";
 
   export default {
-    name: "BudgetCard",
+    name: "BudgetsCard",
     props: {
       entity: {
         type: Object,

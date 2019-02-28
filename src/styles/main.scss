@@ -24,10 +24,43 @@
 }
 
 .el-input__inner {
-  min-height: 52px;
+  min-height: $fieldHeight;
   padding: 8px 10px;
   border-radius: 3px;
-  font-size: 18px;
+  font-size: $fieldFontSize;
+}
+
+.multiple_input {
+  .el-input__inner {
+    cursor: text !important;
+  }
+}
+
+.el-select-dropdown {
+  margin-top: -1px !important;
+  margin-bottom: -1px !important;
+  background-color: #efefef;
+  border-left: none;
+  border-right: none;
+  border-radius: 0 0 4px 4px;
+  &__item {
+    height: 52px;
+    line-height: 52px;
+    border-bottom: 1px solid #d2d2d2;
+    transition: 0.1s;
+    &.selected {
+      padding-right: 35px;
+    }
+    &.hover {
+      background-color: #d9d9d9;
+    }
+  }
+  .popper__arrow {
+    display: none !important;
+    &:after {
+      content: none !important;
+    }
+  }
 }
 
 .el-time-panel {
@@ -35,10 +68,11 @@
 }
 
 .el-checkbox-button__inner {
-  height: 52px;
+  height: $fieldHeight;
+  padding: 12px 16px;
   border-radius: 3px;
-  line-height: 26px;
-  font-size: 18px;
+  line-height: 1;
+  font-size: $fieldFontSize;
 }
 
 .text-center {
