@@ -3,45 +3,13 @@
   <div key="loading" v-if="!loaded && !error.status">
     <div class="loading"></div>
   </div>
-  <div key="info" v-else-if="loaded && !error.status" class="info">
-    <div id="contract-title" class="info__title">{{ $t("budget.execution") }}</div>
+  <div key="info" v-else-if="loaded && !error.status" class="info info_budget">
     <page-number
         v-if="needPagination"
         :current-page="currentPage"
         :elements-amount="elementsAmount"
         :page-size="pageSize"
     />
-    <div class="info-blocks">
-      <div class="info-block table-header">
-        <el-row :gutter="15">
-          <el-col :sm="2">
-            <div class="info-block__text info-block__text_bold">
-              №
-            </div>
-          </el-col>
-          <el-col :sm="10">
-            <div class="info-block__text info-block__text_bold">
-              {{$t("budget.cpv")}}
-            </div>
-          </el-col>
-          <el-col :sm="4">
-            <div class="info-block__text info-block__text_bold">
-              {{$t("budget.method")}}
-            </div>
-          </el-col>
-          <el-col :sm="4">
-            <div class="info-block__text info-block__text_bold">
-              {{$t("budget.current_status")}}
-            </div>
-          </el-col>
-          <el-col :sm="4">
-            <div class="info-block__text info-block__text_bold">
-              {{$t("budget.expected_value")}}
-            </div>
-          </el-col>
-        </el-row>
-      </div>
-    </div>
     <el-collapse
         accordion
         :value="getExecutionsId[0]"

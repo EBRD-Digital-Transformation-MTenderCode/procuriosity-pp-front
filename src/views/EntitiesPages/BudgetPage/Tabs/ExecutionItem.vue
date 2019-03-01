@@ -6,11 +6,6 @@
       <div class="info-blocks accordion-header">
         <div class="info-block accordion-table">
           <el-row :gutter="15">
-            <el-col :sm="2">
-              <div data-th="№" class="info-block__text info-block__text_bold accordion-table__th">
-                {{index+1}}
-              </div>
-            </el-col>
             <el-col :sm="10">
               <div :data-th="$t('budget.cpv')" class="info-block__text info-block__text_bold accordion-table__th">
                 {{ gd(ms, _ => _.tender.classification.id)}},
@@ -22,12 +17,12 @@
                 {{selectProcedure(gd(ms, _ => _.tender.mainProcurementCategory), gd(ms, _ => _.tender.value.amount))}}
               </div>
             </el-col>
-            <el-col :sm="4">
+            <el-col :sm="5">
               <div :data-th="$t('budget.current_status')" class="info-block__text info-block__text_bold accordion-table__th">
                 {{mapProcedureStatus}}
               </div>
             </el-col>
-            <el-col :sm="4">
+            <el-col :sm="5">
               <div :data-th="$t('budget.expected_value')" class="info-block__text info-block__text_bold accordion-table__th">
                 {{ fa(gd(ms, _ => _.tender.value.amount)) }} {{ gd(ms, _ => _.tender.value.currency) }}
               </div>
@@ -41,15 +36,12 @@
 
       <div class="info-blocks">
         <el-row :gutter="15">
-          <el-col :sm="2">
-            <div class="info-block__text"/>
-          </el-col>
-          <el-col :sm="10">
+          <el-col :sm="8">
             <div class="info-block__text">
               {{$t("budget.procedure_id")}}
             </div>
           </el-col>
-          <el-col :sm="12">
+          <el-col :sm="16">
             <div class="info-block__text">
               <a :href="`${$i18n.locale !== 'ro' ? `/${$i18n.locale}` : ''}/${getEntityName}/${gd(ms, _ => _.ocid)}`" target="_blank" data-link class="info-block__text_link">
                 {{ gd(ms, _ => _.ocid)}}
@@ -58,45 +50,36 @@
           </el-col>
         </el-row>
         <el-row :gutter="15">
-          <el-col :sm="2">
-            <div class="info-block__text"/>
-          </el-col>
-          <el-col :sm="10">
+          <el-col :sm="8">
             <div class="info-block__text">
               {{$t("budget.title")}}
             </div>
           </el-col>
-          <el-col :sm="12">
+          <el-col :sm="16">
             <div class="info-block__text">
               {{ gd(ms, _ => _.tender.title)}}
             </div>
           </el-col>
         </el-row>
         <el-row :gutter="15">
-          <el-col :sm="2">
-            <div class="info-block__text"/>
-          </el-col>
-          <el-col :sm="10">
+          <el-col :sm="8">
             <div class="info-block__text">
               {{$t("budget.procuring_entity")}}
             </div>
           </el-col>
-          <el-col :sm="12">
+          <el-col :sm="16">
             <div class="info-block__text">
               {{getOrganizationName(gd(ms, _ => _.parties, []), "procuringEntity")}}
             </div>
           </el-col>
         </el-row>
         <el-row :gutter="15">
-          <el-col :sm="2">
-            <div class="info-block__text"/>
-          </el-col>
-          <el-col :sm="10">
+          <el-col :sm="8">
             <div class="info-block__text">
               {{$t("budget.payer_entity")}}
             </div>
           </el-col>
-          <el-col :sm="12">
+          <el-col :sm="16">
             <div class="info-block__text">
               {{getOrganizationName(gd(ms, _ => _.parties, []), "payer")}}
             </div>

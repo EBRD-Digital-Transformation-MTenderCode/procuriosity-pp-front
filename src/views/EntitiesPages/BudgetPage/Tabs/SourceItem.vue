@@ -6,11 +6,6 @@
       <div class="info-blocks accordion-header ">
         <div class="info-block accordion-table">
           <el-row :gutter="15">
-            <el-col :sm="2">
-              <div data-th="№" class="info-block__text info-block__text_bold accordion-table__th">
-                {{index+1}}
-              </div>
-            </el-col>
             <el-col :sm="10">
               <div :data-th="$t('budget.projectID')" class="info-block__text info-block__text_bold accordion-table__th">
                 {{ gd(fs, _ => _.compiledRelease.ocid) }}
@@ -28,13 +23,13 @@
                 {{ fd(gd(fs, _ => _.compiledRelease.planning.budget.period.endDate), "DD.MM.YYYY") }}
               </div>
             </el-col>
-            <el-col :sm="3">
+            <el-col :sm="4">
               <div :data-th="$t('budget.amount')" class="info-block__text info-block__text_bold accordion-table__th">
                 {{ fa(gd(fs, _ => _.compiledRelease.planning.budget.amount.amount)) }} {{ gd(fs, _ =>
                 _.compiledRelease.planning.budget.amount.currency) }}
               </div>
             </el-col>
-            <el-col :sm="2">
+            <el-col :sm="3">
               <div :data-th="$t('budget.status')" class="info-block__text info-block__text_bold accordion-table__th">
                 {{ gd(fs, _ => _.compiledRelease.planning.budget.status)? $t("budget.verified") :$t("budget.not_verified") }}
               </div>
@@ -47,90 +42,72 @@
     <transition name="fade" mode="out-in" appear>
       <div class="info-blocks">
         <el-row :gutter="15">
-          <el-col :sm="2">
-            <div class="info-block__text"/>
-          </el-col>
-          <el-col :sm="10">
+          <el-col :sm="8">
             <div class="info-block__text">
               {{$t("budget.eu_funder")}}
             </div>
           </el-col>
-          <el-col :sm="12">
+          <el-col :sm="16">
             <div class="info-block__text">
               {{ gd(fs, _ => _.compiledRelease.planning.budget.isEuropeanUnionFunded)? $t("budget.yes"): $t("budget.no")}}
             </div>
           </el-col>
         </el-row>
         <el-row :gutter="15" v-if="gd(fs, _ => _.compiledRelease.planning.budget.projectID)">
-          <el-col :sm="2">
-            <div class="info-block__text"/>
-          </el-col>
-          <el-col :sm="10">
+          <el-col :sm="8">
             <div class="info-block__text">
               {{$t("budget.project")}}
             </div>
           </el-col>
-          <el-col :sm="12">
+          <el-col :sm="16">
             <div class="info-block__text">
               {{ gd(fs, _ => _.compiledRelease.planning.budget.projectID)}}
             </div>
           </el-col>
         </el-row>
         <el-row :gutter="15" v-if=" gd(fs, _ => _.compiledRelease.planning.budget.project)">
-          <el-col :sm="2">
-            <div class="info-block__text"/>
-          </el-col>
-          <el-col :sm="10">
+          <el-col :sm="8">
             <div class="info-block__text">
               {{$t("budget.details")}}
             </div>
           </el-col>
-          <el-col :sm="12">
+          <el-col :sm="16">
             <div class="info-block__text">
               {{ gd(fs, _ => _.compiledRelease.planning.budget.project)}}
             </div>
           </el-col>
         </el-row>
         <el-row :gutter="15">
-          <el-col :sm="2">
-            <div class="info-block__text"/>
-          </el-col>
-          <el-col :sm="10">
+          <el-col :sm="8">
             <div class="info-block__text">
               {{$t("budget.payer_entity")}}
             </div>
           </el-col>
-          <el-col :sm="12">
+          <el-col :sm="16">
             <div class="info-block__text">
               {{getOrganizationName(gd(fs,_=>_.compiledRelease.parties,[]),"payer")}}
             </div>
           </el-col>
         </el-row>
         <el-row :gutter="15">
-          <el-col :sm="2">
-            <div class="info-block__text"/>
-          </el-col>
-          <el-col :sm="10">
+          <el-col :sm="8">
             <div class="info-block__text">
               {{$t("budget.funding_entity")}}
             </div>
           </el-col>
-          <el-col :sm="12">
+          <el-col :sm="16">
             <div class="info-block__text">
               {{getOrganizationName(gd(fs,_=>_.compiledRelease.parties,[]), "funder")}}
             </div>
           </el-col>
         </el-row>
         <el-row :gutter="15" v-if="gd(fs, _ => _.compiledRelease.planning.budget.description)">
-          <el-col :sm="2">
-            <div class="info-block__text"/>
-          </el-col>
-          <el-col :sm="10">
+          <el-col :sm="8">
             <div class="info-block__text">
               {{$t("budget.budget_description")}}
             </div>
           </el-col>
-          <el-col :sm="12">
+          <el-col :sm="16">
             <div class="info-block__text">
               {{gd(fs, _ => _.compiledRelease.planning.budget.description)}}
             </div>

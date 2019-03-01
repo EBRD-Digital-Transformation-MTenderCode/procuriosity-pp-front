@@ -37,7 +37,7 @@
                 </div>
                 <div class="entity-main-info__additional">
                   <div class="entity-main-info__additional-block">
-                    <div class="entity-main-info__additional-title">{{ $t("budget.procuring_entity_name") }}</div>
+                    <div class="entity-main-info__additional-title">{{ $t("budget.buyer_name") }}</div>
                     <div class="entity-main-info__additional-value">
                       {{ gd(EI, _ => _.buyer.name) }}
                     </div>
