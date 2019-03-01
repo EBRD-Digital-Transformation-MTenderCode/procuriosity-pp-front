@@ -111,16 +111,15 @@
                       key="review"
                   >
                     <span slot="label" v-html="$t('tender.review_procedures')" />
-                    <auction />
                   </el-tab-pane>
                   <el-tab-pane
-                      disabled
+                      :disabled="!gd(tender,_=>_.EVRecord.compiledRelease.tender.electronicAuctions.details).length"
                       :label='$t("tender.electronic_auction")'
                       name="auction"
                       lazy
                       key="auction"
                   >
-
+                    <auction  :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
                   </el-tab-pane>
                   <el-tab-pane
                       :disabled="!gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('bids')"

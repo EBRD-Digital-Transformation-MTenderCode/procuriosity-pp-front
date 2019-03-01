@@ -269,4 +269,19 @@ export default {
 
   "no_documents": "Nu au fost depuse documente",
   "no_documents_submitted": "Nu au fost depuse documente",
+
+  "e_auction":"e-Auction",
+  "electronic_auction_modalities":"Electronic auction modalities",
+  "auction_period":"Auction period",
+  "minimal_eligible_difference":"Minimal eligible difference",
+  "number_of_participants":"Number of participants",
+  "number_of_rounds":"Number of rounds",
+  "electronic_auction_progress":"Electronic auction progress",
+  "number_of_round":"Number of Round",
+  "timeframe_of_round":"Timeframe of round",
+  "submitted_offer":"Submitted offer",
+  "submission_date":"Submission date",
+  "electronic_auction_results":"Electronic auction results",
+  "final_offer":"Final offer",
+  "MDL_exluding_VAT":"MDL exluding VAT",
 };
