@@ -113,7 +113,7 @@
                     <span slot="label" v-html="$t('tender.review_procedures')" />
                   </el-tab-pane>
                   <el-tab-pane
-                      :disabled="!gd(tender,_=>_.EVRecord.compiledRelease.tender.electronicAuctions.details).length"
+                      :disabled="!gd(tender,_=>_.EVRecord.compiledRelease.tender.electronicAuctions.details, []).length"
                       :label='$t("tender.electronic_auction")'
                       name="auction"
                       lazy

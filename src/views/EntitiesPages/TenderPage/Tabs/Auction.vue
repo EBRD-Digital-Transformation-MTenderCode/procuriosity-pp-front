@@ -17,7 +17,6 @@
           v-if ="index >= numberOfLastDisplayedAuction - pageSize &&  index < numberOfLastDisplayedAuction"
           :key="auction.id + index"
           :auction="auction"
-          :index="index"
           :activeItemId="activeItemId"
       />
     </el-collapse>
@@ -40,9 +39,7 @@
   import ListPagination from "./../../../../components/ListPagination";
   import PageNumber  from "./../../../../components/PageNumber"
   import {
-    getDataFromObject,
-    formatDate,
-    formatAmount
+    getDataFromObject
   } from "./../../../../utils";
 
   export default {
@@ -74,15 +71,15 @@
         return this.gd(this.evRecord, _ => _.tender.electronicAuctions.details, []).length;
       },
       mapObject() {
-        return this.gd(this.evRecord,_=>_.tender.electronicAuctions.details,[]).map(auction => ({
+        return this.gd(this.evRecord,_=>_.tender.electronicAuctions.details, []).map(auction => ({
           id: this.gd(auction,_=>_.id),
           lotTitle: this.getLotTitle(this.gd(auction,_=>_.relatedLot)),
           minimalStep: {
             amount: this.gd(auction, _ => _.electronicAuctionModalities[0].eligibleMinimumDifference.amount),
             currency: this.gd(auction, _ => _.electronicAuctionModalities[0].eligibleMinimumDifference.currency)
           },
-          rounds: this.gd(auction, _ => _.electronicAuctionProgress).length,
-          participants: this.gd(auction, _ => _.electronicAuctionProgress[0].breakdown).length,
+          rounds: this.gd(auction, _ => _.electronicAuctionProgress,[]).length,
+          participants: this.gd(auction, _ => _.electronicAuctionProgress[0].breakdown,[]).length,
           auctionPeriod: {
             startDate: this.gd(auction, _ => _.auctionPeriod.startDate),
             endDate: this.gd(auction, _ => _.auctionPeriod.endDate),
@@ -134,12 +131,6 @@
       },
       gd(...args) {
         return getDataFromObject(...args);
-      },
-      fd(...ars) {
-        return formatDate(...ars);
-      },
-      fa(amount) {
-        return formatAmount(amount);
       },
       changeActiveItem(item) {
         this.activeItemId = item;

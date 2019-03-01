@@ -20,7 +20,7 @@
       <div>
         <div class="info-blocks">
           <div class="info__sub-title">  {{$t("tender.electronic_auction_modalities")}}</div>
-          <div v-if="auction.auctionProgress && auction.auctionProgress.length">
+          <div v-if="auction.auctionProgress.length">
             <el-row :gutter="15">
               <el-col :sm="12">
                 <div class="info-block__text">{{$t("tender.auction_period")}}:
@@ -89,7 +89,7 @@
             </el-row>
           </div>
         </div>
-        <div v-if="auction.auctionProgress && auction.auctionProgress.length">
+        <div v-if="auction.auctionProgress.length">
           <div class="info__sub-title">
             {{$t("tender.electronic_auction_progress")}}
           </div>
@@ -154,7 +154,7 @@
                   <div class="info-block__value">{{fa(breakdown.value.amount)}}
                   </div>
                   <div class="info-block__text">
-                    MDL exluding VAT
+                    {{$t("tender.MDL_exluding_VAT")}}
                   </div>
                 </el-col>
                 <el-col :sm="6">
@@ -169,7 +169,7 @@
             </div>
           </div>
         </div>
-        <div v-if="auction.results && auction.results.length">
+        <div v-if="auction.results.length">
           <div class="info__sub-title">
             {{$t("tender.electronic_auction_results")}}
           </div>
@@ -226,10 +226,6 @@
     props: {
       auction: {
         type: Object,
-        required: true
-      },
-      index: {
-        type: Number,
         required: true
       },
       activeItemId: {
