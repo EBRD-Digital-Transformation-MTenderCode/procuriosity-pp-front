@@ -24,7 +24,7 @@ export default {
   "donors_money": "Donor's money",
   "state_money": "State money",
 
-  "projectID":"ProjectID",
+  "projectID":"Project ID",
   "source_of_money":"Source of Money",
   "validity_period":"Validity period",
   "amount":"Amount",
@@ -40,15 +40,15 @@ export default {
   "current_status":"Current Status",
   "expected_value":"Expected Value",
   "procedure_id":"Procedure ID",
-  "title":"Title",
+  "title":"Титул",
   "procuring_entity":"Procuring Entity",
   "tender_id":"Tender ID",
-  "contract_id":"Contract ID",
+  "contract_id":"ID договора",
   "budget_project_id(s)":"Budget Project ID(s)",
   "type":"Type",
   "verified": "Verified",
   "not_verified": "Not verified",
-  "yes":"Yes",
-  "no":"No",
+  "yes":"Да",
+  "no":"Нет",
 
 };
