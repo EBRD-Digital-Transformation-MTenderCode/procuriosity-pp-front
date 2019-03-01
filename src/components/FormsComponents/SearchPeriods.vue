@@ -4,7 +4,7 @@
     <el-date-picker
       v-model="inputValue"
       type="datetimerange"
-      :range-separator="$t('search.range_separator')"
+      range-separator="-"
       :start-placeholder="$t('search.start_date_placeholder')"
       :end-placeholder="$t('search.end_date_placeholder')"
       clearable

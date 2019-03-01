@@ -211,7 +211,7 @@
   import { mapState } from "vuex";
   import { FETCH_CURRENT_CONTRACT_INFO } from "./../../store/types/actions-types";
 
-  import ContractCard from "../../components/ListCards/ContractCard";
+  import ContractCard from "../../components/ListCards/ContractsCard";
   import DocumentsModal from "./DocumentsModal";
 
   import { MTENDER1, MTENDER2 } from "./../../store/types/cbd-types";

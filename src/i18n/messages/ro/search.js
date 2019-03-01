@@ -36,7 +36,6 @@ export default {
   "list_no_data": "Nimic gasit",
   "start_date_placeholder": "Data de început",
   "end_date_placeholder": "Data de încheiere",
-  "range_separator": "La",
   "reset_button": "Restabili",
 
   "list_total_found": "Total găsit",

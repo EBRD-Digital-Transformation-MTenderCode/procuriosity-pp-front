@@ -1,5 +1,5 @@
 <template>
-  <div class="entity-card">
+  <li class="entity-card">
     <el-card>
       <div slot="header">
         <div class="entity-status">
@@ -66,7 +66,7 @@
         </el-col>
       </el-row>
     </el-card>
-  </div>
+  </li>
 </template>
 
 <script>
@@ -76,7 +76,7 @@
   import { getDataFromObject, formatDate } from "../../utils";
 
   export default {
-    name: "TenderCard",
+    name: "TendersCard",
     props: {
       entity: {
         type: Object,

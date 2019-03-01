@@ -173,7 +173,7 @@
   import { REGIONS, CPV_CODES } from "./../../store/types/directories-types";
 
   import MainSearch from "./../FormsComponents/MainSearch";
-  import SearchInput from "./../FormsComponents/SearchInput";
+  import SearchInput from "./../FormsComponents/SearchInputText";
   import SearchAutoCompleteInput from "./../FormsComponents/SearchAutoCompleteInput";
   import SearchRegions from "./../FormsComponents/SearchRegions";
   import SearchClassifications from "./../FormsComponents/SearchClassifications";

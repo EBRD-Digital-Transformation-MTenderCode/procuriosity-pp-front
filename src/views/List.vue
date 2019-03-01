@@ -1,7 +1,16 @@
 <template>
-  <div class="list">
+  <div class="list-page">
     <el-container direction="vertical">
-      <component :is="renderSearchForm" class="search-form"/>
+      <div class="search-form-wp">
+        <component :is="renderSearchForm" class="search-form" :isExpanded="isExpanded"/>
+        <button class="search-form__btn search-form__btn_more" @click="actionExpand">
+          <i :class="['icon-right', isExpanded ? 'el-icon-arrow-up' : 'el-icon-arrow-down']"/>
+          {{ isExpanded ? $t("search.lessCriterions") : $t("search.moreCriterions") }}
+          <i
+            :class="['icon-left', isExpanded ? 'el-icon-arrow-up' : 'el-icon-arrow-down']"
+          />
+        </button>
+      </div>
       <search-status-bar :entity="entityName" :needPagination="needPagination"/>
       <transition-group
         @before-enter="beforeEnter"
@@ -9,7 +18,7 @@
         @leave="leave"
         id="transition-group"
       >
-        <div
+        <ul
           v-if="entities[entityName].loaded && entities[entityName].list.length"
           :key="'list'"
           class="list"
@@ -21,7 +30,7 @@
             needLink
             :key="entity.id"
           />
-        </div>
+        </ul>
         <div
           class="list__no-data-title"
           v-if="entities[entityName].loaded && !entities[entityName].list.length && !entities[entityName].error.status"
@@ -67,10 +76,10 @@ import ContractsSearchForm from "../components/SearchForms/ContractsSearchForm";
 import SearchStatusBar from "./../components/SearchStatusBar";
 
 import StubCard from "../components/ListCards/StubCard";
-import BudgetCard from "../components/ListCards/BudgetCard";
-import TenderCard from "../components/ListCards/TenderCard";
-import PlanCard from "../components/ListCards/PlanCard";
-import ContractCard from "../components/ListCards/ContractCard";
+import BudgetsCard from "../components/ListCards/BudgetsCard";
+import TendersCard from "../components/ListCards/TendersCard";
+import PlansCard from "../components/ListCards/PlansCard";
+import ContractsCard from "../components/ListCards/ContractsCard";
 
 import ListPagination from "../components/ListPagination";
 
@@ -87,20 +96,36 @@ export default {
     "search-status-bar": SearchStatusBar,
 
     "stub-card": StubCard,
-    "budget-card": BudgetCard,
-    "tender-card": TenderCard,
-    "plan-card": PlanCard,
-    "contract-card": ContractCard,
+    "budgets-card": BudgetsCard,
+    "tenders-card": TendersCard,
+    "plans-card": PlansCard,
+    "contracts-card": ContractsCard,
 
     "list-pagination": ListPagination
+  },
+  data() {
+    return {
+      isExpanded: false
+    };
   },
   created() {
     const { entityName } = this;
 
+    const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
+    if (localStorageEntities[entityName].hasOwnProperty("isExpanded")) {
+      this.isExpanded = localStorageEntities[entityName].isExpanded;
+    } else {
+      localStorageEntities[entityName].isExpanded = this.isExpanded;
+      localStorage.setItem("entities", JSON.stringify(localStorageEntities));
+    }
+
     if (entityName === "tenders") {
       const { query } = this.$route;
 
-      if (query.procedures && (query.procedures === "new" || query.procedures === "bidding")) {
+      if (
+        query.procedures &&
+        (query.procedures === "new" || query.procedures === "bidding")
+      ) {
         if (query.procedures === "new") {
           this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
             entityName: "tenders",
@@ -122,7 +147,7 @@ export default {
         this.getList();
       }
     } else {
-       this.getList();
+      this.getList();
     }
   },
   computed: {
@@ -131,32 +156,24 @@ export default {
       return this.$route.params.entityName;
     },
     renderSearchForm() {
-      switch (this.entityName) {
-        case "budgets":
-          return "budgets-search-form";
-        case "plans":
-          return "plans-search-form";
-        case "tenders":
-          return "tenders-search-form";
-        case "contracts":
-          return "contracts-search-form";
-        default:
-          return "div";
-      }
+      const mappedEntitiesForms = {
+        budgets: "budgets-search-form",
+        plans: "plans-search-form",
+        tenders: "tenders-search-form",
+        contracts: "contracts-search-form"
+      };
+
+      return mappedEntitiesForms[this.entityName] || "div";
     },
     renderCard() {
-      switch (this.entityName) {
-        case "budgets":
-          return "budget-card";
-        case "plans":
-          return "plan-card";
-        case "tenders":
-          return "tender-card";
-        case "contracts":
-          return "contract-card";
-        default:
-          return "li";
-      }
+      const mappedEntitiesCard = {
+        budgets: "budgets-card",
+        plans: "plans-card",
+        tenders: "tenders-card",
+        contracts: "contracts-card"
+      };
+
+      return mappedEntitiesCard[this.entityName] || "li";
     },
     needPagination() {
       const entityInfoObj = this.entities[this.entityName];
@@ -174,6 +191,14 @@ export default {
         ),
         entityName: this.entityName
       });
+    },
+
+    actionExpand() {
+      this.isExpanded = !this.isExpanded;
+
+      const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
+      localStorageEntities[this.entityName].isExpanded = this.isExpanded;
+      localStorage.setItem("entities", JSON.stringify(localStorageEntities));
     },
 
     changePage(page) {
@@ -227,6 +252,10 @@ export default {
   margin-bottom: -20px;
   padding-bottom: 20px;
   background-color: #efefef;
+  &-page {
+    background-color: #efefef;
+    padding-bottom: 20px;
+  }
   &__no-data-title,
   &__error {
     margin: 20px 0;

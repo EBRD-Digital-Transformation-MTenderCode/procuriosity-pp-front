@@ -3,17 +3,15 @@
     <el-card>
       <div slot="header">
         <div class="entity-status">
-          <div class="entity-status__text">
-            {{ parseStatusText }}
-          </div>
+          <div :class="`entity-status__ico ${parseStatusIco}`" />
         </div>
         <div class="entity-update">
-          {{$t("contract.last_modified_date")}}: <span class="entity-update__date">{{ modifiedDate }}</span>
+          {{$t("plan.last_modified_date")}}: <span class="entity-update__date">{{ modifiedDate }}</span>
         </div>
       </div>
       <el-row type="flex" :gutter="18">
         <el-col :xs="24" :sm="14">
-          <router-link v-if="needLink && entity.cdb !== 'mtender2'" :to="`${$i18n.locale !== 'ro' ? `/${$i18n.locale}` : ''}/contracts/${entityId}`" data-link class="entity-title">
+          <router-link v-if="needLink && entity.cdb !== 'mtender1'" :to="`${$i18n.locale !== 'ro' ? `/${$i18n.locale}` : ''}/plans/${entityId}`" data-link class="entity-title">
             {{ title }}
           </router-link>
           <div v-else class="entity-title">
@@ -25,9 +23,7 @@
         </el-col>
         <el-col :xs="24" :sm="6">
           <div class="entity-amount">
-            <div class="entity-amount__text">
-              {{$t("contract.value")}} ({{ currency ? currency: "MDL" }})
-            </div>
+            <div class="entity-amount__text">{{$t("plan.value")}} ({{ currency ? currency: "MDL" }})</div>
             <div class="entity-amount__number">
               <span class="whole" :style="wholeAmount.length > 10 ? 'font-size: 30px': ''">{{ wholeAmount }}<span
                   v-if="fractionAmount">.</span></span>
@@ -37,19 +33,19 @@
         </el-col>
         <el-col :xs="24" :sm="4">
           <div class="entity-pe-name">
-            <div class="title">{{$t("contract.procuring_entity_name")}}:</div>
+            <div class="title">{{$t("plan.procuring_entity_name")}}:</div>
             <div class="text">{{ peName }}</div>
           </div>
           <div class="entity-region" v-if="region">
-            <div class="title">{{$t("contract.delivery_regions")}}:</div>
+            <div class="title">{{$t("plan.delivery_regions")}}:</div>
             <div class="text">{{ region }}</div>
           </div>
-          <div class="entity-type" v-if="type">
-            <div class="title">{{$t("contract.procedure_type")}}:</div>
+          <div class="entity-type">
+            <div class="title">{{$t("plan.procedure_type")}}:</div>
             <div class="text">{{ type }}</div>
           </div>
           <div class="entity-id">
-            <div class="title">{{$t("contract.tender_id")}}</div>
+            <div class="title">{{$t("plan.tender_id")}}:</div>
             <div class="text">{{ entityId }}</div>
           </div>
         </el-col>
@@ -59,11 +55,12 @@
 </template>
 
 <script>
-  import { getDataFromObject, formatDate } from "../../utils";
-  import procedureTypes from "./../../store/types/procedures-types";
+  import procedureTypes from "./../../store/types/procedures-types"
+
+  import { getDataFromObject, formatDate } from "./../../utils";
 
   export default {
-    name: "TenderCard",
+    name: "PlansCard",
     props: {
       entity: {
         type: Object,
@@ -75,13 +72,52 @@
       }
     },
     computed: {
+      parseStatusIco() {
+        const status = getDataFromObject(this.entity, _ => _.procedureStatus);
+        switch (status) {
+          case "active.auction":
+            return "entity-status__ico_auction";
+          case "active.qualification":
+            return "entity-status__ico_qualification";
+          case "active.enquiries":
+            return "entity-status__ico_enquiries";
+          case "active.tendering":
+            return "entity-status__ico_tendering";
+          case "cancelled":
+            return "entity-status__ico_cancelled";
+          case "active":
+            return "entity-status__ico_active";
+          case "active.awarded":
+            return "entity-status__ico_awarded";
+          case "complete":
+            return "entity-status__ico_complete";
+          case "unsuccessful":
+            return "entity-status__ico_unsuccessful";
+        }
+      },
       parseStatusText() {
         const status = getDataFromObject(this.entity, _ => _.procedureStatus);
         switch (status) {
-          case "execution":
-            return "Execution";
+          case "active.auction":
+            return "Auction Period";
+          case "active.qualification":
+            return "Qualification Period";
+          case "active.enquiries":
+            return "Enquiries Period";
+          case "active.tendering":
+            return "Tendering Period";
+          case "cancelled":
+            return "Cancelled tender";
+          case "active":
+            return "Published";
+          case "active.awarded":
+            return "Awarded";
+          case "complete":
+            return "Complete";
+          case "unsuccessful":
+            return "Unsuccessful Tender";
           default:
-            return "";
+            return status;
         }
       },
       modifiedDate() {
@@ -108,7 +144,10 @@
         return getDataFromObject(this.entity, _ => _.buyerRegion);
       },
       type() {
-          return getDataFromObject(this.entity, _=> _.procedureType) ? procedureTypes.contracts.find(it => it.value === getDataFromObject(this.entity, _ => _.procedureType)).name[this.$i18n.locale] : "";
+        if( !getDataFromObject(procedureTypes, _ => _.plans.find(it => it.value === getDataFromObject(this.entity, _=> _.procedureType))).hasOwnProperty("name")) {
+            console.warn(`Can't find procedure type "${getDataFromObject(this.entity, _=> _.procedureType)}" `);
+        }
+        else return procedureTypes.plans.find(it => it.value === getDataFromObject(this.entity, _=> _.procedureType)).name[this.$i18n.locale];
       },
       peName() {
         return getDataFromObject(this.entity, _ => _.buyerName);
