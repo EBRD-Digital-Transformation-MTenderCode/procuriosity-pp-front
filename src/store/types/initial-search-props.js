@@ -12,8 +12,8 @@ export default {
 
     id: "",
 
-    amountFrom: null,
-    amountTo: null,
+    amountFrom: undefined,
+    amountTo: undefined,
 
     classifications: [],
 
@@ -33,8 +33,8 @@ export default {
     proceduresTypes: [],
     proceduresStatuses: [],
 
-    amountFrom: null,
-    amountTo: null,
+    amountFrom: undefined,
+    amountTo: undefined,
 
     classifications: [],
 
@@ -64,8 +64,8 @@ export default {
 
     entityId: "",
 
-    amountFrom: null,
-    amountTo: null,
+    amountFrom: undefined,
+    amountTo: undefined,
 
     classifications: [],
 
@@ -96,8 +96,8 @@ export default {
     proceduresTypes: [],
     proceduresStatuses: [],
 
-    amountFrom: null,
-    amountTo: null,
+    amountFrom: undefined,
+    amountTo: undefined,
 
     classifications: [],
 

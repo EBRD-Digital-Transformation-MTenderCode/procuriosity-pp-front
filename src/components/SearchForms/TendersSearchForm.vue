@@ -68,8 +68,12 @@
                     :items="mainGeneralActivityList"
                     :values="buyersMainGeneralActivities"
                     :setValues="setFormParams"
-                    :label="$t('search.buyers_main_general_activity_placeholder')"
-                    :placeholder="$t('search.buyers_main_general_activity_placeholder')"
+                    :label="
+                      $t('search.buyers_main_general_activity_placeholder')
+                    "
+                    :placeholder="
+                      $t('search.buyers_main_general_activity_placeholder')
+                    "
                   />
                 </div>
 
@@ -80,8 +84,12 @@
                     :items="mainSectoralActivityList"
                     :values="buyersMainSectoralActivities"
                     :setValues="setFormParams"
-                    :label="$t('search.buyers_main_sectoral_activity_placeholder')"
-                    :placeholder="$t('search.buyers_main_sectoral_activity_placeholder')"
+                    :label="
+                      $t('search.buyers_main_sectoral_activity_placeholder')
+                    "
+                    :placeholder="
+                      $t('search.buyers_main_sectoral_activity_placeholder')
+                    "
                   />
                 </div>
               </div>
@@ -93,11 +101,10 @@
 
                 <!-- id -->
                 <div class="search-form-element">
-                  <search-input
+                  <search-input-text
                     name="entityId"
                     :value="entityId"
                     :setValue="setFormParams"
-                    prefixIcon
                     :label="$t('search.id_placeholder')"
                     :placeholder="$t('search.id_placeholder')"
                   />
@@ -131,10 +138,8 @@
                   <el-col :sm="12">
                     <!-- Amount from -->
                     <div class="search-form-element">
-                      <search-input
+                      <search-input-number
                         name="amountFrom"
-                        type="number"
-                        prefixIcon
                         :value="amountFrom"
                         :setValue="setFormParams"
                         :label="$t('search.amount_from')"
@@ -145,10 +150,8 @@
                   <el-col :sm="12">
                     <!-- Amount to -->
                     <div class="search-form-element">
-                      <search-input
+                      <search-input-number
                         name="amountTo"
-                        type="number"
-                        prefixIcon
                         :value="amountTo"
                         :setValue="setFormParams"
                         :label="$t('search.amount_to')"
@@ -253,7 +256,7 @@
           </el-row>
           <!-- Reset button -->
           <div class="search-form__btn_reset-wp">
-            <reset-button entity="tenders"/>
+            <reset-button entity="tenders" />
           </div>
         </div>
       </div>
@@ -267,7 +270,8 @@ import { SET_ENTITY_SEARCH_PARAMS } from "./../../store/types/mutations-types";
 import { REGIONS, CPV_CODES } from "./../../store/types/directories-types";
 
 import MainSearch from "./../FormsComponents/MainSearch";
-import SearchInput from "./../FormsComponents/SearchInput";
+import SearchInputText from "./../FormsComponents/SearchInputText";
+import SearchInputNumber from "./../../components/FormsComponents/SearchInputNumber";
 import SearchAutoCompleteInput from "./../FormsComponents/SearchAutoCompleteInput";
 import SearchRegions from "./../FormsComponents/SearchRegions";
 import SearchClassifications from "./../FormsComponents/SearchClassifications";
@@ -287,7 +291,8 @@ export default {
   name: "TendersSearchForm",
   components: {
     "main-search": MainSearch,
-    "search-input": SearchInput,
+    "search-input-text": SearchInputText,
+    "search-input-number": SearchInputNumber,
     "search-auto-complete-input": SearchAutoCompleteInput,
     "search-regions": SearchRegions,
     "search-classifications": SearchClassifications,

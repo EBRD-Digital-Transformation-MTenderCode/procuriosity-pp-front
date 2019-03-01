@@ -27,7 +27,7 @@
   min-height: $fieldHeight;
   padding: 8px 10px;
   border-radius: 3px;
-  font-size: $fieldFontSize;
+  font-size: $fieldFontSize - 2px;
 }
 
 .multiple_input {
@@ -97,5 +97,5 @@
 }
 
 .el-date-editor .el-range-separator {
-  width: 10%;
+  width: 16px;
 }

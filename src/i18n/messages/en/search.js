@@ -36,7 +36,6 @@ export default {
   "list_no_data": "Nothing found",
   "start_date_placeholder": "Start date",
   "end_date_placeholder": "End date",
-  "range_separator": "To",
   "reset_button": "Reset",
 
   "list_total_found": "Total found",

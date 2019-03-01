@@ -1,0 +1,53 @@
+<template>
+  <div class="search-form-field-wp">
+    <label class="search-form__label">{{ label }}</label>
+    <el-input-number
+      :min="0"
+      controls-position="right"
+      v-model="localValue"
+      @change="handleChange(name, $event)"
+      :placeholder="placeholder"
+    />
+  </div>
+</template>
+
+<script>
+export default {
+  name: "SearchInputNumber",
+  props: {
+    name: {
+      type: String,
+      required: true
+    },
+    value: {
+      required: true
+    },
+    setValue: {
+      type: Function,
+      required: true
+    },
+    label: {
+      type: String
+    },
+    placeholder: {
+      type: String
+    }
+  },
+  data() {
+    return {
+      localValue: this.value || undefined
+    };
+  },
+  methods: {
+    handleChange(name, value) {
+      console.log(value);
+      this.setValue(name, value && undefined);
+    }
+  },
+  watch: {
+    value(newVal) {
+      this.localValue = newVal;
+    }
+  }
+};
+</script>

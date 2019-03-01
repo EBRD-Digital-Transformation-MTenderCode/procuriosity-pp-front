@@ -3,7 +3,7 @@
 .search-form {
   z-index: 10;
   position: relative;
-  padding: 25px 30px;
+  padding: 20px;
   background-color: $mainC;
   &-wp {
     position: relative;
@@ -15,7 +15,7 @@
     }
   }
   @media (max-width: 580px) {
-    padding: 16px 18px;
+    padding: 16px;
   }
   .main-search {
     flex-grow: 1;
@@ -191,11 +191,10 @@
   }
   .el-range {
     &-input {
-      font-size: $fieldFontSize;
+      font-size: $fieldFontSize - 2px;
     }
     &-separator {
-      font-size: $fieldFontSize;
-      min-width: 14%;
+      font-size: $fieldFontSize - 2px;
     }
     &__close-icon {
       font-size: 25px !important;

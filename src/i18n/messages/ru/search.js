@@ -36,7 +36,6 @@ export default {
   "list_no_data": "Ничего не найдено",
   "start_date_placeholder": "Дата начала",
   "end_date_placeholder": "Дата окончания",
-  "range_separator": "до",
   "reset_button": "Сбросить",
 
   "list_total_found": "Всего найдено",
