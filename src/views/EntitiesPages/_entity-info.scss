@@ -663,6 +663,9 @@
         display: none;
       }
     }
+    &_auction{
+      margin-bottom: 30px;
+    }
   }
   .table-header {
     padding: 5px 10px 12px;
@@ -931,6 +934,9 @@
   &__no-data {
     font-size: 20px;
     margin: 20px 0;
+  }
+  &_budget{
+    padding-top: 50px;
   }
   ul,
   ol {

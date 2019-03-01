@@ -1,48 +1,11 @@
 <template>
-  <div class="info" v-if="FSs.length">
-    <div id="contract-title" class="info__title">{{ $t("budget.source_of_financing") }}</div>
+  <div class="info info_budget" v-if="FSs.length">
     <page-number
         v-if="needPagination"
         :current-page="currentPage"
         :elements-amount="elementsAmount"
         :page-size="pageSize"
     />
-    <div class="info-blocks ">
-      <div class="info-block table-header">
-        <el-row :gutter="15">
-          <el-col :sm="2">
-            <div class="info-block__text info-block__text_bold">
-              №
-            </div>
-          </el-col>
-          <el-col :sm="10">
-            <div class="info-block__text info-block__text_bold">
-              {{$t("budget.projectID")}}
-            </div>
-          </el-col>
-          <el-col :sm="3">
-            <div class="info-block__text info-block__text_bold">
-              {{$t("budget.source_of_money")}}
-            </div>
-          </el-col>
-          <el-col :sm="4">
-            <div class="info-block__text info-block__text_bold">
-              {{$t("budget.validity_period")}}
-            </div>
-          </el-col>
-          <el-col :sm="3">
-            <div class="info-block__text info-block__text_bold">
-              {{$t("budget.amount")}}
-            </div>
-          </el-col>
-          <el-col :sm="2">
-            <div class="info-block__text info-block__text_bold">
-              {{$t("budget.status")}}
-            </div>
-          </el-col>
-        </el-row>
-      </div>
-    </div>
     <el-collapse
         accordion
         :value="FSs[0].ocid"
