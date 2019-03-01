@@ -14,7 +14,7 @@
     >
       <auction-item
           v-for="(auction, index) of mapObject"
-          v-if ="index >= numberOfLastDisplayedAuction - pageSize &&  index < numberOfLastDisplayedAuction"
+          v-if="index >= numberOfLastDisplayedAuction - pageSize &&  index < numberOfLastDisplayedAuction"
           :key="auction.id + index"
           :auction="auction"
           :activeItemId="activeItemId"
@@ -37,7 +37,7 @@
 <script>
   import AuctionItem from "./AuctionItem";
   import ListPagination from "./../../../../components/ListPagination";
-  import PageNumber  from "./../../../../components/PageNumber"
+  import PageNumber from "./../../../../components/PageNumber";
   import {
     getDataFromObject
   } from "./../../../../utils";
@@ -64,34 +64,34 @@
       };
     },
     computed: {
-      needPagination(){
-        return this.elementsAmount > this.pageSize
+      needPagination() {
+        return this.elementsAmount > this.pageSize;
       },
       elementsAmount() {
         return this.gd(this.evRecord, _ => _.tender.electronicAuctions.details, []).length;
       },
       mapObject() {
-        return this.gd(this.evRecord,_=>_.tender.electronicAuctions.details, []).map(auction => ({
-          id: this.gd(auction,_=>_.id),
-          lotTitle: this.getLotTitle(this.gd(auction,_=>_.relatedLot)),
+        return this.gd(this.evRecord, _ => _.tender.electronicAuctions.details, []).map(auction => ({
+          id: this.gd(auction, _ => _.id),
+          lotTitle: this.getLotTitle(this.gd(auction, _ => _.relatedLot)),
           minimalStep: {
             amount: this.gd(auction, _ => _.electronicAuctionModalities[0].eligibleMinimumDifference.amount),
             currency: this.gd(auction, _ => _.electronicAuctionModalities[0].eligibleMinimumDifference.currency)
           },
-          rounds: this.gd(auction, _ => _.electronicAuctionProgress,[]).length,
-          participants: this.gd(auction, _ => _.electronicAuctionProgress[0].breakdown,[]).length,
+          rounds: this.gd(auction, _ => _.electronicAuctionProgress, []).length,
+          participants: this.gd(auction, _ => _.electronicAuctionProgress[0].breakdown, []).length,
           auctionPeriod: {
             startDate: this.gd(auction, _ => _.auctionPeriod.startDate),
             endDate: this.gd(auction, _ => _.auctionPeriod.endDate),
           },
-          auctionProgress: this.getAuctionProgress(this.gd(auction,_=>_.electronicAuctionProgress,[])),
-          results: this.getResults(this.gd(auction,_=>_.electronicAuctionResult,[]))
+          auctionProgress: this.getAuctionProgress(this.gd(auction, _ => _.electronicAuctionProgress, [])),
+          results: this.getResults(this.gd(auction, _ => _.electronicAuctionResult, []))
         }));
       },
     },
     methods: {
       getLotTitle(id) {
-        return this.gd(this.gd(this.evRecord,_=>_.tender.lots,[]).find(lot => id === lot.id),_=>_.title);
+        return this.gd(this.gd(this.evRecord, _ => _.tender.lots, []).find(lot => id === lot.id), _ => _.title);
       },
       getAuctionProgress(progresses) {
         return progresses.map(progress => ({
@@ -100,8 +100,8 @@
             startDate: this.gd(progress, _ => _.period.startDate),
             endDate: this.gd(progress, _ => _.period.endDate),
           },
-          breakdowns: this.getBreakdowns(this.gd(progress,_=>_.breakdown,[]))
-        }));
+          breakdowns: this.getBreakdowns(this.gd(progress, _ => _.breakdown, []))
+        })).sort((el1, el2) => el1.round - el2.round);
       },
       getBreakdowns(breakdowns) {
         return breakdowns.map(breakdown => ({
@@ -110,7 +110,7 @@
             currency: this.gd(breakdown, _ => _.value.currency)
           },
           dateMet: this.gd(breakdown, _ => _.dateMet),
-          tenderer: this.getTenderer(this.gd(breakdown,_=>_.relatedBid))
+          tenderer: this.getTenderer(this.gd(breakdown, _ => _.relatedBid))
         }));
       },
       getTenderer(id) {
@@ -126,8 +126,8 @@
             amount: this.gd(result, _ => _.value.amount),
             currency: this.gd(result, _ => _.value.currency)
           },
-          tenderer: this.getTenderer(this.gd(result,_=>_.relatedBid))
-        }));
+          tenderer: this.getTenderer(this.gd(result, _ => _.relatedBid))
+        })).sort((el1, el2) => el1.value.amount - el2.value.amount);
       },
       gd(...args) {
         return getDataFromObject(...args);
@@ -136,7 +136,7 @@
         this.activeItemId = item;
       },
       changePage(page) {
-        this.numberOfLastDisplayedAuction =  page * this.pageSize;
+        this.numberOfLastDisplayedAuction = page * this.pageSize;
         this.currentPage = page;
       }
     },
