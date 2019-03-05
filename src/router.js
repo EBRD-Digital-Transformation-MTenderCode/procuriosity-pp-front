@@ -12,28 +12,31 @@ const router = new Router({
     {
       path: `/:lang?/:entityName(budgets|plans|tenders|contracts)`,
       name: "list",
-      component: List
+      component: List,
     },
     {
       path: `/:lang?/plans/:id`,
       name: "plan",
-      component: () => import(/* webpackChunkName: "PlanPage" */ "./views/EntitiesPages/PlanPage/ContainerPlanPage.vue")
+      component: () =>
+        import(/* webpackChunkName: "PlanPage" */ "./views/EntitiesPages/PlanPage/ContainerPlanPage.vue"),
     },
-     {
-     path: "/:lang?/budgets/:id",
-     name: "budget-page",
-     component: () => import(/* webpackChunkName: "BudgetPage" */ "./views/EntitiesPages/BudgetPage/ContainerBudgetPage.vue")
-     },
+    {
+      path: "/:lang?/budgets/:id",
+      name: "budget-page",
+      component: () =>
+        import(/* webpackChunkName: "BudgetPage" */ "./views/EntitiesPages/BudgetPage/ContainerBudgetPage.vue"),
+    },
     {
       path: `/:lang?/tenders/:id`,
       name: "tender",
-      component: () => import(/* webpackChunkName: "TenderPage" */ "./views/EntitiesPages/TenderPage/ContainerTenderPage.vue")
+      component: () =>
+        import(/* webpackChunkName: "TenderPage" */ "./views/EntitiesPages/TenderPage/ContainerTenderPage.vue"),
     },
     {
       path: `/:lang?/contracts/:id`,
       name: "contract",
-      component: () => import(/* webpackChunkName: "ContractPage" */ "./views/EntitiesPages/ContractPage.vue")
-    }
+      component: () => import(/* webpackChunkName: "ContractPage" */ "./views/EntitiesPages/ContractPage.vue"),
+    },
   ],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
@@ -41,19 +44,17 @@ const router = new Router({
     } else {
       return { x: 0, y: 0 };
     }
-  }
+  },
 });
 
 router.beforeEach((to, from, next) => {
+  const linkFrom = document.querySelector(`.header-entity-nav a[href*=${from.name}]`);
+  const linkTo = document.querySelector(`.header-entity-nav a[href*=${to.name}]`);
+
   if (process.env.NODE_ENV !== "development") {
-    if (from.name && document.querySelector(`.header-entity-nav a[href*=${from.name}]`) && document.querySelector(`.header-entity-nav a[href*=${to.name}]`)) {
-      document.querySelector(`.header-entity-nav a[href*=${from.name}]`).classList.remove("is-active");
-      document.querySelector(`.header-entity-nav a[href*=${to.name}]`).classList.add("is-active");
-    }
-  } else {
-    if (document.querySelector(`.header-entity-nav a[href*=${from.name}]`) && document.querySelector(`.header-entity-nav a[href*=${to.name}]`)) {
-      document.querySelector(`.header-entity-nav a[href*=${from.name}]`).classList.remove("is-active");
-      document.querySelector(`.header-entity-nav a[href*=${to.name}]`).classList.add("is-active");
+    if (from.name && linkFrom && linkTo) {
+      linkFrom.classList.remove("is-active");
+      linkTo.classList.add("is-active");
     }
   }
   next();

@@ -40,7 +40,6 @@ export default {
   },
   methods: {
     handleChange(name, value) {
-      console.log(value);
       this.setValue(name, value && undefined);
     }
   },

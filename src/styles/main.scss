@@ -6,6 +6,15 @@
   margin-bottom: auto;
 }
 
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter, .fade-leave-active {
+  opacity: 0;
+}
+
 .el-container {
   width: 100%;
   max-width: 1030px;
