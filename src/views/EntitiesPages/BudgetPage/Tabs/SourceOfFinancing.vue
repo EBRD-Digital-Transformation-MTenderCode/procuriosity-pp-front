@@ -8,16 +8,14 @@
     />
     <el-collapse
         accordion
-        :value="FSs[0].ocid"
+        :value="mapFSs[0].ocid"
         @change="changeActiveItem"
     >
-      <source-item
-          v-for="(fs, index) of FSs"
+      <budget-breakdown
+          v-for="(budgetBreakdown, index) of mapFSs"
           v-if ="index >= numberOfLastDisplayedSource - pageSize &&  index < numberOfLastDisplayedSource"
-          :key="fs.ocid"
-          :fs="fs"
-          :index="index"
-          :activeItemId="activeItemId"
+          :key="budgetBreakdown.ocid"
+          :budgetBreakdown="budgetBreakdown"
       />
     </el-collapse>
     <list-pagination
@@ -35,18 +33,20 @@
 </template>
 
 <script>
-  import SourceItem from "./SourceItem";
+  import BudgetBreakdown from "../../../../components/BudgetBreakdown";
   import ListPagination from "./../../../../components/ListPagination";
   import PageNumber  from "./../../../../components/PageNumber"
 
   import {
-    getDataFromObject
+    getDataFromObject,
+    getOrganizationObject,
+      getSourceOfMoney
   } from "./../../../../utils";
 
   export default {
     name: "SourceItem",
     components: {
-      "source-item": SourceItem,
+      "budget-breakdown": BudgetBreakdown,
       "list-pagination": ListPagination,
       "page-number": PageNumber
     },
@@ -55,6 +55,10 @@
         type: Array,
         required: true
       },
+      buyer:{
+        type: Object,
+        required: true
+      }
     },
     data() {
       return {
@@ -70,6 +74,36 @@
       },
       elementsAmount() {
         return this.FSs.length;
+      },
+      mapFSs() {
+        return  this.FSs.map(fs => ({
+          ocid: this.gd(fs, _ => _.compiledRelease.ocid),
+          value:{
+            amount: this.gd(fs, _ => _.compiledRelease.planning.budget.amount.amount),
+            currency: this.gd(fs, _ =>_.compiledRelease.planning.budget.amount.currency)
+          },
+          sourceOfMoney: getSourceOfMoney(this.gd(fs,_=>_.compiledRelease.parties,[]), this.gd(this.buyer,_=>_.id)),
+          status: this.gd(fs, _ => _.compiledRelease.planning.budget.status),
+          description: this.gd(fs, _ => _.compiledRelease.planning.budget.description, "n/a"),
+          period: {
+            startDate: this.gd(fs, _ => _.compiledRelease.planning.budget.period.startDate),
+            endDate: this.gd(fs, _ => _.compiledRelease.planning.budget.period.endDate)
+          },
+          project: this.gd(fs, _ => _.compiledRelease.planning.budget.project, "n/a"),
+          projectId: this.gd(fs, _ => _.compiledRelease.planning.budget.projectID, "n/a"),
+          buyer: {
+            name:this.gd(this.buyer,_=>_.name),
+            id: this.gd(this.buyer,_=>_.id)
+          },
+          funder: {
+            name: this.gd(getOrganizationObject(this.gd(fs,_=>_.compiledRelease.parties,[]),"funder"),_=>_.name),
+            id: this.gd(getOrganizationObject(this.gd(fs,_=>_.compiledRelease.parties,[]),"funder"),_=>_.id)
+          },
+          payer: {
+            name: this.gd(getOrganizationObject(this.gd(fs,_=>_.compiledRelease.parties,[]),"payer"),_=>_.name),
+            id: this.gd(getOrganizationObject(this.gd(fs,_=>_.compiledRelease.parties,[]),"payer"),_=>_.id)
+          },
+        }))
       }
     },
     methods: {
@@ -82,7 +116,7 @@
       changePage(page) {
         this.numberOfLastDisplayedSource =  page * this.pageSize;
         this.currentPage = page;
-      }
+      },
     }
   };
 </script>

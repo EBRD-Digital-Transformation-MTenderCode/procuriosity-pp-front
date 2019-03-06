@@ -1,6 +1,6 @@
 export default {
   last_modified_date: "Last Modified Date",
-  value: "Estimated value without VAT",
+  value: "Allocated budget without VAT",
   no_finances_sources: "The budget has no funding sources yet",
   period_planning: "Planning of need",
   buyer_name: "Buyer name",

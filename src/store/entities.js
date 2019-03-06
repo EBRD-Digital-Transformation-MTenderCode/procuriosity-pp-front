@@ -125,23 +125,6 @@ export default {
       },
     },
   },
-  getters: {
-    getSourceOfMoney: store => index => {
-      const parties = store.budgets.currentEntity.entityData.FSs[index].compiledRelease.parties;
-      const buyerId = store.budgets.currentEntity.entityData.EI.compiledRelease.buyer.id;
-
-      let source = "";
-      for (let part of parties) {
-        if (part.roles.find((role) => role === "funder")) {
-          if (part.id === buyerId) {
-            source = VueI18n.t("budget.own_money");
-            break;
-          } else source = VueI18n.t("budget.donors_money");
-        }
-      }
-      return source || VueI18n.t("budget.state_money");
-    },
-  },
   mutations: {
     [SET_ENTITY_LOADED](state, { entityName, loaded }) {
       state[entityName].loaded = loaded;
