@@ -9,7 +9,7 @@ export const convertStringDateToUTCDateObject = date => {
   const dateObject = new Date(date);
 
   return new Date(dateObject.getTime() + dateObject.getTimezoneOffset() * 60000);
-}
+};
 
 export const formatDate = (date, formatType = "DD.MM.YYYY / HH:mm", def = "none") => {
   if (date && dayjs(date).isValid()) {
@@ -17,7 +17,7 @@ export const formatDate = (date, formatType = "DD.MM.YYYY / HH:mm", def = "none"
   } else {
     return def;
   }
-}
+};
 
 export const addPeriod = (date, timePeriod, count) => {
   const timePeriods = ["day", "month", "year", "week"];
@@ -34,13 +34,13 @@ export const addPeriod = (date, timePeriod, count) => {
   } else {
     return dayjs(date).add(count, timePeriod);
   }
-}
+};
 
 export const formatAmount = (amount, def = "0.00") => {
   if (typeof amount === "number" && !isNaN(amount)) {
     return amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$& ");
   } else return def;
-}
+};
 
 export const convertObjectToQueryParamsString = obj => {
   if (!obj && typeof obj !== "object") {
@@ -76,7 +76,7 @@ export const parseDocumentType = (documentsType, lang) => {
     const result = documentsType.replace(/([A-Z])/g, " $1");
     return result.charAt(0).toUpperCase() + result.slice(1);
   }
-}
+};
 
 export const transformDocumentation = docs => {
   const transformDocId = doc => ({
@@ -113,7 +113,7 @@ export const transformDocumentation = docs => {
         return obj;
       }, {})
   );
-}
+};
 
 export const getOrganizationName = (parties, organizationRole) => {
   for (let part of parties) {
@@ -123,7 +123,7 @@ export const getOrganizationName = (parties, organizationRole) => {
       if (organizationRole === "funder") return "State money";
     }
   }
-}
+};
 
 export const selectProcedure = (category, amount) => {
   if (category === "goods" || category === "services") {
@@ -197,4 +197,4 @@ export const selectProcedure = (category, amount) => {
       }
     }
   }
-}
+};

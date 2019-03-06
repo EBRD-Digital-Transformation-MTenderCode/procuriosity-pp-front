@@ -1,0 +1,23 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "extends": [
+    "plugin:vue/essential",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": [
+    "prettier"
+  ],
+  "parserOptions": {
+    "parser": "babel-eslint"
+  },
+  "rules": {
+    "prettier/prettier": "error",
+    "vue/no-multi-spaces": "error",
+    "vue/require-default-prop": "warning",
+    "vue/require-prop-types": "error"
+  }
+}

@@ -1,152 +1,153 @@
 export default {
-  "tenderNotice": {
+  tenderNotice: {
     en: "Contract Notice",
     ro: "Invitaţie de participare",
-    ru: "Приглашение на участие"
+    ru: "Приглашение на участие",
   },
-  "biddingDocuments": {
+  biddingDocuments: {
     en: "Tender Documents",
     ro: "Documentaţie de atribuire",
-    ru: "Документация по присуждению"
+    ru: "Документация по присуждению",
   },
-  "technicalSpecifications": {
+  technicalSpecifications: {
     en: "Technical Specifications",
     ro: "Specificații tehnice",
-    ru: "Технические спецификации"
+    ru: "Технические спецификации",
   },
-  "evaluationCriteria": {
+  evaluationCriteria: {
     en: "Evaluation Criteria",
     ro: "Criterii de evaluare",
-    ru: "Критерии оценки"
+    ru: "Критерии оценки",
   },
-  "clarifications": {
+  clarifications: {
     en: "Clarification of Tender Documents",
     ro: "Clarificări pentru participanți",
-    ru: "Разъяснения для участников"
+    ru: "Разъяснения для участников",
   },
-  "eligibilityCriteria": {
+  eligibilityCriteria: {
     en: "Eligibility Criteria",
     ro: "Criterii de calificare",
-    ru: "Критерии приемлимости"
+    ru: "Критерии приемлимости",
   },
-  "shortlistedFirms": {
+  shortlistedFirms: {
     en: "Shortlisted Firms",
     ro: "Lista OE preselectaţi",
-    ru: "Список предварительного отбора"
+    ru: "Список предварительного отбора",
   },
-  "riskProvisions": {
+  riskProvisions: {
     en: "Provisions for management of risks and liabilities",
     ro: "Dispoziții privind gestionarea riscurilor și obligațiilor",
-    ru: "Положения по управлению рисками и обязательств"
+    ru: "Положения по управлению рисками и обязательств",
   },
-  "billOfQuantity": {
+  billOfQuantity: {
     en: "Bill Of Quantity",
     ro: "Deviz de cheltuieli",
-    ru: "Смета расходов"
+    ru: "Смета расходов",
   },
-  "conflictOfInterest": {
+  conflictOfInterest: {
     en: "Identified conflicts of interest uncovered",
     ro: "Conflicte de interese descoperite",
-    ru: "Обнаруженные конфликты интересов"
+    ru: "Обнаруженные конфликты интересов",
   },
-  "procurementPlan": {
+  procurementPlan: {
     en: "Procurement Plan",
     ro: "Planul de achiziții",
-    ru: "План закупок"
+    ru: "План закупок",
   },
-  "evaluationReports": {
+  evaluationReports: {
     en: "Evaluation report",
     ro: "Raport de evaluare",
-    ru: "Отчет об оценке"
+    ru: "Отчет об оценке",
   },
-  "contractDraft": {
+  contractDraft: {
     en: "Draft contract - special conditions",
     ro: "Model de сontract",
-    ru: "Проект договора"
+    ru: "Проект договора",
   },
-  "contractArrangements": {
+  contractArrangements: {
     en: "Arrangements for closing or termination of the contract",
     ro: "Aranjamente de încetare a contractului",
-    ru: "Условия прекращения договора"
+    ru: "Условия прекращения договора",
   },
-  "complaints": {
+  complaints: {
     en: "Complaints and review decisions",
     ro: "Reclamații și decizii",
-    ru: "Жалобы и решения"
+    ru: "Жалобы и решения",
   },
-  "contractGuarantees": {
+  contractGuarantees: {
     en: "Contract Performance Guarantees",
     ro: "Garanții",
-    ru: "Гарантии исполнения договора"
+    ru: "Гарантии исполнения договора",
   },
-  "illustration": {
+  illustration: {
     en: "Illustration",
     ro: "Ilustrare",
-    ru: "Иллюстрация"
+    ru: "Иллюстрация",
   },
-  "cancellationDetails": {
+  cancellationDetails: {
     en: "Details of cancellation",
     ro: "Detalii privind anularea",
-    ru: "Детали отмены"
+    ru: "Детали отмены",
   },
-  "awardNotice": {
+  awardNotice: {
     en: "Award Notification",
     ro: "Anunț de atribuire",
-    ru: "Oбъявление о присуждении"
+    ru: "Oбъявление о присуждении",
   },
-  "winningBid": {
+  winningBid: {
     en: "Winning Bid",
     ro: "Oferta câștigătoare",
-    ru: "Выигравшее предложение"
+    ru: "Выигравшее предложение",
   },
-  "contractSchedule": {
+  contractSchedule: {
     en: "Schedules and milestones",
     ro: "Etape planificate",
-    ru: "График и запланированные этапы"
+    ru: "График и запланированные этапы",
   },
-  "contractNotice": {
+  contractNotice: {
     en: "Contract Award Notice",
     ro: "Anunț de contractare",
-    ru: "Уведомление о договоре"
+    ru: "Уведомление о договоре",
   },
-  "contractSigned": {
+  contractSigned: {
     en: "Signed Contract",
     ro: "Contract semnat",
-    ru: "Подписанный договор"
+    ru: "Подписанный договор",
   },
-  "contractAnnexe": {
+  contractAnnexe: {
     en: "Annexes to the Contract",
     ro: "Anexe la contract",
-    ru: "Приложения к договору"
+    ru: "Приложения к договору",
   },
-  "subContract": {
+  subContract: {
     en: "Subcontracts",
     ro: "Subcontracte",
-    ru: "Субконтракты"
+    ru: "Субконтракты",
   },
-  "contractSummary": {//TODO add translates
+  contractSummary: {
+    //TODO add translates
     en: "Contract summary",
     ro: "Contract summary",
-    ru: "Contract summary"
+    ru: "Contract summary",
   },
-  "x_commercialOffer": {
+  x_commercialOffer: {
     en: "Financial proposal",
     ro: "Propunere financiară",
-    ru: "Финансовое предложение"
+    ru: "Финансовое предложение",
   },
-  "x_qualificationDocuments": {
+  x_qualificationDocuments: {
     en: "Qualification documents",
     ro: "Documente de calificare",
-    ru: "Квалификационные документы"
+    ru: "Квалификационные документы",
   },
-  "x_eligibilityDocuments": {
+  x_eligibilityDocuments: {
     en: "Eligibility documents",
     ro: "Documente de eligibilitate",
-    ru: "Документы соответствия"
+    ru: "Документы соответствия",
   },
-  "submissionDocuments": {
+  submissionDocuments: {
     en: "Documents of submission",
     ro: "Documente de depunere",
-    ru: "Документы для представления"
+    ru: "Документы для представления",
   },
 };

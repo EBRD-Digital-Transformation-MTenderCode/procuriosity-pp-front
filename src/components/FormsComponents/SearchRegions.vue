@@ -15,12 +15,7 @@
       :value="values"
       @change="setValues(name, $event)"
     >
-      <el-option
-        v-for="option of items"
-        :key="option.value"
-        :label="option.name"
-        :value="option.value"
-      />
+      <el-option v-for="option of items" :key="option.value" :label="option.name" :value="option.value" />
     </el-select>
   </div>
 </template>
@@ -33,33 +28,33 @@ export default {
   props: {
     name: {
       type: String,
-      required: true
+      required: true,
     },
     items: {
-      type: Array
+      type: Array,
     },
     values: {
       type: Array,
-      required: true
+      required: true,
     },
     setValues: {
       type: Function,
-      required: true
+      required: true,
     },
     label: {
-      type: String
+      type: String,
     },
     placeholder: {
-      type: String
-    }
+      type: String,
+    },
   },
   methods: {
     getOptions() {
       this.$store.dispatch(FETCH_REGIONS, {
         country: "MD",
-        lang: "ro"
+        lang: "ro",
       });
-    }
-  }
+    },
+  },
 };
 </script>

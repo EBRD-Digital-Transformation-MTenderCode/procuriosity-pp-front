@@ -1,17 +1,17 @@
 export default {
-  "goods": {
+  goods: {
     en: "Goods",
     ro: "Bunuri",
-    ru: "Товары"
+    ru: "Товары",
   },
-  "services": {
+  services: {
     en: "Services",
     ro: "Servicii",
-    ru: "Услуги"
+    ru: "Услуги",
   },
-  "works": {
+  works: {
     en: "Works",
     ro: "Lucrari",
-    ru: "Работы"
-  }
-}
+    ru: "Работы",
+  },
+};

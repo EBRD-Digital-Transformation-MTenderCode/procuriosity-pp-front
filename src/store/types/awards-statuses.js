@@ -1,22 +1,22 @@
 export default {
-  "pending": {
+  pending: {
     en: "Pending",
     ro: "În așteptarea",
-    ru: "В ожидании"
+    ru: "В ожидании",
   },
-  "consideration": {
+  consideration: {
     en: "Consideration",
     ro: "în cauză",
-    ru: "На рассмотрении"
+    ru: "На рассмотрении",
   },
-  "winner": {
+  winner: {
     en: "Winner",
     ro: "Câștigătorul",
-    ru: "Победитель"
+    ru: "Победитель",
   },
-  "disqualified": {
+  disqualified: {
     en: "Disqualified",
     ro: "Refuzat",
-    ru: "Отклонено"
-  }
-}
+    ru: "Отклонено",
+  },
+};

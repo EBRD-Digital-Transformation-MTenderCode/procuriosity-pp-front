@@ -4,125 +4,125 @@ export default {
       name: {
         en: "Low value procedure",
         ro: "Achiziții de valoare mică",
-        ru: "Закупка малой стоимости"
+        ru: "Закупка малой стоимости",
       },
-      value: "mv"
+      value: "mv",
     },
     {
       name: {
         en: "Request for quotation",
         ro: "Cerere Oferte de Prețuri",
-        ru: "Запрос ценовых оферт"
+        ru: "Запрос ценовых оферт",
       },
-      value: "sv"
+      value: "sv",
     },
     {
       name: {
         en: "Open Tender",
         ro: "Licitație deschisă",
-        ru: "Открытые торги"
+        ru: "Открытые торги",
       },
-      value: "ot"
+      value: "ot",
     },
     {
       name: {
         en: "Open Tender",
         ro: "Licitație deschisă",
-        ru: "Открытые торги"
+        ru: "Открытые торги",
       },
-      value: "aboveThreshold"
+      value: "aboveThreshold",
     },
     {
       name: {
         en: "Request for quotation",
         ro: "Cerere Oferte de Prețuri",
-        ru: "Запрос ценовых оферт"
+        ru: "Запрос ценовых оферт",
       },
-      value: "priceProposals"
+      value: "priceProposals",
     },
     {
       name: {
         en: "Restricted tender",
         ro: "Licitație limitată",
-        ru: "Торги с ограниченным участием"
+        ru: "Торги с ограниченным участием",
       },
-      value: "priceProposalsNoPublication"
+      value: "priceProposalsNoPublication",
     },
     {
       name: {
         en: "Negotiatian without prior publication of a contract notice",
         ro: "Negociere fără publicarea prealabilă a unui anunț de participare",
-        ru: "Переговоры без предварительного опубликования объявления на участие"
+        ru: "Переговоры без предварительного опубликования объявления на участие",
       },
-      value: "negotiationNoPublication"
+      value: "negotiationNoPublication",
     },
     {
       name: {
         en: "Negotiatian with prior publication of a contract notice",
         ro: "Negocierea cu publicarea preliminară a unui anunț de participare",
-        ru: "Переговоры с предварительным опубликованием объявления на участие"
+        ru: "Переговоры с предварительным опубликованием объявления на участие",
       },
-      value: "negotiation"
-    }
+      value: "negotiation",
+    },
   ],
   tenders: [
     {
       name: {
         en: "Negotiation with one or Negotiation with several",
         ro: "Procedura negocieri fără publicare",
-        ru: "Переговоры без публикации"
+        ru: "Переговоры без публикации",
       },
-      value: "reporting"
+      value: "reporting",
     },
     {
       name: {
         en: "Low value procedure",
         ro: "Achiziții de valoare mică",
-        ru: "Закупка малой стоимости"
+        ru: "Закупка малой стоимости",
       },
-      value: "mv"
+      value: "mv",
     },
     {
       name: {
         en: "Request for quotation",
         ro: "Cerere Oferte de Prețuri",
-        ru: "Запрос ценовых оферт"
+        ru: "Запрос ценовых оферт",
       },
-      value: "sv"
+      value: "sv",
     },
     {
       name: {
         en: "Open Tender",
         ro: "Licitație deschisă",
-        ru: "Открытые торги"
+        ru: "Открытые торги",
       },
-      value: "ot"
-    }
+      value: "ot",
+    },
   ],
   contracts: [
     {
       name: {
         en: "Low value procedure",
         ro: "Achiziții de valoare mică",
-        ru: "Закупка малой стоимости"
+        ru: "Закупка малой стоимости",
       },
-      value: "mv"
+      value: "mv",
     },
     {
       name: {
         en: "Request for Proposals",
         ro: "Cerere Oferte de Prețuri",
-        ru: "Запрос ценовых оферт"
+        ru: "Запрос ценовых оферт",
       },
-      value: "sv"
+      value: "sv",
     },
     {
       name: {
         en: "Open Tender",
         ro: "Licitație deschisă",
-        ru: "Открытые торги"
+        ru: "Открытые торги",
       },
-      value: "ot"
-    }
-  ]
+      value: "ot",
+    },
+  ],
 };

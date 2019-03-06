@@ -2,27 +2,16 @@
   <div class="list-page">
     <el-container direction="vertical">
       <div class="search-form-wp">
-        <component :is="renderSearchForm" class="search-form" :isExpanded="isExpanded"/>
+        <component :is="renderSearchForm" class="search-form" :isExpanded="isExpanded" />
         <button class="search-form__btn search-form__btn_more" @click="actionExpand">
-          <i :class="['icon-right', isExpanded ? 'el-icon-arrow-up' : 'el-icon-arrow-down']"/>
+          <i :class="['icon-right', isExpanded ? 'el-icon-arrow-up' : 'el-icon-arrow-down']" />
           {{ isExpanded ? $t("search.lessCriterions") : $t("search.moreCriterions") }}
-          <i
-            :class="['icon-left', isExpanded ? 'el-icon-arrow-up' : 'el-icon-arrow-down']"
-          />
+          <i :class="['icon-left', isExpanded ? 'el-icon-arrow-up' : 'el-icon-arrow-down']" />
         </button>
       </div>
-      <search-status-bar :entity="entityName" :needPagination="needPagination"/>
-      <transition-group
-        @before-enter="beforeEnter"
-        @enter="enter"
-        @leave="leave"
-        id="transition-group"
-      >
-        <ul
-          v-if="entities[entityName].loaded && entities[entityName].list.length"
-          :key="'list'"
-          class="list"
-        >
+      <search-status-bar :entity="entityName" :needPagination="needPagination" />
+      <transition-group @before-enter="beforeEnter" @enter="enter" @leave="leave" id="transition-group">
+        <ul v-if="entities[entityName].loaded && entities[entityName].list.length" :key="'list'" class="list">
           <component
             :is="renderCard"
             v-for="entity of entities[entityName].list"
@@ -35,17 +24,15 @@
           class="list__no-data-title"
           v-if="entities[entityName].loaded && !entities[entityName].list.length && !entities[entityName].error.status"
           :key="'no-data'"
-        >{{$t("search.list_no_data")}}</div>
-        <div
-          class="list__error"
-          v-if="entities[entityName].loaded && entities[entityName].error.status"
-          :key="'error'"
         >
+          {{ $t("search.list_no_data") }}
+        </div>
+        <div class="list__error" v-if="entities[entityName].loaded && entities[entityName].error.status" :key="'error'">
           <div class="list__error-message">{{ entities[entityName].error.message }}</div>
-          <button class="list__refresh-btn" @click="getList">{{$t("search.list_refresh")}}</button>
+          <button class="list__refresh-btn" @click="getList">{{ $t("search.list_refresh") }}</button>
         </div>
         <template v-if="!entities[entityName].loaded">
-          <stub-card v-for="item of 3" :key="item"/>
+          <stub-card v-for="item of 3" :key="item" />
         </template>
       </transition-group>
       <list-pagination
@@ -101,11 +88,11 @@ export default {
     "plans-card": PlansCard,
     "contracts-card": ContractsCard,
 
-    "list-pagination": ListPagination
+    "list-pagination": ListPagination,
   },
   data() {
     return {
-      isExpanded: false
+      isExpanded: false,
     };
   },
   created() {
@@ -122,16 +109,13 @@ export default {
     if (entityName === "tenders") {
       const { query } = this.$route;
 
-      if (
-        query.procedures &&
-        (query.procedures === "new" || query.procedures === "bidding")
-      ) {
+      if (query.procedures && (query.procedures === "new" || query.procedures === "bidding")) {
         if (query.procedures === "new") {
           this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
             entityName: "tenders",
             params: {
-              proceduresStatuses: ["published", "clarification", "suspended"]
-            }
+              proceduresStatuses: ["published", "clarification", "suspended"],
+            },
           });
         }
 
@@ -139,8 +123,8 @@ export default {
           this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
             entityName: "tenders",
             params: {
-              proceduresStatuses: ["tendering"]
-            }
+              proceduresStatuses: ["tendering"],
+            },
           });
         }
       } else {
@@ -160,7 +144,7 @@ export default {
         budgets: "budgets-search-form",
         plans: "plans-search-form",
         tenders: "tenders-search-form",
-        contracts: "contracts-search-form"
+        contracts: "contracts-search-form",
       };
 
       return mappedEntitiesForms[this.entityName] || "div";
@@ -170,26 +154,21 @@ export default {
         budgets: "budgets-card",
         plans: "plans-card",
         tenders: "tenders-card",
-        contracts: "contracts-card"
+        contracts: "contracts-card",
       };
 
       return mappedEntitiesCard[this.entityName] || "li";
     },
     needPagination() {
       const entityInfoObj = this.entities[this.entityName];
-      return !!(
-        entityInfoObj.paginationInfo.pageCount !== 1 &&
-        entityInfoObj.list.length
-      );
-    }
+      return !!(entityInfoObj.paginationInfo.pageCount !== 1 && entityInfoObj.list.length);
+    },
   },
   methods: {
     getList() {
       this.$store.dispatch(FETCH_ENTITY_LIST, {
-        params: convertObjectToQueryParamsString(
-          this.$store.state.entities[this.entityName].searchParams
-        ),
-        entityName: this.entityName
+        params: convertObjectToQueryParamsString(this.$store.state.entities[this.entityName].searchParams),
+        entityName: this.entityName,
       });
     },
 
@@ -205,8 +184,8 @@ export default {
       this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
         entityName: this.entityName,
         params: {
-          page
-        }
+          page,
+        },
       });
     },
 
@@ -227,21 +206,21 @@ export default {
       setTimeout(() => {
         Velocity(el, { opacity: 0, height: 0 }, { complete: done });
       }, delay);
-    }
+    },
   },
   watch: {
-    entityName: "getList"
+    entityName: "getList",
   },
   destroyed() {
     if (this.entityName === "tenders" && this.$route.query.procedures) {
       this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
         entityName: "tenders",
         params: {
-          proceduresStatuses: []
-        }
+          proceduresStatuses: [],
+        },
       });
     }
-  }
+  },
 };
 </script>
 

@@ -4,111 +4,111 @@ export default {
       name: {
         en: "Planning",
         ro: "Planificare",
-        ru: "Планирование"
+        ru: "Планирование",
       },
-      value: "planning"
-    }
+      value: "planning",
+    },
   ],
   plans: [
     {
       name: {
         en: "Planning notice",
         ro: "Anunț de planificare",
-        ru: "Сообщение о планировании"
+        ru: "Сообщение о планировании",
       },
-      value: "planning notice"
-    }
+      value: "planning notice",
+    },
   ],
   tenders: [
     {
       name: {
         en: "Published",
         ro: "Postat",
-        ru: "Опубликовано"
+        ru: "Опубликовано",
       },
-      value: "published"
+      value: "published",
     },
     {
       name: {
         en: "Enquiries in progress ",
         ro: "Solicitare сlarificări",
-        ru: "Период уточнений"
+        ru: "Период уточнений",
       },
-      value: "clarification"
+      value: "clarification",
     },
     {
       name: {
         en: "Bidding in progress",
         ro: "Depunerea ofertelor",
-        ru: "Подача предложений"
+        ru: "Подача предложений",
       },
-      value: "tendering"
+      value: "tendering",
     },
     {
       name: {
         en: "Auction in progress",
         ro: "Perioada de licitare",
-        ru: "Период аукциона"
+        ru: "Период аукциона",
       },
-      value: "auction"
+      value: "auction",
     },
     {
       name: {
         en: "Qualification of bidders",
         ro: "Calificarea ofertanților",
-        ru: "Квалификация офертантов"
+        ru: "Квалификация офертантов",
       },
-      value: "awarding"
+      value: "awarding",
     },
     {
       name: {
         en: "Standstill period",
         ro: "Perioada de așteptare",
-        ru: "Период ожидания"
+        ru: "Период ожидания",
       },
-      value: "suspended"
+      value: "suspended",
     },
     {
       name: {
         en: "Awarded",
         ro: "Ofertele a fost revizuite",
-        ru: "Победитель определен"
+        ru: "Победитель определен",
       },
-      value: "awarded"
+      value: "awarded",
     },
     {
       name: {
         en: "Tender completed",
         ro: "Procedură finalizată",
-        ru: "Закупка завершена"
+        ru: "Закупка завершена",
       },
-      value: "complete"
+      value: "complete",
     },
     {
       name: {
         en: "Cancelled tender",
         ro: "Procedură anulată",
-        ru: "Закупка отменена"
+        ru: "Закупка отменена",
       },
-      value: "cancelled"
+      value: "cancelled",
     },
     {
       name: {
         en: "Unsuccessful Tender",
         ro: "Procedura nu a avut loc",
-        ru: "Закупка не состоялась"
+        ru: "Закупка не состоялась",
       },
-      value: "unsuccessful"
-    }
+      value: "unsuccessful",
+    },
   ],
   contracts: [
     {
       name: {
         en: "Execution",
         ro: "Execuţie",
-        ru: "Выполненый"
+        ru: "Выполненый",
       },
-      value: "execution"
-    }
-  ]
+      value: "execution",
+    },
+  ],
 };

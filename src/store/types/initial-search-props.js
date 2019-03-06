@@ -20,7 +20,7 @@ export default {
     periodPlanning: [],
 
     page: 1,
-    pageSize: 10
+    pageSize: 10,
   },
   plans: {
     titlesOrDescriptions: "",
@@ -50,7 +50,7 @@ export default {
     tags: [],
 
     page: 1,
-    pageSize: 10
+    pageSize: 10,
   },
   tenders: {
     titlesOrDescriptions: "",
@@ -83,7 +83,7 @@ export default {
     buyersMainSectoralActivities: [],
 
     page: 1,
-    pageSize: 10
+    pageSize: 10,
   },
   contracts: {
     titlesOrDescriptions: "",
@@ -116,6 +116,6 @@ export default {
 
     tags: [],
     page: 1,
-    pageSize: 10
-  }
+    pageSize: 10,
+  },
 };

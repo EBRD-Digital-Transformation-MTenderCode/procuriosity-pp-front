@@ -1,15 +1,12 @@
 <template>
-  <el-collapse-item
-      :name="1"
-  >
+  <el-collapse-item :name="1">
     <template slot="title">
-
       <div class="info-blocks accordion-header">
         <div class="info-block">
           <el-row :gutter="15">
             <el-col :sm="2">
               <div class="info-block__text info-block__text_bold">
-                {{index+1}}
+                {{ index + 1 }}
               </div>
             </el-col>
             <el-col :sm="10">
@@ -38,7 +35,6 @@
     </template>
 
     <transition name="fade" mode="out-in" appear>
-
       <div class="info-blocks">
         <el-row :gutter="15">
           <el-col :sm="2">
@@ -109,43 +105,39 @@
           </el-col>
         </el-row>
       </div>
-
     </transition>
   </el-collapse-item>
 </template>
 
 <script>
-  import {
-    getDataFromObject,
-    formatAmount,
-  } from "./../../../../utils";
+import { getDataFromObject, formatAmount } from "./../../../../utils";
 
-  export default {
-    name: "SpendingItem",
-    props: {
-      procedure: {
-        type: Object,
-        required: true
-      },
-      index: {
-        type: Number,
-        required: true
-      },
-      activeItemId: {
-        type: String,
-        required: true
-      }
+export default {
+  name: "SpendingItem",
+  props: {
+    procedure: {
+      type: Object,
+      required: true,
     },
-      methods: {
-        gd(...args) {
-          return getDataFromObject(...args);
-        },
-        fd(...ars) {
-          return formatDate(...ars);
-        },
-        fa(amount) {
-          return formatAmount(amount);
-        },
-      }
-  }
+    index: {
+      type: Number,
+      required: true,
+    },
+    activeItemId: {
+      type: String,
+      required: true,
+    },
+  },
+  methods: {
+    gd(...args) {
+      return getDataFromObject(...args);
+    },
+    fd(...ars) {
+      return formatDate(...ars);
+    },
+    fa(amount) {
+      return formatAmount(amount);
+    },
+  },
+};
 </script>

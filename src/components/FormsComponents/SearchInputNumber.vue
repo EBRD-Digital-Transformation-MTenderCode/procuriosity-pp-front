@@ -17,36 +17,36 @@ export default {
   props: {
     name: {
       type: String,
-      required: true
+      required: true,
     },
     value: {
-      required: true
+      required: true,
     },
     setValue: {
       type: Function,
-      required: true
+      required: true,
     },
     label: {
-      type: String
+      type: String,
     },
     placeholder: {
-      type: String
-    }
+      type: String,
+    },
   },
   data() {
     return {
-      localValue: this.value || undefined
+      localValue: this.value || undefined,
     };
   },
   methods: {
     handleChange(name, value) {
       this.setValue(name, value && undefined);
-    }
+    },
   },
   watch: {
     value(newVal) {
       this.localValue = newVal;
-    }
-  }
+    },
+  },
 };
 </script>

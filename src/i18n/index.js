@@ -10,7 +10,7 @@ export const defaultLocale = "ro";
 
 export default new VueI18n({
   locale: defaultLocale,
-  messages
+  messages,
 });
 
 axios.defaults.headers.common["Accept-Language"] = defaultLocale;
