@@ -16,11 +16,7 @@
         <el-col :xs="24" :sm="14">
           <div class="entity-title">
             <router-link
-              :to="
-                `${
-                  $i18n.locale !== 'ro' ? `/${$i18n.locale}` : ''
-                }/budgets/${id}`
-              "
+              :to="`${$i18n.locale !== 'ro' ? `/${$i18n.locale}` : ''}/budgets/${id}`"
               data-link
               class="entity-title"
             >
@@ -33,18 +29,12 @@
         </el-col>
         <el-col :xs="24" :sm="6">
           <div class="entity-amount" v-if="amount">
-            <div class="entity-amount__text">
-              {{ $t("budget.value") }} ({{ currency ? currency : "MDL" }})
-            </div>
+            <div class="entity-amount__text">{{ $t("budget.value") }} ({{ currency ? currency : "MDL" }})</div>
             <div class="entity-amount__number">
-              <span
-                class="whole"
-                :style="wholeAmount.length > 10 ? 'font-size: 30px' : ''"
+              <span class="whole" :style="wholeAmount.length > 10 ? 'font-size: 30px' : ''"
                 >{{ wholeAmount }}<span v-if="fractionAmount">.</span></span
               >
-              <span v-if="fractionAmount" class="fraction">{{
-                fractionAmount
-              }}</span>
+              <span v-if="fractionAmount" class="fraction">{{ fractionAmount }}</span>
             </div>
           </div>
           <div class="entity-amount__number" v-else>
@@ -53,9 +43,7 @@
           <div>
             <div class="entity-period-planning">
               <div class="title">{{ $t("budget.period_planning") }}</div>
-              <div class="text">
-                {{ periodPlanningFrom }} - {{ periodPlanningTo }}
-              </div>
+              <div class="text">{{ periodPlanningFrom }} - {{ periodPlanningTo }}</div>
             </div>
           </div>
         </el-col>
@@ -94,12 +82,12 @@ export default {
   props: {
     entity: {
       type: Object,
-      required: true
+      required: true,
     },
     needLink: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   computed: {
     parseBudgetStatusText() {
@@ -130,16 +118,10 @@ export default {
       const amountStr = getDataFromObject(this.entity, _ => _.amount, 0)
         .toString()
         .replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-      return /\./.test(amountStr)
-        ? amountStr.slice(0, amountStr.indexOf("."))
-        : amountStr;
+      return /\./.test(amountStr) ? amountStr.slice(0, amountStr.indexOf(".")) : amountStr;
     },
     fractionAmount() {
-      const amountStr = getDataFromObject(
-        this.entity,
-        _ => _.amount,
-        0
-      ).toString();
+      const amountStr = getDataFromObject(this.entity, _ => _.amount, 0).toString();
       return /\./.test(amountStr)
         ? amountStr.slice(amountStr.indexOf(".") + 1).length === 1
           ? amountStr.slice(amountStr.indexOf(".") + 1) + "0"
@@ -159,18 +141,14 @@ export default {
       return getDataFromObject(this.entity, _ => _.classifications).join(",");
     },
     periodPlanningFrom() {
-      return formatDate(
-        getDataFromObject(this.entity, _ => _.periodPlanningFrom)
-      );
+      return formatDate(getDataFromObject(this.entity, _ => _.periodPlanningFrom));
     },
     periodPlanningTo() {
-      return formatDate(
-        getDataFromObject(this.entity, _ => _.periodPlanningTo)
-      );
+      return formatDate(getDataFromObject(this.entity, _ => _.periodPlanningTo));
     },
     id() {
       return getDataFromObject(this.entity, _ => _.id);
-    }
-  }
+    },
+  },
 };
 </script>

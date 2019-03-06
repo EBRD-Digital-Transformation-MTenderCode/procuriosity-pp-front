@@ -1,18 +1,23 @@
 <template>
   <div>
-    <div class="entity-nav" data-scroll-spy-id="clarification" v-scroll-spy-active="{selector: 'a', class: 'active'}"
-         v-scroll-spy-link>
+    <div
+      class="entity-nav"
+      data-scroll-spy-id="clarification"
+      v-scroll-spy-active="{ selector: 'a', class: 'active' }"
+      v-scroll-spy-link
+    >
       <a>{{ $t("tender.clarification") }}</a>
       <a>{{ $t("tender.modification_documents") }}</a>
     </div>
-    <div class="info" data-scroll-spy-id="clarification" v-scroll-spy="{offset: 75, allowNoActive: true}">
+    <div class="info" data-scroll-spy-id="clarification" v-scroll-spy="{ offset: 75, allowNoActive: true }">
       <div>
         <div class="info__title">{{ $t("tender.clarification") }}</div>
         <div v-if="evRecord.tender.hasOwnProperty('enquiries')">
-          <div class="info-blocks info-blocks__questions"
-               v-for="(question, index) of gd(evRecord, _ => _.tender.enquiries, [])"
-               :key="question.id + index"
-               :name="question.id + index"
+          <div
+            class="info-blocks info-blocks__questions"
+            v-for="(question, index) of gd(evRecord, _ => _.tender.enquiries, [])"
+            :key="question.id + index"
+            :name="question.id + index"
           >
             <div class="info-block">
               <el-row :gutter="25">
@@ -81,9 +86,11 @@
         <div v-if="evRecord.tender.hasOwnProperty('amendments')">
           <div class="info-blocks">
             <div
-                class="info-block"
-                v-for="amendment of [...gd(evRecord, _ => _.tender.amendments, [])].sort((amendmentA, amendmentB) => +(new Date(amendmentB.date)) - +(new Date(amendmentA.date)))"
-                :key="amendment.id"
+              class="info-block"
+              v-for="amendment of [...gd(evRecord, _ => _.tender.amendments, [])].sort(
+                (amendmentA, amendmentB) => +new Date(amendmentB.date) - +new Date(amendmentA.date)
+              )"
+              :key="amendment.id"
             >
               <el-row :gutter="25">
                 <el-col :sm="16">
@@ -111,25 +118,25 @@
 </template>
 
 <script>
-  import { getDataFromObject, formatDate, transformSpecialSymbols } from "./../../../../utils";
+import { getDataFromObject, formatDate, transformSpecialSymbols } from "./../../../../utils";
 
-  export default {
-    name: "Clarification",
-    props: {
-      evRecord: {
-        type: Object
-      }
+export default {
+  name: "Clarification",
+  props: {
+    evRecord: {
+      type: Object,
     },
-    methods: {
-      gd(...args) {
-        return getDataFromObject(...args);
-      },
-      fd(...ars) {
-        return formatDate(...ars);
-      },
-      transformSS(str) {
-        return transformSpecialSymbols(str);
-      }
-    }
-  };
+  },
+  methods: {
+    gd(...args) {
+      return getDataFromObject(...args);
+    },
+    fd(...ars) {
+      return formatDate(...ars);
+    },
+    transformSS(str) {
+      return transformSpecialSymbols(str);
+    },
+  },
+};
 </script>

@@ -22,22 +22,22 @@ export default {
   props: {
     name: {
       type: String,
-      required: true
+      required: true,
     },
     values: {
       type: Array,
-      required: true
+      required: true,
     },
     setValues: {
       type: Function,
-      required: true
+      required: true,
     },
     label: {
-      type: String
+      type: String,
     },
     placeholder: {
-      type: String
-    }
-  }
+      type: String,
+    },
+  },
 };
 </script>

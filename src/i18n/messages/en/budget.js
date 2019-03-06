@@ -48,5 +48,5 @@ export default {
   verified: "Verified",
   not_verified: "Not verified",
   yes: "Yes",
-  no: "No"
+  no: "No",
 };

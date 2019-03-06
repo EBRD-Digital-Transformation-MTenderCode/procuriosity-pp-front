@@ -1,9 +1,7 @@
 <template>
-  <el-button
-    class="search-form__btn search-form__btn_reset"
-    type="danger"
-    @click="reset"
-  >{{$t("search.reset_button")}}</el-button>
+  <el-button class="search-form__btn search-form__btn_reset" type="danger" @click="reset">{{
+    $t("search.reset_button")
+  }}</el-button>
 </template>
 
 <script>
@@ -14,15 +12,15 @@ export default {
   props: {
     entity: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
     reset() {
       this.$store.commit(SET_INITIAL_SEARCH_PARAMS, {
-        entityName: this.entity
+        entityName: this.entity,
       });
-    }
-  }
+    },
+  },
 };
 </script>

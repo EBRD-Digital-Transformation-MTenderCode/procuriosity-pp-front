@@ -18,37 +18,37 @@ export default {
   props: {
     name: {
       type: String,
-      required: true
+      required: true,
     },
     value: {
       type: String,
-      required: true
+      required: true,
     },
     setValue: {
       type: Function,
-      required: true
+      required: true,
     },
     label: {
-      type: String
+      type: String,
     },
     placeholder: {
-      type: String
-    }
+      type: String,
+    },
   },
   data() {
     return {
-      localValue: this.value
+      localValue: this.value,
     };
   },
   methods: {
     handleChange(name, value) {
       this.setValue(name, value.trim());
-    }
+    },
   },
   watch: {
     value(newVal) {
       this.localValue = newVal;
-    }
-  }
+    },
+  },
 };
 </script>

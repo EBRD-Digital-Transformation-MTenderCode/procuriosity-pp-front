@@ -1,7 +1,13 @@
 import axios from "axios";
 import VueI18n from "./../i18n/index";
 
-import { getListConfig, getBudgetConfig, getTenderConfig, getContractConfig, getPlanConfig } from "./../configs/requests-configs";
+import {
+  getListConfig,
+  getBudgetConfig,
+  getTenderConfig,
+  getContractConfig,
+  getPlanConfig,
+} from "./../configs/requests-configs";
 
 import initialSearchProps from "./types/initial-search-props";
 
@@ -62,7 +68,7 @@ export default {
         cdb: "",
         entityData: {
           EI: {},
-          FSs: []
+          FSs: [],
         },
       },
       paginationInfo: {
@@ -266,26 +272,25 @@ export default {
       });
       try {
         const { data } = await axios(getBudgetConfig(id));
-        const entityData = data.records.reduce((acc, record) => {
-          if (record.ocid.match(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/)) {
-            return {
-              ...acc,
-              EI: record
-            };
+        const entityData = data.records.reduce(
+          (acc, record) => {
+            if (record.ocid.match(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/)) {
+              return {
+                ...acc,
+                EI: record,
+              };
+            } else {
+              return {
+                ...acc,
+                FSs: [...acc.FSs, record],
+              };
+            }
+          },
+          {
+            EI: {},
+            FSs: [],
           }
-          else {
-            return {
-              ...acc,
-              FSs: [
-                ...acc.FSs,
-                record
-              ]
-            };
-          }
-        }, {
-          EI: {},
-          FSs: []
-        });
+        );
         commit(SET_CURRENT_ENTITY_INFO, {
           entityName,
           cdb: MTENDER2,
@@ -395,7 +400,7 @@ export default {
           if (Object.keys(res.data).length) {
             const tenderRecords = res.data.records;
 
-            tenderRecords.forEach((record) => {
+            tenderRecords.forEach(record => {
               if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/) !== -1) {
                 Object.assign(MSRecord, record);
               }
@@ -543,7 +548,7 @@ export default {
           if (Object.keys(res.data).length) {
             const tenderRecords = res.data.records;
 
-            tenderRecords.forEach((record) => {
+            tenderRecords.forEach(record => {
               if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/) !== -1) {
                 Object.assign(MSRecord, record);
               }

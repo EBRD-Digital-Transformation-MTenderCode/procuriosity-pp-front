@@ -27,19 +27,19 @@ export default {
   props: {
     name: {
       type: String,
-      required: true
+      required: true,
     },
     value: {
       type: null,
-      required: true
+      required: true,
     },
     setValue: {
       type: Function,
-      required: true
+      required: true,
     },
     label: {
-      type: String
-    }
+      type: String,
+    },
   },
   computed: {
     inputValue: {
@@ -59,18 +59,14 @@ export default {
           const endDate = period[1];
 
           this.setValue(this.name, [
-            dayjs(convertStringDateToUTCDateObject(startDate)).format(
-              "YYYY-MM-DDTHH:mm:ss"
-            ) + "Z",
-            dayjs(convertStringDateToUTCDateObject(endDate)).format(
-              "YYYY-MM-DDTHH:mm:ss"
-            ) + "Z"
+            dayjs(convertStringDateToUTCDateObject(startDate)).format("YYYY-MM-DDTHH:mm:ss") + "Z",
+            dayjs(convertStringDateToUTCDateObject(endDate)).format("YYYY-MM-DDTHH:mm:ss") + "Z",
           ]);
         } else {
           this.setValue(this.name, []);
         }
-      }
-    }
-  }
+      },
+    },
+  },
 };
 </script>

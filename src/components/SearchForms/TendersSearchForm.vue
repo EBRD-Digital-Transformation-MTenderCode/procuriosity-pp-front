@@ -68,12 +68,8 @@
                     :items="mainGeneralActivityList"
                     :values="buyersMainGeneralActivities"
                     :setValues="setFormParams"
-                    :label="
-                      $t('search.buyers_main_general_activity_placeholder')
-                    "
-                    :placeholder="
-                      $t('search.buyers_main_general_activity_placeholder')
-                    "
+                    :label="$t('search.buyers_main_general_activity_placeholder')"
+                    :placeholder="$t('search.buyers_main_general_activity_placeholder')"
                   />
                 </div>
 
@@ -84,12 +80,8 @@
                     :items="mainSectoralActivityList"
                     :values="buyersMainSectoralActivities"
                     :setValues="setFormParams"
-                    :label="
-                      $t('search.buyers_main_sectoral_activity_placeholder')
-                    "
-                    :placeholder="
-                      $t('search.buyers_main_sectoral_activity_placeholder')
-                    "
+                    :label="$t('search.buyers_main_sectoral_activity_placeholder')"
+                    :placeholder="$t('search.buyers_main_sectoral_activity_placeholder')"
                   />
                 </div>
               </div>
@@ -298,28 +290,23 @@ export default {
     "search-classifications": SearchClassifications,
     "search-period": SearchPeriods,
     "multiple-input": MultipleInput,
-    "reset-button": ResetButton
+    "reset-button": ResetButton,
   },
   props: {
     isExpanded: {
       type: Boolean,
-      required: true
-    }
+      required: true,
+    },
   },
   created() {
     if (
       this.$route.query.procedures &&
-      (this.$route.query.procedures === "new" ||
-        this.$route.query.procedures === "bidding")
+      (this.$route.query.procedures === "new" || this.$route.query.procedures === "bidding")
     ) {
       this.procedures = this.$route.query.procedures;
 
       if (this.$route.query.procedures === "new") {
-        initialSearchProps.tenders.proceduresStatuses = [
-          "published",
-          "clarification",
-          "suspended"
-        ];
+        initialSearchProps.tenders.proceduresStatuses = ["published", "clarification", "suspended"];
       }
 
       if (this.$route.query.procedures === "bidding") {
@@ -334,62 +321,43 @@ export default {
       proceduresStatusesList: proceduresStatusesList["tenders"],
       buyersTypesList,
       mainGeneralActivityList,
-      mainSectoralActivityList
+      mainSectoralActivityList,
     };
   },
   computed: {
     ...mapState({
-      /* + */ titlesOrDescriptions: state =>
-        state.entities.tenders.searchParams.titlesOrDescriptions,
-      /* + */ titlesOrDescriptionsStrict: state =>
-        state.entities.tenders.searchParams.titlesOrDescriptionsStrict,
+      /* + */ titlesOrDescriptions: state => state.entities.tenders.searchParams.titlesOrDescriptions,
+      /* + */ titlesOrDescriptionsStrict: state => state.entities.tenders.searchParams.titlesOrDescriptionsStrict,
 
-      /* + */ buyersRegions: state =>
-        state.entities.tenders.searchParams.buyersRegions,
-      /* + */ deliveriesRegions: state =>
-        state.entities.tenders.searchParams.deliveriesRegions,
+      /* + */ buyersRegions: state => state.entities.tenders.searchParams.buyersRegions,
+      /* + */ deliveriesRegions: state => state.entities.tenders.searchParams.deliveriesRegions,
 
-      /* + */ proceduresTypes: state =>
-        state.entities.tenders.searchParams.proceduresTypes,
-      /* + */ proceduresStatuses: state =>
-        state.entities.tenders.searchParams.proceduresStatuses,
+      /* + */ proceduresTypes: state => state.entities.tenders.searchParams.proceduresTypes,
+      /* + */ proceduresStatuses: state => state.entities.tenders.searchParams.proceduresStatuses,
 
       /* + */ entityId: state => state.entities.tenders.searchParams.entityId,
 
-      /* + */ amountFrom: state =>
-        state.entities.tenders.searchParams.amountFrom,
+      /* + */ amountFrom: state => state.entities.tenders.searchParams.amountFrom,
       /* + */ amountTo: state => state.entities.tenders.searchParams.amountTo,
 
-      /* + */ classifications: state =>
-        state.entities.tenders.searchParams.classifications,
+      /* + */ classifications: state => state.entities.tenders.searchParams.classifications,
 
-      /* + */ periodPublished: state =>
-        state.entities.tenders.searchParams.periodPublished,
-      /* + */ periodDelivery: state =>
-        state.entities.tenders.searchParams.periodDelivery,
-      /* + */ periodEnquiry: state =>
-        state.entities.tenders.searchParams.periodEnquiry,
-      /* + */ periodOffer: state =>
-        state.entities.tenders.searchParams.periodOffer,
-      /* + */ periodAuction: state =>
-        state.entities.tenders.searchParams.periodAuction,
-      /* + */ periodAward: state =>
-        state.entities.tenders.searchParams.periodAward,
+      /* + */ periodPublished: state => state.entities.tenders.searchParams.periodPublished,
+      /* + */ periodDelivery: state => state.entities.tenders.searchParams.periodDelivery,
+      /* + */ periodEnquiry: state => state.entities.tenders.searchParams.periodEnquiry,
+      /* + */ periodOffer: state => state.entities.tenders.searchParams.periodOffer,
+      /* + */ periodAuction: state => state.entities.tenders.searchParams.periodAuction,
+      /* + */ periodAward: state => state.entities.tenders.searchParams.periodAward,
 
-      /* + */ buyersNames: state =>
-        state.entities.tenders.searchParams.buyersNames,
-      /* + */ buyersIdentifiers: state =>
-        state.entities.tenders.searchParams.buyersIdentifiers,
-      /* + */ buyersTypes: state =>
-        state.entities.tenders.searchParams.buyersTypes,
-      /* + */ buyersMainGeneralActivities: state =>
-        state.entities.tenders.searchParams.buyersMainGeneralActivities,
-      /* + */ buyersMainSectoralActivities: state =>
-        state.entities.tenders.searchParams.buyersMainSectoralActivities,
+      /* + */ buyersNames: state => state.entities.tenders.searchParams.buyersNames,
+      /* + */ buyersIdentifiers: state => state.entities.tenders.searchParams.buyersIdentifiers,
+      /* + */ buyersTypes: state => state.entities.tenders.searchParams.buyersTypes,
+      /* + */ buyersMainGeneralActivities: state => state.entities.tenders.searchParams.buyersMainGeneralActivities,
+      /* + */ buyersMainSectoralActivities: state => state.entities.tenders.searchParams.buyersMainSectoralActivities,
 
       regionsList: state => state.mdm[REGIONS],
-      CPVCodesList: state => state.mdm[CPV_CODES]
-    })
+      CPVCodesList: state => state.mdm[CPV_CODES],
+    }),
   },
   methods: {
     setFormParams(name, value) {
@@ -400,28 +368,28 @@ export default {
           params = {
             page: 1,
             [name]: value,
-            proceduresStatuses: ["published", "clarification", "suspended"]
+            proceduresStatuses: ["published", "clarification", "suspended"],
           };
           break;
         case "bidding":
           params = {
             page: 1,
             [name]: value,
-            proceduresStatuses: ["tendering"]
+            proceduresStatuses: ["tendering"],
           };
           break;
         default:
           params = {
             page: 1,
-            [name]: value
+            [name]: value,
           };
       }
 
       this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
         entityName: "tenders",
-        params
+        params,
       });
-    }
+    },
   },
   destroyed() {
     if (this.procedures !== "all") {
@@ -431,6 +399,6 @@ export default {
       localStorageEntities.tenders.proceduresStatuses = [];
       localStorage.setItem("entities", JSON.stringify(localStorageEntities));
     }
-  }
+  },
 };
 </script>

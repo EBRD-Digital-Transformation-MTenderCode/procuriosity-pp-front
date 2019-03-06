@@ -1,7 +1,7 @@
 <template>
   <div class="list__status-bar">
     <div class="list__status-bar__text">
-      {{$t("search.list_total_found")}}:
+      {{ $t("search.list_total_found") }}:
       <span class="list__status-bar_count">{{ entities[entity].paginationInfo.totalCount }}</span>
     </div>
     <page-number
@@ -24,19 +24,19 @@ export default {
   props: {
     entity: {
       type: String,
-      required: true
+      required: true,
     },
     needPagination: {
       type: Boolean,
-      required: true
-    }
+      required: true,
+    },
   },
   components: {
-    "page-number": PageNumber
+    "page-number": PageNumber,
   },
   computed: {
-    ...mapState(["entities"])
-  }
+    ...mapState(["entities"]),
+  },
 };
 </script>
 

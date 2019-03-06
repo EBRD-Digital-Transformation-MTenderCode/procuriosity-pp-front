@@ -17,7 +17,7 @@
       @blur="clearItems"
       @change="setValues(name, $event)"
     >
-      <el-option v-for="item of items" :key="item.value" :label="item.label" :value="item.value"/>
+      <el-option v-for="item of items" :key="item.value" :label="item.label" :value="item.value" />
     </el-select>
   </div>
 </template>
@@ -32,40 +32,40 @@ export default {
   props: {
     name: {
       type: String,
-      required: true
+      required: true,
     },
     items: {
-      type: Array
+      type: Array,
     },
     values: {
       type: Array,
-      required: true
+      required: true,
     },
     setValues: {
       type: Function,
-      required: true
+      required: true,
     },
     label: {
-      type: String
+      type: String,
     },
     placeholder: {
-      type: String
-    }
+      type: String,
+    },
   },
   methods: {
     getOptions(val) {
       if (val && val.length >= 3) {
         this.$store.dispatch(FETCH_CPV_CODES, {
           lang: this.$i18n.locale,
-          idOrName: val
+          idOrName: val,
         });
       }
     },
     clearItems() {
       this.$store.commit(SET_CPV_CODES, {
-        CPVCodes: []
+        CPVCodes: [],
       });
-    }
-  }
+    },
+  },
 };
 </script>

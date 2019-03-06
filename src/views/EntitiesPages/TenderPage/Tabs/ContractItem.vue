@@ -1,7 +1,5 @@
 <template>
-  <el-collapse-item
-    :name="lot.id + index"
-  >
+  <el-collapse-item :name="lot.id + index">
     <template slot="title">
       <div class="info-blocks accordion-header">
         <div class="info-block">
@@ -27,15 +25,26 @@
 
         <div class="info-block">
           <el-row :gutter="15">
-            <el-col :sm="lot.status !== 'canceled' && lot.status !== 'unsuccessful' ? 16: 24">
+            <el-col :sm="lot.status !== 'canceled' && lot.status !== 'unsuccessful' ? 16 : 24">
               <div class="info-block__text">
-                {{ lot.status === "canceled" || lot.status === "unsuccessful" ? $t("tender.lot_is_not_awarded"): $t("tender.lot_is_awarded") }}
+                {{
+                  lot.status === "canceled" || lot.status === "unsuccessful"
+                    ? $t("tender.lot_is_not_awarded")
+                    : $t("tender.lot_is_awarded")
+                }}
               </div>
               <div v-if="lot.status !== 'canceled' && lot.status !== 'unsuccessful'" class="info-block__value">
-                {{ gd(gd(contractForCurrentLot, _ => _.relatedProcesses, []).find(proc => gd(proc, _ => _.relationship, []).some(relationship => relationship === "x_contracting")), _ => _.identifier) }}
+                {{
+                  gd(
+                    gd(contractForCurrentLot, _ => _.relatedProcesses, []).find(proc =>
+                      gd(proc, _ => _.relationship, []).some(relationship => relationship === "x_contracting")
+                    ),
+                    _ => _.identifier
+                  )
+                }}
               </div>
               <div v-else>
-                {{ lot.status === "canceled" ? $t("tender.lot_is_canceled"): $t("tender.no_tenderers_or_request") }}
+                {{ lot.status === "canceled" ? $t("tender.lot_is_canceled") : $t("tender.no_tenderers_or_request") }}
               </div>
             </el-col>
             <el-col :sm="8" v-if="lot.status !== 'canceled' && lot.status !== 'unsuccessful'">
@@ -52,55 +61,78 @@
     </template>
 
     <transition name="fade" mode="out-in" appear>
-      <div v-if="activeItemId === lot.id + index && (lot.status !== 'canceled')">
+      <div v-if="activeItemId === lot.id + index && lot.status !== 'canceled'">
         <div class="info-blocks">
           <div class="info__sub-title">{{ $t("tender.info_about_tenders") }}</div>
-            <el-row :gutter="15">
-              <el-col :sm="12">
-                <div class="info-block__text">{{ $t("tender.number_of_tenders_received")}}:</div>
-              </el-col>
-              <el-col :sm="12">
-                <div class="info-block__text">
-                  {{ gd(evRecord, _ => _.bids.details, []).filter(bid => gd(bid, _ => _.relatedLots[0]) === lot.id).length }}
-                </div>
-              </el-col>
-            </el-row>
+          <el-row :gutter="15">
+            <el-col :sm="12">
+              <div class="info-block__text">{{ $t("tender.number_of_tenders_received") }}:</div>
+            </el-col>
+            <el-col :sm="12">
+              <div class="info-block__text">
+                {{
+                  gd(evRecord, _ => _.bids.details, []).filter(bid => gd(bid, _ => _.relatedLots[0]) === lot.id).length
+                }}
+              </div>
+            </el-col>
+          </el-row>
 
-            <el-row :gutter="15">
-              <el-col :sm="12">
-                <div class="info-block__text">{{ $t("tender.number_of_tenders_received_from_SMEs")}}:</div>
-              </el-col>
-              <el-col :sm="12">
-                <div class="info-block__text">
-                  {{ gd(evRecord, _ => _.bids.details, []).filter(bid => gd(bid, _ => _.relatedLots[0]) === lot.id).filter(bid => gd(evRecord, _=> _.parties).find(part => part.id
-                  === bid.tenderers[0].id ).details.scale === "sme").length }}
-                </div>
-              </el-col>
-            </el-row>
+          <el-row :gutter="15">
+            <el-col :sm="12">
+              <div class="info-block__text">{{ $t("tender.number_of_tenders_received_from_SMEs") }}:</div>
+            </el-col>
+            <el-col :sm="12">
+              <div class="info-block__text">
+                {{
+                  gd(evRecord, _ => _.bids.details, [])
+                    .filter(bid => gd(bid, _ => _.relatedLots[0]) === lot.id)
+                    .filter(
+                      bid =>
+                        gd(evRecord, _ => _.parties).find(part => part.id === bid.tenderers[0].id).details.scale ===
+                        "sme"
+                    ).length
+                }}
+              </div>
+            </el-col>
+          </el-row>
 
-            <el-row :gutter="15">
-              <el-col :sm="12">
-                <div class="info-block__text">{{ $t("tender.number_of_tenders_received_from_residents")}}:</div>
-              </el-col>
-              <el-col :sm="12">
-                <div class="info-block__text">
-                  {{ gd(evRecord, _ => _.bids.details, []).filter(bid => gd(bid, _ => _.relatedLots[0]) === lot.id).filter(bid => gd(evRecord, _=> _.parties).find(part => part.id
-                  === bid.tenderers[0].id ).address.addressDetails.country.id === "MD").length }}
-                </div>
-              </el-col>
-            </el-row>
+          <el-row :gutter="15">
+            <el-col :sm="12">
+              <div class="info-block__text">{{ $t("tender.number_of_tenders_received_from_residents") }}:</div>
+            </el-col>
+            <el-col :sm="12">
+              <div class="info-block__text">
+                {{
+                  gd(evRecord, _ => _.bids.details, [])
+                    .filter(bid => gd(bid, _ => _.relatedLots[0]) === lot.id)
+                    .filter(
+                      bid =>
+                        gd(evRecord, _ => _.parties).find(part => part.id === bid.tenderers[0].id).address
+                          .addressDetails.country.id === "MD"
+                    ).length
+                }}
+              </div>
+            </el-col>
+          </el-row>
 
-            <el-row :gutter="15">
-              <el-col :sm="12">
-                <div class="info-block__text">{{ $t("tender.number_of_tenders_received_from_non-residents")}}:</div>
-              </el-col>
-              <el-col :sm="12">
-                <div class="info-block__text">
-                  {{ gd(evRecord, _ => _.bids.details, []).filter(bid => gd(bid, _ => _.relatedLots[0]) === lot.id).filter(bid => gd(evRecord, _=> _.parties).find(part => part.id
-                  === bid.tenderers[0].id ).address.addressDetails.country.id !== "MD").length }}
-                </div>
-              </el-col>
-            </el-row>
+          <el-row :gutter="15">
+            <el-col :sm="12">
+              <div class="info-block__text">{{ $t("tender.number_of_tenders_received_from_non-residents") }}:</div>
+            </el-col>
+            <el-col :sm="12">
+              <div class="info-block__text">
+                {{
+                  gd(evRecord, _ => _.bids.details, [])
+                    .filter(bid => gd(bid, _ => _.relatedLots[0]) === lot.id)
+                    .filter(
+                      bid =>
+                        gd(evRecord, _ => _.parties).find(part => part.id === bid.tenderers[0].id).address
+                          .addressDetails.country.id !== "MD"
+                    ).length
+                }}
+              </div>
+            </el-col>
+          </el-row>
         </div>
 
         <div v-if="lot.status !== 'canceled' && lot.status !== 'unsuccessful'">
@@ -202,7 +234,7 @@
                     {{ $t("tender.email") }}
                   </div>
                   <div class="info-block__value">
-                    <a :href="`mailto:${ gd(winnerOrganizationForCurrentLot, _ => _.contactPoint.email) }`">
+                    <a :href="`mailto:${gd(winnerOrganizationForCurrentLot, _ => _.contactPoint.email)}`">
                       {{ gd(winnerOrganizationForCurrentLot, _ => _.contactPoint.email) }}
                     </a>
                   </div>
@@ -221,9 +253,7 @@
               <div class="info-block__text">{{ $t("tender.initial_total_contract_value") }}:</div>
             </el-col>
             <el-col :sm="12">
-              <div class="info-block__text">
-                {{ fa(gd(lot, _ => _.value.amount)) }} MDL
-              </div>
+              <div class="info-block__text">{{ fa(gd(lot, _ => _.value.amount)) }} MDL</div>
             </el-col>
           </el-row>
 
@@ -232,9 +262,7 @@
               <div class="info-block__text">{{ $t("tender.total_contract_value") }}:</div>
             </el-col>
             <el-col :sm="12">
-              <div class="info-block__text">
-                {{ fa(gd(winnerAwardForCurrentLot, _ => _.value.amount)) }} MDL
-              </div>
+              <div class="info-block__text">{{ fa(gd(winnerAwardForCurrentLot, _ => _.value.amount)) }} MDL</div>
             </el-col>
           </el-row>
 
@@ -244,7 +272,23 @@
             </el-col>
             <el-col :sm="12">
               <div class="info-block__text">
-                {{ fa(Math.min(...gd(gd(evRecord, _ => _.awards, []).filter(award => gd(award, _ => _.relatedLots[0]) === lot.id && gd(award, _ => _.status) !== "pending").map(award => gd(award, _ => _.value.amount, 0)), _ => _, []))) }} MDL
+                {{
+                  fa(
+                    Math.min(
+                      ...gd(
+                        gd(evRecord, _ => _.awards, [])
+                          .filter(
+                            award =>
+                              gd(award, _ => _.relatedLots[0]) === lot.id && gd(award, _ => _.status) !== "pending"
+                          )
+                          .map(award => gd(award, _ => _.value.amount, 0)),
+                        _ => _,
+                        []
+                      )
+                    )
+                  )
+                }}
+                MDL
               </div>
             </el-col>
           </el-row>
@@ -255,7 +299,23 @@
             </el-col>
             <el-col :sm="12">
               <div class="info-block__text">
-                {{ fa(Math.max(...gd(gd(evRecord, _ => _.awards, []).filter(award => gd(award, _ => _.relatedLots[0]) === lot.id&& gd(award, _ => _.status) !== "pending").map(award => gd(award, _ => _.value.amount, 0)), _ => _, []))) }} MDL
+                {{
+                  fa(
+                    Math.max(
+                      ...gd(
+                        gd(evRecord, _ => _.awards, [])
+                          .filter(
+                            award =>
+                              gd(award, _ => _.relatedLots[0]) === lot.id && gd(award, _ => _.status) !== "pending"
+                          )
+                          .map(award => gd(award, _ => _.value.amount, 0)),
+                        _ => _,
+                        []
+                      )
+                    )
+                  )
+                }}
+                MDL
               </div>
             </el-col>
           </el-row>
@@ -264,17 +324,17 @@
         <div v-if="lot.status !== 'canceled' && lot.status !== 'unsuccessful'">
           <div class="info__sub-title">{{ $t("tender.request_for_contract_performance_guarantee") }}</div>
           <div class="info-blocks">
-          <div class="info-block">
-            <div class="info-block__text">
-              {{ $t("tender.complementary_information_list2_p4_1") }}
-              {{ fa(gd(winnerAwardForCurrentLot, _ => _.value.amount) * 0.02) }}
-              {{ $t("tender.complementary_information_list2_p4_2") }}
-            </div>
-            <div class="info-block__text">
-              {{ $t("tender.complementary_information_list2_p5") }}
+            <div class="info-block">
+              <div class="info-block__text">
+                {{ $t("tender.complementary_information_list2_p4_1") }}
+                {{ fa(gd(winnerAwardForCurrentLot, _ => _.value.amount) * 0.02) }}
+                {{ $t("tender.complementary_information_list2_p4_2") }}
+              </div>
+              <div class="info-block__text">
+                {{ $t("tender.complementary_information_list2_p5") }}
+              </div>
             </div>
           </div>
-        </div>
         </div>
       </div>
     </transition>
@@ -282,65 +342,67 @@
 </template>
 
 <script>
-  import {
-    getDataFromObject,
-    formatDate,
-    formatAmount
-  } from "./../../../../utils";
+import { getDataFromObject, formatDate, formatAmount } from "./../../../../utils";
 
-  export default {
-    name: "ContractItem",
-    props: {
-      evRecord: {
-        type: Object,
-        required: true
-      },
-      lot: {
-        type: Object,
-        required: true
-      },
-      index: {
-        type: Number,
-        required: true
-      },
-      activeItemId: {
-        type: String,
-        required: true
-      }
+export default {
+  name: "ContractItem",
+  props: {
+    evRecord: {
+      type: Object,
+      required: true,
     },
-    data() {
-      return {
-        successfulLot: false
-      };
+    lot: {
+      type: Object,
+      required: true,
     },
-    created() {
-      this.successfulLot = !!this.contractForCurrentLot;
+    index: {
+      type: Number,
+      required: true,
     },
-    computed: {
-      contractForCurrentLot() {
-        return this.gd(this.evRecord, _ => _.contracts, []).find(contract => {
-          return contract.awardId === this.gd(this.winnerAwardForCurrentLot, _ => _.id);
-        });
-      },
-      winnerAwardForCurrentLot() {
-        return this.gd(this.evRecord, _ => _.awards, []).find(award => {
-          return award.relatedLots[0] === this.lot.id && ((award.status === "pending" && award.statusDetails === "active") || (award.status === "active" && award.statusDetails === "empty"));
-        });
-      },
-      winnerOrganizationForCurrentLot() {
-        return this.gd(this.evRecord, _ => _.parties, []).find(part => part.id === this.gd(this.winnerAwardForCurrentLot, _ => _.suppliers[0].id));
-      }
+    activeItemId: {
+      type: String,
+      required: true,
     },
-    methods: {
-      gd(...args) {
-        return getDataFromObject(...args);
-      },
-      fd(...ars) {
-        return formatDate(...ars);
-      },
-      fa(amount) {
-        return formatAmount(amount);
-      }
-    }
-  };
+  },
+  data() {
+    return {
+      successfulLot: false,
+    };
+  },
+  created() {
+    this.successfulLot = !!this.contractForCurrentLot;
+  },
+  computed: {
+    contractForCurrentLot() {
+      return this.gd(this.evRecord, _ => _.contracts, []).find(contract => {
+        return contract.awardId === this.gd(this.winnerAwardForCurrentLot, _ => _.id);
+      });
+    },
+    winnerAwardForCurrentLot() {
+      return this.gd(this.evRecord, _ => _.awards, []).find(award => {
+        return (
+          award.relatedLots[0] === this.lot.id &&
+          ((award.status === "pending" && award.statusDetails === "active") ||
+            (award.status === "active" && award.statusDetails === "empty"))
+        );
+      });
+    },
+    winnerOrganizationForCurrentLot() {
+      return this.gd(this.evRecord, _ => _.parties, []).find(
+        part => part.id === this.gd(this.winnerAwardForCurrentLot, _ => _.suppliers[0].id)
+      );
+    },
+  },
+  methods: {
+    gd(...args) {
+      return getDataFromObject(...args);
+    },
+    fd(...ars) {
+      return formatDate(...ars);
+    },
+    fa(amount) {
+      return formatAmount(amount);
+    },
+  },
+};
 </script>
