@@ -4,7 +4,7 @@ import budget from "./ro/budget";
 import plan from "./ro/plan";
 import tender from "./ro/tender";
 import contract from "./ro/contract";
-import budgetBreakdown from "./en/budgetBreakdown";
+import budgetBreakdown from "./en/budgetBreakdown"
 
 export default {
   entities,
