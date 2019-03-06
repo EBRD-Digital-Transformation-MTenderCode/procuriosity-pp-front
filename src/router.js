@@ -48,13 +48,22 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  const linkFrom = document.querySelector(`.header-entity-nav a[href*=${from.name}]`);
-  const linkTo = document.querySelector(`.header-entity-nav a[href*=${to.name}]`);
-
   if (process.env.NODE_ENV !== "development") {
-    if (from.name && linkFrom && linkTo) {
-      linkFrom.classList.remove("is-active");
-      linkTo.classList.add("is-active");
+    if (
+      from.name &&
+      document.querySelector(`.header-entity-nav a[href*=${from.name}]`) &&
+      document.querySelector(`.header-entity-nav a[href*=${to.name}]`)
+    ) {
+      document.querySelector(`.header-entity-nav a[href*=${from.name}]`).classList.remove("is-active");
+      document.querySelector(`.header-entity-nav a[href*=${to.name}]`).classList.add("is-active");
+    }
+  } else {
+    if (
+      document.querySelector(`.header-entity-nav a[href*=${from.name}]`) &&
+      document.querySelector(`.header-entity-nav a[href*=${to.name}]`)
+    ) {
+      document.querySelector(`.header-entity-nav a[href*=${from.name}]`).classList.remove("is-active");
+      document.querySelector(`.header-entity-nav a[href*=${to.name}]`).classList.add("is-active");
     }
   }
   next();
