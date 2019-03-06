@@ -4,6 +4,7 @@ import budget from "./ru/budget";
 import plan from "./ru/plan";
 import tender from "./ru/tender";
 import contract from "./ru/contract";
+import budgetBreakdown from "./ru/budgetBreakdown";
 
 export default {
   entities,
@@ -12,6 +13,7 @@ export default {
   plan,
   tender,
   contract,
+  budgetBreakdown,
   refresh: "Обновить",
   back: "Назад",
   "invalid-id": "Неправильный идентификатор",

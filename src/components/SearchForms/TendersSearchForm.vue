@@ -12,7 +12,7 @@
           <el-row :gutter="26">
             <el-col :sm="8">
               <div class="search-form__group">
-                <div class="search-form__group-title">Byuer's info</div>
+                <div class="search-form__group-title">Buyer's info</div>
 
                 <!-- Buyers names -->
                 <div class="search-form-element">
