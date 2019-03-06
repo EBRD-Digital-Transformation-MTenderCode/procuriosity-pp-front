@@ -111,12 +111,18 @@ export function transformDocumentation(docs) {
   ));
 }
 
-export function getOrganizationName (parties, organizationRole)  {
+export function getOrganizationObject (parties, organizationRole)  {
   for (let part of parties) {
     if (part.roles.find(role => role === organizationRole)) {
-      return part.name;
+      return {
+        name: part.name,
+        id: part.id
+      };
     } else {
-      if (organizationRole === "funder") return "State money";
+      if (organizationRole === "funder") return {
+        name: "State money",
+        id: undefined
+      };
     }
   }
 }
@@ -193,4 +199,17 @@ export function selectProcedure(category, amount) {
       }
     }
   }
+}
+
+export function getSourceOfMoney (parties, buyerId)  {
+  let source = "";
+  for (let part of parties) {
+    if (part.roles.find((role) => role === "funder")) {
+      if (part.id === buyerId) {
+        source = VueI18n.t("budget.own_money");
+        break;
+      } else source = VueI18n.t("budget.donors_money");
+    }
+  }
+  return source || VueI18n.t("budget.state_money");
 }

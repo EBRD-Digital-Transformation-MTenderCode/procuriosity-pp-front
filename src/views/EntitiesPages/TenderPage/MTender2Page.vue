@@ -89,6 +89,8 @@
                     <contract-notice
                         :msRecord="gd(tender, _ => _.MSRecord.compiledRelease)"
                         :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
+                        :getFS="getFS"
+                        :breakdowns="breakdowns"
                         :procedureType="selectProcedure(gd(tender, _ =>
                       _.MSRecord.compiledRelease.tender.mainProcurementCategory),gd(tender, _ =>
                       _.MSRecord.compiledRelease.tender.value.amount))"
@@ -163,6 +165,8 @@
                     <procurement-record
                         :msRecord="gd(tender, _ => _.MSRecord.compiledRelease)"
                         :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
+                        :getFS="getFS"
+                        :breakdowns="breakdowns"
                         :procedureType="selectProcedure(gd(tender, _ => _.MSRecord.compiledRelease.tender.mainProcurementCategory),gd(tender, _ => _.MSRecord.compiledRelease.tender.value.amount))"
                         :selectTab="selectTab"
                         :hasBids="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('bids')"
@@ -191,6 +195,7 @@
 </template>
 
 <script>
+  import axios from "axios";
   import { mapState } from "vuex";
   import { FETCH_CURRENT_TENDER_INFO } from "../../../store/types/actions-types";
 
@@ -202,7 +207,10 @@
   import Contracts from "./Tabs/Contracts";
   import ProcurementRecord from "./Tabs/ProcurementRecord";
 
-  import { getDataFromObject, selectProcedure } from "./../../../utils";
+  import { getDataFromObject,
+    selectProcedure,
+    getOrganizationObject,
+    getSourceOfMoney } from "./../../../utils";
 
   export default {
     name: "TenderPage",
@@ -217,7 +225,8 @@
     },
     data() {
       return {
-        activeTab: "cn"
+        activeTab: "cn",
+        FSs: {},
       };
     },
     created() {
@@ -236,6 +245,36 @@
       fractionAmount() {
         const amountStr = this.gd(this.tender, _ => _.MSRecord.compiledRelease.tender.value.amount, 0).toString();
         return /\./.test(amountStr) ? amountStr.slice(amountStr.indexOf(".") + 1).length === 1 ? amountStr.slice(amountStr.indexOf(".") + 1) + "0" : amountStr.slice(amountStr.indexOf(".") + 1) : "00";
+      },
+      breakdowns(){
+        return  this.gd(this.tender, _ => _.MSRecord.compiledRelease.planning.budget.budgetBreakdown, []).map(budgetBreakdown => ({
+          ocid: this.gd(budgetBreakdown, _ => _.id),
+          value:{
+            amount: this.gd(budgetBreakdown, _ => _.amount.amount),
+            currency: this.gd(budgetBreakdown, _ => _.amount.currency)
+          },
+          status: this.gd(this.FSs,_=>_[this.gd(budgetBreakdown, _ => _.id)].status),
+          sourceOfMoney: getSourceOfMoney(this.gd(this.FSs,_=>_[this.gd(budgetBreakdown, _ => _.id)].parties, []), getOrganizationObject(this.gd(this.tender, _ => _.MSRecord.compiledRelease.parties),"buyer").id),
+          description: this.gd(budgetBreakdown, _ => _.description, "n/a"),
+          period: {
+            startDate: this.gd(budgetBreakdown, _ => _.period.startDate),
+            endDate: this.gd(budgetBreakdown, _ => _.period.endDate)
+          },
+          project: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].project, "n/a"),
+          projectId: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].projectId, "n/a"),
+          buyer: {
+            name:  getOrganizationObject(this.gd(this.tender, _ => _.MSRecord.compiledRelease.parties), "buyer").name,
+            id:  getOrganizationObject(this.gd(this.tender, _ => _.MSRecord.compiledRelease.parties),"buyer").id
+          },
+          funder: {
+            name: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].funder.name),
+            id: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].funder.id)
+          },
+          payer: {
+            name:this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].payer.name),
+            id: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].payer.id)
+          },
+        }))
       }
     },
     methods: {
@@ -263,7 +302,47 @@
       },
       selectProcedure(category, amount){
         return selectProcedure(category, amount)
-      }
+      },
+      async getFS(ocidFS) {
+        if (!ocidFS || this.FSs.hasOwnProperty(ocidFS)) {
+          return false;
+        }
+
+        const cpidEI = ocidFS.replace(/-FS-[0-9]{13}$/, "");
+
+        try {
+          const responseFS = await axios({
+            method: "get",
+            url: `https://public.mtender.gov.md/budgets/${cpidEI}/${ocidFS}`
+          });
+
+          const FS = responseFS.data.releases[0];
+
+          const payer = getOrganizationObject(FS.parties, "payer");
+          const funder = getOrganizationObject(FS.parties, "funder");
+          const status = this.gd(FS,_=>_.planning.budget.verified);
+          const parties = this.gd(FS,_=>_.tender.parties);
+          this.FSs = Object.assign({}, this.FSs, {
+            [FS.ocid]: {
+              project: FS.planning.project,
+              projectId: FS.planning.projectId,
+              payer: {
+                name: payer.name,
+                id: payer.id
+              },
+              funder: {
+                name: funder ? funder.name : null,
+                id: funder ? funder.id : null
+              },
+              status,
+              parties
+            }
+          });
+
+        } catch (e) {
+          console.log(e);
+        }
+      },
     }
   };
 </script>

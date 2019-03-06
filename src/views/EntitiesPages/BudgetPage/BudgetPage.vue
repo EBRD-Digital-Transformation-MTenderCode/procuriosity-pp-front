@@ -75,6 +75,7 @@
                     <span slot="label" v-html="$t('budget.source_of_financing')" />
                     <source-of-financing
                         :FSs="FSs"
+                        :buyer="gd(EI,_=>_.buyer)"
                     />
                   </el-tab-pane>
                   <el-tab-pane

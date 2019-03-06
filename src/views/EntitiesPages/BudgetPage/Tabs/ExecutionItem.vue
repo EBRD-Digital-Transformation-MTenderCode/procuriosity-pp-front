@@ -69,7 +69,7 @@
           </el-col>
           <el-col :sm="16">
             <div class="info-block__text">
-              {{getOrganizationName(gd(ms, _ => _.parties, []), "procuringEntity")}}
+              {{gd(getOrganizationObject(gd(ms, _ => _.parties, []), "procuringEntity"),_=>_.name)}}
             </div>
           </el-col>
         </el-row>
@@ -81,7 +81,7 @@
           </el-col>
           <el-col :sm="16">
             <div class="info-block__text">
-              {{getOrganizationName(gd(ms, _ => _.parties, []), "payer")}}
+              {{gd(getOrganizationObject(gd(ms, _ => _.parties, []), "payer"),_=>_.name)}}
             </div>
           </el-col>
         </el-row>
@@ -94,7 +94,7 @@
   import {
     getDataFromObject,
     formatAmount,
-    getOrganizationName, selectProcedure
+    getOrganizationObject, selectProcedure
   } from "./../../../../utils";
 
   import procedureStatusType from "./../../../../store/types/procedure-status-types";
@@ -161,8 +161,8 @@
       fa(amount) {
         return formatAmount(amount);
       },
-      getOrganizationName(item, role) {
-        return getOrganizationName(item, role);
+      getOrganizationObject(item, role) {
+        return getOrganizationObject(item, role);
       },
       selectProcedure(category, amount) {
         return selectProcedure(category, amount);

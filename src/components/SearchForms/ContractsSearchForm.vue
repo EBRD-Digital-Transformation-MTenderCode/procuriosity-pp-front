@@ -6,11 +6,12 @@
         :titlesOrDescriptions="titlesOrDescriptions"
     />
     <el-collapse-transition mode="in-out" name="el-zoom-in-top">
-      <div v-show="moreCriterions">
+      <div v-show="isExpanded">
         <div class="search-form-more">
-          <el-row :gutter="40">
-            <el-col :xs="24" :sm="12">
-
+          <el-row :gutter="26">
+            <el-col :sm="8">
+              <div class="search-form__group">
+                <div class="search-form__group-title">Buyer's info</div>
               <!-- Buyers names -->
               <div class="search-form-element">
                 <multiple-input
@@ -81,36 +82,11 @@
                   :placeholder="$t('search.buyers_main_sectoral_activity_placeholder')"
                 />
               </div>
-
-              <!-- Amount from -->
-              <div class="search-form-element">
-                <search-input
-                  name="amountFrom"
-                  type="number"
-                  prefixIcon
-                  :value="amountFrom"
-                  :setValue="setFormParams"
-                  :label="$t('search.amount_from')"
-                  :placeholder="$t('search.amount_from')"
-                />
               </div>
-
-              <!-- Amount to -->
-              <div class="search-form-element">
-                <search-input
-                  name="amountTo"
-                  type="number"
-                  prefixIcon
-                  :value="amountTo"
-                  :setValue="setFormParams"
-                  :label="$t('search.amount_to')"
-                  :placeholder="$t('search.amount_to')"
-                />
-              </div>
-
             </el-col>
-            <el-col :xs="24" :sm="12">
-
+            <el-col :sm="8">
+              <div class="search-form__group">
+                <div class="search-form__group-title">Procedure info</div>
                <!-- Delivery regions -->
               <div class="search-form-element">
                 <search-regions
@@ -123,7 +99,32 @@
                     :placeholder="$t('search.deliveries_regions_placeholder')"
                 />
               </div>
-              
+                <el-row :gutter="15" style="margin: 20px -7.5px">
+                  <el-col :sm="12">
+                    <!-- Amount from -->
+                    <div class="search-form-element">
+                      <search-input-number
+                          name="amountFrom"
+                          :value="amountFrom"
+                          :setValue="setFormParams"
+                          :label="$t('search.amount_from')"
+                          :placeholder="$t('search.amount_from')"
+                      />
+                    </div>
+                  </el-col>
+                  <el-col :sm="12">
+                    <!-- Amount to -->
+                    <div class="search-form-element">
+                      <search-input-number
+                          name="amountTo"
+                          :value="amountTo"
+                          :setValue="setFormParams"
+                          :label="$t('search.amount_to')"
+                          :placeholder="$t('search.amount_to')"
+                      />
+                    </div>
+                  </el-col>
+                </el-row>
               <!-- Procedure types -->
               <div class="search-form-element">
                 <search-auto-complete-input
@@ -148,33 +149,9 @@
                 />
               </div>
 
-              <!-- Period published -->
-              <div class="search-form-element">
-                <search-period
-                  name="periodPublished"
-                  :value="periodPublished"
-                  :setValue="setFormParams"
-                  :label="$t('search.published_period')"
-                >
-                  {{$t("search.published_period")}}:
-                </search-period>
-              </div>
-
-              <!-- Period delivery -->
-              <div class="search-form-element">
-                <search-period
-                  name="periodDelivery"
-                  :value="periodDelivery"
-                  :setValue="setFormParams"
-                  :label="$t('search.delivery_period')"
-                >
-                  {{$t("search.delivery_period")}}:
-                </search-period>
-              </div>
-
               <!-- id -->
               <div class="search-form-element">
-                <search-input
+                <search-input-text
                   name="entityId"
                   :value="entityId"
                   :setValue="setFormParams"
@@ -196,6 +173,35 @@
                   :placeholder="$t('search.classifications_placeholder')"
                 />
               </div>
+              </div>
+            </el-col>
+            <el-col :sm="8">
+              <div class="search-form__group">
+                <div class="search-form__group-title">Periods</div>
+                <!-- Period published -->
+                <div class="search-form-element">
+                  <search-period
+                      name="periodPublished"
+                      :value="periodPublished"
+                      :setValue="setFormParams"
+                      :label="$t('search.published_period')"
+                  >
+                    {{$t("search.published_period")}}:
+                  </search-period>
+                </div>
+
+                <!-- Period delivery -->
+                <div class="search-form-element">
+                  <search-period
+                      name="periodDelivery"
+                      :value="periodDelivery"
+                      :setValue="setFormParams"
+                      :label="$t('search.delivery_period')"
+                  >
+                    {{$t("search.delivery_period")}}:
+                  </search-period>
+                </div>
+              </div>
             </el-col>
           </el-row>
           <!-- Reset button -->
@@ -205,13 +211,6 @@
         </div>
       </div>
     </el-collapse-transition>
-    <button class="search-form__btn search-form__btn_more" @click="actionExpand" tabindex="-1">
-      <i :class="['icon-right', moreCriterions ? 'el-icon-arrow-up' : 'el-icon-arrow-down']"/>
-      {{ moreCriterions ? $t("search.lessCriterions") : $t("search.moreCriterions") }}
-      <i
-          :class="['icon-left', moreCriterions ? 'el-icon-arrow-up' : 'el-icon-arrow-down']"
-      />
-    </button>
   </div>
 </template>
 
@@ -221,7 +220,8 @@
   import { REGIONS, CPV_CODES } from "./../../store/types/directories-types";
 
   import MainSearch from "./../FormsComponents/MainSearch";
-  import SearchInput from "./../FormsComponents/SearchInputText";
+  import SearchInputText from "./../FormsComponents/SearchInputText";
+  import SearchInputNumber from "./../../components/FormsComponents/SearchInputNumber";
   import SearchAutoCompleteInput from "./../FormsComponents/SearchAutoCompleteInput";
   import SearchRegions from "./../FormsComponents/SearchRegions";
   import SearchClassifications from "./../FormsComponents/SearchClassifications";
@@ -239,13 +239,20 @@
     name: "ContractsSearchForm",
     components: {
       "main-search": MainSearch,
-      "search-input": SearchInput,
+      "search-input-text": SearchInputText,
+      "search-input-number": SearchInputNumber,
       "search-auto-complete-input": SearchAutoCompleteInput,
       "search-regions": SearchRegions,
       "search-classifications": SearchClassifications,
       "search-period": SearchPeriods,
       "multiple-input": MultipleInput,
       "reset-button": ResetButton
+    },
+    props: {
+      isExpanded: {
+        type: Boolean,
+        required: true
+      }
     },
     data() {
       return {
@@ -322,13 +329,6 @@
             [name]: value
           }
         });
-      },
-      actionExpand() {
-        this.moreCriterions = !this.moreCriterions;
-
-        const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
-        localStorageEntities.contracts.isExpanded = this.moreCriterions;
-        localStorage.setItem("entities", JSON.stringify(localStorageEntities));
       }
     },
     created() {
