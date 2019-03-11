@@ -85,13 +85,41 @@
         </div>
         <div v-if="auction.auctionProgress.length">
           <div class="info__sub-title">
+            {{ $t("tender.initial_offers") }}
+          </div>
+
+          <div class="info-block" v-for="offer of auction.initialOffers" :key="offer.tenderer.id">
+            <el-row :gutter="15">
+              <el-col :sm="12">
+                <div class="info-block__value">
+                  {{ offer.tenderer.name }}
+                </div>
+                <div class="info-block__text">
+                  {{ offer.tenderer.id }}
+                </div>
+              </el-col>
+              <el-col :sm="12">
+                <div class="info-block__value">{{ fa(offer.value.amount) }}</div>
+                <div class="info-block__text">
+                  {{ $t("tender.MDL_exluding_VAT") }}
+                </div>
+              </el-col>
+            </el-row>
+          </div>
+        </div>
+        <div v-if="auction.auctionProgress.length">
+          <div class="info__sub-title">
             {{ $t("tender.electronic_auction_progress") }}
           </div>
 
-          <div class="info-blocks info-blocks_auction" v-for="progress of auction.auctionProgress">
+          <div
+            class="info-blocks info-blocks_auction"
+            v-for="progress of auction.auctionProgress"
+            :key="progress.round"
+          >
             <div class="info-block">
               <el-row :gutter="15">
-                <el-col :sm="16">
+                <el-col :sm="12">
                   <div class="info-block__text">
                     {{ $t("tender.number_of_round") }}
                   </div>
@@ -99,7 +127,7 @@
                     {{ progress.round }}
                   </div>
                 </el-col>
-                <el-col :sm="8">
+                <el-col :sm="12">
                   <div class="info-block__text">
                     {{ $t("tender.timeframe_of_round") }}
                   </div>
@@ -130,7 +158,7 @@
               </el-row>
             </div>
 
-            <div v-for="breakdown of progress.breakdowns" class="info-block">
+            <div v-for="breakdown of progress.breakdowns" :key="breakdown.tenderer.id" class="info-block">
               <el-row :gutter="15">
                 <el-col :sm="12">
                   <div class="info-block__value">
@@ -176,7 +204,7 @@
               </el-col>
             </el-row>
           </div>
-          <div class="info-blocks" v-for="result of auction.results">
+          <div class="info-blocks" v-for="result of auction.results" :key="result.tenderer.id">
             <el-row :gutter="15">
               <el-col :sm="12">
                 <div class="info-block__value">

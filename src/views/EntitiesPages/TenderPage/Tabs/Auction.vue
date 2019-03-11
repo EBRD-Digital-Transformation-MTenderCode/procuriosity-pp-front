@@ -73,6 +73,7 @@ export default {
         },
         rounds: this.gd(auction, _ => _.electronicAuctionProgress, []).length,
         participants: this.gd(auction, _ => _.electronicAuctionProgress[0].breakdown, []).length,
+        initialOffers: this.getInitialOffer(this.gd(auction, _ => _.electronicAuctionProgress[0].breakdown, [])),
         auctionPeriod: {
           startDate: this.gd(auction, _ => _.auctionPeriod.startDate),
           endDate: this.gd(auction, _ => _.auctionPeriod.endDate),
@@ -128,6 +129,21 @@ export default {
           tenderer: this.getTenderer(this.gd(result, _ => _.relatedBid)),
         }))
         .sort((el1, el2) => el1.value.amount - el2.value.amount);
+    },
+    getInitialOffer(breakdowns) {
+      return breakdowns
+        .map(breakdown => ({
+          value: this.getInitialOfferAmount(this.gd(breakdown, _ => _.relatedBid)),
+          tenderer: this.getTenderer(this.gd(breakdown, _ => _.relatedBid)),
+        }))
+        .sort((el1, el2) => el1.value.amount - el2.value.amount);
+    },
+    getInitialOfferAmount(id) {
+      const value = this.gd(this.gd(this.evRecord, _ => _.bids.details, []).find(bid => id === bid.id), _ => _.value);
+      return {
+        amount: value.amount,
+        currency: value.currency,
+      };
     },
     gd(...args) {
       return getDataFromObject(...args);
