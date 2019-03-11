@@ -2,8 +2,11 @@ module.exports = {
   runtimeCompiler: true,
 
   css: {
-    sourceMap: true
+    sourceMap: true,
+    extract: false,
   },
+
   productionSourceMap: false,
-  filenameHashing: false
+  filenameHashing: false,
+  parallel: true,
 };
