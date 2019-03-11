@@ -22,13 +22,12 @@ export function formatDate(date, formatType = "DD.MM.YYYY / HH:mm", def = "none"
 }
 
 export function addPeriod(date, timePeriod, count) {
+  const timePeriods = ["day", "week", "month", "year"];
+
   if (!date || !dayjs(date).isValid()) {
     console.warn(`date ${date} is not valid`);
     return date;
-  } else if (
-    !timePeriod ||
-    (timePeriod !== "day" && timePeriod !== "month" && timePeriod !== "year" && timePeriod !== "week")
-  ) {
+  } else if (!timePeriod || timePeriods.includes(timePeriod)) {
     console.warn(`period ${timePeriod} is not valid `);
     return date;
   } else if (!count || (typeof count !== "number" && isNaN(count))) {
