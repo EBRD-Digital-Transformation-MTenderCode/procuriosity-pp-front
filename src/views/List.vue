@@ -234,6 +234,7 @@ export default {
   &-page {
     background-color: #efefef;
     padding-bottom: 20px;
+    margin-bottom: -20px;
   }
   &__no-data-title,
   &__error {

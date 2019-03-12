@@ -3,10 +3,12 @@ module.exports = {
 
   css: {
     sourceMap: true,
-    extract: false,
   },
 
   productionSourceMap: false,
   filenameHashing: false,
-  parallel: true,
+  parallel: undefined,
+  baseUrl: undefined,
+  outputDir: undefined,
+  assetsDir: undefined,
 };
