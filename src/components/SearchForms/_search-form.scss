@@ -25,6 +25,7 @@
     }
     .el-input__inner {
       border-radius: 0;
+      margin-bottom: -4px;
     }
   }
   &__group {
@@ -209,6 +210,9 @@
     &__close {
       flex-shrink: 0;
     }
+  }
+  :-ms-input-placeholder {
+    line-height: 1;
   }
 }
 
