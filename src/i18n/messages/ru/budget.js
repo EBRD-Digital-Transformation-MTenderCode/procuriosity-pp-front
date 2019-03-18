@@ -1,5 +1,5 @@
 export default {
-  last_modified_date: "Дата последней модификации",
+  last_modified_date: "Дата последних изменений",
   value: "Расчетная стоимость без НДС",
   no_finances_sources: "Бюджет пока не имеет источников финансирования",
   period_planning: "Период использования",
