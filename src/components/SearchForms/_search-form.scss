@@ -1,7 +1,6 @@
 @import "./../../styles/variables";
 
 .search-form {
-  z-index: 10;
   position: relative;
   padding: 20px;
   background-color: $mainC;
@@ -10,6 +9,7 @@
     margin-bottom: $fieldHeight;
     &:hover {
       .search-form__btn_more {
+        color: #fff;
         bottom: -$fieldHeight;
       }
     }
@@ -18,8 +18,10 @@
     padding: 16px;
   }
   .main-search {
-    flex-grow: 1;
     display: flex;
+    flex-grow: 1;
+    position: relative;
+    z-index: 10;
     @media (max-width: 580px) {
       flex-wrap: wrap;
     }
@@ -119,7 +121,7 @@
       white-space: nowrap;
       line-height: 1;
       font-size: 16px;
-      color: #fff;
+      color: transparent;
       transition: 0.4s;
       &:hover {
         background-color: lighten($mainC, 10%);
