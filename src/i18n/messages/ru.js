@@ -21,4 +21,6 @@ export default {
   page: "Страница",
   of: "из",
   pages: "страниц",
+
+  "n/a": "n/a",
 };

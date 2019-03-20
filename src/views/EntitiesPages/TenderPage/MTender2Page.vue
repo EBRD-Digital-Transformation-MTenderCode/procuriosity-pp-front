@@ -190,6 +190,7 @@ import Contracts from "./Tabs/Contracts";
 import ProcurementRecord from "./Tabs/ProcurementRecord";
 
 import { getDataFromObject, selectProcedure, getOrganizationObject, getSourceOfMoney } from "./../../../utils";
+import { getFSReleaseConfig } from "../../../configs/requests-configs";
 
 export default {
   name: "TenderPage",
@@ -245,6 +246,8 @@ export default {
             getOrganizationObject(this.gd(this.tender, _ => _.MSRecord.compiledRelease.parties), "buyer").id
           ),
           description: this.gd(budgetBreakdown, _ => _.description, "n/a"),
+          rationale: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].rationale, "n/a"),
+          EIocid: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].EIocid, "n/a"),
           period: {
             startDate: this.gd(budgetBreakdown, _ => _.period.startDate),
             endDate: this.gd(budgetBreakdown, _ => _.period.endDate),
@@ -295,39 +298,36 @@ export default {
     selectProcedure(category, amount) {
       return selectProcedure(category, amount);
     },
-    async getFS(ocidFS) {
-      if (!ocidFS || this.FSs.hasOwnProperty(ocidFS)) {
+    async getFS(FSocid) {
+      if (!FSocid || this.FSs.hasOwnProperty(FSocid)) {
         return false;
       }
 
-      const cpidEI = ocidFS.replace(/-FS-[0-9]{13}$/, "");
+      const EIocid = FSocid.replace(/-FS-[0-9]{13}$/, "");
 
       try {
-        const responseFS = await axios({
-          method: "get",
-          url: `https://public.mtender.gov.md/budgets/${cpidEI}/${ocidFS}`,
-        });
+        const responseFS = await axios(getFSReleaseConfig(EIocid, FSocid));
 
         const FS = responseFS.data.releases[0];
 
-        const payer = getOrganizationObject(FS.parties, "payer");
-        const funder = getOrganizationObject(FS.parties, "funder");
-        const status = this.gd(FS, _ => _.planning.budget.verified);
-        const parties = this.gd(FS, _ => _.tender.parties);
         this.FSs = Object.assign({}, this.FSs, {
           [FS.ocid]: {
             project: FS.planning.project,
             projectId: FS.planning.projectId,
             payer: {
-              name: payer.name,
-              id: payer.id,
+              name: getOrganizationObject(FS.parties, "payer").name,
+              id: getOrganizationObject(FS.parties, "payer").id,
             },
             funder: {
-              name: funder ? funder.name : null,
-              id: funder ? funder.id : null,
+              name: getOrganizationObject(FS.parties, "funder")
+                ? getOrganizationObject(FS.parties, "funder").name
+                : null,
+              id: getOrganizationObject(FS.parties, "funder") ? getOrganizationObject(FS.parties, "funder").id : null,
             },
-            status,
-            parties,
+            status: this.gd(FS, _ => _.planning.budget.verified),
+            parties: this.gd(FS, _ => _.tender.parties),
+            rationale: this.gd(FS, _ => _.planning.rationale),
+            EIocid,
           },
         });
       } catch (e) {

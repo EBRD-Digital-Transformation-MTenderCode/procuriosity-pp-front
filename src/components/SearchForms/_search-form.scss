@@ -5,6 +5,7 @@
   padding: 20px;
   background-color: $mainC;
   &-wp {
+    height: 100%;
     position: relative;
     margin-bottom: $fieldHeight;
     &:hover {
@@ -27,7 +28,6 @@
     }
     .el-input__inner {
       border-radius: 0;
-      margin-bottom: -4px;
     }
   }
   &__group {
@@ -185,9 +185,6 @@
         }
       }
     }
-    &__tags > span {
-      max-width: 100%;
-    }
     &__caret {
       font-size: 20px !important;
     }
@@ -212,9 +209,6 @@
     &__close {
       flex-shrink: 0;
     }
-  }
-  :-ms-input-placeholder {
-    line-height: 1;
   }
 }
 

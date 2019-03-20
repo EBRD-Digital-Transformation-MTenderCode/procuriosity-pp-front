@@ -2,9 +2,7 @@
   <div class="entity-card">
     <el-card>
       <div slot="header">
-        <div class="entity-status">
-          <div :class="`entity-status__ico ${parseStatusIco}`" />
-        </div>
+        <div class="entity-status" />
         <div class="entity-update">
           {{ $t("plan.last_modified_date") }}: <span class="entity-update__date">{{ modifiedDate }}</span>
         </div>

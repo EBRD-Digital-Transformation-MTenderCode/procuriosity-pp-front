@@ -79,6 +79,7 @@ export default {
           this.gd(this.buyer, _ => _.id)
         ),
         status: this.gd(fs, _ => _.compiledRelease.planning.budget.status),
+        rationale: this.gd(fs, _ => _.compiledRelease.planning.rationale, "n/a"),
         description: this.gd(fs, _ => _.compiledRelease.planning.budget.description, "n/a"),
         period: {
           startDate: this.gd(fs, _ => _.compiledRelease.planning.budget.period.startDate),

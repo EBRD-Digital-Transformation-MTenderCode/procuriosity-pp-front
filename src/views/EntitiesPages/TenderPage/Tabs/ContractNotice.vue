@@ -101,7 +101,7 @@
                   {{ $t("tender.nuts_code") }}
                 </div>
                 <div class="info-block__value">
-                  n/a
+                  {{ $t("n/a") }}
                 </div>
               </el-col>
               <el-col :sm="6">

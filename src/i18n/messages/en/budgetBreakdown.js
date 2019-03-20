@@ -2,7 +2,8 @@ export default {
   procuring_entity_identifier: "National registration number",
   budgetline_id: "Budgetline ID",
   amount: "Amount",
-  budget_details_rationale: "Budget details or rationale",
+  budget_details: "Budget description",
+  rationale: "Rationale",
   validity_period: "Validity Period",
   end_date: "End date",
   budget_project: "Budget Project",
@@ -12,4 +13,8 @@ export default {
   funding_entity: "Funding Entity",
   verified: "Verified",
   not_verified: "Not verified",
+
+  status: "Status",
+  budget_ID: "Budget ID",
+  source_of_money: "Source of Money",
 };
