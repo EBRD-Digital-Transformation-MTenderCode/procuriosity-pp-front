@@ -40,4 +40,8 @@ export default {
 
   list_total_found: "Total găsit",
   list_refresh: "Reîmprospăta",
+
+  buyers_info: "Buyer's info",
+  procedure_info: "Procedure info",
+  periods: "Periods",
 };

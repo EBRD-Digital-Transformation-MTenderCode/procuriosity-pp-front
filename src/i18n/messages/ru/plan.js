@@ -1,5 +1,5 @@
 export default {
-  last_modified_date: "Дата последней модификации",
+  last_modified_date: "Дата последних изменений",
   value: "Расчетная стоимость без НДС",
   delivery_regions: "Регион поставки",
   procedure_type: "Тип процедуры",
@@ -33,7 +33,7 @@ export default {
   items: "Состав закупки",
   type_of_buyer: "Тип покупателя",
   main_activity: "Основная деятельность",
-  communication: "Коммуникаций",
+  communication: "Коммуникации",
   procurement_documents_links:
     "Документы государственных закупок доступны для прямого, неограниченного, полного и бесплатного доступа на: (URL)",
   additional_information_obtained: "Дополнительная информация может быть получена от",
@@ -112,7 +112,7 @@ export default {
   complementary_information_list2_p2: "Это не повторяющиеся закупка.",
   complementary_information_list2_p3:
     "Минимальный срок, в течение которого оферент должен сохранять в силе оферту, составляет 90 дней с момента открытия оферты.",
-  complementary_information_list2_p4_1: "Сумма и валюта обеспечение оферты -",
+  complementary_information_list2_p4_1: "Сумма и валюта обеспечения оферты -",
   complementary_information_list2_p4_2:
     "из оценочной стоимости в леях и должна быть действительна в течение 90 дней с момента открытия торгов.",
   complementary_information_list2_p5:

@@ -14,7 +14,7 @@ import "@/views/EntitiesPages/_entity-info.scss";
 import Vue from "vue";
 
 import Element from "element-ui";
-import scrollSpy, { Easing } from "vue2-scrollspy";
+import scrollSpy, { Easing } from "vue2-scrollspy/dist/index.js";
 
 import i18n from "./i18n/index";
 import router from "./router";

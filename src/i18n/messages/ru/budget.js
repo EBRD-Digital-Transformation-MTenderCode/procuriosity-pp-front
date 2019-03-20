@@ -1,5 +1,5 @@
 export default {
-  last_modified_date: "Дата последней модификации",
+  last_modified_date: "Дата последних изменений",
   value: "Расчетная стоимость без НДС",
   no_finances_sources: "Бюджет пока не имеет источников финансирования",
   period_planning: "Период использования",
@@ -23,17 +23,10 @@ export default {
   donors_money: "Donor's money",
   state_money: "State money",
 
-  projectID: "Project ID",
-  source_of_money: "Source of Money",
-  validity_period: "Validity period",
   amount: "Amount",
   status: "Status",
-  eu_funder: " EU Funded",
-  project: "Project",
-  details: "Details",
   payer_entity: "Payer Entity",
   funding_entity: "Funding Entity",
-  budget_description: "Budget Description",
   cpv: "CPV",
   method: "Method",
   current_status: "Current Status",
@@ -45,8 +38,4 @@ export default {
   contract_id: "ID договора",
   "budget_project_id(s)": "Budget Project ID(s)",
   type: "Type",
-  verified: "Verified",
-  not_verified: "Not verified",
-  yes: "Да",
-  no: "Нет",
 };

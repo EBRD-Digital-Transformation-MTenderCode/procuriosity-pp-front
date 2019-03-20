@@ -2,7 +2,6 @@
   <div>
     <label class="search-form__label">{{ label }}</label>
     <el-select
-      :items="items"
       multiple
       filterable
       default-first-option

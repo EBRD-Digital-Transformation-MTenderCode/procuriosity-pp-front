@@ -10,4 +10,6 @@ export default {
   budget_owner: "Владелец бюджета",
   payer_entity: "Плательщик",
   funding_entity: "Финансирующий орган",
+  verified: "Verified",
+  not_verified: "Not verified",
 };

@@ -45,7 +45,9 @@
     cursor: text !important;
   }
 }
-
+.el-select__tags > span {
+  width: 100%;
+}
 .el-select-dropdown {
   margin-top: -1px !important;
   margin-bottom: -1px !important;

@@ -10,4 +10,6 @@ export default {
   budget_owner: "Budget owner",
   payer_entity: "Payer Entity",
   funding_entity: "Funding Entity",
+  verified: "Verified",
+  not_verified: "Not verified",
 };

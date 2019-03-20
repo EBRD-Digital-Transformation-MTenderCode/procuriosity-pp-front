@@ -26,22 +26,6 @@ export default {
     },
     {
       name: {
-        en: "Open Tender",
-        ro: "Licitație deschisă",
-        ru: "Открытые торги",
-      },
-      value: "aboveThreshold",
-    },
-    {
-      name: {
-        en: "Request for quotation",
-        ro: "Cerere Oferte de Prețuri",
-        ru: "Запрос ценовых оферт",
-      },
-      value: "priceProposals",
-    },
-    {
-      name: {
         en: "Restricted tender",
         ro: "Licitație limitată",
         ru: "Торги с ограниченным участием",

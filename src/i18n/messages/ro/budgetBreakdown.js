@@ -10,4 +10,6 @@ export default {
   budget_owner: "Titularul Bugetului",
   payer_entity: "Entitate plătitoare",
   funding_entity: "Entitatea finanțatoare",
+  verified: "Verified",
+  not_verified: "Not verified",
 };

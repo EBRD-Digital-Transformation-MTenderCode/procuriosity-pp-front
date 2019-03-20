@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     handleChange(name, value) {
-      this.setValue(name, value && undefined);
+      this.setValue(name, value);
     },
   },
   watch: {
