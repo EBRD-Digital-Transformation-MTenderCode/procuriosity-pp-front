@@ -40,4 +40,8 @@ export default {
 
   list_total_found: "Всего найдено",
   list_refresh: "Обновить",
+
+  buyers_info: "Buyer's info",
+  procedure_info: "Procedure info",
+  periods: "Periods",
 };

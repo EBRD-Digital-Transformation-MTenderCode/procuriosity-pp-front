@@ -47,7 +47,7 @@
           <el-col :sm="8">
             <div class="info-block__text">Status</div>
             <div class="info-block__value">
-              {{ budgetBreakdown.status ? $t("budget.verified") : $t("budget.not_verified") }}
+              {{ budgetBreakdown.status ? $t("budgetBreakdown.verified") : $t("budgetBreakdown.not_verified") }}
             </div>
           </el-col>
         </el-row>

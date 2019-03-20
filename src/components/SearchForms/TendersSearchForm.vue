@@ -12,7 +12,7 @@
           <el-row :gutter="26">
             <el-col :sm="8">
               <div class="search-form__group">
-                <div class="search-form__group-title">Buyer's info</div>
+                <div class="search-form__group-title">{{ $t("search.buyers_info") }}</div>
 
                 <!-- Buyers names -->
                 <div class="search-form-element">
@@ -89,7 +89,7 @@
 
             <el-col :sm="8">
               <div class="search-form__group">
-                <div class="search-form__group-title">Procedure info</div>
+                <div class="search-form__group-title">{{ $t("search.procedure_info") }}</div>
 
                 <!-- id -->
                 <div class="search-form-element">
@@ -182,7 +182,7 @@
 
             <el-col :sm="8">
               <div class="search-form__group">
-                <div class="search-form__group-title">Periods</div>
+                <div class="search-form__group-title">{{ $t("search.periods") }}</div>
 
                 <!-- Period published -->
                 <div class="search-form-element">

@@ -40,4 +40,8 @@ export default {
 
   list_total_found: "Total found",
   list_refresh: "Refresh",
+
+  buyers_info: "Buyer's info",
+  procedure_info: "Procedure info",
+  periods: "Periods",
 };
