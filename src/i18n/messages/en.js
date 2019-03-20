@@ -21,4 +21,6 @@ export default {
   page: "Page",
   of: "of",
   pages: "pages",
+
+  "n/a": "n/a",
 };

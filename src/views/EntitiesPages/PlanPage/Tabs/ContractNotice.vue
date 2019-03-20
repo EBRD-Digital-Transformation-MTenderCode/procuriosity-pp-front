@@ -100,7 +100,7 @@
                   {{ $t("plan.nuts_code") }}
                 </div>
                 <div class="info-block__value">
-                  n/a
+                  {{ $t("n/a") }}
                 </div>
               </el-col>
               <el-col :sm="6">
@@ -1075,145 +1075,14 @@
         <div class="info__title">{{ $t("plan.budget") }}</div>
 
         <div class="info__sub-title">{{ $t("plan.budget_breakdown") }}</div>
-        <el-collapse accordion @change="getFS">
-          <el-collapse-item
-            v-for="(budgetBreakdown, index) of gd(msRecord, _ => _.planning.budget.budgetBreakdown, [])"
-            :key="budgetBreakdown.id + index"
-            :name="budgetBreakdown.id"
-          >
-            <template slot="title">
-              <div class="info-block accordion-header">
-                <el-row :gutter="15">
-                  <el-col :sm="16">
-                    <div class="info-block__text">{{ $t("plan.budgetline_id") }}</div>
-                    <div class="info-block__value">
-                      {{ gd(budgetBreakdown, _ => _.id) }}
-                    </div>
-                  </el-col>
-                  <el-col :sm="4">
-                    <div class="info-block__text">{{ $t("plan.amount") }}</div>
-                    <div class="info-block__value">
-                      {{ fa(gd(budgetBreakdown, _ => _.amount.amount)) }}
-                      {{ gd(budgetBreakdown, _ => _.amount.currency) }}
-                    </div>
-                  </el-col>
-                  <!--<el-col :sm="4">
-                    <div class="info-block__text">Status</div>
-                    <div class="info-block__value">
-                      ???Verified
-                    </div>
-                  </el-col>-->
-                </el-row>
-              </div>
-            </template>
-
-            <div class="info-blocks">
-              <div class="info-block">
-                <el-row :gutter="15">
-                  <el-col :sm="16">
-                    <div class="info-block__text">{{ $t("plan.budget_details_rationale") }}</div>
-                    <div class="info-block__value">{{ gd(budgetBreakdown, _ => _.description, "n/a") }}</div>
-                  </el-col>
-                  <el-col :sm="8">
-                    <div class="info-block__text">{{ $t("plan.validity_period") }}</div>
-                    <div class="info-block__value">
-                      {{ $t("plan.start_date") }}:
-                      {{ fd(gd(budgetBreakdown, _ => _.period.startDate), "DD.MM.YYYY") }} - {{ $t("plan.end_date") }}:
-                      {{ fd(gd(budgetBreakdown, _ => _.period.endDate), "DD.MM.YYYY") }}
-                    </div>
-                  </el-col>
-                </el-row>
-              </div>
-
-              <div class="info-block">
-                <el-row :gutter="15">
-                  <el-col :sm="16">
-                    <div class="info-block__text">{{ $t("plan.budget_project") }}</div>
-                    <div class="info-block__value">
-                      {{ gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].project, "n/a") }}
-                    </div>
-                  </el-col>
-                  <el-col :sm="8">
-                    <div class="info-block__text">{{ $t("plan.project_ID") }}</div>
-                    <div class="info-block__value">
-                      {{ gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].projectId, "n/a") }}
-                    </div>
-                  </el-col>
-                </el-row>
-              </div>
-
-              <div class="info-block">
-                <el-row :gutter="15">
-                  <el-col :sm="16">
-                    <div class="info-block__text">{{ $t("plan.budget_owner") }}</div>
-                    <div class="info-block__value">
-                      {{
-                        gd(
-                          gd(msRecord, _ => _.parties, []).find(part =>
-                            gd(part, _ => _.roles, []).some(role => role === "buyer")
-                          ),
-                          _ => _.name
-                        )
-                      }}
-                    </div>
-                  </el-col>
-                  <el-col :sm="8">
-                    <div class="info-block__text">{{ $t("plan.national_registration_number") }}</div>
-                    <div class="info-block__value">
-                      {{
-                        gd(
-                          gd(msRecord, _ => _.parties, []).find(part =>
-                            gd(part, _ => _.roles, []).some(role => role === "buyer")
-                          ),
-                          _ => _.id
-                        )
-                      }}
-                    </div>
-                  </el-col>
-                </el-row>
-              </div>
-
-              <div class="info-block">
-                <el-row :gutter="15">
-                  <el-col :sm="16">
-                    <div class="info-block__text">{{ $t("plan.payer_entity") }}</div>
-                    <div class="info-block__value">
-                      {{ gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].payer.name, "n/a") }}
-                    </div>
-                  </el-col>
-                  <el-col :sm="8">
-                    <div class="info-block__text">{{ $t("plan.national_registration_number") }}</div>
-                    <div class="info-block__value">
-                      {{ gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].payer.id, "n/a") }}
-                    </div>
-                  </el-col>
-                </el-row>
-              </div>
-
-              <div class="info-block">
-                <el-row :gutter="15">
-                  <el-col :sm="16">
-                    <div class="info-block__text">{{ $t("plan.funding_entity") }}</div>
-                    <div class="info-block__value">
-                      {{
-                        FSs.hasOwnProperty(gd(budgetBreakdown, _ => _.id))
-                          ? gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].funder.name, $t("plan.state_money"))
-                          : "n/a"
-                      }}
-                    </div>
-                  </el-col>
-                  <el-col :sm="8" v-if="gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].funder.id)">
-                    <div class="info-block__text">{{ $t("plan.national_registration_number") }}</div>
-                    <div class="info-block__value">
-                      {{ gd(FSs, _ => _[gd(budgetBreakdown, _ => _.id)].funder.id) }}
-                    </div>
-                  </el-col>
-                </el-row>
-              </div>
-            </div>
-          </el-collapse-item>
+        <el-collapse accordion @change="getFSRecord">
+          <budget-breakdown
+            v-for="(budgetBreakdown, index) of breakdowns"
+            :key="budgetBreakdown.ocid"
+            :budgetBreakdown="budgetBreakdown"
+            :index="index"
+          />
         </el-collapse>
-
         <div class="info-blocks">
           <div class="info-block">
             <el-row :gutter="15">
@@ -1464,6 +1333,7 @@ import typesOfBuyers from "./../../../../store/types/buyers-types";
 import mainGeneralActivites from "./../../../../store/types/main-general-activity-types";
 import ListPagination from "./../../../../components/ListPagination";
 import PageNumber from "./../../../../components/PageNumber";
+import BudgetBreakdown from "../../../../components/BudgetBreakdown";
 
 import {
   getDataFromObject,
@@ -1471,7 +1341,10 @@ import {
   parseDocumentType,
   formatAmount,
   transformDocumentation,
+  getOrganizationObject,
+  getSourceOfMoney,
 } from "./../../../../utils";
+import { getFSReleaseConfig } from "../../../../configs/requests-configs";
 
 export default {
   name: "ContractNotice",
@@ -1492,6 +1365,7 @@ export default {
   components: {
     "list-pagination": ListPagination,
     "page-number": PageNumber,
+    "budget-breakdown": BudgetBreakdown,
   },
   data() {
     return {
@@ -1553,6 +1427,41 @@ export default {
     elementsAmount() {
       return this.gd(this.pnRecord, _ => _.tender.lots, []).length;
     },
+    breakdowns() {
+      return this.gd(this.msRecord, _ => _.planning.budget.budgetBreakdown, []).map(budgetBreakdown => ({
+        ocid: this.gd(budgetBreakdown, _ => _.id),
+        value: {
+          amount: this.gd(budgetBreakdown, _ => _.amount.amount),
+          currency: this.gd(budgetBreakdown, _ => _.amount.currency),
+        },
+        status: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].status),
+        sourceOfMoney: getSourceOfMoney(
+          this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].parties, []),
+          getOrganizationObject(this.gd(this.msRecord, _ => _.parties), "buyer").id
+        ),
+        description: this.gd(budgetBreakdown, _ => _.description, "n/a"),
+        rationale: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].rationale, "n/a"),
+        EIocid: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].EIocid, "n/a"),
+        period: {
+          startDate: this.gd(budgetBreakdown, _ => _.period.startDate),
+          endDate: this.gd(budgetBreakdown, _ => _.period.endDate),
+        },
+        project: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].project, "n/a"),
+        projectId: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].projectId, "n/a"),
+        buyer: {
+          name: getOrganizationObject(this.gd(this.msRecord, _ => _.parties), "buyer").name,
+          id: getOrganizationObject(this.gd(this.msRecord, _ => _.parties), "buyer").id,
+        },
+        funder: {
+          name: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].funder.name),
+          id: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].funder.id),
+        },
+        payer: {
+          name: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].payer.name),
+          id: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].payer.id),
+        },
+      }));
+    },
   },
   methods: {
     gd(...args) {
@@ -1570,36 +1479,36 @@ export default {
     fa(amount) {
       return formatAmount(amount);
     },
-    async getFS(ocidFS) {
-      if (!ocidFS || this.FSs.hasOwnProperty(ocidFS)) {
+    async getFSRecord(FSocid) {
+      if (!FSocid || this.FSs.hasOwnProperty(FSocid)) {
         return false;
       }
 
-      const cpidEI = ocidFS.replace(/-FS-[0-9]{13}$/, "");
+      const EIocid = FSocid.replace(/-FS-[0-9]{13}$/, "");
 
       try {
-        const responseFS = await axios({
-          method: "get",
-          url: `https://public.mtender.gov.md/budgets/${cpidEI}/${ocidFS}`,
-        });
+        const responseFS = await axios(getFSReleaseConfig(EIocid, FSocid));
 
         const FS = responseFS.data.releases[0];
-
-        const payer = FS.parties.find(part => part.roles.some(role => role === "payer"));
-        const funder = FS.parties.find(part => part.roles.some(role => role === "funder"));
 
         this.FSs = Object.assign({}, this.FSs, {
           [FS.ocid]: {
             project: FS.planning.project,
             projectId: FS.planning.projectId,
             payer: {
-              name: payer.name,
-              id: payer.id,
+              name: FS.parties.find(part => part.roles.some(role => role === "payer")).name,
+              id: FS.parties.find(part => part.roles.some(role => role === "payer")).id,
             },
             funder: {
-              name: funder ? funder.name : null,
-              id: funder ? funder.id : null,
+              name: getOrganizationObject(FS.parties, "funder")
+                ? getOrganizationObject(FS.parties, "funder").name
+                : null,
+              id: getOrganizationObject(FS.parties, "funder") ? getOrganizationObject(FS.parties, "funder").id : null,
             },
+            status: this.gd(FS, _ => _.planning.budget.verified),
+            parties: this.gd(FS, _ => _.tender.parties),
+            rationale: this.gd(FS, _ => _.planning.rationale),
+            EIocid,
           },
         });
       } catch (e) {

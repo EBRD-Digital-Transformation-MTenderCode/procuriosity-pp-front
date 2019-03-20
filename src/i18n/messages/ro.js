@@ -4,7 +4,7 @@ import budget from "./ro/budget";
 import plan from "./ro/plan";
 import tender from "./ro/tender";
 import contract from "./ro/contract";
-import budgetBreakdown from "./en/budgetBreakdown";
+import budgetBreakdown from "./ro/budgetBreakdown";
 
 export default {
   entities,
@@ -21,4 +21,6 @@ export default {
   page: "Pagină",
   of: "din",
   pages: "de pagini",
+
+  "n/a": "n/a",
 };

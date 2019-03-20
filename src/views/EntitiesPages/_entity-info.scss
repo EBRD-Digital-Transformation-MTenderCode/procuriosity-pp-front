@@ -468,6 +468,8 @@
       }
 
       &__nav-wrap {
+        display: flex;
+        padding: 0;
         margin-top: -79px;
 
         &:after {
@@ -490,10 +492,6 @@
         &:last-child {
           padding-right: 14px !important;
         }
-      }
-      &__nav-wrap {
-        display: flex;
-        padding: 0;
       }
       &__nav-prev,
       &__nav-next {
