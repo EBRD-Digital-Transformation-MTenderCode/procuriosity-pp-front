@@ -1,16 +1,19 @@
 <template>
   <div class="info">
-    <div id="contract-title" class="info__title">{{ $t("tender.contract_award_notices") }}</div>
-    <page-number
-      v-if="needPagination"
-      :current-page="currentPage"
-      :elements-amount="elementsAmount"
-      :page-size="pageSize"
-    />
-    <el-collapse accordion :value="gd(evRecord, _ => _.tender.lots[0].id, '0') + '0'" @change="changeActiveItem">
+    <div id="contract-title" class="info__title info__title_with-action">
+      {{ $t("tender.contract_award_notices") }}
+      <el-radio-group v-model="cansView" size="medium" class="info__radio-group">
+        <el-radio-button label="all">{{ $t("tender.all_lots") }}</el-radio-button>
+        <el-radio-button label="successful">{{ $t("tender.successful_lots") }}</el-radio-button>
+        <el-radio-button label="unsuccessful">{{ $t("tender.unsuccessful_lots") }}</el-radio-button>
+      </el-radio-group>
+    </div>
+    <page-number v-if="needPagination" :current-page="currentPage" :elements-amount="lotsCount" :page-size="pageSize" />
+    <el-collapse accordion :value="gd(lotsList, _ => _[0].id, '0') + '0'" @change="changeActiveItem">
       <contract-item
-        v-for="(lot, index) of gd(evRecord, _ => _.tender.lots, [])"
-        v-if="index >= numberOfLastDisplayedLot - pageSize && index < numberOfLastDisplayedLot"
+        v-for="(lot, index) of lotsList.filter((lot, i) =>
+          needPagination ? i >= numberOfLastDisplayedLot - pageSize && i < numberOfLastDisplayedLot : true
+        )"
         :key="lot.id + index"
         :lot="lot"
         :index="index"
@@ -20,7 +23,7 @@
     </el-collapse>
     <list-pagination
       v-if="needPagination"
-      :total="elementsAmount"
+      :total="lotsCount"
       :pageCount="0"
       :currentPage="currentPage"
       :pageSize="pageSize"
@@ -57,18 +60,31 @@ export default {
       pageSize: 25,
       numberOfLastDisplayedLot: 25,
       currentPage: 1,
+      cansView: "all",
     };
   },
   computed: {
     needPagination() {
-      return this.elementsAmount > this.pageSize;
+      return this.lotsCount > this.pageSize;
     },
-    elementsAmount() {
-      return this.gd(this.evRecord, _ => _.tender.lots, []).length;
+    lotsList() {
+      const initialLotsList = this.gd(this.evRecord, _ => _.tender.lots, []);
+
+      switch (this.cansView) {
+        case "successful":
+          return initialLotsList.filter(lot => lot.status === "complete");
+        case "unsuccessful":
+          return initialLotsList.filter(lot => lot.status === "unsuccessful");
+        default:
+          return initialLotsList;
+      }
+    },
+    lotsCount() {
+      return this.lotsList.length;
     },
   },
   created() {
-    this.changeActiveItem(this.gd(this.evRecord, _ => _.tender.lots[0].id, "0") + "0");
+    this.changeActiveItem(this.gd(this.lotsList, _ => _[0].id, "0") + "0");
   },
   methods: {
     gd(...args) {
