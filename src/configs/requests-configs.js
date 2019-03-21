@@ -21,13 +21,6 @@ export const getBudgetConfig = id => {
   };
 };
 
-export const getFSReleaseConfig = (EIocid, FSocid) => {
-  return {
-    method: "get",
-    url: `https://public.mtender.gov.md/budgets/${EIocid}/${FSocid}`,
-  };
-};
-
 export const getTenderConfig = (cdb, id) => {
   return {
     method: "get",

@@ -19,10 +19,6 @@ export default {
   execution: "Execution",
   spending: "Spending",
 
-  own_money: "Own money",
-  donors_money: "Donor's money",
-  state_money: "State money",
-
   amount: "Amount",
   status: "Status",
   payer_entity: "Payer Entity",

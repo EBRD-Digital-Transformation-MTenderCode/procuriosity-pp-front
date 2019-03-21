@@ -139,7 +139,7 @@
               {{ gd(bid, _ => _.value.currency) }} {{ $t("tender.exluding_vat") }}
             </div>
           </td>
-          <td data-th="Self-declaration">
+          <td :data-th="$t('tender.self_declaration')">
             <button
               type="button"
               @click="$refs[bid.id + 'eligibilityDocuments'][0].show = true"

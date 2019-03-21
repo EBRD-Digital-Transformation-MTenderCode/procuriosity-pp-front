@@ -1344,7 +1344,7 @@ import {
   getOrganizationObject,
   getSourceOfMoney,
 } from "./../../../../utils";
-import { getFSReleaseConfig } from "../../../../configs/requests-configs";
+import { getBudgetConfig } from "../../../../configs/requests-configs";
 
 export default {
   name: "ContractNotice",
@@ -1440,8 +1440,9 @@ export default {
           getOrganizationObject(this.gd(this.msRecord, _ => _.parties), "buyer").id
         ),
         description: this.gd(budgetBreakdown, _ => _.description, this.$t("n/a")),
-        rationale: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].rationale, this.$t("n/a")),
-        EIocid: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].EIocid, this.$t("n/a")),
+        budgetLineId: this.gd(this.msRecord, _ => _.planning.budget.id, this.$t("n/a")),
+        EIocid: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].EIocid),
+        EIname: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].EIname),
         period: {
           startDate: this.gd(budgetBreakdown, _ => _.period.startDate),
           endDate: this.gd(budgetBreakdown, _ => _.period.endDate),
@@ -1487,10 +1488,9 @@ export default {
       const EIocid = FSocid.replace(/-FS-[0-9]{13}$/, "");
 
       try {
-        const responseFS = await axios(getFSReleaseConfig(EIocid, FSocid));
-
-        const FS = responseFS.data.releases[0];
-
+        const responseBudget = await axios(getBudgetConfig(EIocid));
+        const EI = responseBudget.data.records.find(record => record.ocid === EIocid).compiledRelease;
+        const FS = responseBudget.data.records.find(record => record.ocid === FSocid).compiledRelease;
         this.FSs = Object.assign({}, this.FSs, {
           [FS.ocid]: {
             project: FS.planning.project,
@@ -1507,8 +1507,8 @@ export default {
             },
             status: this.gd(FS, _ => _.planning.budget.verified),
             parties: this.gd(FS, _ => _.tender.parties),
-            rationale: this.gd(FS, _ => _.planning.rationale),
             EIocid,
+            EIname: EI.tender.title,
           },
         });
       } catch (e) {
