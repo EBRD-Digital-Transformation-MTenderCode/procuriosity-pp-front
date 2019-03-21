@@ -245,15 +245,15 @@ export default {
             this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].parties, []),
             getOrganizationObject(this.gd(this.tender, _ => _.MSRecord.compiledRelease.parties), "buyer").id
           ),
-          description: this.gd(budgetBreakdown, _ => _.description, "n/a"),
-          rationale: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].rationale, "n/a"),
-          EIocid: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].EIocid, "n/a"),
+          description: this.gd(budgetBreakdown, _ => _.description, this.$t("n/a")),
+          rationale: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].rationale, this.$t("n/a")),
+          EIocid: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].EIocid, this.$t("n/a")),
           period: {
             startDate: this.gd(budgetBreakdown, _ => _.period.startDate),
             endDate: this.gd(budgetBreakdown, _ => _.period.endDate),
           },
-          project: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].project, "n/a"),
-          projectId: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].projectId, "n/a"),
+          project: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].project, this.$t("n/a")),
+          projectId: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].projectId, this.$t("n/a")),
           buyer: {
             name: getOrganizationObject(this.gd(this.tender, _ => _.MSRecord.compiledRelease.parties), "buyer").name,
             id: getOrganizationObject(this.gd(this.tender, _ => _.MSRecord.compiledRelease.parties), "buyer").id,

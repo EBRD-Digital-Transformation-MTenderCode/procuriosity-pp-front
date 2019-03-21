@@ -105,7 +105,7 @@
               <el-row :gutter="25">
                 <el-col :xs="24">
                   <div class="info-block__text">{{ $t("tender.description_of_changes") }}</div>
-                  <div class="info-block__value">n/a</div>
+                  <div class="info-block__value">{{ $t("n/a") }}</div>
                 </el-col>
               </el-row>
             </div>

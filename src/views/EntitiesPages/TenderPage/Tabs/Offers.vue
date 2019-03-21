@@ -88,8 +88,25 @@
       v-if="index >= numberOfLastDisplayedLot - pageSize && index < numberOfLastDisplayedLot"
       :key="lot.id"
     >
-      <div style="margin-bottom: 15px; font-size: 16px; font-weight: 700;">
-        {{ lot.title }}
+      <div class="info-block">
+        <el-row :gutter="15">
+          <el-col :sm="16">
+            <div class="info-block__text">
+              {{ $t("tender.lot") }}
+            </div>
+            <div class="info-block__value info-block__value_bold">
+              {{ lot.title }}
+            </div>
+          </el-col>
+          <el-col :sm="8">
+            <div class="info-block__text">
+              {{ $t("tender.lot_identifier") }}
+            </div>
+            <div class="info-block__value">
+              {{ lot.id }}
+            </div>
+          </el-col>
+        </el-row>
       </div>
       <table
         class="info-table offers-table"

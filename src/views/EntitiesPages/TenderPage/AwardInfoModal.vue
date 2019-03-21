@@ -18,7 +18,7 @@
             <el-col :sm="24">
               <div class="info-block__text">{{ $t("tender.award_description") }}:</div>
               <div class="info-block__value">
-                {{ gd(award, _ => _.description, "n/a") }}
+                {{ gd(award, _ => _.description, $t("n/a")) }}
               </div>
             </el-col>
           </el-row>

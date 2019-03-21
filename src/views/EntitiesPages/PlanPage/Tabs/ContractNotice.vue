@@ -112,7 +112,7 @@
                     gd(
                       gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
                       _ => _.address.postalCode,
-                      "n/a"
+                      $t("n/a")
                     )
                   }}
                 </div>
@@ -215,7 +215,7 @@
                       )
                     }}
                   </a>
-                  <span v-else>n/a</span>
+                  <span v-else>{{ $t("n/a") }}</span>
                 </div>
               </el-col>
               <el-col :sm="14">
@@ -480,7 +480,7 @@
                   <el-col :sm="24">
                     <div class="info-block__text">{{ $t("plan.place_of_performance") }}</div>
                     <div class="info-block__value">
-                      {{ gd(lot, _ => _.placeOfPerformance.address.postalCode, "n/a") }},
+                      {{ gd(lot, _ => _.placeOfPerformance.address.postalCode, $t("n/a")) }},
                       {{ gd(lot, _ => _.placeOfPerformance.address.addressDetails.country.description) }},
                       {{ gd(lot, _ => _.placeOfPerformance.address.addressDetails.region.description) }},
                       {{ gd(lot, _ => _.placeOfPerformance.address.addressDetails.locality.description) }},
@@ -1089,7 +1089,7 @@
               <el-col :sm="24">
                 <div class="info-block__text">{{ $t("plan.rationale_procurement") }}</div>
                 <div class="info-block__value">
-                  {{ gd(msRecord, _ => _.planning.rationale, "n/a") }}
+                  {{ gd(msRecord, _ => _.planning.rationale, $t("n/a")) }}
                 </div>
               </el-col>
             </el-row>
@@ -1100,7 +1100,7 @@
               <el-col :sm="24">
                 <div class="info-block__text">{{ $t("plan.short_free_description") }}</div>
                 <div class="info-block__value">
-                  {{ gd(msRecord, _ => _.planning.budget.description, "n/a") }}
+                  {{ gd(msRecord, _ => _.planning.budget.description, $t("n/a")) }}
                 </div>
               </el-col>
             </el-row>
@@ -1248,7 +1248,7 @@
                 </div>
               </el-col>
 
-              <el-col :sm="8">
+              <el-col :sm="8">0
                 <div class="info-block__text">{{ $t("plan.country") }}</div>
                 <div class="info-block__value">
                   Republic of Moldova
@@ -1387,7 +1387,7 @@ export default {
           _ => _.details.typeOfBuyer
         )
       ) {
-        return "n/a";
+        return this.$t("n/a");
       }
 
       return typesOfBuyers.find(
@@ -1406,7 +1406,7 @@ export default {
           _ => _.details.mainGeneralActivity
         )
       ) {
-        return "n/a";
+        return this.$t("n/a");
       }
 
       return mainGeneralActivites.find(
@@ -1439,15 +1439,15 @@ export default {
           this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].parties, []),
           getOrganizationObject(this.gd(this.msRecord, _ => _.parties), "buyer").id
         ),
-        description: this.gd(budgetBreakdown, _ => _.description, "n/a"),
-        rationale: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].rationale, "n/a"),
-        EIocid: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].EIocid, "n/a"),
+        description: this.gd(budgetBreakdown, _ => _.description, this.$t("n/a")),
+        rationale: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].rationale, this.$t("n/a")),
+        EIocid: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].EIocid, this.$t("n/a")),
         period: {
           startDate: this.gd(budgetBreakdown, _ => _.period.startDate),
           endDate: this.gd(budgetBreakdown, _ => _.period.endDate),
         },
-        project: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].project, "n/a"),
-        projectId: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].projectId, "n/a"),
+        project: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].project, this.$t("n/a")),
+        projectId: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].projectId, this.$t("n/a")),
         buyer: {
           name: getOrganizationObject(this.gd(this.msRecord, _ => _.parties), "buyer").name,
           id: getOrganizationObject(this.gd(this.msRecord, _ => _.parties), "buyer").id,
