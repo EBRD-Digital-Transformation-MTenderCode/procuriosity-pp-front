@@ -4,9 +4,8 @@
       <div class="search-form-wp">
         <component :is="renderSearchForm" class="search-form" :isExpanded="isExpanded" />
         <button class="search-form__btn search-form__btn_more" @click="actionExpand">
-          <i :class="['icon-right', isExpanded ? 'el-icon-arrow-up' : 'el-icon-arrow-down']" />
-          {{ isExpanded ? $t("search.lessCriterions") : $t("search.moreCriterions") }}
-          <i :class="['icon-left', isExpanded ? 'el-icon-arrow-up' : 'el-icon-arrow-down']" />
+          {{ $t("search.moreCriterions") }}
+          <i :class="['icon-left', isExpanded ? 'el-icon-close' : 'el-icon-arrow-down']" />
         </button>
       </div>
       <search-status-bar :entity="entityName" :needPagination="needPagination" />

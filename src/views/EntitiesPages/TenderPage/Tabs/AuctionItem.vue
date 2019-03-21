@@ -4,9 +4,20 @@
       <div class="info-blocks accordion-header">
         <div class="info-block">
           <el-row :gutter="15">
-            <el-col :sm="24">
+            <el-col :sm="16">
+              <div class="info-block__text">
+                {{ $t("tender.lot") }}
+              </div>
               <div class="info-block__value info-block__value__bold">
                 {{ auction.lotTitle }}
+              </div>
+            </el-col>
+            <el-col :sm="8">
+              <div class="info-block__text">
+                {{ $t("tender.lot_identifier") }}
+              </div>
+              <div class="info-block__value">
+                {{ auction.lotId }}
               </div>
             </el-col>
           </el-row>
@@ -17,7 +28,7 @@
     <transition name="fade" mode="out-in" appear>
       <div>
         <div class="info-blocks">
-          <div class="info__sub-title">{{ $t("tender.electronic_auction_modalities") }}</div>
+          <div class="info__sub-title ">{{ $t("tender.electronic_auction_modalities") }}</div>
           <div v-if="auction.auctionProgress.length">
             <el-row :gutter="15">
               <el-col :sm="12">

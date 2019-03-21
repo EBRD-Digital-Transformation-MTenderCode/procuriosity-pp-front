@@ -45,6 +45,7 @@ export default {
   information_about_lots: "Информация о лотах",
   contract_divided_into_lots: "Этот договор разделен на лоты",
   tenders_submitted_all_lots: "Оферты могут быть подданы для всех лотов",
+  must_be_submitted: "Оферты или заявки на участие должны быть поданны в электронном виде через",
 
   no_lots: "Нет лотов",
   description: "Описание",

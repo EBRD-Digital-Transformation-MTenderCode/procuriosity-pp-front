@@ -19,10 +19,6 @@ export default {
   execution: "Execution",
   spending: "Spending",
 
-  own_money: "Own money",
-  donors_money: "Donor's money",
-  state_money: "State money",
-
   amount: "Amount",
   status: "Status",
   payer_entity: "Payer Entity",
@@ -38,4 +34,9 @@ export default {
   contract_id: "ID договора",
   "budget_project_id(s)": "Budget Project ID(s)",
   type: "Type",
+  main_cpv: "Основной код CPV",
+
+  period_of_need: "Period of need",
+  main_procurement_category: "Main procurement category",
+  from: "from",
 };

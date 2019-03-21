@@ -67,6 +67,7 @@ export default {
       return this.gd(this.evRecord, _ => _.tender.electronicAuctions.details, []).map(auction => ({
         id: this.gd(auction, _ => _.id),
         lotTitle: this.getLotTitle(this.gd(auction, _ => _.relatedLot)),
+        lotId: this.gd(auction, _ => _.relatedLot),
         minimalStep: {
           amount: this.gd(auction, _ => _.electronicAuctionModalities[0].eligibleMinimumDifference.amount),
           currency: this.gd(auction, _ => _.electronicAuctionModalities[0].eligibleMinimumDifference.currency),

@@ -48,12 +48,22 @@ export default {
   methods: {
     handleChangeSearch(val) {
       this.currentSearchValue = val;
-      if (this.currentSearchValue && this.currentSearchValue.length >= 3) {
+      if (this.currentSearchValue) {
+        if (this.currentSearchValue.length >= 3) {
+          this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
+            entityName: this.entityName,
+            params: {
+              titlesOrDescriptionsStrict: this.currentStrictSearhcValue,
+              titlesOrDescriptions: val.trim(),
+            },
+          });
+        }
+      } else {
         this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
           entityName: this.entityName,
           params: {
             titlesOrDescriptionsStrict: this.currentStrictSearhcValue,
-            titlesOrDescriptions: val.trim(),
+            titlesOrDescriptions: "",
           },
         });
       }
