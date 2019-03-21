@@ -1,6 +1,7 @@
 import idx from "idx";
 import dayjs from "dayjs";
 import documentsTypes from "./store/types/documents-types";
+import proceduresTypes from "./store/types/procedures-types";
 import VueI18n from "./i18n";
 
 export function getDataFromObject(obj, getFunc, def = "") {
@@ -134,77 +135,26 @@ export function getOrganizationObject(parties, organizationRole) {
   }
 }
 
+// @TODO need clarify types for entities
 export function selectProcedure(category, amount) {
+  return (
+    // @TODO need refactoring
+    proceduresTypes.contracts.find(procedure => procedure.value === calculateProcedureType(category, amount)) &&
+    proceduresTypes.contracts.find(procedure => procedure.value === calculateProcedureType(category, amount)).name[
+      VueI18n.locale
+    ]
+  );
+}
+
+function calculateProcedureType(category, amount) {
   if (category === "goods" || category === "services") {
-    if (amount < 80000) {
-      switch (VueI18n.locale) {
-        case "en":
-          return "Low value procedure";
-        case "ro":
-          return "Procedură de valoare mică";
-        case "ru":
-          return "Закупка малой стоимости";
-        default:
-          return "Low value procedure";
-      }
-    } else if (amount <= 400000) {
-      switch (VueI18n.locale) {
-        case "en":
-          return "Request for Proposals";
-        case "ro":
-          return "COP";
-        case "ru":
-          return "Запрос ценовых предложений";
-        default:
-          return "Request for Proposals";
-      }
-    } else {
-      switch (VueI18n.locale) {
-        case "en":
-          return "Open Tender";
-        case "ro":
-          return "Licitație deschisă";
-        case "ru":
-          return "Открытые торги";
-        default:
-          return "Open Tender";
-      }
-    }
-  } else if (category === "works") {
-    if (amount < 100000) {
-      switch (VueI18n.locale) {
-        case "en":
-          return "Low value procedure";
-        case "ro":
-          return "Procedură de valoare mică";
-        case "ru":
-          return "Закупка малой стоимости";
-        default:
-          return "Low value procedure";
-      }
-    } else if (amount <= 1500000) {
-      switch (VueI18n.locale) {
-        case "en":
-          return "Request for Proposals";
-        case "ro":
-          return "COP";
-        case "ru":
-          return "Запрос ценовых предложений";
-        default:
-          return "Request for Proposals";
-      }
-    } else {
-      switch (VueI18n.locale) {
-        case "en":
-          return "Open tender";
-        case "ro":
-          return "Licitație deschisă";
-        case "ru":
-          return "Открытые торги";
-        default:
-          return "Open Tender";
-      }
-    }
+    if (amount < 80000) return "mv";
+    else if (amount <= 400000) return "sv";
+    else return "ot";
+  } else {
+    if (amount < 100000) return "mv";
+    else if (amount <= 1500000) return "sv";
+    else return "ot";
   }
 }
 

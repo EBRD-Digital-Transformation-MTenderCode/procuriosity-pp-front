@@ -345,6 +345,26 @@
               </el-col>
             </el-row>
           </div>
+
+          <div class="info-block">
+            <el-row :gutter="15">
+              <el-col :sm="24">
+                <div class="info-block__text">{{ $t("plan.must_be_submitted") }}:</div>
+                <div class="info-block__value info-block__value-platform">
+                  <a
+                    class="platform-link"
+                    v-for="platform of randomSortPlatforms"
+                    :key="platform.name"
+                    :href="platform.href"
+                    :title="platform.name"
+                    target="_blank"
+                  >
+                    <img :src="platform.src" :alt="platform.name" class="platform-img" />
+                  </a>
+                </div>
+              </el-col>
+            </el-row>
+          </div>
         </div>
       </div>
 
@@ -1369,6 +1389,33 @@ export default {
   },
   data() {
     return {
+      platforms: [
+        {
+          href: "https://yptender.md/",
+          src: "/img/yptender.png",
+          name: "YPTENDER.MD",
+        },
+        {
+          href: "https://e-licitatie.md/",
+          src: "/img/e-lici.png",
+          name: "e-licitatie.md",
+        },
+        {
+          href: "https://achizitii.md/",
+          src: "/img/achizitii.md.png",
+          name: "achizitii.md",
+        },
+        {
+          href: "javascript:void(0)",
+          src: "/img/ebs-integrator.png",
+          name: "ebs-integrator",
+        },
+        {
+          href: "javascript:void(0)",
+          src: "/img/lonar.png",
+          name: "lonar",
+        },
+      ],
       FSs: {},
       pageSize: 25,
       numberOfLastDisplayedLot: 25,

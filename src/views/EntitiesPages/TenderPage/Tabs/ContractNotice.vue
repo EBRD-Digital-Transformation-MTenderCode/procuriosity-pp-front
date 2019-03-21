@@ -1470,17 +1470,16 @@ export default {
           src: "/img/achizitii.md.png",
           name: "achizitii.md",
         },
-        /*{
-           href: "javascript:void(0)",
-           src: "/img/ebs-integrator.png",
-           name: "ebs-integrator"
-           },
-           {
-           href: "javascript:void(0)",
-           src: "/img/lonar.png",
-           name: "lonar"
-           }
-           */
+        {
+          href: "javascript:void(0)",
+          src: "/img/ebs-integrator.png",
+          name: "ebs-integrator",
+        },
+        {
+          href: "javascript:void(0)",
+          src: "/img/lonar.png",
+          name: "lonar",
+        },
       ],
       needDisplay: false,
       windowWidth: 0,

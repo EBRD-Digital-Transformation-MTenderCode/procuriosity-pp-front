@@ -9,13 +9,16 @@
           <el-container direction="vertical">
             <el-row>
               <el-col :xs="24" :sm="14">
+                <div class="entity-main-info__subtitle">
+                  {{ gd(EI, _ => _.ocid).toUpperCase() }} {{ $t("budget.from") }}
+                  {{ fd(gd(EI, _ => _.date), "DD.MM.YYYY, HH:mm") }}
+                </div>
                 <div class="entity-main-info__title">
                   {{ gd(EI, _ => _.tender.title) }}
                 </div>
                 <div class="entity-main-info__description">
                   {{ gd(EI, _ => _.tender.classification.description) }}
                 </div>
-                <div class="entity-main-info__timeline"></div>
               </el-col>
               <el-col :xs="22" :sm="6" :offset="2">
                 <div class="entity-main-info__value">
@@ -33,11 +36,21 @@
                     {{ $t("budget.no_finances_sources") }}
                   </div>
                 </div>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :xs="24" :sm="14">
                 <div class="entity-main-info__additional">
                   <div class="entity-main-info__additional-block">
                     <div class="entity-main-info__additional-title">{{ $t("budget.buyer_name") }}</div>
                     <div class="entity-main-info__additional-value">
                       {{ gd(EI, _ => _.buyer.name) }}
+                    </div>
+                  </div>
+                  <div class="entity-main-info__additional-block">
+                    <div class="entity-main-info__additional-title">{{ $t("budget.buyer_id") }}</div>
+                    <div class="entity-main-info__additional-value">
+                      {{ gd(EI, _ => _.buyer.id) }}
                     </div>
                   </div>
                   <div class="entity-main-info__additional-block">
@@ -49,10 +62,27 @@
                       }}
                     </div>
                   </div>
+                </div>
+              </el-col>
+              <el-col :xs="24" :sm="6" :offset="2">
+                <div class="entity-main-info__additional">
                   <div class="entity-main-info__additional-block">
-                    <div class="entity-main-info__additional-title">{{ $t("budget.number_of_notice") }}</div>
+                    <div class="entity-main-info__additional-title">{{ $t("budget.period_of_need") }}</div>
                     <div class="entity-main-info__additional-value">
-                      {{ gd(EI, _ => _.ocid) }}
+                      {{ fd(gd(EI, _ => _.planning.budget.period.startDate), "DD.MM.YYYY") }} -
+                      {{ fd(gd(EI, _ => _.planning.budget.period.endDate), "DD.MM.YYYY") }}
+                    </div>
+                  </div>
+                  <div class="entity-main-info__additional-block">
+                    <div class="entity-main-info__additional-title">{{ $t("budget.main_cpv") }}</div>
+                    <div class="entity-main-info__additional-value">
+                      {{ gd(EI, _ => _.tender.classification.id) }}
+                    </div>
+                  </div>
+                  <div class="entity-main-info__additional-block">
+                    <div class="entity-main-info__additional-title">{{ $t("budget.main_procurement_category") }}</div>
+                    <div class="entity-main-info__additional-value">
+                      {{ getMainProcurementCategory }}
                     </div>
                   </div>
                 </div>
@@ -97,12 +127,13 @@
 <script>
 import { mapState } from "vuex";
 import { FETCH_CURRENT_BUDGET_INFO } from "../../../store/types/actions-types";
+import mainProcurementCategory from "./../../../store/types/main-procurement-category";
 
 import Execution from "./Tabs/Execution";
 import Spending from "./Tabs/Spending";
 import SourceOfFinancing from "./Tabs/SourceOfFinancing";
 
-import { getDataFromObject } from "../../../utils";
+import { getDataFromObject, formatDate } from "../../../utils";
 
 export default {
   name: "BudgetPage",
@@ -145,6 +176,9 @@ export default {
         .filter(relatedProcesses => relatedProcesses.relationship.find(value => value === "x_execution"))
         .map(process => process.identifier);
     },
+    getMainProcurementCategory() {
+      return mainProcurementCategory[this.gd(this.EI, _ => _.tender.mainProcurementCategory)][this.$i18n.locale];
+    },
   },
   methods: {
     async getBudget() {
@@ -154,6 +188,9 @@ export default {
     },
     gd(...args) {
       return getDataFromObject(...args);
+    },
+    fd(date, type) {
+      return formatDate(date, type);
     },
   },
 };

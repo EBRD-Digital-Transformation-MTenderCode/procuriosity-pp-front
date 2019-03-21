@@ -34,4 +34,9 @@ export default {
   contract_id: "ID договора",
   "budget_project_id(s)": "Budget Project ID(s)",
   type: "Type",
+  main_cpv: "Основной код CPV",
+
+  period_of_need: "Period of need",
+  main_procurement_category: "Main procurement category",
+  from: "from",
 };
