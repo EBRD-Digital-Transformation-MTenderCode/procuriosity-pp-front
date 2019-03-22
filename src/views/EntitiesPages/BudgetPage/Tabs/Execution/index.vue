@@ -7,22 +7,24 @@
       <page-number
         v-if="needPagination"
         :current-page="currentPage"
-        :elements-amount="elementsAmount"
+        :elements-amount="itemsNumber"
         :page-size="pageSize"
       />
       <el-collapse accordion :value="getExecutionsId[0]" @change="changeActiveItem">
         <execution-item
-          v-for="(procedure, index) of procedures"
-          v-if="index >= numberOfLastDisplayedProcedure - pageSize && index < numberOfLastDisplayedProcedure"
+          v-for="procedure of needPagination
+            ? procedures.filter(
+                (it, i) => i >= numberOfLastDisplayedProcedure - pageSize && i < numberOfLastDisplayedProcedure
+              )
+            : procedures"
           :key="procedure.id"
-          :index="index"
           :activeItemId="activeItemId"
           :procedure="procedure"
         />
       </el-collapse>
       <list-pagination
         v-if="needPagination"
-        :total="elementsAmount"
+        :total="itemsNumber"
         :pageCount="0"
         :currentPage="currentPage"
         :pageSize="pageSize"
@@ -42,14 +44,14 @@
 
 <script>
 import axios from "axios";
-import { getTenderConfig } from "../../../../configs/requests-configs";
+import { getTenderConfig } from "./../../../../../configs/requests-configs";
 
 import ExecutionItem from "./ExecutionItem";
-import ListPagination from "./../../../../components/ListPagination";
-import PageNumber from "./../../../../components/PageNumber";
+import ListPagination from "./../../../../../components/ListPagination";
+import PageNumber from "./../../../../../components/PageNumber";
 
-import { MTENDER2 } from "./../../../../store/types/cbd-types";
-import { getDataFromObject } from "./../../../../utils";
+import { MTENDER2 } from "./../../../../../store/types/cbd-types";
+import { getDataFromObject } from "./../../../../../utils";
 
 export default {
   name: "Execution",
@@ -80,9 +82,9 @@ export default {
   },
   computed: {
     needPagination() {
-      return this.elementsAmount > this.pageSize;
+      return this.itemsNumber > this.pageSize;
     },
-    elementsAmount() {
+    itemsNumber() {
       return this.procedures.length;
     },
   },
@@ -109,26 +111,34 @@ export default {
       for await (let id of this.getExecutionsId) {
         try {
           const { data } = await axios(getTenderConfig(MTENDER2, id));
-          const entityData = data.records.reduce((acc, record) => {
-            if (record.ocid.match(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/)) {
-              return {
-                ...acc,
-                MS: record,
-              };
-            } else if (record.ocid.match(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-PN-[0-9]{13}$/)) {
-              return {
-                ...acc,
-                PN: record,
-              };
-            } else if (record.ocid.match(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-EV-[0-9]{13}$/)) {
-              return {
-                ...acc,
-                EV: record,
-              };
-            } else return { ...acc };
-          }, {});
+          const entityData = data.records.reduce(
+            (acc, record) => {
+              if (record.ocid.match(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/)) {
+                return {
+                  ...acc,
+                  MS: record,
+                };
+              } else if (record.ocid.match(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-PN-[0-9]{13}$/)) {
+                return {
+                  ...acc,
+                  PN: record,
+                };
+              } else if (record.ocid.match(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-EV-[0-9]{13}$/)) {
+                return {
+                  ...acc,
+                  EV: record,
+                };
+              } else if (record.ocid.match(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-AC-[0-9]{13}$/)) {
+                return {
+                  ...acc,
+                  ACs: [...acc.ACs, record],
+                };
+              } else return { ...acc };
+            },
+            { ACs: [] }
+          );
 
-          this.procedures = [...this.procedures, { ...entityData }];
+          this.procedures = [...this.procedures, entityData];
           this.error = {
             status: false,
             message: "",

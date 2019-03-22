@@ -8,12 +8,17 @@
         <el-radio-button label="unsuccessful">{{ $t("tender.unsuccessful_lots") }}</el-radio-button>
       </el-radio-group>
     </div>
-    <page-number v-if="needPagination" :current-page="currentPage" :elements-amount="lotsCount" :page-size="pageSize" />
+    <page-number
+      v-if="needPagination"
+      :current-page="currentPage"
+      :elements-amount="itemsNumber"
+      :page-size="pageSize"
+    />
     <el-collapse accordion :value="gd(lotsList, _ => _[0].id, '0') + '0'" @change="changeActiveItem">
       <contract-item
-        v-for="(lot, index) of lotsList.filter((lot, i) =>
-          needPagination ? i >= numberOfLastDisplayedLot - pageSize && i < numberOfLastDisplayedLot : true
-        )"
+        v-for="(lot, index) of needPagination
+          ? lotsList.filter((it, i) => i >= numberOfLastDisplayedLot - pageSize && i < numberOfLastDisplayedLot)
+          : lotsList"
         :key="lot.id + index"
         :lot="lot"
         :index="index"
@@ -23,7 +28,7 @@
     </el-collapse>
     <list-pagination
       v-if="needPagination"
-      :total="lotsCount"
+      :total="itemsNumber"
       :pageCount="0"
       :currentPage="currentPage"
       :pageSize="pageSize"
@@ -65,7 +70,7 @@ export default {
   },
   computed: {
     needPagination() {
-      return this.lotsCount > this.pageSize;
+      return this.itemsNumber > this.pageSize;
     },
     lotsList() {
       const initialLotsList = this.gd(this.evRecord, _ => _.tender.lots, []);
@@ -79,7 +84,7 @@ export default {
           return initialLotsList;
       }
     },
-    lotsCount() {
+    itemsNumber() {
       return this.lotsList.length;
     },
   },

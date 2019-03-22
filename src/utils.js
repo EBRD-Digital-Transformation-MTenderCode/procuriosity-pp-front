@@ -213,10 +213,10 @@ export function getSourceOfMoney(parties, buyerId) {
   for (let part of parties) {
     if (part.roles.find(role => role === "funder")) {
       if (part.id === buyerId) {
-        source = VueI18n.t("budget.own_money");
+        source = VueI18n.t("budgetBreakdown.own_money");
         break;
-      } else source = VueI18n.t("budget.donors_money");
+      } else source = VueI18n.t("budgetBreakdown.donors_money");
     }
   }
-  return source || VueI18n.t("budget.state_money");
+  return source || VueI18n.t("budgetBreakdown.state_money");
 }

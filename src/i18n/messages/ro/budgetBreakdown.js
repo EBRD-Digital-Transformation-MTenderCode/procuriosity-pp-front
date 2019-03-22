@@ -17,4 +17,8 @@ export default {
   status: "Statut",
   budget_ID: "Budget ID",
   source_of_money: "Source of Money",
+
+  own_money: "Own money",
+  donors_money: "Donor's money",
+  state_money: "State money",
 };
