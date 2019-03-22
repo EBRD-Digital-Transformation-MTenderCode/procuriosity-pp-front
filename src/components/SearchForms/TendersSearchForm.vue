@@ -115,7 +115,7 @@
                 </div>
 
                 <!-- Procedure statuses -->
-                <div class="search-form-element" v-if="procedures === 'all'">
+                <div class="search-form-element">
                   <search-auto-complete-input
                     name="proceduresStatuses"
                     :items="proceduresStatusesList"
@@ -271,13 +271,11 @@ import SearchPeriods from "./../FormsComponents/SearchPeriods";
 import MultipleInput from "./../FormsComponents/MultipleInput";
 import ResetButton from "./../FormsComponents/ResetButton";
 
-import initialSearchProps from "./../../store/types/initial-search-props.js";
 import proceduresTypesList from "./../../store/types/procedures-types";
 import proceduresStatusesList from "./../../store/types/procedure-status-types";
 import buyersTypesList from "./../../store/types/buyers-types";
 import mainGeneralActivityList from "./../../store/types/main-general-activity-types";
 import mainSectoralActivityList from "./../../store/types/main-sectoral-activity";
-import entities from "./../../store/entities";
 
 export default {
   name: "TendersSearchForm",
@@ -297,26 +295,13 @@ export default {
       type: Boolean,
       required: true,
     },
-  },
-  created() {
-    if (
-      this.$route.query.procedures &&
-      (this.$route.query.procedures === "new" || this.$route.query.procedures === "bidding")
-    ) {
-      this.procedures = this.$route.query.procedures;
-
-      if (this.$route.query.procedures === "new") {
-        initialSearchProps.tenders.proceduresStatuses = ["published", "clarification", "suspended"];
-      }
-
-      if (this.$route.query.procedures === "bidding") {
-        initialSearchProps.tenders.proceduresStatuses = ["tendering"];
-      }
-    }
+    initialParams: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
-      procedures: "all",
       proceduresTypesList: proceduresTypesList["tenders"],
       proceduresStatusesList: proceduresStatusesList["tenders"],
       buyersTypesList,
@@ -361,44 +346,15 @@ export default {
   },
   methods: {
     setFormParams(name, value) {
-      let params = {};
-
-      switch (this.procedures) {
-        case "new":
-          params = {
-            page: 1,
-            [name]: value,
-            proceduresStatuses: ["published", "clarification", "suspended"],
-          };
-          break;
-        case "bidding":
-          params = {
-            page: 1,
-            [name]: value,
-            proceduresStatuses: ["tendering"],
-          };
-          break;
-        default:
-          params = {
-            page: 1,
-            [name]: value,
-          };
-      }
-
       this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
         entityName: "tenders",
-        params,
+        params: {
+          page: 1,
+          [name]: value,
+          ...this.initialParams,
+        },
       });
     },
-  },
-  destroyed() {
-    if (this.procedures !== "all") {
-      initialSearchProps.tenders.proceduresStatuses = [];
-
-      const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
-      localStorageEntities.tenders.proceduresStatuses = [];
-      localStorage.setItem("entities", JSON.stringify(localStorageEntities));
-    }
   },
 };
 </script>

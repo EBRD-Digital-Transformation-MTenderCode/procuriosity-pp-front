@@ -46,6 +46,8 @@ export default {
     buyersMainGeneralActivities: [],
     buyersMainSectoralActivities: [],
 
+    pins: [],
+
     tags: [],
 
     page: 1,
@@ -80,6 +82,8 @@ export default {
     buyersTypes: [],
     buyersMainGeneralActivities: [],
     buyersMainSectoralActivities: [],
+
+    procedures: [],
 
     page: 1,
     pageSize: 10,
