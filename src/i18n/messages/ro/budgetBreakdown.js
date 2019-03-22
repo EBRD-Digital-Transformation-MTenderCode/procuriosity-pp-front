@@ -23,4 +23,8 @@ export default {
 
   expenditure_item_name: "Expenditure item",
   expenditure_item_id: "Expenditure item ID",
+
+  own_money: "Own money",
+  donors_money: "Donor's money",
+  state_money: "State money",
 };

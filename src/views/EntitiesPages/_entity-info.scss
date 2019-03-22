@@ -626,6 +626,13 @@
     @media (max-width: 560px) {
       text-align: center;
     }
+
+    &_with-action {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
   }
 
   &__sub-title {
@@ -885,6 +892,38 @@
       @media (max-width: 700px) {
         display: block;
         margin-top: 5px;
+      }
+    }
+  }
+
+  &__radio-group {
+    margin: 10px 0;
+    white-space: nowrap;
+    @media (max-width: 480px) {
+      .el-radio-button__inner {
+        padding: 10px;
+      }
+    }
+    @media (max-width: 380px) {
+      display: block;
+      width: 100%;
+      .el-radio-button {
+        display: block;
+        &:first-child {
+          .el-radio-button__inner {
+            border-radius: 3px 3px 0 0;
+          }
+        }
+        &:last-child {
+          .el-radio-button__inner {
+            border-radius: 0 0 3px 3px;
+          }
+        }
+        &__inner {
+          display: block;
+          border: 1px solid #dcdfe6;
+          border-radius: 0;
+        }
       }
     }
   }

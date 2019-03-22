@@ -5,6 +5,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 import "element-ui/lib/theme-chalk/index.css";
+import "@/styles/element-variables.scss";
 import "@/styles/main.scss";
 
 import "@/components/SearchForms/_search-form.scss";

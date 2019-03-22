@@ -297,4 +297,8 @@ export default {
   final_offer: "Final offer",
   MDL_exluding_VAT: "MDL exluding VAT",
   initial_offers: "Initial offers",
+
+  all_lots: "All lots",
+  successful_lots: "Successful lots",
+  unsuccessful_lots: "Unsuccessful lots",
 };
