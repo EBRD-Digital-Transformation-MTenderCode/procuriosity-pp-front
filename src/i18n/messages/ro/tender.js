@@ -90,7 +90,7 @@ export default {
   telephone: "Telefon",
   email: "E-mail",
   main_internet_address: "Adresa principală: (URL)",
-  address_of_buyer_profile: "Adresa profilului cumpărătorului: (URL)",
+  address_of_buyer_profile: "Adresa profilului cumpărătorului: (URL) / Profilul cumpărătorului / Anunțul de intenție",
 
   type_of_buyer: "Tipul cumpărătorului",
   main_activity: "Activitate principală",

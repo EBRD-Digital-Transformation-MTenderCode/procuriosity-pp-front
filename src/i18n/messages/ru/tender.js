@@ -90,7 +90,7 @@ export default {
   telephone: "Телефон",
   email: "E-mail",
   main_internet_address: "Основной адрес: (URL)",
-  address_of_buyer_profile: "Адрес профиля покупателя (URL)",
+  address_of_buyer_profile: "Адрес профиля покупателя (URL) / Профиль Закупщика / Объявление о намерении",
 
   type_of_buyer: "Тип покупателя",
   main_activity: "Основная деятельность",
