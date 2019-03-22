@@ -137,18 +137,6 @@
                   />
                 </div>
 
-                <!-- Procedure statuses -->
-                <div class="search-form-element">
-                  <search-auto-complete-input
-                    name="proceduresStatuses"
-                    :items="proceduresStatusesList"
-                    :values="proceduresStatuses"
-                    :setValues="setFormParams"
-                    :label="$t('search.statuses_procedures_placeholder')"
-                    :placeholder="$t('search.statuses_procedures_placeholder')"
-                  />
-                </div>
-
                 <!-- id -->
                 <div class="search-form-element">
                   <search-input-text
@@ -230,7 +218,6 @@ import MultipleInput from "./../FormsComponents/MultipleInput";
 import ResetButton from "./../FormsComponents/ResetButton";
 
 import proceduresTypesList from "./../../store/types/procedures-types";
-import proceduresStatusesList from "./../../store/types/procedure-status-types";
 import buyersTypesList from "./../../store/types/buyers-types";
 import mainGeneralActivityList from "./../../store/types/main-general-activity-types";
 import mainSectoralActivityList from "./../../store/types/main-sectoral-activity";
@@ -249,6 +236,10 @@ export default {
     "reset-button": ResetButton,
   },
   props: {
+    initialParams: {
+      type: Object,
+      required: true,
+    },
     isExpanded: {
       type: Boolean,
       required: true,
@@ -258,7 +249,6 @@ export default {
     return {
       moreCriterions: false,
       proceduresTypesList: proceduresTypesList["contracts"],
-      proceduresStatusesList: proceduresStatusesList["contracts"],
       buyersTypesList,
       mainGeneralActivityList,
       mainSectoralActivityList,
@@ -278,8 +268,6 @@ export default {
 
       /* + */
       proceduresTypes: state => state.entities.contracts.searchParams.proceduresTypes,
-      /* + */
-      proceduresStatuses: state => state.entities.contracts.searchParams.proceduresStatuses,
 
       /* + */
       entityId: state => state.entities.contracts.searchParams.entityId,
@@ -327,6 +315,7 @@ export default {
         params: {
           page: 1,
           [name]: value,
+          ...this.initialParams,
         },
       });
     },

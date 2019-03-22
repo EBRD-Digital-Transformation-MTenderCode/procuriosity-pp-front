@@ -193,6 +193,10 @@ export default {
     "reset-button": ResetButton,
   },
   props: {
+    initialParams: {
+      type: Object,
+      required: true,
+    },
     isExpanded: {
       type: Boolean,
       required: true,
@@ -247,6 +251,7 @@ export default {
         params: {
           page: 1,
           [name]: value,
+          ...this.initialParams,
         },
       });
     },

@@ -2,7 +2,7 @@
   <div class="list-page">
     <el-container direction="vertical">
       <div class="search-form-wp">
-        <component :is="renderSearchForm" class="search-form" :isExpanded="isExpanded" />
+        <component :is="renderSearchForm" class="search-form" :isExpanded="isExpanded" :initialParams="initialParams" />
         <button class="search-form__btn search-form__btn_more" @click="actionExpand">
           {{ $t("search.moreCriterions") }}
           <i :class="['icon-left', isExpanded ? 'el-icon-close' : 'el-icon-arrow-down']" />
@@ -53,6 +53,7 @@ import Velocity from "velocity-animate";
 import { mapState } from "vuex";
 import { FETCH_ENTITY_LIST } from "../store/types/actions-types";
 import { SET_ENTITY_SEARCH_PARAMS } from "../store/types/mutations-types";
+import initialSearchProps from "./../store/types/initial-search-props.js";
 
 import BudgetsSearchForm from "../components/SearchForms/BudgetsSearchForm";
 import TendersSearchForm from "../components/SearchForms/TendersSearchForm";
@@ -105,32 +106,50 @@ export default {
       localStorage.setItem("entities", JSON.stringify(localStorageEntities));
     }
 
+    const { query } = this.$route;
     if (entityName === "tenders") {
-      const { query } = this.$route;
-
-      if (query.procedures && (query.procedures === "new" || query.procedures === "bidding")) {
-        if (query.procedures === "new") {
-          this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
-            entityName: "tenders",
-            params: {
-              proceduresStatuses: ["published", "clarification", "suspended"],
-            },
-          });
-        }
-
-        if (query.procedures === "bidding") {
-          this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
-            entityName: "tenders",
-            params: {
-              proceduresStatuses: ["tendering"],
-            },
-          });
-        }
-      } else {
-        this.getList();
-      }
+    } else if (entityName === "plans") {
+    } else if (entityName === "contracts") {
     } else {
       this.getList();
+    }
+    switch (entityName) {
+      case "budgets":
+        this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
+          entityName,
+          params: {},
+        });
+        break;
+      case "plans":
+        this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
+          entityName,
+          params: {
+            pins: query.procedures && query.procedures === "pin" ? ["true"] : ["false"],
+          },
+        });
+        break;
+      case "tenders":
+        this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
+          entityName,
+          params: {
+            proceduresOwnerships:
+              query.procedures && query.procedures === "commercial" ? ["commercial"] : ["government"],
+          },
+        });
+        break;
+      case "contracts":
+        this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
+          entityName,
+          params: {
+            proceduresStatuses:
+              query.procedures && query.procedures === "signing"
+                ? ["pending", "pending.signing"]
+                : ["active", "terminated"],
+          },
+        });
+        break;
+      default:
+        this.getList();
     }
   },
   computed: {
@@ -161,6 +180,41 @@ export default {
     needPagination() {
       const entityInfoObj = this.entities[this.entityName];
       return !!(entityInfoObj.paginationInfo.pageCount !== 1 && entityInfoObj.list.length);
+    },
+    initialParams() {
+      const { entityName } = this;
+      const { query } = this.$route;
+
+      switch (entityName) {
+        case "budgets":
+          return {};
+        case "plans":
+          if (query.procedures && query.procedures === "pin") {
+            initialSearchProps.plans.pins = ["true"];
+            return { pins: ["true"] };
+          } else {
+            initialSearchProps.plans.pins = ["false"];
+            return { pins: ["false"] };
+          }
+        case "tenders":
+          if (query.procedures && query.procedures === "commercial") {
+            initialSearchProps.tenders.proceduresOwnerships = "commercial";
+            return { proceduresOwnerships: ["commercial"] };
+          } else {
+            initialSearchProps.tenders.proceduresOwnerships = "government";
+            return { proceduresOwnerships: ["government"] };
+          }
+        case "contracts":
+          if (query.procedures && query.procedures === "signing") {
+            initialSearchProps.contracts.proceduresStatuses = ["pending", "pending.signing"];
+            return { proceduresStatuses: ["pending", "pending.signing"] };
+          } else {
+            initialSearchProps.contracts.proceduresStatuses = ["active", "terminated"];
+            return { proceduresStatuses: ["active", "terminated"] };
+          }
+        default:
+          return {};
+      }
     },
   },
   methods: {
@@ -209,16 +263,6 @@ export default {
   },
   watch: {
     entityName: "getList",
-  },
-  destroyed() {
-    if (this.entityName === "tenders" && this.$route.query.procedures) {
-      this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
-        entityName: "tenders",
-        params: {
-          proceduresStatuses: [],
-        },
-      });
-    }
   },
 };
 </script>
