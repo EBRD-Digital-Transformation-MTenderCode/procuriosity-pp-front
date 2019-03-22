@@ -53,7 +53,7 @@
             <div class="text">{{ type }}</div>
           </div>
           <div class="entity-id">
-            <div class="title">{{ $t("contract.tender_id") }}</div>
+            <div class="title">{{ $t("contract.tender_id") }}:</div>
             <div class="text">{{ entityId }}</div>
           </div>
         </el-col>
