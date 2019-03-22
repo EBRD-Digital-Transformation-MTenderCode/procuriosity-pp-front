@@ -5,7 +5,7 @@ export default {
   period_planning: "Planning of need",
   buyer_name: "Buyer",
   buyer_id: "Buyer's ID",
-  buyer_region: "Buyer region",
+  buyer_region: "Buyer's region",
   procedure_cpv: "Procedure CPV",
   id: "Budget ID",
 

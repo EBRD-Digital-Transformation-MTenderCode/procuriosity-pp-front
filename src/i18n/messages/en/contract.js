@@ -1,7 +1,7 @@
 export default {
   last_modified_date: "Last Modified Date",
   value: "Estimated value",
-  procuring_entity_name: "Procuring Entity",
+  buyer_name: "Buyer's name",
   delivery_regions: "Region",
   procedure_type: "Procedure type",
   tender_id: "Contract ID",

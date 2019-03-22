@@ -3,7 +3,7 @@ export default {
   value: "Valoarea estimată fără TVA",
   delivery_regions: "Regiunea de livrare",
   procedure_type: "Tip de procedură",
-  procuring_entity_name: "Obtinerea numelui entitatii",
+  buyer_name: "Obtinerea numelui entitatii",
   tender_id: "Identificarea planului",
   region: "Raion",
 

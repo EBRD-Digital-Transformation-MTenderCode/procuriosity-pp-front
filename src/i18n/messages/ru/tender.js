@@ -2,7 +2,7 @@ export default {
   last_modified_date: "Дата последних изменений",
   value: "Оценочная стоимость закупки",
   procedure_type: "Тип процедуры закупки",
-  procuring_entity_name: "Закупающий орган",
+  buyer_name: "Закупающий орган",
   buyer_region: "Административный район",
   tender_id: "Номер уведомления",
 

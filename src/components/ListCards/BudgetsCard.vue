@@ -48,7 +48,7 @@
           </div>
         </el-col>
         <el-col :xs="24" :sm="4">
-          <div class="entity-pe-name">
+          <div class="entity-buyer-name">
             <div class="title">{{ $t("budget.buyer_name") }}:</div>
             <div class="text">{{ peName }}</div>
           </div>
@@ -138,7 +138,7 @@ export default {
       return getDataFromObject(this.entity, _ => _.buyerName);
     },
     classifications() {
-      return getDataFromObject(this.entity, _ => _.classifications).join(",");
+      return getDataFromObject(this.entity, _ => _.classifications, []).join(",");
     },
     periodPlanningFrom() {
       return formatDate(getDataFromObject(this.entity, _ => _.periodPlanningFrom));

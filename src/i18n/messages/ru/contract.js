@@ -1,7 +1,7 @@
 export default {
   last_modified_date: "Дата последнего изменения",
   value: "Оценочная стоимость закупки",
-  procuring_entity_name: "Закупающий орган",
+  buyer_name: "Закупающий орган",
   delivery_regions: "Административный район",
   procedure_type: "Тип процедуры закупки",
   tender_id: "ID договора",
