@@ -73,7 +73,7 @@
                   data-link
                   class="info-block__text_link"
                 >
-                  {{ budgetBreakdown.EIocid }}
+                  {{ budgetBreakdown.EIocid.toUpperCase() }}
                 </a>
               </div>
             </div>

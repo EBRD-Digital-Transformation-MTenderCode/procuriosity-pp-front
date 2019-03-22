@@ -5,20 +5,12 @@
         <div class="info-block">
           <el-row :gutter="15">
             <el-col :sm="16">
-              <div class="info-block__text">
-                {{ $t("tender.lot") }}
-              </div>
-              <div class="info-block__value info-block__value__bold">
-                {{ lot.title }}
-              </div>
+              <div class="info-block__text">{{ $t("tender.lot") }}</div>
+              <div class="info-block__value info-block__value__bold">{{ lot.title }}</div>
             </el-col>
             <el-col :sm="8">
-              <div class="info-block__text">
-                {{ $t("tender.lot_identifier") }}
-              </div>
-              <div class="info-block__value">
-                {{ lot.id }}
-              </div>
+              <div class="info-block__text">{{ $t("tender.lot_identifier") }}</div>
+              <div class="info-block__value">{{ lot.id }}</div>
             </el-col>
           </el-row>
         </div>
@@ -39,8 +31,9 @@
                     gd(contractForCurrentLot, _ => _.relatedProcesses, []).find(proc =>
                       gd(proc, _ => _.relationship, []).some(relationship => relationship === "x_contracting")
                     ),
-                    _ => _.identifier
-                  )
+                    _ => _.identifier,
+                    ""
+                  ).toUpperCase()
                 }}
               </div>
               <div v-else>
@@ -48,12 +41,8 @@
               </div>
             </el-col>
             <el-col :sm="8" v-if="lot.status !== 'canceled' && lot.status !== 'unsuccessful'">
-              <div class="info-block__text">
-                {{ $t("tender.date_of_conclusion") }}
-              </div>
-              <div class="info-block__value">
-                {{ fd(gd(contractForCurrentLot, _ => _.date), "DD/MM/YYYY") }}
-              </div>
+              <div class="info-block__text">{{ $t("tender.date_of_conclusion") }}</div>
+              <div class="info-block__value">{{ fd(gd(contractForCurrentLot, _ => _.date), "DD/MM/YYYY") }}</div>
             </el-col>
           </el-row>
         </div>
@@ -141,17 +130,11 @@
             <div class="info-block">
               <el-row :gutter="15">
                 <el-col :sm="16">
-                  <div class="info-block__text">
-                    {{ $t("tender.procuring_entity_full_name") }}
-                  </div>
-                  <div class="info-block__value">
-                    {{ gd(winnerOrganizationForCurrentLot, _ => _.name) }}
-                  </div>
+                  <div class="info-block__text">{{ $t("tender.procuring_entity_full_name") }}</div>
+                  <div class="info-block__value">{{ gd(winnerOrganizationForCurrentLot, _ => _.name) }}</div>
                 </el-col>
                 <el-col :sm="8">
-                  <div class="info-block__text">
-                    {{ $t("tender.procuring_entity_identifier") }}
-                  </div>
+                  <div class="info-block__text">{{ $t("tender.procuring_entity_identifier") }}</div>
                   <div class="info-block__value">
                     {{ gd(winnerOrganizationForCurrentLot, _ => _.identifier.scheme) }}:
                     {{ gd(winnerOrganizationForCurrentLot, _ => _.identifier.id) }}
@@ -163,9 +146,7 @@
             <div class="info-block">
               <el-row :gutter="15">
                 <el-col :sm="24">
-                  <div class="info-block__text">
-                    {{ $t("tender.procuring_entity_address") }}
-                  </div>
+                  <div class="info-block__text">{{ $t("tender.procuring_entity_address") }}</div>
                   <div class="info-block__value">
                     {{ gd(winnerOrganizationForCurrentLot, _ => _.address.addressDetails.region.description) }},
                     {{ gd(winnerOrganizationForCurrentLot, _ => _.address.streetAddress) }}
@@ -177,33 +158,23 @@
             <div class="info-block">
               <el-row :gutter="15">
                 <el-col :sm="6">
-                  <div class="info-block__text">
-                    {{ $t("tender.town") }}
-                  </div>
+                  <div class="info-block__text">{{ $t("tender.town") }}</div>
                   <div class="info-block__value">
                     {{ gd(winnerOrganizationForCurrentLot, _ => _.address.addressDetails.locality.description) }}
                   </div>
                 </el-col>
                 <el-col :sm="4">
-                  <div class="info-block__text">
-                    {{ $t("tender.nuts_code") }}
-                  </div>
-                  <div class="info-block__value">
-                    {{ $t("n/a") }}
-                  </div>
+                  <div class="info-block__text">{{ $t("tender.nuts_code") }}</div>
+                  <div class="info-block__value">{{ $t("n/a") }}</div>
                 </el-col>
                 <el-col :sm="6">
-                  <div class="info-block__text">
-                    {{ $t("tender.postal_code") }}
-                  </div>
+                  <div class="info-block__text">{{ $t("tender.postal_code") }}</div>
                   <div class="info-block__value">
                     {{ gd(winnerOrganizationForCurrentLot, _ => _.address.postalCode) }}
                   </div>
                 </el-col>
                 <el-col :sm="8">
-                  <div class="info-block__text">
-                    {{ $t("tender.country") }}
-                  </div>
+                  <div class="info-block__text">{{ $t("tender.country") }}</div>
                   <div class="info-block__value">
                     {{ gd(winnerOrganizationForCurrentLot, _ => _.address.addressDetails.country.description) }}
                   </div>
@@ -214,25 +185,19 @@
             <div class="info-block">
               <el-row :gutter="15">
                 <el-col :sm="10">
-                  <div class="info-block__text">
-                    {{ $t("tender.contact_persone") }}
-                  </div>
+                  <div class="info-block__text">{{ $t("tender.contact_persone") }}</div>
                   <div class="info-block__value">
                     {{ gd(winnerOrganizationForCurrentLot, _ => _.contactPoint.name) }}
                   </div>
                 </el-col>
                 <el-col :sm="6">
-                  <div class="info-block__text">
-                    {{ $t("tender.telephone") }}
-                  </div>
+                  <div class="info-block__text">{{ $t("tender.telephone") }}</div>
                   <div class="info-block__value">
                     {{ gd(winnerOrganizationForCurrentLot, _ => _.contactPoint.telephone) }}
                   </div>
                 </el-col>
                 <el-col :sm="8">
-                  <div class="info-block__text">
-                    {{ $t("tender.email") }}
-                  </div>
+                  <div class="info-block__text">{{ $t("tender.email") }}</div>
                   <div class="info-block__value">
                     <a :href="`mailto:${gd(winnerOrganizationForCurrentLot, _ => _.contactPoint.email)}`">
                       {{ gd(winnerOrganizationForCurrentLot, _ => _.contactPoint.email) }}
@@ -330,9 +295,7 @@
                 {{ fa(gd(winnerAwardForCurrentLot, _ => _.value.amount) * 0.02) }}
                 {{ $t("tender.complementary_information_list2_p4_2") }}
               </div>
-              <div class="info-block__text">
-                {{ $t("tender.complementary_information_list2_p5") }}
-              </div>
+              <div class="info-block__text">{{ $t("tender.complementary_information_list2_p5") }}</div>
             </div>
           </div>
         </div>

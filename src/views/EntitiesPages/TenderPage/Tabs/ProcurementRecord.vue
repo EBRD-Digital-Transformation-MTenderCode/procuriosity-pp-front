@@ -1,6 +1,6 @@
 <template>
   <div class="info">
-    <div class="info__title">{{ $t("tender.procurement_record") }} № {{ gd(msRecord, _ => _.ocid) }}</div>
+    <div class="info__title">{{ $t("tender.procurement_record") }} № {{ gd(msRecord, _ => _.ocid).toUpperCase() }}</div>
     <div class="info-blocks">
       <div class="info-block">
         <div>
@@ -26,16 +26,17 @@
     <div class="info-block__text">{{ $t("tender.previous_publication_concerning_procedure") }}</div>
     <div class="info-block__value">
       {{ $t("tender.PP_Buyer_profile_PIN") }} №
-      <a :href="`/${$i18n.locale !== 'ro' ? $i18n.locale + '/' : ''}plans/${gd(msRecord, _ => _.ocid)}`">
+      <router-link :to="`/${$i18n.locale !== 'ro' ? $i18n.locale + '/' : ''}plans/${gd(msRecord, _ => _.ocid)}`">
         {{
           gd(
             gd(msRecord, _ => _.relatedProcesses, []).find(procces =>
               procces.relationship.some(relationship => relationship === "planning")
             ),
-            _ => _.identifier
-          )
+            _ => _.identifier,
+            ""
+          ).toUpperCase()
         }}
-      </a>
+      </router-link>
     </div>
 
     <div class="info__sub-title">{{ $t("tender.contracting_authority") }}</div>

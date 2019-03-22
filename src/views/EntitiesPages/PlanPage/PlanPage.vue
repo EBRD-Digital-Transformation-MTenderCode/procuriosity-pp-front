@@ -41,7 +41,7 @@
                     </div>
                   </div>
                   <div class="entity-main-info__additional-block">
-                    <div class="entity-main-info__additional-title">{{ $t("plan.procuring_entity_name") }}</div>
+                    <div class="entity-main-info__additional-title">{{ $t("plan.buyer_name") }}</div>
                     <div class="entity-main-info__additional-value">
                       {{ gd(plan, _ => _.MSRecord.compiledRelease.tender.procuringEntity.name) }}
                     </div>

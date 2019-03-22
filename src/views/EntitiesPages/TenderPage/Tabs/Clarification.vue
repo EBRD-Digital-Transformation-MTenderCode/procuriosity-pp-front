@@ -95,7 +95,7 @@
               <el-row :gutter="25">
                 <el-col :sm="16">
                   <div class="info-block__text">{{ $t("tender.amended_release") }}</div>
-                  <div class="info-block__value">{{ amendment.amendsReleaseID }}</div>
+                  <div class="info-block__value">{{ amendment.amendsReleaseID.toUpperCase() }}</div>
                 </el-col>
                 <el-col :sm="8">
                   <div class="info-block__text">{{ $t("tender.date_of_change") }}</div>
