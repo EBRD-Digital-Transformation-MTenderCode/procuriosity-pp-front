@@ -135,7 +135,7 @@ export default {
                 };
               } else return { ...acc };
             },
-            { ACs: [] }
+            { publishedDate: data.publishedDate, ACs: [] }
           );
 
           this.procedures = [...this.procedures, entityData];

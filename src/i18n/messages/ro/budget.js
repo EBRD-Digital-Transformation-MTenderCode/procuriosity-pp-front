@@ -45,4 +45,6 @@ export default {
   awarded_contracts: "Awarded contracts",
   awarded_contracts_id: "Contract ID",
   awarded_contracts_amount: "Contract value",
+  awarded_contracts_status_active: "Active",
+  awarded_contracts_status_pending: "Pending",
 };

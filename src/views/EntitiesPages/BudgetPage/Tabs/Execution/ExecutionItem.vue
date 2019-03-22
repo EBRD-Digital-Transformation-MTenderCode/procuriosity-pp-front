@@ -5,7 +5,9 @@
         <el-row :gutter="15">
           <el-col :sm="16">
             <div class="info-block__text">{{ $t("budget.contracting_process_id") }}</div>
-            <div class="info-block__value info-block__value_bold">{{ gd(MS, _ => _.compiledRelease.ocid) }}</div>
+            <div class="info-block__value info-block__value_bold">
+              {{ gd(MS, _ => _.compiledRelease.ocid, "").toUpperCase() }}
+            </div>
           </el-col>
           <el-col :sm="4">
             <div class="info-block__text">{{ $t("budget.contracting_state") }}</div>
@@ -32,13 +34,13 @@
                   `${$i18n.locale !== 'ro' ? `/${$i18n.locale}` : ''}/plans/${gd(MS, _ => _.compiledRelease.ocid)}`
                 "
                 target="_blank"
-                >{{ gd(PN, _ => _.compiledRelease.ocid) }}</a
+                >{{ gd(PN, _ => _.compiledRelease.ocid, "").toUpperCase() }}</a
               >
             </div>
           </el-col>
           <el-col :sm="4">
             <div class="info-block__text">{{ $t("budget.contracting_publication_date") }}</div>
-            <div class="info-block__value">???</div>
+            <div class="info-block__value">{{ fd(procedure.publishedDate, "DD.MM.YYYY") }}</div>
           </el-col>
           <el-col :sm="4">
             <div class="info-block__text">{{ $t("budget.contracting_last_update_date") }}</div>
@@ -57,13 +59,15 @@
                   `${$i18n.locale !== 'ro' ? `/${$i18n.locale}` : ''}/tenders/${gd(MS, _ => _.compiledRelease.ocid)}`
                 "
                 target="_blank"
-                >{{ gd(EV, _ => _.compiledRelease.ocid) }}</a
+                >{{ gd(EV, _ => _.compiledRelease.ocid, "").toUpperCase() }}</a
               >
             </div>
           </el-col>
           <el-col :sm="4">
             <div class="info-block__text">{{ $t("budget.contracting_publication_date") }}</div>
-            <div class="info-block__value">???</div>
+            <div class="info-block__value">
+              {{ fd(gd(EV, _ => _.compiledRelease.tender.enquiryPeriod.startDate), "DD.MM.YYYY") }}
+            </div>
           </el-col>
           <el-col :sm="4">
             <div class="info-block__text">{{ $t("budget.contracting_last_update_date") }}</div>
@@ -138,7 +142,6 @@
       </div>
     </div>
 
-    <!-- @TODO must be move to spending tab -->
     <div v-if="ACs.length" class="info-blocks">
       <div class="info__sub-title">{{ $t("budget.awarded_contracts") }}</div>
       <div v-for="AC of ACs" :key="gd(AC, _ => _.compiledRelease.ocid)" class="info-block">
@@ -146,21 +149,26 @@
           <el-col :sm="16">
             <div class="info-block__text">{{ $t("budget.awarded_contracts_id") }}</div>
             <div class="info-block__value info-block__value">
-              {{ gd(AC, _ => _.compiledRelease.ocid) }}
+              {{ gd(AC, _ => _.compiledRelease.ocid, "").toUpperCase() }}
             </div>
           </el-col>
           <el-col :sm="4">
             <div class="info-block__text">{{ $t("budget.awarded_contracts_amount") }}</div>
             <div class="info-block__value">
-              <!-- @TODO need clarification from Paul about amount in AC -->
-              {{ fa(gd(AC, _ => _.compiledRelease.awards[0].value.amount, 0)) }}
-              {{ gd(MS, _ => _.compiledRelease.tender.value.currency) }}
+              <template v-if="gd(AC, _ => _.compiledRelease.contranst[0].value.amount)">
+                {{ fa(gd(AC, _ => _.compiledRelease.contracts[0].value.amount, 0)) }}
+                {{ gd(MS, _ => _.compiledRelease.contracts[0].value.currency) }}
+              </template>
+              <template v-else>
+                Pending
+              </template>
             </div>
           </el-col>
           <el-col :sm="4">
             <div class="info-block__text">{{ $t("budget.contracting_status") }}</div>
-            <!-- @TODO need clarification from Paul about status in AC -->
-            <div class="info-block__value">???</div>
+            <div class="info-block__value">
+              {{ $t(`budget.awarded_contracts_status_${gd(AC, _ => _.compiledRelease.contracts[0].status, "")}`) }}
+            </div>
           </el-col>
         </el-row>
       </div>

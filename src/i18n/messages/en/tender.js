@@ -90,7 +90,7 @@ export default {
   telephone: "Telephone",
   email: "E-mail",
   main_internet_address: "Main Internet address (URL)",
-  address_of_buyer_profile: "Address of the buyer profile (URL)",
+  address_of_buyer_profile: "Address of the buyer profile (URL) / Buyer's profile / PIN",
 
   type_of_buyer: "Type of buyer",
   main_activity: "Main activity",
