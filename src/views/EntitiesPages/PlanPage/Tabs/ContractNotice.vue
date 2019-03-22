@@ -112,7 +112,7 @@
                     gd(
                       gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
                       _ => _.address.postalCode,
-                      "n/a"
+                      $t("n/a")
                     )
                   }}
                 </div>
@@ -215,7 +215,7 @@
                       )
                     }}
                   </a>
-                  <span v-else>n/a</span>
+                  <span v-else>{{ $t("n/a") }}</span>
                 </div>
               </el-col>
               <el-col :sm="14">
@@ -340,6 +340,26 @@
                         _ => _.contactPoint.email
                       )
                     }}
+                  </a>
+                </div>
+              </el-col>
+            </el-row>
+          </div>
+
+          <div class="info-block">
+            <el-row :gutter="15">
+              <el-col :sm="24">
+                <div class="info-block__text">{{ $t("plan.must_be_submitted") }}:</div>
+                <div class="info-block__value info-block__value-platform">
+                  <a
+                    class="platform-link"
+                    v-for="platform of randomSortPlatforms"
+                    :key="platform.name"
+                    :href="platform.href"
+                    :title="platform.name"
+                    target="_blank"
+                  >
+                    <img :src="platform.src" :alt="platform.name" class="platform-img" />
                   </a>
                 </div>
               </el-col>
@@ -480,7 +500,7 @@
                   <el-col :sm="24">
                     <div class="info-block__text">{{ $t("plan.place_of_performance") }}</div>
                     <div class="info-block__value">
-                      {{ gd(lot, _ => _.placeOfPerformance.address.postalCode, "n/a") }},
+                      {{ gd(lot, _ => _.placeOfPerformance.address.postalCode, $t("n/a")) }},
                       {{ gd(lot, _ => _.placeOfPerformance.address.addressDetails.country.description) }},
                       {{ gd(lot, _ => _.placeOfPerformance.address.addressDetails.region.description) }},
                       {{ gd(lot, _ => _.placeOfPerformance.address.addressDetails.locality.description) }},
@@ -1089,7 +1109,7 @@
               <el-col :sm="24">
                 <div class="info-block__text">{{ $t("plan.rationale_procurement") }}</div>
                 <div class="info-block__value">
-                  {{ gd(msRecord, _ => _.planning.rationale, "n/a") }}
+                  {{ gd(msRecord, _ => _.planning.rationale, $t("n/a")) }}
                 </div>
               </el-col>
             </el-row>
@@ -1100,7 +1120,7 @@
               <el-col :sm="24">
                 <div class="info-block__text">{{ $t("plan.short_free_description") }}</div>
                 <div class="info-block__value">
-                  {{ gd(msRecord, _ => _.planning.budget.description, "n/a") }}
+                  {{ gd(msRecord, _ => _.planning.budget.description, $t("n/a")) }}
                 </div>
               </el-col>
             </el-row>
@@ -1248,7 +1268,7 @@
                 </div>
               </el-col>
 
-              <el-col :sm="8">
+              <el-col :sm="8">0
                 <div class="info-block__text">{{ $t("plan.country") }}</div>
                 <div class="info-block__value">
                   Republic of Moldova
@@ -1344,7 +1364,7 @@ import {
   getOrganizationObject,
   getSourceOfMoney,
 } from "./../../../../utils";
-import { getFSReleaseConfig } from "../../../../configs/requests-configs";
+import { getBudgetConfig } from "../../../../configs/requests-configs";
 
 export default {
   name: "ContractNotice",
@@ -1369,6 +1389,33 @@ export default {
   },
   data() {
     return {
+      platforms: [
+        {
+          href: "https://yptender.md/",
+          src: "/img/yptender.png",
+          name: "YPTENDER.MD",
+        },
+        {
+          href: "https://e-licitatie.md/",
+          src: "/img/e-lici.png",
+          name: "e-licitatie.md",
+        },
+        {
+          href: "https://achizitii.md/",
+          src: "/img/achizitii.md.png",
+          name: "achizitii.md",
+        },
+        {
+          href: "javascript:void(0)",
+          src: "/img/ebs-integrator.png",
+          name: "ebs-integrator",
+        },
+        {
+          href: "javascript:void(0)",
+          src: "/img/lonar.png",
+          name: "lonar",
+        },
+      ],
       FSs: {},
       pageSize: 25,
       numberOfLastDisplayedLot: 25,
@@ -1387,7 +1434,7 @@ export default {
           _ => _.details.typeOfBuyer
         )
       ) {
-        return "n/a";
+        return this.$t("n/a");
       }
 
       return typesOfBuyers.find(
@@ -1406,7 +1453,7 @@ export default {
           _ => _.details.mainGeneralActivity
         )
       ) {
-        return "n/a";
+        return this.$t("n/a");
       }
 
       return mainGeneralActivites.find(
@@ -1439,15 +1486,16 @@ export default {
           this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].parties, []),
           getOrganizationObject(this.gd(this.msRecord, _ => _.parties), "buyer").id
         ),
-        description: this.gd(budgetBreakdown, _ => _.description, "n/a"),
-        rationale: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].rationale, "n/a"),
-        EIocid: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].EIocid, "n/a"),
+        description: this.gd(budgetBreakdown, _ => _.description, this.$t("n/a")),
+        budgetLineId: this.gd(this.msRecord, _ => _.planning.budget.id, this.$t("n/a")),
+        EIocid: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].EIocid),
+        EIname: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].EIname),
         period: {
           startDate: this.gd(budgetBreakdown, _ => _.period.startDate),
           endDate: this.gd(budgetBreakdown, _ => _.period.endDate),
         },
-        project: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].project, "n/a"),
-        projectId: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].projectId, "n/a"),
+        project: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].project, this.$t("n/a")),
+        projectId: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].projectId, this.$t("n/a")),
         buyer: {
           name: getOrganizationObject(this.gd(this.msRecord, _ => _.parties), "buyer").name,
           id: getOrganizationObject(this.gd(this.msRecord, _ => _.parties), "buyer").id,
@@ -1487,10 +1535,9 @@ export default {
       const EIocid = FSocid.replace(/-FS-[0-9]{13}$/, "");
 
       try {
-        const responseFS = await axios(getFSReleaseConfig(EIocid, FSocid));
-
-        const FS = responseFS.data.releases[0];
-
+        const responseBudget = await axios(getBudgetConfig(EIocid));
+        const EI = responseBudget.data.records.find(record => record.ocid === EIocid).compiledRelease;
+        const FS = responseBudget.data.records.find(record => record.ocid === FSocid).compiledRelease;
         this.FSs = Object.assign({}, this.FSs, {
           [FS.ocid]: {
             project: FS.planning.project,
@@ -1507,8 +1554,8 @@ export default {
             },
             status: this.gd(FS, _ => _.planning.budget.verified),
             parties: this.gd(FS, _ => _.tender.parties),
-            rationale: this.gd(FS, _ => _.planning.rationale),
             EIocid,
+            EIname: EI.tender.title,
           },
         });
       } catch (e) {

@@ -14,6 +14,11 @@ export default {
   number_of_notice: "Номер уведомления",
   procedure_type: "Тип процедуры",
   procuring_entity_name: "Название закупающей организации",
+  main_cpv: "Main CPV code",
+
+  period_of_need: "Period of need",
+  main_procurement_category: "Main procurement category",
+  from: "from",
 
   source_of_financing: "Item source of financing",
   execution: "Execution",

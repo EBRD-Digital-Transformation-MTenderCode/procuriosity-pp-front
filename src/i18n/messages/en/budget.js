@@ -3,7 +3,7 @@ export default {
   value: "Allocated budget without VAT",
   no_finances_sources: "The budget has no funding sources yet",
   period_planning: "Planning of need",
-  buyer_name: "Buyer name",
+  buyer_name: "Buyer",
   buyer_id: "Buyer ID",
   buyer_region: "Buyer region",
   procedure_cpv: "Procedure CPV",
@@ -14,6 +14,11 @@ export default {
   number_of_notice: "Number of Notice",
   procedure_type: "Procedure type",
   procuring_entity_name: "Procuring Entity Name",
+  main_cpv: "Main CPV code",
+
+  period_of_need: "Period of need",
+  main_procurement_category: "Main procurement category",
+  from: "from",
 
   source_of_financing: "Item source of financing",
   execution: "Execution",

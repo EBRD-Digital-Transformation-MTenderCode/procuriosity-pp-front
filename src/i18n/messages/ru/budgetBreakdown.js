@@ -2,8 +2,7 @@ export default {
   procuring_entity_identifier: "Национальный регистрационный код",
   budgetline_id: "IBAN",
   amount: "Сумма",
-  budget_details: "Бюджетные детали",
-  rationale: "Обоснование",
+  budget_details_rationale: "Бюджетные детали или обоснование",
   validity_period: "Период доступности",
   end_date: "До",
   budget_project: "Бюджетный проект",
@@ -14,9 +13,16 @@ export default {
   verified: "Verified",
   not_verified: "Not verified",
 
+  own_money: "Own money",
+  donors_money: "Donor's money",
+  state_money: "State money",
+
   status: "Статус",
   budget_ID: "Budget ID",
   source_of_money: "Source of Money",
+
+  expenditure_item_name: "Expenditure item",
+  expenditure_item_id: "Expenditure item ID",
 
   own_money: "Own money",
   donors_money: "Donor's money",

@@ -64,6 +64,7 @@ export default {
   published: "Published",
   no_lots: "No lots",
   type_of_procedure: "Type of procedure",
+  must_be_submitted: "Tenders or requests to participate must be submitted electronically via",
 
   administrative_information: "Administrative information",
   previous_publication_concerning_procedure: "Previous publication concerning this procedure",

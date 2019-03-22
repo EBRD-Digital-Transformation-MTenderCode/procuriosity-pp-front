@@ -9,11 +9,17 @@
               {{ budgetBreakdown.ocid }}
             </div>
           </el-col>
-          <el-col :sm="8">
+          <el-col :sm="4">
             <div class="info-block__text">{{ $t("budgetBreakdown.amount") }}</div>
             <div class="info-block__value">
               {{ fa(budgetBreakdown.value.amount) }}
               {{ budgetBreakdown.value.currency }}
+            </div>
+          </el-col>
+          <el-col :sm="4">
+            <div class="info-block__text">{{ $t("budgetBreakdown.status") }}</div>
+            <div class="info-block__value">
+              {{ budgetBreakdown.status ? $t("budgetBreakdown.verified") : $t("budgetBreakdown.not_verified") }}
             </div>
           </el-col>
         </el-row>
@@ -24,10 +30,8 @@
       <div class="info-block">
         <el-row :gutter="15">
           <el-col :sm="16">
-            <div class="info-block__text">{{ $t("budgetBreakdown.status") }}</div>
-            <div class="info-block__value">
-              {{ budgetBreakdown.status ? $t("budgetBreakdown.verified") : $t("budgetBreakdown.not_verified") }}
-            </div>
+            <div class="info-block__text">{{ $t("budgetBreakdown.budget_details_rationale") }}</div>
+            <div class="info-block__value">{{ budgetBreakdown.description }}</div>
           </el-col>
           <el-col :sm="8">
             <div class="info-block__text">{{ $t("budgetBreakdown.validity_period") }}</div>
@@ -42,33 +46,28 @@
       <div class="info-block">
         <el-row :gutter="15">
           <el-col :sm="16">
-            <div class="info-block__text">{{ $t("budgetBreakdown.budget_details") }}</div>
-            <div class="info-block__value">{{ budgetBreakdown.description }}</div>
+            <div class="info-block__text">{{ $t("budgetBreakdown.source_of_money") }}</div>
+            <div class="info-block__value">{{ budgetBreakdown.sourceOfMoney }}</div>
           </el-col>
           <el-col :sm="8">
-            <div class="info-block__text">{{ $t("budgetBreakdown.rationale") }}</div>
-            <div class="info-block__value">{{ budgetBreakdown.rationale }}</div>
+            <div class="info-block__text">{{ $t("budgetBreakdown.budget_ID") }}</div>
+            <div class="info-block__value">
+              {{ budgetBreakdown.budgetLineId }}
+            </div>
           </el-col>
         </el-row>
       </div>
-      <div class="info-block">
+      <div class="info-block" v-if="budgetBreakdown.EIocid">
         <el-row :gutter="15">
-          <el-col :sm="16" v-if="budgetBreakdown.EIocid">
-            <div class="info-block__text">{{ $t("budgetBreakdown.budget_ID") }}</div>
-            <div class="info-block__value">
-              <a
-                :href="`${$i18n.locale !== 'ro' ? `/${$i18n.locale}` : ''}/budgets/${budgetBreakdown.EIocid}`"
-                target="_blank"
-                data-link
-                class="info-block__text_link"
-              >
-                {{ budgetBreakdown.EIocid }}
-              </a>
-            </div>
+          <el-col :sm="16">
+            <div class="info-block__text">{{ $t("budgetBreakdown.expenditure_item_name") }}</div>
+            <div class="info-block__value">{{ budgetBreakdown.EIname }}</div>
           </el-col>
-          <el-col :sm="budgetBreakdown.EIocid ? 8 : 24">
-            <div class="info-block__text">{{ $t("budgetBreakdown.source_of_money") }}</div>
-            <div class="info-block__value">{{ budgetBreakdown.sourceOfMoney }}</div>
+          <el-col :sm="8">
+            <div class="info-block__text">{{ $t("budgetBreakdown.expenditure_item_id") }}</div>
+            <div class="info-block__value">
+              <div class="info-block__value">{{ budgetBreakdown.EIocid }}</div>
+            </div>
           </el-col>
         </el-row>
       </div>
@@ -124,7 +123,7 @@
         </el-row>
       </div>
 
-      <div class="info-block">
+      <div class="info-block" v-if="budgetBreakdown.funder.id">
         <el-row :gutter="15">
           <el-col :sm="16">
             <div class="info-block__text">{{ $t("budgetBreakdown.funding_entity") }}</div>
@@ -132,7 +131,7 @@
               {{ budgetBreakdown.funder.name }}
             </div>
           </el-col>
-          <el-col :sm="8" v-if="budgetBreakdown.funder.id">
+          <el-col :sm="8">
             <div class="info-block__text">{{ $t("budgetBreakdown.procuring_entity_identifier") }}</div>
             <div class="info-block__value">
               {{ budgetBreakdown.funder.id }}

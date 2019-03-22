@@ -14,6 +14,11 @@ export default {
   region: "Raion",
   procedure_type: "Tip de procedură",
   procuring_entity_name: "Obtinerea numelui entitatii",
+  main_cpv: "Main CPV code",
+
+  period_of_need: "Period of need",
+  main_procurement_category: "Main procurement category",
+  from: "from",
 
   source_of_financing: "Item source of financing",
   execution: "Execution",

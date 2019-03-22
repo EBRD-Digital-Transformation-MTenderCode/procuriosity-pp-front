@@ -190,7 +190,7 @@ import Contracts from "./Tabs/Contracts";
 import ProcurementRecord from "./Tabs/ProcurementRecord";
 
 import { getDataFromObject, selectProcedure, getOrganizationObject, getSourceOfMoney } from "./../../../utils";
-import { getFSReleaseConfig } from "../../../configs/requests-configs";
+import { getBudgetConfig } from "../../../configs/requests-configs";
 
 export default {
   name: "TenderPage",
@@ -245,15 +245,16 @@ export default {
             this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].parties, []),
             getOrganizationObject(this.gd(this.tender, _ => _.MSRecord.compiledRelease.parties), "buyer").id
           ),
-          description: this.gd(budgetBreakdown, _ => _.description, "n/a"),
-          rationale: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].rationale, "n/a"),
-          EIocid: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].EIocid, "n/a"),
+          description: this.gd(budgetBreakdown, _ => _.description, this.$t("n/a")),
+          budgetLineId: this.gd(this.tender, _ => _.MSRecord.compiledRelease.planning.budget.id, this.$t("n/a")),
+          EIocid: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].EIocid),
+          EIname: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].EIname),
           period: {
             startDate: this.gd(budgetBreakdown, _ => _.period.startDate),
             endDate: this.gd(budgetBreakdown, _ => _.period.endDate),
           },
-          project: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].project, "n/a"),
-          projectId: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].projectId, "n/a"),
+          project: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].project, this.$t("n/a")),
+          projectId: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].projectId, this.$t("n/a")),
           buyer: {
             name: getOrganizationObject(this.gd(this.tender, _ => _.MSRecord.compiledRelease.parties), "buyer").name,
             id: getOrganizationObject(this.gd(this.tender, _ => _.MSRecord.compiledRelease.parties), "buyer").id,
@@ -306,9 +307,9 @@ export default {
       const EIocid = FSocid.replace(/-FS-[0-9]{13}$/, "");
 
       try {
-        const responseFS = await axios(getFSReleaseConfig(EIocid, FSocid));
-
-        const FS = responseFS.data.releases[0];
+        const responseBudget = await axios(getBudgetConfig(EIocid));
+        const EI = responseBudget.data.records.find(record => record.ocid === EIocid).compiledRelease;
+        const FS = responseBudget.data.records.find(record => record.ocid === FSocid).compiledRelease;
 
         this.FSs = Object.assign({}, this.FSs, {
           [FS.ocid]: {
@@ -326,8 +327,8 @@ export default {
             },
             status: this.gd(FS, _ => _.planning.budget.verified),
             parties: this.gd(FS, _ => _.tender.parties),
-            rationale: this.gd(FS, _ => _.planning.rationale),
             EIocid,
+            EIname: EI.tender.title,
           },
         });
       } catch (e) {

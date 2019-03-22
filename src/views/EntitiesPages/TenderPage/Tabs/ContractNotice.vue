@@ -113,7 +113,7 @@
                     gd(
                       gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
                       _ => _.address.postalCode,
-                      "n/a"
+                      $t("n/a")
                     )
                   }}
                 </div>
@@ -216,7 +216,7 @@
                       )
                     }}
                   </a>
-                  <span v-else>n/a</span>
+                  <span v-else>{{ $t("n/a") }}</span>
                 </div>
               </el-col>
               <el-col :sm="14">
@@ -497,7 +497,7 @@
                   <el-col :sm="24">
                     <div class="info-block__text">{{ $t("tender.place_of_performance") }}</div>
                     <div class="info-block__value">
-                      {{ gd(lot, _ => _.placeOfPerformance.address.postalCode, "n/a") }},
+                      {{ gd(lot, _ => _.placeOfPerformance.address.postalCode, $t("n/a")) }},
                       {{ gd(lot, _ => _.placeOfPerformance.address.addressDetails.country.description) }},
                       {{ gd(lot, _ => _.placeOfPerformance.address.addressDetails.region.description) }},
                       {{ gd(lot, _ => _.placeOfPerformance.address.addressDetails.locality.description) }},
@@ -1030,7 +1030,7 @@
                 <div class="info-block__text">{{ $t("tender.additional_information_electronic_auction") }}</div>
                 <div class="info-block__value">
                   {{ $t("tender.start_date") }}:
-                  {{ fd(gd(evRecord, _ => _.tender.auctionPeriod.startDate), "DD.MM.YYYY", "n/a") }}
+                  {{ fd(gd(evRecord, _ => _.tender.auctionPeriod.startDate), "DD.MM.YYYY", $t("n/a")) }}
                 </div>
               </el-col>
             </el-row>
@@ -1170,7 +1170,7 @@
               <el-col :sm="24">
                 <div class="info-block__text">{{ $t("tender.rationale_procurement") }}</div>
                 <div class="info-block__value">
-                  {{ gd(msRecord, _ => _.planning.rationale, "n/a") }}
+                  {{ gd(msRecord, _ => _.planning.rationale, $t("n/a")) }}
                 </div>
               </el-col>
             </el-row>
@@ -1181,7 +1181,7 @@
               <el-col :sm="24">
                 <div class="info-block__text">{{ $t("plan.short_free_description") }}</div>
                 <div class="info-block__value">
-                  {{ gd(msRecord, _ => _.planning.budget.description, "n/a") }}
+                  {{ gd(msRecord, _ => _.planning.budget.description, $t("n/a")) }}
                 </div>
               </el-col>
             </el-row>
@@ -1316,7 +1316,7 @@
             <el-col :sm="4">
               <div class="info-block__text">{{ $t("tender.nuts_code") }}</div>
               <div class="info-block__value">
-                n/a
+                {{ $t("n/a") }}
               </div>
             </el-col>
 
@@ -1470,17 +1470,16 @@ export default {
           src: "/img/achizitii.md.png",
           name: "achizitii.md",
         },
-        /*{
-           href: "javascript:void(0)",
-           src: "/img/ebs-integrator.png",
-           name: "ebs-integrator"
-           },
-           {
-           href: "javascript:void(0)",
-           src: "/img/lonar.png",
-           name: "lonar"
-           }
-           */
+        {
+          href: "javascript:void(0)",
+          src: "/img/ebs-integrator.png",
+          name: "ebs-integrator",
+        },
+        {
+          href: "javascript:void(0)",
+          src: "/img/lonar.png",
+          name: "lonar",
+        },
       ],
       needDisplay: false,
       windowWidth: 0,
@@ -1498,7 +1497,7 @@ export default {
           _ => _.details.typeOfBuyer
         )
       ) {
-        return "n/a";
+        return this.$t("n/a");
       }
 
       return typesOfBuyers.find(
@@ -1517,7 +1516,7 @@ export default {
           _ => _.details.mainGeneralActivity
         )
       ) {
-        return "n/a";
+        return this.$t("n/a");
       }
 
       return mainGeneralActivites.find(
