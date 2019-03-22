@@ -1481,7 +1481,7 @@ export default {
           amount: this.gd(budgetBreakdown, _ => _.amount.amount),
           currency: this.gd(budgetBreakdown, _ => _.amount.currency),
         },
-        status: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].status),
+        status: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].status, null),
         sourceOfMoney: getSourceOfMoney(
           this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].parties, []),
           getOrganizationObject(this.gd(this.msRecord, _ => _.parties), "buyer").id
@@ -1553,7 +1553,7 @@ export default {
               id: getOrganizationObject(FS.parties, "funder") ? getOrganizationObject(FS.parties, "funder").id : null,
             },
             status: this.gd(FS, _ => _.planning.budget.verified),
-            parties: this.gd(FS, _ => _.tender.parties),
+            parties: this.gd(FS, _ => _.parties),
             EIocid,
             EIname: EI.tender.title,
           },

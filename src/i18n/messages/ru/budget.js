@@ -28,6 +28,7 @@ export default {
   contracting_state: "State",
   contracting_state_planning: "Planning",
   contracting_state_active: "Active",
+  contracting_state_cancelled: "Cancelled",
   contracting_status: "Status",
   prior_notice: "Prior Information Notice",
   contract_notice: "Contract Notice",

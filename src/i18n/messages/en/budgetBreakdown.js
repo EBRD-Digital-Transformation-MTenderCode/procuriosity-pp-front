@@ -23,4 +23,6 @@ export default {
   own_money: "Own money",
   donors_money: "Donor's money",
   state_money: "State money",
+
+  funding_source_id: "Fundings source ID",
 };

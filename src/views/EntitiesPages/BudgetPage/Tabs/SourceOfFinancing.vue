@@ -78,7 +78,7 @@ export default {
           this.gd(fs, _ => _.compiledRelease.parties, []),
           this.gd(this.buyer, _ => _.id)
         ),
-        status: this.gd(fs, _ => _.compiledRelease.planning.budget.status),
+        status: this.gd(fs, _ => _.compiledRelease.planning.budget.verified),
         budgetLineId: this.gd(fs, _ => _.compiledRelease.planning.budget.id, this.$t("n/a")),
         description: this.gd(fs, _ => _.compiledRelease.planning.budget.description, this.$t("n/a")),
         period: {

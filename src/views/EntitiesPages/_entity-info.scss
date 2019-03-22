@@ -367,6 +367,12 @@
       font-size: 13px;
       font-weight: 400;
       color: #fff;
+      &_budget {
+        margin-bottom: 0;
+        @media (max-width: 767px) {
+          margin: 20px 0;
+        }
+      }
     }
 
     &__amount {

@@ -9,16 +9,6 @@ export default {
       value: "planning",
     },
   ],
-  plans: [
-    {
-      name: {
-        en: "Planning notice",
-        ro: "Anunț de planificare",
-        ru: "Сообщение о планировании",
-      },
-      value: "planning notice",
-    },
-  ],
   tenders: [
     {
       name: {
