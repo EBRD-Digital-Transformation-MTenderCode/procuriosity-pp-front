@@ -31,7 +31,6 @@ export default {
     buyersRegions: [],
     deliveriesRegions: [],
     proceduresTypes: [],
-    proceduresStatuses: [],
 
     amountFrom: undefined,
     amountTo: undefined,

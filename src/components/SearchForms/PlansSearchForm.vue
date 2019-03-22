@@ -98,18 +98,6 @@
                     :placeholder="$t('search.types_procedures_placeholder')"
                   />
                 </div>
-
-                <!-- Procedure statuses -->
-                <div class="search-form-element">
-                  <search-auto-complete-input
-                    name="proceduresStatuses"
-                    :items="proceduresStatusesList"
-                    :values="proceduresStatuses"
-                    :setValues="setFormParams"
-                    :label="$t('search.statuses_procedures_placeholder')"
-                    :placeholder="$t('search.statuses_procedures_placeholder')"
-                  />
-                </div>
                 <el-row :gutter="15" style="margin: 20px -7.5px">
                   <el-col :sm="12">
                     <!-- Amount from -->
@@ -225,7 +213,6 @@ import SearchClassifications from "./../FormsComponents/SearchClassifications";
 import SearchPeriods from "./../FormsComponents/SearchPeriods";
 
 import proceduresTypesList from "./../../store/types/procedures-types";
-import proceduresStatusesList from "./../../store/types/procedure-status-types";
 import buyersTypesList from "./../../store/types/buyers-types";
 import mainGeneralActivityList from "./../../store/types/main-general-activity-types";
 import mainSectoralActivityList from "./../../store/types/main-sectoral-activity";
@@ -264,7 +251,6 @@ export default {
     return {
       moreCriterions: false,
       proceduresTypesList: proceduresTypesList["plans"],
-      proceduresStatusesList: proceduresStatusesList["plans"],
       buyersTypesList,
       mainGeneralActivityList,
       mainSectoralActivityList,
@@ -279,7 +265,6 @@ export default {
       /* + */ deliveriesRegions: state => state.entities.plans.searchParams.deliveriesRegions,
 
       /* + */ proceduresTypes: state => state.entities.plans.searchParams.proceduresTypes,
-      /* + */ proceduresStatuses: state => state.entities.plans.searchParams.proceduresStatuses,
 
       /* + */ entityId: state => state.entities.plans.searchParams.entityId,
 

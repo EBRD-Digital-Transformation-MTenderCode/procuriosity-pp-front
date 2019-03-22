@@ -13,15 +13,9 @@
                   {{ gd(EI, _ => _.ocid).toUpperCase() }} {{ $t("budget.from") }}
                   {{ fd(gd(EI, _ => _.date), "DD.MM.YYYY, HH:mm") }}
                 </div>
-                <div class="entity-main-info__title">
-                  {{ gd(EI, _ => _.tender.title) }}
-                </div>
-                <div class="entity-main-info__description">
-                  {{ gd(EI, _ => _.tender.classification.description) }}
-                </div>
               </el-col>
-              <el-col :xs="22" :sm="6" :offset="2">
-                <div class="entity-main-info__value">
+              <el-col :xs="{ span: 24, offset: 0 }" :sm="{ span: 6, offset: 2 }">
+                <div class="entity-main-info__value entity-main-info__value_budget">
                   <div v-if="gd(EI, _ => _.planning.budget, {}).hasOwnProperty('amount')">
                     <div>{{ $t("budget.estimated_value_excluding_VAT") }}</div>
                     <span class="entity-main-info__amount">
@@ -35,6 +29,16 @@
                   <div v-else>
                     {{ $t("budget.no_finances_sources") }}
                   </div>
+                </div>
+              </el-col>
+              <el-col :xs="24" :sm="14">
+                <div class="entity-main-info__title">
+                  {{ gd(EI, _ => _.tender.title) }}
+                </div>
+              </el-col>
+              <el-col :sm="24">
+                <div class="entity-main-info__description">
+                  {{ gd(EI, _ => _.tender.classification.description) }}
                 </div>
               </el-col>
             </el-row>
@@ -64,7 +68,7 @@
                   </div>
                 </div>
               </el-col>
-              <el-col :xs="24" :sm="6" :offset="2">
+              <el-col :xs="{ span: 24, offset: 0 }" :sm="{ span: 6, offset: 2 }">
                 <div class="entity-main-info__additional">
                   <div class="entity-main-info__additional-block">
                     <div class="entity-main-info__additional-title">{{ $t("budget.period_of_need") }}</div>
