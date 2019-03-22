@@ -40,9 +40,9 @@
           </div>
         </el-col>
         <el-col :xs="24" :sm="4">
-          <div class="entity-pe-name">
-            <div class="title">{{ $t("contract.procuring_entity_name") }}:</div>
-            <div class="text">{{ peName }}</div>
+          <div class="entity-buyer-name">
+            <div class="title">{{ $t("contract.buyer_name") }}:</div>
+            <div class="text">{{ buyerName }}</div>
           </div>
           <div class="entity-region" v-if="region">
             <div class="title">{{ $t("contract.delivery_regions") }}:</div>
@@ -53,7 +53,7 @@
             <div class="text">{{ type }}</div>
           </div>
           <div class="entity-id">
-            <div class="title">{{ $t("contract.tender_id") }}</div>
+            <div class="title">{{ $t("contract.tender_id") }}:</div>
             <div class="text">{{ entityId }}</div>
           </div>
         </el-col>
@@ -124,7 +124,7 @@ export default {
           ]
         : "";
     },
-    peName() {
+    buyerName() {
       return getDataFromObject(this.entity, _ => _.buyerName);
     },
     id() {

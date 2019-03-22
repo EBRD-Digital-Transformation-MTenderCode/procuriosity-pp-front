@@ -1,7 +1,7 @@
 export default {
   last_modified_date: "Data ultimilor modificări",
   value: "Valoarea estimată a achiziției",
-  procuring_entity_name: "Autoritate contractantă",
+  buyer_name: "Autoritate contractantă",
   delivery_regions: "Raionul",
   procedure_type: "Tipul procedurii",
   tender_id: "ID contractelor",

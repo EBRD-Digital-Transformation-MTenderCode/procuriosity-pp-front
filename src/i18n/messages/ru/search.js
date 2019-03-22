@@ -1,6 +1,6 @@
 export default {
-  strict: "Строгий",
-  no_strict: "Не строгий",
+  strict: "Точный",
+  no_strict: "Не точный",
   tooltip_strict_button: "Ведите запрос в строку поиска",
   titles_or_descriptions: "поиск (название, описание, идентификатор процедуры)",
   action_of_search: "Искать",

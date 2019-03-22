@@ -45,9 +45,9 @@
           </div>
         </el-col>
         <el-col :xs="24" :sm="4">
-          <div class="entity-pe-name">
-            <div class="title">{{ $t("tender.procuring_entity_name") }}:</div>
-            <div class="text">{{ peName }}</div>
+          <div class="entity-buyer-name">
+            <div class="title">{{ $t("tender.buyer_name") }}:</div>
+            <div class="text">{{ buyerName }}</div>
           </div>
           <div class="entity-region">
             <div class="title">{{ $t("tender.buyer_region") }}:</div>
@@ -152,7 +152,7 @@ export default {
         return procedureTypes.tenders.find(it => it.value === getDataFromObject(this.entity, _ => _.procedureType))
           .name[this.$i18n.locale];
     },
-    peName() {
+    buyerName() {
       return getDataFromObject(this.entity, _ => _.buyerName);
     },
     id() {

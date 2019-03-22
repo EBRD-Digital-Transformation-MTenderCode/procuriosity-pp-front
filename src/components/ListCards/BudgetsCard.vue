@@ -2,11 +2,7 @@
   <div class="entity-card">
     <el-card>
       <div slot="header">
-        <div class="entity-status">
-          <div class="entity-status__text">
-            {{ parseBudgetStatusText }}
-          </div>
-        </div>
+        <div class="entity-status" />
         <div class="entity-update">
           {{ $t("budget.last_modified_date") }}:
           <span class="entity-update__date">{{ modifiedDate }}</span>
@@ -48,21 +44,13 @@
           </div>
         </el-col>
         <el-col :xs="24" :sm="4">
-          <div class="entity-pe-name">
+          <div class="entity-buyer-name">
             <div class="title">{{ $t("budget.buyer_name") }}:</div>
-            <div class="text">{{ peName }}</div>
-          </div>
-          <div class="entity-buyer-id">
-            <div class="title">{{ $t("budget.buyer_id") }}:</div>
-            <div class="text">{{ buyerIdentifier }}</div>
+            <div class="text">{{ buyerName }}</div>
           </div>
           <div class="entity-region">
             <div class="title">{{ $t("budget.buyer_region") }}:</div>
             <div class="text">{{ region }}</div>
-          </div>
-          <div class="entity-classifications">
-            <div class="title">{{ $t("budget.procedure_cpv") }}:</div>
-            <div class="text">{{ classifications }}</div>
           </div>
           <div class="entity-budget-id">
             <div class="title">{{ $t("budget.id") }}:</div>
@@ -90,15 +78,6 @@ export default {
     },
   },
   computed: {
-    parseBudgetStatusText() {
-      const status = getDataFromObject(this.entity, _ => _.budgetStatus);
-      switch (status) {
-        case "planning":
-          return "Planning";
-        default:
-          return "";
-      }
-    },
     modifiedDate() {
       return formatDate(getDataFromObject(this.entity, _ => _.modifiedDate));
     },
@@ -134,11 +113,11 @@ export default {
     buyerIdentifier() {
       return getDataFromObject(this.entity, _ => _.buyerIdentifier);
     },
-    peName() {
+    buyerName() {
       return getDataFromObject(this.entity, _ => _.buyerName);
     },
     classifications() {
-      return getDataFromObject(this.entity, _ => _.classifications).join(",");
+      return getDataFromObject(this.entity, _ => _.classifications, []).join(",");
     },
     periodPlanningFrom() {
       return formatDate(getDataFromObject(this.entity, _ => _.periodPlanningFrom));

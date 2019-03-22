@@ -8,7 +8,7 @@
     <el-collapse-transition mode="in-out" name="el-zoom-in-top">
       <div v-show="isExpanded">
         <div class="search-form-more">
-          <el-row :gutter="40">
+          <el-row :gutter="26">
             <el-col :sm="8">
               <div class="search-form__group">
                 <div class="search-form__group-title">{{ $t("search.buyers_info") }}</div>

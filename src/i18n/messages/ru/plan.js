@@ -3,7 +3,7 @@ export default {
   value: "Расчетная стоимость без НДС",
   delivery_regions: "Регион поставки",
   procedure_type: "Тип процедуры",
-  procuring_entity_name: "Название закупающей организации",
+  buyer_name: "Название закупающей организации",
   tender_id: "ID плана",
 
   estimated_value_excluding_VAT: "Ожидаемая стоимость закупки без учета НДС",

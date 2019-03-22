@@ -146,9 +146,10 @@
         </tr>
       </table>
 
-      <div v-else style="margin-bottom: 25px">
+      <div v-else style="margin-top: 15px">
         {{ $t("tender.lot_is_not_awarded") }}
       </div>
+      <hr style="margin-bottom: 25px;" />
     </div>
     <list-pagination
       v-if="needPagination"

@@ -3,7 +3,7 @@ export default {
   value: "Estimated value without VAT",
   delivery_regions: "Delivery Region",
   procedure_type: "Procedure type",
-  procuring_entity_name: "Procuring Entity Name",
+  buyer_name: "Buyer`s Name",
   tender_id: "Plan ID",
 
   estimated_value_excluding_VAT: "Estimated value excluding VAT",
