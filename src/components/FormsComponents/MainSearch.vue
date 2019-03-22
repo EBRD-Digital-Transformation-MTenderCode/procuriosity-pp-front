@@ -1,8 +1,8 @@
 <template>
   <div class="main-search">
-    <el-checkbox-button class="search-form__btn search-form__btn_strict" v-model="currentStrictSearhcValue">{{
-      currentStrictSearhcValue ? $t("search.strict") : $t("search.no_strict")
-    }}</el-checkbox-button>
+    <el-checkbox-button class="search-form__btn search-form__btn_strict" v-model="currentStrictSearhcValue">
+      {{ currentStrictSearhcValue ? $t("search.strict") : $t("search.no_strict") }}
+    </el-checkbox-button>
 
     <el-input
       type="text"
@@ -48,6 +48,7 @@ export default {
   methods: {
     handleChangeSearch(val) {
       this.currentSearchValue = val;
+
       if (this.currentSearchValue) {
         if (this.currentSearchValue.length >= 3) {
           this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
@@ -96,6 +97,14 @@ export default {
         };
         localStorage.setItem("entities", JSON.stringify(localStorageEntities));
       }, 0);
+    },
+
+    titlesOrDescriptionsStrict(newVal) {
+      this.currentStrictSearhcValue = newVal;
+    },
+
+    titlesOrDescriptions(newVal) {
+      this.currentSearchValue = newVal;
     },
   },
 };
