@@ -313,21 +313,11 @@ export default {
       this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
         entityName: "contracts",
         params: {
-          page: 1,
           [name]: value,
           ...this.initialParams,
         },
       });
     },
-  },
-  created() {
-    const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
-    if (localStorageEntities.contracts.hasOwnProperty("isExpanded")) {
-      this.moreCriterions = localStorageEntities.contracts.isExpanded;
-    } else {
-      localStorageEntities.contracts.isExpanded = this.moreCriterions;
-      localStorage.setItem("entities", JSON.stringify(localStorageEntities));
-    }
   },
 };
 </script>

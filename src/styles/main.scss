@@ -3,7 +3,7 @@
 #app {
   display: flex;
   flex-direction: column;
-  margin-bottom: auto;
+  flex: 1;
 }
 
 .fade-enter-active,
@@ -29,6 +29,9 @@
 }
 
 .el-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   overflow: inherit;
   padding: 0;
 }

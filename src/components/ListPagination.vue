@@ -82,6 +82,7 @@ export default {
 @import "./../styles/variables";
 
 .list-pagination {
+  margin: 10px 0;
   .el-pagination {
     @media (max-width: 525px) {
       display: flex;
@@ -96,8 +97,8 @@ export default {
       flex-shrink: 0;
       width: 46px;
       height: 46px;
-      margin: 3px;
-      border-radius: 50%;
+      margin: 3px !important;
+      border-radius: 50% !important;
       background-color: #9e9e9e;
       font-size: 40px;
       color: #fff;

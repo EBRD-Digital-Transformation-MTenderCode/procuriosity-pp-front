@@ -349,7 +349,6 @@ export default {
       this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
         entityName: "tenders",
         params: {
-          page: 1,
           [name]: value,
           ...this.initialParams,
         },
