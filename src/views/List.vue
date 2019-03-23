@@ -107,31 +107,25 @@ export default {
     }
 
     const { query } = this.$route;
-    if (entityName === "tenders") {
-    } else if (entityName === "plans") {
-    } else if (entityName === "contracts") {
-    } else {
-      this.getList();
-    }
+
     switch (entityName) {
       case "budgets":
         this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
           entityName,
-          params: {},
+          params: { page: 1 },
         });
         break;
       case "plans":
         this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
           entityName,
-          params: {
-            pins: query.procedures && query.procedures === "pin" ? ["true"] : ["false"],
-          },
+          params: { page: 1, pins: query.procedures && query.procedures === "pin" ? ["true"] : ["false"] },
         });
         break;
       case "tenders":
         this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
           entityName,
           params: {
+            page: 1,
             proceduresOwnerships:
               query.procedures && query.procedures === "commercial" ? ["commercial"] : ["government"],
           },
@@ -141,6 +135,7 @@ export default {
         this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
           entityName,
           params: {
+            page: 1,
             proceduresStatuses:
               query.procedures && query.procedures === "signing"
                 ? ["pending", "pending.signing"]
@@ -187,33 +182,33 @@ export default {
 
       switch (entityName) {
         case "budgets":
-          return {};
+          return { page: 1 };
         case "plans":
           if (query.procedures && query.procedures === "pin") {
             initialSearchProps.plans.pins = ["true"];
-            return { pins: ["true"] };
+            return { page: 1, pins: ["true"] };
           } else {
             initialSearchProps.plans.pins = ["false"];
-            return { pins: ["false"] };
+            return { page: 1, pins: ["false"] };
           }
         case "tenders":
           if (query.procedures && query.procedures === "commercial") {
             initialSearchProps.tenders.proceduresOwnerships = "commercial";
-            return { proceduresOwnerships: ["commercial"] };
+            return { page: 1, proceduresOwnerships: ["commercial"] };
           } else {
             initialSearchProps.tenders.proceduresOwnerships = "government";
-            return { proceduresOwnerships: ["government"] };
+            return { page: 1, proceduresOwnerships: ["government"] };
           }
         case "contracts":
           if (query.procedures && query.procedures === "signing") {
             initialSearchProps.contracts.proceduresStatuses = ["pending", "pending.signing"];
-            return { proceduresStatuses: ["pending", "pending.signing"] };
+            return { page: 1, proceduresStatuses: ["pending", "pending.signing"] };
           } else {
             initialSearchProps.contracts.proceduresStatuses = ["active", "terminated"];
-            return { proceduresStatuses: ["active", "terminated"] };
+            return { page: 1, proceduresStatuses: ["active", "terminated"] };
           }
         default:
-          return {};
+          return { page: 1 };
       }
     },
   },
@@ -275,9 +270,10 @@ export default {
   padding-bottom: 20px;
   background-color: #efefef;
   &-page {
-    background-color: #efefef;
-    padding-bottom: 20px;
+    flex: 1;
     margin-bottom: -20px;
+    padding-bottom: 20px;
+    background-color: #efefef;
   }
   &__no-data-title,
   &__error {

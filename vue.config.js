@@ -7,8 +7,5 @@ module.exports = {
 
   productionSourceMap: false,
   filenameHashing: false,
-  parallel: undefined,
-  baseUrl: undefined,
-  outputDir: undefined,
-  assetsDir: undefined,
+  parallel: true,
 };
