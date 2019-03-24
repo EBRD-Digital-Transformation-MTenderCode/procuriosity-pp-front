@@ -14,13 +14,13 @@ export default {
   number_of_notice: "Номер уведомления",
   procedure_type: "Тип процедуры",
   procuring_entity_name: "Название закупающей организации",
-  main_cpv: "Main CPV code",
+  main_cpv: "CPV код статьи",
 
-  period_of_need: "Period of need",
-  main_procurement_category: "Main procurement category",
-  from: "from",
+  period_of_need: "Период потребности",
+  main_procurement_category: "Основная закупочная категория",
+  from: "от",
 
-  source_of_financing: "Item source of financing",
+  source_of_financing: "Источники финансирования",
   execution: "Execution",
   spending: "Spending",
 
@@ -34,7 +34,7 @@ export default {
   contract_notice: "Contract Notice",
   contracting_publication_date: "Publication date",
   contracting_last_update_date: "Last update",
-  procuring_entity: "Procuring Entity",
+  procuring_entity: "Закупающий орган",
   registration_number: "National registration number",
   contracting_method: "Procurement method",
   contracting_cpv: "Main CPV code",

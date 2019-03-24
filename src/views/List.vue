@@ -8,7 +8,7 @@
           <i :class="['icon-left', isExpanded ? 'el-icon-close' : 'el-icon-arrow-down']" />
         </button>
       </div>
-      <search-status-bar :entity="entityName" :needPagination="needPagination" />
+      <search-status-bar :loaded="entities[entityName].loaded" :entity="entityName" :needPagination="needPagination" />
       <transition-group @before-enter="beforeEnter" @enter="enter" @leave="leave" id="transition-group">
         <ul v-if="entities[entityName].loaded && entities[entityName].list.length" :key="'list'" class="list">
           <component

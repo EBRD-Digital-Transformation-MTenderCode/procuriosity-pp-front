@@ -288,22 +288,25 @@ export default {
   no_documents: "Nu au fost depuse documente",
   no_documents_submitted: "Nu au fost depuse documente",
 
-  e_auction: "e-Auction",
+  e_auction: "Licitația electronică",
+  //TODO need translate
   electronic_auction_modalities: "Electronic auction modalities",
-  auction_period: "Auction period",
+  auction_period: "Perioada licitației electronice",
+  //TODO need translate
   minimal_eligible_difference: "Minimal eligible difference",
-  number_of_participants: "Number of participants",
-  number_of_rounds: "Number of rounds",
-  electronic_auction_progress: "Electronic auction progress",
-  number_of_round: "Number of Round",
-  timeframe_of_round: "Timeframe of round",
-  submitted_offer: "Submitted offer",
-  submission_date: "Submission date",
-  electronic_auction_results: "Electronic auction results",
-  final_offer: "Final offer",
-  MDL_exluding_VAT: "MDL exluding VAT",
+  number_of_participants: "Numărul de participanți",
+  number_of_rounds: "Numărul de runde",
+  electronic_auction_progress: "Statutul licitației electronice",
+  number_of_round: "Numărul de runde",
+  timeframe_of_round: "Timpul alocat rundei",
+  submitted_offer: "Oferte depuse",
+  submission_date: "Data depunerii",
+  electronic_auction_results: "Rezultatele licitației electronice",
+  final_offer: "Oferta finală",
+  MDL_exluding_VAT: "MDL fără TVA",
+  //TODO need translate
   initial_offers: "Initial offers",
-
+  //TODO need translate
   all_lots: "All lots",
   successful_lots: "Successful lots",
   unsuccessful_lots: "Unsuccessful lots",

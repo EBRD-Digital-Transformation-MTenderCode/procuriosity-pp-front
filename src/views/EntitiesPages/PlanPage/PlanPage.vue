@@ -76,7 +76,11 @@
                     <span slot="label" v-html="$t('tender.procurement_plan')" />
                   </el-tab-pane>
                   <el-tab-pane :disabled="!hasTender" name="cn" lazy>
-                    <span slot="label" v-html="$t('tender.contract_notice')" />
+                    <a
+                      :href="`${$i18n.locale !== 'ro' ? `/${$i18n.locale}` : ''}/tenders/${plan.MSRecord.ocid}`"
+                      slot="label"
+                      v-html="$t('tender.contract_notice')"
+                    />
                   </el-tab-pane>
                 </el-tabs>
               </el-col>
@@ -169,9 +173,7 @@ export default {
     },
     checkTab(tab) {
       if (tab === "cn") {
-        this.$router.push({
-          path: `${this.$i18n.locale !== "ro" ? `/${this.$i18n.locale}` : ""}/tenders/${this.plan.MSRecord.ocid}`,
-        });
+        return false;
       }
     },
   },
