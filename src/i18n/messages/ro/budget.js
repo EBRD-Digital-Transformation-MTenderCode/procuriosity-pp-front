@@ -42,7 +42,7 @@ export default {
   contracting_scope: "Scope of procurement",
   contracting_amount: "Estimated value excluding VAT",
 
-  awarded_contracts: "Awarded contracts",
+  awarded_contracts: "Awarded Contracts",
   awarded_contracts_id: "Contract ID",
   awarded_contracts_amount: "Contract value",
   awarded_contracts_status_active: "Active",

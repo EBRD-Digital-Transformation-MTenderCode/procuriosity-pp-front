@@ -223,35 +223,40 @@ export default {
       });
 
       try {
-        const res = await axios(getListConfig(entityName, params));
+        const { data } = await axios(getListConfig(entityName, params));
 
-        commit(SET_ENTITY_LIST, {
-          entityName,
-          list: res.data.data,
-        });
+        if (data.data) {
+          commit(SET_ENTITY_LIST, {
+            entityName,
+            list: data.data || [],
+          });
 
-        commit(SET_ENTITY_PAGINATION_INFO, {
-          entityName,
-          totalCount: res.data._meta.totalCount,
-          pageCount: res.data._meta.pageCount,
-        });
-
-        commit(SET_ENTITY_LOADED, {
-          entityName,
-          loaded: true,
-        });
+          commit(SET_ENTITY_PAGINATION_INFO, {
+            entityName,
+            totalCount: data._meta.totalCount,
+            pageCount: data._meta.pageCount,
+          });
+        } else {
+          commit(SET_ENTITY_LOADED_ERROR, {
+            entityName,
+            error: {
+              status: true,
+              message: `¯\(°_°)/¯`,
+            },
+          });
+        }
       } catch (e) {
-        commit(SET_ENTITY_LOADED, {
-          entityName,
-          loaded: true,
-        });
-
         commit(SET_ENTITY_LOADED_ERROR, {
           entityName,
           error: {
             status: true,
             message: e.message,
           },
+        });
+      } finally {
+        commit(SET_ENTITY_LOADED, {
+          entityName,
+          loaded: true,
         });
       }
     },
@@ -356,11 +361,6 @@ export default {
             entityData: planData,
           });
 
-          commit(SET_ENTITY_LOADED, {
-            entityName,
-            loaded: true,
-          });
-
           commit(SET_ENTITY_LOADED_ERROR, {
             entityName,
             error: {
@@ -369,17 +369,17 @@ export default {
             },
           });
         } catch (e) {
-          commit(SET_ENTITY_LOADED, {
-            entityName,
-            loaded: true,
-          });
-
           commit(SET_ENTITY_LOADED_ERROR, {
             entityName,
             error: {
               status: true,
               message: e.message,
             },
+          });
+        } finally {
+          commit(SET_ENTITY_LOADED, {
+            entityName,
+            loaded: true,
           });
         }
       } else if (regexMtender2Id.test(id)) {
@@ -424,11 +424,6 @@ export default {
               entityData: planData,
             });
 
-            commit(SET_ENTITY_LOADED, {
-              entityName,
-              loaded: true,
-            });
-
             commit(SET_ENTITY_LOADED_ERROR, {
               entityName,
               error: {
@@ -438,17 +433,17 @@ export default {
             });
           }
         } catch (e) {
-          commit(SET_ENTITY_LOADED, {
-            entityName,
-            loaded: true,
-          });
-
           commit(SET_ENTITY_LOADED_ERROR, {
             entityName,
             error: {
               status: true,
               message: e.message,
             },
+          });
+        } finally {
+          commit(SET_ENTITY_LOADED, {
+            entityName,
+            loaded: true,
           });
         }
       } else {
@@ -571,10 +566,6 @@ export default {
               cdb,
               entityData: tenderData,
             });
-            commit(SET_ENTITY_LOADED, {
-              entityName,
-              loaded: true,
-            });
 
             commit(SET_ENTITY_LOADED_ERROR, {
               entityName,
@@ -585,17 +576,17 @@ export default {
             });
           }
         } catch (e) {
-          commit(SET_ENTITY_LOADED, {
-            entityName,
-            loaded: true,
-          });
-
           commit(SET_ENTITY_LOADED_ERROR, {
             entityName,
             error: {
               status: true,
               message: e.message,
             },
+          });
+        } finally {
+          commit(SET_ENTITY_LOADED, {
+            entityName,
+            loaded: true,
           });
         }
       } else {
@@ -645,11 +636,6 @@ export default {
               entityData: contractData,
             });
 
-            commit(SET_ENTITY_LOADED, {
-              entityName,
-              loaded: true,
-            });
-
             commit(SET_ENTITY_LOADED_ERROR, {
               entityName,
               error: {
@@ -658,11 +644,6 @@ export default {
               },
             });
           } else {
-            commit(SET_ENTITY_LOADED, {
-              entityName,
-              loaded: true,
-            });
-
             commit(SET_ENTITY_LOADED_ERROR, {
               entityName,
               error: {
@@ -672,17 +653,17 @@ export default {
             });
           }
         } catch (e) {
-          commit(SET_ENTITY_LOADED, {
-            entityName,
-            loaded: true,
-          });
-
           commit(SET_ENTITY_LOADED_ERROR, {
             entityName,
             error: {
               status: true,
               message: e.message,
             },
+          });
+        } finally {
+          commit(SET_ENTITY_LOADED, {
+            entityName,
+            loaded: true,
           });
         }
       }

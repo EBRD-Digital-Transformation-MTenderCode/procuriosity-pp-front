@@ -55,7 +55,11 @@ import "@/components/ListCards/_card.scss";
 import "@/views/EntitiesPages/_entity-info.scss";
 
 if (process.env.NODE_ENV === "development") {
-  import("@/styles/for-dev.scss");
+  import("@/styles/for-dev.scss").then(() => {
+    for (let i = 0; i < 3; i++) {
+      document.head.insertBefore(document.head.lastChild, document.head.firstChild);
+    }
+  });
 }
 
 Vue.use(Pagination);
@@ -90,8 +94,8 @@ Vue.use(Container);
 Vue.use(Main);
 Vue.component(CollapseTransition.name, CollapseTransition);
 
-if (/\/en\/|\/ru\//.test(window.location.pathname)) {
-  i18n.locale = window.location.pathname.match(/\/en\/|\/ru\//)[0].replace(/\//g, "");
+if (/^(\/en\/|\/ru\/)/.test(window.location.pathname)) {
+  i18n.locale = window.location.pathname.match(/^(\/en\/|\/ru\/)/)[0].replace(/\//g, "");
 }
 
 switch (i18n.locale) {
