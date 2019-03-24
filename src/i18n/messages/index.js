@@ -9,14 +9,14 @@ import roLocale from "element-ui/lib/locale/lang/ro";
 export default {
   en: {
     ...enLocale,
-    ...en
+    ...en,
   },
   ro: {
     ...roLocale,
-    ...ro
+    ...ro,
   },
   ru: {
     ...ruLocale,
-    ...ru
-  }
+    ...ru,
+  },
 };

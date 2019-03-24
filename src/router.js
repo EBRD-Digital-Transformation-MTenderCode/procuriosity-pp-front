@@ -1,82 +1,40 @@
 import Vue from "vue";
 import Router from "vue-router";
-import MainPage from "./views/MainPage";
+
+import List from "./views/List";
 
 Vue.use(Router);
 
-export default new Router({
-  mode: "hash",
+const router = new Router({
+  mode: "history",
   base: process.env.BASE_URL,
   routes: [
     {
-      path: "/",
-      name: "main-page",
-      component: MainPage
-    },
-    {
-      path: "/(budgets|tenders|plans|contracts)",
+      path: `/:lang?/:entityName(budgets|plans|tenders|contracts)`,
       name: "list",
-      component: () => import(/* webpackChunkName: "List" */ "./components/List.vue")
-    },
-    /*{
-     path: "/budgets/:id",
-     name: "budget-page",
-     component: () => import(/!* webpackChunkName: "BudgetPage" *!/ "./views/EntitiesPages/BudgetPage.vue")
-     },*/
-    {
-      path: "/tenders/:id",
-      name: "tender-page",
-      component: () => import(/* webpackChunkName: "TenderPage" */ "./views/EntitiesPages/TenderPage.vue")
+      component: List,
     },
     {
-      path: "/contracts/:id",
-      name: "contract-page",
-      component: () => import(/* webpackChunkName: "ContractPage" */ "./views/EntitiesPages/ContractPage.vue")
+      path: `/:lang?/plans/:id`,
+      name: "plan",
+      component: () =>
+        import(/* webpackChunkName: "PlanPage" */ "./views/EntitiesPages/PlanPage/ContainerPlanPage.vue"),
     },
     {
-      path: "/news",
-      name: "news",
-      component: () => import(/* webpackChunkName: "News" */ "./views/NewsList.vue")
+      path: "/:lang?/budgets/:id",
+      name: "budget-page",
+      component: () => import(/* webpackChunkName: "BudgetPage" */ "./views/EntitiesPages/BudgetPage/BudgetPage.vue"),
     },
     {
-      path: "/about",
-      name: "about",
-      component: () => import(/* webpackChunkName: "About" */ "./views/StaticPages/About.vue")
+      path: `/:lang?/tenders/:id`,
+      name: "tender",
+      component: () =>
+        import(/* webpackChunkName: "TenderPage" */ "./views/EntitiesPages/TenderPage/ContainerTenderPage.vue"),
     },
     {
-      path: "/register",
-      name: "register",
-      component: () => import(/* webpackChunkName: "Register" */ "./views/StaticPages/Register.vue")
-    },
-    {
-      path: "/legal-framework",
-      name: "legal-framework",
-      component: () => import(/* webpackChunkName: "LegalFramework" */ "./views/StaticPages/LegalFramework.vue")
-    },
-    {
-      path: "/security-and-confidentiality",
-      name: "security-and-confidentiality",
-      component: () => import(/* webpackChunkName: "SecurityAndConfidentiality" */ "./views/StaticPages/SecurityAndConfidentiality.vue")
-    },
-    {
-      path: "/join-mtender",
-      name: "join-mtender",
-      component: () => import(/* webpackChunkName: "JoinMTender" */ "./views/StaticPages/JoinMTender.vue")
-    },
-    {
-      path: "/accreditation",
-      name: "accreditation",
-      component: () => import(/* webpackChunkName: "Accreditation" */ "./views/StaticPages/Accreditation.vue")
-    },
-    {
-      path: "/for-civil",
-      name: "for-civil",
-      component: () => import(/* webpackChunkName: "ForCivil" */ "./views/StaticPages/ForCivil.vue")
-    },
-    {
-      path: "/faq",
-      name: "faq",
-      component: () => import(/* webpackChunkName: "FAQ" */ "./views/StaticPages/FAQ.vue")
+      path: `/:lang?/contracts/:id`,
+      name: "contract",
+      component: () => import(/* webpackChunkName: "ContractPage" */ "./views/EntitiesPages/ContractPage.vue"),
     },
   ],
   scrollBehavior(to, from, savedPosition) {
@@ -85,5 +43,29 @@ export default new Router({
     } else {
       return { x: 0, y: 0 };
     }
-  }
+  },
 });
+
+router.beforeEach((to, from, next) => {
+  if (process.env.NODE_ENV !== "development") {
+    if (
+      from.name &&
+      document.querySelector(`.header-entity-nav a[href*=${from.name}]`) &&
+      document.querySelector(`.header-entity-nav a[href*=${to.name}]`)
+    ) {
+      document.querySelector(`.header-entity-nav a[href*=${from.name}]`).classList.remove("is-active");
+      document.querySelector(`.header-entity-nav a[href*=${to.name}]`).classList.add("is-active");
+    }
+  } else {
+    if (
+      document.querySelector(`.header-entity-nav a[href*=${from.name}]`) &&
+      document.querySelector(`.header-entity-nav a[href*=${to.name}]`)
+    ) {
+      document.querySelector(`.header-entity-nav a[href*=${from.name}]`).classList.remove("is-active");
+      document.querySelector(`.header-entity-nav a[href*=${to.name}]`).classList.add("is-active");
+    }
+  }
+  next();
+});
+
+export default router;

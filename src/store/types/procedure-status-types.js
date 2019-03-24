@@ -4,103 +4,101 @@ export default {
       name: {
         en: "Planning",
         ro: "Planificare",
-        ru: "Планирование"
+        ru: "Планирование",
       },
-      value: "planning"
-    }
-  ],
-  plans: [
-    {
-      name: {
-        en: "Planning notice",
-        ro: "Anunț de planificare",
-        ru: "Сообщение о планировании"
-      },
-      value: "planning notice"
-    }
+      value: "planning",
+    },
   ],
   tenders: [
     {
       name: {
-        en: "Auction Period",
-        ro: "Perioada Licitației",
-        ru: "Период аукциона"
-      },
-      value: "active.auction"
-    },
-    {
-      name: {
-        en: "Qualification Period",
-        ro: "Perioada de calificare",
-        ru: "Квалификационный период"
-      },
-      value: "active.qualification"
-    },
-    {
-      name: {
-        en: "Enquiries Period",
-        ro: "Perioada anchetelor",
-        ru: "Период запросов"
-      },
-      value: "active.enquiries"
-    },
-    {
-      name: {
-        en: "Tendering Period",
-        ro: "Perioada de licitare",
-        ru: "Тендерный период"
-      },
-      value: "active.tendering"
-    },
-    {
-      name: {
-        en: "Cancelled tender",
-        ro: "Anunțarea licitației anulate",
-        ru: "Отмененный тендер"
-      },
-      value: "cancelled"
-    },
-    {
-      name: {
         en: "Published",
-        ro: "Publicat",
-        ru: "Опубликованный"
+        ro: "Postat",
+        ru: "Опубликовано",
       },
-      value: "active"
+      value: "published",
+    },
+    {
+      name: {
+        en: "Enquiries in progress ",
+        ro: "Solicitare сlarificări",
+        ru: "Период уточнений",
+      },
+      value: "clarification",
+    },
+    {
+      name: {
+        en: "Bidding in progress",
+        ro: "Depunerea ofertelor",
+        ru: "Подача предложений",
+      },
+      value: "tendering",
+    },
+    {
+      name: {
+        en: "Auction in progress",
+        ro: "Perioada de licitare",
+        ru: "Период аукциона",
+      },
+      value: "auction",
+    },
+    {
+      name: {
+        en: "Qualification of bidders",
+        ro: "Calificarea ofertanților",
+        ru: "Квалификация офертантов",
+      },
+      value: "awarding",
+    },
+    {
+      name: {
+        en: "Standstill period",
+        ro: "Perioada de așteptare",
+        ru: "Период ожидания",
+      },
+      value: "suspended",
     },
     {
       name: {
         en: "Awarded",
-        ro: "Premiat",
-        ru: "Решение о квалификации"
+        ro: "Ofertele a fost revizuite",
+        ru: "Победитель определен",
       },
-      value: "active.awarded"
+      value: "awarded",
     },
     {
       name: {
-        en: "Complete",
-        ro: "Complet",
-        ru: "Завершен"
+        en: "Tender completed",
+        ro: "Procedură finalizată",
+        ru: "Закупка завершена",
       },
-      value: "complete"
+      value: "complete",
+    },
+    {
+      name: {
+        en: "Cancelled tender",
+        ro: "Procedură anulată",
+        ru: "Закупка отменена",
+      },
+      value: "cancelled",
     },
     {
       name: {
         en: "Unsuccessful Tender",
-        ro: "Ofertă nereușită",
-        ru: "Неуспешный тендер"
+        ro: "Procedura nu a avut loc",
+        ru: "Закупка не состоялась",
       },
-      value: "unsuccessful"
-    }
+      value: "unsuccessful",
+    },
   ],
   contracts: [
     {
       name: {
         en: "Execution",
         ro: "Execuţie",
-        ru: "Выполненый"
+        ru: "Выполненый",
       },
-      value: "execution"
-    }
-  ]
+      value: "execution",
+    },
+  ],
 };

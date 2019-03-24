@@ -1,25 +1,31 @@
 import axios from "axios";
-import { getBudgetConfig, getListConfig, getTenderConfig, getContractConfig } from "./../configs/requests-configs";
+import VueI18n from "./../i18n/index";
+
+import {
+  getListConfig,
+  getBudgetConfig,
+  getTenderConfig,
+  getContractConfig,
+  getPlanConfig,
+} from "./../configs/requests-configs";
 
 import initialSearchProps from "./types/initial-search-props";
 
 import {
   SET_ENTITY_LOADED,
-
+  SET_ENTITY_LOADED_ERROR,
   SET_ENTITY_LIST,
   SET_ENTITY_PAGINATION_INFO,
   SET_ENTITY_SEARCH_PARAMS,
-
-  SET_CURRENT_TENDER_INFO,
-  SET_CURRENT_BUDGET_INFO,
-  SET_CURRENT_CONTRACT_INFO,
-
-  SET_INITIAL_SEARCH_PARAMS
+  SET_CURRENT_ENTITY_INFO,
+  SET_INITIAL_SEARCH_PARAMS,
 } from "./types/mutations-types";
 import {
   FETCH_ENTITY_LIST,
   FETCH_CURRENT_TENDER_INFO,
-  FETCH_CURRENT_BUDGET_INFO, FETCH_CURRENT_CONTRACT_INFO
+  FETCH_CURRENT_CONTRACT_INFO,
+  FETCH_CURRENT_BUDGET_INFO,
+  FETCH_CURRENT_PLAN_INFO,
 } from "./types/actions-types";
 
 import { MTENDER1, MTENDER2 } from "./types/cbd-types";
@@ -28,18 +34,18 @@ import { convertObjectToQueryParamsString } from "./../utils";
 
 if (!localStorage.getItem("entities")) {
   const entities = {
-    "budgets": {
-      searchParams: initialSearchProps.budgets
+    budgets: {
+      searchParams: initialSearchProps.budgets,
     },
-    "plans": {
-      searchParams: initialSearchProps.plans
+    plans: {
+      searchParams: initialSearchProps.plans,
     },
-    "tenders": {
-      searchParams: initialSearchProps.tenders
+    tenders: {
+      searchParams: initialSearchProps.tenders,
     },
-    "contracts": {
-      searchParams: initialSearchProps.contracts
-    }
+    contracts: {
+      searchParams: initialSearchProps.contracts,
+    },
   };
 
   localStorage.setItem("entities", JSON.stringify(entities));
@@ -49,212 +55,500 @@ const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
 
 export default {
   state: {
-    /*budgets: {
-     name: "entities.budgets",
-     loaded: false,
-     list: [],
-     searchParams: {...localStorageEntities.budgets.searchParams},
-     paginationInfo: {
-     totalCount: 0, pageCount: 0
-     }
-     },*/
+    budgets: {
+      name: "entities.budgets",
+      loaded: false,
+      error: {
+        status: false,
+        message: "",
+      },
+      list: [],
+      searchParams: { ...localStorageEntities.budgets.searchParams },
+      currentEntity: {
+        cdb: "",
+        entityData: {
+          EI: {},
+          FSs: [],
+        },
+      },
+      paginationInfo: {
+        totalCount: 0,
+        pageCount: 0,
+      },
+    },
     plans: {
       name: "entities.plans",
       loaded: false,
+      error: {
+        status: false,
+        message: "",
+      },
       list: [],
       searchParams: { ...localStorageEntities.plans.searchParams },
+      currentEntity: {
+        cdb: "",
+        entityData: {},
+      },
       paginationInfo: {
         totalCount: 0,
-        pageCount: 0
-      }
+        pageCount: 0,
+      },
     },
     tenders: {
       name: "entities.tenders",
       loaded: false,
+      error: {
+        status: false,
+        message: "",
+      },
       list: [],
       searchParams: { ...localStorageEntities.tenders.searchParams },
-      currentTender: {
+      currentEntity: {
         cdb: "",
-        tenderData: {}
+        entityData: {},
       },
       paginationInfo: {
         totalCount: 0,
-        pageCount: 0
-      }
+        pageCount: 0,
+      },
     },
     contracts: {
       name: "entities.contracts",
       loaded: false,
+      error: {
+        status: false,
+        message: "",
+      },
       list: [],
       searchParams: { ...localStorageEntities.contracts.searchParams },
-      currentContract: {
+      currentEntity: {
         cdb: "",
-        contractData: {}
+        entityData: {},
       },
       paginationInfo: {
         totalCount: 0,
-        pageCount: 0
-      }
-    }
+        pageCount: 0,
+      },
+    },
   },
   mutations: {
-    [SET_ENTITY_LOADED](state, { entity, loaded }) {
-      state[entity].loaded = loaded;
+    [SET_ENTITY_LOADED](state, { entityName, loaded }) {
+      state[entityName].loaded = loaded;
     },
 
-    [SET_ENTITY_LIST](state, payload) {
-      state[payload.entity] = {
-        ...state[payload.entity],
-        list: payload.list
+    [SET_ENTITY_LOADED_ERROR](state, { entityName, error }) {
+      state[entityName].error = {
+        status: error.status,
+        message: error.message,
       };
     },
 
-    [SET_ENTITY_PAGINATION_INFO](state, payload) {
-      state[payload.entity] = {
-        ...state[payload.entity],
+    [SET_ENTITY_LIST](state, { entityName, list }) {
+      state[entityName] = {
+        ...state[entityName],
+        list,
+      };
+    },
+
+    [SET_ENTITY_PAGINATION_INFO](state, { entityName, totalCount, pageCount }) {
+      state[entityName] = {
+        ...state[entityName],
         paginationInfo: {
-          totalCount: payload.totalCount,
-          pageCount: payload.pageCount
-        }
+          totalCount,
+          pageCount,
+        },
       };
     },
 
-    [SET_ENTITY_SEARCH_PARAMS](state, { entity, params }) {
-      state[entity] = {
-        ...state[entity],
+    [SET_ENTITY_SEARCH_PARAMS](state, { entityName, params }) {
+      state[entityName] = {
+        ...state[entityName],
         searchParams: {
-          ...state[entity].searchParams,
-          ...params
-        }
+          ...state[entityName].searchParams,
+          ...params,
+        },
       };
 
-      if (!(Object.keys(params).length === 2 && params.hasOwnProperty("titlesOrDescriptionsStrict"))) {
-        this.dispatch(FETCH_ENTITY_LIST, {
-          entity: entity,
-          params: convertObjectToQueryParamsString(state[entity].searchParams)
-        });
-      }
+      this.dispatch(FETCH_ENTITY_LIST, {
+        entityName,
+        params: convertObjectToQueryParamsString(state[entityName].searchParams),
+      });
 
       const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
-      localStorageEntities[entity].searchParams = {
-        ...localStorageEntities[entity].searchParams,
-        ...params
+      localStorageEntities[entityName].searchParams = {
+        ...localStorageEntities[entityName].searchParams,
+        ...params,
       };
       localStorage.setItem("entities", JSON.stringify(localStorageEntities));
     },
 
-    [SET_CURRENT_BUDGET_INFO](state, { budgetData }) {
-      state.tenders.currentTender = {
-        budgetData
+    [SET_CURRENT_ENTITY_INFO](state, { entityName, cdb, entityData }) {
+      state[entityName] = {
+        ...state[entityName],
+        currentEntity: {
+          ...state[entityName].currentEntity,
+          cdb,
+          entityData,
+        },
       };
     },
 
-    [SET_CURRENT_TENDER_INFO](state, { cdb, tenderData }) {
-      state.tenders.currentTender = {
-        cdb,
-        tenderData
-      };
-    },
-
-    [SET_CURRENT_CONTRACT_INFO](state, { cdb, contractData }) {
-      state.contracts.currentContract = {
-        cdb,
-        contractData
-      };
-    },
-
-    [SET_INITIAL_SEARCH_PARAMS](state, { entity }) {
-      state[entity].searchParams = initialSearchProps[entity];
+    [SET_INITIAL_SEARCH_PARAMS](state, { entityName }) {
+      state[entityName].searchParams = initialSearchProps[entityName];
 
       const localStorageEntities = JSON.parse(localStorage.getItem("entities"));
 
-      localStorageEntities[entity].searchParams = initialSearchProps[entity];
+      localStorageEntities[entityName].searchParams = initialSearchProps[entityName];
       localStorage.setItem("entities", JSON.stringify(localStorageEntities));
 
       this.dispatch(FETCH_ENTITY_LIST, {
-        entity: entity,
-        params: convertObjectToQueryParamsString(state[entity].searchParams)
+        entityName,
+        params: convertObjectToQueryParamsString(state[entityName].searchParams),
       });
-    }
+    },
   },
   actions: {
-    async [FETCH_ENTITY_LIST]({ commit }, { entity, params }) {
+    async [FETCH_ENTITY_LIST]({ commit }, { entityName, params }) {
       commit(SET_ENTITY_LOADED, {
-        entity,
-        loaded: false
+        entityName,
+        loaded: false,
+      });
+
+      commit(SET_ENTITY_LOADED_ERROR, {
+        entityName,
+        error: {
+          status: false,
+          message: "",
+        },
       });
 
       try {
-        const res = await axios(getListConfig(entity, params));
+        const { data } = await axios(getListConfig(entityName, params));
 
-        commit(SET_ENTITY_LIST, {
-          entity,
-          list: res.data.data
+        if (data.data) {
+          commit(SET_ENTITY_LIST, {
+            entityName,
+            list: data.data || [],
+          });
+
+          commit(SET_ENTITY_PAGINATION_INFO, {
+            entityName,
+            totalCount: data._meta.totalCount,
+            pageCount: data._meta.pageCount,
+          });
+        } else {
+          commit(SET_ENTITY_LOADED_ERROR, {
+            entityName,
+            error: {
+              status: true,
+              message: `¯\\(°_°)/¯`,
+            },
+          });
+        }
+      } catch (e) {
+        commit(SET_ENTITY_LOADED_ERROR, {
+          entityName,
+          error: {
+            status: true,
+            message: e.message,
+          },
         });
-
-        commit(SET_ENTITY_PAGINATION_INFO, {
-          entity,
-          totalCount: res.data._meta.totalCount,
-          pageCount: res.data._meta.pageCount
-        });
-
+      } finally {
         commit(SET_ENTITY_LOADED, {
-          entity,
-          loaded: true
+          entityName,
+          loaded: true,
         });
-      }
-      catch (e) {
-        console.log(e.message);
       }
     },
 
     async [FETCH_CURRENT_BUDGET_INFO]({ commit }, { id }) {
-      try {
-        const res = await axios(getBudgetConfig(id));
-        console.log(res);
+      const entityName = "budgets";
+      commit(SET_ENTITY_LOADED, {
+        entityName,
+        loaded: false,
+      });
 
-        commit(SET_CURRENT_BUDGET_INFO, {
-          budgetData: res.data
+      commit(SET_ENTITY_LOADED_ERROR, {
+        entityName,
+        error: {
+          status: false,
+          message: "",
+        },
+      });
+      try {
+        const { data } = await axios(getBudgetConfig(id));
+        const entityData = data.records.reduce(
+          (acc, record) => {
+            if (record.ocid.match(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/)) {
+              return {
+                ...acc,
+                EI: record,
+              };
+            } else {
+              return {
+                ...acc,
+                FSs: [...acc.FSs, record],
+              };
+            }
+          },
+          {
+            EI: {},
+            FSs: [],
+          }
+        );
+        commit(SET_CURRENT_ENTITY_INFO, {
+          entityName,
+          cdb: MTENDER2,
+          entityData,
         });
-      }
-      catch (e) {
-        console.log(e);
+
+        commit(SET_ENTITY_LOADED_ERROR, {
+          entityName,
+          error: {
+            status: false,
+            message: "",
+          },
+        });
+      } catch (e) {
+        commit(SET_ENTITY_LOADED_ERROR, {
+          entityName,
+          error: {
+            status: true,
+            message: e.message,
+          },
+        });
+      } finally {
+        commit(SET_ENTITY_LOADED, {
+          entityName,
+          loaded: true,
+        });
       }
     },
 
-    async [FETCH_CURRENT_TENDER_INFO]({ commit }, { cdb, id }) {
-      if (cdb === MTENDER1) {
-        try {
-          const elasticRes = await axios(getListConfig("tenders", `?entityId=${id}`));
+    async [FETCH_CURRENT_PLAN_INFO]({ commit }, { id }) {
+      const entityName = "plans";
+      const regexMtender1Id = /^MD-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{6}-[0-9]$/;
+      const regexMtender2Id = /^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/;
 
+      let cdb = "";
+
+      commit(SET_ENTITY_LOADED, {
+        entityName,
+        loaded: false,
+      });
+
+      commit(SET_ENTITY_LOADED_ERROR, {
+        entityName,
+        error: {
+          status: false,
+          message: "",
+        },
+      });
+
+      if (regexMtender1Id.test(id)) {
+        cdb = MTENDER1;
+
+        try {
+          const elasticRes = await axios(getListConfig(entityName, `?entityId=${id}`));
+          const requestId = elasticRes.data.data[0].id;
+
+          const res = await axios(getPlanConfig(cdb, requestId));
+          const planData = res.data.data;
+
+          commit(SET_CURRENT_ENTITY_INFO, {
+            entityName,
+            cdb,
+            entityData: planData,
+          });
+
+          commit(SET_ENTITY_LOADED_ERROR, {
+            entityName,
+            error: {
+              status: false,
+              message: "",
+            },
+          });
+        } catch (e) {
+          commit(SET_ENTITY_LOADED_ERROR, {
+            entityName,
+            error: {
+              status: true,
+              message: e.message,
+            },
+          });
+        } finally {
+          commit(SET_ENTITY_LOADED, {
+            entityName,
+            loaded: true,
+          });
+        }
+      } else if (regexMtender2Id.test(id)) {
+        cdb = MTENDER2;
+
+        try {
+          const res = await axios(getPlanConfig(cdb, id));
+
+          if (!Object.keys(res.data).length) {
+            throw new Error(VueI18n.t("invalid-id"));
+          }
+          const planData = {};
+
+          const MSRecord = {};
+          const PNRecord = {};
+          const EVRecord = {};
+
+          if (Object.keys(res.data).length) {
+            const tenderRecords = res.data.records;
+
+            tenderRecords.forEach(record => {
+              if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/) !== -1) {
+                Object.assign(MSRecord, record);
+              }
+              if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-PN-[0-9]{13}$/) !== -1) {
+                Object.assign(PNRecord, record);
+              }
+              if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-EV-[0-9]{13}$/) !== -1) {
+                Object.assign(EVRecord, record);
+              }
+            });
+
+            Object.assign(planData, {
+              MSRecord,
+              PNRecord,
+              EVRecord,
+            });
+
+            commit(SET_CURRENT_ENTITY_INFO, {
+              entityName,
+              cdb,
+              entityData: planData,
+            });
+
+            commit(SET_ENTITY_LOADED_ERROR, {
+              entityName,
+              error: {
+                status: false,
+                message: "",
+              },
+            });
+          }
+        } catch (e) {
+          commit(SET_ENTITY_LOADED_ERROR, {
+            entityName,
+            error: {
+              status: true,
+              message: e.message,
+            },
+          });
+        } finally {
+          commit(SET_ENTITY_LOADED, {
+            entityName,
+            loaded: true,
+          });
+        }
+      } else {
+        commit(SET_ENTITY_LOADED, {
+          entityName,
+          loaded: true,
+        });
+
+        commit(SET_ENTITY_LOADED_ERROR, {
+          entityName,
+          error: {
+            status: true,
+            message: VueI18n.t("invalid-id"),
+          },
+        });
+      }
+    },
+
+    async [FETCH_CURRENT_TENDER_INFO]({ commit }, { id }) {
+      const entityName = "tenders";
+      const regexMtender1Id = /^MD-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{6}-[0-9]$/;
+      const regexMtender2Id = /^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/;
+
+      let cdb = "";
+
+      commit(SET_ENTITY_LOADED, {
+        entityName,
+        loaded: false,
+      });
+
+      commit(SET_ENTITY_LOADED_ERROR, {
+        entityName,
+        error: {
+          status: false,
+          message: "",
+        },
+      });
+
+      if (regexMtender1Id.test(id)) {
+        cdb = MTENDER1;
+
+        try {
+          const elasticRes = await axios(getListConfig(entityName, `?entityId=${id}`));
           const requestId = elasticRes.data.data[0].id;
 
           const res = await axios(getTenderConfig(cdb, requestId));
-
           const tenderData = res.data.data;
 
-          commit(SET_CURRENT_TENDER_INFO, {
+          commit(SET_CURRENT_ENTITY_INFO, {
+            entityName,
             cdb,
-            tenderData
+            entityData: tenderData,
+          });
+
+          commit(SET_ENTITY_LOADED, {
+            entityName,
+            loaded: true,
+          });
+
+          commit(SET_ENTITY_LOADED_ERROR, {
+            entityName,
+            error: {
+              status: false,
+              message: "",
+            },
+          });
+        } catch (e) {
+          commit(SET_ENTITY_LOADED, {
+            entityName,
+            loaded: true,
+          });
+
+          commit(SET_ENTITY_LOADED_ERROR, {
+            entityName,
+            error: {
+              status: true,
+              message: e.message,
+            },
           });
         }
-        catch (e) {
-          console.log(e);
-        }
-      } else {
+      } else if (regexMtender2Id.test(id)) {
+        cdb = MTENDER2;
+
         try {
           const res = await axios(getTenderConfig(cdb, id));
+
+          if (!Object.keys(res.data).length) {
+            throw new Error(VueI18n.t("invalid-id"));
+          }
 
           const tenderData = {};
 
           const MSRecord = {};
+          const PNRecord = {};
           const EVRecord = {};
 
-          if (cdb === MTENDER2) {
+          if (Object.keys(res.data).length) {
             const tenderRecords = res.data.records;
+
             tenderRecords.forEach(record => {
               if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/) !== -1) {
                 Object.assign(MSRecord, record);
+              }
+              if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-PN-[0-9]{13}$/) !== -1) {
+                Object.assign(PNRecord, record);
               }
               if (record.ocid.search(/^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}-EV-[0-9]{13}$/) !== -1) {
                 Object.assign(EVRecord, record);
@@ -263,41 +557,116 @@ export default {
 
             Object.assign(tenderData, {
               MSRecord,
-              EVRecord
+              PNRecord,
+              EVRecord,
             });
 
-            commit(SET_CURRENT_TENDER_INFO, {
+            commit(SET_CURRENT_ENTITY_INFO, {
+              entityName,
               cdb,
-              tenderData
+              entityData: tenderData,
+            });
+
+            commit(SET_ENTITY_LOADED_ERROR, {
+              entityName,
+              error: {
+                status: false,
+                message: "",
+              },
             });
           }
+        } catch (e) {
+          commit(SET_ENTITY_LOADED_ERROR, {
+            entityName,
+            error: {
+              status: true,
+              message: e.message,
+            },
+          });
+        } finally {
+          commit(SET_ENTITY_LOADED, {
+            entityName,
+            loaded: true,
+          });
         }
-        catch (e) {
-          console.log(e);
-        }
+      } else {
+        commit(SET_ENTITY_LOADED, {
+          entityName,
+          loaded: true,
+        });
+
+        commit(SET_ENTITY_LOADED_ERROR, {
+          entityName,
+          error: {
+            status: true,
+            message: VueI18n.t("invalid-id"),
+          },
+        });
       }
     },
 
     async [FETCH_CURRENT_CONTRACT_INFO]({ commit }, { cdb, id }) {
+      const entityName = "contracts";
+
+      commit(SET_ENTITY_LOADED, {
+        entityName,
+        loaded: false,
+      });
+
+      commit(SET_ENTITY_LOADED_ERROR, {
+        entityName,
+        error: {
+          status: false,
+          message: "",
+        },
+      });
       if (cdb === MTENDER1) {
         try {
-          const elasticRes = await axios(getListConfig("contracts", `?entityId=${id}`));
+          const elasticRes = await axios(getListConfig(entityName, `?entityId=${id}`));
+          if (elasticRes.data.data.length) {
+            const requestId = elasticRes.data.data[0].id;
 
-          const requestId = elasticRes.data.data[0].id;
+            const res = await axios(getContractConfig(cdb, requestId));
 
-          const res = await axios(getContractConfig(cdb, requestId));
+            const contractData = res.data.data;
 
-          const contractData = res.data.data;
+            commit(SET_CURRENT_ENTITY_INFO, {
+              entityName,
+              cdb,
+              entityData: contractData,
+            });
 
-          commit(SET_CURRENT_CONTRACT_INFO, {
-            cdb,
-            contractData
+            commit(SET_ENTITY_LOADED_ERROR, {
+              entityName,
+              error: {
+                status: false,
+                message: "",
+              },
+            });
+          } else {
+            commit(SET_ENTITY_LOADED_ERROR, {
+              entityName,
+              error: {
+                status: true,
+                message: VueI18n.t("invalid-id"),
+              },
+            });
+          }
+        } catch (e) {
+          commit(SET_ENTITY_LOADED_ERROR, {
+            entityName,
+            error: {
+              status: true,
+              message: e.message,
+            },
+          });
+        } finally {
+          commit(SET_ENTITY_LOADED, {
+            entityName,
+            loaded: true,
           });
         }
-        catch (e) {
-          console.log(e);
-        }
       }
-    }
-  }
+    },
+  },
 };

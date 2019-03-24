@@ -6,18 +6,12 @@ import axios from "axios";
 
 Vue.use(VueI18n);
 
-const defaultLocale = "ro";
-
-if (!localStorage.getItem("locale")) {
-  localStorage.setItem("locale", defaultLocale);
-}
-
-const savedLocale = localStorage.getItem("locale");
+export const defaultLocale = "ro";
 
 export default new VueI18n({
-  locale: savedLocale,
-  messages
+  locale: defaultLocale,
+  messages,
 });
 
-axios.defaults.headers.common["Accept-Language"] = savedLocale;
-document.querySelector("html").setAttribute("lang", savedLocale);
+axios.defaults.headers.common["Accept-Language"] = defaultLocale;
+document.querySelector("html").setAttribute("lang", defaultLocale);

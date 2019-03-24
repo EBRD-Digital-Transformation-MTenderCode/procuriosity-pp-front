@@ -3,26 +3,24 @@ export default {
     titlesOrDescriptions: "",
     titlesOrDescriptionsStrict: false,
 
-    buyersRegions: [],
-    budgetStatuses: [],
-
-    id: "",
-
-    amountFrom: null,
-    amountTo: null,
-
-    classifications: [],
-
-    periodPlanning: [],
-
     buyersNames: [],
     buyersIdentifiers: [],
     buyersTypes: [],
     buyersMainGeneralActivities: [],
     buyersMainSectoralActivities: [],
+    buyersRegions: [],
+
+    id: "",
+
+    amountFrom: undefined,
+    amountTo: undefined,
+
+    classifications: [],
+
+    periodPlanning: [],
 
     page: 1,
-    pageSize: 10
+    pageSize: 10,
   },
   plans: {
     titlesOrDescriptions: "",
@@ -33,10 +31,9 @@ export default {
     buyersRegions: [],
     deliveriesRegions: [],
     proceduresTypes: [],
-    proceduresStatuses: [],
 
-    amountFrom: null,
-    amountTo: null,
+    amountFrom: undefined,
+    amountTo: undefined,
 
     classifications: [],
 
@@ -49,10 +46,12 @@ export default {
     buyersMainGeneralActivities: [],
     buyersMainSectoralActivities: [],
 
+    pins: [],
+
     tags: [],
 
     page: 1,
-    pageSize: 10
+    pageSize: 10,
   },
   tenders: {
     titlesOrDescriptions: "",
@@ -66,8 +65,8 @@ export default {
 
     entityId: "",
 
-    amountFrom: null,
-    amountTo: null,
+    amountFrom: undefined,
+    amountTo: undefined,
 
     classifications: [],
 
@@ -84,8 +83,10 @@ export default {
     buyersMainGeneralActivities: [],
     buyersMainSectoralActivities: [],
 
+    procedures: [],
+
     page: 1,
-    pageSize: 10
+    pageSize: 10,
   },
   contracts: {
     titlesOrDescriptions: "",
@@ -98,8 +99,8 @@ export default {
     proceduresTypes: [],
     proceduresStatuses: [],
 
-    amountFrom: null,
-    amountTo: null,
+    amountFrom: undefined,
+    amountTo: undefined,
 
     classifications: [],
 
@@ -118,6 +119,6 @@ export default {
 
     tags: [],
     page: 1,
-    pageSize: 10
-  }
+    pageSize: 10,
+  },
 };
