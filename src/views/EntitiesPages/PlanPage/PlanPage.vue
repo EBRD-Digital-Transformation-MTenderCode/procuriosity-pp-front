@@ -73,7 +73,7 @@
               <el-col :xs="24">
                 <el-tabs v-model="activeTab" :before-leave="checkTab">
                   <el-tab-pane :label="$t('tender.procurement_plan')" name="pn" lazy>
-                    <span slot="label" v-html="$t('tender.procurement_plan')" />
+                    <span slot="label" v-html="$t(isPIN ? 'tender.pin' : 'tender.procurement_plan')" />
                   </el-tab-pane>
                   <el-tab-pane :disabled="!hasTender" name="cn" lazy>
                     <a
@@ -113,6 +113,8 @@
 <script>
 import { mapState } from "vuex";
 import { FETCH_CURRENT_PLAN_INFO } from "../../../store/types/actions-types";
+
+import dayjs from "dayjs";
 
 import ContractNotice from "./Tabs/ContractNotice";
 
@@ -155,6 +157,14 @@ export default {
       return this.gd(this.plan, _ => _.MSRecord.compiledRelease.relatedProcesses, []).some(process =>
         this.gd(process, _ => _.relationship, []).some(it => it === "x_evaluation")
       );
+    },
+    isPIN() {
+      const { plan, gd } = this;
+
+      const startDate = dayjs(gd(plan, _ => _.PNRecord.compiledRelease.tender.tenderPeriod.startDate));
+      const modifyDate = dayjs(gd(plan, _ => _.PNRecord.compiledRelease.date));
+
+      return startDate.diff(modifyDate, "day") >= 15;
     },
   },
   methods: {

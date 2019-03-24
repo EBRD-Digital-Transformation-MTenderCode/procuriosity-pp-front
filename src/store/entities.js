@@ -241,7 +241,7 @@ export default {
             entityName,
             error: {
               status: true,
-              message: `¯\(°_°)/¯`,
+              message: `¯\\(°_°)/¯`,
             },
           });
         }

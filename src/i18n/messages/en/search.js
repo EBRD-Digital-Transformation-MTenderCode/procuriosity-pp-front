@@ -40,6 +40,6 @@ export default {
   list_refresh: "Refresh",
 
   buyers_info: "Buyer's info",
-  procedure_info: "Procurement Procedure Information",
+  procedure_info: "Procurement Procedure",
   periods: "Periods",
 };

@@ -229,7 +229,7 @@ export default {
         case "active.auction":
           return procedureStatusType.tenders.find(val => val.value === "auction").name[this.$i18n.locale];
         case "unsuccessful.empty":
-          return procedureStatusType.tenders.find(val => val.value === "unsuccessful").name[this.$i18n.locale];
+          return "-";
         case "active.awarding":
           return procedureStatusType.tenders.find(val => val.value === "awarding").name[this.$i18n.locale];
         case "active.awardedContractPreparation":
@@ -237,9 +237,9 @@ export default {
         case "active.suspended":
           return procedureStatusType.tenders.find(val => val.value === "suspended").name[this.$i18n.locale];
         case "complete.empty":
-          return procedureStatusType.tenders.find(val => val.value === "complete").name[this.$i18n.locale];
+          return "-";
         case "cancelled.empty":
-          return procedureStatusType.tenders.find(val => val.value === "cancelled").name[this.$i18n.locale];
+          return "-";
       }
     },
     getMainProcurementCategory() {

@@ -81,7 +81,7 @@
                     <a
                       :href="`${$i18n.locale !== 'ro' ? `/${$i18n.locale}` : ''}/plans/${tender.MSRecord.ocid}`"
                       slot="label"
-                      v-html="$t('tender.procurement_plan')"
+                      v-html="$t(isPIN ? 'tender.pin' : 'tender.procurement_plan')"
                     />
                   </el-tab-pane>
                   <el-tab-pane name="cn" lazy key="cn">
@@ -185,6 +185,8 @@ import axios from "axios";
 import { mapState } from "vuex";
 import { FETCH_CURRENT_TENDER_INFO } from "../../../store/types/actions-types";
 
+import dayjs from "dayjs";
+
 import ContractNotice from "./Tabs/ContractNotice";
 import Clarification from "./Tabs/Clarification";
 import Auction from "./Tabs/Auction";
@@ -273,6 +275,16 @@ export default {
           },
         })
       );
+    },
+    isPIN() {
+      const { tender, gd } = this;
+
+      if (gd(tender, _ => _.EVRecord.compiledRelease.hasPreviousNotice)) {
+        const startDate = dayjs(gd(tender, _ => _.PNRecord.compiledRelease.tender.tenderPeriod.startDate));
+        const modifyDate = dayjs(gd(tender, _ => _.PNRecord.compiledRelease.date));
+
+        return startDate.diff(modifyDate, "day") >= 15;
+      } else return false;
     },
   },
   methods: {

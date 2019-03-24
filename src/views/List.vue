@@ -193,10 +193,10 @@ export default {
           }
         case "tenders":
           if (query.procedures && query.procedures === "commercial") {
-            initialSearchProps.tenders.proceduresOwnerships = "commercial";
+            initialSearchProps.tenders.proceduresOwnerships = ["commercial"];
             return { page: 1, proceduresOwnerships: ["commercial"] };
           } else {
-            initialSearchProps.tenders.proceduresOwnerships = "government";
+            initialSearchProps.tenders.proceduresOwnerships = ["government"];
             return { page: 1, proceduresOwnerships: ["government"] };
           }
         case "contracts":

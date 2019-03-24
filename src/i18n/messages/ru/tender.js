@@ -66,6 +66,7 @@ export default {
   review_procedures_title: "Процедура разрешения споров",
   review_procedures: "Процедура разрешения&nbsp;споров",
   procurement_plan: "План <br/>закупки",
+  pin: "Объявление о<br/>намерении",
 
   contract_notice: "Объявление<br/> на участие",
   clarification_and_changes: "Разъяснения и изменения",

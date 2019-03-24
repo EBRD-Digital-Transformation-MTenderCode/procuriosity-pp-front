@@ -286,7 +286,7 @@
           </el-row>
         </div>
 
-        <div v-if="lot.status !== 'canceled' && lot.status !== 'unsuccessful'">
+        <!-- <div v-if="lot.status !== 'canceled' && lot.status !== 'unsuccessful'">
           <div class="info__sub-title">{{ $t("tender.request_for_contract_performance_guarantee") }}</div>
           <div class="info-blocks">
             <div class="info-block">
@@ -298,7 +298,7 @@
               <div class="info-block__text">{{ $t("tender.complementary_information_list2_p5") }}</div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </transition>
   </el-collapse-item>
