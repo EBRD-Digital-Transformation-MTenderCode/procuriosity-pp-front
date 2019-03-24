@@ -5,7 +5,6 @@ export default {
   titles_or_descriptions: "căutare (titlu, descriere, cod de procedură)",
   action_of_search: "Сăutați",
   moreCriterions: "Mai multe criterii",
-  lessCriterions: "Mai puține criterii",
 
   buyers_names_placeholder: "Numele cumpărătorilor",
   buyers_region_placeholder: "Regiunile cumpărătorilor",
@@ -13,7 +12,6 @@ export default {
   buyers_types_placeholder: "Tipuri de cumpărători",
   buyers_main_general_activity_placeholder: "Activitatea generală a cumpărătorilor",
   buyers_main_sectoral_activity_placeholder: "Activitatea sectorială principală a cumpărătorilor",
-  buyers_regions: "Regiuni de cumpărători",
 
   amount_from: "Sumă de la",
   amount_to: "Sumă de",

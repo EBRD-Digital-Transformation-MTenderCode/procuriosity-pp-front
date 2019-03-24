@@ -5,7 +5,6 @@ export default {
   titles_or_descriptions: "поиск (название, описание, идентификатор процедуры)",
   action_of_search: "Искать",
   moreCriterions: "Больше критериев",
-  lessCriterions: "Меньше критериев",
 
   buyers_names_placeholder: "Имена закупщиков",
   buyers_region_placeholder: "Регионы закупщиков",
@@ -13,7 +12,6 @@ export default {
   buyers_types_placeholder: "Типы закупщиков",
   buyers_main_general_activity_placeholder: "Основная деятельность закупщиков",
   buyers_main_sectoral_activity_placeholder: "Основная секторальная деятельность закупщиков",
-  buyers_regions: "Регионы закупщиков",
 
   amount_from: "Сумма от",
   amount_to: "Сумма до",

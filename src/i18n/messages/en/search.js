@@ -6,13 +6,12 @@ export default {
   action_of_search: "Go",
   moreCriterions: "Refine search",
 
-  buyers_names_placeholder: "Buyer's names",
-  buyers_region_placeholder: "Buyer's Regions",
-  buyers_identifiers_placeholder: "Buyer's identifiers",
+  buyers_names_placeholder: "Buyers' names",
+  buyers_region_placeholder: "Buyers' Regions",
+  buyers_identifiers_placeholder: "Buyers' identifiers",
   buyers_types_placeholder: "Types of Buyers",
-  buyers_main_general_activity_placeholder: "Buyer's main general activity",
-  buyers_main_sectoral_activity_placeholder: "Buyer's main sectoral activity",
-  buyers_regions: "Buyer's regions",
+  buyers_main_general_activity_placeholder: "Buyers' main general activities",
+  buyers_main_sectoral_activity_placeholder: "Buyers' main sectoral activities",
 
   amount_from: "Amount From",
   amount_to: "Amount To",

@@ -78,7 +78,11 @@
                     lazy
                     key="pn"
                   >
-                    <span slot="label" v-html="$t('tender.procurement_plan')" />
+                    <a
+                      :href="`${$i18n.locale !== 'ro' ? `/${$i18n.locale}` : ''}/plans/${tender.MSRecord.ocid}`"
+                      slot="label"
+                      v-html="$t('tender.procurement_plan')"
+                    />
                   </el-tab-pane>
                   <el-tab-pane name="cn" lazy key="cn">
                     <span slot="label" v-html="$t('tender.contract_notice')" />
@@ -291,9 +295,7 @@ export default {
     },
     checkTab(tab) {
       if (tab === "pn") {
-        this.$router.push({
-          path: `${this.$i18n.locale !== "ro" ? `/${this.$i18n.locale}` : ""}/plans/${this.tender.MSRecord.ocid}`,
-        });
+        return false;
       }
     },
     selectProcedure(category, amount) {
