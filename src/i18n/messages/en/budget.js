@@ -14,13 +14,13 @@ export default {
   number_of_notice: "Number of Notice",
   procedure_type: "Procedure type",
   procuring_entity_name: "Procuring Entity Name",
-  main_cpv: "Main CPV code",
+  main_cpv: "Expenditure CPV",
 
   period_of_need: "Period of need",
   main_procurement_category: "Main procurement category",
   from: "from",
 
-  source_of_financing: "Item source of financing",
+  source_of_financing: "Funding sources",
   execution: "Execution",
   spending: "Spending",
 

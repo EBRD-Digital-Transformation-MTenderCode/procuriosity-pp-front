@@ -10,19 +10,21 @@ export default {
   budget_owner: "Titularul Bugetului",
   payer_entity: "Entitate plătitoare",
   funding_entity: "Entitatea finanțatoare",
-  verified: "Verified",
-  not_verified: "Not verified",
+  verified: "Verificat",
+  not_verified: "Neverificat",
 
   own_money: "Own money",
   donors_money: "Donor's money",
   state_money: "State money",
 
   status: "Statut",
-  budget_ID: "Budget ID",
+  budget_ID: "Linia bugetară",
   source_of_money: "Source of Money",
 
   expenditure_item_name: "Expenditure item",
   expenditure_item_id: "Expenditure item ID",
 
   funding_source_id: "Fundings source ID",
+
+  //TODO translates!!!
 };

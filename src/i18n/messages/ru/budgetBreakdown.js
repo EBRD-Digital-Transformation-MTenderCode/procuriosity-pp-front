@@ -10,19 +10,19 @@ export default {
   budget_owner: "Владелец бюджета",
   payer_entity: "Плательщик",
   funding_entity: "Финансирующий орган",
-  verified: "Verified",
-  not_verified: "Not verified",
+  verified: "Подтвержден",
+  not_verified: "Неподтвержден",
 
   own_money: "Own money",
   donors_money: "Donor's money",
   state_money: "State money",
 
   status: "Статус",
-  budget_ID: "Budget ID",
+  budget_ID: "Код бюджетной линии",
   source_of_money: "Source of Money",
 
-  expenditure_item_name: "Expenditure item",
-  expenditure_item_id: "Expenditure item ID",
+  expenditure_item_name: "Статья расходов",
+  expenditure_item_id: "ID статьи расходов",
 
-  funding_source_id: "Fundings source ID",
+  funding_source_id: "ID источника финансирования",
 };

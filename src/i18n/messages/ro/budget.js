@@ -14,13 +14,13 @@ export default {
   region: "Raion",
   procedure_type: "Tip de procedură",
   procuring_entity_name: "Obtinerea numelui entitatii",
-  main_cpv: "Main CPV code",
+  main_cpv: "CPV",
 
-  period_of_need: "Period of need",
+  period_of_need: "Perioada de necesitate",
   main_procurement_category: "Main procurement category",
-  from: "from",
+  from: "de la",
 
-  source_of_financing: "Item source of financing",
+  source_of_financing: "Sursa de finanțare",
   execution: "Execution",
   spending: "Spending",
 
@@ -34,7 +34,7 @@ export default {
   contract_notice: "Contract Notice",
   contracting_publication_date: "Publication date",
   contracting_last_update_date: "Last update",
-  procuring_entity: "Procuring Entity",
+  procuring_entity: "Autoritate contractantă",
   registration_number: "National registration number",
   contracting_method: "Procurement method",
   contracting_cpv: "Main CPV code",
