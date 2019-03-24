@@ -30,7 +30,7 @@ export default {
   contracting_state_active: "Active",
   contracting_state_cancelled: "Cancelled",
   contracting_status: "Status",
-  prior_notice: "Prior Information Notice",
+  prior_notice: "Plan de achiziții / Profilul cumpărătorului / Anunțul de intenție",
   contract_notice: "Contract Notice",
   contracting_publication_date: "Publication date",
   contracting_last_update_date: "Last update",

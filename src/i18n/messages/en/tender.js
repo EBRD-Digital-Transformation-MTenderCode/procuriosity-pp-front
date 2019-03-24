@@ -67,6 +67,7 @@ export default {
   review_procedures: "Review procedures",
 
   procurement_plan: "Procurement<br/>Plan",
+  pin: "Prior<br/>Notice",
   contract_notice: "Contract<br/>Notice",
   clarification_and_changes: "Clarifications and changes",
   electronic_auction: "Electronic auction",
@@ -299,6 +300,6 @@ export default {
   initial_offers: "Initial offers",
 
   all_lots: "All lots",
-  successful_lots: "Successful lots",
+  successful_lots: "Awarded lots",
   unsuccessful_lots: "Unsuccessful lots",
 };

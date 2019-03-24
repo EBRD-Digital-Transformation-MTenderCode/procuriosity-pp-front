@@ -40,6 +40,6 @@ export default {
   list_refresh: "Обновить",
 
   buyers_info: "Информация о закупщике",
-  procedure_info: "Информация о процедуре закупки",
+  procedure_info: "Процедура закупки",
   periods: "Периоды",
 };

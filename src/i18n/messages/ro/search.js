@@ -40,6 +40,6 @@ export default {
   list_refresh: "Reîmprospăta",
 
   buyers_info: "Informații despre cumpărător",
-  procedure_info: "Informații privind procedura de achiziție",
+  procedure_info: "Procedura de achiziție",
   periods: "Perioadele",
 };

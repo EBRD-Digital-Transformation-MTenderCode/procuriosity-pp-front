@@ -66,6 +66,7 @@ export default {
   review_procedures_title: "Procedura de contestare",
 
   procurement_plan: "Planul&nbsp;de<br/>achiziții",
+  pin: "Anunț de<br/>intenție",
   contract_notice: "Anunț&nbsp;de<br/>participare",
   clarification_and_changes: "Clarificare&nbsp;și<br/>modificări",
   review_procedures: "Procedura&nbsp;de<br/>contestare",
