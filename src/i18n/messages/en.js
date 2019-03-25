@@ -23,4 +23,12 @@ export default {
   pages: "pages",
 
   "n/a": "n/a",
+
+  tenders: "Public Procurement Bulletin",
+  tenders_commercial: "Commercial Tenders",
+  budgets: "Budgets",
+  plans: "Procurement Plans",
+  plans_pin: "PINs",
+  contracts_signing: "Online Signing",
+  contracts: "Registered Contracts",
 };

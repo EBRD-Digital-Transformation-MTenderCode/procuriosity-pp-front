@@ -21,10 +21,16 @@
                 <div class="entity-main-info__value">
                   <div>{{ $t("plan.estimated_value_excluding_VAT") }}</div>
                   <span class="entity-main-info__amount">
-                    <span class="whole">{{ wholeAmount }} </span>
-                    <span class="fraction"> <span class="dot">.</span>{{ fractionAmount }}</span>
-                    <span class="entity-main-info__currency">
-                      {{ gd(plan, _ => _.MSRecord.compiledRelease.tender.value.currency) }}
+                    <span class="whole" :style="wholeAmount.length > 8 ? 'font-size: 30px' : ''"
+                      >{{ wholeAmount }}
+                    </span>
+                    <span class="fraction-currency_wp">
+                      <span class="fraction" :style="wholeAmount.length > 8 ? 'font-size: 16px' : ''">
+                        <span class="dot">.</span>{{ fractionAmount }}</span
+                      >
+                      <span class="entity-main-info__currency" :style="wholeAmount.length > 8 ? 'font-size: 11px' : ''">
+                        {{ gd(plan, _ => _.MSRecord.compiledRelease.tender.value.currency) }}
+                      </span>
                     </span>
                   </span>
                 </div>

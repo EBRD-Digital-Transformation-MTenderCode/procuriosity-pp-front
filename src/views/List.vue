@@ -8,6 +8,9 @@
           <i :class="['icon-left', isExpanded ? 'el-icon-close' : 'el-icon-arrow-down']" />
         </button>
       </div>
+      <h1 class="list-title">
+        {{ $t(`${entityName}${$route.query.procedures ? `_${$route.query.procedures}` : ""}  `) }}
+      </h1>
       <search-status-bar :loaded="entities[entityName].loaded" :entity="entityName" :needPagination="needPagination" />
       <transition-group @before-enter="beforeEnter" @enter="enter" @leave="leave" id="transition-group">
         <ul v-if="entities[entityName].loaded && entities[entityName].list.length" :key="'list'" class="list">
@@ -269,6 +272,12 @@ export default {
   margin-bottom: -20px;
   padding-bottom: 20px;
   background-color: #efefef;
+  &-title {
+    padding: 15px 0;
+    color: #225aa5;
+    font-size: 33px;
+    font-weight: 700;
+  }
   &-page {
     flex: 1;
     margin-bottom: -20px;

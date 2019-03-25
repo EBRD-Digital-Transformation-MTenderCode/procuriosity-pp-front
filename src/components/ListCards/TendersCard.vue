@@ -38,9 +38,9 @@
             <div class="entity-amount__text">{{ $t("tender.value") }} ({{ currency }})</div>
             <div class="entity-amount__number">
               <span class="whole" :style="wholeAmount.length > 10 ? 'font-size: 30px' : ''">
-                {{ wholeAmount }}<span v-if="fractionAmount">.</span>
+                {{ wholeAmount }}
               </span>
-              <span v-if="fractionAmount" class="fraction">{{ fractionAmount }}</span>
+              <span v-if="fractionAmount" class="fraction">.{{ fractionAmount }}</span>
             </div>
           </div>
         </el-col>

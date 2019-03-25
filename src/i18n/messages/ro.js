@@ -23,4 +23,12 @@ export default {
   pages: "de pagini",
 
   "n/a": "n/a",
+
+  tenders: "Buletinul Achizițiilor Publice",
+  tenders_commercial: "Commercial Tenders",
+  budgets: "Buget",
+  plans: "Planul achizițiilor",
+  plans_pin: "Anunț de intenție ",
+  contracts_signing: "Semnarea online",
+  contracts: "Contracte înregistrate",
 };

@@ -19,10 +19,19 @@
                   <div v-if="gd(EI, _ => _.planning.budget, {}).hasOwnProperty('amount')">
                     <div>{{ $t("budget.estimated_value_excluding_VAT") }}</div>
                     <span class="entity-main-info__amount">
-                      <span class="whole">{{ wholeAmount }} </span>
-                      <span class="fraction"> <span class="dot">.</span>{{ fractionAmount }}</span>
-                      <span class="entity-main-info__currency">
-                        {{ gd(EI, _ => _.planning.budget.amount.currency) }}
+                      <span class="whole" :style="wholeAmount.length > 8 ? 'font-size: 30px' : ''"
+                        >{{ wholeAmount }}
+                      </span>
+                      <span class="fraction-currency_wp">
+                        <span class="fraction" :style="wholeAmount.length > 8 ? 'font-size: 16px' : ''">
+                          <span class="dot">.</span>{{ fractionAmount }}</span
+                        >
+                        <span
+                          class="entity-main-info__currency"
+                          :style="wholeAmount.length > 8 ? 'font-size: 11px' : ''"
+                        >
+                          {{ gd(EI, _ => _.planning.budget.amount.currency) }}
+                        </span>
                       </span>
                     </span>
                   </div>
@@ -32,7 +41,7 @@
                 </div>
               </el-col>
               <el-col :xs="24" :sm="14">
-                <div class="entity-main-info__title">
+                <div class="entity-main-info__title entity-main-info__title_budget">
                   {{ gd(EI, _ => _.tender.title) }}
                 </div>
               </el-col>
