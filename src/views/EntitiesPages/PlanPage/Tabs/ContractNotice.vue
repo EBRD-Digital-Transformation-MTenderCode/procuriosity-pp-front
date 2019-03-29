@@ -1406,12 +1406,12 @@ export default {
           name: "achizitii.md",
         },
         {
-          href: "javascript:void(0)",
+          href: "https://ebs-integrator.com/",
           src: "/img/ebs-integrator.png",
           name: "ebs-integrator",
         },
         {
-          href: "javascript:void(0)",
+          href: "http://lonar-it.com/ru/",
           src: "/img/lonar.png",
           name: "lonar",
         },

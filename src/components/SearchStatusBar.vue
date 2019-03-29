@@ -55,7 +55,7 @@ export default {
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 9;
+    z-index: 10;
     width: 100%;
     margin: 15px 0 0;
     padding: 14px 16px;

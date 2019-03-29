@@ -16,7 +16,7 @@ export default {
   budgetBreakdown,
   refresh: "Reîmprospăta",
   back: "Înapoi",
-  "invalid-id": "ID nevalid",
+  "invalid-id": "Procedura nu a fost găsită",
 
   page: "Pagină",
   of: "din",
@@ -25,10 +25,10 @@ export default {
   "n/a": "n/a",
 
   tenders: "Buletinul Achizițiilor Publice",
-  tenders_commercial: "Commercial Tenders",
+  tenders_commercial: "Licitații comerciale",
   budgets: "Buget",
   plans: "Planul achizițiilor",
   plans_pin: "Anunț de intenție ",
   contracts_signing: "Semnarea online",
-  contracts: "Contracte înregistrate",
+  contracts: "În proces de implementare",
 };

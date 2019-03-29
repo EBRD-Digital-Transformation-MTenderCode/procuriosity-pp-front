@@ -372,6 +372,7 @@
 
     &__description {
       margin-bottom: 40px;
+      line-height: 1.7;
       font-size: 14px;
       font-weight: 300;
       color: #fff;
@@ -472,7 +473,7 @@
       }
 
       &-value {
-        font-size: 15px;
+        font-size: 14px;
         font-weight: 400;
         color: #fff;
       }
@@ -775,8 +776,9 @@
 
         &[title="ebs-integrator"],
         &[title="lonar"] {
+          filter: grayscale(100%);
           opacity: 0.3;
-          cursor: default;
+          pointer-events: none;
         }
       }
 

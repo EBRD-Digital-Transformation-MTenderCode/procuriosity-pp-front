@@ -16,7 +16,7 @@ export default {
   budgetBreakdown,
   refresh: "Обновить",
   back: "Назад",
-  "invalid-id": "Неправильный идентификатор",
+  "invalid-id": "Процедура не найднена",
 
   page: "Страница",
   of: "из",
@@ -30,5 +30,5 @@ export default {
   plans: "Годовые планы",
   plans_pin: "Объявление о намерении",
   contracts_signing: "Online подписание",
-  contracts: "Зарегистрированные договора",
+  contracts: "Исполнение договоров",
 };

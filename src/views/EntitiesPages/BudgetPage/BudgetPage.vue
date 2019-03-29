@@ -4,13 +4,13 @@
       <el-container key="loading" v-if="!loaded && !error.status">
         <div class="loading"></div>
       </el-container>
-      <div v-else-if="loaded && Object.keys(EI).length" key="info">
+      <div v-else-if="loaded && EI" key="info">
         <div class="entity-main-info entity-main-info__budget ">
           <el-container direction="vertical">
             <el-row>
               <el-col :xs="24" :sm="14">
                 <div class="entity-main-info__subtitle">
-                  {{ gd(EI, _ => _.ocid).toUpperCase() }} {{ $t("budget.from") }}
+                  <procedure-id>{{ gd(EI, _ => _.ocid).toUpperCase() }}</procedure-id> {{ $t("budget.from") }}
                   {{ fd(gd(EI, _ => _.date), "DD.MM.YYYY, HH:mm") }}
                 </div>
               </el-col>
@@ -19,23 +19,23 @@
                   <div v-if="gd(EI, _ => _.planning.budget, {}).hasOwnProperty('amount')">
                     <div>{{ $t("budget.estimated_value_excluding_VAT") }}</div>
                     <span class="entity-main-info__amount">
-                      <span class="whole" :style="wholeAmount.length > 8 ? 'font-size: 30px' : ''"
+                      <span class="whole" :style="wholeAmount.length > 8 ? 'font-size: 26px' : ''"
                         >{{ wholeAmount }}
                       </span>
                       <span class="fraction-currency_wp">
-                        <span class="fraction" :style="wholeAmount.length > 8 ? 'font-size: 16px' : ''">
+                        <span class="fraction" :style="wholeAmount.length > 8 ? 'font-size: 14px' : ''">
                           <span class="dot">.</span>{{ fractionAmount }}</span
                         >
                         <span
                           class="entity-main-info__currency"
-                          :style="wholeAmount.length > 8 ? 'font-size: 11px' : ''"
+                          :style="wholeAmount.length > 8 ? 'font-size: 10px' : ''"
                         >
                           {{ gd(EI, _ => _.planning.budget.amount.currency) }}
                         </span>
                       </span>
                     </span>
                   </div>
-                  <div v-else>
+                  <div style="height: 72px" v-else>
                     {{ $t("budget.no_finances_sources") }}
                   </div>
                 </div>
@@ -127,11 +127,7 @@
         </div>
       </div>
       <el-container class="error" key="error" v-else>
-        <div class="error-message">{{ error.message }}</div>
-        <button class="refresh-btn" @click="getBudget">
-          {{ $t("refresh") }}
-        </button>
-        <button class="back-btn" @click="$router.go(-1)">{{ $t("back") }}</button>
+        <error :message="error.message"></error>
       </el-container>
     </transition>
   </div>
@@ -145,6 +141,8 @@ import mainProcurementCategory from "./../../../store/types/main-procurement-cat
 import Execution from "./Tabs/Execution";
 import Spending from "./Tabs/Spending";
 import SourceOfFinancing from "./Tabs/SourceOfFinancing";
+import ProcedureId from "../../../components/ProcedureId";
+import Error from "./../../Error";
 
 import { getDataFromObject, formatDate } from "../../../utils";
 
@@ -154,6 +152,8 @@ export default {
     spending: Spending,
     execution: Execution,
     "source-of-financing": SourceOfFinancing,
+    "procedure-id": ProcedureId,
+    error: Error,
   },
   data() {
     return {

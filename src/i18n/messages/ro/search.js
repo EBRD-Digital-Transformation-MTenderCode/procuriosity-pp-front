@@ -17,7 +17,7 @@ export default {
   amount_to: "Valoarea estimată până la",
 
   types_procedures_placeholder: "Tipul procedurii",
-  statuses_procedures_placeholder: "Statutul proceduriiEstimated value from",
+  statuses_procedures_placeholder: "Statutul procedurii",
   deliveries_regions_placeholder: "Raionul livrării",
   published_period: "Perioada publicării",
   delivery_period: "Perioada de livrare",

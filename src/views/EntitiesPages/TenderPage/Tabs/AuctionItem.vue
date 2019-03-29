@@ -190,7 +190,7 @@
                     {{ fd(breakdown.dateMet, "DD/MM/YYYY") }}
                   </div>
                   <div class="info-block__text">
-                    {{ fd(breakdown.dateMet, "HH:MM") }}
+                    {{ fd(breakdown.dateMet, "HH:mm") }}
                   </div>
                 </el-col>
               </el-row>

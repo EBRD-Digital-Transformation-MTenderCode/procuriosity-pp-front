@@ -16,7 +16,7 @@ export default {
   budgetBreakdown,
   refresh: "Refresh",
   back: "Back",
-  "invalid-id": "Invalid ID",
+  "invalid-id": "Procedure not found",
 
   page: "Page",
   of: "of",
@@ -30,5 +30,5 @@ export default {
   plans: "Procurement Plans",
   plans_pin: "PINs",
   contracts_signing: "Online Signing",
-  contracts: "Registered Contracts",
+  contracts: "Under Implementation",
 };

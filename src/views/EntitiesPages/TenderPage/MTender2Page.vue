@@ -21,14 +21,14 @@
                 <div class="entity-main-info__value">
                   <div>{{ $t("tender.estimated_value_excluding_VAT") }}</div>
                   <span class="entity-main-info__amount">
-                    <span class="whole" :style="wholeAmount.length > 8 ? 'font-size: 30px' : ''"
+                    <span class="whole" :style="wholeAmount.length > 8 ? 'font-size: 26px' : ''"
                       >{{ wholeAmount }}
                     </span>
                     <span class="fraction-currency_wp">
-                      <span class="fraction" :style="wholeAmount.length > 8 ? 'font-size: 16px' : ''">
+                      <span class="fraction" :style="wholeAmount.length > 8 ? 'font-size: 14px' : ''">
                         <span class="dot">.</span>{{ fractionAmount }}</span
                       >
-                      <span class="entity-main-info__currency" :style="wholeAmount.length > 8 ? 'font-size: 11px' : ''">
+                      <span class="entity-main-info__currency" :style="wholeAmount.length > 8 ? 'font-size: 10px' : ''">
                         {{ gd(tender, _ => _.MSRecord.compiledRelease.tender.value.currency) }}
                       </span>
                     </span>
@@ -65,7 +65,7 @@
                   <div class="entity-main-info__additional-block">
                     <div class="entity-main-info__additional-title">{{ $t("tender.tender_id") }}</div>
                     <div class="entity-main-info__additional-value">
-                      {{ gd(tender, _ => _.MSRecord.compiledRelease.ocid) }}
+                      <procedure-id>{{ gd(tender, _ => _.MSRecord.compiledRelease.ocid) }}</procedure-id>
                     </div>
                   </div>
                 </div>
@@ -175,12 +175,8 @@
           </el-container>
         </div>
       </div>
-      <el-container class="error" key="error" v-else>
-        <div class="error-message">{{ error.message }}</div>
-        <button class="refresh-btn" @click="getTender">
-          {{ $t("refresh") }}
-        </button>
-        <button class="back-btn" @click="$router.go(-1)">{{ $t("back") }}</button>
+      <el-container key="error" v-else>
+        <error :message="error.message"></error>
       </el-container>
     </transition>
   </div>
@@ -200,6 +196,8 @@ import Offers from "./Tabs/Offers";
 import Evaluation from "./Tabs/Evaluation";
 import Contracts from "./Tabs/Contracts";
 import ProcurementRecord from "./Tabs/ProcurementRecord";
+import ProcedureId from "../../../components/ProcedureId";
+import Error from "./../../Error";
 
 import { getDataFromObject, selectProcedure, getOrganizationObject, getSourceOfMoney } from "./../../../utils";
 import { getBudgetConfig } from "../../../configs/requests-configs";
@@ -214,6 +212,8 @@ export default {
     evaluation: Evaluation,
     contracts: Contracts,
     "procurement-record": ProcurementRecord,
+    "procedure-id": ProcedureId,
+    error: Error,
   },
   data() {
     return {

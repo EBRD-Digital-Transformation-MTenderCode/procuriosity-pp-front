@@ -9,7 +9,7 @@
         </button>
       </div>
       <h1 class="list-title">
-        {{ $t(`${entityName}${$route.query.procedures ? `_${$route.query.procedures}` : ""}  `) }}
+        {{ listTitle }}
       </h1>
       <search-status-bar :loaded="entities[entityName].loaded" :entity="entityName" :needPagination="needPagination" />
       <transition-group @before-enter="beforeEnter" @enter="enter" @leave="leave" id="transition-group">
@@ -96,6 +96,7 @@ export default {
   data() {
     return {
       isExpanded: false,
+      listTitle: "",
     };
   },
   created() {
@@ -117,12 +118,14 @@ export default {
           entityName,
           params: { page: 1 },
         });
+        this.listTitle = this.$t("budgets");
         break;
       case "plans":
         this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
           entityName,
           params: { page: 1, pins: query.procedures && query.procedures === "pin" ? ["true"] : ["false"] },
         });
+        this.listTitle = query.procedures && query.procedures === "pin" ? this.$t("plans_pin") : this.$t("plans");
         break;
       case "tenders":
         this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
@@ -133,6 +136,8 @@ export default {
               query.procedures && query.procedures === "commercial" ? ["commercial"] : ["government"],
           },
         });
+        this.listTitle =
+          query.procedures && query.procedures === "commercial" ? this.$t("tenders_commercial") : this.$t("tenders");
         break;
       case "contracts":
         this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
@@ -145,6 +150,8 @@ export default {
                 : ["active", "terminated"],
           },
         });
+        this.listTitle =
+          query.procedures && query.procedures === "signing" ? this.$t("contracts_signing") : this.$t("contracts");
         break;
       default:
         this.getList();
@@ -277,6 +284,9 @@ export default {
     color: #225aa5;
     font-size: 33px;
     font-weight: 700;
+    @media (max-width: 480px) {
+      font-size: 28px;
+    }
   }
   &-page {
     flex: 1;
