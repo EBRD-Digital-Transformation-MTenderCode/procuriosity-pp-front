@@ -1270,6 +1270,7 @@ import axios from "axios";
 
 import typesOfBuyers from "../../../../../store/types/buyers-types";
 import mainGeneralActivites from "../../../../../store/types/main-general-activity-types";
+import platforms from "../../../../../store/types/platforms";
 import ListPagination from "../../../../../components/ListPagination";
 import PageNumber from "../../../../../components/PageNumber";
 import BudgetBreakdown from "../../../../../components/BudgetBreakdown";
@@ -1308,33 +1309,6 @@ export default {
   },
   data() {
     return {
-      platforms: [
-        {
-          href: "https://yptender.md/",
-          src: "/img/yptender.png",
-          name: "YPTENDER.MD",
-        },
-        {
-          href: "https://e-licitatie.md/",
-          src: "/img/e-lici.png",
-          name: "e-licitatie.md",
-        },
-        {
-          href: "https://achizitii.md/",
-          src: "/img/achizitii.md.png",
-          name: "achizitii.md",
-        },
-        {
-          href: "https://ebs-integrator.com/",
-          src: "/img/ebs-integrator.png",
-          name: "ebs-integrator",
-        },
-        {
-          href: "http://lonar-it.com/ru/",
-          src: "/img/lonar.png",
-          name: "lonar",
-        },
-      ],
       FSs: {},
       pageSize: 25,
       numberOfLastDisplayedLot: 25,
@@ -1385,7 +1359,7 @@ export default {
       ).name[this.$i18n.locale];
     },
     randomSortPlatforms() {
-      return [...this.platforms].sort(() => 0.5 - Math.random());
+      return [...platforms].sort(() => 0.5 - Math.random());
     },
     needPagination() {
       return this.elementsAmount > this.pageSize;

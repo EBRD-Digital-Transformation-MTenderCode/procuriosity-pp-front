@@ -327,6 +327,7 @@ import { mapState } from "vuex";
 import { FETCH_CURRENT_PLAN_INFO } from "../../../../store/types/actions-types";
 import mainProcurementCategory from "../../../../store/types/main-procurement-category";
 import proceduresTypes from "../../../../store/types/procedures-types";
+import platforms from "../../../../store/types/platforms";
 
 import ListPagination from "../../../../components/ListPagination";
 import PageNumber from "../../../../components/PageNumber";
@@ -344,33 +345,6 @@ export default {
   },
   data() {
     return {
-      platforms: [
-        {
-          href: "https://yptender.md/",
-          src: "/img/yptender.png",
-          name: "YPTENDER.MD",
-        },
-        {
-          href: "https://e-licitatie.md/",
-          src: "/img/e-lici.png",
-          name: "e-licitatie.md",
-        },
-        {
-          href: "https://achizitii.md/",
-          src: "/img/achizitii.md.png",
-          name: "achizitii.md",
-        },
-        {
-          href: "https://ebs-integrator.com/",
-          src: "/img/ebs-integrator.png",
-          name: "ebs-integrator",
-        },
-        {
-          href: "http://lonar-it.com/ru/",
-          src: "/img/lonar.png",
-          name: "lonar",
-        },
-      ],
       pageSize: 25,
       numberOfLastDisplayedLot: 25,
       currentPage: 1,
@@ -400,7 +374,7 @@ export default {
         : "00";
     },
     randomSortPlatforms() {
-      return [...this.platforms].sort(() => 0.5 - Math.random());
+      return [...platforms].sort(() => 0.5 - Math.random());
     },
     needPagination() {
       return this.elementsAmount > this.pageSize;
