@@ -10,7 +10,7 @@
       default-first-option
       :popper-append-to-body="false"
       :placeholder="placeholder"
-      :value="values"
+      :value="clearValues"
       @change="setValues(name, $event)"
     ></el-select>
   </div>
@@ -37,6 +37,11 @@ export default {
     },
     placeholder: {
       type: String,
+    },
+  },
+  computed: {
+    clearValues() {
+      return [...new Set(this.values.map(val => val.trim()))];
     },
   },
 };
