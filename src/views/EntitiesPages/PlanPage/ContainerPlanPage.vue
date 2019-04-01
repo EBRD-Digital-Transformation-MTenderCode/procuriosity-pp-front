@@ -5,12 +5,14 @@
 <script>
 import PlanPage from "./PlanPage";
 import PlanPageOld from "./PlanPage_old";
+import Error from "./../../Error";
 
 export default {
   name: "ContainerPlanPage",
   components: {
     "plan-page": PlanPage,
     "plan-page-old": PlanPageOld,
+    error: Error,
   },
   data() {
     return {
@@ -25,6 +27,8 @@ export default {
       this.component = "plan-page-old";
     } else if (regexMtender2Id.test(this.$route.params.id)) {
       this.component = "plan-page";
+    } else {
+      this.component = "error";
     }
   },
 };

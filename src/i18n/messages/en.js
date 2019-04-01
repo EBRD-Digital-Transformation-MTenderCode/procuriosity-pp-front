@@ -16,11 +16,19 @@ export default {
   budgetBreakdown,
   refresh: "Refresh",
   back: "Back",
-  "invalid-id": "Invalid ID",
+  "invalid-id": "Procedure not found",
 
   page: "Page",
   of: "of",
   pages: "pages",
 
   "n/a": "n/a",
+
+  tenders: "Public Procurement Bulletin",
+  tenders_commercial: "Commercial Tenders",
+  budgets: "Budgets",
+  plans: "Procurement Plans",
+  plans_pin: "PINs",
+  contracts_signing: "Online Signing",
+  contracts: "Under Implementation",
 };

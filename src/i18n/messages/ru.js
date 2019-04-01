@@ -16,11 +16,19 @@ export default {
   budgetBreakdown,
   refresh: "Обновить",
   back: "Назад",
-  "invalid-id": "Неправильный идентификатор",
+  "invalid-id": "Процедура не найднена",
 
   page: "Страница",
   of: "из",
   pages: "страниц",
 
   "n/a": "n/a",
+
+  tenders: "Бюллетень государственных закупок",
+  tenders_commercial: "Коммерческие закупки",
+  budgets: "Потребности",
+  plans: "Годовые планы",
+  plans_pin: "Объявление о намерении",
+  contracts_signing: "Online подписание",
+  contracts: "Исполнение договоров",
 };

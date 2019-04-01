@@ -1,6 +1,8 @@
 <template>
   <div class="info">
-    <div class="info__title">{{ $t("tender.procurement_record") }} № {{ gd(msRecord, _ => _.ocid).toUpperCase() }}</div>
+    <div class="info__title">
+      {{ $t("tender.procurement_record") }} № <procedure-id>{{ gd(msRecord, _ => _.ocid) }}</procedure-id>
+    </div>
     <div class="info-blocks">
       <div class="info-block">
         <div>
@@ -203,6 +205,7 @@
 <script>
 import BudgetBreakdown from "../../../../components/BudgetBreakdown";
 import mainProcurementCategory from "./../../../../store/types/main-procurement-category";
+import ProcedureId from "../../../../components/ProcedureId";
 import { getDataFromObject, formatDate, formatAmount } from "./../../../../utils";
 
 export default {
@@ -247,6 +250,7 @@ export default {
   },
   components: {
     "budget-breakdown": BudgetBreakdown,
+    "procedure-id": ProcedureId,
   },
   computed: {
     getMainProcurementCategory() {

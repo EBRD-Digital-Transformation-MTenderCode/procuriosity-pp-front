@@ -6,7 +6,7 @@
           <el-col :sm="16">
             <div class="info-block__text">{{ $t("budget.contracting_process_id") }}</div>
             <div class="info-block__value info-block__value_bold">
-              {{ gd(MS, _ => _.compiledRelease.ocid, "").toUpperCase() }}
+              <procedure-id>{{ gd(MS, _ => _.compiledRelease.ocid, "") }}</procedure-id>
             </div>
           </el-col>
           <el-col :sm="4">
@@ -188,6 +188,8 @@ import {
 import procedureStatusType from "./../../../../../store/types/procedure-status-types";
 import mainProcurementCategory from "./../../../../../store/types/main-procurement-category";
 
+import ProcedureId from "../../../../../components/ProcedureId";
+
 export default {
   name: "ExecutionItem",
   props: {
@@ -199,6 +201,9 @@ export default {
       type: String,
       required: true,
     },
+  },
+  components: {
+    "procedure-id": ProcedureId,
   },
   computed: {
     MS() {

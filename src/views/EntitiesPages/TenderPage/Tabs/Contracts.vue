@@ -4,8 +4,16 @@
       {{ $t("tender.contract_award_notices") }}
       <el-radio-group v-model="cansView" size="medium" class="info__radio-group">
         <el-radio-button label="all">{{ $t("tender.all_lots") }}</el-radio-button>
-        <el-radio-button label="successful">{{ $t("tender.successful_lots") }}</el-radio-button>
-        <el-radio-button label="unsuccessful">{{ $t("tender.unsuccessful_lots") }}</el-radio-button>
+        <el-radio-button
+          :disabled="!this.gd(evRecord, _ => _.tender.lots, []).filter(lot => lot.status === 'complete').length"
+          label="successful"
+          >{{ $t("tender.successful_lots") }}</el-radio-button
+        >
+        <el-radio-button
+          :disabled="!this.gd(evRecord, _ => _.tender.lots, []).filter(lot => lot.status === 'unsuccessful').length"
+          label="unsuccessful"
+          >{{ $t("tender.unsuccessful_lots") }}</el-radio-button
+        >
       </el-radio-group>
     </div>
     <page-number

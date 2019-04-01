@@ -21,10 +21,16 @@
                 <div class="entity-main-info__value">
                   <div>{{ $t("plan.estimated_value_excluding_VAT") }}</div>
                   <span class="entity-main-info__amount">
-                    <span class="whole">{{ wholeAmount }} </span>
-                    <span class="fraction"> <span class="dot">.</span>{{ fractionAmount }}</span>
-                    <span class="entity-main-info__currency">
-                      {{ gd(plan, _ => _.MSRecord.compiledRelease.tender.value.currency) }}
+                    <span class="whole" :style="wholeAmount.length > 8 ? 'font-size: 26px' : ''"
+                      >{{ wholeAmount }}
+                    </span>
+                    <span class="fraction-currency_wp">
+                      <span class="fraction" :style="wholeAmount.length > 8 ? 'font-size: 14px' : ''">
+                        <span class="dot">.</span>{{ fractionAmount }}</span
+                      >
+                      <span class="entity-main-info__currency" :style="wholeAmount.length > 8 ? 'font-size: 10px' : ''">
+                        {{ gd(plan, _ => _.MSRecord.compiledRelease.tender.value.currency) }}
+                      </span>
                     </span>
                   </span>
                 </div>
@@ -59,7 +65,7 @@
                   <div class="entity-main-info__additional-block">
                     <div class="entity-main-info__additional-title">{{ $t("plan.number_of_notice") }}</div>
                     <div class="entity-main-info__additional-value">
-                      {{ gd(plan, _ => _.MSRecord.compiledRelease.ocid) }}
+                      <procedure-id>{{ gd(plan, _ => _.MSRecord.compiledRelease.ocid) }}</procedure-id>
                     </div>
                   </div>
                 </div>
@@ -99,12 +105,8 @@
           </el-container>
         </div>
       </div>
-      <el-container class="error" key="error" v-else>
-        <div class="error-message">{{ error.message }}</div>
-        <button class="refresh-btn" @click="getPlan">
-          {{ $t("refresh") }}
-        </button>
-        <button class="back-btn" @click="$router.go(-1)">{{ $t("back") }}</button>
+      <el-container key="error" v-else>
+        <error :message="error.message"></error>
       </el-container>
     </transition>
   </div>
@@ -117,6 +119,8 @@ import { FETCH_CURRENT_PLAN_INFO } from "../../../store/types/actions-types";
 import dayjs from "dayjs";
 
 import ContractNotice from "./Tabs/ContractNotice";
+import ProcedureId from "../../../components/ProcedureId";
+import Error from "./../../Error";
 
 import { getDataFromObject, selectProcedure } from "../../../utils";
 
@@ -124,6 +128,8 @@ export default {
   name: "PlanPage",
   components: {
     "contract-notice": ContractNotice,
+    "procedure-id": ProcedureId,
+    error: Error,
   },
   data() {
     return {

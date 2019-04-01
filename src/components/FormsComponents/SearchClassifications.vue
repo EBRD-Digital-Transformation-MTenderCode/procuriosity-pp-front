@@ -8,14 +8,14 @@
       data-classifications
       filterable
       remote
-      reserve-keyword
+      :loading="loading"
       :placeholder="placeholder"
       :remote-method="getOptions"
       default-first-option
       :popper-append-to-body="false"
       :value="values"
       @blur="clearItems"
-      @change="setValues(name, $event)"
+      @change="handleChange($event)"
     >
       <el-option v-for="item of items" :key="item.value" :label="item.label" :value="item.value" />
     </el-select>
@@ -52,19 +52,30 @@ export default {
       type: String,
     },
   },
+  data() {
+    return {
+      loading: false,
+    };
+  },
   methods: {
-    getOptions(val) {
+    async getOptions(val) {
       if (val && val.length >= 3) {
-        this.$store.dispatch(FETCH_CPV_CODES, {
+        this.loading = true;
+        await this.$store.dispatch(FETCH_CPV_CODES, {
           lang: this.$i18n.locale,
           idOrName: val,
         });
+        this.loading = false;
       }
     },
     clearItems() {
       this.$store.commit(SET_CPV_CODES, {
         CPVCodes: [],
       });
+    },
+    handleChange(event) {
+      this.setValues(this.name, event);
+      this.clearItems();
     },
   },
 };

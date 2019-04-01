@@ -1,12 +1,18 @@
 <template>
-  <div style="text-align: center">
-    <h2>ERROR 404</h2>
-    wrong url
+  <div class="error">
+    <div class="error-message">{{ message }}</div>
+    <button class="back-btn" @click="$router.go(-1)">{{ $t("back") }}</button>
   </div>
 </template>
 
 <script>
 export default {
   name: "Error",
+  props: {
+    message: {
+      type: String,
+      default: () => "404 Page not found",
+    },
+  },
 };
 </script>

@@ -28,10 +28,8 @@
           <div class="entity-amount">
             <div class="entity-amount__text">{{ $t("plan.value") }} ({{ currency ? currency : "MDL" }})</div>
             <div class="entity-amount__number">
-              <span class="whole" :style="wholeAmount.length > 10 ? 'font-size: 30px' : ''"
-                >{{ wholeAmount }}<span v-if="fractionAmount">.</span></span
-              >
-              <span v-if="fractionAmount" class="fraction">{{ fractionAmount }}</span>
+              <span class="whole" :style="wholeAmount.length > 10 ? 'font-size: 30px' : ''">{{ wholeAmount }}</span>
+              <span v-if="fractionAmount" class="fraction">.{{ fractionAmount }}</span>
             </div>
           </div>
         </el-col>
