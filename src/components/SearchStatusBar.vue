@@ -2,16 +2,22 @@
   <div class="list__status-bar">
     <div class="list__status-bar__text">
       {{ $t("search.list_total_found") }}:
-      <span class="list__status-bar_count" v-if="loaded">{{ entities[entity].paginationInfo.totalCount }}</span>
-      <div v-else class="loading loading_status"></div>
+      <transition name="fade" mode="out-in" appear>
+        <span class="list__status-bar_count" v-if="loaded" key="content">{{
+          entities[entity].paginationInfo.totalCount
+        }}</span>
+        <div v-else class="loading loading_status" key="loading"></div>
+      </transition>
     </div>
-    <page-number
-      class="list__status-bar__page"
-      v-if="needPagination && loaded"
-      :current-page="entities[entity].searchParams.page"
-      :elements-amount="entities[entity].paginationInfo.totalCount"
-      :page-size="entities[entity].searchParams.pageSize"
-    />
+    <transition name="fade" mode="out-in" appear>
+      <page-number
+        class="list__status-bar__page"
+        v-if="needPagination && loaded"
+        :current-page="entities[entity].searchParams.page"
+        :elements-amount="entities[entity].paginationInfo.totalCount"
+        :page-size="entities[entity].searchParams.pageSize"
+      />
+    </transition>
   </div>
 </template>
 
