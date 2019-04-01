@@ -3,15 +3,15 @@
 </template>
 
 <script>
-import PlanPage from "./PlanPage";
-import PlanPageOld from "./PlanPage_old";
+import PlanPageCDB1 from "./CDB1/PlanPageCDB1";
+import PlanPageCDB2 from "./CDB2/PlanPageCDB2";
 import Error from "./../../Error";
 
 export default {
   name: "ContainerPlanPage",
   components: {
-    "plan-page": PlanPage,
-    "plan-page-old": PlanPageOld,
+    "plan-page-cdb1": PlanPageCDB1,
+    "plan-page-cdb2": PlanPageCDB2,
     error: Error,
   },
   data() {
@@ -20,13 +20,13 @@ export default {
     };
   },
   created() {
-    const regexMtender1Id = /^MD-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{6}-[0-9]$/;
+    const regexMtender1Id = /^MD-P-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{6}-[0-9]$/;
     const regexMtender2Id = /^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/;
 
     if (regexMtender1Id.test(this.$route.params.id)) {
-      this.component = "plan-page-old";
+      this.component = "plan-page-cdb1";
     } else if (regexMtender2Id.test(this.$route.params.id)) {
-      this.component = "plan-page";
+      this.component = "plan-page-cdb2";
     } else {
       this.component = "error";
     }

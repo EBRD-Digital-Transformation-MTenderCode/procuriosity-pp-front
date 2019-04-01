@@ -121,10 +121,7 @@ export function transformDocumentation(docs) {
 export function getOrganizationObject(parties, organizationRole) {
   for (let part of parties) {
     if (part.roles.find(role => role === organizationRole)) {
-      return {
-        name: part.name,
-        id: part.id,
-      };
+      return part;
     } else {
       if (organizationRole === "funder")
         return {
