@@ -26,12 +26,7 @@
                   {{ $t("plan.official_name") }}
                 </div>
                 <div class="info-block__value">
-                  {{
-                    gd(
-                      gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
-                      _ => _.name
-                    )
-                  }}
+                  {{ getOrganizationObject(gd(msRecord, _ => _.parties, []), "buyer").name }}
                 </div>
               </el-col>
               <el-col :sm="8">
@@ -39,18 +34,8 @@
                   {{ $t("plan.national_registration_number") }}
                 </div>
                 <div class="info-block__value">
-                  {{
-                    gd(
-                      gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
-                      _ => _.identifier.scheme
-                    )
-                  }}:
-                  {{
-                    gd(
-                      gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
-                      _ => _.identifier.id
-                    )
-                  }}
+                  {{ getOrganizationObject(gd(msRecord, _ => _.parties, []), "buyer").identifier.scheme }}:
+                  {{ getOrganizationObject(gd(msRecord, _ => _.parties, []), "buyer").identifier.id }}
                 </div>
               </el-col>
             </el-row>
@@ -64,17 +49,10 @@
                 </div>
                 <div class="info-block__value">
                   {{
-                    gd(
-                      gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
-                      _ => _.address.addressDetails.region.description
-                    )
+                    getOrganizationObject(gd(msRecord, _ => _.parties, []), "buyer").address.addressDetails.region
+                      .description
                   }},
-                  {{
-                    gd(
-                      gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
-                      _ => _.address.streetAddress
-                    )
-                  }}
+                  {{ getOrganizationObject(gd(msRecord, _ => _.parties, []), "buyer").address.streetAddress }}
                 </div>
               </el-col>
             </el-row>
@@ -88,10 +66,8 @@
                 </div>
                 <div class="info-block__value">
                   {{
-                    gd(
-                      gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
-                      _ => _.address.addressDetails.locality.description
-                    )
+                    getOrganizationObject(gd(msRecord, _ => _.parties, []), "buyer").address.addressDetails.locality
+                      .description
                   }}
                 </div>
               </el-col>
@@ -110,7 +86,7 @@
                 <div class="info-block__value">
                   {{
                     gd(
-                      gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
+                      getOrganizationObject(gd(msRecord, _ => _.parties, []), "buyer"),
                       _ => _.address.postalCode,
                       $t("n/a")
                     )
@@ -123,10 +99,8 @@
                 </div>
                 <div class="info-block__value">
                   {{
-                    gd(
-                      gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
-                      _ => _.address.addressDetails.country.description
-                    )
+                    getOrganizationObject(gd(msRecord, _ => _.parties, []), "buyer").address.addressDetails.country
+                      .description
                   }}
                 </div>
               </el-col>
@@ -140,12 +114,7 @@
                   {{ $t("plan.contact_persone") }}
                 </div>
                 <div class="info-block__value">
-                  {{
-                    gd(
-                      gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
-                      _ => _.contactPoint.name
-                    )
-                  }}
+                  {{ getOrganizationObject(gd(msRecord, _ => _.parties, []), "buyer").contactPoint.name }}
                 </div>
               </el-col>
               <el-col :sm="6">
@@ -153,12 +122,7 @@
                   {{ $t("plan.telephone") }}
                 </div>
                 <div class="info-block__value">
-                  {{
-                    gd(
-                      gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
-                      _ => _.contactPoint.telephone
-                    )
-                  }}
+                  {{ getOrganizationObject(gd(msRecord, _ => _.parties, []), "buyer").contactPoint.telephone }}
                 </div>
               </el-col>
               <el-col :sm="8">
@@ -168,18 +132,10 @@
                 <div class="info-block__value">
                   <a
                     :href="
-                      `mailto:${gd(
-                        gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === 'buyer')),
-                        _ => _.contactPoint.email
-                      )}`
+                      `mailto:${getOrganizationObject(gd(msRecord, _ => _.parties, []), 'buyer').contactPoint.email}`
                     "
                   >
-                    {{
-                      gd(
-                        gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
-                        _ => _.contactPoint.email
-                      )
-                    }}
+                    {{ getOrganizationObject(gd(msRecord, _ => _.parties, []), "buyer").contactPoint.email }}
                   </a>
                 </div>
               </el-col>
@@ -194,26 +150,11 @@
                 </div>
                 <div class="info-block__value">
                   <a
-                    v-if="
-                      gd(
-                        gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === 'buyer')),
-                        _ => _.contactPoint.url
-                      )
-                    "
-                    :href="
-                      gd(
-                        gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === 'buyer')),
-                        _ => _.contactPoint.url
-                      )
-                    "
+                    v-if="getOrganizationObject(gd(msRecord, _ => _.parties, []), 'buyer').contactPoint.url"
+                    :href="getOrganizationObject(gd(msRecord, _ => _.parties, []), 'buyer').contactPoint.url"
                     target="_blank"
                   >
-                    {{
-                      gd(
-                        gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
-                        _ => _.contactPoint.url
-                      )
-                    }}
+                    {{ getOrganizationObject(gd(msRecord, _ => _.parties, []), "buyer").contactPoint.url }}
                   </a>
                   <span v-else>{{ $t("n/a") }}</span>
                 </div>
@@ -292,14 +233,7 @@
                   {{ $t("plan.additional_information_obtained") }}
                 </div>
                 <div class="info-block__value">
-                  {{
-                    gd(
-                      gd(msRecord, _ => _.parties, []).find(part =>
-                        part.roles.some(role => role === "procuringEntity")
-                      ),
-                      _ => _.contactPoint.name
-                    )
-                  }}
+                  {{ getOrganizationObject(gd(msRecord, _ => _.parties, []), "procuringEntity").contactPoint.name }}
                 </div>
               </el-col>
               <el-col :sm="6">
@@ -308,12 +242,7 @@
                 </div>
                 <div class="info-block__value">
                   {{
-                    gd(
-                      gd(msRecord, _ => _.parties, []).find(part =>
-                        part.roles.some(role => role === "procuringEntity")
-                      ),
-                      _ => _.contactPoint.telephone
-                    )
+                    getOrganizationObject(gd(msRecord, _ => _.parties, []), "procuringEntity").contactPoint.telephone
                   }}
                 </div>
               </el-col>
@@ -324,22 +253,12 @@
                 <div class="info-block__value">
                   <a
                     :href="
-                      `mailto:${gd(
-                        gd(msRecord, _ => _.parties, []).find(part =>
-                          part.roles.some(role => role === 'procuringEntity')
-                        ),
-                        _ => _.contactPoint.email
-                      )}`
+                      `mailto:${
+                        getOrganizationObject(gd(msRecord, _ => _.parties, []), 'procuringEntity').contactPoint.email
+                      }`
                     "
                   >
-                    {{
-                      gd(
-                        gd(msRecord, _ => _.parties, []).find(part =>
-                          part.roles.some(role => role === "procuringEntity")
-                        ),
-                        _ => _.contactPoint.email
-                      )
-                    }}
+                    {{ getOrganizationObject(gd(msRecord, _ => _.parties, []), "procuringEntity").contactPoint.email }}
                   </a>
                 </div>
               </el-col>
@@ -1349,11 +1268,12 @@
 <script>
 import axios from "axios";
 
-import typesOfBuyers from "./../../../../store/types/buyers-types";
-import mainGeneralActivites from "./../../../../store/types/main-general-activity-types";
-import ListPagination from "./../../../../components/ListPagination";
-import PageNumber from "./../../../../components/PageNumber";
-import BudgetBreakdown from "../../../../components/BudgetBreakdown";
+import typesOfBuyers from "../../../../../store/types/buyers-types";
+import mainGeneralActivites from "../../../../../store/types/main-general-activity-types";
+import platforms from "../../../../../store/types/platforms";
+import ListPagination from "../../../../../components/ListPagination";
+import PageNumber from "../../../../../components/PageNumber";
+import BudgetBreakdown from "../../../../../components/BudgetBreakdown";
 
 import {
   getDataFromObject,
@@ -1363,8 +1283,8 @@ import {
   transformDocumentation,
   getOrganizationObject,
   getSourceOfMoney,
-} from "./../../../../utils";
-import { getBudgetConfig } from "../../../../configs/requests-configs";
+} from "../../../../../utils";
+import { getBudgetConfig } from "../../../../../configs/requests-configs";
 
 export default {
   name: "ContractNotice",
@@ -1389,33 +1309,6 @@ export default {
   },
   data() {
     return {
-      platforms: [
-        {
-          href: "https://yptender.md/",
-          src: "/img/yptender.png",
-          name: "YPTENDER.MD",
-        },
-        {
-          href: "https://e-licitatie.md/",
-          src: "/img/e-lici.png",
-          name: "e-licitatie.md",
-        },
-        {
-          href: "https://achizitii.md/",
-          src: "/img/achizitii.md.png",
-          name: "achizitii.md",
-        },
-        {
-          href: "https://ebs-integrator.com/",
-          src: "/img/ebs-integrator.png",
-          name: "ebs-integrator",
-        },
-        {
-          href: "http://lonar-it.com/ru/",
-          src: "/img/lonar.png",
-          name: "lonar",
-        },
-      ],
       FSs: {},
       pageSize: 25,
       numberOfLastDisplayedLot: 25,
@@ -1466,7 +1359,7 @@ export default {
       ).name[this.$i18n.locale];
     },
     randomSortPlatforms() {
-      return [...this.platforms].sort(() => 0.5 - Math.random());
+      return [...platforms].sort(() => 0.5 - Math.random());
     },
     needPagination() {
       return this.elementsAmount > this.pageSize;
@@ -1521,9 +1414,6 @@ export default {
     parseDocType(type) {
       return parseDocumentType(type, this.$i18n.locale);
     },
-    add(date) {
-      return addDay(date);
-    },
     fa(amount) {
       return formatAmount(amount);
     },
@@ -1568,6 +1458,9 @@ export default {
     changePage(page) {
       this.numberOfLastDisplayedLot = page * this.pageSize;
       this.currentPage = page;
+    },
+    getOrganizationObject(...args) {
+      return getOrganizationObject(...args);
     },
   },
 };

@@ -54,6 +54,14 @@ export const convertObjectToQueryParamsString = obj => {
         return Array.isArray(val) ? !!val.length : !!val;
       })
       .reduce((accVal, [key, val], i) => {
+        if (typeof val === "string") {
+          val = val.trim();
+        }
+
+        if (Array.isArray(val)) {
+          val = [...new Set(val.map(it => it.trim()))];
+        }
+
         return `${accVal}${i !== 0 ? "&" : ""}${key}=${encodeURIComponent(
           Array.isArray(val) ? JSON.stringify(val) : val
         )}`;
@@ -121,10 +129,7 @@ export function transformDocumentation(docs) {
 export function getOrganizationObject(parties, organizationRole) {
   for (let part of parties) {
     if (part.roles.find(role => role === organizationRole)) {
-      return {
-        name: part.name,
-        id: part.id,
-      };
+      return part;
     } else {
       if (organizationRole === "funder")
         return {

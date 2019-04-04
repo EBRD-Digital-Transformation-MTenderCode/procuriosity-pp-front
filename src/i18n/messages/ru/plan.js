@@ -139,4 +139,7 @@ export default {
   date_online_publication: "Дата онлайн публикации объявления",
 
   state_money: "Государственные деньги",
+  legal_name: "Legal name",
+  item_identifier: "Item identifier",
+  no_items: "No items",
 };

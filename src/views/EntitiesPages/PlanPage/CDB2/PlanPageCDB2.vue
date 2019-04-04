@@ -49,16 +49,15 @@
                   <div class="entity-main-info__additional-block">
                     <div class="entity-main-info__additional-title">{{ $t("plan.buyer_name") }}</div>
                     <div class="entity-main-info__additional-value">
-                      {{ gd(plan, _ => _.MSRecord.compiledRelease.tender.procuringEntity.name) }}
+                      {{ getOrganizationObject(gd(plan, _ => _.MSRecord.compiledRelease.parties, []), "buyer").name }}
                     </div>
                   </div>
                   <div class="entity-main-info__additional-block">
                     <div class="entity-main-info__additional-title">{{ $t("plan.region") }}</div>
                     <div class="entity-main-info__additional-value">
                       {{
-                        gd(plan, _ => _.MSRecord.compiledRelease.parties, []).find(part =>
-                          part.roles.some(role => role === "procuringEntity")
-                        ).address.addressDetails.region.description
+                        getOrganizationObject(gd(plan, _ => _.MSRecord.compiledRelease.parties, []), "buyer").address
+                          .addressDetails.region.description
                       }}
                     </div>
                   </div>
@@ -114,18 +113,18 @@
 
 <script>
 import { mapState } from "vuex";
-import { FETCH_CURRENT_PLAN_INFO } from "../../../store/types/actions-types";
+import { FETCH_CURRENT_PLAN_INFO } from "../../../../store/types/actions-types";
 
 import dayjs from "dayjs";
 
 import ContractNotice from "./Tabs/ContractNotice";
-import ProcedureId from "../../../components/ProcedureId";
-import Error from "./../../Error";
+import ProcedureId from "../../../../components/ProcedureId";
+import Error from "../../../Error";
 
-import { getDataFromObject, selectProcedure } from "../../../utils";
+import { getDataFromObject, selectProcedure, getOrganizationObject } from "../../../../utils";
 
 export default {
-  name: "PlanPage",
+  name: "PlanPageCDB2",
   components: {
     "contract-notice": ContractNotice,
     "procedure-id": ProcedureId,
@@ -191,6 +190,9 @@ export default {
       if (tab === "cn") {
         return false;
       }
+    },
+    getOrganizationObject(...args) {
+      return getOrganizationObject(...args);
     },
   },
 };

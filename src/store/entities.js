@@ -327,7 +327,7 @@ export default {
 
     async [FETCH_CURRENT_PLAN_INFO]({ commit }, { id }) {
       const entityName = "plans";
-      const regexMtender1Id = /^MD-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{6}-[0-9]$/;
+      const regexMtender1Id = /^MD-P-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{6}-[0-9]$/;
       const regexMtender2Id = /^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/;
 
       let cdb = "";
@@ -350,6 +350,9 @@ export default {
 
         try {
           const elasticRes = await axios(getListConfig(entityName, `?entityId=${id}`));
+
+          if (!elasticRes.data.data.length) throw new Error(VueI18n.t("invalid-id"));
+
           const requestId = elasticRes.data.data[0].id;
 
           const res = await axios(getPlanConfig(cdb, requestId));

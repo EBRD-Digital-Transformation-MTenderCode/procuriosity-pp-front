@@ -137,4 +137,7 @@ export default {
   date_online_publication: "Date of online publication of notice",
 
   state_money: "State Money",
+  legal_name: "Legal name",
+  item_identifier: "Item identifier",
+  no_items: "No items",
 };

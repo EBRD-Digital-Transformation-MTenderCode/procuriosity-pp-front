@@ -143,4 +143,7 @@ export default {
   date_online_publication: "Data publicării online a anunțului",
 
   state_money: "Data publicării online a notificării",
+  legal_name: "Legal name",
+  item_identifier: "Item identifier",
+  no_items: "No items",
 };
