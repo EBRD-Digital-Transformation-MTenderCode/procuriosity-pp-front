@@ -206,6 +206,7 @@ export default {
   amended_release: "Amended release",
   date_of_change: "Date of change",
   description_of_changes: "Description of the scope of change",
+  rationale_of_changes: "Rationale of the scope of change",
   no_data: "No data",
 
   state_money: "State Money",
