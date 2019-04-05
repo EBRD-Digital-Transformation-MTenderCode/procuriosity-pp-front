@@ -211,6 +211,7 @@ export default {
   amended_release: "Versiunea modificată",
   date_of_change: "Data modificării",
   description_of_changes: "Descrierea sferei de aplicare a modificărilor",
+  rationale_of_changes: "Argumentare sferei de aplicare a modificărilor",
   no_data: "Nu există date",
 
   state_money: "Bani Publici",

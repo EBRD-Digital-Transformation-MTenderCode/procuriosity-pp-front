@@ -206,6 +206,7 @@ export default {
   amended_release: "Измененная версия",
   date_of_change: "Дата изменения",
   description_of_changes: "Описание сферы изменения",
+  rationale_of_changes: "Обоснование сферы изменения",
   no_data: "Нет данных",
 
   state_money: "Государственные деньги",
