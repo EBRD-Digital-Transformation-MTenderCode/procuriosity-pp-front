@@ -16,6 +16,10 @@ export default {
   procuring_entity_name: "Procuring Entity Name",
   main_cpv: "Expenditure CPV",
 
+  type_of_buyer: "Type of buyer",
+  main_activity: "Main activity",
+  sectoral_activity: "Activity in the utilities sector",
+
   period_of_need: "Period of need",
   main_procurement_category: "Main procurement category",
   from: "from",

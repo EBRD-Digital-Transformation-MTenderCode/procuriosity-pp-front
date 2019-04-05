@@ -23,6 +23,17 @@
                   />
                 </div>
 
+                <!-- Buyers identifiers -->
+                <div class="search-form-element">
+                  <multiple-input
+                    name="buyersIdentifiers"
+                    :values="buyersIdentifiers"
+                    :setValues="setFormParams"
+                    :label="$t('search.buyers_identifiers_placeholder')"
+                    :placeholder="$t('search.buyers_identifiers_placeholder')"
+                  />
+                </div>
+
                 <!-- Buyers regions -->
                 <div class="search-form-element">
                   <search-regions
@@ -33,17 +44,6 @@
                     needFetch
                     :label="$t('search.buyers_region_placeholder')"
                     :placeholder="$t('search.buyers_region_placeholder')"
-                  />
-                </div>
-
-                <!-- Buyers identifiers -->
-                <div class="search-form-element">
-                  <multiple-input
-                    name="buyersIdentifiers"
-                    :values="buyersIdentifiers"
-                    :setValues="setFormParams"
-                    :label="$t('search.buyers_identifiers_placeholder')"
-                    :placeholder="$t('search.buyers_identifiers_placeholder')"
                   />
                 </div>
 

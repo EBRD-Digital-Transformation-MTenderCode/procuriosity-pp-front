@@ -66,12 +66,6 @@
               {{
                 gd(
                   gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
-                  _ => _.identifier.scheme
-                )
-              }}:
-              {{
-                gd(
-                  gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
                   _ => _.identifier.id
                 )
               }}

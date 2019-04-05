@@ -66,54 +66,6 @@ export default {
     },
   },
   computed: {
-    parseStatusIco() {
-      const status = getDataFromObject(this.entity, _ => _.procedureStatus);
-      switch (status) {
-        case "active.auction":
-          return "entity-status__ico_auction";
-        case "active.qualification":
-          return "entity-status__ico_qualification";
-        case "active.enquiries":
-          return "entity-status__ico_enquiries";
-        case "active.tendering":
-          return "entity-status__ico_tendering";
-        case "cancelled":
-          return "entity-status__ico_cancelled";
-        case "active":
-          return "entity-status__ico_active";
-        case "active.awarded":
-          return "entity-status__ico_awarded";
-        case "complete":
-          return "entity-status__ico_complete";
-        case "unsuccessful":
-          return "entity-status__ico_unsuccessful";
-      }
-    },
-    parseStatusText() {
-      const status = getDataFromObject(this.entity, _ => _.procedureStatus);
-      switch (status) {
-        case "active.auction":
-          return "Auction Period";
-        case "active.qualification":
-          return "Qualification Period";
-        case "active.enquiries":
-          return "Enquiries Period";
-        case "active.tendering":
-          return "Tendering Period";
-        case "cancelled":
-          return "Cancelled tender";
-        case "active":
-          return "Published";
-        case "active.awarded":
-          return "Awarded";
-        case "complete":
-          return "Complete";
-        case "unsuccessful":
-          return "Unsuccessful Tender";
-        default:
-          return status;
-      }
-    },
     modifiedDate() {
       return formatDate(getDataFromObject(this.entity, _ => _.modifiedDate));
     },

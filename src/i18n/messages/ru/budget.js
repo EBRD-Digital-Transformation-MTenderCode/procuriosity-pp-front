@@ -9,6 +9,10 @@ export default {
   procedure_cpv: "CPV код процедуры",
   id: "ID статьи расходов",
 
+  type_of_buyer: "Тип покупателя",
+  main_activity: "Основная деятельность",
+  sectoral_activity: "Основная секторальная деятельность",
+
   estimated_value_excluding_VAT: "Ожидаемая стоимость закупки без учета НДС",
   region: "Административный район",
   number_of_notice: "Номер уведомления",
@@ -29,6 +33,8 @@ export default {
   contracting_state_planning: "Planning",
   contracting_state_active: "Active",
   contracting_state_cancelled: "Cancelled",
+  contracting_state_unsuccessful: "Unsuccessful",
+  contracting_state_complete: "Complete",
   contracting_status: "Status",
   prior_notice: "План закупок / Профиль Закупщика / Объявление о намерении",
   contract_notice: "Contract Notice",

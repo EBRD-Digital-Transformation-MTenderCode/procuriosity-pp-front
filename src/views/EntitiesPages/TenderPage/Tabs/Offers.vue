@@ -126,7 +126,7 @@
           <td :data-th="$t('tender.tenderer')">
             <div class="offers-table__tenderer-name">{{ gd(bid, _ => _.tenderers[0]).name }}</div>
             <div class="offers-table__tenderer-id">
-              {{ $t("tender.idno_code") }}: {{ gd(bid, _ => _.tenderers[0]).id }}
+              {{ $t("tender.idno_code") }}: {{ gd(bid, _ => _.tenderers[0].id) }}
             </div>
           </td>
           <td :data-th="$t('tender.discloser_date')">

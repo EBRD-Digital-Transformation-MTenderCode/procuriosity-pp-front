@@ -3,6 +3,7 @@
     <label class="search-form__label">{{ label }}</label>
     <el-input-number
       :min="0"
+      :max="10000000000"
       controls-position="right"
       v-model="localValue"
       @change="handleChange(name, $event)"

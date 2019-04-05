@@ -39,12 +39,6 @@
                   {{
                     gd(
                       gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
-                      _ => _.identifier.scheme
-                    )
-                  }}:
-                  {{
-                    gd(
-                      gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
                       _ => _.identifier.id
                     )
                   }}
@@ -217,9 +211,13 @@
                 <div class="info-block__text">{{ $t("tender.type_of_buyer") }}</div>
                 <div class="info-block__value">{{ getTypeOfBuyer }}</div>
               </el-col>
-              <el-col :sm="14">
+              <el-col :sm="6">
                 <div class="info-block__text">{{ $t("tender.main_activity") }}</div>
                 <div class="info-block__value">{{ getMainGeneralActivity }}</div>
+              </el-col>
+              <el-col :sm="8">
+                <div class="info-block__text">{{ $t("tender.sectoral_activity") }}</div>
+                <div class="info-block__value">{{ getMainSectoralActivity }}</div>
               </el-col>
             </el-row>
           </div>
@@ -1313,6 +1311,7 @@
 import mainProcurementCategory from "./../../../../store/types/main-procurement-category";
 import typesOfBuyers from "./../../../../store/types/buyers-types";
 import mainGeneralActivites from "./../../../../store/types/main-general-activity-types";
+import mainSectoralActivites from "./../../../../store/types/main-sectoral-activity";
 import platforms from "../../../../store/types/platforms";
 
 import ListPagination from "./../../../../components/ListPagination";
@@ -1402,6 +1401,25 @@ export default {
           this.gd(
             this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
             _ => _.details.mainGeneralActivity
+          )
+      ).name[this.$i18n.locale];
+    },
+    getMainSectoralActivity() {
+      if (
+        !this.gd(
+          this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
+          _ => _.details.mainSectoralActivity
+        )
+      ) {
+        return this.$t("n/a");
+      }
+
+      return mainSectoralActivites.find(
+        activity =>
+          activity.value ===
+          this.gd(
+            this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
+            _ => _.details.mainSectoralActivity
           )
       ).name[this.$i18n.locale];
     },

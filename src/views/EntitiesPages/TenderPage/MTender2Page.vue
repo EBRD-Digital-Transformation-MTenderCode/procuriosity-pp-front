@@ -47,6 +47,12 @@
                     </div>
                   </div>
                   <div class="entity-main-info__additional-block">
+                    <div class="entity-main-info__additional-title">{{ $t("tender.procedure_status") }}</div>
+                    <div class="entity-main-info__additional-value">
+                      {{ mapTenderStatus }}
+                    </div>
+                  </div>
+                  <div class="entity-main-info__additional-block">
                     <div class="entity-main-info__additional-title">{{ $t("tender.buyer_name") }}</div>
                     <div class="entity-main-info__additional-value">
                       {{ gd(tender, _ => _.MSRecord.compiledRelease.tender.procuringEntity.name) }}
@@ -199,7 +205,13 @@ import ProcurementRecord from "./Tabs/ProcurementRecord";
 import ProcedureId from "../../../components/ProcedureId";
 import Error from "./../../Error";
 
-import { getDataFromObject, selectProcedure, getOrganizationObject, getSourceOfMoney } from "./../../../utils";
+import {
+  getDataFromObject,
+  selectProcedure,
+  getOrganizationObject,
+  getSourceOfMoney,
+  mapTenderStatus,
+} from "./../../../utils";
 import { getBudgetConfig } from "../../../configs/requests-configs";
 
 export default {
@@ -230,6 +242,13 @@ export default {
       loaded: state => state.entities.tenders.loaded,
       error: state => state.entities.tenders.error,
     }),
+    mapTenderStatus() {
+      const tender = this.gd(this.tender.EVRecord, _ => _.compiledRelease.tender);
+      if (!tender) {
+        return "";
+      }
+      return mapTenderStatus(tender.status, tender.statusDetails);
+    },
     wholeAmount() {
       const amountStr = this.gd(this.tender, _ => _.MSRecord.compiledRelease.tender.value.amount, 0)
         .toString()
@@ -269,7 +288,8 @@ export default {
           projectId: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].projectId, this.$t("n/a")),
           buyer: {
             name: getOrganizationObject(this.gd(this.tender, _ => _.MSRecord.compiledRelease.parties), "buyer").name,
-            id: getOrganizationObject(this.gd(this.tender, _ => _.MSRecord.compiledRelease.parties), "buyer").id,
+            id: getOrganizationObject(this.gd(this.tender, _ => _.MSRecord.compiledRelease.parties), "buyer").identifier
+              .id,
           },
           funder: {
             name: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].funder.name),
@@ -337,13 +357,15 @@ export default {
             projectId: FS.planning.projectId,
             payer: {
               name: getOrganizationObject(FS.parties, "payer").name,
-              id: getOrganizationObject(FS.parties, "payer").id,
+              id: getOrganizationObject(FS.parties, "payer").identifier.id,
             },
             funder: {
               name: getOrganizationObject(FS.parties, "funder")
                 ? getOrganizationObject(FS.parties, "funder").name
                 : null,
-              id: getOrganizationObject(FS.parties, "funder") ? getOrganizationObject(FS.parties, "funder").id : null,
+              id: getOrganizationObject(FS.parties, "funder")
+                ? getOrganizationObject(FS.parties, "funder").identifier.id
+                : null,
             },
             status: this.gd(FS, _ => _.planning.budget.verified),
             parties: this.gd(FS, _ => _.parties),

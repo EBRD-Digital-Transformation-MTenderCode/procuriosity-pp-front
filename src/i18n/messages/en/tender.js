@@ -95,6 +95,7 @@ export default {
 
   type_of_buyer: "Type of buyer",
   main_activity: "Main activity",
+  sectoral_activity: "Activity in the utilities sector",
   communication: "Communication",
   procurement_documents_links:
     "The procurement documents are available for unrestricted and full direct access, free of charge, at",
@@ -303,4 +304,6 @@ export default {
   all_lots: "All lots",
   successful_lots: "Awarded lots",
   unsuccessful_lots: "Unsuccessful lots",
+
+  procedure_status: "Procedure status",
 };

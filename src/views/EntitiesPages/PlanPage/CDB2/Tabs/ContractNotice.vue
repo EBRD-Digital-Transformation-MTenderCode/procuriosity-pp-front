@@ -34,7 +34,6 @@
                   {{ $t("plan.national_registration_number") }}
                 </div>
                 <div class="info-block__value">
-                  {{ getOrganizationObject(gd(msRecord, _ => _.parties, []), "buyer").identifier.scheme }}:
                   {{ getOrganizationObject(gd(msRecord, _ => _.parties, []), "buyer").identifier.id }}
                 </div>
               </el-col>
@@ -189,12 +188,20 @@
                   {{ getTypeOfBuyer }}
                 </div>
               </el-col>
-              <el-col :sm="14">
+              <el-col :sm="6">
                 <div class="info-block__text">
                   {{ $t("plan.main_activity") }}
                 </div>
                 <div class="info-block__value">
                   {{ getMainGeneralActivity }}
+                </div>
+              </el-col>
+              <el-col :sm="8">
+                <div class="info-block__text">
+                  {{ $t("plan.sectoral_activity") }}
+                </div>
+                <div class="info-block__value">
+                  {{ getMainSectoralActivity }}
                 </div>
               </el-col>
             </el-row>
@@ -1270,6 +1277,7 @@ import axios from "axios";
 
 import typesOfBuyers from "../../../../../store/types/buyers-types";
 import mainGeneralActivites from "../../../../../store/types/main-general-activity-types";
+import mainSectoralActivites from "../../../../../store/types/main-sectoral-activity";
 import platforms from "../../../../../store/types/platforms";
 import ListPagination from "../../../../../components/ListPagination";
 import PageNumber from "../../../../../components/PageNumber";
@@ -1358,6 +1366,25 @@ export default {
           )
       ).name[this.$i18n.locale];
     },
+    getMainSectoralActivity() {
+      if (
+        !this.gd(
+          this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
+          _ => _.details.mainSectoralActivity
+        )
+      ) {
+        return this.$t("n/a");
+      }
+
+      return mainSectoralActivites.find(
+        activity =>
+          activity.value ===
+          this.gd(
+            this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
+            _ => _.details.mainSectoralActivity
+          )
+      ).name[this.$i18n.locale];
+    },
     randomSortPlatforms() {
       return [...platforms].sort(() => 0.5 - Math.random());
     },
@@ -1391,7 +1418,7 @@ export default {
         projectId: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].projectId, this.$t("n/a")),
         buyer: {
           name: getOrganizationObject(this.gd(this.msRecord, _ => _.parties), "buyer").name,
-          id: getOrganizationObject(this.gd(this.msRecord, _ => _.parties), "buyer").id,
+          id: getOrganizationObject(this.gd(this.msRecord, _ => _.parties), "buyer").identifier.id,
         },
         funder: {
           name: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].funder.name),
@@ -1434,13 +1461,15 @@ export default {
             projectId: FS.planning.projectId,
             payer: {
               name: FS.parties.find(part => part.roles.some(role => role === "payer")).name,
-              id: FS.parties.find(part => part.roles.some(role => role === "payer")).id,
+              id: FS.parties.find(part => part.roles.some(role => role === "payer")).identifier.id,
             },
             funder: {
               name: getOrganizationObject(FS.parties, "funder")
                 ? getOrganizationObject(FS.parties, "funder").name
                 : null,
-              id: getOrganizationObject(FS.parties, "funder") ? getOrganizationObject(FS.parties, "funder").id : null,
+              id: getOrganizationObject(FS.parties, "funder")
+                ? getOrganizationObject(FS.parties, "funder").identifier.id
+                : null,
             },
             status: this.gd(FS, _ => _.planning.budget.verified),
             parties: this.gd(FS, _ => _.parties),

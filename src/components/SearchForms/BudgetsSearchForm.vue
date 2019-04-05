@@ -34,6 +34,19 @@
                   />
                 </div>
 
+                <!-- Buyers regions -->
+                <div class="search-form-element">
+                  <search-regions
+                    name="buyersRegions"
+                    :items="regionsList"
+                    :values="buyersRegions"
+                    :setValues="setFormParams"
+                    needFetch
+                    :label="$t('search.buyers_region_placeholder')"
+                    :placeholder="$t('search.buyers_region_placeholder')"
+                  />
+                </div>
+
                 <!-- Types of buyers -->
                 <div class="search-form-element">
                   <search-auto-complete-input
@@ -66,19 +79,6 @@
                     :setValues="setFormParams"
                     :label="$t('search.buyers_main_sectoral_activity_placeholder')"
                     :placeholder="$t('search.buyers_main_sectoral_activity_placeholder')"
-                  />
-                </div>
-
-                <!-- Buyers regions -->
-                <div class="search-form-element">
-                  <search-regions
-                    name="buyersRegions"
-                    :items="regionsList"
-                    :values="buyersRegions"
-                    :setValues="setFormParams"
-                    needFetch
-                    :label="$t('search.buyers_region_placeholder')"
-                    :placeholder="$t('search.buyers_region_placeholder')"
                   />
                 </div>
               </div>
