@@ -33,11 +33,12 @@ export default {
   items: "Состав закупки",
   type_of_buyer: "Тип покупателя",
   main_activity: "Основная деятельность",
+  sectoral_activity: "Основная секторальная деятельность",
   communication: "Коммуникации",
   procurement_documents_links:
     "Документы государственных закупок доступны для прямого, неограниченного, полного и бесплатного доступа на: (URL)",
   additional_information_obtained: "Дополнительная информация может быть получена от",
-  title: "Титул",
+  title: "Название",
   main_CPV: "Основной код CPV",
   type_of_contract: "Тип договора",
   estimated_total_value_excluding_VAT: "Общая стоимость без учета НДС",
@@ -142,4 +143,6 @@ export default {
   legal_name: "Legal name",
   item_identifier: "Item identifier",
   no_items: "No items",
+
+  procedure_status: "Статус процедуры",
 };

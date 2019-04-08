@@ -63,16 +63,38 @@
                   <div class="entity-main-info__additional-block">
                     <div class="entity-main-info__additional-title">{{ $t("budget.buyer_id") }}</div>
                     <div class="entity-main-info__additional-value">
-                      {{ gd(EI, _ => _.buyer.id) }}
+                      {{ gd(getOrganizationObject(gd(EI, _ => _.parties, []), "buyer"), _ => _.identifier.id) }}
                     </div>
                   </div>
                   <div class="entity-main-info__additional-block">
                     <div class="entity-main-info__additional-title">{{ $t("budget.region") }}</div>
                     <div class="entity-main-info__additional-value">
                       {{
-                        gd(EI, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")).address
-                          .addressDetails.region.description
+                        gd(
+                          getOrganizationObject(gd(EI, _ => _.parties, []), "buyer"),
+                          _ => _.address.addressDetails.region.description
+                        )
                       }}
+                    </div>
+                  </div>
+                </div>
+                <div class="entity-main-info__additional">
+                  <div class="entity-main-info__additional-block">
+                    <div class="entity-main-info__additional-title">{{ $t("budget.type_of_buyer") }}</div>
+                    <div class="entity-main-info__additional-value">
+                      {{ getTypeOfBuyer }}
+                    </div>
+                  </div>
+                  <div class="entity-main-info__additional-block">
+                    <div class="entity-main-info__additional-title">{{ $t("budget.main_activity") }}</div>
+                    <div class="entity-main-info__additional-value">
+                      {{ getMainGeneralActivity }}
+                    </div>
+                  </div>
+                  <div class="entity-main-info__additional-block">
+                    <div class="entity-main-info__additional-title">{{ $t("budget.sectoral_activity") }}</div>
+                    <div class="entity-main-info__additional-value">
+                      {{ getMainSectoralActivity }}
                     </div>
                   </div>
                 </div>
@@ -110,7 +132,10 @@
                 <el-tabs v-model="activeTab">
                   <el-tab-pane name="sourceOfFinancing" lazy key="sourceOfFinancing">
                     <span slot="label" v-html="$t('budget.source_of_financing')" />
-                    <source-of-financing :FSs="FSs" :buyer="gd(EI, _ => _.buyer)" />
+                    <source-of-financing
+                      :FSs="FSs"
+                      :buyer="getOrganizationObject(gd(EI, _ => _.parties, []), 'buyer')"
+                    />
                   </el-tab-pane>
                   <el-tab-pane name="execution" lazy key="execution" :disabled="!getExecutionsId.length">
                     <span slot="label" v-html="$t('budget.execution')" />
@@ -137,6 +162,9 @@
 import { mapState } from "vuex";
 import { FETCH_CURRENT_BUDGET_INFO } from "../../../store/types/actions-types";
 import mainProcurementCategory from "./../../../store/types/main-procurement-category";
+import typesOfBuyers from "./../../../store/types/buyers-types";
+import mainGeneralActivites from "./../../../store/types/main-general-activity-types";
+import mainSectoralActivites from "./../../../store/types/main-sectoral-activity";
 
 import Execution from "./Tabs/Execution";
 import Spending from "./Tabs/Spending";
@@ -144,7 +172,7 @@ import SourceOfFinancing from "./Tabs/SourceOfFinancing";
 import ProcedureId from "../../../components/ProcedureId";
 import Error from "./../../Error";
 
-import { getDataFromObject, formatDate } from "../../../utils";
+import { getDataFromObject, formatDate, getOrganizationObject } from "../../../utils";
 
 export default {
   name: "BudgetPage",
@@ -170,6 +198,63 @@ export default {
       loaded: state => state.entities.budgets.loaded,
       error: state => state.entities.budgets.error,
     }),
+    getTypeOfBuyer() {
+      if (
+        !this.gd(
+          this.gd(this.EI, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
+          _ => _.details.typeOfBuyer
+        )
+      ) {
+        return this.$t("n/a");
+      }
+
+      return typesOfBuyers.find(
+        type =>
+          type.value ===
+          this.gd(
+            this.gd(this.EI, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
+            _ => _.details.typeOfBuyer
+          )
+      ).name[this.$i18n.locale];
+    },
+    getMainGeneralActivity() {
+      if (
+        !this.gd(
+          this.gd(this.EI, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
+          _ => _.details.mainGeneralActivity
+        )
+      ) {
+        return this.$t("n/a");
+      }
+
+      return mainGeneralActivites.find(
+        activity =>
+          activity.value ===
+          this.gd(
+            this.gd(this.EI, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
+            _ => _.details.mainGeneralActivity
+          )
+      ).name[this.$i18n.locale];
+    },
+    getMainSectoralActivity() {
+      if (
+        !this.gd(
+          this.gd(this.EI, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
+          _ => _.details.mainSectoralActivity
+        )
+      ) {
+        return this.$t("n/a");
+      }
+
+      return mainSectoralActivites.find(
+        activity =>
+          activity.value ===
+          this.gd(
+            this.gd(this.EI, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
+            _ => _.details.mainSectoralActivity
+          )
+      ).name[this.$i18n.locale];
+    },
     wholeAmount() {
       const amountStr = this.gd(this.EI, _ => _.planning.budget.amount.amount, 0)
         .toString()
@@ -198,6 +283,9 @@ export default {
       await this.$store.dispatch(FETCH_CURRENT_BUDGET_INFO, {
         id: this.$route.params.id,
       });
+    },
+    getOrganizationObject(parties, role) {
+      return getOrganizationObject(parties, role);
     },
     gd(...args) {
       return getDataFromObject(...args);

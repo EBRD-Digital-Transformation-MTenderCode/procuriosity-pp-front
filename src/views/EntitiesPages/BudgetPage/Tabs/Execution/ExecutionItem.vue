@@ -12,7 +12,11 @@
           <el-col :sm="4">
             <div class="info-block__text">{{ $t("budget.contracting_state") }}</div>
             <div class="info-block__value info-block__value_bold">
-              {{ $t(`budget.contracting_state_${gd(MS, _ => _.compiledRelease.tender.status, "")}`) }}
+              {{
+                gd(MS, _ => _.compiledRelease.tender.status, "") === "active"
+                  ? $t(`budget.contracting_state_${gd(MS, _ => _.compiledRelease.tender.status, "")}`)
+                  : "-"
+              }}
             </div>
           </el-col>
           <el-col v-if="EV" :sm="4">
@@ -87,7 +91,12 @@
           <el-col :sm="8">
             <div class="info-block__text">{{ $t("budget.registration_number") }}</div>
             <div class="info-block__value">
-              {{ gd(getOrganizationObject(gd(MS, _ => _.compiledRelease.parties), "procuringEntity"), _ => _.id) }}
+              {{
+                gd(
+                  getOrganizationObject(gd(MS, _ => _.compiledRelease.parties), "procuringEntity"),
+                  _ => _.identifier.id
+                )
+              }}
             </div>
           </el-col>
         </el-row>
@@ -183,9 +192,9 @@ import {
   formatAmount,
   getOrganizationObject,
   selectProcedure,
+  mapTenderStatus,
 } from "./../../../../../utils";
 
-import procedureStatusType from "./../../../../../store/types/procedure-status-types";
 import mainProcurementCategory from "./../../../../../store/types/main-procurement-category";
 
 import ProcedureId from "../../../../../components/ProcedureId";
@@ -220,32 +229,10 @@ export default {
     },
     mapTenderStatus() {
       const tender = this.gd(this.EV, _ => _.compiledRelease.tender);
-
       if (!tender) {
         return "";
       }
-
-      const status = `${tender.status}.${tender.statusDetails}`;
-      switch (status) {
-        case "active.clarification":
-          return procedureStatusType.tenders.find(val => val.value === "clarification").name[this.$i18n.locale];
-        case "active.tendering":
-          return procedureStatusType.tenders.find(val => val.value === "tendering").name[this.$i18n.locale];
-        case "active.auction":
-          return procedureStatusType.tenders.find(val => val.value === "auction").name[this.$i18n.locale];
-        case "unsuccessful.empty":
-          return "-";
-        case "active.awarding":
-          return procedureStatusType.tenders.find(val => val.value === "awarding").name[this.$i18n.locale];
-        case "active.awardedContractPreparation":
-          return procedureStatusType.tenders.find(val => val.value === "awarded").name[this.$i18n.locale];
-        case "active.suspended":
-          return procedureStatusType.tenders.find(val => val.value === "suspended").name[this.$i18n.locale];
-        case "complete.empty":
-          return "-";
-        case "cancelled.empty":
-          return "-";
-      }
+      return mapTenderStatus(tender.status, tender.statusDetails);
     },
     getMainProcurementCategory() {
       return mainProcurementCategory[this.gd(this.MS, _ => _.compiledRelease.tender.mainProcurementCategory)][

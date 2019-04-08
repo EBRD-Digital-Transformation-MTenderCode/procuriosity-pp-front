@@ -31,6 +31,7 @@ export default {
   address_of_buyer_profile: "Address of the buyer profile (URL)",
   type_of_buyer: "Type of buyer",
   main_activity: "Main activity",
+  sectoral_activity: "Activity in the utilities sector",
   communication: "Communication",
   procurement_documents_links:
     "The procurement documents are available for unrestricted and full direct access, free of charge, at",
@@ -140,4 +141,6 @@ export default {
   legal_name: "Legal name",
   item_identifier: "Item identifier",
   no_items: "No items",
+
+  procedure_status: "Procedure status",
 };

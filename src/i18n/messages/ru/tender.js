@@ -66,7 +66,7 @@ export default {
   review_procedures_title: "Процедура разрешения споров",
   review_procedures: "Процедура разрешения&nbsp;споров",
   procurement_plan: "План <br/>закупки",
-  pin: "Объявление о<br/>намерении",
+  pin: "Объявление&nbsp;о<br/>намерении",
 
   contract_notice: "Объявление<br/> на участие",
   clarification_and_changes: "Разъяснения и изменения",
@@ -95,12 +95,13 @@ export default {
 
   type_of_buyer: "Тип покупателя",
   main_activity: "Основная деятельность",
+  sectoral_activity: "Основная секторальная деятельность",
   communication: "Коммуникации",
   procurement_documents_links:
     "Документы государственных закупок доступны для прямого, неограниченного, полного и бесплатного доступа на: (URL)",
   additional_information_obtained: "Дополнительная информация может быть получена от",
   must_be_submitted: "Оферты или заявки на участие должны быть поданны в электронном виде через",
-  title: "Заголовок",
+  title: "Название",
   main_CPV: "Основной код CPV",
   type_of_contract: "Тип договора",
   estimated_total_value_excluding_VAT: "Общая стоимость без учета НДС",
@@ -304,4 +305,6 @@ export default {
   all_lots: "All lots",
   successful_lots: "Successful lots",
   unsuccessful_lots: "Unsuccessful lots",
+
+  procedure_status: "Статус процедуры",
 };

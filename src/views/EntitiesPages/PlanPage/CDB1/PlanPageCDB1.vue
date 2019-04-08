@@ -88,7 +88,6 @@
                         {{ $t("plan.national_registration_number") }}
                       </div>
                       <div class="info-block__value">
-                        {{ gd(plan, _ => _.procuringEntity.identifier.scheme, "") }}:
                         {{ gd(plan, _ => _.procuringEntity.identifier.id, "") }}
                       </div>
                     </el-col>

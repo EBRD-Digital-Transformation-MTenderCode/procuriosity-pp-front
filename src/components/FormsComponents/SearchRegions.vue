@@ -13,7 +13,7 @@
       :placeholder="placeholder"
       @focus="getOptions"
       :value="values"
-      @change="setValues(name, $event)"
+      @change="handleChange(name, $event)"
     >
       <el-option v-for="option of items" :key="option.value" :label="option.name" :value="option.value" />
     </el-select>
@@ -54,6 +54,10 @@ export default {
         country: "MD",
         lang: "ro",
       });
+    },
+    handleChange(name, value) {
+      const clearValue = [...new Set(value.map(val => val.replace(/"/g, "'").trim()).filter(val => val.length))];
+      if (this.values.length || clearValue.length) this.setValues(name, clearValue);
     },
   },
 };

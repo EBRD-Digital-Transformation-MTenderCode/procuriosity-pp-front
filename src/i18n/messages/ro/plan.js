@@ -33,6 +33,7 @@ export default {
 
   type_of_buyer: "Tipul cumpărătorului",
   main_activity: "Activitate principală",
+  sectoral_activity: "Activitatea sectorială principală",
   communication: "Comunicare",
   procurement_documents_links:
     "Documentele de achiziţii publice sunt disponibile pentru acces direct, nerestricţionat, complet si gratuit la:(URL)",
@@ -146,4 +147,6 @@ export default {
   legal_name: "Legal name",
   item_identifier: "Item identifier",
   no_items: "No items",
+
+  procedure_status: "Statutul procedurii",
 };
