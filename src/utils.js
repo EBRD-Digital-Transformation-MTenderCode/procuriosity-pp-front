@@ -52,23 +52,9 @@ export const convertObjectToQueryParamsString = obj => {
   } else {
     return Object.entries(obj)
       .filter(([key, val]) => {
-        if (Array.isArray(val)) {
-          return !!val.length;
-        }
-        if (typeof val === "string") {
-          return val.replace(/"/g, "'").trim();
-        }
-        return !!val;
+        return Array.isArray(val) ? !!val.length : !!val;
       })
       .reduce((accVal, [key, val], i) => {
-        if (typeof val === "string") {
-          val = val.replace(/"/g, "'").trim();
-        }
-
-        if (Array.isArray(val)) {
-          val = [...new Set(val.map(it => it.replace(/"/g, "'").trim()))];
-        }
-
         return `${accVal}${i !== 0 ? "&" : ""}${key}=${encodeURIComponent(
           Array.isArray(val) ? JSON.stringify(val) : val
         )}`;

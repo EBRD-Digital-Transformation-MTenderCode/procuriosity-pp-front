@@ -42,7 +42,12 @@ export default {
   },
   methods: {
     handleChange(name, value) {
-      this.setValue(name, value.trim());
+      const clearValue = value.replace(/"/g, "'").trim();
+      if (this.value.length || clearValue.length) {
+        this.setValue(name, clearValue);
+      } else {
+        this.localValue = "";
+      }
     },
   },
   watch: {
