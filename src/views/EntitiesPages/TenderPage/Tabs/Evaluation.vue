@@ -115,6 +115,13 @@
                     )
                   : []
               "
+              :espdDocuments="
+                bidForCurrentAward(award.relatedBid).hasOwnProperty('documents')
+                  ? bidForCurrentAward(award.relatedBid).documents.filter(
+                      _doc => _doc.documentType === 'x_eligibilityDocuments'
+                    )
+                  : []
+              "
               :noItemsText="$t('tender.no_documents')"
             />
           </td>

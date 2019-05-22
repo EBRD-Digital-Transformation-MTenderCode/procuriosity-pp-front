@@ -173,6 +173,11 @@
                   ? bid.documents.filter(_doc => _doc.documentType !== 'x_eligibilityDocuments')
                   : []
               "
+              :espdDocuments="
+                bid.hasOwnProperty('documents')
+                  ? bid.documents.filter(_doc => _doc.documentType === 'x_eligibilityDocuments')
+                  : []
+              "
               :noItemsText="$t('tender.no_documents')"
             />
           </td>
