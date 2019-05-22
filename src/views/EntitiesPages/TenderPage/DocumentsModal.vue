@@ -26,7 +26,7 @@
                 </el-col>
                 <el-col :sm="8">
                   <div class="info-block__text info-block__text_small">
-                    {{ $t("tender.published") }}: {{ fd(gd(espdDoc, _ => _.datePublished)) }}
+                    {{ $t("tender.published") }}: {{ fd(datePublished) }}
                   </div>
                 </el-col>
               </el-row>
@@ -52,7 +52,7 @@
                 </el-col>
                 <el-col :sm="8">
                   <div class="info-block__text info-block__text_small">
-                    {{ $t("tender.published") }}: {{ fd(gd(oldEspdDoc, _ => _.datePublished)) }}
+                    {{ $t("tender.published") }}: {{ fd(datePublished) }}
                   </div>
                 </el-col>
               </el-row>
@@ -82,7 +82,7 @@
                 </el-col>
                 <el-col :sm="8">
                   <div class="info-block__text info-block__text_small">
-                    {{ $t("tender.published") }}: {{ fd(gd(doc, _ => _.datePublished)) }}
+                    {{ $t("tender.published") }}: {{ fd(datePublished) }}
                   </div>
                 </el-col>
               </el-row>
@@ -108,7 +108,7 @@
                 </el-col>
                 <el-col :sm="8">
                   <div class="info-block__text info-block__text_small">
-                    {{ $t("tender.published") }}: {{ fd(gd(oldDoc, _ => _.datePublished)) }}
+                    {{ $t("tender.published") }}: {{ fd(datePublished) }}
                   </div>
                 </el-col>
               </el-row>
@@ -133,6 +133,10 @@ export default {
     },
     espdDocuments: {
       type: Array,
+    },
+    datePublished: {
+      type: String,
+      required: true,
     },
     noItemsText: {
       type: String,

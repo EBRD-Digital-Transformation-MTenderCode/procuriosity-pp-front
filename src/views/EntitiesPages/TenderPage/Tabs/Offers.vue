@@ -154,6 +154,7 @@
                   ? bid.documents.filter(_doc => _doc.documentType === 'x_eligibilityDocuments')
                   : []
               "
+              :datePublished="bid.date"
               :noItemsText="$t('tender.no_documents_submitted')"
             />
             <div class="offers-table__docs-espd-text">{{ $t("tender.self_declaration") }}</div>
@@ -178,6 +179,7 @@
                   ? bid.documents.filter(_doc => _doc.documentType === 'x_eligibilityDocuments')
                   : []
               "
+              :datePublished="bid.date"
               :noItemsText="$t('tender.no_documents')"
             />
           </td>

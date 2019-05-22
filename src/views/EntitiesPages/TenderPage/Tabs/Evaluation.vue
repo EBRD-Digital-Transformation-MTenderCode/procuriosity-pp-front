@@ -91,6 +91,7 @@
                     )
                   : []
               "
+              :datePublished="bidForCurrentAward(award.relatedBid).date"
               :noItemsText="$t('tender.no_documents_submitted')"
             />
           </td>
@@ -122,6 +123,7 @@
                     )
                   : []
               "
+              :datePublished="bidForCurrentAward(award.relatedBid).date"
               :noItemsText="$t('tender.no_documents')"
             />
           </td>
