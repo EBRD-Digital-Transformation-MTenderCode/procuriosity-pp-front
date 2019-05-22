@@ -79,6 +79,7 @@ export default {
           startDate: this.gd(auction, _ => _.auctionPeriod.startDate),
           endDate: this.gd(auction, _ => _.auctionPeriod.endDate),
         },
+        url: this.gd(auction, _ => _.electronicAuctionModalities[0].url),
         auctionProgress: this.getAuctionProgress(this.gd(auction, _ => _.electronicAuctionProgress, [])),
         results: this.getResults(this.gd(auction, _ => _.electronicAuctionResult, [])),
       }));

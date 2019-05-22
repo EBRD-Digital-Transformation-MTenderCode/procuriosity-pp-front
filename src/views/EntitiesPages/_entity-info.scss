@@ -809,6 +809,7 @@
     &__link {
       text-decoration: underline;
       color: $mainC;
+      word-break: break-word;
 
       &:hover {
         text-decoration: none;

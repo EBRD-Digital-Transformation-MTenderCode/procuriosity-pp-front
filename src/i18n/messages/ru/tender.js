@@ -142,7 +142,7 @@ export default {
   PP_Buyer_profile_PIN: "Объявление о намерении: ",
   time_limit: "Kрайний срок приема оферт или заявок на участие",
   estimated_date: "Ориентировочная дата отправки приглашений для подачи оферты или на участия выбранным кандидатам.",
-  languages_submitted: "Языки на которых могут быть подданы оферты или заявки на участие",
+  languages_submitted: "Оферты или запрос на участие представляются на языке, указанном в документации по присуждению.",
   romanian_russian: " Румынский, Русский",
   conditions_for_opening_tenders: "Условия открытия оферт",
 
@@ -307,4 +307,6 @@ export default {
   unsuccessful_lots: "Unsuccessful lots",
 
   procedure_status: "Статус процедуры",
+
+  link_to_auction: "Link to auction",
 };

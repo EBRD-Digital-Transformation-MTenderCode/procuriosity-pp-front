@@ -71,7 +71,8 @@ export default {
   previous_publication_concerning_procedure: "Previous publication concerning this procedure",
   PP_Buyer_profile_PIN: "Procurement plan / Buyer’s profile / PIN: ",
   estimated_date: "Estimated date of dispatch of invitations to tender or to participate to selected candidates",
-  languages_submitted: "Languages in which tenders or requests to participate may be submitted",
+  languages_submitted:
+    "The tenders or requests to participate are submitted in the language specified in the tender documents.",
   romanian_russian: " Romanian, Russian",
 
   for_electronic_tendering_procedures: "For electronic tendering procedures",

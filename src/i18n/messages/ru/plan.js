@@ -74,7 +74,7 @@ export default {
   previous_publication_concerning_procedure: "Предыдущая публикация по этой процедуре",
   PP_Buyer_profile_PIN: "Объявление о намерении: ",
   estimated_date: "Ориентировочная дата отправки приглашений для подачи оферты или на участия выбранным кандидатам.",
-  languages_submitted: "Языки на которых могут быть подданы оферты или заявки на участие",
+  languages_submitted: "Оферты или запрос на участие представляются на языке, указанном в документации по присуждению.",
   romanian_russian: " Румынский, Русский",
 
   for_electronic_tendering_procedures: "Для электронных процедур торгов",

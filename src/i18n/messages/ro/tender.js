@@ -144,7 +144,8 @@ export default {
   time_limit: "Termen limită pentru primirea ofertelor sau a cererilor de participare",
   estimated_date:
     "Data estimată a expedierii invitațiilor de prezentare a ofertelor sau de participare către candidații selectați",
-  languages_submitted: "Limbile în care pot fi depuse ofertele sau cererile de participare",
+  languages_submitted:
+    "Ofertele sau cererile de participare se prezintă în limba specificată în documentaţia de atribuire.",
   romanian_russian: " Română, Rusă",
   conditions_for_opening_tenders: "Condiții de deschidere a ofertelor",
 
@@ -315,4 +316,6 @@ export default {
   unsuccessful_lots: "Unsuccessful lots",
 
   procedure_status: "Statutul procedurii",
+
+  link_to_auction: "Link to auction",
 };
