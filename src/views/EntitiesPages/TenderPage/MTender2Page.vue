@@ -83,7 +83,7 @@
           <el-container direction="vertical">
             <el-row>
               <el-col :xs="24">
-                <el-tabs v-model="activeTab" stretch :before-leave="checkTab">
+                <el-tabs v-model="activeTab" stretch :before-leave="checkTab" @tab-click="handleClick">
                   <el-tab-pane
                     :disabled="!gd(tender, _ => _.EVRecord.compiledRelease.hasPreviousNotice)"
                     name="pn"
@@ -96,7 +96,7 @@
                       v-html="$t(isPIN ? 'tender.pin' : 'tender.procurement_plan')"
                     />
                   </el-tab-pane>
-                  <el-tab-pane name="cn" lazy key="cn">
+                  <el-tab-pane :name="tabs[0]" lazy :key="tabs[0]">
                     <span slot="label" v-html="$t('tender.contract_notice')" />
                     <contract-notice
                       :msRecord="gd(tender, _ => _.MSRecord.compiledRelease)"
@@ -111,11 +111,11 @@
                       "
                     />
                   </el-tab-pane>
-                  <el-tab-pane name="clarification" lazy key="clarification">
+                  <el-tab-pane :name="tabs[1]" lazy :key="tabs[1]">
                     <span slot="label" v-html="$t('tender.clarification_and_changes')" />
                     <clarification :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
                   </el-tab-pane>
-                  <el-tab-pane disabled name="review" lazy key="review">
+                  <el-tab-pane disabled :name="tabs[2]" lazy :key="tabs[2]">
                     <span slot="label" v-html="$t('tender.review_procedures')" />
                   </el-tab-pane>
                   <el-tab-pane
@@ -123,40 +123,40 @@
                       !gd(tender, _ => _.EVRecord.compiledRelease.tender.electronicAuctions.details, []).length
                     "
                     :label="$t('tender.electronic_auction')"
-                    name="auction"
+                    :name="tabs[3]"
                     lazy
-                    key="auction"
+                    :key="tabs[3]"
                   >
                     <auction :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
                   </el-tab-pane>
                   <el-tab-pane
                     :disabled="!gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('bids')"
-                    name="offers"
+                    :name="tabs[4]"
                     lazy
-                    key="offers"
+                    :key="tabs[4]"
                   >
                     <span slot="label" v-html="$t('tender.electronic_bids')"></span>
                     <offers :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
                   </el-tab-pane>
                   <el-tab-pane
                     :disabled="!gd(tender, _ => _.EVRecord.compiledRelease.tender, {}).hasOwnProperty('awardPeriod')"
-                    name="ev"
+                    :name="tabs[5]"
                     lazy
-                    key="ev"
+                    :key="tabs[5]"
                   >
                     <span slot="label" v-html="$t('tender.evaluation_of_bids')"></span>
                     <evaluation :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
                   </el-tab-pane>
                   <el-tab-pane
                     :disabled="!gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('contracts')"
-                    name="cans"
+                    :name="tabs[6]"
                     lazy
-                    key="cans"
+                    :key="tabs[6]"
                   >
                     <span slot="label" v-html="$t('tender.contract_award')"></span>
                     <contracts :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
                   </el-tab-pane>
-                  <el-tab-pane name="pr" lazy key="pr">
+                  <el-tab-pane :name="tabs[7]" lazy :key="tabs[7]">
                     <span slot="label" v-html="$t('tender.procurement_record_title')" />
                     <procurement-record
                       :msRecord="gd(tender, _ => _.MSRecord.compiledRelease)"
@@ -229,12 +229,20 @@ export default {
   },
   data() {
     return {
-      activeTab: "cn",
+      activeTab: "contract-notice",
       FSs: {},
+      tabs: ["contract-notice", "clarification", "review", "auctions", "bids", "awards", "cans", "procurement-record"],
     };
   },
   created() {
     this.getTender();
+    const { query } = this.$route;
+    if (query.tab && this.tabs.find(tab => query.tab === tab)) {
+      this.activeTab = query.tab;
+    } else {
+      this.activeTab = this.tabs[0];
+      this.$router.replace({ query: { tab: this.tabs[0] } });
+    }
   },
   computed: {
     ...mapState({
@@ -376,6 +384,9 @@ export default {
       } catch (e) {
         console.log(e);
       }
+    },
+    handleClick(tab) {
+      this.$router.replace({ query: { tab: tab.name } });
     },
   },
 };
