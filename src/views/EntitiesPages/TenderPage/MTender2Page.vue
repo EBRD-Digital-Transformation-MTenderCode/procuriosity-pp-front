@@ -122,11 +122,11 @@
                     :disabled="
                       !gd(tender, _ => _.EVRecord.compiledRelease.tender.electronicAuctions.details, []).length
                     "
-                    :label="$t('tender.electronic_auction')"
                     :name="tabs[3]"
                     lazy
                     :key="tabs[3]"
                   >
+                    <span slot="label" v-html="$t('tender.electronic_auction')"></span>
                     <auction :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
                   </el-tab-pane>
                   <el-tab-pane
