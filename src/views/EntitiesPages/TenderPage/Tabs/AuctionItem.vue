@@ -70,6 +70,16 @@
                 </div>
               </el-col>
             </el-row>
+            <el-row :gutter="15">
+              <el-col :sm="12">
+                <div class="info-block__text">{{ $t("tender.link_to_auction") }}:</div>
+              </el-col>
+              <el-col :sm="12">
+                <div class="info-block__link">
+                  <a :href="auction.url" target="_blank">{{ auction.url }}</a>
+                </div>
+              </el-col>
+            </el-row>
           </div>
           <div v-else>
             <el-row :gutter="15">
