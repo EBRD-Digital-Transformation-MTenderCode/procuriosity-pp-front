@@ -115,8 +115,9 @@
                     <span slot="label" v-html="$t('tender.clarification_and_changes')" />
                     <clarification :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
                   </el-tab-pane>
-                  <el-tab-pane disabled :name="tabs[2]" lazy :key="tabs[2]">
+                  <el-tab-pane :name="tabs[2]" lazy :key="tabs[2]">
                     <span slot="label" v-html="$t('tender.review_procedures')" />
+                    <review :id="gd(tender, _ => _.EVRecord.compiledRelease.tender.id)" />
                   </el-tab-pane>
                   <el-tab-pane
                     :disabled="
@@ -197,6 +198,7 @@ import dayjs from "dayjs";
 
 import ContractNotice from "./Tabs/ContractNotice";
 import Clarification from "./Tabs/Clarification";
+import Review from "./Tabs/Review";
 import Auction from "./Tabs/Auction";
 import Offers from "./Tabs/Offers";
 import Evaluation from "./Tabs/Evaluation";
@@ -219,6 +221,7 @@ export default {
   components: {
     "contract-notice": ContractNotice,
     clarification: Clarification,
+    review: Review,
     auction: Auction,
     offers: Offers,
     evaluation: Evaluation,

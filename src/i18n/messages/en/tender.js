@@ -309,4 +309,9 @@ export default {
   procedure_status: "Procedure status",
 
   link_to_auction: "Link to auction",
+  review: "Review",
+  controversial: "Controversial",
+  entry_date: "Entry Date",
+  status: "Status",
+  objection_to_complaint: "Objection to the Complaint",
 };

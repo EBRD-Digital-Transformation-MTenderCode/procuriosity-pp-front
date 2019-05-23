@@ -78,3 +78,16 @@ export const getCPVCodesConfig = (language, idOrName = "") => {
     url: `${baseURL}/search/cpv?language=${language}&idOrName=${idOrName}`,
   };
 };
+
+export const getComplaintsConfig = id => {
+  return {
+    method: "get",
+    url: `${baseURL}/search/complaints?NrProcedurii=${id}`,
+  };
+};
+export const getDecisionsConfig = id => {
+  return {
+    method: "get",
+    url: `${baseURL}/search/decisions?NrProcedurii=${id}`,
+  };
+};
