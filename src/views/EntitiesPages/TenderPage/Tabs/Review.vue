@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="info">
-      <div class="info__title">{{ $t("tender.review") }}Review</div>
-      <div>
+      <div class="info__title">{{ $t("tender.review") }}</div>
+      <div v-if="complaints.length">
         <div
           class="info-blocks info-blocks__questions"
           v-for="(complaint, index) of complaints"
@@ -72,6 +72,7 @@
           </div>
         </div>
       </div>
+      <div v-else>{{ $t("tender.no_data") }}</div>
     </div>
   </div>
 </template>
