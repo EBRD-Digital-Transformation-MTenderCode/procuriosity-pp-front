@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <div class="info">
+  <transition name="fade" mode="out-in" appear>
+    <div key="loading" v-if="!loaded && !error.status">
+      <div class="loading"></div>
+    </div>
+    <div class="info" v-else-if="!error.status" key="info">
       <div class="info__title">{{ $t("tender.review") }}</div>
       <div v-if="complaints.length">
         <div
@@ -67,6 +70,25 @@
                     </div>
                   </el-col>
                 </el-row>
+                <el-row :gutter="15">
+                  <el-col :sm="24">
+                    <div class="info-block__text">{{ $t("tender.elements_of_complaint") }}</div>
+                    <div class="info-block__value">{{ gd(decision, _ => _.ElementeleContestatiei) }}</div>
+                  </el-col>
+                </el-row>
+                <el-row :gutter="15">
+                  <el-col :sm="24">
+                    <div class="info-block__text">{{ $t("tender.decision_url") }}</div>
+                    <div class="info-block__link">
+                      <a
+                        :href="`https://elo.ansc.md/DownloadDocs/DownloadFileServlet?id=${decision.id}`"
+                        target="_blank"
+                      >
+                        https://elo.ansc.md/DownloadDocs/DownloadFileServlet?id={{ decision.id }}</a
+                      >
+                    </div>
+                  </el-col>
+                </el-row>
               </div>
             </div>
           </div>
@@ -74,16 +96,23 @@
       </div>
       <div v-else>{{ $t("tender.no_data") }}</div>
     </div>
-  </div>
+    <div v-else>
+      <error :message="error.message"></error>
+    </div>
+  </transition>
 </template>
 
 <script>
 import axios from "axios";
 import { getComplaintsConfig, getDecisionsConfig } from "./../../../../configs/requests-configs";
 import { getDataFromObject, formatDate, transformSpecialSymbols } from "./../../../../utils";
+import Error from "./../../../Error";
 
 export default {
   name: "Review",
+  components: {
+    error: Error,
+  },
   props: {
     id: {
       type: String,
@@ -94,6 +123,11 @@ export default {
     return {
       complaints: [],
       decisions: [],
+      loaded: false,
+      error: {
+        status: false,
+        message: "",
+      },
     };
   },
   created() {
@@ -114,16 +148,22 @@ export default {
       try {
         const res = await axios(getComplaintsConfig(id));
         this.complaints = res.data.data;
+        this.error = { status: false, message: "" };
       } catch (e) {
-        console.log(e);
+        this.error = { status: true, message: e.message };
+      } finally {
+        this.loaded = true;
       }
     },
     async getDecisions(id) {
       try {
         const res = await axios(getDecisionsConfig(id));
         this.decisions = res.data.data;
+        this.error = { status: false, message: "" };
       } catch (e) {
-        console.log(e);
+        this.error = { status: true, message: e.message };
+      } finally {
+        this.loaded = true;
       }
     },
   },

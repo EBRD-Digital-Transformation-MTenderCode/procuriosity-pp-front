@@ -130,18 +130,18 @@
             <el-row>
               <el-col :xs="24">
                 <el-tabs v-model="activeTab" @tab-click="handleClick">
-                  <el-tab-pane :name="tabs[0]" lazy :key="tabs[0]">
+                  <el-tab-pane name="source-of-financing" lazy>
                     <span slot="label" v-html="$t('budget.source_of_financing')" />
                     <source-of-financing
                       :FSs="FSs"
                       :buyer="getOrganizationObject(gd(EI, _ => _.parties, []), 'buyer')"
                     />
                   </el-tab-pane>
-                  <el-tab-pane :name="tabs[1]" lazy :key="tabs[1]" :disabled="!getExecutionsId.length">
+                  <el-tab-pane name="execution" lazy :disabled="!tabs.includes('execution')">
                     <span slot="label" v-html="$t('budget.execution')" />
                     <execution :getExecutionsId="getExecutionsId" />
                   </el-tab-pane>
-                  <el-tab-pane :name="tabs[2]" lazy :key="tabs[2]" disabled>
+                  <el-tab-pane name="spending" lazy disabled>
                     <span slot="label" v-html="$t('budget.spending')" />
                     <spending />
                   </el-tab-pane>
@@ -189,8 +189,15 @@ export default {
       tabs: ["source-of-financing", "execution", "spending"],
     };
   },
-  created() {
-    this.getBudget();
+  async created() {
+    await this.getBudget();
+    this.tabs = this.tabs.filter(tab => {
+      if (tab === "execution") {
+        return !!this.getExecutionsId.length;
+      }
+      return true;
+    });
+
     const { query } = this.$route;
     if (query.tab && this.tabs.find(tab => query.tab === tab)) {
       this.activeTab = query.tab;

@@ -323,4 +323,6 @@ export default {
   entry_date: "Entry Date",
   status: "Status",
   objection_to_complaint: "Objection to the Complaint",
+  elements_of_complaint: "Elements of Complaint",
+  decision_url: "URL",
 };
