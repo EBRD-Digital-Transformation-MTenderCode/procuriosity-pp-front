@@ -367,12 +367,8 @@ export default {
               id: getOrganizationObject(FS.parties, "payer").identifier.id,
             },
             funder: {
-              name: getOrganizationObject(FS.parties, "funder")
-                ? getOrganizationObject(FS.parties, "funder").name
-                : null,
-              id: getOrganizationObject(FS.parties, "funder")
-                ? getOrganizationObject(FS.parties, "funder").identifier.id
-                : null,
+              name: this.gd(getOrganizationObject(FS.parties, "funder"), _ => _.name),
+              id: this.gd(getOrganizationObject(FS.parties, "funder"), _ => _.identifier.id),
             },
             status: this.gd(FS, _ => _.planning.budget.verified),
             parties: this.gd(FS, _ => _.parties),

@@ -281,7 +281,12 @@
                     class="platform-link"
                     v-for="platform of randomSortPlatforms"
                     :key="platform.name"
-                    :href="platform.href"
+                    :href="
+                      `${platform.href}${$i18n.locale !== 'ro' ? `${$i18n.locale}/` : ''}plans/${gd(
+                        msRecord,
+                        _ => _.ocid
+                      )}`
+                    "
                     :title="platform.name"
                     target="_blank"
                   >
@@ -1457,19 +1462,15 @@ export default {
         const FS = responseBudget.data.records.find(record => record.ocid === FSocid).compiledRelease;
         this.FSs = Object.assign({}, this.FSs, {
           [FS.ocid]: {
-            project: FS.planning.project,
-            projectId: FS.planning.projectId,
+            project: this.gd(FS, _ => _.planning.project),
+            projectId: this.gd(FS, _ => _.planning.projectId),
             payer: {
               name: FS.parties.find(part => part.roles.some(role => role === "payer")).name,
               id: FS.parties.find(part => part.roles.some(role => role === "payer")).identifier.id,
             },
             funder: {
-              name: getOrganizationObject(FS.parties, "funder")
-                ? getOrganizationObject(FS.parties, "funder").name
-                : null,
-              id: getOrganizationObject(FS.parties, "funder")
-                ? getOrganizationObject(FS.parties, "funder").identifier.id
-                : null,
+              name: this.gd(getOrganizationObject(FS.parties, "funder"), _ => _.name),
+              id: this.gd(getOrganizationObject(FS.parties, "funder"), _ => _.identifier.id),
             },
             status: this.gd(FS, _ => _.planning.budget.verified),
             parties: this.gd(FS, _ => _.parties),

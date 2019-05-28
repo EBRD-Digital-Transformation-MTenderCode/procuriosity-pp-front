@@ -307,7 +307,12 @@
                     class="platform-link"
                     v-for="platform of randomSortPlatforms"
                     :key="platform.name"
-                    :href="platform.href"
+                    :href="
+                      `${platform.href}${$i18n.locale !== 'ro' ? `${$i18n.locale}/` : ''}tenders/${gd(
+                        msRecord,
+                        _ => _.ocid
+                      )}`
+                    "
                     :title="platform.name"
                     target="_blank"
                   >
