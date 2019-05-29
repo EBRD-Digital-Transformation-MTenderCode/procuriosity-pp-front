@@ -158,7 +158,10 @@
       <div v-else style="margin-top: 15px">
         {{ $t("tender.lot_is_not_awarded") }}
       </div>
-      <hr v-if="index !== gd(evRecord, _ => _.tender.lots, []).length - 1" style="margin-bottom: 25px;" />
+      <hr
+        v-if="!((index !== 0 && index % 24 === 0) || index === gd(evRecord, _ => _.tender.lots, []).length - 1)"
+        style="margin-bottom: 25px;"
+      />
     </div>
     <list-pagination
       v-if="needPagination"

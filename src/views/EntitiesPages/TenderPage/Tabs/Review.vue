@@ -94,7 +94,7 @@
           </div>
         </div>
       </div>
-      <div v-else>{{ $t("tender.no_data") }}</div>
+      <div style="margin-bottom: 30px;" v-else>{{ $t("tender.no_data") }}</div>
     </div>
     <div v-else>
       <error :message="error.message"></error>
