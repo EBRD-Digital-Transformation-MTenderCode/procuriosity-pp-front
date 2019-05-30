@@ -325,4 +325,6 @@ export default {
   objection_to_complaint: "Objection to the Complaint",
   elements_of_complaint: "Elements of Complaint",
   decision_url: "URL",
+  auction_not_started: "Auction is not started",
+  go_to_auction: "Go to auction",
 };
