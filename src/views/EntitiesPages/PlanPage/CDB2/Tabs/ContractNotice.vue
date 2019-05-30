@@ -1412,7 +1412,7 @@ export default {
           getOrganizationObject(this.gd(this.msRecord, _ => _.parties), "buyer").id
         ),
         description: this.gd(budgetBreakdown, _ => _.description, this.$t("n/a")),
-        budgetLineId: this.gd(this.msRecord, _ => _.planning.budget.id, this.$t("n/a")),
+        budgetLineId: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].budgetLineId, this.$t("n/a")),
         EIocid: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].EIocid),
         EIname: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].EIname),
         period: {
@@ -1464,6 +1464,7 @@ export default {
           [FS.ocid]: {
             project: this.gd(FS, _ => _.planning.project),
             projectId: this.gd(FS, _ => _.planning.projectId),
+            budgetLineId: this.gd(FS, _ => _.planning.budget.id),
             payer: {
               name: FS.parties.find(part => part.roles.some(role => role === "payer")).name,
               id: FS.parties.find(part => part.roles.some(role => role === "payer")).identifier.id,
