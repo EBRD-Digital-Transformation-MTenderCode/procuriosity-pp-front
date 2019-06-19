@@ -154,6 +154,7 @@
                   ? bid.documents.filter(_doc => _doc.documentType === 'x_eligibilityDocuments')
                   : []
               "
+              :datePublished="bid.date"
               :noItemsText="$t('tender.no_documents_submitted')"
             />
             <div class="offers-table__docs-espd-text">{{ $t("tender.self_declaration") }}</div>
@@ -173,6 +174,12 @@
                   ? bid.documents.filter(_doc => _doc.documentType !== 'x_eligibilityDocuments')
                   : []
               "
+              :espdDocuments="
+                bid.hasOwnProperty('documents')
+                  ? bid.documents.filter(_doc => _doc.documentType === 'x_eligibilityDocuments')
+                  : []
+              "
+              :datePublished="bid.date"
               :noItemsText="$t('tender.no_documents')"
             />
           </td>
@@ -182,7 +189,10 @@
       <div v-else style="margin-top: 15px">
         {{ $t("tender.no_bids_received") }}
       </div>
-      <hr v-if="index !== gd(evRecord, _ => _.tender.lots, []).length - 1" style="margin-bottom: 25px;" />
+      <hr
+        v-if="!((index !== 0 && index % 24 === 0) || index === gd(evRecord, _ => _.tender.lots, []).length - 1)"
+        style="margin-bottom: 25px;"
+      />
     </div>
     <list-pagination
       v-if="needPagination"

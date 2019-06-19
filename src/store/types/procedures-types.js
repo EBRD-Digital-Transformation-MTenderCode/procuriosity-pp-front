@@ -86,6 +86,14 @@ export default {
   contracts: [
     {
       name: {
+        en: "Negotiation with one or Negotiation with several",
+        ro: "Procedura negocieri fără publicare",
+        ru: "Переговоры без публикации",
+      },
+      value: "reporting",
+    },
+    {
+      name: {
         en: "Low value procedure",
         ro: "Achiziții de valoare mică",
         ru: "Закупка малой стоимости",

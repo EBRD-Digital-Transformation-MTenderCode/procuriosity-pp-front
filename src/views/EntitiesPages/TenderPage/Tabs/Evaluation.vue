@@ -91,6 +91,7 @@
                     )
                   : []
               "
+              :datePublished="bidForCurrentAward(award.relatedBid).date"
               :noItemsText="$t('tender.no_documents_submitted')"
             />
           </td>
@@ -115,6 +116,14 @@
                     )
                   : []
               "
+              :espdDocuments="
+                bidForCurrentAward(award.relatedBid).hasOwnProperty('documents')
+                  ? bidForCurrentAward(award.relatedBid).documents.filter(
+                      _doc => _doc.documentType === 'x_eligibilityDocuments'
+                    )
+                  : []
+              "
+              :datePublished="bidForCurrentAward(award.relatedBid).date"
               :noItemsText="$t('tender.no_documents')"
             />
           </td>
@@ -149,7 +158,10 @@
       <div v-else style="margin-top: 15px">
         {{ $t("tender.lot_is_not_awarded") }}
       </div>
-      <hr v-if="index !== gd(evRecord, _ => _.tender.lots, []).length - 1" style="margin-bottom: 25px;" />
+      <hr
+        v-if="!((index !== 0 && index % 24 === 0) || index === gd(evRecord, _ => _.tender.lots, []).length - 1)"
+        style="margin-bottom: 25px;"
+      />
     </div>
     <list-pagination
       v-if="needPagination"

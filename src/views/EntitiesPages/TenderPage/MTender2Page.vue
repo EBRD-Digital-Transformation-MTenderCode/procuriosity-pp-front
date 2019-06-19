@@ -83,7 +83,7 @@
           <el-container direction="vertical">
             <el-row>
               <el-col :xs="24">
-                <el-tabs v-model="activeTab" stretch :before-leave="checkTab">
+                <el-tabs v-model="activeTab" stretch :before-leave="checkTab" @tab-click="handleClick">
                   <el-tab-pane
                     :disabled="!gd(tender, _ => _.EVRecord.compiledRelease.hasPreviousNotice)"
                     name="pn"
@@ -96,7 +96,7 @@
                       v-html="$t(isPIN ? 'tender.pin' : 'tender.procurement_plan')"
                     />
                   </el-tab-pane>
-                  <el-tab-pane name="cn" lazy key="cn">
+                  <el-tab-pane name="contract-notice" lazy>
                     <span slot="label" v-html="$t('tender.contract_notice')" />
                     <contract-notice
                       :msRecord="gd(tender, _ => _.MSRecord.compiledRelease)"
@@ -111,52 +111,31 @@
                       "
                     />
                   </el-tab-pane>
-                  <el-tab-pane name="clarification" lazy key="clarification">
+                  <el-tab-pane name="clarification" lazy>
                     <span slot="label" v-html="$t('tender.clarification_and_changes')" />
                     <clarification :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
                   </el-tab-pane>
-                  <el-tab-pane disabled name="review" lazy key="review">
+                  <el-tab-pane name="review" lazy>
                     <span slot="label" v-html="$t('tender.review_procedures')" />
+                    <review :id="gd(tender, _ => _.EVRecord.compiledRelease.tender.id)" />
                   </el-tab-pane>
-                  <el-tab-pane
-                    :disabled="
-                      !gd(tender, _ => _.EVRecord.compiledRelease.tender.electronicAuctions.details, []).length
-                    "
-                    :label="$t('tender.electronic_auction')"
-                    name="auction"
-                    lazy
-                    key="auction"
-                  >
+                  <el-tab-pane :disabled="!tabs.includes('auctions')" name="auctions" lazy>
+                    <span slot="label" v-html="$t('tender.electronic_auction')"></span>
                     <auction :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
                   </el-tab-pane>
-                  <el-tab-pane
-                    :disabled="!gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('bids')"
-                    name="offers"
-                    lazy
-                    key="offers"
-                  >
+                  <el-tab-pane :disabled="!tabs.includes('bids')" name="bids" lazy>
                     <span slot="label" v-html="$t('tender.electronic_bids')"></span>
                     <offers :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
                   </el-tab-pane>
-                  <el-tab-pane
-                    :disabled="!gd(tender, _ => _.EVRecord.compiledRelease.tender, {}).hasOwnProperty('awardPeriod')"
-                    name="ev"
-                    lazy
-                    key="ev"
-                  >
+                  <el-tab-pane :disabled="!tabs.includes('awards')" name="awards" lazy>
                     <span slot="label" v-html="$t('tender.evaluation_of_bids')"></span>
                     <evaluation :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
                   </el-tab-pane>
-                  <el-tab-pane
-                    :disabled="!gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('contracts')"
-                    name="cans"
-                    lazy
-                    key="cans"
-                  >
+                  <el-tab-pane :disabled="!tabs.includes('cans')" name="cans" lazy>
                     <span slot="label" v-html="$t('tender.contract_award')"></span>
                     <contracts :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
                   </el-tab-pane>
-                  <el-tab-pane name="pr" lazy key="pr">
+                  <el-tab-pane name="procurement-record" lazy>
                     <span slot="label" v-html="$t('tender.procurement_record_title')" />
                     <procurement-record
                       :msRecord="gd(tender, _ => _.MSRecord.compiledRelease)"
@@ -197,6 +176,7 @@ import dayjs from "dayjs";
 
 import ContractNotice from "./Tabs/ContractNotice";
 import Clarification from "./Tabs/Clarification";
+import Review from "./Tabs/Review";
 import Auction from "./Tabs/Auction";
 import Offers from "./Tabs/Offers";
 import Evaluation from "./Tabs/Evaluation";
@@ -219,6 +199,7 @@ export default {
   components: {
     "contract-notice": ContractNotice,
     clarification: Clarification,
+    review: Review,
     auction: Auction,
     offers: Offers,
     evaluation: Evaluation,
@@ -229,12 +210,38 @@ export default {
   },
   data() {
     return {
-      activeTab: "cn",
+      activeTab: "contract-notice",
       FSs: {},
+      tabs: ["contract-notice", "clarification", "review", "auctions", "bids", "awards", "cans", "procurement-record"],
     };
   },
-  created() {
-    this.getTender();
+  async created() {
+    await this.getTender();
+
+    this.tabs = this.tabs.filter(tab => {
+      if (tab === "auctions") {
+        return !!this.gd(this.tender, _ => _.EVRecord.compiledRelease.tender.electronicAuctions.details, []).length;
+      }
+      if (tab === "bids") {
+        return !!this.gd(this.tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty("bids");
+      }
+      if (tab === "awards") {
+        return !!this.gd(this.tender, _ => _.EVRecord.compiledRelease.tender, {}).hasOwnProperty("awardPeriod");
+      }
+      if (tab === "cans") {
+        return !!this.gd(this.tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty("contracts");
+      }
+
+      return true;
+    });
+
+    const { query } = this.$route;
+    if (query.tab && this.tabs.find(tab => query.tab === tab)) {
+      this.activeTab = query.tab;
+    } else {
+      this.activeTab = this.tabs[0];
+      this.$router.replace({ query: { tab: this.tabs[0] } });
+    }
   },
   computed: {
     ...mapState({
@@ -277,7 +284,7 @@ export default {
             getOrganizationObject(this.gd(this.tender, _ => _.MSRecord.compiledRelease.parties), "buyer").id
           ),
           description: this.gd(budgetBreakdown, _ => _.description, this.$t("n/a")),
-          budgetLineId: this.gd(this.tender, _ => _.MSRecord.compiledRelease.planning.budget.id, this.$t("n/a")),
+          budgetLineId: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].budgetLineId, this.$t("n/a")),
           EIocid: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].EIocid),
           EIname: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].EIname),
           period: {
@@ -355,17 +362,14 @@ export default {
           [FS.ocid]: {
             project: FS.planning.project,
             projectId: FS.planning.projectId,
+            budgetLineId: this.gd(FS, _ => _.planning.budget.id),
             payer: {
               name: getOrganizationObject(FS.parties, "payer").name,
               id: getOrganizationObject(FS.parties, "payer").identifier.id,
             },
             funder: {
-              name: getOrganizationObject(FS.parties, "funder")
-                ? getOrganizationObject(FS.parties, "funder").name
-                : null,
-              id: getOrganizationObject(FS.parties, "funder")
-                ? getOrganizationObject(FS.parties, "funder").identifier.id
-                : null,
+              name: this.gd(getOrganizationObject(FS.parties, "funder"), _ => _.name),
+              id: this.gd(getOrganizationObject(FS.parties, "funder"), _ => _.identifier.id),
             },
             status: this.gd(FS, _ => _.planning.budget.verified),
             parties: this.gd(FS, _ => _.parties),
@@ -376,6 +380,9 @@ export default {
       } catch (e) {
         console.log(e);
       }
+    },
+    handleClick(tab) {
+      this.$router.replace({ query: { tab: tab.name } });
     },
   },
 };

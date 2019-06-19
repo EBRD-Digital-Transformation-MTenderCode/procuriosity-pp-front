@@ -75,7 +75,8 @@ export default {
   PP_Buyer_profile_PIN: "Anunț de intenție: ",
   estimated_date:
     "Data estimată a expedierii invitațiilor de prezentare a ofertelor sau de participare către candidații selectați",
-  languages_submitted: "Limbile în care pot fi depuse ofertele sau cererile de participare",
+  languages_submitted:
+    "Ofertele sau cererile de participare se prezintă în limba specificată în documentaţia de atribuire.",
   romanian_russian: " Română, Rusă",
   conditions_for_opening_tenders: "Condiții de deschidere a ofertelor",
 

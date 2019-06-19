@@ -66,7 +66,7 @@ export default {
   review_procedures_title: "Procedura de contestare",
 
   procurement_plan: "Planul&nbsp;de<br/>achiziții",
-  pin: "Anunț de<br/>intenție",
+  pin: "Anunț&nbsp;de<br/>intenție",
   contract_notice: "Anunț&nbsp;de<br/>participare",
   clarification_and_changes: "Clarificare&nbsp;și<br/>modificări",
   review_procedures: "Procedura&nbsp;de<br/>contestare",
@@ -144,7 +144,8 @@ export default {
   time_limit: "Termen limită pentru primirea ofertelor sau a cererilor de participare",
   estimated_date:
     "Data estimată a expedierii invitațiilor de prezentare a ofertelor sau de participare către candidații selectați",
-  languages_submitted: "Limbile în care pot fi depuse ofertele sau cererile de participare",
+  languages_submitted:
+    "Ofertele sau cererile de participare se prezintă în limba specificată în documentaţia de atribuire.",
   romanian_russian: " Română, Rusă",
   conditions_for_opening_tenders: "Condiții de deschidere a ofertelor",
 
@@ -315,4 +316,15 @@ export default {
   unsuccessful_lots: "Unsuccessful lots",
 
   procedure_status: "Statutul procedurii",
+
+  link_to_auction: "Link to auction",
+  review: "Review",
+  controversial: "Controversial",
+  entry_date: "Entry Date",
+  status: "Status",
+  objection_to_complaint: "Objection to the Complaint",
+  elements_of_complaint: "Elements of Complaint",
+  decision_url: "URL",
+  auction_not_started: "Auction is not started",
+  go_to_auction: "Go to auction",
 };

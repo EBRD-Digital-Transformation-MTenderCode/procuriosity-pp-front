@@ -42,16 +42,6 @@
             </el-row>
             <el-row :gutter="15">
               <el-col :sm="12">
-                <div class="info-block__text">{{ $t("tender.minimal_eligible_difference") }}:</div>
-              </el-col>
-              <el-col :sm="12">
-                <div class="info-block__text">
-                  {{ fa(auction.minimalStep.amount) }} {{ auction.minimalStep.currency }}
-                </div>
-              </el-col>
-            </el-row>
-            <el-row :gutter="15">
-              <el-col :sm="12">
                 <div class="info-block__text">{{ $t("tender.number_of_participants") }}:</div>
               </el-col>
               <el-col :sm="12">
@@ -82,18 +72,29 @@
                 </div>
               </el-col>
             </el-row>
-            <el-row :gutter="15">
-              <el-col :sm="12">
-                <div class="info-block__text">{{ $t("tender.minimal_eligible_difference") }}:</div>
-              </el-col>
-              <el-col :sm="12">
-                <div class="info-block__text">
-                  {{ fa(auction.minimalStep.amount) }} {{ auction.minimalStep.currency }}
-                </div>
-              </el-col>
-            </el-row>
           </div>
         </div>
+        <el-row :gutter="15">
+          <el-col :sm="12">
+            <div class="info-block__text">{{ $t("tender.minimal_eligible_difference") }}:</div>
+          </el-col>
+          <el-col :sm="12">
+            <div class="info-block__text">{{ fa(auction.minimalStep.amount) }} {{ auction.minimalStep.currency }}</div>
+          </el-col>
+        </el-row>
+        <el-row :gutter="15">
+          <el-col :sm="12">
+            <div class="info-block__text">{{ $t("tender.link_to_auction") }}:</div>
+          </el-col>
+          <el-col :sm="12">
+            <div v-if="isDateBefore(auction.tenderPeriodEndDate)" class="info-block__link">
+              <a :href="auction.url" target="_blank">{{ $t("tender.go_to_auction") }}</a>
+            </div>
+            <div v-else class="info-block">
+              <span>{{ $t("tender.auction_not_started") }}</span>
+            </div>
+          </el-col>
+        </el-row>
         <div v-if="auction.auctionProgress.length">
           <div class="info__sub-title">
             {{ $t("tender.initial_offers") }}
@@ -240,6 +241,7 @@
 </template>
 
 <script>
+import dayjs from "dayjs";
 import { formatDate, formatAmount } from "./../../../../utils";
 
 export default {
@@ -260,6 +262,9 @@ export default {
     },
     fa(amount) {
       return formatAmount(amount);
+    },
+    isDateBefore(date) {
+      return dayjs(date).isBefore(dayjs(Date.now()));
     },
   },
 };

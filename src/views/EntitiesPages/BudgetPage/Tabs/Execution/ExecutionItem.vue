@@ -10,17 +10,13 @@
             </div>
           </el-col>
           <el-col :sm="4">
-            <div class="info-block__text">{{ $t("budget.contracting_state") }}</div>
+            <div class="info-block__text">{{ $t("budget.contracting_status") }}</div>
             <div class="info-block__value info-block__value_bold">
-              {{
-                gd(MS, _ => _.compiledRelease.tender.status, "") === "active"
-                  ? $t(`budget.contracting_state_${gd(MS, _ => _.compiledRelease.tender.status, "")}`)
-                  : "-"
-              }}
+              {{ $t(`budget.contracting_state_${gd(MS, _ => _.compiledRelease.tender.status, "")}`) }}
             </div>
           </el-col>
           <el-col v-if="EV" :sm="4">
-            <div class="info-block__text">{{ $t("budget.contracting_status") }}</div>
+            <div class="info-block__text">{{ $t("budget.contracting_status_detail") }}</div>
             <div class="info-block__value info-block__value_bold">{{ mapTenderStatus }}</div>
           </el-col>
         </el-row>

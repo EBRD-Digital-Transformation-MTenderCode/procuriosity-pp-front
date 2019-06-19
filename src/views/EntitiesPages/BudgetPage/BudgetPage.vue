@@ -129,19 +129,19 @@
           <el-container direction="vertical">
             <el-row>
               <el-col :xs="24">
-                <el-tabs v-model="activeTab">
-                  <el-tab-pane name="sourceOfFinancing" lazy key="sourceOfFinancing">
+                <el-tabs v-model="activeTab" @tab-click="handleClick">
+                  <el-tab-pane name="source-of-financing" lazy>
                     <span slot="label" v-html="$t('budget.source_of_financing')" />
                     <source-of-financing
                       :FSs="FSs"
                       :buyer="getOrganizationObject(gd(EI, _ => _.parties, []), 'buyer')"
                     />
                   </el-tab-pane>
-                  <el-tab-pane name="execution" lazy key="execution" :disabled="!getExecutionsId.length">
+                  <el-tab-pane name="execution" lazy :disabled="!tabs.includes('execution')">
                     <span slot="label" v-html="$t('budget.execution')" />
                     <execution :getExecutionsId="getExecutionsId" />
                   </el-tab-pane>
-                  <el-tab-pane name="spending" lazy key="spending" disabled>
+                  <el-tab-pane name="spending" lazy disabled>
                     <span slot="label" v-html="$t('budget.spending')" />
                     <spending />
                   </el-tab-pane>
@@ -185,11 +185,26 @@ export default {
   },
   data() {
     return {
-      activeTab: "sourceOfFinancing",
+      activeTab: "source-of-financing",
+      tabs: ["source-of-financing", "execution", "spending"],
     };
   },
-  created() {
-    this.getBudget();
+  async created() {
+    await this.getBudget();
+    this.tabs = this.tabs.filter(tab => {
+      if (tab === "execution") {
+        return !!this.getExecutionsId.length;
+      }
+      return true;
+    });
+
+    const { query } = this.$route;
+    if (query.tab && this.tabs.find(tab => query.tab === tab)) {
+      this.activeTab = query.tab;
+    } else {
+      this.activeTab = this.tabs[0];
+      this.$router.replace({ query: { tab: this.tabs[0] } });
+    }
   },
   computed: {
     ...mapState({
@@ -292,6 +307,9 @@ export default {
     },
     fd(date, type) {
       return formatDate(date, type);
+    },
+    handleClick(tab) {
+      this.$router.replace({ query: { tab: tab.name } });
     },
   },
 };

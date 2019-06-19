@@ -142,7 +142,8 @@ export default {
   PP_Buyer_profile_PIN: "Prior Information Notice:",
   time_limit: "Time limit for receipt of tenders or requests to participate",
   estimated_date: "Estimated date of dispatch of invitations to tender or to participate to selected candidates",
-  languages_submitted: "Languages in which tenders or requests to participate may be submitted",
+  languages_submitted:
+    "The tenders or requests to participate are submitted in the language specified in the tender documents.",
   romanian_russian: " Romanian, Russian",
   conditions_for_opening_tenders: "Conditions for opening of tenders",
 
@@ -306,4 +307,15 @@ export default {
   unsuccessful_lots: "Unsuccessful lots",
 
   procedure_status: "Procedure status",
+
+  link_to_auction: "Link to auction",
+  review: "Review",
+  controversial: "Controversial",
+  entry_date: "Entry Date",
+  status: "Status",
+  objection_to_complaint: "Objection to the Complaint",
+  elements_of_complaint: "Elements of Complaint",
+  decision_url: "URL",
+  auction_not_started: "Auction is not started",
+  go_to_auction: "Go to auction",
 };

@@ -127,7 +127,6 @@ export function getOrganizationObject(parties, organizationRole) {
       if (organizationRole === "funder")
         return {
           name: VueI18n.t("budgetBreakdown.state_money"),
-          id: undefined,
         };
     }
   }
