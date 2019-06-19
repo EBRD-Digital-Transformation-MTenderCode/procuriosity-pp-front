@@ -115,7 +115,7 @@
             </div>
           </div>
         </div>
-        <div v-else>{{ noItemsText }}</div>
+        <div v-else-if="!espdDocuments || !espdDocuments.length">{{ noItemsText }}</div>
       </div>
     </slot>
   </el-dialog>
