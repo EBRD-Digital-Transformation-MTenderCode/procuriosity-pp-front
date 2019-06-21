@@ -197,10 +197,10 @@
 </template>
 
 <script>
-import BudgetBreakdown from "../../../../components/BudgetBreakdown";
-import mainProcurementCategory from "./../../../../store/types/main-procurement-category";
-import ProcedureId from "../../../../components/ProcedureId";
-import { getDataFromObject, formatDate, formatAmount } from "./../../../../utils";
+import BudgetBreakdown from "../../../../../components/BudgetBreakdown";
+import mainProcurementCategory from "../../../../../store/types/main-procurement-category";
+import ProcedureId from "../../../../../components/ProcedureId";
+import { getDataFromObject, formatDate, formatAmount } from "../../../../../utils";
 
 export default {
   name: "ProcurementRecord",

@@ -473,14 +473,14 @@
 
 <script>
 import { mapState } from "vuex";
-import { FETCH_CURRENT_TENDER_INFO } from "../../../store/types/actions-types";
+import { FETCH_CURRENT_TENDER_INFO } from "../../../../store/types/actions-types";
 
-import TenderCard from "../../../components/ListCards/TendersCard";
-import DocumentsModal from "./DocumentsModal";
+import TenderCard from "../../../../components/ListCards/TendersCard";
+import DocumentsModal from "../DocumentsModal";
 
-import { MTENDER1, MTENDER2 } from "../../../store/types/cbd-types";
+import { MTENDER1, MTENDER2 } from "../../../../store/types/cbd-types";
 
-import { getDataFromObject, formatDate } from "../../../utils";
+import { getDataFromObject, formatDate } from "../../../../utils";
 
 export default {
   name: "TenderPage",

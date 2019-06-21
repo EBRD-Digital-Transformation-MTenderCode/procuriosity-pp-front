@@ -304,7 +304,7 @@
 </template>
 
 <script>
-import { getDataFromObject, formatDate, formatAmount } from "./../../../../utils";
+import { getDataFromObject, formatDate, formatAmount } from "../../../../../utils";
 
 export default {
   name: "ContractItem",

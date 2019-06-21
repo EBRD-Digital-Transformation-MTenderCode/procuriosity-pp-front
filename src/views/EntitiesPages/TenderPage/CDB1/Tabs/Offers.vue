@@ -208,12 +208,12 @@
 </template>
 
 <script>
-import DocumentsModal from "./../DocumentsModal";
+import DocumentsModal from "../../DocumentsModal";
 
-import ListPagination from "./../../../../components/ListPagination";
-import PageNumber from "./../../../../components/PageNumber";
+import ListPagination from "../../../../../components/ListPagination";
+import PageNumber from "../../../../../components/PageNumber";
 
-import { getDataFromObject, formatDate, formatAmount } from "./../../../../utils";
+import { getDataFromObject, formatDate, formatAmount } from "../../../../../utils";
 
 export default {
   name: "Offers",

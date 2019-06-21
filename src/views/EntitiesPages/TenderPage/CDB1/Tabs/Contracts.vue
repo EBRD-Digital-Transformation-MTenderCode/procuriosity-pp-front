@@ -49,10 +49,10 @@
 
 <script>
 import ContractItem from "./ContractItem";
-import ListPagination from "./../../../../components/ListPagination";
-import PageNumber from "./../../../../components/PageNumber";
+import ListPagination from "../../../../../components/ListPagination";
+import PageNumber from "../../../../../components/PageNumber";
 
-import { getDataFromObject } from "./../../../../utils";
+import { getDataFromObject } from "../../../../../utils";
 
 export default {
   name: "Contracts",

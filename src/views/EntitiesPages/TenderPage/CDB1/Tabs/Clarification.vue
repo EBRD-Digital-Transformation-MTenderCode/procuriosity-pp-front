@@ -112,7 +112,7 @@
 </template>
 
 <script>
-import { getDataFromObject, formatDate, transformSpecialSymbols } from "./../../../../utils";
+import { getDataFromObject, formatDate, transformSpecialSymbols } from "../../../../../utils";
 
 export default {
   name: "Clarification",

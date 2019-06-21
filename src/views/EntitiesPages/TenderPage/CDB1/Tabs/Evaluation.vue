@@ -177,15 +177,15 @@
 </template>
 
 <script>
-import DocumentsModal from "./../DocumentsModal";
-import AwardInfoModal from "./../AwardInfoModal";
+import DocumentsModal from "../../DocumentsModal";
+import AwardInfoModal from "../../AwardInfoModal";
 
-import ListPagination from "./../../../../components/ListPagination";
-import PageNumber from "./../../../../components/PageNumber";
+import ListPagination from "../../../../../components/ListPagination";
+import PageNumber from "../../../../../components/PageNumber";
 
-import { getDataFromObject, formatDate, formatAmount } from "./../../../../utils";
+import { getDataFromObject, formatDate, formatAmount } from "../../../../../utils";
 
-import awardsStatuses from "./../../../../store/types/awards-statuses";
+import awardsStatuses from "../../../../../store/types/awards-statuses";
 
 export default {
   name: "Evaluation",

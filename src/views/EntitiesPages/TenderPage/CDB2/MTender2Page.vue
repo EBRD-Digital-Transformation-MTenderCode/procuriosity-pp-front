@@ -170,7 +170,7 @@
 <script>
 import axios from "axios";
 import { mapState } from "vuex";
-import { FETCH_CURRENT_TENDER_INFO } from "../../../store/types/actions-types";
+import { FETCH_CURRENT_TENDER_INFO } from "../../../../store/types/actions-types";
 
 import dayjs from "dayjs";
 
@@ -182,8 +182,8 @@ import Offers from "./Tabs/Offers";
 import Evaluation from "./Tabs/Evaluation";
 import Contracts from "./Tabs/Contracts";
 import ProcurementRecord from "./Tabs/ProcurementRecord";
-import ProcedureId from "../../../components/ProcedureId";
-import Error from "./../../Error";
+import ProcedureId from "../../../../components/ProcedureId";
+import Error from "../../../Error";
 
 import {
   getDataFromObject,
@@ -191,8 +191,8 @@ import {
   getOrganizationObject,
   getSourceOfMoney,
   mapTenderStatus,
-} from "./../../../utils";
-import { getBudgetConfig } from "../../../configs/requests-configs";
+} from "../../../../utils";
+import { getBudgetConfig } from "../../../../configs/requests-configs";
 
 export default {
   name: "TenderPage",

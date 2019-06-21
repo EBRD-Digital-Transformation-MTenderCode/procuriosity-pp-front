@@ -1313,15 +1313,15 @@
 </template>
 
 <script>
-import mainProcurementCategory from "./../../../../store/types/main-procurement-category";
-import typesOfBuyers from "./../../../../store/types/buyers-types";
-import mainGeneralActivites from "./../../../../store/types/main-general-activity-types";
-import mainSectoralActivites from "./../../../../store/types/main-sectoral-activity";
-import platforms from "../../../../store/types/platforms";
+import mainProcurementCategory from "../../../../../store/types/main-procurement-category";
+import typesOfBuyers from "../../../../../store/types/buyers-types";
+import mainGeneralActivites from "../../../../../store/types/main-general-activity-types";
+import mainSectoralActivites from "../../../../../store/types/main-sectoral-activity";
+import platforms from "../../../../../store/types/platforms";
 
-import ListPagination from "./../../../../components/ListPagination";
-import PageNumber from "./../../../../components/PageNumber";
-import BudgetBreakdown from "../../../../components/BudgetBreakdown";
+import ListPagination from "../../../../../components/ListPagination";
+import PageNumber from "../../../../../components/PageNumber";
+import BudgetBreakdown from "../../../../../components/BudgetBreakdown";
 
 import {
   getDataFromObject,
@@ -1330,7 +1330,7 @@ import {
   addPeriod,
   formatAmount,
   transformDocumentation,
-} from "./../../../../utils";
+} from "../../../../../utils";
 
 export default {
   name: "ContractNotice",
