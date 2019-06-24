@@ -9,9 +9,7 @@
     >
       <a :data-displayLink="needDisplay">{{ $t("tender.contracting_authority") }}</a>
       <a :data-displayLink="needDisplay">{{ $t("tender.object") }}</a>
-      <!--<a>Legal, economic, financial and technical information</a>-->
       <a :data-displayLink="needDisplay">{{ $t("tender.procedure") }}</a>
-      <a :data-displayLink="needDisplay">{{ $t("tender.budget") }}</a>
       <a :data-displayLink="needDisplay">{{ $t("tender.complementary_information") }}</a>
     </div>
     <div class="info" data-scroll-spy-id="cn" v-scroll-spy="{ offset: computedOffset, allowNoActive: true }">
@@ -171,56 +169,147 @@
             <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__text">{{ $t("tender.short_description") }}</div>
-                <div class="info-block__value">{{ gd(tender, _ => _.description, "###") }}</div>
+                <div id="scrollToDescription" class="info-block__value">
+                  {{ gd(tender, _ => _.description, "###") }}
+                </div>
               </el-col>
             </el-row>
           </div>
         </div>
+        <div v-if="tender.lots">
+          <div class="info__sub-title">{{ $t("tender.description") }}</div>
+          <page-number
+            v-if="needPagination"
+            :current-page="currentPage"
+            :elements-amount="elementsAmount"
+            :page-size="pageSize"
+          />
+          <el-collapse accordion :value="gd(tender, _ => _.lots[0].id, '0') + '0'">
+            <el-collapse-item
+              v-for="(lot, index) of gd(tender, _ => _.lots, [])"
+              v-if="index >= numberOfLastDisplayedElement - pageSize && index < numberOfLastDisplayedElement"
+              :key="lot.id + index"
+              :name="lot.id + index"
+            >
+              <template slot="title">
+                <div class="info-block accordion-header">
+                  <el-row :gutter="15">
+                    <el-col :sm="16">
+                      <div class="info-block__text">{{ $t("tender.title") }}</div>
+                      <div class="info-block__value info-block__value__bold">{{ gd(lot, _ => _.title, "###") }}</div>
+                    </el-col>
+                    <el-col :sm="8">
+                      <div class="info-block__text">{{ $t("tender.lot_identifier") }}</div>
+                      <div class="info-block__value">{{ gd(lot, _ => _.id, "###") }}</div>
+                    </el-col>
+                  </el-row>
+                </div>
+              </template>
 
-        <div v-if="tender.lots" class="info__sub-title">{{ $t("tender.description") }}</div>
-        <page-number
-          v-if="needPagination"
-          :current-page="currentPage"
-          :elements-amount="elementsAmount"
-          :page-size="pageSize"
-        />
-        <el-collapse accordion :value="gd(tender, _ => _.lots[0].id, '0') + '0'">
-          <el-collapse-item
-            v-for="(lot, index) of gd(tender, _ => _.lots, [])"
-            v-if="index >= numberOfLastDisplayedLot - pageSize && index < numberOfLastDisplayedLot"
-            :key="lot.id + index"
-            :name="lot.id + index"
-          >
-            <template slot="title">
-              <div class="info-block accordion-header">
-                <el-row :gutter="15">
-                  <el-col :sm="16">
-                    <div class="info-block__text">{{ $t("tender.title") }}</div>
-                    <div class="info-block__value info-block__value__bold">{{ gd(lot, _ => _.title, "###") }}</div>
-                  </el-col>
-                  <el-col :sm="8">
-                    <div class="info-block__text">{{ $t("tender.lot_identifier") }}</div>
-                    <div class="info-block__value">{{ gd(lot, _ => _.id, "###") }}</div>
-                  </el-col>
-                </el-row>
+              <div class="info-blocks">
+                <!--             -->
+
+                <div class="info-block">
+                  <div class="info-block__text">{{ $t("tender.description_of_procurement") }}:</div>
+                  <div
+                    v-for="item of gd(tender, _ => _.items, []).filter(
+                      item => gd(item, _ => _.relatedLot, '') === gd(lot, _ => _.id)
+                    )"
+                    :key="item.id"
+                  >
+                    <el-row :gutter="15">
+                      <el-col :sm="16">
+                        <div class="info-block__value">
+                          <div>{{ gd(item, _ => _.description, "###") }}</div>
+                          <div class="info-block__text_small">
+                            {{ gd(item, _ => _.classification.id, "###") }}
+                            {{ gd(item, _ => _.classification.description, "###") }}
+                          </div>
+                        </div>
+                      </el-col>
+                      <el-col :sm="8">
+                        <div class="info-block__value">
+                          {{ gd(item, _ => _.quantity, "###") }} {{ gd(item, _ => _.unit.name, "###") }}
+                        </div>
+                      </el-col>
+                    </el-row>
+                    <el-row :gutter="15">
+                      <el-col :sm="24">
+                        <div class="info-block__text">{{ $t("tender.place_of_performance") }}</div>
+                        <div class="info-block__value">
+                          {{ gd(item, _ => _.deliveryAddress.postalCode, $t("n/a")) }},
+                          {{ gd(item, _ => _.deliveryAddress.countryName, "###") }},
+                          {{ gd(item, _ => _.deliveryAddress.region, "###") }},
+                          {{ gd(item, _ => _.deliveryAddress.locality, "###") }},
+                          {{ gd(item, _ => _.deliveryAddress.streetAddress, "###") }}
+                        </div>
+                      </el-col>
+                    </el-row>
+                    <el-row :gutter="15">
+                      <el-col :sm="24">
+                        <div class="info-block__text">{{ $t("tender.duration_of_contract") }}</div>
+                        <div class="info-block__value">
+                          {{ $t("tender.start") }}: {{ fd(gd(item, _ => _.deliveryDate.startDate), "DD.MM.YYYY") }} /
+                          {{ $t("tender.end") }}: {{ fd(gd(item, _ => _.deliveryDate.endDate), "DD.MM.YYYY") }}
+                          <div>{{ $t("tender.is_not_renewal") }}</div>
+                        </div>
+                      </el-col>
+                    </el-row>
+                  </div>
+                </div>
+                <div class="info-block">
+                  <el-row :gutter="15">
+                    <el-col :sm="24">
+                      <div class="info-block__text">{{ $t("tender.estimated_value_excluding_VAT") }}</div>
+                      <div class="info-block__value">
+                        {{ fa(gd(lot, _ => _.value.amount)) }} {{ gd(lot, _ => _.value.currency) }}
+                      </div>
+                    </el-col>
+                  </el-row>
+                </div>
               </div>
-            </template>
-
-            <div class="info-blocks">
-              <!--             -->
-
-              <div class="info-block">
-                <div class="info-block__text">{{ $t("tender.description_of_procurement") }}:</div>
-                <div
-                  v-for="item of gd(tender, _ => _.items, []).filter(
-                    item => gd(item, _ => _.relatedLot, '') === gd(lot, _ => _.id)
-                  )"
-                  :key="item.id"
-                >
+            </el-collapse-item>
+          </el-collapse>
+          <list-pagination
+            v-if="needPagination"
+            :total="elementsAmount"
+            :pageCount="0"
+            :currentPage="currentPage"
+            :pageSize="pageSize"
+            :changePage="changePage"
+            offsetTo="scrollToDescription"
+            :key="'pagination'"
+          />
+        </div>
+        <div v-else>
+          <div class="info__sub-title">{{ $t("tender.description") }}</div>
+          <page-number
+            v-if="needPagination"
+            :current-page="currentPage"
+            :elements-amount="elementsAmount"
+            :page-size="pageSize"
+          />
+          <el-collapse accordion :value="gd(tender, _ => _.items[0].id, '0') + '0'">
+            <el-collapse-item
+              v-for="(item, index) of gd(tender, _ => _.items, [])"
+              v-if="index >= numberOfLastDisplayedElement - pageSize && index < numberOfLastDisplayedElement"
+              :key="item.id + index"
+              :name="item.id + index"
+            >
+              <template slot="title">
+                <div class="info-block accordion-header">
+                  <div class="info-block__text">{{ $t("tender.description") }}</div>
+                  <div class="info-block__value info-block__value__bold">
+                    {{ gd(item, _ => _.description, "###") }}
+                  </div>
+                </div>
+              </template>
+              <div class="info-blocks">
+                <div class="info-block">
                   <el-row :gutter="15">
                     <el-col :sm="16">
                       <div class="info-block__value">
-                        <div>{{ gd(item, _ => _.description, "###") }}</div>
+                        <div></div>
                         <div class="info-block__text_small">
                           {{ gd(item, _ => _.classification.id, "###") }}
                           {{ gd(item, _ => _.classification.description, "###") }}
@@ -250,39 +339,29 @@
                       <div class="info-block__text">{{ $t("tender.duration_of_contract") }}</div>
                       <div class="info-block__value">
                         {{ $t("tender.start") }}: {{ fd(gd(item, _ => _.deliveryDate.startDate), "DD.MM.YYYY") }} /
-                        {{ $t("tender.end") }}: {{ fd(gd(lot, _ => _.deliveryDate.endDate), "DD.MM.YYYY") }}
+                        {{ $t("tender.end") }}: {{ fd(gd(item, _ => _.deliveryDate.endDate), "DD.MM.YYYY") }}
                         <div>{{ $t("tender.is_not_renewal") }}</div>
                       </div>
                     </el-col>
                   </el-row>
                 </div>
               </div>
-              <div class="info-block">
-                <el-row :gutter="15">
-                  <el-col :sm="24">
-                    <div class="info-block__text">{{ $t("tender.estimated_value_excluding_VAT") }}</div>
-                    <div class="info-block__value">
-                      {{ fa(gd(lot, _ => _.value.amount)) }} {{ gd(lot, _ => _.value.currency) }}
-                    </div>
-                  </el-col>
-                </el-row>
-              </div>
-            </div>
-          </el-collapse-item>
-        </el-collapse>
-        <list-pagination
-          v-if="needPagination"
-          :total="elementsAmount"
-          :pageCount="0"
-          :currentPage="currentPage"
-          :pageSize="pageSize"
-          :changePage="changePage"
-          offsetTo="scrollToDescription"
-          :key="'pagination'"
-        />
+            </el-collapse-item>
+          </el-collapse>
+          <list-pagination
+            v-if="needPagination"
+            :total="elementsAmount"
+            :pageCount="0"
+            :currentPage="currentPage"
+            :pageSize="pageSize"
+            :changePage="changePage"
+            offsetTo="scrollToDescription"
+            :key="'pagination'"
+          />
+        </div>
       </div>
 
-      <!--&lt;!&ndash; Procedure &ndash;&gt;
+      <!-- Procedure -->
       <div>
         <div class="info__title">{{ $t("tender.procedure") }}</div>
         <div class="info__sub-title">{{ $t("tender.description") }}</div>
@@ -293,30 +372,26 @@
                 <div class="info-block__text">{{ $t("tender.type_of_procedure") }}</div>
                 <div class="info-block__value">{{ procedureType }}</div>
               </el-col>
-              &lt;!&ndash;<el-col :sm="14">
-                <div class="info-block__text">Accelerated procedure</div>
-                <div class="info-block__value">???Justification:</div>
-              </el-col>&ndash;&gt;
             </el-row>
           </div>
 
-          <div class="info-block">
+          <div v-if="this.gd(this.tender, _ => _.procurementMethodType, '') === 'belowThreshold'" class="info-block">
             <el-row :gutter="15">
               <el-col :sm="10">
                 <div class="info-block__text">{{ $t("tender.information_about_electronic_auction") }}</div>
                 <div class="info-block__value">
                   {{ $t("tender.an_electronic_auction_will") }}
-                  <span v-if="!gd(evRecord, _ => _.tender, {}).hasOwnProperty('auctionPeriod')">{{
+                  <!--<span v-if="!gd(evRecord, _ => _.tender, {}).hasOwnProperty('auctionPeriod')">{{
                     $t("tender.not")
-                  }}</span>
+                  }}</span>-->
                   {{ $t("tender.be_used") }}
                 </div>
               </el-col>
-              <el-col :sm="14" v-if="gd(evRecord, _ => _.tender, {}).hasOwnProperty('auctionPeriod')">
+              <el-col :sm="14" v-if="tender.auctionPeriod">
                 <div class="info-block__text">{{ $t("tender.additional_information_electronic_auction") }}</div>
                 <div class="info-block__value">
                   {{ $t("tender.start_date") }}:
-                  {{ fd(gd(evRecord, _ => _.tender.auctionPeriod.startDate), "DD.MM.YYYY", $t("n/a")) }}
+                  {{ fd(gd(tender, _ => _.auctionPeriod.startDate), "DD.MM.YYYY", $t("n/a")) }}
                 </div>
               </el-col>
             </el-row>
@@ -325,46 +400,23 @@
 
         <div class="info__sub-title">{{ $t("tender.administrative_information") }}</div>
         <div class="info-blocks">
-          <div class="info-block">
-            <el-row :gutter="15">
-              <el-col :sm="24">
-                <div class="info-block__text">{{ $t("tender.previous_publication_concerning_procedure") }}</div>
-                <div class="info-block__value">
-                  {{ $t("tender.PP_Buyer_profile_PIN") }} №
-                  &lt;!&ndash;<a
-                    :href="`/plans/${gd(gd(msRecord, _ => _.relatedProcesses, []).find(procces => procces.relationship.some(relationship => relationship === 'planning')), _ => _.identifier)}`"
-                  target="_blank">&ndash;&gt;
-                  {{
-                    gd(
-                      gd(msRecord, _ => _.relatedProcesses, []).find(procces =>
-                        procces.relationship.some(relationship => relationship === "planning")
-                      ),
-                      _ => _.identifier
-                    )
-                  }}
-                  &lt;!&ndash;</a>&ndash;&gt;
-                </div>
-              </el-col>
-            </el-row>
-          </div>
-
-          <div class="info-block">
+          <div v-if="tender.tenderPeriod" class="info-block">
             <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__text">{{ $t("tender.time_limit") }}</div>
                 <div class="info-block__value">
-                  {{ fd(gd(evRecord, _ => _.tender.tenderPeriod.endDate), "DD.MM.YYYY / HH:mm ") }}
+                  {{ fd(gd(tender, _ => _.tenderPeriod.endDate), "DD.MM.YYYY / HH:mm ") }}
                 </div>
               </el-col>
             </el-row>
           </div>
 
-          <div class="info-block">
+          <div v-if="tender.tenderPeriod" class="info-block">
             <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__text">{{ $t("tender.estimated_date") }}</div>
                 <div class="info-block__value">
-                  {{ fd(gd(evRecord, _ => _.tender.tenderPeriod.startDate), "DD.MM.YYYY / HH:mm ") }}
+                  {{ fd(gd(tender, _ => _.tenderPeriod.startDate), "DD.MM.YYYY / HH:mm ") }}
                 </div>
               </el-col>
             </el-row>
@@ -379,16 +431,16 @@
             </el-row>
           </div>
 
-          <div class="info-block">
+          <div v-if="tender.tenderPeriod" class="info-block">
             <el-row :gutter="15">
               <el-col :sm="24">
                 <div class="info-block__text">{{ $t("tender.conditions_for_opening_tenders") }}</div>
                 <div class="info-block__value">
                   {{
                     fd(
-                      gd(evRecord, _ => _.tender, {}).hasOwnProperty("auctionPeriod")
-                        ? gd(evRecord, _ => _.tender.auctionPeriod.endDate)
-                        : gd(evRecord, _ => _.tender.tenderPeriod.endDate),
+                      tender.hasOwnProperty("auctionPeriod")
+                        ? gd(tender, _ => _.auctionPeriod.endDate)
+                        : gd(tender, _ => _.tenderPeriod.endDate),
                       "DD.MM.YYYY / HH:mm"
                     )
                   }}
@@ -409,64 +461,13 @@
                   {{ $t("tender.negotiated_with_publication") }}
                 </div>
               </el-col>
-              &lt;!&ndash; <el-col :sm="16">
-                <div class="info-block__text"> Information about authorised persons and opening procedure</div>
-                <div class="info-block__value">
-              &ndash;&gt;
-              &lt;!&ndash; @TODO text from Pasha &ndash;&gt;
-              &lt;!&ndash;Full name of the persone
-                </div>
-              </el-col>
-              <el-col :sm="8">
-                <div class="info-block__text">
-                  {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "procuringEntity")), _ =>
-                  _.address.addressDetails.country.description) }}, {{ gd(gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "procuringEntity")), _ =>
-                  _.address.addressDetails.locality.description) }}
-                </div>
-              </el-col>
-              &ndash;&gt;
             </el-row>
           </div>
         </div>
       </div>
--->
-      <!-- &lt;!&ndash; Budget &ndash;&gt;
-      <div>
-        <div class="info__title">{{ $t("tender.budget") }}</div>
-
-        <div class="info__sub-title">{{ $t("tender.budget_breakdown") }}</div>
-        <el-collapse accordion @change="getFSRecord">
-          <budget-breakdown
-            v-for="(budgetBreakdown, index) of breakdowns"
-            :key="budgetBreakdown.ocid"
-            :budgetBreakdown="budgetBreakdown"
-            :index="index"
-          />
-        </el-collapse>
-
-        <div class="info-blocks">
-          <div class="info-block">
-            <el-row :gutter="15">
-              <el-col :sm="24">
-                <div class="info-block__text">{{ $t("tender.rationale_procurement") }}</div>
-                <div class="info-block__value">{{ gd(msRecord, _ => _.planning.rationale, $t("n/a")) }}</div>
-              </el-col>
-            </el-row>
-          </div>
-
-          <div class="info-block">
-            <el-row :gutter="15">
-              <el-col :sm="24">
-                <div class="info-block__text">{{ $t("plan.short_free_description") }}</div>
-                <div class="info-block__value">{{ gd(msRecord, _ => _.planning.budget.description, $t("n/a")) }}</div>
-              </el-col>
-            </el-row>
-          </div>
-        </div>
-      </div>-->
 
       <!-- Complementary information -->
-      <!--      <div>
+      <div>
         <div class="info__title">{{ $t("tender.complementary_information") }}</div>
         <div class="info__sub-title">{{ $t("tender.information_about_electronic_workflows") }}</div>
         <ul class="info-list">
@@ -482,11 +483,6 @@
           <li>{{ $t("tender.complementary_information_list2_p1") }}</li>
           <li>{{ $t("tender.complementary_information_list2_p2") }}</li>
           <li>{{ $t("tender.complementary_information_list2_p3") }}</li>
-          &lt;!&ndash;<li v-if="procedureType==='Open Tender' || procedureType==='Licitație deschisă' || procedureType==='Открытые торги'">
-            {{ $t("tender.complementary_information_list2_p4_1") }}
-            {{ fa(gd(msRecord, _ => _.tender.value.amount) * 0.02) }}
-            {{ $t("tender.complementary_information_list2_p4_2") }}
-          </li>&ndash;&gt;
           <li>{{ $t("tender.complementary_information_list2_p5") }}</li>
         </ul>
 
@@ -495,13 +491,7 @@
           <div class="info-block">
             <div
               class="info-block__documents"
-              v-for="(doc, index) of getDocs(
-                gd(
-                  gd(evRecord, _ => _.tender.documents, []).filter(_doc => !_doc.hasOwnProperty('relatedLots')),
-                  _ => _,
-                  []
-                )
-              )"
+              v-for="(doc, index) of getDocs(gd(tender, _ => _.documents, []))"
               :key="doc.id + index"
             >
               <div class="info-block__document">
@@ -645,20 +635,16 @@
           <li>{{ $t("tender.review_procedures_list1_p3") }}</li>
           <li>{{ $t("tender.review_procedures_list1_p4") }}</li>
         </ol>
-      </div>-->
+      </div>
     </div>
-    <!--    <div class="info__sub-title">
+    <div class="info__sub-title">
       {{ $t("tender.date_online_publication") }}:
-      {{ fd(gd(evRecord, _ => _.tender.enquiryPeriod.startDate), "DD/MM/YYYY") }}
-    </div>-->
+      {{ fd(gd(tender, _ => _.date), "DD/MM/YYYY") }}
+    </div>
   </div>
 </template>
 
 <script>
-import mainProcurementCategory from "../../../../../store/types/main-procurement-category";
-import typesOfBuyers from "../../../../../store/types/buyers-types";
-import mainGeneralActivites from "../../../../../store/types/main-general-activity-types";
-import mainSectoralActivites from "../../../../../store/types/main-sectoral-activity";
 import platforms from "../../../../../store/types/platforms";
 
 import ListPagination from "../../../../../components/ListPagination";
@@ -669,9 +655,8 @@ import {
   getDataFromObject,
   formatDate,
   parseDocumentType,
-  addPeriod,
   formatAmount,
-  transformDocumentation,
+  transformDocumentationFromCDB1,
 } from "../../../../../utils";
 
 export default {
@@ -679,6 +664,10 @@ export default {
   props: {
     tender: {
       type: Object,
+      required: true,
+    },
+    procedureType: {
+      type: String,
       required: true,
     },
   },
@@ -693,71 +682,11 @@ export default {
       windowWidth: 0,
       computedOffset: 75,
       pageSize: 25,
-      numberOfLastDisplayedLot: 25,
+      numberOfLastDisplayedElement: 25,
       currentPage: 1,
     };
   },
   computed: {
-    getTypeOfBuyer() {
-      if (
-        !this.gd(
-          this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
-          _ => _.details.typeOfBuyer
-        )
-      ) {
-        return this.$t("n/a");
-      }
-
-      return typesOfBuyers.find(
-        type =>
-          type.value ===
-          this.gd(
-            this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
-            _ => _.details.typeOfBuyer
-          )
-      ).name[this.$i18n.locale];
-    },
-    getMainGeneralActivity() {
-      if (
-        !this.gd(
-          this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
-          _ => _.details.mainGeneralActivity
-        )
-      ) {
-        return this.$t("n/a");
-      }
-
-      return mainGeneralActivites.find(
-        activity =>
-          activity.value ===
-          this.gd(
-            this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
-            _ => _.details.mainGeneralActivity
-          )
-      ).name[this.$i18n.locale];
-    },
-    getMainSectoralActivity() {
-      if (
-        !this.gd(
-          this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
-          _ => _.details.mainSectoralActivity
-        )
-      ) {
-        return this.$t("n/a");
-      }
-
-      return mainSectoralActivites.find(
-        activity =>
-          activity.value ===
-          this.gd(
-            this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
-            _ => _.details.mainSectoralActivity
-          )
-      ).name[this.$i18n.locale];
-    },
-    getMainProcurementCategory() {
-      return mainProcurementCategory[this.gd(this.msRecord, _ => _.tender.mainProcurementCategory)][this.$i18n.locale];
-    },
     randomSortPlatforms() {
       return [...platforms].sort(() => 0.5 - Math.random());
     },
@@ -765,7 +694,7 @@ export default {
       return this.elementsAmount > this.pageSize;
     },
     elementsAmount() {
-      return this.gd(this.evRecord, _ => _.tender.lots, []).length;
+      return this.gd(this.tender, _ => _.lots, []).length || this.gd(this.tender, _ => _.items, []).length;
     },
   },
   methods: {
@@ -778,9 +707,6 @@ export default {
     parseDocType(type) {
       return parseDocumentType(type, this.$i18n.locale);
     },
-    add(date, timePeriod, count) {
-      return addPeriod(date, timePeriod, count);
-    },
     fa(amount) {
       return formatAmount(amount);
     },
@@ -788,10 +714,10 @@ export default {
       this.windowWidth = window.innerWidth;
     },
     getDocs(docs) {
-      return transformDocumentation(docs);
+      return transformDocumentationFromCDB1(docs);
     },
     changePage(page) {
-      this.numberOfLastDisplayedLot = page * this.pageSize;
+      this.numberOfLastDisplayedElement = page * this.pageSize;
       this.currentPage = page;
     },
     getFSRecord(ocid) {

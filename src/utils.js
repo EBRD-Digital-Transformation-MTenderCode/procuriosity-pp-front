@@ -119,6 +119,37 @@ export function transformDocumentation(docs) {
   );
 }
 
+export function transformDocumentationFromCDB1(docs) {
+  return Object.values(
+    [...docs]
+      .sort((doc1, doc2) => new Date(doc2.dateModified) - new Date(doc1.dateModified))
+      .reduce((obj, doc) => {
+        const docObj = {
+          title: doc.title,
+          url: doc.url,
+          datePublished: doc.datePublished,
+          documentType: doc.documentType,
+          id: doc.id,
+        };
+
+        if (!obj.hasOwnProperty(doc.id)) {
+          obj[doc.id] = {
+            oldVersions: [],
+            ...docObj,
+          };
+        } else {
+          obj[doc.id].oldVersions = [
+            ...obj[doc.id].oldVersions,
+            {
+              ...docObj,
+            },
+          ];
+        }
+        return obj;
+      }, {})
+  );
+}
+
 export function getOrganizationObject(parties, organizationRole) {
   for (let part of parties) {
     if (part.roles.find(role => role === organizationRole)) {

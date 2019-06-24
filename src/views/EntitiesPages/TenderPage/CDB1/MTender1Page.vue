@@ -77,51 +77,54 @@
                 <el-tabs v-model="activeTab" stretch>
                   <el-tab-pane name="contract-notice" lazy>
                     <span slot="label" v-html="$t('tender.contract_notice')" />
-                    <contract-notice :tender="tender" />
+                    <contract-notice :tender="tender" :procedureType="getProcedureType" />
                   </el-tab-pane>
-                  <!--                  <el-tab-pane name="clarification" lazy>
+                  <el-tab-pane name="clarification" lazy>
                     <span slot="label" v-html="$t('tender.clarification_and_changes')" />
-                    <clarification :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
+                    <clarification :tender="tender" />
                   </el-tab-pane>
                   <el-tab-pane name="review" lazy>
                     <span slot="label" v-html="$t('tender.review_procedures')" />
-                    <review :id="gd(tender, _ => _.EVRecord.compiledRelease.tender.id)" />
+                    <review :id="gd(tender, _ => _.tenderID)" />
                   </el-tab-pane>
-                  <el-tab-pane :disabled="!tabs.includes('auctions')" name="auctions" lazy>
+
+                  <el-tab-pane :disabled="!tender.lots" name="auctions" lazy>
                     <span slot="label" v-html="$t('tender.electronic_auction')"></span>
-                    <auction :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
+                    <auction :tender="tender" />
                   </el-tab-pane>
-                  <el-tab-pane :disabled="!tabs.includes('bids')" name="bids" lazy>
+
+                  <el-tab-pane name="bids" lazy>
                     <span slot="label" v-html="$t('tender.electronic_bids')"></span>
-                    <offers :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
+                    <offers :tender="tender" />
                   </el-tab-pane>
-                  <el-tab-pane :disabled="!tabs.includes('awards')" name="awards" lazy>
-                    <span slot="label" v-html="$t('tender.evaluation_of_bids')"></span>
-                    <evaluation :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
-                  </el-tab-pane>
-                  <el-tab-pane :disabled="!tabs.includes('cans')" name="cans" lazy>
-                    <span slot="label" v-html="$t('tender.contract_award')"></span>
-                    <contracts :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
-                  </el-tab-pane>
-                  <el-tab-pane name="procurement-record" lazy>
-                    <span slot="label" v-html="$t('tender.procurement_record_title')" />
-                    <procurement-record
-                        :msRecord="gd(tender, _ => _.MSRecord.compiledRelease)"
-                        :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
-                        :getFS="getFS"
-                        :breakdowns="breakdowns"
-                        :procedureType="
-                        selectProcedure(
-                          gd(tender, _ => _.MSRecord.compiledRelease.tender.mainProcurementCategory),
-                          gd(tender, _ => _.MSRecord.compiledRelease.tender.value.amount)
-                        )
-                      "
-                        :selectTab="selectTab"
-                        :hasBids="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('bids')"
-                        :hasAwards="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('awards')"
-                        :hasCANs="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('contracts')"
-                    />
-                  </el-tab-pane>-->
+                  <!--
+<el-tab-pane :disabled="!tabs.includes('awards')" name="awards" lazy>
+<span slot="label" v-html="$t('tender.evaluation_of_bids')"></span>
+<evaluation :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
+</el-tab-pane>
+<el-tab-pane :disabled="!tabs.includes('cans')" name="cans" lazy>
+<span slot="label" v-html="$t('tender.contract_award')"></span>
+<contracts :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
+</el-tab-pane>
+<el-tab-pane name="procurement-record" lazy>
+<span slot="label" v-html="$t('tender.procurement_record_title')" />
+<procurement-record
+:msRecord="gd(tender, _ => _.MSRecord.compiledRelease)"
+:evRecord="gd(tender, _ => _.EVRecord.compiledRelease)"
+:getFS="getFS"
+:breakdowns="breakdowns"
+:procedureType="
+selectProcedure(
+gd(tender, _ => _.MSRecord.compiledRelease.tender.mainProcurementCategory),
+gd(tender, _ => _.MSRecord.compiledRelease.tender.value.amount)
+)
+"
+:selectTab="selectTab"
+:hasBids="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('bids')"
+:hasAwards="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('awards')"
+:hasCANs="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('contracts')"
+/>
+</el-tab-pane>-->
                 </el-tabs>
               </el-col>
             </el-row>
@@ -142,8 +145,10 @@ import { FETCH_CURRENT_TENDER_INFO } from "../../../../store/types/actions-types
 import TenderCard from "../../../../components/ListCards/TendersCard";
 import DocumentsModal from "../../DocumentsModal";
 import ContractNotice from "./Tabs/ContractNotice";
-
-import { MTENDER1, MTENDER2 } from "../../../../store/types/cbd-types";
+import Clarification from "./Tabs/Clarification";
+import Review from "./Tabs/Review";
+import Auction from "./Tabs/Auction";
+import Offers from "./Tabs/Offers";
 
 import { getDataFromObject, mapTenderStatus } from "../../../../utils";
 import ProcedureId from "../../../../components/ProcedureId";
@@ -157,6 +162,10 @@ export default {
     "documents-modal": DocumentsModal,
     "procedure-id": ProcedureId,
     "contract-notice": ContractNotice,
+    clarification: Clarification,
+    auction: Auction,
+    offers: Offers,
+    review: Review,
     error: Error,
   },
   data() {
