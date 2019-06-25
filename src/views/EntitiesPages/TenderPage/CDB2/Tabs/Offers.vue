@@ -149,11 +149,7 @@
             </button>
             <documents-modal
               :ref="bid.id + 'eligibilityDocuments'"
-              :documents="
-                bid.hasOwnProperty('documents')
-                  ? bid.documents.filter(_doc => _doc.documentType === 'x_eligibilityDocuments')
-                  : []
-              "
+              :documents="getEspdDocuments(bid)"
               :datePublished="bid.date"
               :noItemsText="$t('tender.no_documents_submitted')"
             />
@@ -169,16 +165,7 @@
             <div class="offers-table__docs-eos-text" v-else>{{ $t("tender.no_documents") }}</div>
             <documents-modal
               :ref="bid.id"
-              :documents="
-                bid.hasOwnProperty('documents')
-                  ? bid.documents.filter(_doc => _doc.documentType !== 'x_eligibilityDocuments')
-                  : []
-              "
-              :espdDocuments="
-                bid.hasOwnProperty('documents')
-                  ? bid.documents.filter(_doc => _doc.documentType === 'x_eligibilityDocuments')
-                  : []
-              "
+              :documents="getEosDocuments(bid)"
               :datePublished="bid.date"
               :noItemsText="$t('tender.no_documents')"
             />
@@ -256,6 +243,32 @@ export default {
     changePage(page) {
       this.numberOfLastDisplayedLot = page * this.pageSize;
       this.currentPage = page;
+    },
+    getEosDocuments(bid) {
+      return [
+        {
+          title: this.$t("tender.espd_docs"),
+          values: bid.hasOwnProperty("documents")
+            ? bid.documents.filter(_doc => _doc.documentType === "x_eligibilityDocuments")
+            : [],
+        },
+        {
+          title: this.$t("tender.modal_documents"),
+          values: bid.hasOwnProperty("documents")
+            ? bid.documents.filter(_doc => _doc.documentType !== "x_eligibilityDocuments")
+            : [],
+        },
+      ];
+    },
+    getEspdDocuments(bid) {
+      return [
+        {
+          title: this.$t("tender.espd_docs"),
+          values: bid.hasOwnProperty("documents")
+            ? bid.documents.filter(_doc => _doc.documentType === "x_eligibilityDocuments")
+            : [],
+        },
+      ];
     },
   },
 };

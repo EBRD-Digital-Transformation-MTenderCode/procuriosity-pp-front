@@ -7,13 +7,13 @@
         <el-radio-button
           :disabled="!this.gd(evRecord, _ => _.tender.lots, []).filter(lot => lot.status === 'complete').length"
           label="successful"
-          >{{ $t("tender.successful_lots") }}</el-radio-button
-        >
+          >{{ $t("tender.successful_lots") }}
+        </el-radio-button>
         <el-radio-button
           :disabled="!this.gd(evRecord, _ => _.tender.lots, []).filter(lot => lot.status === 'unsuccessful').length"
           label="unsuccessful"
-          >{{ $t("tender.unsuccessful_lots") }}</el-radio-button
-        >
+          >{{ $t("tender.unsuccessful_lots") }}
+        </el-radio-button>
       </el-radio-group>
     </div>
     <page-number

@@ -1,4 +1,4 @@
-<template>
+<templatef>
   <div class="entity-wp entity__tender">
     <transition name="fade" mode="out-in" appear>
       <el-container key="loading" v-if="!loaded && !error.status">
@@ -165,7 +165,7 @@
       </el-container>
     </transition>
   </div>
-</template>
+</templatef>
 
 <script>
 import axios from "axios";
@@ -331,6 +331,7 @@ export default {
       return getDataFromObject(...args);
     },
     selectTab(tab) {
+      console.log(tab);
       this.activeTab = tab;
       window.scrollTo({
         top: 0,

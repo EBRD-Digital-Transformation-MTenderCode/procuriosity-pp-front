@@ -93,16 +93,16 @@
                     <auction :tender="tender" />
                   </el-tab-pane>
 
-                  <el-tab-pane name="bids" lazy>
+                  <el-tab-pane :disabled="!tender.bids" name="bids" lazy>
                     <span slot="label" v-html="$t('tender.electronic_bids')"></span>
                     <offers :tender="tender" />
                   </el-tab-pane>
-                  <!--
-<el-tab-pane :disabled="!tabs.includes('awards')" name="awards" lazy>
-<span slot="label" v-html="$t('tender.evaluation_of_bids')"></span>
-<evaluation :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
-</el-tab-pane>
-<el-tab-pane :disabled="!tabs.includes('cans')" name="cans" lazy>
+
+                  <el-tab-pane :disabled="!tender.awards" name="awards" lazy>
+                    <span slot="label" v-html="$t('tender.evaluation_of_bids')"></span>
+                    <evaluation :tender="tender" />
+                  </el-tab-pane>
+                  <!--<el-tab-pane :disabled="!tabs.includes('cans')" name="cans" lazy>
 <span slot="label" v-html="$t('tender.contract_award')"></span>
 <contracts :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
 </el-tab-pane>
@@ -143,12 +143,12 @@ import { mapState } from "vuex";
 import { FETCH_CURRENT_TENDER_INFO } from "../../../../store/types/actions-types";
 
 import TenderCard from "../../../../components/ListCards/TendersCard";
-import DocumentsModal from "../../DocumentsModal";
 import ContractNotice from "./Tabs/ContractNotice";
 import Clarification from "./Tabs/Clarification";
 import Review from "./Tabs/Review";
 import Auction from "./Tabs/Auction";
 import Offers from "./Tabs/Offers";
+import Evaluation from "./Tabs/Evaluation";
 
 import { getDataFromObject, mapTenderStatus } from "../../../../utils";
 import ProcedureId from "../../../../components/ProcedureId";
@@ -159,13 +159,13 @@ export default {
   name: "TenderPage",
   components: {
     "tender-card": TenderCard,
-    "documents-modal": DocumentsModal,
     "procedure-id": ProcedureId,
     "contract-notice": ContractNotice,
     clarification: Clarification,
     auction: Auction,
     offers: Offers,
     review: Review,
+    evaluation: Evaluation,
     error: Error,
   },
   data() {

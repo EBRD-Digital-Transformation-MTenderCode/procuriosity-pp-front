@@ -97,11 +97,7 @@
               </button>
               <documents-modal
                 :ref="bid.id + 'eligibilityDocuments'"
-                :documents="
-                  bid.hasOwnProperty('documents')
-                    ? bid.documents.filter(_doc => _doc.documentType === 'eligibilityDocuments')
-                    : []
-                "
+                :documents="getEspdDocuments(bid)"
                 :datePublished="bid.date"
                 :noItemsText="$t('tender.no_documents_submitted')"
               />
@@ -117,16 +113,7 @@
               <div class="offers-table__docs-eos-text" v-else>{{ $t("tender.no_documents") }}</div>
               <documents-modal
                 :ref="bid.id"
-                :documents="
-                  bid.hasOwnProperty('documents')
-                    ? bid.documents.filter(_doc => _doc.documentType !== 'eligibilityDocuments')
-                    : []
-                "
-                :espdDocuments="
-                  bid.hasOwnProperty('documents')
-                    ? bid.documents.filter(_doc => _doc.documentType === 'eligibilityDocuments')
-                    : []
-                "
+                :documents="getEosDocuments(bid)"
                 :datePublished="bid.date"
                 :noItemsText="$t('tender.no_documents')"
               />
@@ -192,12 +179,7 @@
             </button>
             <documents-modal
               :ref="bid.id + 'eligibilityDocuments'"
-              :documents="
-                bid.hasOwnProperty('documents')
-                  ? bid.documents.filter(_doc => _doc.documentType === 'eligibilityDocuments')
-                  : []
-              "
-              :datePublished="bid.date"
+              :documents="getEspdDocuments(bid)"
               :noItemsText="$t('tender.no_documents_submitted')"
             />
             <div class="offers-table__docs-espd-text">{{ $t("tender.self_declaration") }}</div>
@@ -210,21 +192,7 @@
               class="offers-table__docs-button"
             />
             <div class="offers-table__docs-eos-text" v-else>{{ $t("tender.no_documents") }}</div>
-            <documents-modal
-              :ref="bid.id"
-              :documents="
-                bid.hasOwnProperty('documents')
-                  ? bid.documents.filter(_doc => _doc.documentType !== 'eligibilityDocuments')
-                  : []
-              "
-              :espdDocuments="
-                bid.hasOwnProperty('documents')
-                  ? bid.documents.filter(_doc => _doc.documentType === 'eligibilityDocuments')
-                  : []
-              "
-              :datePublished="bid.date"
-              :noItemsText="$t('tender.no_documents')"
-            />
+            <documents-modal :ref="bid.id" :documents="getEosDocuments(bid)" />
           </td>
         </tr>
       </table>
@@ -285,6 +253,32 @@ export default {
     changePage(page) {
       this.numberOfLastDisplayedElement = page * this.pageSize;
       this.currentPage = page;
+    },
+    getEosDocuments(bid) {
+      return [
+        {
+          title: this.$t("tender.espd_docs"),
+          values: bid.hasOwnProperty("documents")
+            ? bid.documents.filter(_doc => _doc.documentType === "eligibilityDocuments")
+            : [],
+        },
+        {
+          title: this.$t("tender.modal_documents"),
+          values: bid.hasOwnProperty("documents")
+            ? bid.documents.filter(_doc => _doc.documentType !== "eligibilityDocuments")
+            : [],
+        },
+      ];
+    },
+    getEspdDocuments(bid) {
+      return [
+        {
+          title: this.$t("tender.espd_docs"),
+          values: bid.hasOwnProperty("documents")
+            ? bid.documents.filter(_doc => _doc.documentType === "eligibilityDocuments")
+            : [],
+        },
+      ];
     },
   },
 };

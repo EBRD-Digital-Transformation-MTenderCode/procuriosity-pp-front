@@ -84,13 +84,7 @@
             </div>
             <documents-modal
               :ref="award.id + 'eligibilityDocuments'"
-              :documents="
-                bidForCurrentAward(award.relatedBid).hasOwnProperty('documents')
-                  ? bidForCurrentAward(award.relatedBid).documents.filter(
-                      _doc => _doc.documentType === 'x_eligibilityDocuments'
-                    )
-                  : []
-              "
+              :documents="getEspdDocuments(award)"
               :datePublished="bidForCurrentAward(award.relatedBid).date"
               :noItemsText="$t('tender.no_documents_submitted')"
             />
@@ -109,20 +103,7 @@
             <div class="evaluation-table__docs-eos-text" v-else>{{ $t("tender.no_documents") }}</div>
             <documents-modal
               :ref="award.id"
-              :documents="
-                bidForCurrentAward(award.relatedBid).hasOwnProperty('documents')
-                  ? bidForCurrentAward(award.relatedBid).documents.filter(
-                      _doc => _doc.documentType !== 'x_eligibilityDocuments'
-                    )
-                  : []
-              "
-              :espdDocuments="
-                bidForCurrentAward(award.relatedBid).hasOwnProperty('documents')
-                  ? bidForCurrentAward(award.relatedBid).documents.filter(
-                      _doc => _doc.documentType === 'x_eligibilityDocuments'
-                    )
-                  : []
-              "
+              :documents="getEosDocuments(award)"
               :datePublished="bidForCurrentAward(award.relatedBid).date"
               :noItemsText="$t('tender.no_documents')"
             />
@@ -144,6 +125,7 @@
               v-if="!(gd(award, _ => _.status) === 'pending' && gd(award, _ => _.statusDetails) === 'empty')"
               :ref="award.id + 'info'"
               :award="award"
+              :cdbType="cdbType"
             />
             <div
               class="evaluation-table__status-time"
@@ -186,6 +168,7 @@ import PageNumber from "../../../../../components/PageNumber";
 import { getDataFromObject, formatDate, formatAmount } from "../../../../../utils";
 
 import awardsStatuses from "../../../../../store/types/awards-statuses";
+import { MTENDER2 } from "../../../../../store/types/cbd-types";
 
 export default {
   name: "Evaluation",
@@ -214,6 +197,9 @@ export default {
     },
     elementsAmount() {
       return this.gd(this.evRecord, _ => _.tender.lots, []).length;
+    },
+    cdbType() {
+      return MTENDER2;
     },
   },
   methods: {
@@ -252,6 +238,38 @@ export default {
     changePage(page) {
       this.numberOfLastDisplayedLot = page * this.pageSize;
       this.currentPage = page;
+    },
+    getEosDocuments(award) {
+      return [
+        {
+          title: this.$t("tender.espd_docs"),
+          values: this.bidForCurrentAward(award.relatedBid).hasOwnProperty("documents")
+            ? this.bidForCurrentAward(award.relatedBid).documents.filter(
+                _doc => _doc.documentType === "x_eligibilityDocuments"
+              )
+            : [],
+        },
+        {
+          title: this.$t("tender.modal_documents"),
+          values: this.bidForCurrentAward(award.relatedBid).hasOwnProperty("documents")
+            ? this.bidForCurrentAward(award.relatedBid).documents.filter(
+                _doc => _doc.documentType !== "x_eligibilityDocuments"
+              )
+            : [],
+        },
+      ];
+    },
+    getEspdDocuments(award) {
+      return [
+        {
+          title: this.$t("tender.espd_docs"),
+          values: this.bidForCurrentAward(award.relatedBid).hasOwnProperty("documents")
+            ? this.bidForCurrentAward(award.relatedBid).documents.filter(
+                _doc => _doc.documentType === "x_eligibilityDocuments"
+              )
+            : [],
+        },
+      ];
     },
   },
 };

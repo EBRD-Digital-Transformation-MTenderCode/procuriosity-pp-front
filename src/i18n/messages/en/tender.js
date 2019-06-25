@@ -318,4 +318,5 @@ export default {
   decision_url: "URL",
   auction_not_started: "Auction is not started",
   go_to_auction: "Go to auction",
+  espd_docs: "ESPD documents",
 };
