@@ -148,7 +148,6 @@
                           gd(tender, _ => _.MSRecord.compiledRelease.tender.value.amount)
                         )
                       "
-                      :selectTab="selectTab"
                       :hasBids="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('bids')"
                       :hasAwards="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('awards')"
                       :hasCANs="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('contracts')"
@@ -216,6 +215,7 @@ export default {
     };
   },
   async created() {
+    console.log(1);
     await this.getTender();
 
     this.tabs = this.tabs.filter(tab => {
@@ -329,14 +329,6 @@ export default {
     },
     gd(...args) {
       return getDataFromObject(...args);
-    },
-    selectTab(tab) {
-      this.activeTab = tab;
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "smooth",
-      });
     },
     checkTab(tab) {
       if (tab === "pn") {
