@@ -151,7 +151,7 @@
     <div class="info__sub-title">{{ $t("tender.info_about_cn") }}</div>
     <ul class="info-list">
       <li>
-        <button type="button" class="info-block__link" @click="selectTab('cn')">
+        <button type="button" class="info-block__link" @click="selectTab('contract-notice')">
           {{ $t("tender.official_publication_procedure") }}
         </button>
       </li>
@@ -170,7 +170,7 @@
       <div class="info__sub-title">{{ $t("tender.record_of_bids") }}</div>
       <ul class="info-list">
         <li>
-          <button type="button" class="info-block__link" @click="selectTab('offers')">
+          <button type="button" class="info-block__link" @click="selectTab('bids')">
             {{ $t("tender.record_of_bids_text") }}
           </button>
         </li>
@@ -182,7 +182,7 @@
       <ul class="info-list">
         <!--<li>Record of Electronic auction</li>-->
         <li>
-          <button type="button" class="info-block__link" @click="selectTab('ev')">
+          <button type="button" class="info-block__link" @click="selectTab('awards')">
             {{ $t("tender.information_about_evaluation_and_award_text") }}
           </button>
         </li>

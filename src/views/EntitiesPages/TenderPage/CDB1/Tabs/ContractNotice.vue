@@ -589,9 +589,6 @@ export default {
       this.numberOfLastDisplayedElement = page * this.pageSize;
       this.currentPage = page;
     },
-    getFSRecord(ocid) {
-      this.getFS(ocid);
-    },
   },
   mounted() {
     this.$nextTick(() => {

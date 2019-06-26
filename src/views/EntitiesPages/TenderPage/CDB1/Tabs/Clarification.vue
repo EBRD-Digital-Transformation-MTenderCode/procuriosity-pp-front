@@ -1,15 +1,6 @@
 <template>
   <div>
-    <div
-      class="entity-nav"
-      data-scroll-spy-id="clarification"
-      v-scroll-spy-active="{ selector: 'a', class: 'active' }"
-      v-scroll-spy-link
-    >
-      <a>{{ $t("tender.clarification") }}</a>
-      <a>{{ $t("tender.modification_documents") }}</a>
-    </div>
-    <div class="info" data-scroll-spy-id="clarification" v-scroll-spy="{ offset: 75, allowNoActive: true }">
+    <div class="info">
       <div>
         <div class="info__title">{{ $t("tender.clarification") }}</div>
         <div v-if="tender.hasOwnProperty('questions')">

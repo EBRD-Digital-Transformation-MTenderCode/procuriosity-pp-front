@@ -4,32 +4,26 @@
       <div class="info-blocks accordion-header">
         <div class="info-block">
           <el-row :gutter="15">
-            <el-col :sm="16">
+            <el-col v-if="contract.title" :sm="16">
               <div class="info-block__text">{{ $t("tender.title") }}</div>
-              <div class="info-block__value info-block__value__bold">{{ gd(contract, _ => _.title, "###") }}</div>
+              <div class="info-block__value info-block__value__bold">{{ gd(contract, _ => _.title) }}</div>
             </el-col>
-            <el-col :sm="8">
-              <div class="info-block__text">{{ $t("tender.id") }}</div>
-              <div class="info-block__value">{{ gd(contract, _ => _.id, "###") }}</div>
+            <el-col :sm="contract.title ? 8 : 16">
+              <div class="info-block__text">{{ $t("tender.contract_identifier") }}</div>
+              <div class="info-block__value">{{ gd(contract, _ => _.contractID, "###") }}</div>
             </el-col>
           </el-row>
         </div>
 
         <div class="info-block">
           <el-row :gutter="15">
-            <el-col :sm="16">
-              <div class="info-block__text">{{ $t("tender.contract_identifier") }}</div>
-              <div class="info-block__value">{{ gd(contract, _ => _.contractID, "###") }}</div>
+            <el-col v-if="contract.contractNumber" :sm="16">
+              <div class="info-block__text">{{ $t("tender.contract_number") }}</div>
+              <div class="info-block__value">{{ gd(contract, _ => _.contractNumber) }}</div>
             </el-col>
-            <el-col :sm="8">
+            <el-col :sm="contract.contractNumber ? 8 : 16">
               <div class="info-block__text">{{ $t("tender.contract_date") }}</div>
               <div class="info-block__value">{{ fd(gd(contract, _ => _.date, "###")) }}</div>
-            </el-col>
-          </el-row>
-          <el-row :gutter="15">
-            <el-col :sm="16">
-              <div class="info-block__text">{{ $t("tender.contract_number") }}</div>
-              <div class="info-block__value">{{ gd(contract, _ => _.contractNumber, "###") }}</div>
             </el-col>
           </el-row>
         </div>

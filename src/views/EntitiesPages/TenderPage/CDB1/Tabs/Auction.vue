@@ -76,7 +76,7 @@ export default {
           startDate: this.gd(lot, _ => _.auctionPeriod.startDate),
           endDate: this.gd(lot, _ => _.auctionPeriod.endDate),
         },
-        url: this.gd(lot, _ => _.auctionUrl, "###"),
+        url: lot.auctionUrl,
       }));
     },
   },

@@ -235,13 +235,7 @@ export default {
       return true;
     });
 
-    const { query } = this.$route;
-    if (query.tab && this.tabs.find(tab => query.tab === tab)) {
-      this.activeTab = query.tab;
-    } else {
-      this.activeTab = this.tabs[0];
-      this.$router.replace({ query: { tab: this.tabs[0] } });
-    }
+    this.changeTab();
   },
   computed: {
     ...mapState({
@@ -331,13 +325,25 @@ export default {
       return getDataFromObject(...args);
     },
     selectTab(tab) {
+      this.$router.replace({ query: { tab } });
       this.activeTab = tab;
+      this.changeTab();
       window.scrollTo({
         top: 0,
         left: 0,
         behavior: "smooth",
       });
     },
+    changeTab() {
+      const { query } = this.$route;
+      if (query.tab && this.tabs.find(tab => query.tab === tab)) {
+        this.activeTab = query.tab;
+      } else {
+        this.activeTab = this.tabs[0];
+        this.$router.replace({ query: { tab: this.tabs[0] } });
+      }
+    },
+
     checkTab(tab) {
       if (tab === "pn") {
         return false;

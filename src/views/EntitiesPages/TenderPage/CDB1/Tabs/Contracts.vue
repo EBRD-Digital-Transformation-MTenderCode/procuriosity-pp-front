@@ -9,7 +9,7 @@
       :elements-amount="itemsNumber"
       :page-size="pageSize"
     />
-    <el-collapse accordion :value="gd(tender.contracts, _ => _[0].id, '0') + '0'" @change="changeActiveItem">
+    <el-collapse accordion :value="gd(tender.contracts, _ => _[0].id, '0')" @change="changeActiveItem">
       <contract-item
         v-for="(contract, index) of needPagination
           ? tender.contracts.filter(
@@ -18,6 +18,7 @@
           : tender.contracts"
         :key="contract.id + index"
         :contract="contract"
+        :activeItemId="activeItemId"
       />
     </el-collapse>
     <list-pagination
