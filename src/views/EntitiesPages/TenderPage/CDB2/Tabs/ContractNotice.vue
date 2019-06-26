@@ -642,68 +642,7 @@
                   ).length
                 "
               >
-                <div
-                  class="info-block__documents"
-                  v-for="(doc, index) of getDocs(
-                    gd(
-                      gd(evRecord, _ => _.tender.documents, []).filter(
-                        _doc => gd(_doc, _ => _.relatedLots[0], '') === gd(lot, _ => _.id)
-                      ),
-                      _ => _,
-                      []
-                    )
-                  )"
-                  :key="doc.id + index"
-                >
-                  <div class="info-block__document">
-                    <el-row :gutter="15">
-                      <el-col :sm="24">
-                        <div class="info-block__value">
-                          {{ parseDocType(gd(doc, _ => _.documentType)) }}
-                          <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a>
-                        </div>
-                      </el-col>
-                    </el-row>
-                    <el-row :gutter="15">
-                      <el-col :sm="16">
-                        <div class="info-block__text info-block__text_small">
-                          {{ $t("tender.id") }}: {{ gd(doc, _ => _.id) }}
-                        </div>
-                      </el-col>
-                      <el-col :sm="8">
-                        <div class="info-block__text info-block__text_small">
-                          {{ $t("tender.published") }}: {{ fd(gd(doc, _ => _.datePublished)) }}
-                        </div>
-                      </el-col>
-                    </el-row>
-                  </div>
-                  <div
-                    v-for="(oldDoc, index) of gd(doc, _ => _.oldVersions, [])"
-                    :key="oldDoc.id + index"
-                    class="info-block__document info-block__document_old"
-                  >
-                    <el-row :gutter="15">
-                      <el-col :sm="24">
-                        <div class="info-block__value">
-                          {{ parseDocType(gd(oldDoc, _ => _.documentType)) }}
-                          <a :href="gd(oldDoc, _ => _.url)">{{ gd(oldDoc, _ => _.title) }}</a>
-                        </div>
-                      </el-col>
-                    </el-row>
-                    <el-row :gutter="15">
-                      <el-col :sm="16" class="info-block__text_oldDoc">
-                        <div class="info-block__text info-block__text_small">
-                          {{ $t("tender.id") }}: {{ gd(oldDoc, _ => _.id) }}
-                        </div>
-                      </el-col>
-                      <el-col :sm="8">
-                        <div class="info-block__text info-block__text_small">
-                          {{ $t("tender.published") }}: {{ fd(gd(oldDoc, _ => _.datePublished)) }}
-                        </div>
-                      </el-col>
-                    </el-row>
-                  </div>
-                </div>
+                <documents-item :documents="getLotDocs(lot)" :cdbType="cdbType" />
               </div>
             </div>
           </el-collapse-item>
@@ -1151,66 +1090,7 @@
         <div class="info__sub-title">{{ $t("tender.procedure_documents") }}</div>
         <div class="info-blocks">
           <div class="info-block">
-            <div
-              class="info-block__documents"
-              v-for="(doc, index) of getDocs(
-                gd(
-                  gd(evRecord, _ => _.tender.documents, []).filter(_doc => !_doc.hasOwnProperty('relatedLots')),
-                  _ => _,
-                  []
-                )
-              )"
-              :key="doc.id + index"
-            >
-              <div class="info-block__document">
-                <el-row :gutter="15">
-                  <el-col :sm="24">
-                    <div class="info-block__value">
-                      {{ parseDocType(gd(doc, _ => _.documentType)) }}
-                      <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a>
-                    </div>
-                  </el-col>
-                </el-row>
-                <el-row :gutter="15">
-                  <el-col :sm="16">
-                    <div class="info-block__text info-block__text_small">
-                      {{ $t("tender.id") }}: {{ gd(doc, _ => _.id) }}
-                    </div>
-                  </el-col>
-                  <el-col :sm="8">
-                    <div class="info-block__text info-block__text_small">
-                      {{ $t("tender.published") }}: {{ fd(gd(doc, _ => _.datePublished)) }}
-                    </div>
-                  </el-col>
-                </el-row>
-              </div>
-              <div
-                v-for="(oldDoc, index) of gd(doc, _ => _.oldVersions, [])"
-                :key="oldDoc.id + index"
-                class="info-block__document info-block__document_old"
-              >
-                <el-row :gutter="15">
-                  <el-col :sm="24">
-                    <div class="info-block__value">
-                      {{ parseDocType(gd(oldDoc, _ => _.documentType)) }}
-                      <a :href="gd(oldDoc, _ => _.url)">{{ gd(oldDoc, _ => _.title) }}</a>
-                    </div>
-                  </el-col>
-                </el-row>
-                <el-row :gutter="15">
-                  <el-col :sm="16" class="info-block__text_oldDoc">
-                    <div class="info-block__text info-block__text_small">
-                      {{ $t("tender.id") }}: {{ gd(oldDoc, _ => _.id) }}
-                    </div>
-                  </el-col>
-                  <el-col :sm="8">
-                    <div class="info-block__text info-block__text_small">
-                      {{ $t("tender.published") }}: {{ fd(gd(oldDoc, _ => _.datePublished)) }}
-                    </div>
-                  </el-col>
-                </el-row>
-              </div>
-            </div>
+            <documents-item :documents="getDocs()" :cdbType="cdbType" />
           </div>
         </div>
       </div>
@@ -1322,15 +1202,10 @@ import platforms from "../../../../../store/types/platforms";
 import ListPagination from "../../../../../components/ListPagination";
 import PageNumber from "../../../../../components/PageNumber";
 import BudgetBreakdown from "../../../../../components/BudgetBreakdown";
+import DocumentsItem from "./../../DocumentsItem";
 
-import {
-  getDataFromObject,
-  formatDate,
-  parseDocumentType,
-  addPeriod,
-  formatAmount,
-  transformDocumentation,
-} from "../../../../../utils";
+import { getDataFromObject, formatDate, addPeriod, formatAmount } from "../../../../../utils";
+import { MTENDER2 } from "../../../../../store/types/cbd-types";
 
 export default {
   name: "ContractNotice",
@@ -1359,6 +1234,7 @@ export default {
     "list-pagination": ListPagination,
     "page-number": PageNumber,
     "budget-breakdown": BudgetBreakdown,
+    "documents-item": DocumentsItem,
   },
   data() {
     return {
@@ -1440,6 +1316,9 @@ export default {
     elementsAmount() {
       return this.gd(this.evRecord, _ => _.tender.lots, []).length;
     },
+    cdbType() {
+      return MTENDER2;
+    },
   },
   methods: {
     gd(...args) {
@@ -1447,9 +1326,6 @@ export default {
     },
     fd(...ars) {
       return formatDate(...ars);
-    },
-    parseDocType(type) {
-      return parseDocumentType(type, this.$i18n.locale);
     },
     add(date, timePeriod, count) {
       return addPeriod(date, timePeriod, count);
@@ -1460,8 +1336,29 @@ export default {
     setWindowSize() {
       this.windowWidth = window.innerWidth;
     },
-    getDocs(docs) {
-      return transformDocumentation(docs);
+    getDocs() {
+      return [
+        {
+          values: this.gd(
+            this.gd(this.evRecord, _ => _.tender.documents, []).filter(_doc => !_doc.hasOwnProperty("relatedLots")),
+            _ => _,
+            []
+          ),
+        },
+      ];
+    },
+    getLotDocs(lot) {
+      return [
+        {
+          values: this.gd(
+            this.gd(this.evRecord, _ => _.tender.documents, []).filter(
+              _doc => this.gd(_doc, _ => _.relatedLots[0], "") === this.gd(lot, _ => _.id)
+            ),
+            _ => _,
+            []
+          ),
+        },
+      ];
     },
     changePage(page) {
       this.numberOfLastDisplayedLot = page * this.pageSize;

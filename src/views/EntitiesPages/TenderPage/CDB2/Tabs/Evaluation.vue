@@ -87,6 +87,7 @@
               :documents="getEspdDocuments(award)"
               :datePublished="bidForCurrentAward(award.relatedBid).date"
               :noItemsText="$t('tender.no_documents_submitted')"
+              :cdbType="cdbType"
             />
           </td>
           <td class="evaluation-table__docs-eos" :data-th="$t('tender.eos_docs')">
@@ -106,6 +107,7 @@
               :documents="getEosDocuments(award)"
               :datePublished="bidForCurrentAward(award.relatedBid).date"
               :noItemsText="$t('tender.no_documents')"
+              :cdbType="cdbType"
             />
           </td>
           <!--<td>

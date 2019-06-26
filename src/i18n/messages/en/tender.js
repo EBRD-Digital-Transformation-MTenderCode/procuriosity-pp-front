@@ -319,4 +319,7 @@ export default {
   auction_not_started: "Auction is not started",
   go_to_auction: "Go to auction",
   espd_docs: "ESPD documents",
+  contract_identifier: "Contract identifier",
+  contract_date: "Contract date",
+  contract_number: "Contract number",
 };

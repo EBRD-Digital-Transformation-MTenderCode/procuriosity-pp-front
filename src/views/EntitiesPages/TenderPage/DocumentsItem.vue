@@ -68,7 +68,14 @@
 </template>
 
 <script>
-import { getDataFromObject, formatDate, parseDocumentType, transformDocumentation } from "./../../../utils";
+import {
+  getDataFromObject,
+  formatDate,
+  parseDocumentType,
+  transformDocumentation,
+  transformDocumentationFromCDB1,
+} from "./../../../utils";
+import { MTENDER1, MTENDER2 } from "../../../store/types/cbd-types";
 
 export default {
   name: "DocumentsItem",
@@ -84,6 +91,10 @@ export default {
     noItemsText: {
       type: String,
     },
+    cdbType: {
+      type: String,
+      required: true,
+    },
   },
   methods: {
     gd(...args) {
@@ -96,7 +107,11 @@ export default {
       return parseDocumentType(type, this.$i18n.locale);
     },
     getDocs(docs) {
-      return transformDocumentation(docs);
+      if (this.cdbType === MTENDER1) {
+        return docs ? transformDocumentationFromCDB1(docs) : [];
+      } else if (this.cdbType === MTENDER2) {
+        return docs ? transformDocumentation(docs) : [];
+      } else return [];
     },
   },
 };

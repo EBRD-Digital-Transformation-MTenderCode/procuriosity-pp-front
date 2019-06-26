@@ -25,21 +25,14 @@
         </div>
 
         <div class="info__sub-title">{{ $t("tender.documents_of_decision") }}</div>
-        <documents-item :documents="getDocs(award)" :noItemsText="$t('tender.no_documents')" />
+        <documents-item :documents="getDocs(award)" :noItemsText="$t('tender.no_documents')" :cdbType="cdbType" />
       </div>
     </slot>
   </el-dialog>
 </template>
 
 <script>
-import {
-  getDataFromObject,
-  formatDate,
-  parseDocumentType,
-  transformDocumentation,
-  transformDocumentationFromCDB1,
-} from "./../../../utils";
-import { MTENDER2, MTENDER1 } from "../../../store/types/cbd-types";
+import { getDataFromObject, formatDate, parseDocumentType } from "./../../../utils";
 import DocumentsItem from "./DocumentsItem";
 
 export default {
@@ -73,19 +66,11 @@ export default {
       return parseDocumentType(type, this.$i18n.locale);
     },
     getDocs(award) {
-      if (this.cdbType === MTENDER1) {
-        return [
-          {
-            values: award.documents ? transformDocumentationFromCDB1(award.documents) : [],
-          },
-        ];
-      } else if (this.cdbType === MTENDER2) {
-        return [
-          {
-            values: award.documents ? transformDocumentation(award.documents) : [],
-          },
-        ];
-      } else return [];
+      return [
+        {
+          values: this.gd(award, _ => _.documents),
+        },
+      ];
     },
   },
 };

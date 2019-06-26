@@ -79,6 +79,7 @@
               :ref="award.id + 'eligibilityDocuments'"
               :documents="getEspdDocuments(award)"
               :noItemsText="$t('tender.no_documents_submitted')"
+              :cdbType="cdbType"
             />
           </td>
           <td class="evaluation-table__docs-eos" :data-th="$t('tender.eos_docs')">
@@ -93,6 +94,7 @@
               :ref="award.id"
               :documents="getEosDocuments(award)"
               :noItemsText="$t('tender.no_documents')"
+              :cdbType="cdbType"
             />
           </td>
           <td :data-th="$t('tender.status_and_resolution_tc_withoutBreak')">
@@ -181,6 +183,7 @@
             :ref="award.id + 'eligibilityDocuments'"
             :documents="getEspdDocuments(award)"
             :noItemsText="$t('tender.no_documents_submitted')"
+            :cdbType="cdbType"
           />
         </td>
         <td class="evaluation-table__docs-eos" :data-th="$t('tender.eos_docs')">
@@ -195,6 +198,7 @@
             :ref="award.id"
             :documents="getEosDocuments(award)"
             :noItemsText="$t('tender.no_documents')"
+            :cdbType="cdbType"
           />
         </td>
         <td :data-th="$t('tender.status_and_resolution_tc_withoutBreak')">

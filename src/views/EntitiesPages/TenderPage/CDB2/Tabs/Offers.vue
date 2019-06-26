@@ -152,6 +152,7 @@
               :documents="getEspdDocuments(bid)"
               :datePublished="bid.date"
               :noItemsText="$t('tender.no_documents_submitted')"
+              :cdbType="cdbType"
             />
             <div class="offers-table__docs-espd-text">{{ $t("tender.self_declaration") }}</div>
           </td>
@@ -168,6 +169,7 @@
               :documents="getEosDocuments(bid)"
               :datePublished="bid.date"
               :noItemsText="$t('tender.no_documents')"
+              :cdbType="cdbType"
             />
           </td>
         </tr>
@@ -201,6 +203,7 @@ import ListPagination from "../../../../../components/ListPagination";
 import PageNumber from "../../../../../components/PageNumber";
 
 import { getDataFromObject, formatDate, formatAmount } from "../../../../../utils";
+import { MTENDER2 } from "../../../../../store/types/cbd-types";
 
 export default {
   name: "Offers",
@@ -228,6 +231,9 @@ export default {
     },
     elementsAmount() {
       return this.gd(this.evRecord, _ => _.tender.lots, []).length;
+    },
+    cdbType() {
+      return MTENDER2;
     },
   },
   methods: {

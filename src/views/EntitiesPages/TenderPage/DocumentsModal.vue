@@ -1,7 +1,12 @@
 <template>
   <el-dialog :visible.sync="show" append-to-body :title="$t('tender.modal_documents')" width="75%">
     <slot>
-      <documents-item :documents="documents" :noItemsText="noItemsText" :datePublished="datePublished" />
+      <documents-item
+        :documents="documents"
+        :noItemsText="noItemsText"
+        :datePublished="datePublished"
+        :cdbType="cdbType"
+      />
     </slot>
   </el-dialog>
 </template>
@@ -22,6 +27,10 @@ export default {
     },
     noItemsText: {
       type: String,
+    },
+    cdbType: {
+      type: String,
+      required: true,
     },
   },
   components: {
