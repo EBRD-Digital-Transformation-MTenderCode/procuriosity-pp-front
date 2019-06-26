@@ -152,31 +152,18 @@
     <div class="info__sub-title">{{ $t("tender.info_about_cn") }}</div>
     <ul class="info-list">
       <li>
-        <a
-          class="info-block__link"
-          :href="
-            `/${$i18n.locale !== 'ro' ? $i18n.locale + '/' : ''}tenders/${gd(
-              msRecord,
-              _ => _.ocid
-            )}?tab=contract-notice`
-          "
-        >
-          {{ $t("tender.clarifications_changes_and_cancellations_text") }}
-        </a>
+        <button type="button" class="info-block__link" @click="selectTab('contract-notice')">
+          {{ $t("tender.official_publication_procedure") }}
+        </button>
       </li>
     </ul>
 
     <div class="info__sub-title">{{ $t("tender.clarifications_changes_and_cancellations") }}</div>
     <ul class="info-list">
       <li>
-        <a
-          class="info-block__link"
-          :href="
-            `/${$i18n.locale !== 'ro' ? $i18n.locale + '/' : ''}tenders/${gd(msRecord, _ => _.ocid)}?tab=clarification`
-          "
-        >
+        <button type="button" class="info-block__link" @click="selectTab('clarification')">
           {{ $t("tender.clarifications_changes_and_cancellations_text") }}
-        </a>
+        </button>
       </li>
     </ul>
 
@@ -184,12 +171,9 @@
       <div class="info__sub-title">{{ $t("tender.record_of_bids") }}</div>
       <ul class="info-list">
         <li>
-          <a
-            class="info-block__link"
-            :href="`/${$i18n.locale !== 'ro' ? $i18n.locale + '/' : ''}tenders/${gd(msRecord, _ => _.ocid)}?tab=bids`"
-          >
+          <button type="button" class="info-block__link" @click="selectTab('bids')">
             {{ $t("tender.record_of_bids_text") }}
-          </a>
+          </button>
         </li>
       </ul>
     </div>
@@ -199,20 +183,14 @@
       <ul class="info-list">
         <!--<li>Record of Electronic auction</li>-->
         <li>
-          <a
-            class="info-block__link"
-            :href="`/${$i18n.locale !== 'ro' ? $i18n.locale + '/' : ''}tenders/${gd(msRecord, _ => _.ocid)}?tab=awards`"
-          >
+          <button type="button" class="info-block__link" @click="selectTab('awards')">
             {{ $t("tender.information_about_evaluation_and_award_text") }}
-          </a>
+          </button>
         </li>
         <li v-if="hasCANs">
-          <a
-            class="info-block__link"
-            :href="`/${$i18n.locale !== 'ro' ? $i18n.locale + '/' : ''}tenders/${gd(msRecord, _ => _.ocid)}?tab=cans`"
-          >
+          <button type="button" class="info-block__link" @click="selectTab('cans')">
             {{ $t("tender.report_on_recommended_awards") }}
-          </a>
+          </button>
         </li>
       </ul>
     </div>
@@ -258,6 +236,10 @@ export default {
     },
     breakdowns: {
       type: Array,
+      required: true,
+    },
+    selectTab: {
+      type: Function,
       required: true,
     },
   },
