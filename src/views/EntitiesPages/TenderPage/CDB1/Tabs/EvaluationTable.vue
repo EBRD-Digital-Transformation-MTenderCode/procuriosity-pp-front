@@ -136,10 +136,12 @@ export default {
     parseStatus(status) {
       if (status === "active") {
         return awardsStatuses["winner"][this.$i18n.locale];
-      } else if (status === "unsuccessful") {
+      } else if (status === "unsuccessful" || status === "cancelled") {
         return awardsStatuses["disqualified"][this.$i18n.locale];
       } else if (status === "pending") {
         return awardsStatuses["pending"][this.$i18n.locale];
+      } else if (status === "consideration") {
+        return awardsStatuses["consideration"][this.$i18n.locale];
       } else {
         return "###";
       }
