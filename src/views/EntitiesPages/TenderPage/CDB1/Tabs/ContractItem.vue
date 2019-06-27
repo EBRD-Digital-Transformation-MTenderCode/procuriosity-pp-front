@@ -40,7 +40,7 @@
                 <el-col :sm="16">
                   <div class="info-block__text">{{ $t("tender.procuring_entity_full_name") }}</div>
                   <div class="info-block__value">
-                    {{ gd(contract, _ => _.suppliers[0].identifier.legalName, "###") }}
+                    {{ gd(contract, _ => _.suppliers[0].name, "###") }}
                   </div>
                 </el-col>
                 <el-col :sm="8">

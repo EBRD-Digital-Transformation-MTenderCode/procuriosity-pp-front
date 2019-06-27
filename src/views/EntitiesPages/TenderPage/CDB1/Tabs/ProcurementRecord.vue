@@ -6,7 +6,7 @@
     <div class="info-blocks">
       <div class="info-block">
         <div>
-          <span class="info-block__text">{{ $t("tender.electronic_tendering_procedure_started") }}:</span>{{ " " }}
+          <span class="info-block__text">{{ $t("tender.electronic_tendering_procedure_started") }}:</span>
           <span class="info-block__value">{{ fd(gd(tender, _ => _.date), "DD/MM/YYYY, HH:mm") }}</span>
         </div>
         <div>
@@ -31,7 +31,7 @@
               {{ $t("tender.procuring_entity_full_name") }}
             </div>
             <div class="info-block__value">
-              {{ gd(tender, _ => _.procuringEntity.identifier.legalName) }}
+              {{ gd(tender, _ => _.procuringEntity.name, "###") }}
             </div>
           </el-col>
           <el-col :sm="8">
@@ -39,7 +39,7 @@
               {{ $t("tender.procuring_entity_identifier") }}
             </div>
             <div class="info-block__value">
-              {{ gd(tender, _ => _.procuringEntity.identifier.id) }}
+              {{ gd(tender, _ => _.procuringEntity.identifier.id, "###") }}
             </div>
           </el-col>
         </el-row>
@@ -52,7 +52,7 @@
         <el-row :gutter="15">
           <el-col :sm="24">
             <div class="info-block__text">{{ $t("tender.title") }}</div>
-            <div class="info-block__value">{{ gd(tender, _ => _.title) }}</div>
+            <div class="info-block__value">{{ gd(tender, _ => _.title, "###") }}</div>
           </el-col>
         </el-row>
       </div>
