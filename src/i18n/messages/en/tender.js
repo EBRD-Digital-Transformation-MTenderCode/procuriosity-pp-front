@@ -276,6 +276,7 @@ export default {
   report_on_recommended_awards: "Report on recommended awards",
 
   value_excluding_VAT: "value excluding VAT",
+  value_including_VAT: "value including VAT",
   request_for_contract_performance_guarantee: "Request for contract performance guarantee",
 
   information_of_the_decision: "Information on the award decision",
@@ -322,4 +323,5 @@ export default {
   contract_identifier: "Contract identifier",
   contract_date: "Contract date",
   contract_number: "Contract number",
+  estimated_total_value_including_VAT: "Estimated total value including VAT",
 };

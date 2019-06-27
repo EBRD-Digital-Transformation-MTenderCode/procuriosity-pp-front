@@ -104,9 +104,9 @@
 
 <script>
 import axios from "axios";
-import { getComplaintsConfig, getDecisionsConfig } from "../../../../../configs/requests-configs";
-import { getDataFromObject, formatDate, transformSpecialSymbols } from "../../../../../utils";
-import Error from "../../../../Error";
+import { getComplaintsConfig, getDecisionsConfig } from "../../../configs/requests-configs";
+import { getDataFromObject, formatDate, transformSpecialSymbols } from "../../../utils";
+import Error from "../../Error";
 
 export default {
   name: "Review",

@@ -63,6 +63,7 @@ export default {
   documentation: "Documentație",
 
   estimated_value_excluding_VAT: "Valoarea estimată a achiziției fără TVA",
+  estimated_total_value_including_VAT: "Valoarea estimată a achiziției cu TVA",
   review_procedures_title: "Procedura de contestare",
 
   procurement_plan: "Planul&nbsp;de<br/>achiziții",
@@ -281,6 +282,7 @@ export default {
   report_on_recommended_awards: "Raport privind atribuirea recomandată",
 
   value_excluding_VAT: "achiziției fără TVA",
+  value_including_VAT: "achiziției cu TVA",
 
   request_for_contract_performance_guarantee: "Cerere de garanție de bună execuție a contractului",
 

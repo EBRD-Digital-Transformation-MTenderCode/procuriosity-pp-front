@@ -176,7 +176,7 @@ import dayjs from "dayjs";
 
 import ContractNotice from "./Tabs/ContractNotice";
 import Clarification from "./Tabs/Clarification";
-import Review from "./Tabs/Review";
+import Review from "../Review";
 import Auction from "./Tabs/Auction";
 import Offers from "./Tabs/Offers";
 import Evaluation from "./Tabs/Evaluation";

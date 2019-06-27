@@ -60,7 +60,13 @@
       <div class="info-block">
         <el-row :gutter="15">
           <el-col :sm="12">
-            <div class="info-block__text">{{ $t("tender.estimated_total_value_excluding_VAT") }}</div>
+            <div class="info-block__text">
+              {{
+                tender.value.valueAddedTaxIncluded
+                  ? $t("tender.estimated_total_value_including_VAT")
+                  : $t("tender.estimated_total_value_excluding_VAT")
+              }}
+            </div>
             <div class="info-block__value">
               {{ fa(gd(tender, _ => _.value.amount)) }}
               {{ gd(tender, _ => _.value.currency) }}

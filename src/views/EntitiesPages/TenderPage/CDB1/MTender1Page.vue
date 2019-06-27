@@ -19,7 +19,13 @@
               </el-col>
               <el-col :sm="6" :offset="2" :xs="{ span: 22, offset: 0 }">
                 <div class="entity-main-info__value">
-                  <div>{{ $t("tender.estimated_value_excluding_VAT") }}</div>
+                  <div>
+                    {{
+                      tender.value.valueAddedTaxIncluded
+                        ? $t("tender.estimated_total_value_including_VAT")
+                        : $t("tender.estimated_total_value_excluding_VAT")
+                    }}
+                  </div>
                   <span class="entity-main-info__amount">
                     <span class="whole" :style="wholeAmount.length > 8 ? 'font-size: 26px' : ''"
                       >{{ wholeAmount }}
@@ -130,7 +136,7 @@ import { FETCH_CURRENT_TENDER_INFO } from "../../../../store/types/actions-types
 import TenderCard from "../../../../components/ListCards/TendersCard";
 import ContractNotice from "./Tabs/ContractNotice";
 import Clarification from "./Tabs/Clarification";
-import Review from "./Tabs/Review";
+import Review from "../Review";
 import Auction from "./Tabs/Auction";
 import Offers from "./Tabs/Offers";
 import Evaluation from "./Tabs/Evaluation";
