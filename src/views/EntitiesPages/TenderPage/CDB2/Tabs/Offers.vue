@@ -157,13 +157,7 @@
             <div class="offers-table__docs-espd-text">{{ $t("tender.self_declaration") }}</div>
           </td>
           <td :data-th="$t('tender.eos_docs')">
-            <button
-              v-if="bid.hasOwnProperty('documents') ? bid.documents.length : false"
-              type="button"
-              @click="$refs[bid.id][0].show = true"
-              class="offers-table__docs-button"
-            />
-            <div class="offers-table__docs-eos-text" v-else>{{ $t("tender.no_documents") }}</div>
+            <button type="button" @click="$refs[bid.id][0].show = true" class="offers-table__docs-button" />
             <documents-modal
               :ref="bid.id"
               :documents="getEosDocuments(bid)"

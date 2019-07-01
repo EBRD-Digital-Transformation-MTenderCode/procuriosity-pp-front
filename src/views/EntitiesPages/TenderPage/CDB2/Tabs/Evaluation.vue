@@ -68,11 +68,6 @@
           </td>
           <td :data-th="$t('tender.mtender_espd')">
             <button
-              v-if="
-                bidForCurrentAward(award.relatedBid).hasOwnProperty('documents')
-                  ? bidForCurrentAward(award.relatedBid).documents.length
-                  : false
-              "
               type="button"
               @click="$refs[award.id + 'eligibilityDocuments'][0].show = true"
               class="evaluation-table__docs-espd-button"
@@ -91,17 +86,7 @@
             />
           </td>
           <td class="evaluation-table__docs-eos" :data-th="$t('tender.eos_docs')">
-            <button
-              v-if="
-                bidForCurrentAward(award.relatedBid).hasOwnProperty('documents')
-                  ? bidForCurrentAward(award.relatedBid).documents.length
-                  : 0
-              "
-              type="button"
-              @click="$refs[award.id][0].show = true"
-              class="evaluation-table__docs-button"
-            />
-            <div class="evaluation-table__docs-eos-text" v-else>{{ $t("tender.no_documents") }}</div>
+            <button type="button" @click="$refs[award.id][0].show = true" class="evaluation-table__docs-button" />
             <documents-modal
               :ref="award.id"
               :documents="getEosDocuments(award)"

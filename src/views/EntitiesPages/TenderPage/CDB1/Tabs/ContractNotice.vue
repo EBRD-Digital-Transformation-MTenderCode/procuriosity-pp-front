@@ -214,17 +214,6 @@
 
               <div class="info-blocks">
                 <div class="info-block">
-                  <div class="info-block__text">{{ $t("tender.description_of_procurement") }}:</div>
-                  <div
-                    v-for="item of gd(tender, _ => _.items, []).filter(
-                      item => gd(item, _ => _.relatedLot, '') === gd(lot, _ => _.id)
-                    )"
-                    :key="item.id"
-                  >
-                    <item :item="item" />
-                  </div>
-                </div>
-                <div class="info-block">
                   <el-row :gutter="15">
                     <el-col :sm="24">
                       <div class="info-block__text">
@@ -239,6 +228,17 @@
                       </div>
                     </el-col>
                   </el-row>
+                </div>
+                <div class="info-block">
+                  <div class="info-block__text">{{ $t("tender.description_of_procurement") }}:</div>
+                  <div
+                    v-for="item of gd(tender, _ => _.items, []).filter(
+                      item => gd(item, _ => _.relatedLot, '') === gd(lot, _ => _.id)
+                    )"
+                    :key="item.id"
+                  >
+                    <item :item="item" />
+                  </div>
                 </div>
               </div>
             </el-collapse-item>
