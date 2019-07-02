@@ -103,14 +103,21 @@ export default {
         .sort((el1, el2) => el1.round - el2.round);
     },
     getBreakdowns(breakdowns) {
-      return breakdowns.map(breakdown => ({
-        value: {
-          amount: this.gd(breakdown, _ => _.value.amount),
-          currency: this.gd(breakdown, _ => _.value.currency),
-        },
-        dateMet: this.gd(breakdown, _ => _.dateMet),
-        tenderer: this.getTenderer(this.gd(breakdown, _ => _.relatedBid)),
-      }));
+      return breakdowns
+        .map(breakdown => ({
+          value: {
+            amount: this.gd(breakdown, _ => _.value.amount),
+            currency: this.gd(breakdown, _ => _.value.currency),
+          },
+          dateMet: this.gd(breakdown, _ => _.dateMet),
+          tenderer: this.getTenderer(this.gd(breakdown, _ => _.relatedBid)),
+          relatedBid: this.gd(breakdown, _ => _.relatedBid),
+        }))
+        .sort((el1, el2) =>
+          el2.value.amount !== el1.value.amount
+            ? el2.value.amount - el1.value.amount
+            : new Date(this.getBidDate(el1.relatedBid)) - new Date(this.getBidDate(el2.relatedBid))
+        );
     },
     getTenderer(id) {
       const tenderer = this.gd(
@@ -122,6 +129,9 @@ export default {
         name: tenderer.name,
       };
     },
+    getBidDate(id) {
+      return this.gd(this.gd(this.evRecord, _ => _.bids.details, []).find(bid => id === bid.id), _ => _.date);
+    },
     getResults(results) {
       return results
         .map(result => ({
@@ -130,16 +140,22 @@ export default {
             currency: this.gd(result, _ => _.value.currency),
           },
           tenderer: this.getTenderer(this.gd(result, _ => _.relatedBid)),
+          relatedBid: this.gd(result, _ => _.relatedBid),
         }))
-        .sort((el1, el2) => el1.value.amount - el2.value.amount);
+        .sort((el1, el2) =>
+          el2.value.amount !== el1.value.amount
+            ? el1.value.amount - el2.value.amount
+            : new Date(this.getBidDate(el1.relatedBid)) - new Date(this.getBidDate(el2.relatedBid))
+        );
     },
     getInitialOffer(breakdowns) {
       return breakdowns
         .map(breakdown => ({
           value: this.getInitialOfferAmount(this.gd(breakdown, _ => _.relatedBid)),
           tenderer: this.getTenderer(this.gd(breakdown, _ => _.relatedBid)),
+          relatedBid: this.gd(breakdown, _ => _.relatedBid),
         }))
-        .sort((el1, el2) => el1.value.amount - el2.value.amount);
+        .sort((el1, el2) => new Date(this.getBidDate(el1.relatedBid)) - new Date(this.getBidDate(el2.relatedBid)));
     },
     getInitialOfferAmount(id) {
       const value = this.gd(this.gd(this.evRecord, _ => _.bids.details, []).find(bid => id === bid.id), _ => _.value);

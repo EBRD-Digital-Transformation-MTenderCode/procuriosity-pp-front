@@ -148,10 +148,10 @@
                           gd(tender, _ => _.MSRecord.compiledRelease.tender.value.amount)
                         )
                       "
-                      :selectTab="selectTab"
                       :hasBids="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('bids')"
                       :hasAwards="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('awards')"
                       :hasCANs="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('contracts')"
+                      :selectTab="selectTab"
                     />
                   </el-tab-pane>
                 </el-tabs>
@@ -234,7 +234,6 @@ export default {
 
       return true;
     });
-
     this.changeTab();
   },
   computed: {
@@ -324,26 +323,6 @@ export default {
     gd(...args) {
       return getDataFromObject(...args);
     },
-    selectTab(tab) {
-      this.$router.replace({ query: { tab } });
-      this.activeTab = tab;
-      this.changeTab();
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "smooth",
-      });
-    },
-    changeTab() {
-      const { query } = this.$route;
-      if (query.tab && this.tabs.find(tab => query.tab === tab)) {
-        this.activeTab = query.tab;
-      } else {
-        this.activeTab = this.tabs[0];
-        this.$router.replace({ query: { tab: this.tabs[0] } });
-      }
-    },
-
     checkTab(tab) {
       if (tab === "pn") {
         return false;
@@ -389,6 +368,25 @@ export default {
     },
     handleClick(tab) {
       this.$router.replace({ query: { tab: tab.name } });
+    },
+    selectTab(tab) {
+      this.$router.replace({ query: { tab } });
+      this.activeTab = tab;
+      this.changeTab();
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    },
+    changeTab() {
+      const { query } = this.$route;
+      if (query.tab && this.tabs.find(tab => query.tab === tab)) {
+        this.activeTab = query.tab;
+      } else {
+        this.activeTab = this.tabs[0];
+        this.$router.replace({ query: { tab: this.tabs[0] } });
+      }
     },
   },
 };

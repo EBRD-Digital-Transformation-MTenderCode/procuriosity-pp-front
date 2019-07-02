@@ -1,7 +1,8 @@
 <template>
   <div class="info">
     <div class="info__title">
-      {{ $t("tender.procurement_record") }} № <procedure-id>{{ gd(msRecord, _ => _.ocid) }}</procedure-id>
+      {{ $t("tender.procurement_record") }} №
+      <procedure-id>{{ gd(msRecord, _ => _.ocid) }}</procedure-id>
     </div>
     <div class="info-blocks">
       <div class="info-block">
@@ -217,10 +218,6 @@ export default {
       type: String,
       required: true,
     },
-    selectTab: {
-      type: Function,
-      required: true,
-    },
     hasBids: {
       type: Boolean,
       required: true,
@@ -239,6 +236,10 @@ export default {
     },
     breakdowns: {
       type: Array,
+      required: true,
+    },
+    selectTab: {
+      type: Function,
       required: true,
     },
   },
