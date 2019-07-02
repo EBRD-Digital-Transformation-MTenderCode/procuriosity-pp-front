@@ -3,8 +3,8 @@
 </template>
 
 <script>
-import MTender1Page from "./MTender1Page";
-import MTender2Page from "./MTender2Page";
+import MTender1Page from "./CDB1/MTender1Page";
+import MTender2Page from "./CDB2/MTender2Page";
 import Error from "./../../Error";
 
 export default {

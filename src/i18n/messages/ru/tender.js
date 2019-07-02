@@ -105,6 +105,7 @@ export default {
   main_CPV: "Основной код CPV",
   type_of_contract: "Тип договора",
   estimated_total_value_excluding_VAT: "Общая стоимость без учета НДС",
+  estimated_total_value_including_VAT: "Общая стоимость с учетом НДС",
   short_description: "Краткое описание",
   information_about_lots: "Информация о лотах",
   contract_divided_into_lots: "Этот договор разделен на лоты",
@@ -274,6 +275,7 @@ export default {
   report_on_recommended_awards: "Отчет о рекомендуемых присуждениях",
 
   value_excluding_VAT: "без учета НДС",
+  value_including_VAT: "c учетом НДС",
 
   request_for_contract_performance_guarantee: "Запрос обеспечения надлежащего исполнения договора",
 
@@ -318,4 +320,8 @@ export default {
   decision_url: "URL",
   auction_not_started: "Auction is not started",
   go_to_auction: "Go to auction",
+  espd_docs: "ESPD documents",
+  contract_identifier: "Contract identifier",
+  contract_date: "Contract date",
+  contract_number: "Contract number",
 };

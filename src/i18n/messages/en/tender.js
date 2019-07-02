@@ -276,6 +276,7 @@ export default {
   report_on_recommended_awards: "Report on recommended awards",
 
   value_excluding_VAT: "value excluding VAT",
+  value_including_VAT: "value including VAT",
   request_for_contract_performance_guarantee: "Request for contract performance guarantee",
 
   information_of_the_decision: "Information on the award decision",
@@ -318,4 +319,9 @@ export default {
   decision_url: "URL",
   auction_not_started: "Auction is not started",
   go_to_auction: "Go to auction",
+  espd_docs: "ESPD documents",
+  contract_identifier: "Contract identifier",
+  contract_date: "Contract date",
+  contract_number: "Contract number",
+  estimated_total_value_including_VAT: "Estimated total value including VAT",
 };

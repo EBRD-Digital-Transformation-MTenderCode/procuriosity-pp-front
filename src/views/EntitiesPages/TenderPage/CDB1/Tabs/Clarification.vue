@@ -1,0 +1,88 @@
+<template>
+  <div>
+    <div class="info">
+      <div>
+        <div class="info__title">{{ $t("tender.clarification") }}</div>
+        <div v-if="tender.hasOwnProperty('questions')">
+          <div
+            class="info-blocks info-blocks__questions"
+            v-for="(question, index) of gd(tender, _ => _.questions, [])"
+            :key="question.id + index"
+            :name="question.id + index"
+          >
+            <div class="info-block">
+              <el-row :gutter="25">
+                <el-col :sm="16">
+                  <div class="info-block__text">{{ $t("tender.title") }}</div>
+                  <div class="info-block__value">{{ transformSS(gd(question, _ => _.title, "###")) }}</div>
+                </el-col>
+                <el-col :sm="8">
+                  <div class="info-block__text">{{ $t("tender.question_received") }}</div>
+                  <div class="info-block__value">{{ fd(gd(question, _ => _.date)) }}</div>
+                </el-col>
+              </el-row>
+            </div>
+            <div class="info-block">
+              <el-row :gutter="15">
+                <el-col :sm="24">
+                  <div class="info-block__text">{{ $t("tender.description") }}</div>
+                  <div class="info-block__value">
+                    <div class="info-block__value__pre">{{ transformSS(gd(question, _ => _.description, "###")) }}</div>
+                  </div>
+                </el-col>
+              </el-row>
+            </div>
+            <div class="info-block__answer" v-if="question.hasOwnProperty('answer')">
+              <div class="info-block">
+                <el-row :gutter="15">
+                  <el-col :sm="16">
+                    <div class="info-block__value info-block__value_answer">
+                      {{ transformSS(gd(question, _ => _.title, "###")) }}
+                    </div>
+                  </el-col>
+                  <el-col :sm="8">
+                    <div class="info-block__value">{{ fd(gd(question, _ => _.dateAnswered)) }}</div>
+                  </el-col>
+                </el-row>
+              </div>
+              <div class="info-block">
+                <el-row :gutter="15">
+                  <el-col :sm="24">
+                    <div class="info-block__value info-block__value_italic">
+                      <div class="info-block__value_pre">{{ transformSS(gd(question, _ => _.answer, "###")) }}</div>
+                    </div>
+                  </el-col>
+                </el-row>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-bottom: 30px;" v-else>{{ $t("tender.no_data") }}</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { getDataFromObject, formatDate, transformSpecialSymbols } from "../../../../../utils";
+
+export default {
+  name: "Clarification",
+  props: {
+    tender: {
+      type: Object,
+    },
+  },
+  methods: {
+    gd(...args) {
+      return getDataFromObject(...args);
+    },
+    fd(...ars) {
+      return formatDate(...ars);
+    },
+    transformSS(str) {
+      return transformSpecialSymbols(str);
+    },
+  },
+};
+</script>

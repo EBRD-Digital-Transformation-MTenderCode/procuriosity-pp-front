@@ -31,9 +31,9 @@
 
 <script>
 import AuctionItem from "./AuctionItem";
-import ListPagination from "./../../../../components/ListPagination";
-import PageNumber from "./../../../../components/PageNumber";
-import { getDataFromObject } from "./../../../../utils";
+import ListPagination from "../../../../../components/ListPagination";
+import PageNumber from "../../../../../components/PageNumber";
+import { getDataFromObject } from "../../../../../utils";
 
 export default {
   name: "Auction",
