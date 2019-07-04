@@ -1,6 +1,15 @@
 <template>
   <div>
-    <div class="info">
+    <div
+      class="entity-nav"
+      data-scroll-spy-id="clarification"
+      v-scroll-spy-active="{ selector: 'a', class: 'active' }"
+      v-scroll-spy-link
+    >
+      <a>{{ $t("tender.clarification") }}</a>
+      <a>{{ $t("tender.modification_documents") }}</a>
+    </div>
+    <div class="info" data-scroll-spy-id="clarification" v-scroll-spy="{ offset: 75, allowNoActive: true }">
       <div>
         <div class="info__title">{{ $t("tender.clarification") }}</div>
         <div v-if="tender.hasOwnProperty('questions')">
@@ -54,6 +63,32 @@
                   </el-col>
                 </el-row>
               </div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-bottom: 30px;" v-else>{{ $t("tender.no_data") }}</div>
+      </div>
+      <div>
+        <div class="info__title">{{ $t("tender.modification_documents") }}</div>
+        <div v-if="tender.hasOwnProperty('cancellations')">
+          <div class="info-blocks">
+            <div class="info-block" v-for="cancellation of gd(tender, _ => _.cancellations, [])" :key="cancellation.id">
+              <el-row :gutter="25">
+                <el-col :sm="16">
+                  <div class="info-block__text">{{ $t("tender.amended_release") }}</div>
+                  <div class="info-block__value">{{ cancellation.id.toUpperCase() }}</div>
+                </el-col>
+                <el-col :sm="8">
+                  <div class="info-block__text">{{ $t("tender.date_of_change") }}</div>
+                  <div class="info-block__value">{{ fd(cancellation.date) }}</div>
+                </el-col>
+              </el-row>
+              <el-row :gutter="25">
+                <el-col :xs="24">
+                  <div class="info-block__text">{{ $t("tender.description_of_changes") }}</div>
+                  <div class="info-block__value">{{ cancellation.reason || $t("n/a") }}</div>
+                </el-col>
+              </el-row>
             </div>
           </div>
         </div>

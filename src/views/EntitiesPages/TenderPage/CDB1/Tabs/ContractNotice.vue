@@ -307,13 +307,13 @@
             </el-row>
           </div>
 
-          <div v-if="this.gd(this.tender, _ => _.procurementMethodType, '') === 'belowThreshold'" class="info-block">
+          <div class="info-block">
             <el-row :gutter="15">
               <el-col :sm="10">
                 <div class="info-block__text">{{ $t("tender.information_about_electronic_auction") }}</div>
                 <div class="info-block__value">
                   {{ $t("tender.an_electronic_auction_will") }}
-                  <!--<span v-if="!gd(evRecord, _ => _.tender, {}).hasOwnProperty('auctionPeriod')">{{
+                  <!-- <span v-if="!gd(tender, _ => _.lots, [])[0].hasOwnProperty('auctionPeriod')">{{
                     $t("tender.not")
                   }}</span>-->
                   {{ $t("tender.be_used") }}
