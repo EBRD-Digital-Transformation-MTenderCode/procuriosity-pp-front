@@ -174,7 +174,10 @@ export default {
 
     this.tabs = this.tabs.filter(tab => {
       if (tab === "auctions") {
-        return !!this.gd(this.tender, _ => _.lots, []).length;
+        return !!(
+          (this.gd(this.tender, _ => _.lots, []).length && this.tender.lots[0].hasOwnProperty("auctionPeriod")) ||
+          this.tender.hasOwnProperty("auctionPeriod")
+        );
       }
       if (tab === "bids") {
         return !!this.gd(this.tender, _ => _.bids, []).length;
