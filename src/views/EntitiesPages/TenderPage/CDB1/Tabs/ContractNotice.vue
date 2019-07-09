@@ -307,22 +307,18 @@
             </el-row>
           </div>
 
-          <div class="info-block">
+          <div
+            class="info-block"
+            v-if="
+              (gd(tender, _ => _.lots, []).length && tender.lots[0].hasOwnProperty('auctionPeriod')) ||
+                tender.hasOwnProperty('auctionPeriod')
+            "
+          >
             <el-row :gutter="15">
               <el-col :sm="10">
                 <div class="info-block__text">{{ $t("tender.information_about_electronic_auction") }}</div>
                 <div class="info-block__value">
                   {{ $t("tender.an_electronic_auction_will") }}
-                  <span
-                    v-if="
-                      !(
-                        (gd(tender, _ => _.lots, []).length && tender.lots[0].hasOwnProperty('auctionPeriod')) ||
-                        tender.hasOwnProperty('auctionPeriod')
-                      )
-                    "
-                  >
-                    {{ $t("tender.not") }}
-                  </span>
                   {{ $t("tender.be_used") }}
                 </div>
               </el-col>
