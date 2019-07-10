@@ -200,13 +200,17 @@
               <template slot="title">
                 <div class="info-block accordion-header">
                   <el-row :gutter="15">
-                    <el-col :sm="16">
+                    <el-col :sm="12">
                       <div class="info-block__text">{{ $t("tender.title") }}</div>
                       <div class="info-block__value info-block__value__bold">{{ gd(lot, _ => _.title, "###") }}</div>
                     </el-col>
                     <el-col :sm="8">
                       <div class="info-block__text">{{ $t("tender.lot_identifier") }}</div>
                       <div class="info-block__value">{{ gd(lot, _ => _.id, "###") }}</div>
+                    </el-col>
+                    <el-col :sm="4">
+                      <div class="info-block__text">{{ $t("tender.status") }}</div>
+                      <div class="info-block__value">{{ getLotStatus(gd(lot, _ => _.status, "###")) }}</div>
                     </el-col>
                   </el-row>
                 </div>
@@ -537,6 +541,7 @@ import DocumentsItem from "./../../DocumentsItem";
 
 import { getDataFromObject, formatDate, parseDocumentType, formatAmount } from "../../../../../utils";
 import { MTENDER1 } from "../../../../../store/types/cbd-types";
+import lotStatuses from "../../../../../store/types/lot-statuses";
 
 export default {
   name: "ContractNotice",
@@ -603,6 +608,9 @@ export default {
     changePage(page) {
       this.numberOfLastDisplayedElement = page * this.pageSize;
       this.currentPage = page;
+    },
+    getLotStatus(status) {
+      return lotStatuses[status][this.$i18n.locale];
     },
   },
   mounted() {

@@ -72,7 +72,13 @@
         <div class="info__title">{{ $t("tender.modification_documents") }}</div>
         <div v-if="tender.hasOwnProperty('cancellations')">
           <div class="info-blocks">
-            <div class="info-block" v-for="cancellation of gd(tender, _ => _.cancellations, [])" :key="cancellation.id">
+            <div
+              class="info-block"
+              v-for="cancellation of gd(tender, _ => _.cancellations, []).filter(
+                cancellation => cancellation.status !== 'pending'
+              )"
+              :key="cancellation.id"
+            >
               <el-row :gutter="25">
                 <el-col :sm="16">
                   <div class="info-block__text">{{ $t("tender.amended_release") }}</div>
@@ -83,10 +89,26 @@
                   <div class="info-block__value">{{ fd(cancellation.date) }}</div>
                 </el-col>
               </el-row>
+              <el-row :gutter="25" v-if="cancellation.cancellationOf === 'lot'">
+                <el-col :sm="16">
+                  <div class="info-block__text">{{ $t("tender.lot_title") }}</div>
+                  <div class="info-block__value">
+                    {{ gd(tender, _ => _.lots).find(lot => lot.id === cancellation.relatedLot).title }}
+                  </div>
+                </el-col>
+                <el-col :sm="8">
+                  <div class="info-block__text">{{ $t("tender.cancellation_of") }}</div>
+                  <div class="info-block__value">{{ mapCancellationOf(cancellation.cancellationOf) }}</div>
+                </el-col>
+              </el-row>
               <el-row :gutter="25">
-                <el-col :xs="24">
+                <el-col :sm="cancellation.cancellationOf === 'lot' ? 24 : 16">
                   <div class="info-block__text">{{ $t("tender.description_of_changes") }}</div>
                   <div class="info-block__value">{{ cancellation.reason || $t("n/a") }}</div>
+                </el-col>
+                <el-col v-if="cancellation.cancellationOf === 'tender'" :sm="8">
+                  <div class="info-block__text">{{ $t("tender.cancellation_of") }}</div>
+                  <div class="info-block__value">{{ mapCancellationOf(cancellation.cancellationOf) }}</div>
                 </el-col>
               </el-row>
             </div>
@@ -117,6 +139,21 @@ export default {
     },
     transformSS(str) {
       return transformSpecialSymbols(str);
+    },
+    mapCancellationOf(entity) {
+      const entities = {
+        lot: {
+          en: "Lot",
+          ro: "Lot",
+          ru: "Lot",
+        },
+        tender: {
+          en: "Tender",
+          ro: "Tender",
+          ru: "Tender",
+        },
+      };
+      return entities[entity][this.$i18n.locale];
     },
   },
 };

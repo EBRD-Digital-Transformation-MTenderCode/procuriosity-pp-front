@@ -324,4 +324,5 @@ export default {
   contract_identifier: "Contract identifier",
   contract_date: "Contract date",
   contract_number: "Contract number",
+  cancellation_of: "Cancellation of",
 };

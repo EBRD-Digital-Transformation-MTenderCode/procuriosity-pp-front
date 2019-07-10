@@ -324,4 +324,5 @@ export default {
   contract_date: "Contract date",
   contract_number: "Contract number",
   estimated_total_value_including_VAT: "Estimated total value including VAT",
+  cancellation_of: "Cancellation of",
 };
