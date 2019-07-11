@@ -43,7 +43,9 @@
           <div v-for="(decision, index) of decisions" :key="decision.id + index">
             <div
               v-if="
-                decision.NRContestatie.split(';').find(identifier => identifier.trim() === complaint['Nr de intrare'])
+                gd(decision, _ => _.NRContestatie, '')
+                  .split(';')
+                  .find(identifier => identifier.trim() === complaint['Nr de intrare'])
               "
               class="info-block__answer"
             >
