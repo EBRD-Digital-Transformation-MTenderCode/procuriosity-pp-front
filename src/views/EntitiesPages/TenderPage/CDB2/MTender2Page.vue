@@ -15,7 +15,7 @@
                 <div class="entity-main-info__description">
                   {{ gd(tender, _ => _.MSRecord.compiledRelease.tender.description) }}
                 </div>
-                <div class="entity-main-info__timeline"></div>
+                <timeline :periods="mapPeriods" />
               </el-col>
               <el-col :sm="6" :offset="2" :xs="{ span: 22, offset: 0 }">
                 <div class="entity-main-info__value">
@@ -181,6 +181,7 @@ import Auction from "./Tabs/Auction";
 import Offers from "./Tabs/Offers";
 import Evaluation from "./Tabs/Evaluation";
 import Contracts from "./Tabs/Contracts";
+import Timeline from "./Timeline";
 import ProcurementRecord from "./Tabs/ProcurementRecord";
 import ProcedureId from "../../../../components/ProcedureId";
 import Error from "../../../Error";
@@ -206,6 +207,7 @@ export default {
     contracts: Contracts,
     "procurement-record": ProcurementRecord,
     "procedure-id": ProcedureId,
+    timeline: Timeline,
     error: Error,
   },
   data() {
@@ -311,6 +313,19 @@ export default {
 
         return startDate.diff(modifyDate, "day") >= 15;
       } else return false;
+    },
+    mapPeriods() {
+      return {
+        enquiryPeriodStart: this.gd(this.tender, _ => _.EVRecord.compiledRelease.tender.enquiryPeriod.startDate, "###"),
+        enquiryPeriodEnd: this.gd(this.tender, _ => _.EVRecord.compiledRelease.tender.enquiryPeriod.endDate, "###"),
+        auctionPeriodStart: this.gd(
+          this.tender,
+          _ => _.EVRecord.compiledRelease.tender.auctionPeriod.startDate,
+          undefined
+        ),
+        awardPeriodStart: this.gd(this.tender, _ => _.EVRecord.compiledRelease.tender.awardPeriod.startDate, "###"),
+        awardPeriodEnd: this.gd(this.tender, _ => _.EVRecord.compiledRelease.tender.awardPeriod.endDate, "###"),
+      };
     },
   },
   methods: {
