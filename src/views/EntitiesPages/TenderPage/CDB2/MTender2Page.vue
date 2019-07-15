@@ -15,7 +15,11 @@
                 <div class="entity-main-info__description">
                   {{ gd(tender, _ => _.MSRecord.compiledRelease.tender.description) }}
                 </div>
-                <timeline :periods="mapPeriods" />
+                <timeline
+                  :periods="mapPeriods"
+                  :status="gd(tender.EVRecord, _ => _.compiledRelease.tender.status)"
+                  :statusDetails="gd(tender.EVRecord, _ => _.compiledRelease.tender.statusDetails)"
+                />
               </el-col>
               <el-col :sm="6" :offset="2" :xs="{ span: 22, offset: 0 }">
                 <div class="entity-main-info__value">

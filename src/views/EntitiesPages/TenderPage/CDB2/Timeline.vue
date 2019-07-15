@@ -1,22 +1,25 @@
 <template>
   <div class="timeline">
-    <div class="timeline-item">
+    <div :class="[{ 'timeline-item__active': getActivePeriod === 'clarifications' }, 'timeline-item']">
       <span class="timeline-date">{{ fd(periods.enquiryPeriodStart) }}</span>
       <div class="timeline-period">Clarifications</div>
     </div>
-    <div class="timeline-item">
+    <div :class="[{ 'timeline-item__active': getActivePeriod === 'tendering' }, 'timeline-item']">
       <span class="timeline-date">{{ fd(periods.enquiryPeriodEnd) }}</span>
       <div class="timeline-period">Tendering</div>
     </div>
-    <div class="timeline-item" v-if="periods.auctionPeriodStart">
+    <div
+      :class="[{ 'timeline-item__active': getActivePeriod === 'auction' }, 'timeline-item']"
+      v-if="periods.auctionPeriodStart"
+    >
       <span class="timeline-date">{{ fd(periods.auctionPeriodStart) }}</span>
       <div class="timeline-period">Auction</div>
     </div>
-    <div class="timeline-item">
+    <div :class="[{ 'timeline-item__active': getActivePeriod === 'awarding' }, 'timeline-item']">
       <span class="timeline-date">{{ fd(periods.awardPeriodStart) }}</span>
       <div class="timeline-period">Awarding</div>
     </div>
-    <div class="timeline-item">
+    <div :class="[{ 'timeline-item__active': getActivePeriod === 'awarded' }, 'timeline-item']" class="timeline-item">
       <div class="timeline-date">{{ fd(periods.awardPeriodEnd) }}</div>
     </div>
   </div>
@@ -32,9 +35,38 @@ export default {
       type: Object,
       required: true,
     },
+    status: {
+      type: String,
+      required: true,
+    },
+    statusDetails: {
+      type: String,
+      required: true,
+    },
   },
-  created() {
-    console.log(this.periods);
+  computed: {
+    getActivePeriod() {
+      const statusFull = `${this.status}.${this.statusDetails}`;
+      switch (statusFull) {
+        case "active.clarification":
+        case "active.enquiries":
+        case "active.suspended":
+          return "clarifications";
+        case "active.tendering":
+          return "tendering";
+        case "active.auction":
+          return "auction";
+        case "unsuccessful.empty":
+        case "unsuccessful":
+        case "active.awardedContractPreparation":
+        case "active.awarded":
+          return "awarded";
+        case "active.awarding":
+        case "active.qualification":
+          return "awarding";
+        case "cancelled.empty":
+      }
+    },
   },
   methods: {
     gd(...args) {
@@ -46,7 +78,7 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style scoped lang="scss">
 .timeline {
   display: flex;
   justify-content: space-between;
@@ -67,6 +99,30 @@ export default {
       width: 1px;
       height: 100%;
       transform: translateY(0) translateX(6px);
+    }
+  }
+  &-date {
+    position: absolute;
+    top: 0;
+    left: 5px;
+    color: #2da9e2;
+    font-size: 11px;
+    white-space: nowrap;
+    @media (max-width: 490px) {
+      left: 20px;
+    }
+  }
+  &-period {
+    position: absolute;
+    top: 35px;
+    width: 100%;
+    text-align: center;
+    color: #2da9e2;
+    font-size: 14px;
+    font-weight: 700;
+    @media (max-width: 490px) {
+      text-align: left;
+      left: 25px;
     }
   }
   &-item {
@@ -95,29 +151,16 @@ export default {
         left: 0;
       }
     }
-  }
-  &-date {
-    position: absolute;
-    top: 0;
-    left: 5px;
-    color: #2da9e2;
-    font-size: 11px;
-    white-space: nowrap;
-    @media (max-width: 490px) {
-      left: 20px;
-    }
-  }
-  &-period {
-    position: absolute;
-    top: 35px;
-    width: 100%;
-    text-align: center;
-    color: #2da9e2;
-    font-size: 14px;
-    font-weight: 700;
-    @media (max-width: 490px) {
-      text-align: left;
-      left: 25px;
+    &__active {
+      .timeline-date {
+        color: #add684;
+      }
+      &::before {
+        background-color: #add684;
+      }
+      .timeline-period {
+        color: #fff;
+      }
     }
   }
 }
