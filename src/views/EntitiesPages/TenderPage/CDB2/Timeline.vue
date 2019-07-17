@@ -1,26 +1,26 @@
 <template>
   <div class="timeline">
-    <div :class="[{ 'timeline-item__active': getActivePeriod === 'clarifications' }, 'timeline-item']">
-      <span class="timeline-date">{{ fd(periods.enquiryPeriodStart) }}</span>
-      <div class="timeline-period">Clarifications</div>
+    <div :class="[{ 'timeline__item--active': getActivePeriod === 'clarifications' }, 'timeline__item']">
+      <span class="timeline__date">{{ fd(periods.enquiryPeriodStart) }}</span>
+      <div class="timeline__period">Clarifications</div>
     </div>
-    <div :class="[{ 'timeline-item__active': getActivePeriod === 'tendering' }, 'timeline-item']">
-      <span class="timeline-date">{{ fd(periods.enquiryPeriodEnd) }}</span>
-      <div class="timeline-period">Tendering</div>
+    <div :class="[{ 'timeline__item--active': getActivePeriod === 'tendering' }, 'timeline__item']">
+      <span class="timeline__date">{{ fd(periods.enquiryPeriodEnd) }}</span>
+      <div class="timeline__period">Tendering</div>
     </div>
     <div
-      :class="[{ 'timeline-item__active': getActivePeriod === 'auction' }, 'timeline-item']"
+      :class="[{ 'timeline__item--active': getActivePeriod === 'auction' }, 'timeline__item']"
       v-if="periods.auctionPeriodStart"
     >
-      <span class="timeline-date">{{ fd(periods.auctionPeriodStart) }}</span>
-      <div class="timeline-period">Auction</div>
+      <span class="timeline__date">{{ fd(periods.auctionPeriodStart) }}</span>
+      <div class="timeline__period">Auction</div>
     </div>
-    <div :class="[{ 'timeline-item__active': getActivePeriod === 'awarding' }, 'timeline-item']">
-      <span class="timeline-date">{{ fd(periods.awardPeriodStart) }}</span>
-      <div class="timeline-period">Awarding</div>
+    <div :class="[{ 'timeline__item--active': getActivePeriod === 'awarding' }, 'timeline__item']">
+      <span class="timeline__date">{{ fd(periods.awardPeriodStart) }}</span>
+      <div class="timeline__period">Awarding</div>
     </div>
-    <div :class="[{ 'timeline-item__active': getActivePeriod === 'awarded' }, 'timeline-item']" class="timeline-item">
-      <div class="timeline-date">{{ fd(periods.awardPeriodEnd) }}</div>
+    <div :class="[{ 'timeline__item--active': getActivePeriod === 'awarded' }, 'timeline__item']">
+      <div class="timeline__date">{{ fd(periods.awardPeriodEnd) }}</div>
     </div>
   </div>
 </template>
@@ -101,7 +101,7 @@ export default {
       transform: translateY(0) translateX(6px);
     }
   }
-  &-date {
+  &__date {
     position: absolute;
     top: 0;
     left: 5px;
@@ -112,7 +112,7 @@ export default {
       left: 20px;
     }
   }
-  &-period {
+  &__period {
     position: absolute;
     top: 35px;
     width: 100%;
@@ -125,7 +125,7 @@ export default {
       left: 25px;
     }
   }
-  &-item {
+  &__item {
     position: relative;
     flex: 1 0 0;
     &:last-child {
@@ -151,14 +151,14 @@ export default {
         left: 0;
       }
     }
-    &__active {
-      .timeline-date {
+    &--active {
+      .timeline__date {
         color: #add684;
       }
       &::before {
         background-color: #add684;
       }
-      .timeline-period {
+      .timeline__period {
         color: #fff;
       }
     }
