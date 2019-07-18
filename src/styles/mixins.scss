@@ -1,0 +1,134 @@
+@mixin ico-types() {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  &--published {
+    background-color: #d1d1d1;
+  }
+  &--clarification {
+    background-color: #97ca63;
+  }
+  &--tendering {
+    background-color: #97ca63;
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 9px;
+      height: 9px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background-color: #235aa6;
+    }
+  }
+  &--auction {
+    background-color: #ff7900;
+  }
+  &--awarding {
+    background-color: #ff7900;
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 9px;
+      height: 9px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background-color: #2daae2;
+    }
+  }
+  &--suspended {
+    background-color: #d1d1d1;
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 9px;
+      height: 9px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background-color: #97ca63;
+    }
+  }
+  &--awarded {
+    background-color: #97ca63;
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 9px;
+      height: 9px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background-color: #2daae2;
+    }
+  }
+  &--complete {
+    background-color: #d1d1d1;
+    &:before,
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 50%;
+      width: 8px;
+      height: 2px;
+      background-color: #9e9e9e;
+    }
+    &:before {
+      left: 38%;
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+    &:after {
+      left: 62%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+  }
+  &--cancelled {
+    background-color: #d1d1d1;
+    &:before,
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 15px;
+      height: 2px;
+      background-color: #9e9e9e;
+    }
+    &:before {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+    &:after {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+  }
+  &--unsuccessful {
+    background-color: #d1d1d1;
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 15px;
+      height: 2px;
+      background-color: #9e9e9e;
+    }
+    &:before {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+  }
+  &--stub {
+    background-color: #d1d1d1;
+  }
+}
