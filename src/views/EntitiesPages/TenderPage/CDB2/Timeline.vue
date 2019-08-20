@@ -1,5 +1,10 @@
 <template>
-  <div :class="[{ 'timeline--cancelled': getActivePeriod === 'cancelled' }, 'timeline']">
+  <div
+    :class="[
+      { 'timeline--disabled': getActivePeriod === 'cancelled' || getActivePeriod === 'unsuccessful' },
+      'timeline',
+    ]"
+  >
     <div
       :class="[
         { 'timeline__item--active': getActivePeriod === 'clarification' || getActivePeriod === 'suspended' },
@@ -13,25 +18,30 @@
           getActivePeriod === 'suspended' ? 'timeline__marker--suspended' : 'timeline__marker--clarification',
         ]"
       ></span>
-      <div class="timeline__period">Clarifications</div>
+      <div class="timeline__period">
+        {{ $t("tender.clarifications") }}
+        <div v-if="getActivePeriod === 'suspended'">({{ $t("tender.suspended") }})</div>
+      </div>
     </div>
     <div :class="[{ 'timeline__item--active': getActivePeriod === 'tendering' }, 'timeline__item']">
       <span class="timeline__date">{{ fd(periods.enquiryPeriodEnd) }}</span>
       <span class="timeline__marker timeline__marker--tendering"></span>
-      <div class="timeline__period">Tendering</div>
+      <div class="timeline__period">{{ $t("tender.tendering") }}</div>
     </div>
     <div
       :class="[{ 'timeline__item--active': getActivePeriod === 'auction' }, 'timeline__item']"
       v-if="periods.auctionPeriodStart"
     >
-      <span class="timeline__date">{{ fd(periods.auctionPeriodStart) }}</span>
+      <span class="timeline__date">{{ fd(periods.tenderPeriodEnd) }}</span>
       <span class="timeline__marker timeline__marker--auction"></span>
-      <div class="timeline__period">Auction</div>
+      <div class="timeline__period">{{ $t("tender.auction") }}</div>
     </div>
     <div :class="[{ 'timeline__item--active': getActivePeriod === 'awarding' }, 'timeline__item']">
-      <span class="timeline__date">{{ fd(periods.awardPeriodStart) }}</span>
+      <span class="timeline__date">{{
+        periods.auctionPeriodStart ? fd(periods.auctionPeriodStart) : fd(periods.tenderPeriodEnd)
+      }}</span>
       <span class="timeline__marker timeline__marker--awarding"></span>
-      <div class="timeline__period">Awarding</div>
+      <div class="timeline__period">{{ $t("tender.awarding") }}</div>
     </div>
     <div
       :class="[
@@ -148,11 +158,12 @@ export default {
   }
   &__period {
     position: absolute;
-    top: 35px;
+    top: 40px;
+    left: 5px;
     width: 100%;
     text-align: center;
     color: #2da9e2;
-    font-size: 14px;
+    font-size: 1px;
     font-weight: 700;
     @media (max-width: 490px) {
       text-align: left;
@@ -201,7 +212,7 @@ export default {
       }
     }
   }
-  &--cancelled {
+  &--disabled {
     .timeline__date,
     .timeline__period {
       color: #d1d1d1;

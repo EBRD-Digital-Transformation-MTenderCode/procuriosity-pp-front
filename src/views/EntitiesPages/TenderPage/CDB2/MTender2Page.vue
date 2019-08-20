@@ -327,7 +327,7 @@ export default {
           _ => _.EVRecord.compiledRelease.tender.auctionPeriod.startDate,
           undefined
         ),
-        awardPeriodStart: this.gd(this.tender, _ => _.EVRecord.compiledRelease.tender.awardPeriod.startDate, "###"),
+        tenderPeriodEnd: this.gd(this.tender, _ => _.EVRecord.compiledRelease.tender.tenderPeriod.endDate, "###"),
         awardPeriodEnd: this.gd(this.tender, _ => _.EVRecord.compiledRelease.tender.awardPeriod.endDate, "###"),
       };
     },

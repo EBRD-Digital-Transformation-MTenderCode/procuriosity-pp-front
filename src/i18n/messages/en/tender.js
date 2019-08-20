@@ -325,4 +325,9 @@ export default {
   contract_number: "Contract number",
   estimated_total_value_including_VAT: "Estimated total value including VAT",
   cancellation_of: "Cancellation of",
+  clarifications: "Clarifications",
+  suspended: "suspended",
+  tendering: "Tendering",
+  auction: "Auction period",
+  awarding: "Awarding",
 };

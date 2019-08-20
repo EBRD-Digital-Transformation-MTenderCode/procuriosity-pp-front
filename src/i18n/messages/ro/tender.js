@@ -334,4 +334,9 @@ export default {
   contract_date: "Contract date",
   contract_number: "Contract number",
   cancellation_of: "Cancellation of",
+  clarifications: "Solicitare сlarificări",
+  suspended: "suspendată",
+  tendering: "Depunerea ofertelor",
+  auction: "Perioada de licitaree",
+  awarding: "Calificarea ofertanților",
 };

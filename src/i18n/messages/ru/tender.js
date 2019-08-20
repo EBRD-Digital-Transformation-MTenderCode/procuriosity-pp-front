@@ -325,4 +325,9 @@ export default {
   contract_date: "Contract date",
   contract_number: "Contract number",
   cancellation_of: "Cancellation of",
+  clarifications: "Период уточнений",
+  suspended: "приостановлен",
+  tendering: "Подача предложений",
+  auction: "Период аукциона",
+  awarding: "Квалификация офертантов",
 };
