@@ -119,6 +119,37 @@ export function transformDocumentation(docs) {
   );
 }
 
+export function transformDocumentationFromCDB1(docs) {
+  return Object.values(
+    [...docs]
+      .sort((doc1, doc2) => new Date(doc2.dateModified) - new Date(doc1.dateModified))
+      .reduce((obj, doc) => {
+        const docObj = {
+          title: doc.title,
+          url: doc.url,
+          datePublished: doc.datePublished,
+          documentType: doc.documentType,
+          id: doc.id,
+        };
+
+        if (!obj.hasOwnProperty(doc.id)) {
+          obj[doc.id] = {
+            oldVersions: [],
+            ...docObj,
+          };
+        } else {
+          obj[doc.id].oldVersions = [
+            ...obj[doc.id].oldVersions,
+            {
+              ...docObj,
+            },
+          ];
+        }
+        return obj;
+      }, {})
+  );
+}
+
 export function getOrganizationObject(parties, organizationRole) {
   for (let part of parties) {
     if (part.roles.find(role => role === organizationRole)) {
@@ -156,26 +187,34 @@ function calculateProcedureType(category, amount) {
 }
 
 export function mapTenderStatus(status, statusDetails) {
-  const statusFull = `${status}.${statusDetails}`;
+  const statusFull = statusDetails ? `${status}.${statusDetails}` : status;
   switch (statusFull) {
     case "active.clarification":
+    case "active.enquiries":
       return procedureStatusType.tenders.find(val => val.value === "clarification").name[VueI18n.locale];
     case "active.tendering":
       return procedureStatusType.tenders.find(val => val.value === "tendering").name[VueI18n.locale];
     case "active.auction":
       return procedureStatusType.tenders.find(val => val.value === "auction").name[VueI18n.locale];
     case "unsuccessful.empty":
+    case "unsuccessful":
       return procedureStatusType.tenders.find(val => val.value === "unsuccessful").name[VueI18n.locale];
     case "active.awarding":
+    case "active.qualification":
       return procedureStatusType.tenders.find(val => val.value === "awarding").name[VueI18n.locale];
     case "active.awardedContractPreparation":
+    case "active.awarded":
       return procedureStatusType.tenders.find(val => val.value === "awarded").name[VueI18n.locale];
     case "active.suspended":
       return procedureStatusType.tenders.find(val => val.value === "suspended").name[VueI18n.locale];
     case "complete.empty":
+    case "complete":
       return procedureStatusType.tenders.find(val => val.value === "complete").name[VueI18n.locale];
     case "cancelled.empty":
+    case "cancelled":
       return procedureStatusType.tenders.find(val => val.value === "cancelled").name[VueI18n.locale];
+    case "active":
+      return procedureStatusType.tenders.find(val => val.value === "published").name[VueI18n.locale];
   }
 }
 

@@ -242,7 +242,7 @@
 
 <script>
 import dayjs from "dayjs";
-import { formatDate, formatAmount } from "./../../../../utils";
+import { formatDate, formatAmount } from "../../../../../utils";
 
 export default {
   name: "AuctionItem",

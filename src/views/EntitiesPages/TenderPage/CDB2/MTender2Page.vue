@@ -15,7 +15,11 @@
                 <div class="entity-main-info__description">
                   {{ gd(tender, _ => _.MSRecord.compiledRelease.tender.description) }}
                 </div>
-                <div class="entity-main-info__timeline"></div>
+                <timeline
+                  :periods="mapPeriods"
+                  :status="gd(tender.EVRecord, _ => _.compiledRelease.tender.status)"
+                  :statusDetails="gd(tender.EVRecord, _ => _.compiledRelease.tender.statusDetails)"
+                />
               </el-col>
               <el-col :sm="6" :offset="2" :xs="{ span: 22, offset: 0 }">
                 <div class="entity-main-info__value">
@@ -148,10 +152,10 @@
                           gd(tender, _ => _.MSRecord.compiledRelease.tender.value.amount)
                         )
                       "
-                      :selectTab="selectTab"
                       :hasBids="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('bids')"
                       :hasAwards="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('awards')"
                       :hasCANs="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('contracts')"
+                      :selectTab="selectTab"
                     />
                   </el-tab-pane>
                 </el-tabs>
@@ -170,20 +174,21 @@
 <script>
 import axios from "axios";
 import { mapState } from "vuex";
-import { FETCH_CURRENT_TENDER_INFO } from "../../../store/types/actions-types";
+import { FETCH_CURRENT_TENDER_INFO } from "../../../../store/types/actions-types";
 
 import dayjs from "dayjs";
 
 import ContractNotice from "./Tabs/ContractNotice";
 import Clarification from "./Tabs/Clarification";
-import Review from "./Tabs/Review";
+import Review from "../Review";
 import Auction from "./Tabs/Auction";
 import Offers from "./Tabs/Offers";
 import Evaluation from "./Tabs/Evaluation";
 import Contracts from "./Tabs/Contracts";
+import Timeline from "./Timeline";
 import ProcurementRecord from "./Tabs/ProcurementRecord";
-import ProcedureId from "../../../components/ProcedureId";
-import Error from "./../../Error";
+import ProcedureId from "../../../../components/ProcedureId";
+import Error from "../../../Error";
 
 import {
   getDataFromObject,
@@ -191,8 +196,8 @@ import {
   getOrganizationObject,
   getSourceOfMoney,
   mapTenderStatus,
-} from "./../../../utils";
-import { getBudgetConfig } from "../../../configs/requests-configs";
+} from "../../../../utils";
+import { getBudgetConfig } from "../../../../configs/requests-configs";
 
 export default {
   name: "TenderPage",
@@ -206,6 +211,7 @@ export default {
     contracts: Contracts,
     "procurement-record": ProcurementRecord,
     "procedure-id": ProcedureId,
+    timeline: Timeline,
     error: Error,
   },
   data() {
@@ -234,14 +240,7 @@ export default {
 
       return true;
     });
-
-    const { query } = this.$route;
-    if (query.tab && this.tabs.find(tab => query.tab === tab)) {
-      this.activeTab = query.tab;
-    } else {
-      this.activeTab = this.tabs[0];
-      this.$router.replace({ query: { tab: this.tabs[0] } });
-    }
+    this.changeTab();
   },
   computed: {
     ...mapState({
@@ -319,6 +318,19 @@ export default {
         return startDate.diff(modifyDate, "day") >= 15;
       } else return false;
     },
+    mapPeriods() {
+      return {
+        enquiryPeriodStart: this.gd(this.tender, _ => _.EVRecord.compiledRelease.tender.enquiryPeriod.startDate, "###"),
+        enquiryPeriodEnd: this.gd(this.tender, _ => _.EVRecord.compiledRelease.tender.enquiryPeriod.endDate, "###"),
+        auctionPeriodStart: this.gd(
+          this.tender,
+          _ => _.EVRecord.compiledRelease.tender.auctionPeriod.startDate,
+          undefined
+        ),
+        tenderPeriodEnd: this.gd(this.tender, _ => _.EVRecord.compiledRelease.tender.tenderPeriod.endDate, "###"),
+        awardPeriodEnd: this.gd(this.tender, _ => _.EVRecord.compiledRelease.tender.awardPeriod.endDate, "###"),
+      };
+    },
   },
   methods: {
     async getTender() {
@@ -329,14 +341,6 @@ export default {
     },
     gd(...args) {
       return getDataFromObject(...args);
-    },
-    selectTab(tab) {
-      this.activeTab = tab;
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "smooth",
-      });
     },
     checkTab(tab) {
       if (tab === "pn") {
@@ -383,6 +387,25 @@ export default {
     },
     handleClick(tab) {
       this.$router.replace({ query: { tab: tab.name } });
+    },
+    selectTab(tab) {
+      this.$router.replace({ query: { tab } });
+      this.activeTab = tab;
+      this.changeTab();
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    },
+    changeTab() {
+      const { query } = this.$route;
+      if (query.tab && this.tabs.find(tab => query.tab === tab)) {
+        this.activeTab = query.tab;
+      } else {
+        this.activeTab = this.tabs[0];
+        this.$router.replace({ query: { tab: this.tabs[0] } });
+      }
     },
   },
 };

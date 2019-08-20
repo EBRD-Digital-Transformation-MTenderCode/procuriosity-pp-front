@@ -12,10 +12,10 @@
     <div class="info" data-scroll-spy-id="clarification" v-scroll-spy="{ offset: 75, allowNoActive: true }">
       <div>
         <div class="info__title">{{ $t("tender.clarification") }}</div>
-        <div v-if="evRecord.tender.hasOwnProperty('enquiries')">
+        <div v-if="tender.hasOwnProperty('questions')">
           <div
             class="info-blocks info-blocks__questions"
-            v-for="(question, index) of gd(evRecord, _ => _.tender.enquiries, [])"
+            v-for="(question, index) of gd(tender, _ => _.questions, [])"
             :key="question.id + index"
             :name="question.id + index"
           >
@@ -23,7 +23,7 @@
               <el-row :gutter="25">
                 <el-col :sm="16">
                   <div class="info-block__text">{{ $t("tender.title") }}</div>
-                  <div class="info-block__value">{{ transformSS(gd(question, _ => _.title)) }}</div>
+                  <div class="info-block__value">{{ transformSS(gd(question, _ => _.title, "###")) }}</div>
                 </el-col>
                 <el-col :sm="8">
                   <div class="info-block__text">{{ $t("tender.question_received") }}</div>
@@ -36,7 +36,7 @@
                 <el-col :sm="24">
                   <div class="info-block__text">{{ $t("tender.description") }}</div>
                   <div class="info-block__value">
-                    <div class="info-block__value__pre">{{ transformSS(gd(question, _ => _.description)) }}</div>
+                    <div class="info-block__value__pre">{{ transformSS(gd(question, _ => _.description, "###")) }}</div>
                   </div>
                 </el-col>
               </el-row>
@@ -46,7 +46,7 @@
                 <el-row :gutter="15">
                   <el-col :sm="16">
                     <div class="info-block__value info-block__value_answer">
-                      {{ transformSS(gd(question, _ => _.title)) }}
+                      {{ transformSS(gd(question, _ => _.title, "###")) }}
                     </div>
                   </el-col>
                   <el-col :sm="8">
@@ -58,7 +58,7 @@
                 <el-row :gutter="15">
                   <el-col :sm="24">
                     <div class="info-block__value info-block__value_italic">
-                      <div class="info-block__value_pre">{{ transformSS(gd(question, _ => _.answer)) }}</div>
+                      <div class="info-block__value_pre">{{ transformSS(gd(question, _ => _.answer, "###")) }}</div>
                     </div>
                   </el-col>
                 </el-row>
@@ -68,38 +68,47 @@
         </div>
         <div style="margin-bottom: 30px;" v-else>{{ $t("tender.no_data") }}</div>
       </div>
-
       <div>
         <div class="info__title">{{ $t("tender.modification_documents") }}</div>
-        <div v-if="evRecord.tender.hasOwnProperty('amendments')">
+        <div v-if="tender.hasOwnProperty('cancellations')">
           <div class="info-blocks">
             <div
               class="info-block"
-              v-for="amendment of [...gd(evRecord, _ => _.tender.amendments, [])].sort(
-                (amendmentA, amendmentB) => +new Date(amendmentB.date) - +new Date(amendmentA.date)
+              v-for="cancellation of gd(tender, _ => _.cancellations, []).filter(
+                cancellation => cancellation.status !== 'pending'
               )"
-              :key="amendment.id"
+              :key="cancellation.id"
             >
               <el-row :gutter="25">
                 <el-col :sm="16">
                   <div class="info-block__text">{{ $t("tender.amended_release") }}</div>
-                  <div class="info-block__value">{{ amendment.amendsReleaseID.toUpperCase() }}</div>
+                  <div class="info-block__value">{{ cancellation.id.toUpperCase() }}</div>
                 </el-col>
                 <el-col :sm="8">
                   <div class="info-block__text">{{ $t("tender.date_of_change") }}</div>
-                  <div class="info-block__value">{{ fd(amendment.date) }}</div>
+                  <div class="info-block__value">{{ fd(cancellation.date) }}</div>
+                </el-col>
+              </el-row>
+              <el-row :gutter="25" v-if="cancellation.cancellationOf === 'lot'">
+                <el-col :sm="16">
+                  <div class="info-block__text">{{ $t("tender.lot_title") }}</div>
+                  <div class="info-block__value">
+                    {{ gd(tender, _ => _.lots).find(lot => lot.id === cancellation.relatedLot).title }}
+                  </div>
+                </el-col>
+                <el-col :sm="8">
+                  <div class="info-block__text">{{ $t("tender.cancellation_of") }}</div>
+                  <div class="info-block__value">{{ mapCancellationOf(cancellation.cancellationOf) }}</div>
                 </el-col>
               </el-row>
               <el-row :gutter="25">
-                <el-col :xs="24">
+                <el-col :sm="cancellation.cancellationOf === 'lot' ? 24 : 16">
                   <div class="info-block__text">{{ $t("tender.description_of_changes") }}</div>
-                  <div class="info-block__value">{{ amendment.description || $t("n/a") }}</div>
+                  <div class="info-block__value">{{ cancellation.reason || $t("n/a") }}</div>
                 </el-col>
-              </el-row>
-              <el-row :gutter="25">
-                <el-col :xs="24">
-                  <div class="info-block__text">{{ $t("tender.rationale_of_changes") }}</div>
-                  <div class="info-block__value">{{ amendment.rationale || $t("n/a") }}</div>
+                <el-col v-if="cancellation.cancellationOf === 'tender'" :sm="8">
+                  <div class="info-block__text">{{ $t("tender.cancellation_of") }}</div>
+                  <div class="info-block__value">{{ mapCancellationOf(cancellation.cancellationOf) }}</div>
                 </el-col>
               </el-row>
             </div>
@@ -112,12 +121,12 @@
 </template>
 
 <script>
-import { getDataFromObject, formatDate, transformSpecialSymbols } from "./../../../../utils";
+import { getDataFromObject, formatDate, transformSpecialSymbols } from "../../../../../utils";
 
 export default {
   name: "Clarification",
   props: {
-    evRecord: {
+    tender: {
       type: Object,
     },
   },
@@ -130,6 +139,21 @@ export default {
     },
     transformSS(str) {
       return transformSpecialSymbols(str);
+    },
+    mapCancellationOf(entity) {
+      const entities = {
+        lot: {
+          en: "Lot",
+          ro: "Lot",
+          ru: "Lot",
+        },
+        tender: {
+          en: "Tender",
+          ro: "Tender",
+          ru: "Tender",
+        },
+      };
+      return entities[entity][this.$i18n.locale];
     },
   },
 };

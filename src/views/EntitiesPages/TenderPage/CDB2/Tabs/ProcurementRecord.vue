@@ -1,7 +1,8 @@
 <template>
   <div class="info">
     <div class="info__title">
-      {{ $t("tender.procurement_record") }} № <procedure-id>{{ gd(msRecord, _ => _.ocid) }}</procedure-id>
+      {{ $t("tender.procurement_record") }} №
+      <procedure-id>{{ gd(msRecord, _ => _.ocid) }}</procedure-id>
     </div>
     <div class="info-blocks">
       <div class="info-block">
@@ -151,7 +152,7 @@
     <div class="info__sub-title">{{ $t("tender.info_about_cn") }}</div>
     <ul class="info-list">
       <li>
-        <button type="button" class="info-block__link" @click="selectTab('cn')">
+        <button type="button" class="info-block__link" @click="selectTab('contract-notice')">
           {{ $t("tender.official_publication_procedure") }}
         </button>
       </li>
@@ -170,7 +171,7 @@
       <div class="info__sub-title">{{ $t("tender.record_of_bids") }}</div>
       <ul class="info-list">
         <li>
-          <button type="button" class="info-block__link" @click="selectTab('offers')">
+          <button type="button" class="info-block__link" @click="selectTab('bids')">
             {{ $t("tender.record_of_bids_text") }}
           </button>
         </li>
@@ -182,7 +183,7 @@
       <ul class="info-list">
         <!--<li>Record of Electronic auction</li>-->
         <li>
-          <button type="button" class="info-block__link" @click="selectTab('ev')">
+          <button type="button" class="info-block__link" @click="selectTab('awards')">
             {{ $t("tender.information_about_evaluation_and_award_text") }}
           </button>
         </li>
@@ -197,10 +198,10 @@
 </template>
 
 <script>
-import BudgetBreakdown from "../../../../components/BudgetBreakdown";
-import mainProcurementCategory from "./../../../../store/types/main-procurement-category";
-import ProcedureId from "../../../../components/ProcedureId";
-import { getDataFromObject, formatDate, formatAmount } from "./../../../../utils";
+import BudgetBreakdown from "../../../../../components/BudgetBreakdown";
+import mainProcurementCategory from "../../../../../store/types/main-procurement-category";
+import ProcedureId from "../../../../../components/ProcedureId";
+import { getDataFromObject, formatDate, formatAmount } from "../../../../../utils";
 
 export default {
   name: "ProcurementRecord",
@@ -215,10 +216,6 @@ export default {
     },
     procedureType: {
       type: String,
-      required: true,
-    },
-    selectTab: {
-      type: Function,
       required: true,
     },
     hasBids: {
@@ -239,6 +236,10 @@ export default {
     },
     breakdowns: {
       type: Array,
+      required: true,
+    },
+    selectTab: {
+      type: Function,
       required: true,
     },
   },

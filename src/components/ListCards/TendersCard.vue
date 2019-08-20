@@ -91,9 +91,9 @@ export default {
     parseStatusIco() {
       const status = getDataFromObject(this.entity, _ => _.procedureStatus);
       if (procedureStatuses.tenders.some(it => it.value === status)) {
-        return `entity-status__ico_${procedureStatuses.tenders.find(it => it.value === status).value}`;
+        return `entity-status__ico--${procedureStatuses.tenders.find(it => it.value === status).value}`;
       } else {
-        return `entity-status__ico_${status}`;
+        return `entity-status__ico--${status}`;
       }
     },
     parseStatusText() {

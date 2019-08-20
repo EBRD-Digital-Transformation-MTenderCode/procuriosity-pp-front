@@ -149,38 +149,21 @@
             </button>
             <documents-modal
               :ref="bid.id + 'eligibilityDocuments'"
-              :documents="
-                bid.hasOwnProperty('documents')
-                  ? bid.documents.filter(_doc => _doc.documentType === 'x_eligibilityDocuments')
-                  : []
-              "
+              :documents="getEspdDocuments(bid)"
               :datePublished="bid.date"
               :noItemsText="$t('tender.no_documents_submitted')"
+              :cdbType="cdbType"
             />
             <div class="offers-table__docs-espd-text">{{ $t("tender.self_declaration") }}</div>
           </td>
           <td :data-th="$t('tender.eos_docs')">
-            <button
-              v-if="bid.hasOwnProperty('documents') ? bid.documents.length : false"
-              type="button"
-              @click="$refs[bid.id][0].show = true"
-              class="offers-table__docs-button"
-            />
-            <div class="offers-table__docs-eos-text" v-else>{{ $t("tender.no_documents") }}</div>
+            <button type="button" @click="$refs[bid.id][0].show = true" class="offers-table__docs-button" />
             <documents-modal
               :ref="bid.id"
-              :documents="
-                bid.hasOwnProperty('documents')
-                  ? bid.documents.filter(_doc => _doc.documentType !== 'x_eligibilityDocuments')
-                  : []
-              "
-              :espdDocuments="
-                bid.hasOwnProperty('documents')
-                  ? bid.documents.filter(_doc => _doc.documentType === 'x_eligibilityDocuments')
-                  : []
-              "
+              :documents="getEosDocuments(bid)"
               :datePublished="bid.date"
               :noItemsText="$t('tender.no_documents')"
+              :cdbType="cdbType"
             />
           </td>
         </tr>
@@ -208,12 +191,13 @@
 </template>
 
 <script>
-import DocumentsModal from "./../DocumentsModal";
+import DocumentsModal from "../../DocumentsModal";
 
-import ListPagination from "./../../../../components/ListPagination";
-import PageNumber from "./../../../../components/PageNumber";
+import ListPagination from "../../../../../components/ListPagination";
+import PageNumber from "../../../../../components/PageNumber";
 
-import { getDataFromObject, formatDate, formatAmount } from "./../../../../utils";
+import { getDataFromObject, formatDate, formatAmount } from "../../../../../utils";
+import { MTENDER2 } from "../../../../../store/types/cbd-types";
 
 export default {
   name: "Offers",
@@ -242,6 +226,9 @@ export default {
     elementsAmount() {
       return this.gd(this.evRecord, _ => _.tender.lots, []).length;
     },
+    cdbType() {
+      return MTENDER2;
+    },
   },
   methods: {
     gd(...args) {
@@ -256,6 +243,32 @@ export default {
     changePage(page) {
       this.numberOfLastDisplayedLot = page * this.pageSize;
       this.currentPage = page;
+    },
+    getEosDocuments(bid) {
+      return [
+        {
+          title: this.$t("tender.espd_docs"),
+          values: bid.hasOwnProperty("documents")
+            ? bid.documents.filter(_doc => _doc.documentType === "x_eligibilityDocuments")
+            : [],
+        },
+        {
+          title: this.$t("tender.modal_documents"),
+          values: bid.hasOwnProperty("documents")
+            ? bid.documents.filter(_doc => _doc.documentType !== "x_eligibilityDocuments")
+            : [],
+        },
+      ];
+    },
+    getEspdDocuments(bid) {
+      return [
+        {
+          title: this.$t("tender.espd_docs"),
+          values: bid.hasOwnProperty("documents")
+            ? bid.documents.filter(_doc => _doc.documentType === "x_eligibilityDocuments")
+            : [],
+        },
+      ];
     },
   },
 };
