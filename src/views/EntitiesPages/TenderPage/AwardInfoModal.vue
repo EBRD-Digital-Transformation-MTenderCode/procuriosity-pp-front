@@ -65,10 +65,11 @@ export default {
     parseDocType(type) {
       return parseDocumentType(type, this.$i18n.locale);
     },
+    // according to privacy complaints for tender - MD-2019-02-01-000117-1
     getDocs(award) {
       return [
         {
-          values: this.gd(award, _ => _.documents),
+          values: this.gd(award, _ => _.documents, []).filter(doc => doc.id !== "31f30bf70846436ca8b6fe1172248fb1"),
         },
       ];
     },
