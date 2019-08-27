@@ -339,4 +339,6 @@ export default {
   tendering: "Depunerea ofertelor",
   auction: "Perioada de licitaree",
   awarding: "Calificarea ofertanților",
+
+  winner: "Câştigător",
 };

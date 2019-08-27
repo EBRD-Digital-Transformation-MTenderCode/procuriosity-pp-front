@@ -330,4 +330,6 @@ export default {
   tendering: "Tendering",
   auction: "Auction period",
   awarding: "Awarding",
+
+  winner: "Winner",
 };
