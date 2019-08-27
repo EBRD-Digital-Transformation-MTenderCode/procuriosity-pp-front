@@ -163,7 +163,7 @@ export default {
     width: 100%;
     text-align: center;
     color: #2da9e2;
-    font-size: 1px;
+    font-size: 10px;
     font-weight: 700;
     @media (max-width: 490px) {
       text-align: left;
