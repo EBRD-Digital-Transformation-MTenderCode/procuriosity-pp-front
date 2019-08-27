@@ -166,7 +166,14 @@ export default {
       return MTENDER1;
     },
     getDocs() {
-      return [{ values: this.gd(this.contract, _ => _.documents) }];
+      // according to privacy complaints for tender - MD-2019-02-01-000117-1
+      return [
+        {
+          values: this.gd(this.contract, _ => _.documents, []).filter(
+            doc => doc.id !== "6986f5725c6e4b59a250b78400fc8c63"
+          ),
+        },
+      ];
     },
   },
   methods: {

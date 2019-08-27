@@ -759,8 +759,11 @@
         justify-content: space-around;
         align-items: center;
         margin-top: 20px !important;
-        @media (max-width: 560px) {
+        @media (max-width: 860px) {
           flex-wrap: wrap;
+          a {
+            margin: 0 20px;
+          }
         }
       }
 

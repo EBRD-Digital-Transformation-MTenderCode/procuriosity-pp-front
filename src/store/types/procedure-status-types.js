@@ -20,7 +20,7 @@ export default {
     },
     {
       name: {
-        en: "Enquiries in progress ",
+        en: "Enquiries in progress",
         ro: "Solicitare сlarificări",
         ru: "Период уточнений",
       },
