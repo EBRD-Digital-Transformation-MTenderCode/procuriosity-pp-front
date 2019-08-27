@@ -216,8 +216,8 @@
               </el-col>
             </el-row>
           </div>
-          <div class="info-blocks" v-for="result of auction.results" :key="result.tenderer.id">
-            <el-row :gutter="15">
+          <div class="info-blocks" v-for="(result, resultIndex) of auction.results" :key="result.tenderer.id">
+            <el-row :gutter="15" align="middle" type="flex">
               <el-col :sm="12">
                 <div class="info-block__value">
                   {{ result.tenderer.name }}
@@ -226,11 +226,14 @@
                   {{ result.tenderer.id }}
                 </div>
               </el-col>
-              <el-col :sm="12">
+              <el-col :sm="6">
                 <div class="info-block__value">{{ fa(result.value.amount) }}</div>
                 <div class="info-block__text">
                   {{ $t("tender.MDL_exluding_VAT") }}
                 </div>
+              </el-col>
+              <el-col :sm="6" v-if="resultIndex === 0">
+                <div class="info-block__value info-block__value_bold">{{ $t("tender.winner") }}</div>
               </el-col>
             </el-row>
           </div>
