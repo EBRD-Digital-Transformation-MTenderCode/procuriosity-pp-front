@@ -117,6 +117,7 @@
             <div class="info-block__value info-block__value">
               {{
                 selectProcedure(
+                  gd(MS, _ => _.compiledRelease.tender.procurementMethodDetails),
                   gd(MS, _ => _.compiledRelease.tender.mainProcurementCategory),
                   gd(MS, _ => _.compiledRelease.tender.value.amount, 0)
                 )
@@ -249,8 +250,8 @@ export default {
     getOrganizationObject(parties, role) {
       return getOrganizationObject(parties, role);
     },
-    selectProcedure(category, amount) {
-      return selectProcedure(category, amount);
+    selectProcedure(pmd, category, amount) {
+      return selectProcedure(pmd, category, amount);
     },
   },
 };

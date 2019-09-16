@@ -44,6 +44,7 @@
                     <div class="entity-main-info__additional-value">
                       {{
                         selectProcedure(
+                          gd(tender, _ => _.MSRecord.compiledRelease.tender.procurementMethodDetails),
                           gd(tender, _ => _.MSRecord.compiledRelease.tender.mainProcurementCategory),
                           gd(tender, _ => _.MSRecord.compiledRelease.tender.value.amount)
                         )
@@ -109,6 +110,7 @@
                       :breakdowns="breakdowns"
                       :procedureType="
                         selectProcedure(
+                          gd(tender, _ => _.MSRecord.compiledRelease.tender.procurementMethodDetails),
                           gd(tender, _ => _.MSRecord.compiledRelease.tender.mainProcurementCategory),
                           gd(tender, _ => _.MSRecord.compiledRelease.tender.value.amount)
                         )
@@ -148,6 +150,7 @@
                       :breakdowns="breakdowns"
                       :procedureType="
                         selectProcedure(
+                          gd(tender, _ => _.MSRecord.compiledRelease.tender.procurementMethodDetails),
                           gd(tender, _ => _.MSRecord.compiledRelease.tender.mainProcurementCategory),
                           gd(tender, _ => _.MSRecord.compiledRelease.tender.value.amount)
                         )
@@ -347,8 +350,8 @@ export default {
         return false;
       }
     },
-    selectProcedure(category, amount) {
-      return selectProcedure(category, amount);
+    selectProcedure(pmd, category, amount) {
+      return selectProcedure(pmd, category, amount);
     },
     async getFS(FSocid) {
       if (!FSocid || this.FSs.hasOwnProperty(FSocid)) {

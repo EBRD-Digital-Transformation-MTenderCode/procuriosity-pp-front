@@ -163,26 +163,40 @@ export function getOrganizationObject(parties, organizationRole) {
   }
 }
 
-// @TODO need clarify types for entities
-export function selectProcedure(category, amount) {
+export function selectProcedure(pmd, category, amount) {
+  // fucking crutch
+  if (pmd === "Procedura micro-valorii") {
+    pmd = "microValue";
+  }
+
+  if (pmd === "Procedură de valoare mică") {
+    pmd = "smallValue";
+  }
+
+  if (pmd === "Licitație deschisă") {
+    pmd = "openTender";
+  }
+
   return (
-    // @TODO need refactoring
-    proceduresTypes.contracts.find(procedure => procedure.value === calculateProcedureType(category, amount)) &&
-    proceduresTypes.contracts.find(procedure => procedure.value === calculateProcedureType(category, amount)).name[
+    proceduresTypes.tenders.find(procedure => procedure.value === calculateProcedureType(pmd, category, amount)) &&
+    proceduresTypes.tenders.find(procedure => procedure.value === calculateProcedureType(pmd, category, amount)).name[
       VueI18n.locale
     ]
   );
 }
 
-function calculateProcedureType(category, amount) {
-  if (category === "goods" || category === "services") {
-    if (amount < 80000) return "mv";
-    else if (amount <= 400000) return "sv";
-    else return "ot";
+function calculateProcedureType(pmd, category, amount) {
+  if (pmd === "smallValue") {
+    if (
+      ((category === "goods" || category === "services") && amount >= 800000) ||
+      (category === "works" && amount >= 2000000)
+    ) {
+      return "openTender";
+    } else {
+      return pmd;
+    }
   } else {
-    if (amount < 100000) return "mv";
-    else if (amount <= 1500000) return "sv";
-    else return "ot";
+    return pmd;
   }
 }
 
