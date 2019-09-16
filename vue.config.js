@@ -8,4 +8,8 @@ module.exports = {
   productionSourceMap: false,
   filenameHashing: false,
   parallel: true,
+
+  devServer: {
+    disableHostCheck: true,
+  },
 };

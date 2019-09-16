@@ -19,7 +19,9 @@ import {
   SET_ENTITY_SEARCH_PARAMS,
   SET_CURRENT_ENTITY_INFO,
   SET_INITIAL_SEARCH_PARAMS,
+  SET_DIRTY_FORM,
 } from "./types/mutations-types";
+
 import {
   FETCH_ENTITY_LIST,
   FETCH_CURRENT_TENDER_INFO,
@@ -30,7 +32,7 @@ import {
 
 import { MTENDER1, MTENDER2 } from "./types/cbd-types";
 
-import { convertObjectToQueryParamsString } from "./../utils";
+import { convertObjectToQueryParamsString, objectsIsEqual } from "./../utils";
 
 if (!localStorage.getItem("entities")) {
   const entities = {
@@ -62,6 +64,10 @@ export default {
         status: false,
         message: "",
       },
+      dirty: {
+        status: false,
+        differences: 0,
+      },
       list: [],
       searchParams: { ...localStorageEntities.budgets.searchParams },
       currentEntity: {
@@ -83,6 +89,10 @@ export default {
         status: false,
         message: "",
       },
+      dirty: {
+        status: false,
+        differences: 0,
+      },
       list: [],
       searchParams: { ...localStorageEntities.plans.searchParams },
       currentEntity: {
@@ -101,6 +111,10 @@ export default {
         status: false,
         message: "",
       },
+      dirty: {
+        status: false,
+        differences: 0,
+      },
       list: [],
       searchParams: { ...localStorageEntities.tenders.searchParams },
       currentEntity: {
@@ -118,6 +132,10 @@ export default {
       error: {
         status: false,
         message: "",
+      },
+      dirty: {
+        status: false,
+        differences: 0,
       },
       list: [],
       searchParams: { ...localStorageEntities.contracts.searchParams },
@@ -180,6 +198,8 @@ export default {
         ...params,
       };
       localStorage.setItem("entities", JSON.stringify(localStorageEntities));
+
+      this.commit(SET_DIRTY_FORM, { entityName });
     },
 
     [SET_CURRENT_ENTITY_INFO](state, { entityName, cdb, entityData }) {
@@ -205,6 +225,34 @@ export default {
         entityName,
         params: convertObjectToQueryParamsString(state[entityName].searchParams),
       });
+
+      this.commit(SET_DIRTY_FORM, { entityName });
+    },
+
+    [SET_DIRTY_FORM](state, { entityName }) {
+      const {
+        titlesOrDescriptions,
+        titlesOrDescriptionsStrict,
+        proceduresOwnerships,
+        proceduresStatuses,
+        page,
+        pageSize,
+        ...copyInitialSearchParams
+      } = { ...initialSearchProps[entityName] };
+      const {
+        titlesOrDescriptions: _titlesOrDescriptions,
+        titlesOrDescriptionsStrict: _titlesOrDescriptionsStrict,
+        proceduresOwnerships: _proceduresOwnerships,
+        proceduresStatuses: _proceduresStatuses,
+        page: _page,
+        pageSize: _pageSize,
+        ...copySavedSearchParams
+      } = { ...state[entityName].searchParams };
+
+      state[entityName].dirty = {
+        status: Boolean(objectsIsEqual(copyInitialSearchParams, copySavedSearchParams)),
+        differences: objectsIsEqual(copyInitialSearchParams, copySavedSearchParams),
+      };
     },
   },
   actions: {
