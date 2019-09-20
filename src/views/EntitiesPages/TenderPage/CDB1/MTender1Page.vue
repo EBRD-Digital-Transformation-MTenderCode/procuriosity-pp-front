@@ -254,7 +254,7 @@ export default {
         case "reporting":
           return proceduresTypes.tenders.find(type => type.value === "reporting").name[this.$i18n.locale];
         case "belowThreshold":
-          return proceduresTypes.tenders.find(type => type.value === "mv").name[this.$i18n.locale];
+          return proceduresTypes.tenders.find(type => type.value === "microValue").name[this.$i18n.locale];
         default:
           return "";
       }

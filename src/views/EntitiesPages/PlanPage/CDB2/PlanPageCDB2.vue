@@ -40,6 +40,7 @@
                     <div class="entity-main-info__additional-value">
                       {{
                         selectProcedure(
+                          gd(plan, _ => _.MSRecord.compiledRelease.tender.procurementMethodDetails),
                           gd(plan, _ => _.MSRecord.compiledRelease.tender.mainProcurementCategory),
                           gd(plan, _ => _.MSRecord.compiledRelease.tender.value.amount)
                         )
@@ -95,6 +96,7 @@
               :pnRecord="gd(plan, _ => _.PNRecord.compiledRelease)"
               :procedureType="
                 selectProcedure(
+                  gd(plan, _ => _.MSRecord.compiledRelease.tender.procurementMethodDetails),
                   gd(plan, _ => _.MSRecord.compiledRelease.tender.mainProcurementCategory),
                   gd(plan, _ => _.MSRecord.compiledRelease.tender.value.amount)
                 )
@@ -183,8 +185,8 @@ export default {
     gd(...args) {
       return getDataFromObject(...args);
     },
-    selectProcedure(category, amount) {
-      return selectProcedure(category, amount);
+    selectProcedure(pmd, category, amount) {
+      return selectProcedure(pmd, category, amount);
     },
     checkTab(tab) {
       if (tab === "cn") {

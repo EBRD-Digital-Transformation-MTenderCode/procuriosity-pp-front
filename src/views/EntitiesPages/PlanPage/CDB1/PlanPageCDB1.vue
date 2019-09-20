@@ -338,7 +338,7 @@ import PageNumber from "../../../../components/PageNumber";
 
 import Error from "../../../Error";
 
-import { getDataFromObject, selectProcedure, formatAmount, formatDate } from "../../../../utils";
+import { getDataFromObject, formatAmount, formatDate } from "../../../../utils";
 
 export default {
   name: "PlanPageCDB1",
@@ -459,9 +459,6 @@ export default {
     },
     fd(...ars) {
       return formatDate(...ars);
-    },
-    selectProcedure(category, amount) {
-      return selectProcedure(category, amount);
     },
     changePage(page) {
       this.numberOfLastDisplayedLot = page * this.pageSize;

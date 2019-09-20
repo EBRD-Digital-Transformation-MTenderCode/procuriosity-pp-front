@@ -6,7 +6,7 @@ export default {
         ro: "Achiziții de valoare mică",
         ru: "Закупка малой стоимости",
       },
-      value: "mv",
+      value: "microValue",
     },
     {
       name: {
@@ -14,7 +14,7 @@ export default {
         ro: "Cerere Oferte de Prețuri",
         ru: "Запрос ценовых оферт",
       },
-      value: "sv",
+      value: "smallValue",
     },
     {
       name: {
@@ -22,7 +22,7 @@ export default {
         ro: "Licitație deschisă",
         ru: "Открытые торги",
       },
-      value: "ot",
+      value: "openTender",
     },
     {
       name: {
@@ -64,7 +64,7 @@ export default {
         ro: "Achiziții de valoare mică",
         ru: "Закупка малой стоимости",
       },
-      value: "mv",
+      value: "microValue",
     },
     {
       name: {
@@ -72,7 +72,7 @@ export default {
         ro: "Cerere Oferte de Prețuri",
         ru: "Запрос ценовых оферт",
       },
-      value: "sv",
+      value: "smallValue",
     },
     {
       name: {
@@ -80,7 +80,7 @@ export default {
         ro: "Licitație deschisă",
         ru: "Открытые торги",
       },
-      value: "ot",
+      value: "openTender",
     },
   ],
   contracts: [
@@ -98,7 +98,7 @@ export default {
         ro: "Achiziții de valoare mică",
         ru: "Закупка малой стоимости",
       },
-      value: "mv",
+      value: "microValue",
     },
     {
       name: {
@@ -106,7 +106,7 @@ export default {
         ro: "Cerere Oferte de Prețuri",
         ru: "Запрос ценовых оферт",
       },
-      value: "sv",
+      value: "smallValue",
     },
     {
       name: {
@@ -114,7 +114,7 @@ export default {
         ro: "Licitație deschisă",
         ru: "Открытые торги",
       },
-      value: "ot",
+      value: "openTender",
     },
   ],
 };
