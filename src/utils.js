@@ -244,35 +244,3 @@ export function getSourceOfMoney(parties, buyerId) {
   }
   return source || VueI18n.t("budgetBreakdown.state_money");
 }
-
-export function objectsIsEqual(obj1, obj2) {
-  let differences = 0;
-  if (Object.keys(obj1).length !== Object.keys(obj2).length) {
-    console.log("Objects have a different number of keys");
-    ++differences;
-  }
-  for (const keyOfObj1 in obj1) {
-    if (!obj2.hasOwnProperty(keyOfObj1)) {
-      console.log(`Second object hasn't key - ${keyOfObj1}`);
-      ++differences;
-    } else {
-      if (Array.isArray(obj1[keyOfObj1])) {
-        if (!Array.isArray(obj2[keyOfObj1])) {
-          console.log(`Key - ${keyOfObj1} not array in first object`);
-          ++differences;
-        } else {
-          if (obj1[keyOfObj1].length !== obj2[keyOfObj1].length) {
-            console.log(`Array length with key - ${keyOfObj1} from first object not equal in second object`);
-            ++differences;
-          }
-        }
-      } else {
-        if (obj1[keyOfObj1] !== obj2[keyOfObj1]) {
-          console.log(`Key - ${keyOfObj1} not equal in objects`);
-          ++differences;
-        }
-      }
-    }
-  }
-  return differences;
-}

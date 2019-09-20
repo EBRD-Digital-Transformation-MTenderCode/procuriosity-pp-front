@@ -6,9 +6,6 @@
         <button class="search-form__btn search-form__btn_more" @click="actionExpand">
           {{ $t("search.moreCriterions") }}
           <i :class="['icon-left', isExpanded ? 'el-icon-close' : 'el-icon-arrow-down']" />
-          <span v-if="entities[entityName].dirty.status" class="dirty">
-            {{ entities[entityName].dirty.differences }}
-          </span>
         </button>
       </div>
       <h1 class="list-title">
@@ -59,7 +56,7 @@ import Velocity from "velocity-animate";
 import { mapState } from "vuex";
 import { FETCH_ENTITY_LIST } from "../store/types/actions-types";
 import { SET_ENTITY_SEARCH_PARAMS } from "../store/types/mutations-types";
-import initialSearchProps from "./../store/types/initial-search-props";
+import initialSearchProps from "./../store/types/initial-search-props.js";
 
 import BudgetsSearchForm from "../components/SearchForms/BudgetsSearchForm";
 import TendersSearchForm from "../components/SearchForms/TendersSearchForm";
