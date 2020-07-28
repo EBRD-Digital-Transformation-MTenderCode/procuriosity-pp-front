@@ -327,7 +327,7 @@ export default {
 
     async [FETCH_CURRENT_PLAN_INFO]({ commit }, { id }) {
       const entityName = "plans";
-      const regexMtender1Id = /^MD-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{6}-[0-9]$/;
+      const regexMtender1Id = /^MD-P-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{6}-[0-9]$/;
       const regexMtender2Id = /^ocds-([a-z]|[0-9]){6}-[A-Z]{2,}-[0-9]{13}$/;
 
       let cdb = "";
@@ -350,6 +350,9 @@ export default {
 
         try {
           const elasticRes = await axios(getListConfig(entityName, `?entityId=${id}`));
+
+          if (!elasticRes.data.data.length) throw new Error(VueI18n.t("invalid-id"));
+
           const requestId = elasticRes.data.data[0].id;
 
           const res = await axios(getPlanConfig(cdb, requestId));
@@ -487,6 +490,9 @@ export default {
 
         try {
           const elasticRes = await axios(getListConfig(entityName, `?entityId=${id}`));
+
+          if (!elasticRes.data.data.length) throw new Error(VueI18n.t("invalid-id"));
+
           const requestId = elasticRes.data.data[0].id;
 
           const res = await axios(getTenderConfig(cdb, requestId));
@@ -498,11 +504,6 @@ export default {
             entityData: tenderData,
           });
 
-          commit(SET_ENTITY_LOADED, {
-            entityName,
-            loaded: true,
-          });
-
           commit(SET_ENTITY_LOADED_ERROR, {
             entityName,
             error: {
@@ -511,17 +512,17 @@ export default {
             },
           });
         } catch (e) {
-          commit(SET_ENTITY_LOADED, {
-            entityName,
-            loaded: true,
-          });
-
           commit(SET_ENTITY_LOADED_ERROR, {
             entityName,
             error: {
               status: true,
               message: e.message,
             },
+          });
+        } finally {
+          commit(SET_ENTITY_LOADED, {
+            entityName,
+            loaded: true,
           });
         }
       } else if (regexMtender2Id.test(id)) {
@@ -530,9 +531,7 @@ export default {
         try {
           const res = await axios(getTenderConfig(cdb, id));
 
-          if (!Object.keys(res.data).length) {
-            throw new Error(VueI18n.t("invalid-id"));
-          }
+          if (!Object.keys(res.data).length) throw new Error(VueI18n.t("invalid-id"));
 
           const tenderData = {};
 
@@ -623,35 +622,28 @@ export default {
       if (cdb === MTENDER1) {
         try {
           const elasticRes = await axios(getListConfig(entityName, `?entityId=${id}`));
-          if (elasticRes.data.data.length) {
-            const requestId = elasticRes.data.data[0].id;
 
-            const res = await axios(getContractConfig(cdb, requestId));
+          if (!elasticRes.data.data.length) throw new Error(VueI18n.t("invalid-id"));
 
-            const contractData = res.data.data;
+          const requestId = elasticRes.data.data[0].id;
 
-            commit(SET_CURRENT_ENTITY_INFO, {
-              entityName,
-              cdb,
-              entityData: contractData,
-            });
+          const res = await axios(getContractConfig(cdb, requestId));
 
-            commit(SET_ENTITY_LOADED_ERROR, {
-              entityName,
-              error: {
-                status: false,
-                message: "",
-              },
-            });
-          } else {
-            commit(SET_ENTITY_LOADED_ERROR, {
-              entityName,
-              error: {
-                status: true,
-                message: VueI18n.t("invalid-id"),
-              },
-            });
-          }
+          const contractData = res.data.data;
+
+          commit(SET_CURRENT_ENTITY_INFO, {
+            entityName,
+            cdb,
+            entityData: contractData,
+          });
+
+          commit(SET_ENTITY_LOADED_ERROR, {
+            entityName,
+            error: {
+              status: false,
+              message: "",
+            },
+          });
         } catch (e) {
           commit(SET_ENTITY_LOADED_ERROR, {
             entityName,

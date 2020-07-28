@@ -1,7 +1,7 @@
 <template>
   <div class="main-search">
-    <el-checkbox-button class="search-form__btn search-form__btn_strict" v-model="currentStrictSearhcValue">
-      {{ currentStrictSearhcValue ? $t("search.strict") : $t("search.no_strict") }}
+    <el-checkbox-button class="search-form__btn search-form__btn_strict" v-model="currentStrictSearchValue">
+      {{ currentStrictSearchValue ? $t("search.strict") : $t("search.no_strict") }}
     </el-checkbox-button>
 
     <el-input
@@ -41,7 +41,7 @@ export default {
   },
   data() {
     return {
-      currentStrictSearhcValue: this.titlesOrDescriptionsStrict,
+      currentStrictSearchValue: this.titlesOrDescriptionsStrict,
       currentSearchValue: this.titlesOrDescriptions,
     };
   },
@@ -54,8 +54,9 @@ export default {
           this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
             entityName: this.entityName,
             params: {
-              titlesOrDescriptionsStrict: this.currentStrictSearhcValue,
+              titlesOrDescriptionsStrict: this.currentStrictSearchValue,
               titlesOrDescriptions: val.trim(),
+              page: 1,
             },
           });
         }
@@ -63,7 +64,7 @@ export default {
         this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
           entityName: this.entityName,
           params: {
-            titlesOrDescriptionsStrict: this.currentStrictSearhcValue,
+            titlesOrDescriptionsStrict: this.currentStrictSearchValue,
             titlesOrDescriptions: "",
           },
         });
@@ -79,12 +80,13 @@ export default {
     },
   },
   watch: {
-    currentStrictSearhcValue(newVal) {
+    currentStrictSearchValue(newVal) {
       if (this.currentSearchValue && this.currentSearchValue.length >= 3) {
         this.$store.commit(SET_ENTITY_SEARCH_PARAMS, {
           entityName: this.entityName,
           params: {
             titlesOrDescriptionsStrict: newVal,
+            page: 1,
           },
         });
       }
@@ -100,7 +102,7 @@ export default {
     },
 
     titlesOrDescriptionsStrict(newVal) {
-      this.currentStrictSearhcValue = newVal;
+      this.currentStrictSearchValue = newVal;
     },
 
     titlesOrDescriptions(newVal) {

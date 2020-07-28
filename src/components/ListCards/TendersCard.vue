@@ -38,9 +38,9 @@
             <div class="entity-amount__text">{{ $t("tender.value") }} ({{ currency }})</div>
             <div class="entity-amount__number">
               <span class="whole" :style="wholeAmount.length > 10 ? 'font-size: 30px' : ''">
-                {{ wholeAmount }}<span v-if="fractionAmount">.</span>
+                {{ wholeAmount }}
               </span>
-              <span v-if="fractionAmount" class="fraction">{{ fractionAmount }}</span>
+              <span v-if="fractionAmount" class="fraction">.{{ fractionAmount }}</span>
             </div>
           </div>
         </el-col>
@@ -91,9 +91,9 @@ export default {
     parseStatusIco() {
       const status = getDataFromObject(this.entity, _ => _.procedureStatus);
       if (procedureStatuses.tenders.some(it => it.value === status)) {
-        return `entity-status__ico_${procedureStatuses.tenders.find(it => it.value === status).value}`;
+        return `entity-status__ico--${procedureStatuses.tenders.find(it => it.value === status).value}`;
       } else {
-        return `entity-status__ico_${status}`;
+        return `entity-status__ico--${status}`;
       }
     },
     parseStatusText() {

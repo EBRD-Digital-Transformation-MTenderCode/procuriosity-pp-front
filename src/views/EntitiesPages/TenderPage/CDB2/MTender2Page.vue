@@ -15,16 +15,26 @@
                 <div class="entity-main-info__description">
                   {{ gd(tender, _ => _.MSRecord.compiledRelease.tender.description) }}
                 </div>
-                <div class="entity-main-info__timeline"></div>
+                <timeline
+                  :periods="mapPeriods"
+                  :status="gd(tender.EVRecord, _ => _.compiledRelease.tender.status)"
+                  :statusDetails="gd(tender.EVRecord, _ => _.compiledRelease.tender.statusDetails)"
+                />
               </el-col>
               <el-col :sm="6" :offset="2" :xs="{ span: 22, offset: 0 }">
                 <div class="entity-main-info__value">
                   <div>{{ $t("tender.estimated_value_excluding_VAT") }}</div>
                   <span class="entity-main-info__amount">
-                    <span class="whole">{{ wholeAmount }} </span>
-                    <span class="fraction"> <span class="dot">.</span>{{ fractionAmount }}</span>
-                    <span class="entity-main-info__currency">
-                      {{ gd(tender, _ => _.MSRecord.compiledRelease.tender.value.currency) }}
+                    <span class="whole" :style="wholeAmount.length > 8 ? 'font-size: 26px' : ''"
+                      >{{ wholeAmount }}
+                    </span>
+                    <span class="fraction-currency_wp">
+                      <span class="fraction" :style="wholeAmount.length > 8 ? 'font-size: 14px' : ''">
+                        <span class="dot">.</span>{{ fractionAmount }}</span
+                      >
+                      <span class="entity-main-info__currency" :style="wholeAmount.length > 8 ? 'font-size: 10px' : ''">
+                        {{ gd(tender, _ => _.MSRecord.compiledRelease.tender.value.currency) }}
+                      </span>
                     </span>
                   </span>
                 </div>
@@ -34,10 +44,17 @@
                     <div class="entity-main-info__additional-value">
                       {{
                         selectProcedure(
+                          gd(tender, _ => _.MSRecord.compiledRelease.tender.procurementMethodDetails),
                           gd(tender, _ => _.MSRecord.compiledRelease.tender.mainProcurementCategory),
                           gd(tender, _ => _.MSRecord.compiledRelease.tender.value.amount)
                         )
                       }}
+                    </div>
+                  </div>
+                  <div class="entity-main-info__additional-block">
+                    <div class="entity-main-info__additional-title">{{ $t("tender.procedure_status") }}</div>
+                    <div class="entity-main-info__additional-value">
+                      {{ mapTenderStatus }}
                     </div>
                   </div>
                   <div class="entity-main-info__additional-block">
@@ -59,7 +76,7 @@
                   <div class="entity-main-info__additional-block">
                     <div class="entity-main-info__additional-title">{{ $t("tender.tender_id") }}</div>
                     <div class="entity-main-info__additional-value">
-                      {{ gd(tender, _ => _.MSRecord.compiledRelease.ocid) }}
+                      <procedure-id>{{ gd(tender, _ => _.MSRecord.compiledRelease.ocid) }}</procedure-id>
                     </div>
                   </div>
                 </div>
@@ -71,7 +88,7 @@
           <el-container direction="vertical">
             <el-row>
               <el-col :xs="24">
-                <el-tabs v-model="activeTab" stretch :before-leave="checkTab">
+                <el-tabs v-model="activeTab" stretch :before-leave="checkTab" @tab-click="handleClick">
                   <el-tab-pane
                     :disabled="!gd(tender, _ => _.EVRecord.compiledRelease.hasPreviousNotice)"
                     name="pn"
@@ -84,7 +101,7 @@
                       v-html="$t(isPIN ? 'tender.pin' : 'tender.procurement_plan')"
                     />
                   </el-tab-pane>
-                  <el-tab-pane name="cn" lazy key="cn">
+                  <el-tab-pane name="contract-notice" lazy>
                     <span slot="label" v-html="$t('tender.contract_notice')" />
                     <contract-notice
                       :msRecord="gd(tender, _ => _.MSRecord.compiledRelease)"
@@ -93,58 +110,38 @@
                       :breakdowns="breakdowns"
                       :procedureType="
                         selectProcedure(
+                          gd(tender, _ => _.MSRecord.compiledRelease.tender.procurementMethodDetails),
                           gd(tender, _ => _.MSRecord.compiledRelease.tender.mainProcurementCategory),
                           gd(tender, _ => _.MSRecord.compiledRelease.tender.value.amount)
                         )
                       "
                     />
                   </el-tab-pane>
-                  <el-tab-pane name="clarification" lazy key="clarification">
+                  <el-tab-pane name="clarification" lazy>
                     <span slot="label" v-html="$t('tender.clarification_and_changes')" />
                     <clarification :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
                   </el-tab-pane>
-                  <el-tab-pane disabled name="review" lazy key="review">
+                  <el-tab-pane name="review" lazy>
                     <span slot="label" v-html="$t('tender.review_procedures')" />
+                    <review :id="gd(tender, _ => _.EVRecord.compiledRelease.tender.id)" />
                   </el-tab-pane>
-                  <el-tab-pane
-                    :disabled="
-                      !gd(tender, _ => _.EVRecord.compiledRelease.tender.electronicAuctions.details, []).length
-                    "
-                    :label="$t('tender.electronic_auction')"
-                    name="auction"
-                    lazy
-                    key="auction"
-                  >
+                  <el-tab-pane :disabled="!tabs.includes('auctions')" name="auctions" lazy>
+                    <span slot="label" v-html="$t('tender.electronic_auction')"></span>
                     <auction :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
                   </el-tab-pane>
-                  <el-tab-pane
-                    :disabled="!gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('bids')"
-                    name="offers"
-                    lazy
-                    key="offers"
-                  >
+                  <el-tab-pane :disabled="!tabs.includes('bids')" name="bids" lazy>
                     <span slot="label" v-html="$t('tender.electronic_bids')"></span>
                     <offers :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
                   </el-tab-pane>
-                  <el-tab-pane
-                    :disabled="!gd(tender, _ => _.EVRecord.compiledRelease.tender, {}).hasOwnProperty('awardPeriod')"
-                    name="ev"
-                    lazy
-                    key="ev"
-                  >
+                  <el-tab-pane :disabled="!tabs.includes('awards')" name="awards" lazy>
                     <span slot="label" v-html="$t('tender.evaluation_of_bids')"></span>
                     <evaluation :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
                   </el-tab-pane>
-                  <el-tab-pane
-                    :disabled="!gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('contracts')"
-                    name="cans"
-                    lazy
-                    key="cans"
-                  >
+                  <el-tab-pane :disabled="!tabs.includes('cans')" name="cans" lazy>
                     <span slot="label" v-html="$t('tender.contract_award')"></span>
                     <contracts :evRecord="gd(tender, _ => _.EVRecord.compiledRelease)" />
                   </el-tab-pane>
-                  <el-tab-pane name="pr" lazy key="pr">
+                  <el-tab-pane name="procurement-record" lazy>
                     <span slot="label" v-html="$t('tender.procurement_record_title')" />
                     <procurement-record
                       :msRecord="gd(tender, _ => _.MSRecord.compiledRelease)"
@@ -153,14 +150,15 @@
                       :breakdowns="breakdowns"
                       :procedureType="
                         selectProcedure(
+                          gd(tender, _ => _.MSRecord.compiledRelease.tender.procurementMethodDetails),
                           gd(tender, _ => _.MSRecord.compiledRelease.tender.mainProcurementCategory),
                           gd(tender, _ => _.MSRecord.compiledRelease.tender.value.amount)
                         )
                       "
-                      :selectTab="selectTab"
                       :hasBids="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('bids')"
                       :hasAwards="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('awards')"
                       :hasCANs="gd(tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty('contracts')"
+                      :selectTab="selectTab"
                     />
                   </el-tab-pane>
                 </el-tabs>
@@ -169,12 +167,8 @@
           </el-container>
         </div>
       </div>
-      <el-container class="error" key="error" v-else>
-        <div class="error-message">{{ error.message }}</div>
-        <button class="refresh-btn" @click="getTender">
-          {{ $t("refresh") }}
-        </button>
-        <button class="back-btn" @click="$router.go(-1)">{{ $t("back") }}</button>
+      <el-container key="error" v-else>
+        <error :message="error.message"></error>
       </el-container>
     </transition>
   </div>
@@ -183,40 +177,73 @@
 <script>
 import axios from "axios";
 import { mapState } from "vuex";
-import { FETCH_CURRENT_TENDER_INFO } from "../../../store/types/actions-types";
+import { FETCH_CURRENT_TENDER_INFO } from "../../../../store/types/actions-types";
 
 import dayjs from "dayjs";
 
 import ContractNotice from "./Tabs/ContractNotice";
 import Clarification from "./Tabs/Clarification";
+import Review from "../Review";
 import Auction from "./Tabs/Auction";
 import Offers from "./Tabs/Offers";
 import Evaluation from "./Tabs/Evaluation";
 import Contracts from "./Tabs/Contracts";
+import Timeline from "./Timeline";
 import ProcurementRecord from "./Tabs/ProcurementRecord";
+import ProcedureId from "../../../../components/ProcedureId";
+import Error from "../../../Error";
 
-import { getDataFromObject, selectProcedure, getOrganizationObject, getSourceOfMoney } from "./../../../utils";
-import { getBudgetConfig } from "../../../configs/requests-configs";
+import {
+  getDataFromObject,
+  selectProcedure,
+  getOrganizationObject,
+  getSourceOfMoney,
+  mapTenderStatus,
+} from "../../../../utils";
+import { getBudgetConfig } from "../../../../configs/requests-configs";
 
 export default {
   name: "TenderPage",
   components: {
     "contract-notice": ContractNotice,
     clarification: Clarification,
+    review: Review,
     auction: Auction,
     offers: Offers,
     evaluation: Evaluation,
     contracts: Contracts,
     "procurement-record": ProcurementRecord,
+    "procedure-id": ProcedureId,
+    timeline: Timeline,
+    error: Error,
   },
   data() {
     return {
-      activeTab: "cn",
+      activeTab: "contract-notice",
       FSs: {},
+      tabs: ["contract-notice", "clarification", "review", "auctions", "bids", "awards", "cans", "procurement-record"],
     };
   },
-  created() {
-    this.getTender();
+  async created() {
+    await this.getTender();
+
+    this.tabs = this.tabs.filter(tab => {
+      if (tab === "auctions") {
+        return !!this.gd(this.tender, _ => _.EVRecord.compiledRelease.tender.electronicAuctions.details, []).length;
+      }
+      if (tab === "bids") {
+        return !!this.gd(this.tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty("bids");
+      }
+      if (tab === "awards") {
+        return !!this.gd(this.tender, _ => _.EVRecord.compiledRelease.tender, {}).hasOwnProperty("awardPeriod");
+      }
+      if (tab === "cans") {
+        return !!this.gd(this.tender, _ => _.EVRecord.compiledRelease, {}).hasOwnProperty("contracts");
+      }
+
+      return true;
+    });
+    this.changeTab();
   },
   computed: {
     ...mapState({
@@ -224,6 +251,13 @@ export default {
       loaded: state => state.entities.tenders.loaded,
       error: state => state.entities.tenders.error,
     }),
+    mapTenderStatus() {
+      const tender = this.gd(this.tender.EVRecord, _ => _.compiledRelease.tender);
+      if (!tender) {
+        return "";
+      }
+      return mapTenderStatus(tender.status, tender.statusDetails);
+    },
     wholeAmount() {
       const amountStr = this.gd(this.tender, _ => _.MSRecord.compiledRelease.tender.value.amount, 0)
         .toString()
@@ -252,7 +286,7 @@ export default {
             getOrganizationObject(this.gd(this.tender, _ => _.MSRecord.compiledRelease.parties), "buyer").id
           ),
           description: this.gd(budgetBreakdown, _ => _.description, this.$t("n/a")),
-          budgetLineId: this.gd(this.tender, _ => _.MSRecord.compiledRelease.planning.budget.id, this.$t("n/a")),
+          budgetLineId: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].budgetLineId, this.$t("n/a")),
           EIocid: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].EIocid),
           EIname: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].EIname),
           period: {
@@ -263,7 +297,8 @@ export default {
           projectId: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].projectId, this.$t("n/a")),
           buyer: {
             name: getOrganizationObject(this.gd(this.tender, _ => _.MSRecord.compiledRelease.parties), "buyer").name,
-            id: getOrganizationObject(this.gd(this.tender, _ => _.MSRecord.compiledRelease.parties), "buyer").id,
+            id: getOrganizationObject(this.gd(this.tender, _ => _.MSRecord.compiledRelease.parties), "buyer").identifier
+              .id,
           },
           funder: {
             name: this.gd(this.FSs, _ => _[this.gd(budgetBreakdown, _ => _.id)].funder.name),
@@ -286,6 +321,19 @@ export default {
         return startDate.diff(modifyDate, "day") >= 15;
       } else return false;
     },
+    mapPeriods() {
+      return {
+        enquiryPeriodStart: this.gd(this.tender, _ => _.EVRecord.compiledRelease.tender.enquiryPeriod.startDate, "###"),
+        enquiryPeriodEnd: this.gd(this.tender, _ => _.EVRecord.compiledRelease.tender.enquiryPeriod.endDate, "###"),
+        auctionPeriodStart: this.gd(
+          this.tender,
+          _ => _.EVRecord.compiledRelease.tender.auctionPeriod.startDate,
+          undefined
+        ),
+        tenderPeriodEnd: this.gd(this.tender, _ => _.EVRecord.compiledRelease.tender.tenderPeriod.endDate, "###"),
+        awardPeriodEnd: this.gd(this.tender, _ => _.EVRecord.compiledRelease.tender.awardPeriod.endDate, "###"),
+      };
+    },
   },
   methods: {
     async getTender() {
@@ -297,21 +345,13 @@ export default {
     gd(...args) {
       return getDataFromObject(...args);
     },
-    selectTab(tab) {
-      this.activeTab = tab;
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "smooth",
-      });
-    },
     checkTab(tab) {
       if (tab === "pn") {
         return false;
       }
     },
-    selectProcedure(category, amount) {
-      return selectProcedure(category, amount);
+    selectProcedure(pmd, category, amount) {
+      return selectProcedure(pmd, category, amount);
     },
     async getFS(FSocid) {
       if (!FSocid || this.FSs.hasOwnProperty(FSocid)) {
@@ -329,15 +369,14 @@ export default {
           [FS.ocid]: {
             project: FS.planning.project,
             projectId: FS.planning.projectId,
+            budgetLineId: this.gd(FS, _ => _.planning.budget.id),
             payer: {
               name: getOrganizationObject(FS.parties, "payer").name,
-              id: getOrganizationObject(FS.parties, "payer").id,
+              id: getOrganizationObject(FS.parties, "payer").identifier.id,
             },
             funder: {
-              name: getOrganizationObject(FS.parties, "funder")
-                ? getOrganizationObject(FS.parties, "funder").name
-                : null,
-              id: getOrganizationObject(FS.parties, "funder") ? getOrganizationObject(FS.parties, "funder").id : null,
+              name: this.gd(getOrganizationObject(FS.parties, "funder"), _ => _.name),
+              id: this.gd(getOrganizationObject(FS.parties, "funder"), _ => _.identifier.id),
             },
             status: this.gd(FS, _ => _.planning.budget.verified),
             parties: this.gd(FS, _ => _.parties),
@@ -347,6 +386,28 @@ export default {
         });
       } catch (e) {
         console.log(e);
+      }
+    },
+    handleClick(tab) {
+      this.$router.replace({ query: { tab: tab.name } });
+    },
+    selectTab(tab) {
+      this.$router.replace({ query: { tab } });
+      this.activeTab = tab;
+      this.changeTab();
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    },
+    changeTab() {
+      const { query } = this.$route;
+      if (query.tab && this.tabs.find(tab => query.tab === tab)) {
+        this.activeTab = query.tab;
+      } else {
+        this.activeTab = this.tabs[0];
+        this.$router.replace({ query: { tab: this.tabs[0] } });
       }
     },
   },

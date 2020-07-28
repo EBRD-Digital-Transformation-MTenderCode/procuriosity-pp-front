@@ -39,12 +39,6 @@
                   {{
                     gd(
                       gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
-                      _ => _.identifier.scheme
-                    )
-                  }}:
-                  {{
-                    gd(
-                      gd(msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
                       _ => _.identifier.id
                     )
                   }}
@@ -217,9 +211,13 @@
                 <div class="info-block__text">{{ $t("tender.type_of_buyer") }}</div>
                 <div class="info-block__value">{{ getTypeOfBuyer }}</div>
               </el-col>
-              <el-col :sm="14">
+              <el-col :sm="6">
                 <div class="info-block__text">{{ $t("tender.main_activity") }}</div>
                 <div class="info-block__value">{{ getMainGeneralActivity }}</div>
+              </el-col>
+              <el-col :sm="8">
+                <div class="info-block__text">{{ $t("tender.sectoral_activity") }}</div>
+                <div class="info-block__value">{{ getMainSectoralActivity }}</div>
               </el-col>
             </el-row>
           </div>
@@ -309,7 +307,12 @@
                     class="platform-link"
                     v-for="platform of randomSortPlatforms"
                     :key="platform.name"
-                    :href="platform.href"
+                    :href="
+                      `${platform.href}${$i18n.locale !== 'ro' ? `${$i18n.locale}/` : ''}tenders/${gd(
+                        msRecord,
+                        _ => _.ocid
+                      )}`
+                    "
                     :title="platform.name"
                     target="_blank"
                   >
@@ -407,13 +410,17 @@
             <template slot="title">
               <div class="info-block accordion-header">
                 <el-row :gutter="15">
-                  <el-col :sm="16">
+                  <el-col :sm="12">
                     <div class="info-block__text">{{ $t("tender.title") }}</div>
                     <div class="info-block__value info-block__value__bold">{{ gd(lot, _ => _.title) }}</div>
                   </el-col>
                   <el-col :sm="8">
                     <div class="info-block__text">{{ $t("tender.lot_identifier") }}</div>
                     <div class="info-block__value">{{ gd(lot, _ => _.id) }}</div>
+                  </el-col>
+                  <el-col :sm="4">
+                    <div class="info-block__text">{{ $t("tender.status") }}</div>
+                    <div class="info-block__value">{{ getLotStatus(gd(lot, _ => _.status)) }}</div>
                   </el-col>
                 </el-row>
               </div>
@@ -639,68 +646,7 @@
                   ).length
                 "
               >
-                <div
-                  class="info-block__documents"
-                  v-for="(doc, index) of getDocs(
-                    gd(
-                      gd(evRecord, _ => _.tender.documents, []).filter(
-                        _doc => gd(_doc, _ => _.relatedLots[0], '') === gd(lot, _ => _.id)
-                      ),
-                      _ => _,
-                      []
-                    )
-                  )"
-                  :key="doc.id + index"
-                >
-                  <div class="info-block__document">
-                    <el-row :gutter="15">
-                      <el-col :sm="24">
-                        <div class="info-block__value">
-                          {{ parseDocType(gd(doc, _ => _.documentType)) }}
-                          <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a>
-                        </div>
-                      </el-col>
-                    </el-row>
-                    <el-row :gutter="15">
-                      <el-col :sm="16">
-                        <div class="info-block__text info-block__text_small">
-                          {{ $t("tender.id") }}: {{ gd(doc, _ => _.id) }}
-                        </div>
-                      </el-col>
-                      <el-col :sm="8">
-                        <div class="info-block__text info-block__text_small">
-                          {{ $t("tender.published") }}: {{ fd(gd(doc, _ => _.datePublished)) }}
-                        </div>
-                      </el-col>
-                    </el-row>
-                  </div>
-                  <div
-                    v-for="(oldDoc, index) of gd(doc, _ => _.oldVersions, [])"
-                    :key="oldDoc.id + index"
-                    class="info-block__document info-block__document_old"
-                  >
-                    <el-row :gutter="15">
-                      <el-col :sm="24">
-                        <div class="info-block__value">
-                          {{ parseDocType(gd(oldDoc, _ => _.documentType)) }}
-                          <a :href="gd(oldDoc, _ => _.url)">{{ gd(oldDoc, _ => _.title) }}</a>
-                        </div>
-                      </el-col>
-                    </el-row>
-                    <el-row :gutter="15">
-                      <el-col :sm="16" class="info-block__text_oldDoc">
-                        <div class="info-block__text info-block__text_small">
-                          {{ $t("tender.id") }}: {{ gd(oldDoc, _ => _.id) }}
-                        </div>
-                      </el-col>
-                      <el-col :sm="8">
-                        <div class="info-block__text info-block__text_small">
-                          {{ $t("tender.published") }}: {{ fd(gd(oldDoc, _ => _.datePublished)) }}
-                        </div>
-                      </el-col>
-                    </el-row>
-                  </div>
-                </div>
+                <documents-item :documents="getLotDocs(lot)" :cdbType="cdbType" />
               </div>
             </div>
           </el-collapse-item>
@@ -1148,66 +1094,7 @@
         <div class="info__sub-title">{{ $t("tender.procedure_documents") }}</div>
         <div class="info-blocks">
           <div class="info-block">
-            <div
-              class="info-block__documents"
-              v-for="(doc, index) of getDocs(
-                gd(
-                  gd(evRecord, _ => _.tender.documents, []).filter(_doc => !_doc.hasOwnProperty('relatedLots')),
-                  _ => _,
-                  []
-                )
-              )"
-              :key="doc.id + index"
-            >
-              <div class="info-block__document">
-                <el-row :gutter="15">
-                  <el-col :sm="24">
-                    <div class="info-block__value">
-                      {{ parseDocType(gd(doc, _ => _.documentType)) }}
-                      <a :href="gd(doc, _ => _.url)">{{ gd(doc, _ => _.title) }}</a>
-                    </div>
-                  </el-col>
-                </el-row>
-                <el-row :gutter="15">
-                  <el-col :sm="16">
-                    <div class="info-block__text info-block__text_small">
-                      {{ $t("tender.id") }}: {{ gd(doc, _ => _.id) }}
-                    </div>
-                  </el-col>
-                  <el-col :sm="8">
-                    <div class="info-block__text info-block__text_small">
-                      {{ $t("tender.published") }}: {{ fd(gd(doc, _ => _.datePublished)) }}
-                    </div>
-                  </el-col>
-                </el-row>
-              </div>
-              <div
-                v-for="(oldDoc, index) of gd(doc, _ => _.oldVersions, [])"
-                :key="oldDoc.id + index"
-                class="info-block__document info-block__document_old"
-              >
-                <el-row :gutter="15">
-                  <el-col :sm="24">
-                    <div class="info-block__value">
-                      {{ parseDocType(gd(oldDoc, _ => _.documentType)) }}
-                      <a :href="gd(oldDoc, _ => _.url)">{{ gd(oldDoc, _ => _.title) }}</a>
-                    </div>
-                  </el-col>
-                </el-row>
-                <el-row :gutter="15">
-                  <el-col :sm="16" class="info-block__text_oldDoc">
-                    <div class="info-block__text info-block__text_small">
-                      {{ $t("tender.id") }}: {{ gd(oldDoc, _ => _.id) }}
-                    </div>
-                  </el-col>
-                  <el-col :sm="8">
-                    <div class="info-block__text info-block__text_small">
-                      {{ $t("tender.published") }}: {{ fd(gd(oldDoc, _ => _.datePublished)) }}
-                    </div>
-                  </el-col>
-                </el-row>
-              </div>
-            </div>
+            <documents-item :documents="getDocs()" :cdbType="cdbType" />
           </div>
         </div>
       </div>
@@ -1310,22 +1197,20 @@
 </template>
 
 <script>
-import mainProcurementCategory from "./../../../../store/types/main-procurement-category";
-import typesOfBuyers from "./../../../../store/types/buyers-types";
-import mainGeneralActivites from "./../../../../store/types/main-general-activity-types";
+import mainProcurementCategory from "../../../../../store/types/main-procurement-category";
+import typesOfBuyers from "../../../../../store/types/buyers-types";
+import mainGeneralActivites from "../../../../../store/types/main-general-activity-types";
+import mainSectoralActivites from "../../../../../store/types/main-sectoral-activity";
+import platforms from "../../../../../store/types/platforms";
 
-import ListPagination from "./../../../../components/ListPagination";
-import PageNumber from "./../../../../components/PageNumber";
-import BudgetBreakdown from "../../../../components/BudgetBreakdown";
+import ListPagination from "../../../../../components/ListPagination";
+import PageNumber from "../../../../../components/PageNumber";
+import BudgetBreakdown from "../../../../../components/BudgetBreakdown";
+import DocumentsItem from "./../../DocumentsItem";
 
-import {
-  getDataFromObject,
-  formatDate,
-  parseDocumentType,
-  addPeriod,
-  formatAmount,
-  transformDocumentation,
-} from "./../../../../utils";
+import { getDataFromObject, formatDate, addPeriod, formatAmount } from "../../../../../utils";
+import { MTENDER2 } from "../../../../../store/types/cbd-types";
+import lotStatuses from "../../../../../store/types/lot-statuses";
 
 export default {
   name: "ContractNotice",
@@ -1354,36 +1239,10 @@ export default {
     "list-pagination": ListPagination,
     "page-number": PageNumber,
     "budget-breakdown": BudgetBreakdown,
+    "documents-item": DocumentsItem,
   },
   data() {
     return {
-      platforms: [
-        {
-          href: "https://yptender.md/",
-          src: "/img/yptender.png",
-          name: "YPTENDER.MD",
-        },
-        {
-          href: "https://e-licitatie.md/",
-          src: "/img/e-lici.png",
-          name: "e-licitatie.md",
-        },
-        {
-          href: "https://achizitii.md/",
-          src: "/img/achizitii.md.png",
-          name: "achizitii.md",
-        },
-        {
-          href: "javascript:void(0)",
-          src: "/img/ebs-integrator.png",
-          name: "ebs-integrator",
-        },
-        {
-          href: "javascript:void(0)",
-          src: "/img/lonar.png",
-          name: "lonar",
-        },
-      ],
       needDisplay: false,
       windowWidth: 0,
       computedOffset: 75,
@@ -1431,17 +1290,39 @@ export default {
           )
       ).name[this.$i18n.locale];
     },
+    getMainSectoralActivity() {
+      if (
+        !this.gd(
+          this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
+          _ => _.details.mainSectoralActivity
+        )
+      ) {
+        return this.$t("n/a");
+      }
+
+      return mainSectoralActivites.find(
+        activity =>
+          activity.value ===
+          this.gd(
+            this.gd(this.msRecord, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
+            _ => _.details.mainSectoralActivity
+          )
+      ).name[this.$i18n.locale];
+    },
     getMainProcurementCategory() {
       return mainProcurementCategory[this.gd(this.msRecord, _ => _.tender.mainProcurementCategory)][this.$i18n.locale];
     },
     randomSortPlatforms() {
-      return [...this.platforms].sort(() => 0.5 - Math.random());
+      return [...platforms].sort(() => 0.5 - Math.random());
     },
     needPagination() {
       return this.elementsAmount > this.pageSize;
     },
     elementsAmount() {
       return this.gd(this.evRecord, _ => _.tender.lots, []).length;
+    },
+    cdbType() {
+      return MTENDER2;
     },
   },
   methods: {
@@ -1450,9 +1331,6 @@ export default {
     },
     fd(...ars) {
       return formatDate(...ars);
-    },
-    parseDocType(type) {
-      return parseDocumentType(type, this.$i18n.locale);
     },
     add(date, timePeriod, count) {
       return addPeriod(date, timePeriod, count);
@@ -1463,8 +1341,29 @@ export default {
     setWindowSize() {
       this.windowWidth = window.innerWidth;
     },
-    getDocs(docs) {
-      return transformDocumentation(docs);
+    getDocs() {
+      return [
+        {
+          values: this.gd(
+            this.gd(this.evRecord, _ => _.tender.documents, []).filter(_doc => !_doc.hasOwnProperty("relatedLots")),
+            _ => _,
+            []
+          ),
+        },
+      ];
+    },
+    getLotDocs(lot) {
+      return [
+        {
+          values: this.gd(
+            this.gd(this.evRecord, _ => _.tender.documents, []).filter(
+              _doc => this.gd(_doc, _ => _.relatedLots[0], "") === this.gd(lot, _ => _.id)
+            ),
+            _ => _,
+            []
+          ),
+        },
+      ];
     },
     changePage(page) {
       this.numberOfLastDisplayedLot = page * this.pageSize;
@@ -1472,6 +1371,9 @@ export default {
     },
     getFSRecord(ocid) {
       this.getFS(ocid);
+    },
+    getLotStatus(status) {
+      return lotStatuses[status][this.$i18n.locale];
     },
   },
   mounted() {

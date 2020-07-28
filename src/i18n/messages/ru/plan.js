@@ -33,11 +33,12 @@ export default {
   items: "Состав закупки",
   type_of_buyer: "Тип покупателя",
   main_activity: "Основная деятельность",
+  sectoral_activity: "Основная секторальная деятельность",
   communication: "Коммуникации",
   procurement_documents_links:
     "Документы государственных закупок доступны для прямого, неограниченного, полного и бесплатного доступа на: (URL)",
   additional_information_obtained: "Дополнительная информация может быть получена от",
-  title: "Титул",
+  title: "Название",
   main_CPV: "Основной код CPV",
   type_of_contract: "Тип договора",
   estimated_total_value_excluding_VAT: "Общая стоимость без учета НДС",
@@ -73,7 +74,7 @@ export default {
   previous_publication_concerning_procedure: "Предыдущая публикация по этой процедуре",
   PP_Buyer_profile_PIN: "Объявление о намерении: ",
   estimated_date: "Ориентировочная дата отправки приглашений для подачи оферты или на участия выбранным кандидатам.",
-  languages_submitted: "Языки на которых могут быть подданы оферты или заявки на участие",
+  languages_submitted: "Оферты или запрос на участие представляются на языке, указанном в документации по присуждению.",
   romanian_russian: " Румынский, Русский",
 
   for_electronic_tendering_procedures: "Для электронных процедур торгов",
@@ -139,4 +140,9 @@ export default {
   date_online_publication: "Дата онлайн публикации объявления",
 
   state_money: "Государственные деньги",
+  legal_name: "Legal name",
+  item_identifier: "Item identifier",
+  no_items: "No items",
+
+  procedure_status: "Статус процедуры",
 };

@@ -13,6 +13,7 @@
       time-arrow-control
       format="dd MM yyyy HH:mm"
       :editable="false"
+      :default-time="['00:00:00', '23:59:59']"
     />
   </div>
 </template>

@@ -358,14 +358,21 @@
       margin-bottom: 33px;
       color: #fff;
       font-size: 30px;
+      &_budget {
+        margin-top: -40px;
+      }
+      @media (max-width: 767px) {
+        margin-top: 0;
+      }
     }
     &__subtitle {
       color: #fff;
-      font-size: 18px;
+      font-size: 13px;
     }
 
     &__description {
       margin-bottom: 40px;
+      line-height: 1.7;
       font-size: 14px;
       font-weight: 300;
       color: #fff;
@@ -385,8 +392,7 @@
     }
 
     &__amount {
-      position: relative;
-      display: inline-block;
+      display: flex;
       margin-top: 6px;
       padding-right: 35px;
       color: #fff;
@@ -396,9 +402,15 @@
       @media (max-width: 760px) {
         padding-right: 35px;
       }
+      .fraction-currency_wp {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+      }
 
       .whole {
         display: inline-block;
+        height: 40px;
         margin-right: 2px;
         line-height: 0.8;
         font-size: 41px;
@@ -417,9 +429,6 @@
       }
 
       .fraction {
-        position: absolute;
-        top: 0;
-        right: 0;
         display: inline-block;
         font-size: 22px;
         line-height: 1;
@@ -440,9 +449,6 @@
     }
 
     &__currency {
-      position: absolute;
-      bottom: 0;
-      right: 0;
       font-size: 13px;
       font-weight: 400;
       text-transform: uppercase;
@@ -467,7 +473,8 @@
       }
 
       &-value {
-        font-size: 15px;
+        line-height: 1.3;
+        font-size: 14px;
         font-weight: 400;
         color: #fff;
       }
@@ -540,7 +547,7 @@
 
       &__item {
         height: auto;
-        padding: 20px 14px;
+        padding: 0;
         white-space: normal;
         text-align: left;
         line-height: 1.3;
@@ -551,6 +558,11 @@
         &.is-disabled {
           color: #abaaaa;
           pointer-events: none;
+        }
+        & > a,
+        > span {
+          display: inline-block;
+          padding: 20px 14px;
         }
       }
 
@@ -747,8 +759,11 @@
         justify-content: space-around;
         align-items: center;
         margin-top: 20px !important;
-        @media (max-width: 560px) {
+        @media (max-width: 860px) {
           flex-wrap: wrap;
+          a {
+            margin: 0 20px;
+          }
         }
       }
 
@@ -770,8 +785,9 @@
 
         &[title="ebs-integrator"],
         &[title="lonar"] {
+          filter: grayscale(100%);
           opacity: 0.3;
-          cursor: default;
+          pointer-events: none;
         }
       }
 
@@ -802,6 +818,7 @@
     &__link {
       text-decoration: underline;
       color: $mainC;
+      word-break: break-word;
 
       &:hover {
         text-decoration: none;

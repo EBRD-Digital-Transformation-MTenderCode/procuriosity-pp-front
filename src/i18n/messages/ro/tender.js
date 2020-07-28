@@ -63,10 +63,11 @@ export default {
   documentation: "Documentație",
 
   estimated_value_excluding_VAT: "Valoarea estimată a achiziției fără TVA",
+  estimated_total_value_including_VAT: "Valoarea estimată a achiziției cu TVA",
   review_procedures_title: "Procedura de contestare",
 
   procurement_plan: "Planul&nbsp;de<br/>achiziții",
-  pin: "Anunț de<br/>intenție",
+  pin: "Anunț&nbsp;de<br/>intenție",
   contract_notice: "Anunț&nbsp;de<br/>participare",
   clarification_and_changes: "Clarificare&nbsp;și<br/>modificări",
   review_procedures: "Procedura&nbsp;de<br/>contestare",
@@ -95,6 +96,7 @@ export default {
 
   type_of_buyer: "Tipul cumpărătorului",
   main_activity: "Activitate principală",
+  sectoral_activity: "Activitatea sectorială principală",
   communication: "Comunicare",
   procurement_documents_links:
     "Documentele de achiziţii publice sunt disponibile pentru acces direct, nerestricţionat, complet si gratuit la:(URL)",
@@ -143,7 +145,8 @@ export default {
   time_limit: "Termen limită pentru primirea ofertelor sau a cererilor de participare",
   estimated_date:
     "Data estimată a expedierii invitațiilor de prezentare a ofertelor sau de participare către candidații selectați",
-  languages_submitted: "Limbile în care pot fi depuse ofertele sau cererile de participare",
+  languages_submitted:
+    "Ofertele sau cererile de participare se prezintă în limba specificată în documentaţia de atribuire.",
   romanian_russian: " Română, Rusă",
   conditions_for_opening_tenders: "Condiții de deschidere a ofertelor",
 
@@ -211,6 +214,7 @@ export default {
   amended_release: "Versiunea modificată",
   date_of_change: "Data modificării",
   description_of_changes: "Descrierea sferei de aplicare a modificărilor",
+  rationale_of_changes: "Argumentare sferei de aplicare a modificărilor",
   no_data: "Nu există date",
 
   state_money: "Bani Publici",
@@ -278,6 +282,7 @@ export default {
   report_on_recommended_awards: "Raport privind atribuirea recomandată",
 
   value_excluding_VAT: "achiziției fără TVA",
+  value_including_VAT: "achiziției cu TVA",
 
   request_for_contract_performance_guarantee: "Cerere de garanție de bună execuție a contractului",
 
@@ -311,4 +316,29 @@ export default {
   all_lots: "All lots",
   successful_lots: "Successful lots",
   unsuccessful_lots: "Unsuccessful lots",
+
+  procedure_status: "Statutul procedurii",
+
+  link_to_auction: "Link to auction",
+  review: "Review",
+  controversial: "Controversial",
+  entry_date: "Entry Date",
+  status: "Status",
+  objection_to_complaint: "Objection to the Complaint",
+  elements_of_complaint: "Elements of Complaint",
+  decision_url: "URL",
+  auction_not_started: "Auction is not started",
+  go_to_auction: "Go to auction",
+  espd_docs: "ESPD documents",
+  contract_identifier: "Contract identifier",
+  contract_date: "Contract date",
+  contract_number: "Contract number",
+  cancellation_of: "Cancellation of",
+  clarifications: "Solicitare сlarificări",
+  suspended: "suspendată",
+  tendering: "Depunerea ofertelor",
+  auction: "Perioada de licitaree",
+  awarding: "Calificarea ofertanților",
+
+  winner: "Câştigător",
 };

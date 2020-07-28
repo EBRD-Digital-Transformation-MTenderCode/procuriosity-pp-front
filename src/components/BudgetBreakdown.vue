@@ -5,7 +5,7 @@
         <el-row :gutter="15">
           <el-col :sm="16">
             <div class="info-block__text">{{ $t("budgetBreakdown.funding_source_id") }}</div>
-            <div class="info-block__value info-block__value_bold ">
+            <div class="info-block__value info-block__value_bold" style="user-select: none">
               {{ budgetBreakdown.ocid.toUpperCase() }}
             </div>
           </el-col>

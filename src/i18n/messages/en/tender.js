@@ -95,6 +95,7 @@ export default {
 
   type_of_buyer: "Type of buyer",
   main_activity: "Main activity",
+  sectoral_activity: "Activity in the utilities sector",
   communication: "Communication",
   procurement_documents_links:
     "The procurement documents are available for unrestricted and full direct access, free of charge, at",
@@ -141,7 +142,8 @@ export default {
   PP_Buyer_profile_PIN: "Prior Information Notice:",
   time_limit: "Time limit for receipt of tenders or requests to participate",
   estimated_date: "Estimated date of dispatch of invitations to tender or to participate to selected candidates",
-  languages_submitted: "Languages in which tenders or requests to participate may be submitted",
+  languages_submitted:
+    "The tenders or requests to participate are submitted in the language specified in the tender documents.",
   romanian_russian: " Romanian, Russian",
   conditions_for_opening_tenders: "Conditions for opening of tenders",
 
@@ -206,6 +208,7 @@ export default {
   amended_release: "Amended release",
   date_of_change: "Date of change",
   description_of_changes: "Description of the scope of change",
+  rationale_of_changes: "Rationale of the scope of change",
   no_data: "No data",
 
   state_money: "State Money",
@@ -273,6 +276,7 @@ export default {
   report_on_recommended_awards: "Report on recommended awards",
 
   value_excluding_VAT: "value excluding VAT",
+  value_including_VAT: "value including VAT",
   request_for_contract_performance_guarantee: "Request for contract performance guarantee",
 
   information_of_the_decision: "Information on the award decision",
@@ -302,4 +306,30 @@ export default {
   all_lots: "All lots",
   successful_lots: "Awarded lots",
   unsuccessful_lots: "Unsuccessful lots",
+
+  procedure_status: "Procedure status",
+
+  link_to_auction: "Link to auction",
+  review: "Review",
+  controversial: "Controversial",
+  entry_date: "Entry Date",
+  status: "Status",
+  objection_to_complaint: "Objection to the Complaint",
+  elements_of_complaint: "Elements of Complaint",
+  decision_url: "URL",
+  auction_not_started: "Auction is not started",
+  go_to_auction: "Go to auction",
+  espd_docs: "ESPD documents",
+  contract_identifier: "Contract identifier",
+  contract_date: "Contract date",
+  contract_number: "Contract number",
+  estimated_total_value_including_VAT: "Estimated total value including VAT",
+  cancellation_of: "Cancellation of",
+  clarifications: "Clarifications",
+  suspended: "suspended",
+  tendering: "Tendering",
+  auction: "Auction period",
+  awarding: "Awarding",
+
+  winner: "Winner",
 };

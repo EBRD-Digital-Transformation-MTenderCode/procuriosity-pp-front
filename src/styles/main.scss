@@ -48,8 +48,18 @@
     cursor: text !important;
   }
 }
-.el-select__tags > span {
-  width: 100%;
+.el-select__tags {
+  & > span {
+    width: 100%;
+  }
+  &-text {
+    min-width: 0;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+  }
+  .el-tag {
+    min-width: 0;
+  }
 }
 .el-select-dropdown {
   margin-top: -1px !important;

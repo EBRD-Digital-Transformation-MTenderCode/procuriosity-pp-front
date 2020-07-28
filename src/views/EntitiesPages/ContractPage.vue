@@ -196,12 +196,8 @@
         </template>
       </div>
     </el-container>
-    <el-container class="error" key="error" v-else>
-      <div class="error-message">{{ error.message }}</div>
-      <button class="refresh-btn" @click="getContract">
-        {{ $t("refresh") }}
-      </button>
-      <button class="back-btn" @click="$router.go(-1)">{{ $t("back") }}</button>
+    <el-container key="error" v-else>
+      <error :message="error.message"></error>
     </el-container>
   </div>
 </template>
@@ -212,6 +208,7 @@ import { FETCH_CURRENT_CONTRACT_INFO } from "./../../store/types/actions-types";
 
 import ContractCard from "../../components/ListCards/ContractsCard";
 import DocumentsModal from "./DocumentsModal";
+import Error from "./../Error";
 
 import { MTENDER1, MTENDER2 } from "./../../store/types/cbd-types";
 
@@ -222,6 +219,7 @@ export default {
   components: {
     "contract-card": ContractCard,
     "documents-modal": DocumentsModal,
+    error: Error,
   },
   created() {
     this.getContract();

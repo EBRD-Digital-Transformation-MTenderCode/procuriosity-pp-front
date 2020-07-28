@@ -22,29 +22,19 @@
             <div class="info-block">
               <el-row :gutter="25">
                 <el-col :sm="16">
-                  <div class="info-block__text">
-                    {{ $t("tender.title") }}
-                  </div>
-                  <div class="info-block__value">
-                    {{ transformSS(gd(question, _ => _.title)) }}
-                  </div>
+                  <div class="info-block__text">{{ $t("tender.title") }}</div>
+                  <div class="info-block__value">{{ transformSS(gd(question, _ => _.title)) }}</div>
                 </el-col>
                 <el-col :sm="8">
-                  <div class="info-block__text">
-                    {{ $t("tender.question_received") }}
-                  </div>
-                  <div class="info-block__value">
-                    {{ fd(gd(question, _ => _.date)) }}
-                  </div>
+                  <div class="info-block__text">{{ $t("tender.question_received") }}</div>
+                  <div class="info-block__value">{{ fd(gd(question, _ => _.date)) }}</div>
                 </el-col>
               </el-row>
             </div>
             <div class="info-block">
               <el-row :gutter="15">
                 <el-col :sm="24">
-                  <div class="info-block__text">
-                    {{ $t("tender.description") }}
-                  </div>
+                  <div class="info-block__text">{{ $t("tender.description") }}</div>
                   <div class="info-block__value">
                     <div class="info-block__value__pre">{{ transformSS(gd(question, _ => _.description)) }}</div>
                   </div>
@@ -60,9 +50,7 @@
                     </div>
                   </el-col>
                   <el-col :sm="8">
-                    <div class="info-block__value">
-                      {{ fd(gd(question, _ => _.dateAnswered)) }}
-                    </div>
+                    <div class="info-block__value">{{ fd(gd(question, _ => _.dateAnswered)) }}</div>
                   </el-col>
                 </el-row>
               </div>
@@ -78,7 +66,7 @@
             </div>
           </div>
         </div>
-        <div v-else>{{ $t("tender.no_data") }}</div>
+        <div style="margin-bottom: 30px;" v-else>{{ $t("tender.no_data") }}</div>
       </div>
 
       <div>
@@ -105,20 +93,26 @@
               <el-row :gutter="25">
                 <el-col :xs="24">
                   <div class="info-block__text">{{ $t("tender.description_of_changes") }}</div>
-                  <div class="info-block__value">{{ $t("n/a") }}</div>
+                  <div class="info-block__value">{{ amendment.description || $t("n/a") }}</div>
+                </el-col>
+              </el-row>
+              <el-row :gutter="25">
+                <el-col :xs="24">
+                  <div class="info-block__text">{{ $t("tender.rationale_of_changes") }}</div>
+                  <div class="info-block__value">{{ amendment.rationale || $t("n/a") }}</div>
                 </el-col>
               </el-row>
             </div>
           </div>
         </div>
-        <div v-else>{{ $t("tender.no_data") }}</div>
+        <div style="margin-bottom: 30px;" v-else>{{ $t("tender.no_data") }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { getDataFromObject, formatDate, transformSpecialSymbols } from "./../../../../utils";
+import { getDataFromObject, formatDate, transformSpecialSymbols } from "../../../../../utils";
 
 export default {
   name: "Clarification",

@@ -31,6 +31,7 @@ export default {
   address_of_buyer_profile: "Address of the buyer profile (URL)",
   type_of_buyer: "Type of buyer",
   main_activity: "Main activity",
+  sectoral_activity: "Activity in the utilities sector",
   communication: "Communication",
   procurement_documents_links:
     "The procurement documents are available for unrestricted and full direct access, free of charge, at",
@@ -70,7 +71,8 @@ export default {
   previous_publication_concerning_procedure: "Previous publication concerning this procedure",
   PP_Buyer_profile_PIN: "Procurement plan / Buyer’s profile / PIN: ",
   estimated_date: "Estimated date of dispatch of invitations to tender or to participate to selected candidates",
-  languages_submitted: "Languages in which tenders or requests to participate may be submitted",
+  languages_submitted:
+    "The tenders or requests to participate are submitted in the language specified in the tender documents.",
   romanian_russian: " Romanian, Russian",
 
   for_electronic_tendering_procedures: "For electronic tendering procedures",
@@ -137,4 +139,9 @@ export default {
   date_online_publication: "Date of online publication of notice",
 
   state_money: "State Money",
+  legal_name: "Legal name",
+  item_identifier: "Item identifier",
+  no_items: "No items",
+
+  procedure_status: "Procedure status",
 };

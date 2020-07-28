@@ -16,6 +16,10 @@ export default {
   procuring_entity_name: "Procuring Entity Name",
   main_cpv: "Expenditure CPV",
 
+  type_of_buyer: "Type of buyer",
+  main_activity: "Main activity",
+  sectoral_activity: "Activity in the utilities sector",
+
   period_of_need: "Period of need",
   main_procurement_category: "Main procurement category",
   from: "from",
@@ -25,13 +29,13 @@ export default {
   spending: "Spending",
 
   contracting_process_id: "Contracting process ID",
-  contracting_state: "State",
   contracting_state_planning: "Planning",
   contracting_state_active: "Active",
   contracting_state_cancelled: "Cancelled",
   contracting_state_unsuccessful: "Unsuccessful",
   contracting_state_complete: "Complete",
   contracting_status: "Status",
+  contracting_status_detail: "Status detail",
   prior_notice: "Procurement Plan / Buyer's profile / PIN",
   contract_notice: "Contract Notice",
   contracting_publication_date: "Publication date",

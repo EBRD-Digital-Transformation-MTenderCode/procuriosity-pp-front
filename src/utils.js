@@ -2,6 +2,7 @@ import idx from "idx";
 import dayjs from "dayjs";
 import documentsTypes from "./store/types/documents-types";
 import proceduresTypes from "./store/types/procedures-types";
+import procedureStatusType from "./store/types/procedure-status-types";
 import VueI18n from "./i18n";
 
 export function getDataFromObject(obj, getFunc, def = "") {
@@ -118,43 +119,116 @@ export function transformDocumentation(docs) {
   );
 }
 
+export function transformDocumentationFromCDB1(docs) {
+  return Object.values(
+    [...docs]
+      .sort((doc1, doc2) => new Date(doc2.dateModified) - new Date(doc1.dateModified))
+      .reduce((obj, doc) => {
+        const docObj = {
+          title: doc.title,
+          url: doc.url,
+          datePublished: doc.datePublished,
+          documentType: doc.documentType,
+          id: doc.id,
+        };
+
+        if (!obj.hasOwnProperty(doc.id)) {
+          obj[doc.id] = {
+            oldVersions: [],
+            ...docObj,
+          };
+        } else {
+          obj[doc.id].oldVersions = [
+            ...obj[doc.id].oldVersions,
+            {
+              ...docObj,
+            },
+          ];
+        }
+        return obj;
+      }, {})
+  );
+}
+
 export function getOrganizationObject(parties, organizationRole) {
   for (let part of parties) {
     if (part.roles.find(role => role === organizationRole)) {
-      return {
-        name: part.name,
-        id: part.id,
-      };
+      return part;
     } else {
       if (organizationRole === "funder")
         return {
           name: VueI18n.t("budgetBreakdown.state_money"),
-          id: undefined,
         };
     }
   }
 }
 
-// @TODO need clarify types for entities
-export function selectProcedure(category, amount) {
+export function selectProcedure(pmd, category, amount) {
+  // fucking crutch
+  if (pmd === "Procedura micro-valorii") {
+    pmd = "microValue";
+  }
+
+  if (pmd === "Procedură de valoare mică") {
+    pmd = "smallValue";
+  }
+
+  if (pmd === "Licitație deschisă") {
+    pmd = "openTender";
+  }
+
   return (
-    // @TODO need refactoring
-    proceduresTypes.contracts.find(procedure => procedure.value === calculateProcedureType(category, amount)) &&
-    proceduresTypes.contracts.find(procedure => procedure.value === calculateProcedureType(category, amount)).name[
+    proceduresTypes.tenders.find(procedure => procedure.value === calculateProcedureType(pmd, category, amount)) &&
+    proceduresTypes.tenders.find(procedure => procedure.value === calculateProcedureType(pmd, category, amount)).name[
       VueI18n.locale
     ]
   );
 }
 
-function calculateProcedureType(category, amount) {
-  if (category === "goods" || category === "services") {
-    if (amount < 80000) return "mv";
-    else if (amount <= 400000) return "sv";
-    else return "ot";
+function calculateProcedureType(pmd, category, amount) {
+  if (pmd === "smallValue") {
+    if (
+      ((category === "goods" || category === "services") && amount >= 800000) ||
+      (category === "works" && amount >= 2000000)
+    ) {
+      return "openTender";
+    } else {
+      return pmd;
+    }
   } else {
-    if (amount < 100000) return "mv";
-    else if (amount <= 1500000) return "sv";
-    else return "ot";
+    return pmd;
+  }
+}
+
+export function mapTenderStatus(status, statusDetails) {
+  const statusFull = statusDetails ? `${status}.${statusDetails}` : status;
+  switch (statusFull) {
+    case "active.clarification":
+    case "active.enquiries":
+      return procedureStatusType.tenders.find(val => val.value === "clarification").name[VueI18n.locale];
+    case "active.tendering":
+      return procedureStatusType.tenders.find(val => val.value === "tendering").name[VueI18n.locale];
+    case "active.auction":
+      return procedureStatusType.tenders.find(val => val.value === "auction").name[VueI18n.locale];
+    case "unsuccessful.empty":
+    case "unsuccessful":
+      return procedureStatusType.tenders.find(val => val.value === "unsuccessful").name[VueI18n.locale];
+    case "active.awarding":
+    case "active.qualification":
+      return procedureStatusType.tenders.find(val => val.value === "awarding").name[VueI18n.locale];
+    case "active.awardedContractPreparation":
+    case "active.awarded":
+      return procedureStatusType.tenders.find(val => val.value === "awarded").name[VueI18n.locale];
+    case "active.suspended":
+      return procedureStatusType.tenders.find(val => val.value === "suspended").name[VueI18n.locale];
+    case "complete.empty":
+    case "complete":
+      return procedureStatusType.tenders.find(val => val.value === "complete").name[VueI18n.locale];
+    case "cancelled.empty":
+    case "cancelled":
+      return procedureStatusType.tenders.find(val => val.value === "cancelled").name[VueI18n.locale];
+    case "active":
+      return procedureStatusType.tenders.find(val => val.value === "published").name[VueI18n.locale];
   }
 }
 

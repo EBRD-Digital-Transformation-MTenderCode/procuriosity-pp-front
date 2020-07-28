@@ -4,13 +4,13 @@
       <el-container key="loading" v-if="!loaded && !error.status">
         <div class="loading"></div>
       </el-container>
-      <div v-else-if="loaded && Object.keys(EI).length" key="info">
+      <div v-else-if="loaded && EI" key="info">
         <div class="entity-main-info entity-main-info__budget ">
           <el-container direction="vertical">
             <el-row>
               <el-col :xs="24" :sm="14">
                 <div class="entity-main-info__subtitle">
-                  {{ gd(EI, _ => _.ocid).toUpperCase() }} {{ $t("budget.from") }}
+                  <procedure-id>{{ gd(EI, _ => _.ocid).toUpperCase() }}</procedure-id> {{ $t("budget.from") }}
                   {{ fd(gd(EI, _ => _.date), "DD.MM.YYYY, HH:mm") }}
                 </div>
               </el-col>
@@ -19,20 +19,29 @@
                   <div v-if="gd(EI, _ => _.planning.budget, {}).hasOwnProperty('amount')">
                     <div>{{ $t("budget.estimated_value_excluding_VAT") }}</div>
                     <span class="entity-main-info__amount">
-                      <span class="whole">{{ wholeAmount }} </span>
-                      <span class="fraction"> <span class="dot">.</span>{{ fractionAmount }}</span>
-                      <span class="entity-main-info__currency">
-                        {{ gd(EI, _ => _.planning.budget.amount.currency) }}
+                      <span class="whole" :style="wholeAmount.length > 8 ? 'font-size: 26px' : ''"
+                        >{{ wholeAmount }}
+                      </span>
+                      <span class="fraction-currency_wp">
+                        <span class="fraction" :style="wholeAmount.length > 8 ? 'font-size: 14px' : ''">
+                          <span class="dot">.</span>{{ fractionAmount }}</span
+                        >
+                        <span
+                          class="entity-main-info__currency"
+                          :style="wholeAmount.length > 8 ? 'font-size: 10px' : ''"
+                        >
+                          {{ gd(EI, _ => _.planning.budget.amount.currency) }}
+                        </span>
                       </span>
                     </span>
                   </div>
-                  <div v-else>
+                  <div style="height: 72px" v-else>
                     {{ $t("budget.no_finances_sources") }}
                   </div>
                 </div>
               </el-col>
               <el-col :xs="24" :sm="14">
-                <div class="entity-main-info__title">
+                <div class="entity-main-info__title entity-main-info__title_budget">
                   {{ gd(EI, _ => _.tender.title) }}
                 </div>
               </el-col>
@@ -54,16 +63,38 @@
                   <div class="entity-main-info__additional-block">
                     <div class="entity-main-info__additional-title">{{ $t("budget.buyer_id") }}</div>
                     <div class="entity-main-info__additional-value">
-                      {{ gd(EI, _ => _.buyer.id) }}
+                      {{ gd(getOrganizationObject(gd(EI, _ => _.parties, []), "buyer"), _ => _.identifier.id) }}
                     </div>
                   </div>
                   <div class="entity-main-info__additional-block">
                     <div class="entity-main-info__additional-title">{{ $t("budget.region") }}</div>
                     <div class="entity-main-info__additional-value">
                       {{
-                        gd(EI, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")).address
-                          .addressDetails.region.description
+                        gd(
+                          getOrganizationObject(gd(EI, _ => _.parties, []), "buyer"),
+                          _ => _.address.addressDetails.region.description
+                        )
                       }}
+                    </div>
+                  </div>
+                </div>
+                <div class="entity-main-info__additional">
+                  <div class="entity-main-info__additional-block">
+                    <div class="entity-main-info__additional-title">{{ $t("budget.type_of_buyer") }}</div>
+                    <div class="entity-main-info__additional-value">
+                      {{ getTypeOfBuyer }}
+                    </div>
+                  </div>
+                  <div class="entity-main-info__additional-block">
+                    <div class="entity-main-info__additional-title">{{ $t("budget.main_activity") }}</div>
+                    <div class="entity-main-info__additional-value">
+                      {{ getMainGeneralActivity }}
+                    </div>
+                  </div>
+                  <div class="entity-main-info__additional-block">
+                    <div class="entity-main-info__additional-title">{{ $t("budget.sectoral_activity") }}</div>
+                    <div class="entity-main-info__additional-value">
+                      {{ getMainSectoralActivity }}
                     </div>
                   </div>
                 </div>
@@ -98,16 +129,19 @@
           <el-container direction="vertical">
             <el-row>
               <el-col :xs="24">
-                <el-tabs v-model="activeTab">
-                  <el-tab-pane name="sourceOfFinancing" lazy key="sourceOfFinancing">
+                <el-tabs v-model="activeTab" @tab-click="handleClick">
+                  <el-tab-pane name="source-of-financing" lazy>
                     <span slot="label" v-html="$t('budget.source_of_financing')" />
-                    <source-of-financing :FSs="FSs" :buyer="gd(EI, _ => _.buyer)" />
+                    <source-of-financing
+                      :FSs="FSs"
+                      :buyer="getOrganizationObject(gd(EI, _ => _.parties, []), 'buyer')"
+                    />
                   </el-tab-pane>
-                  <el-tab-pane name="execution" lazy key="execution" :disabled="!getExecutionsId.length">
+                  <el-tab-pane name="execution" lazy :disabled="!tabs.includes('execution')">
                     <span slot="label" v-html="$t('budget.execution')" />
                     <execution :getExecutionsId="getExecutionsId" />
                   </el-tab-pane>
-                  <el-tab-pane name="spending" lazy key="spending" disabled>
+                  <el-tab-pane name="spending" lazy disabled>
                     <span slot="label" v-html="$t('budget.spending')" />
                     <spending />
                   </el-tab-pane>
@@ -118,11 +152,7 @@
         </div>
       </div>
       <el-container class="error" key="error" v-else>
-        <div class="error-message">{{ error.message }}</div>
-        <button class="refresh-btn" @click="getBudget">
-          {{ $t("refresh") }}
-        </button>
-        <button class="back-btn" @click="$router.go(-1)">{{ $t("back") }}</button>
+        <error :message="error.message"></error>
       </el-container>
     </transition>
   </div>
@@ -132,12 +162,17 @@
 import { mapState } from "vuex";
 import { FETCH_CURRENT_BUDGET_INFO } from "../../../store/types/actions-types";
 import mainProcurementCategory from "./../../../store/types/main-procurement-category";
+import typesOfBuyers from "./../../../store/types/buyers-types";
+import mainGeneralActivites from "./../../../store/types/main-general-activity-types";
+import mainSectoralActivites from "./../../../store/types/main-sectoral-activity";
 
 import Execution from "./Tabs/Execution";
 import Spending from "./Tabs/Spending";
 import SourceOfFinancing from "./Tabs/SourceOfFinancing";
+import ProcedureId from "../../../components/ProcedureId";
+import Error from "./../../Error";
 
-import { getDataFromObject, formatDate } from "../../../utils";
+import { getDataFromObject, formatDate, getOrganizationObject } from "../../../utils";
 
 export default {
   name: "BudgetPage",
@@ -145,14 +180,31 @@ export default {
     spending: Spending,
     execution: Execution,
     "source-of-financing": SourceOfFinancing,
+    "procedure-id": ProcedureId,
+    error: Error,
   },
   data() {
     return {
-      activeTab: "sourceOfFinancing",
+      activeTab: "source-of-financing",
+      tabs: ["source-of-financing", "execution", "spending"],
     };
   },
-  created() {
-    this.getBudget();
+  async created() {
+    await this.getBudget();
+    this.tabs = this.tabs.filter(tab => {
+      if (tab === "execution") {
+        return !!this.getExecutionsId.length;
+      }
+      return true;
+    });
+
+    const { query } = this.$route;
+    if (query.tab && this.tabs.find(tab => query.tab === tab)) {
+      this.activeTab = query.tab;
+    } else {
+      this.activeTab = this.tabs[0];
+      this.$router.replace({ query: { tab: this.tabs[0] } });
+    }
   },
   computed: {
     ...mapState({
@@ -161,6 +213,63 @@ export default {
       loaded: state => state.entities.budgets.loaded,
       error: state => state.entities.budgets.error,
     }),
+    getTypeOfBuyer() {
+      if (
+        !this.gd(
+          this.gd(this.EI, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
+          _ => _.details.typeOfBuyer
+        )
+      ) {
+        return this.$t("n/a");
+      }
+
+      return typesOfBuyers.find(
+        type =>
+          type.value ===
+          this.gd(
+            this.gd(this.EI, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
+            _ => _.details.typeOfBuyer
+          )
+      ).name[this.$i18n.locale];
+    },
+    getMainGeneralActivity() {
+      if (
+        !this.gd(
+          this.gd(this.EI, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
+          _ => _.details.mainGeneralActivity
+        )
+      ) {
+        return this.$t("n/a");
+      }
+
+      return mainGeneralActivites.find(
+        activity =>
+          activity.value ===
+          this.gd(
+            this.gd(this.EI, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
+            _ => _.details.mainGeneralActivity
+          )
+      ).name[this.$i18n.locale];
+    },
+    getMainSectoralActivity() {
+      if (
+        !this.gd(
+          this.gd(this.EI, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
+          _ => _.details.mainSectoralActivity
+        )
+      ) {
+        return this.$t("n/a");
+      }
+
+      return mainSectoralActivites.find(
+        activity =>
+          activity.value ===
+          this.gd(
+            this.gd(this.EI, _ => _.parties, []).find(part => part.roles.some(role => role === "buyer")),
+            _ => _.details.mainSectoralActivity
+          )
+      ).name[this.$i18n.locale];
+    },
     wholeAmount() {
       const amountStr = this.gd(this.EI, _ => _.planning.budget.amount.amount, 0)
         .toString()
@@ -190,11 +299,17 @@ export default {
         id: this.$route.params.id,
       });
     },
+    getOrganizationObject(parties, role) {
+      return getOrganizationObject(parties, role);
+    },
     gd(...args) {
       return getDataFromObject(...args);
     },
     fd(date, type) {
       return formatDate(date, type);
+    },
+    handleClick(tab) {
+      this.$router.replace({ query: { tab: tab.name } });
     },
   },
 };

@@ -66,7 +66,7 @@ export default {
   review_procedures_title: "Процедура разрешения споров",
   review_procedures: "Процедура разрешения&nbsp;споров",
   procurement_plan: "План <br/>закупки",
-  pin: "Объявление о<br/>намерении",
+  pin: "Объявление&nbsp;о<br/>намерении",
 
   contract_notice: "Объявление<br/> на участие",
   clarification_and_changes: "Разъяснения и изменения",
@@ -95,15 +95,17 @@ export default {
 
   type_of_buyer: "Тип покупателя",
   main_activity: "Основная деятельность",
+  sectoral_activity: "Основная секторальная деятельность",
   communication: "Коммуникации",
   procurement_documents_links:
     "Документы государственных закупок доступны для прямого, неограниченного, полного и бесплатного доступа на: (URL)",
   additional_information_obtained: "Дополнительная информация может быть получена от",
   must_be_submitted: "Оферты или заявки на участие должны быть поданны в электронном виде через",
-  title: "Заголовок",
+  title: "Название",
   main_CPV: "Основной код CPV",
   type_of_contract: "Тип договора",
   estimated_total_value_excluding_VAT: "Общая стоимость без учета НДС",
+  estimated_total_value_including_VAT: "Общая стоимость с учетом НДС",
   short_description: "Краткое описание",
   information_about_lots: "Информация о лотах",
   contract_divided_into_lots: "Этот договор разделен на лоты",
@@ -141,7 +143,7 @@ export default {
   PP_Buyer_profile_PIN: "Объявление о намерении: ",
   time_limit: "Kрайний срок приема оферт или заявок на участие",
   estimated_date: "Ориентировочная дата отправки приглашений для подачи оферты или на участия выбранным кандидатам.",
-  languages_submitted: "Языки на которых могут быть подданы оферты или заявки на участие",
+  languages_submitted: "Оферты или запрос на участие представляются на языке, указанном в документации по присуждению.",
   romanian_russian: " Румынский, Русский",
   conditions_for_opening_tenders: "Условия открытия оферт",
 
@@ -206,6 +208,7 @@ export default {
   amended_release: "Измененная версия",
   date_of_change: "Дата изменения",
   description_of_changes: "Описание сферы изменения",
+  rationale_of_changes: "Обоснование сферы изменения",
   no_data: "Нет данных",
 
   state_money: "Государственные деньги",
@@ -272,6 +275,7 @@ export default {
   report_on_recommended_awards: "Отчет о рекомендуемых присуждениях",
 
   value_excluding_VAT: "без учета НДС",
+  value_including_VAT: "c учетом НДС",
 
   request_for_contract_performance_guarantee: "Запрос обеспечения надлежащего исполнения договора",
 
@@ -303,4 +307,29 @@ export default {
   all_lots: "All lots",
   successful_lots: "Successful lots",
   unsuccessful_lots: "Unsuccessful lots",
+
+  procedure_status: "Статус процедуры",
+
+  link_to_auction: "Link to auction",
+  review: "Review",
+  controversial: "Controversial",
+  entry_date: "Entry Date",
+  status: "Status",
+  objection_to_complaint: "Objection to the Complaint",
+  elements_of_complaint: "Elements of Complaint",
+  decision_url: "URL",
+  auction_not_started: "Auction is not started",
+  go_to_auction: "Go to auction",
+  espd_docs: "ESPD documents",
+  contract_identifier: "Contract identifier",
+  contract_date: "Contract date",
+  contract_number: "Contract number",
+  cancellation_of: "Cancellation of",
+  clarifications: "Период уточнений",
+  suspended: "приостановлен",
+  tendering: "Подача предложений",
+  auction: "Период аукциона",
+  awarding: "Квалификация офертантов",
+
+  winner: "Победитель",
 };

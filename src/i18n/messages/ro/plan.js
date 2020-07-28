@@ -33,6 +33,7 @@ export default {
 
   type_of_buyer: "Tipul cumpărătorului",
   main_activity: "Activitate principală",
+  sectoral_activity: "Activitatea sectorială principală",
   communication: "Comunicare",
   procurement_documents_links:
     "Documentele de achiziţii publice sunt disponibile pentru acces direct, nerestricţionat, complet si gratuit la:(URL)",
@@ -74,7 +75,8 @@ export default {
   PP_Buyer_profile_PIN: "Anunț de intenție: ",
   estimated_date:
     "Data estimată a expedierii invitațiilor de prezentare a ofertelor sau de participare către candidații selectați",
-  languages_submitted: "Limbile în care pot fi depuse ofertele sau cererile de participare",
+  languages_submitted:
+    "Ofertele sau cererile de participare se prezintă în limba specificată în documentaţia de atribuire.",
   romanian_russian: " Română, Rusă",
   conditions_for_opening_tenders: "Condiții de deschidere a ofertelor",
 
@@ -143,4 +145,9 @@ export default {
   date_online_publication: "Data publicării online a anunțului",
 
   state_money: "Data publicării online a notificării",
+  legal_name: "Legal name",
+  item_identifier: "Item identifier",
+  no_items: "No items",
+
+  procedure_status: "Statutul procedurii",
 };

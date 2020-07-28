@@ -9,6 +9,10 @@ export default {
   procedure_cpv: "Cod CPV principal",
   id: "Buget ID",
 
+  type_of_buyer: "Tipul cumpărătorului",
+  main_activity: "Activitate principală",
+  sectoral_activity: "Activitatea sectorială principală",
+
   estimated_value_excluding_VAT: "Valoarea estimată a achiziției fără TVA",
   number_of_notice: "Numărul de notificări",
   region: "Raion",
@@ -25,11 +29,13 @@ export default {
   spending: "Spending",
 
   contracting_process_id: "Contracting process ID",
-  contracting_state: "State",
   contracting_state_planning: "Planning",
   contracting_state_active: "Active",
   contracting_state_cancelled: "Cancelled",
+  contracting_state_unsuccessful: "Unsuccessful",
+  contracting_state_complete: "Complete",
   contracting_status: "Status",
+  contracting_status_detail: "Status detail",
   prior_notice: "Plan de achiziții / Profilul cumpărătorului / Anunțul de intenție",
   contract_notice: "Contract Notice",
   contracting_publication_date: "Publication date",

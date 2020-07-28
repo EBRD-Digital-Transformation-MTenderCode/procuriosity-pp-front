@@ -21,10 +21,16 @@
                 <div class="entity-main-info__value">
                   <div>{{ $t("plan.estimated_value_excluding_VAT") }}</div>
                   <span class="entity-main-info__amount">
-                    <span class="whole">{{ wholeAmount }} </span>
-                    <span class="fraction"> <span class="dot">.</span>{{ fractionAmount }}</span>
-                    <span class="entity-main-info__currency">
-                      {{ gd(plan, _ => _.MSRecord.compiledRelease.tender.value.currency) }}
+                    <span class="whole" :style="wholeAmount.length > 8 ? 'font-size: 26px' : ''"
+                      >{{ wholeAmount }}
+                    </span>
+                    <span class="fraction-currency_wp">
+                      <span class="fraction" :style="wholeAmount.length > 8 ? 'font-size: 14px' : ''">
+                        <span class="dot">.</span>{{ fractionAmount }}</span
+                      >
+                      <span class="entity-main-info__currency" :style="wholeAmount.length > 8 ? 'font-size: 10px' : ''">
+                        {{ gd(plan, _ => _.MSRecord.compiledRelease.tender.value.currency) }}
+                      </span>
                     </span>
                   </span>
                 </div>
@@ -34,6 +40,7 @@
                     <div class="entity-main-info__additional-value">
                       {{
                         selectProcedure(
+                          gd(plan, _ => _.MSRecord.compiledRelease.tender.procurementMethodDetails),
                           gd(plan, _ => _.MSRecord.compiledRelease.tender.mainProcurementCategory),
                           gd(plan, _ => _.MSRecord.compiledRelease.tender.value.amount)
                         )
@@ -43,23 +50,22 @@
                   <div class="entity-main-info__additional-block">
                     <div class="entity-main-info__additional-title">{{ $t("plan.buyer_name") }}</div>
                     <div class="entity-main-info__additional-value">
-                      {{ gd(plan, _ => _.MSRecord.compiledRelease.tender.procuringEntity.name) }}
+                      {{ getOrganizationObject(gd(plan, _ => _.MSRecord.compiledRelease.parties, []), "buyer").name }}
                     </div>
                   </div>
                   <div class="entity-main-info__additional-block">
                     <div class="entity-main-info__additional-title">{{ $t("plan.region") }}</div>
                     <div class="entity-main-info__additional-value">
                       {{
-                        gd(plan, _ => _.MSRecord.compiledRelease.parties, []).find(part =>
-                          part.roles.some(role => role === "procuringEntity")
-                        ).address.addressDetails.region.description
+                        getOrganizationObject(gd(plan, _ => _.MSRecord.compiledRelease.parties, []), "buyer").address
+                          .addressDetails.region.description
                       }}
                     </div>
                   </div>
                   <div class="entity-main-info__additional-block">
                     <div class="entity-main-info__additional-title">{{ $t("plan.number_of_notice") }}</div>
                     <div class="entity-main-info__additional-value">
-                      {{ gd(plan, _ => _.MSRecord.compiledRelease.ocid) }}
+                      <procedure-id>{{ gd(plan, _ => _.MSRecord.compiledRelease.ocid) }}</procedure-id>
                     </div>
                   </div>
                 </div>
@@ -90,6 +96,7 @@
               :pnRecord="gd(plan, _ => _.PNRecord.compiledRelease)"
               :procedureType="
                 selectProcedure(
+                  gd(plan, _ => _.MSRecord.compiledRelease.tender.procurementMethodDetails),
                   gd(plan, _ => _.MSRecord.compiledRelease.tender.mainProcurementCategory),
                   gd(plan, _ => _.MSRecord.compiledRelease.tender.value.amount)
                 )
@@ -99,12 +106,8 @@
           </el-container>
         </div>
       </div>
-      <el-container class="error" key="error" v-else>
-        <div class="error-message">{{ error.message }}</div>
-        <button class="refresh-btn" @click="getPlan">
-          {{ $t("refresh") }}
-        </button>
-        <button class="back-btn" @click="$router.go(-1)">{{ $t("back") }}</button>
+      <el-container key="error" v-else>
+        <error :message="error.message"></error>
       </el-container>
     </transition>
   </div>
@@ -112,18 +115,22 @@
 
 <script>
 import { mapState } from "vuex";
-import { FETCH_CURRENT_PLAN_INFO } from "../../../store/types/actions-types";
+import { FETCH_CURRENT_PLAN_INFO } from "../../../../store/types/actions-types";
 
 import dayjs from "dayjs";
 
 import ContractNotice from "./Tabs/ContractNotice";
+import ProcedureId from "../../../../components/ProcedureId";
+import Error from "../../../Error";
 
-import { getDataFromObject, selectProcedure } from "../../../utils";
+import { getDataFromObject, selectProcedure, getOrganizationObject } from "../../../../utils";
 
 export default {
-  name: "PlanPage",
+  name: "PlanPageCDB2",
   components: {
     "contract-notice": ContractNotice,
+    "procedure-id": ProcedureId,
+    error: Error,
   },
   data() {
     return {
@@ -178,13 +185,16 @@ export default {
     gd(...args) {
       return getDataFromObject(...args);
     },
-    selectProcedure(category, amount) {
-      return selectProcedure(category, amount);
+    selectProcedure(pmd, category, amount) {
+      return selectProcedure(pmd, category, amount);
     },
     checkTab(tab) {
       if (tab === "cn") {
         return false;
       }
+    },
+    getOrganizationObject(...args) {
+      return getOrganizationObject(...args);
     },
   },
 };

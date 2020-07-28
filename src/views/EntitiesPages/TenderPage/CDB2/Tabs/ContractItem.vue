@@ -136,7 +136,6 @@
                 <el-col :sm="8">
                   <div class="info-block__text">{{ $t("tender.procuring_entity_identifier") }}</div>
                   <div class="info-block__value">
-                    {{ gd(winnerOrganizationForCurrentLot, _ => _.identifier.scheme) }}:
                     {{ gd(winnerOrganizationForCurrentLot, _ => _.identifier.id) }}
                   </div>
                 </el-col>
@@ -305,7 +304,7 @@
 </template>
 
 <script>
-import { getDataFromObject, formatDate, formatAmount } from "./../../../../utils";
+import { getDataFromObject, formatDate, formatAmount } from "../../../../../utils";
 
 export default {
   name: "ContractItem",

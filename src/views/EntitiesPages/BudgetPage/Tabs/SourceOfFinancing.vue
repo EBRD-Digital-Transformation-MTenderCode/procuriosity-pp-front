@@ -89,15 +89,21 @@ export default {
         projectId: this.gd(fs, _ => _.compiledRelease.planning.budget.projectID, this.$t("n/a")),
         buyer: {
           name: this.gd(this.buyer, _ => _.name),
-          id: this.gd(this.buyer, _ => _.id),
+          id: this.gd(this.buyer, _ => _.identifier.id),
         },
         funder: {
           name: this.gd(getOrganizationObject(this.gd(fs, _ => _.compiledRelease.parties, []), "funder"), _ => _.name),
-          id: this.gd(getOrganizationObject(this.gd(fs, _ => _.compiledRelease.parties, []), "funder"), _ => _.id),
+          id: this.gd(
+            getOrganizationObject(this.gd(fs, _ => _.compiledRelease.parties, []), "funder"),
+            _ => _.identifier.id
+          ),
         },
         payer: {
           name: this.gd(getOrganizationObject(this.gd(fs, _ => _.compiledRelease.parties, []), "payer"), _ => _.name),
-          id: this.gd(getOrganizationObject(this.gd(fs, _ => _.compiledRelease.parties, []), "payer"), _ => _.id),
+          id: this.gd(
+            getOrganizationObject(this.gd(fs, _ => _.compiledRelease.parties, []), "payer"),
+            _ => _.identifier.id
+          ),
         },
       }));
     },

@@ -10,31 +10,36 @@ const router = new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: `/:lang?/:entityName(budgets|plans|tenders|contracts)`,
-      name: "list",
-      component: List,
-    },
-    {
-      path: `/:lang?/plans/:id`,
+      path: `/:lang(en|ro|ru)?/plans/:id`,
       name: "plan",
       component: () =>
         import(/* webpackChunkName: "PlanPage" */ "./views/EntitiesPages/PlanPage/ContainerPlanPage.vue"),
     },
     {
-      path: "/:lang?/budgets/:id",
+      path: "/:lang(en|ro|ru)?/budgets/:id",
       name: "budget-page",
       component: () => import(/* webpackChunkName: "BudgetPage" */ "./views/EntitiesPages/BudgetPage/BudgetPage.vue"),
     },
     {
-      path: `/:lang?/tenders/:id`,
+      path: `/:lang(en|ro|ru)?/tenders/:id`,
       name: "tender",
       component: () =>
         import(/* webpackChunkName: "TenderPage" */ "./views/EntitiesPages/TenderPage/ContainerTenderPage.vue"),
     },
     {
-      path: `/:lang?/contracts/:id`,
+      path: `/:lang(en|ro|ru)?/contracts/:id`,
       name: "contract",
       component: () => import(/* webpackChunkName: "ContractPage" */ "./views/EntitiesPages/ContractPage.vue"),
+    },
+    {
+      path: `/:lang(en|ro|ru)?/:entityName(budgets|plans|tenders|contracts)`,
+      name: "list",
+      component: List,
+    },
+    {
+      path: `*`,
+      name: "error",
+      component: () => import(/* webpackChunkName: "Error" */ "./views/Error.vue"),
     },
   ],
   scrollBehavior(to, from, savedPosition) {
